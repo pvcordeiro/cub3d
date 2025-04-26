@@ -6,7 +6,7 @@
 #    By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/26 17:16:21 by afpachec          #+#    #+#              #
-#    Updated: 2025/04/26 17:28:04 by afpachec         ###   ########.fr        #
+#    Updated: 2025/04/26 17:37:21 by afpachec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,10 +38,7 @@ fclean: clean
 re: fclean all
 
 run: $(NAME)
-	@for map in $(MAPS); do \
-		echo "Running with $$map"; \
-		./$(NAME) $$map; \
-	done
+	@for map in $(MAPS); do echo "Running with $$map"; ./$(NAME) $$map; done
 
 val: re
 	@valgrind --show-leak-kinds=all --leak-check=full --track-fds=all ./$(NAME)
