@@ -41,7 +41,7 @@ with open(os.path.join(OUTPUT_DIR, 'errors.c'), 'w') as f:
     f.write('char *get_error_message1(t_error _error);\n\n')
     f.write('char *get_error_message(t_error _error)\n')
     f.write('{\n')
-    f.write('    return (get_error_message1(_error));\n')
+    f.write('\treturn (get_error_message1(_error));\n')
     f.write('}\n')
 
 for i, (error_name, error_message) in enumerate(error_definitions):
@@ -57,13 +57,13 @@ for i, (error_name, error_message) in enumerate(error_definitions):
             f.write(f'char *get_error_message{next_function_number}(t_error _error);\n\n')
             f.write(f'char *get_error_message{function_number}(t_error _error)\n')
             f.write('{\n')
-            f.write(f'    if (_error == {error_name})\n')
-            f.write(f'        return ({error_name}_MSG);\n')
-            f.write(f'    return (get_error_message{next_function_number}(_error));\n')
+            f.write(f'\tif (_error == {error_name})\n')
+            f.write(f'\t\treturn ({error_name}_MSG);\n')
+            f.write(f'\treturn (get_error_message{next_function_number}(_error));\n')
             f.write('}\n')
         else:
             f.write(f'char *get_error_message{function_number}(t_error _error)\n')
             f.write('{\n')
-            f.write(f'    (void)_error;\n')
-            f.write(f'    return ({error_name}_MSG);\n')
+            f.write(f'\t(void)_error;\n')
+            f.write(f'\treturn ({error_name}_MSG);\n')
             f.write('}\n')
