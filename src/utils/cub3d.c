@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 21:53:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/27 00:00:51 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/04/27 00:15:12 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,7 @@ t_cub3d	*cub3d(void)
 
 void	cub3d_exit(void)
 {
+	if (cub3d()->window.initialized)
+		destroy_window(&cub3d()->window);
 	exit(cub3d()->error);
 }

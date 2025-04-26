@@ -6,17 +6,20 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/27 00:02:36 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/04/27 00:17:16 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include <stdio.h>
 # include <mlx.h>
-# include <stdbool.h>
+
 # include <error.h>
+# include <ft_utils.h>
+
+# include <stdio.h>
+# include <stdbool.h>
 # include <stdlib.h>
 
 typedef struct s_window
@@ -25,6 +28,7 @@ typedef struct s_window
 	int		width;
 	void	*win;
 	void	*mlx;
+	bool	initialized;
 }	t_window;
 
 typedef struct s_cub3d
@@ -34,7 +38,8 @@ typedef struct s_cub3d
 }	t_cub3d;
 
 t_cub3d	*cub3d(void);
-void	error(t_error _error);
+void	cub3d_exit(void);
 bool	create_window(t_window *window, int width, int height, char *title);
+void	destroy_window(t_window *window);
 
 #endif
