@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/27 00:24:30 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/04/27 00:44:31 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_cub3d
 }	t_cub3d;
 
 t_cub3d	*cub3d(void);
-void	cub3d_exit(void);
+void	cub3d_exit(int code);
 bool	create_window(t_window *window, int width, int height, char *title);
 void	destroy_window(t_window *window);
 
