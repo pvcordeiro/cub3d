@@ -1,38 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/26 22:05:54 by afpachec         ###   ########.fr       */
+/*   Created: 2025/04/26 22:05:32 by afpachec          #+#    #+#             */
+/*   Updated: 2025/04/26 22:40:10 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef ERROR_H
+# define ERROR_H
 
-#include <stdio.h>
-#include <mlx.h>
-#include <stdbool.h>
-#include <error.h>
-
-typedef struct  s_window
+typedef enum    e_error
 {
-    int     height;
-    int     width;
-    void    *win;
-    void    *mlx;
-}   t_window;
+    ERROR_NO_ERROR,
+    ERROR_INIT_MLX,
+    ERROR_INIT_WINDOW,
+}   t_error;
 
-typedef struct  s_cub3d
-{
-    t_window    window;
-    t_error     error;
-}   t_cub3d;
-
-t_cub3d *cub3d(void);
-void    error(t_error _error);
+#define ERROR_NO_ERROR_MSG "No Error"
+#define ERROR_INIT_MLX_MSG "Error initializing mlx"
+#define ERROR_INIT_WINDOW_MSG "Error initializing window"
+#define ERROR_INVALID_MSG "Invalid Error"
 
 #endif

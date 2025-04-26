@@ -1,38 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/26 22:05:54 by afpachec         ###   ########.fr       */
+/*   Created: 2025/04/26 21:53:37 by afpachec          #+#    #+#             */
+/*   Updated: 2025/04/26 22:03:59 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#include <cub3d.h>
 
-#include <stdio.h>
-#include <mlx.h>
-#include <stdbool.h>
-#include <error.h>
-
-typedef struct  s_window
+t_cub3d *cub3d(void)
 {
-    int     height;
-    int     width;
-    void    *win;
-    void    *mlx;
-}   t_window;
+    static t_cub3d  singleton;
 
-typedef struct  s_cub3d
+    return (&singleton);
+}
+
+void    cub3d_exit(void)
 {
-    t_window    window;
-    t_error     error;
-}   t_cub3d;
-
-t_cub3d *cub3d(void);
-void    error(t_error _error);
-
-#endif
+    exit(cub3d()->error);
+}

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:15:19 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/26 20:20:45 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/04/26 21:54:30 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,5 @@
 
 int main(void)
 {
-    mlx_init();
     printf("Hello cub3d! :)\n");
 }
