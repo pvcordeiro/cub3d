@@ -27,7 +27,7 @@ with open(HEADER_FILE, 'r') as f:
 
 error_definitions = []
 for line in lines:
-    match = re.match(r'#define (\w+)_MSG\s*"([^"]+)"', line)
+    match = re.match(r'# define (\w+)_MSG\s*"([^"]+)"', line)
     if match:
         error_name = match.group(1)
         error_message = match.group(2)
