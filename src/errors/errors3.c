@@ -12,11 +12,11 @@
 
 #include <error.h>
 
-char *get_error_message4(t_error _error);
+char	*get_error_message4(t_error _error);
 
-char *get_error_message3(t_error _error)
+char	*get_error_message3(t_error _error)
 {
-    if (_error == ERROR_INIT_WINDOW)
-        return (ERROR_INIT_WINDOW_MSG);
-    return (get_error_message4(_error));
+	if (_error == ERROR_INIT_WINDOW)
+		return (ERROR_INIT_WINDOW_MSG);
+	return (get_error_message4(_error));
 }

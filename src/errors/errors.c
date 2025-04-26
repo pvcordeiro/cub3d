@@ -12,9 +12,9 @@
 
 #include <error.h>
 
-char *get_error_message1(t_error _error);
+char	*get_error_message1(t_error _error);
 
-char *get_error_message(t_error _error)
+char	*get_error_message(t_error _error)
 {
-    return (get_error_message1(_error));
+	return (get_error_message1(_error));
 }

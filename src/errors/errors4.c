@@ -12,8 +12,8 @@
 
 #include <error.h>
 
-char *get_error_message4(t_error _error)
+char	*get_error_message4(t_error _error)
 {
-    (void)_error;
-    return (ERROR_INVALID_MSG);
+	(void)_error;
+	return (ERROR_INVALID_MSG);
 }

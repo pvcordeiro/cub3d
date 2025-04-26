@@ -12,11 +12,11 @@
 
 #include <error.h>
 
-char *get_error_message2(t_error _error);
+char	*get_error_message2(t_error _error);
 
-char *get_error_message1(t_error _error)
+char	*get_error_message1(t_error _error)
 {
-    if (_error == ERROR_NO_ERROR)
-        return (ERROR_NO_ERROR_MSG);
-    return (get_error_message2(_error));
+	if (_error == ERROR_NO_ERROR)
+		return (ERROR_NO_ERROR_MSG);
+	return (get_error_message2(_error));
 }
