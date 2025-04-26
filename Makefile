@@ -6,7 +6,7 @@
 #    By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/26 17:16:21 by afpachec          #+#    #+#              #
-#    Updated: 2025/04/26 22:51:12 by afpachec         ###   ########.fr        #
+#    Updated: 2025/04/26 23:54:10 by afpachec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,4 +64,7 @@ run: $(NAME)
 val: re
 	@valgrind --show-leak-kinds=all --leak-check=full --track-fds=all ./$(NAME)
 
-.PHONY: all re clean fclean v
+errors:
+	@bash -c "python3 <(git show error-msgs-script:gen_error_msgs.py)"
+
+.PHONY: all re clean fclean run val errors
