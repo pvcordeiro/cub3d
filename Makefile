@@ -6,7 +6,7 @@
 #    By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/26 17:16:21 by afpachec          #+#    #+#              #
-#    Updated: 2025/04/26 20:35:48 by afpachec         ###   ########.fr        #
+#    Updated: 2025/04/26 22:51:12 by afpachec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CFLAGS = -Wall -Wextra -Werror
 INCLUDES = -I headers
 LIBS = -L lib
 LDLIBS = -lX11 -lXext -lm
-SRCS = $(wildcard src/*.c)
+SRCS = $(wildcard src/**/**.c) $(wildcard src/*.c)
 OBJ_DIR = obj
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 MAPS = $(wildcard maps/*.cub)

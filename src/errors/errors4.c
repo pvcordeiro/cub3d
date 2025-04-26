@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 22:25:55 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/26 22:41:48 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/04/26 22:26:16 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 
 char *get_error_message4(t_error _error)
 {
-        return (ERROR_INVALID_MSG);
+    (void)_error;
+    return (ERROR_INVALID_MSG);
 }

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/26 22:05:54 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/04/26 22:47:12 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <mlx.h>
 #include <stdbool.h>
 #include <error.h>
+#include <stdlib.h>
 
 typedef struct  s_window
 {
@@ -34,5 +35,6 @@ typedef struct  s_cub3d
 
 t_cub3d *cub3d(void);
 void    error(t_error _error);
+bool    create_window(t_window *window, int width, int height, char *title);
 
 #endif

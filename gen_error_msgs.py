@@ -64,5 +64,6 @@ for i, (error_name, error_message) in enumerate(error_definitions):
         else:
             f.write(f'char *get_error_message{function_number}(t_error _error)\n')
             f.write('{\n')
-            f.write(f'        return ({error_name}_MSG);\n')
+            f.write(f'    (void)_error;\n')
+            f.write(f'    return ({error_name}_MSG);\n')
             f.write('}\n')
