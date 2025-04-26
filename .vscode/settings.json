@@ -1,0 +1,9 @@
+{
+    "C_Cpp.errorSquiggles": "enabled",
+    "files.associations": {
+        "stdio.h": "c",
+        "ft_utils.h": "c",
+        "error.h": "c",
+        "cub3d.h": "c"
+    }
+}

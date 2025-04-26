@@ -2,8 +2,8 @@ import os
 import re
 import shutil
 
-HEADER_FILE = 'headers/error.h'
-OUTPUT_DIR = 'src/errors/'
+HEADER_FILE = 'headers/ft_error.h'
+OUTPUT_DIR = 'src/ft_error/errors/'
 
 HEADER_42 = '''/* ************************************************************************** */
 /*                                                                            */
@@ -37,9 +37,9 @@ print(f'Found {len(error_definitions)} error definitions.')
 
 with open(os.path.join(OUTPUT_DIR, 'errors.c'), 'w') as f:
     f.write(HEADER_42.format('errors.c'))
-    f.write('#include <error.h>\n\n')
+    f.write('#include <ft_error.h>\n\n')
     f.write('char\t*get_error_message1(t_error _error);\n\n')
-    f.write('char\t*get_error_message(t_error _error)\n')
+    f.write('char\t*ft_error_message(t_error _error)\n')
     f.write('{\n')
     f.write('\treturn (get_error_message1(_error));\n')
     f.write('}\n')
@@ -51,7 +51,7 @@ for i, (error_name, error_message) in enumerate(error_definitions):
 
     with open(file_path, 'w') as f:
         f.write(HEADER_42.format(f"errors{function_number}.c"))
-        f.write('#include <error.h>\n\n')
+        f.write('#include <ft_error.h>\n\n')
         
         if function_number != len(error_definitions):
             f.write(f'char\t*get_error_message{next_function_number}(t_error _error);\n\n')
