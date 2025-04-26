@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/27 00:17:16 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/04/27 00:24:30 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <mlx.h>
 
-# include <error.h>
+# include <ft_error.h>
 # include <ft_utils.h>
 
 # include <stdio.h>
