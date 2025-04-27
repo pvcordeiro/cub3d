@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/27 08:57:05 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/04/27 11:32:47 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,24 @@ typedef struct s_window
 	bool	initialized;
 }	t_window;
 
+typedef struct s_map
+{
+	int		height;
+	int		width;
+	char	*path;
+	bool	initialized;
+}	t_map;
+
 typedef struct s_cub3d
 {
 	t_window	window;
-	char		*map_path;
+	t_map		map;
 }	t_cub3d;
 
 t_cub3d	*cub3d(void);
 void	cub3d_exit(int code);
-void	cub3d_init(int argc, char **argv);
 void	create_window(t_window *window, int width, int height, char *title);
-char	*get_map_from_args(int argc, char **argv);
+void	parse_map(t_map *map, int argc, char **argv);
 void	destroy_window(t_window *window);
 
 #endif

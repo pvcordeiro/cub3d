@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:15:19 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/27 08:52:39 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/04/27 11:34:51 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 
 int	main(int argc, char **argv)
 {
-	ft_error_storage()->exit = cub3d_exit;
-	cub3d_init(argc, argv);
+	parse_map(&cub3d()->map, argc, argv);
 	ft_error_assert();
-	printf("Hello cub3d! :)\n");
-	while (true)
-		;
+	create_window(&cub3d()->window, W_WIDTH, W_HEIGHT, W_TITLE);
+	ft_error_assert();
+	while (true);
 }

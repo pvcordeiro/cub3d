@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 22:00:34 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/27 08:59:24 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/04/27 11:34:16 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	ft_error_assert(void)
 		return ;
 	ft_fputstr(STDERR_FILENO, "Error\n");
 	ft_fputstr(STDERR_FILENO, ft_error_message(ft_error_storage()->error));
+	ft_fputstr(STDERR_FILENO, "\n");
 	ft_error_storage()->exit(ft_error_storage()->error);
 }
 
