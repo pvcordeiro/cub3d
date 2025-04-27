@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/27 00:44:31 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/04/27 08:52:01 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,18 @@
 # include <stdbool.h>
 # include <stdlib.h>
 
+# ifndef W_TITLE
+#  define W_TITLE "Wolfenstein"
+# endif
+
+# ifndef W_WIDTH
+#  define W_WIDTH 1280
+# endif
+
+# ifndef W_HEIGHT
+#  define W_HEIGHT 720
+# endif
+
 typedef struct s_window
 {
 	int		height;
@@ -34,12 +46,14 @@ typedef struct s_window
 typedef struct s_cub3d
 {
 	t_window	window;
-	t_error		error;
+	char		*map_path;
 }	t_cub3d;
 
 t_cub3d	*cub3d(void);
 void	cub3d_exit(int code);
+void	cub3d_init(int argc, char **argv);
 bool	create_window(t_window *window, int width, int height, char *title);
+char	*get_map_from_args(int argc, char **argv);
 void	destroy_window(t_window *window);
 
 #endif

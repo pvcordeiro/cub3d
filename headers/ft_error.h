@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 22:05:32 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/27 00:43:53 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/04/27 08:41:49 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef enum e_error
 	ERROR_NO_ERROR,
 	ERROR_INIT_MLX,
 	ERROR_INIT_WINDOW,
+	ERROR_INVALID_ARGS,
 }	t_error;
 
 typedef struct s_error_storage
@@ -32,8 +33,9 @@ typedef struct s_error_storage
 }	t_error_storage;
 
 # define ERROR_NO_ERROR_MSG "No Error"
-# define ERROR_INIT_MLX_MSG "Error initializing mlx"
-# define ERROR_INIT_WINDOW_MSG "Error initializing window"
+# define ERROR_INIT_MLX_MSG "Initializing mlx"
+# define ERROR_INIT_WINDOW_MSG "Initializing window"
+# define ERROR_INVALID_ARGS_MSG "Invalid Arguments"
 # define ERROR_INVALID_MSG "Invalid Error"
 
 void			ft_error(t_error _error);

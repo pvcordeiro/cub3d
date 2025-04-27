@@ -12,8 +12,11 @@
 
 #include <ft_error.h>
 
+char	*get_error_message5(t_error _error);
+
 char	*get_error_message4(t_error _error)
 {
-	(void)_error;
-	return (ERROR_INVALID_MSG);
+	if (_error == ERROR_INVALID_ARGS)
+		return (ERROR_INVALID_ARGS_MSG);
+	return (get_error_message5(_error));
 }

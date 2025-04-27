@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   errors5.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/26 17:15:19 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/27 08:52:39 by afpachec         ###   ########.fr       */
+/*   Created: 2025/04/26 22:25:55 by afpachec          #+#    #+#             */
+/*   Updated: 2025/04/26 22:26:16 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cub3d.h>
+#include <ft_error.h>
 
-int	main(int argc, char **argv)
+char	*get_error_message5(t_error _error)
 {
-	ft_error_storage()->exit = cub3d_exit;
-	cub3d_init(argc, argv);
-	ft_error_assert();
-	printf("Hello cub3d! :)\n");
-	while (true)
-		;
+	(void)_error;
+	return (ERROR_INVALID_MSG);
 }
