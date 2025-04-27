@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors7.c                                          :+:      :+:    :+:   */
+/*   errors9.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,11 +12,11 @@
 
 #include <ft_error.h>
 
-char	*get_error_message8(t_error _error);
+char	*get_error_message10(t_error _error);
 
-char	*get_error_message7(t_error _error)
+char	*get_error_message9(t_error _error)
 {
-	if (_error == ERROR_MAP_ALREADY_INITIALIZED)
-		return (ERROR_MAP_ALREADY_INITIALIZED_MSG);
-	return (get_error_message8(_error));
+	if (_error == ERROR_DUPLICATE_TYPE)
+		return (ERROR_DUPLICATE_TYPE_MSG);
+	return (get_error_message10(_error));
 }

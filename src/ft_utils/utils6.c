@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils6.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 00:46:10 by afonsocouti       #+#    #+#             */
-/*   Updated: 2025/03/29 14:10:59 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/04/27 22:38:34 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,12 @@ char	**ft_strvndup(char **v, size_t n)
 	new = ft_calloc(n + 1, sizeof(char *));
 	if (!new)
 		return (NULL);
-	i = -1;
-	while (v[++i] && i < n)
+	i = 0;
+	while (i < n && v[i])
+	{
 		new[i] = ft_strdup(v[i]);
+		++i;	
+	}
 	return (new);
 }
 

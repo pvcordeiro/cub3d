@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils11.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 13:52:26 by paude-so          #+#    #+#             */
-/*   Updated: 2025/04/03 13:57:01 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/04/27 22:43:08 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,4 +88,17 @@ char	**ft_hashmap_to_strv(t_hashmap *hashmap)
 		i++;
 	}
 	return (strv);
+}
+
+void	ft_fprint_hashmap(int fd, t_hashmap *hashmap)
+{
+	char	**as_strv;
+
+	if (!hashmap)
+		return ;
+	as_strv = ft_hashmap_to_strv(hashmap);
+	if (!as_strv)
+		return ;
+	ft_fprint_strv(fd, as_strv);
+	ft_strvfree(as_strv);
 }

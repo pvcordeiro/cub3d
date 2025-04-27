@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 12:15:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/04/27 12:10:43 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/04/27 22:43:20 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ void					ft_hashmap_set(t_hashmap *hashmap, char *key,
 							void *value, void (*el_free)(void *value));
 void					ft_hashmap_destroy(t_hashmap *hashmap);
 char					**ft_hashmap_to_strv(t_hashmap *hashmap);
+void					ft_fprint_hashmap(int fd, t_hashmap *hashmap);
 void					ft_hashmap_del(t_hashmap *hashmap, char *key);
 
 void					ft_close(int fd);
@@ -109,5 +110,6 @@ char					*ft_get_next_line(int fd);
 
 bool					ft_str_all(char *str, bool (*func)(char));
 bool					ft_str_endswith(char *str, char *ending);
+char					*ft_strtrim(char *s);
 
 #endif

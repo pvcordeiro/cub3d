@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 00:32:15 by afonsocouti       #+#    #+#             */
-/*   Updated: 2025/04/02 20:40:02 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/04/27 22:38:52 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,12 @@ char	**ft_strvjoin(char **v1, char **v2)
 	ssize_t	i;
 	ssize_t	j;
 
-	if (!v1 || !v2)
+	if (!v1 && !v2)
 		return (NULL);
+	if (!v1)
+		return (ft_strvdup(v2));
+	if (!v2)
+		return (ft_strvdup(v1));
 	i = ft_strvlen(v1);
 	j = ft_strvlen(v2);
 	new = ft_calloc(i + j + 1, sizeof(char *));
