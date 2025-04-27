@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/27 11:32:47 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/04/27 11:47:27 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@
 
 # include <stdio.h>
 # include <stdbool.h>
+# include <unistd.h>
 # include <stdlib.h>
+# include <fcntl.h>
 
 # ifndef W_TITLE
 #  define W_TITLE "Wolfenstein"
@@ -45,9 +47,12 @@ typedef struct s_window
 
 typedef struct s_map
 {
-	int		height;
-	int		width;
-	char	*path;
+	int			height;
+	int			width;
+	char		*path;
+	t_hashmap	*types;
+	char		**raw;
+	char		**map;
 	bool	initialized;
 }	t_map;
 

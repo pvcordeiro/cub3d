@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors5.c                                          :+:      :+:    :+:   */
+/*   errors7.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,11 +12,8 @@
 
 #include <ft_error.h>
 
-char	*get_error_message6(t_error _error);
-
-char	*get_error_message5(t_error _error)
+char	*get_error_message7(t_error _error)
 {
-	if (_error == ERROR_INVALID_MAP)
-		return (ERROR_INVALID_MAP_MSG);
-	return (get_error_message6(_error));
+	(void)_error;
+	return (ERROR_INVALID_MSG);
 }

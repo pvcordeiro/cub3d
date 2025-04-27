@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 12:15:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/04/27 00:09:45 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/04/27 12:10:43 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@
 # include <stdint.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdio.h>
+
+# ifndef GNL_BUFFER_SIZE
+#  define GNL_BUFFER_SIZE 1024
+# endif
 
 typedef struct s_element
 {
@@ -99,5 +104,10 @@ void					ft_close2(int fd1, int fd2);
 void					ft_fprint_strv(int fd, char **strv);
 bool					ft_isdigit(int c);
 char					*ft_strappend(char *str, char append);
+
+char					*ft_get_next_line(int fd);
+
+bool					ft_str_all(char *str, bool (*func)(char));
+bool					ft_str_endswith(char *str, char *ending);
 
 #endif
