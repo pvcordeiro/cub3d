@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 22:05:32 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/27 08:41:49 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/04/27 08:59:21 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_error_storage
 # define ERROR_INVALID_MSG "Invalid Error"
 
 void			ft_error(t_error _error);
+bool			ft_has_error(void);
 char			*ft_error_message(t_error _error);
 t_error_storage	*ft_error_storage(void);
 void			ft_error_assert(void);

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 21:53:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/27 08:51:49 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/04/27 08:59:32 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ void	cub3d_exit(int code)
 void	cub3d_init(int argc, char **argv)
 {
 	cub3d()->map_path = get_map_from_args(argc, argv);
-	if (!cub3d()->map_path)
+	if (ft_has_error())
 		return ;
-	if (!create_window(&cub3d()->window, W_WIDTH, W_HEIGHT, W_TITLE))
-		return ;
+	create_window(&cub3d()->window, W_WIDTH, W_HEIGHT, W_TITLE);
 }
