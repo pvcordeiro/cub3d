@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   wall.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/26 17:15:19 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/28 20:49:35 by afpachec         ###   ########.fr       */
+/*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
+/*   Updated: 2025/04/29 00:09:17 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cub3d.h>
+#include "entities.h"
 
-int	main(int argc, char **argv)
+static void	wall_frame(t_entity *entity)
 {
-	ft_error_storage()->exit = cub3d_exit;
-	parse_map_e(&cub3d()->map, argc, argv);
-	ft_error_assert();
-	cub3d_exit(0);
+	(void)entity;
+}
+
+void	create_player(t_list **list)
+{
+	t_entity	*entity;
+
+	entity = entity_new(ENTITY_WALL, NULL);
+	entity->frame = wall_frame;
 }

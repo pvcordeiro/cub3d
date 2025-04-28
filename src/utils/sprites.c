@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   sprites.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/26 17:15:19 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/28 20:49:35 by afpachec         ###   ########.fr       */
+/*   Created: 2025/04/28 19:01:44 by afpachec          #+#    #+#             */
+/*   Updated: 2025/04/28 19:11:14 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
-int	main(int argc, char **argv)
+t_sprite	*sprite_new(t_list *images, t_time update_delay)
 {
-	ft_error_storage()->exit = cub3d_exit;
-	parse_map_e(&cub3d()->map, argc, argv);
-	ft_error_assert();
-	cub3d_exit(0);
+	t_sprite	*sprite;
+
+	sprite = ft_calloc(1, sizeof(t_sprite));
+	if (!sprite)
+		return (NULL);
+	sprite->images = images;
+	sprite->update_delay = update_delay;
+	sprite->updated_at = ft_get_time();
 }

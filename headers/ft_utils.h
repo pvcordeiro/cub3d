@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 12:15:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/04/27 22:43:20 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/04/28 19:10:37 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # ifndef GNL_BUFFER_SIZE
 #  define GNL_BUFFER_SIZE 1024
 # endif
+
+typedef size_t	t_time;
 
 typedef struct s_element
 {
@@ -111,5 +113,6 @@ char					*ft_get_next_line(int fd);
 bool					ft_str_all(char *str, bool (*func)(char));
 bool					ft_str_endswith(char *str, char *ending);
 char					*ft_strtrim(char *s);
+t_time					ft_get_time(void);
 
 #endif

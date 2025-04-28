@@ -1,21 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   entities2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/26 17:15:19 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/28 20:49:35 by afpachec         ###   ########.fr       */
+/*   Created: 2025/04/28 23:25:11 by afpachec          #+#    #+#             */
+/*   Updated: 2025/04/29 00:08:21 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cub3d.h>
+#include "entities.h"
 
-int	main(int argc, char **argv)
+t_entity	*entity_new(t_entity_type type, void *private)
 {
-	ft_error_storage()->exit = cub3d_exit;
-	parse_map_e(&cub3d()->map, argc, argv);
-	ft_error_assert();
-	cub3d_exit(0);
+	t_entity	*entity;
+
+	entity = ft_calloc(1, sizeof(t_entity));
+	if (!entity)
+		return (NULL);
+	entity->type = type;
+	entity->private = private;
+	return (entity);
+}
+
+double normalize_angle(double angle) {
+    angle = fmod(angle, 360.0);
+    if (angle < 0)
+        angle += 360.0;
+    return angle;
 }
