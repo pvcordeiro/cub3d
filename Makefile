@@ -6,7 +6,7 @@
 #    By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/26 17:16:21 by afpachec          #+#    #+#              #
-#    Updated: 2025/04/27 20:49:34 by afpachec         ###   ########.fr        #
+#    Updated: 2025/04/28 16:30:15 by afpachec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,5 +68,6 @@ val: re
 
 errors:
 	@bash -c "python3 <(git show error-msgs-script:gen_error_msgs.py)"
+	@bash -c "python3 <(git show error-msgs-script:check_error_signals.py) src"
 
 .PHONY: all re clean fclean run val errors
