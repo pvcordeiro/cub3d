@@ -6,16 +6,15 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 22:05:32 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/27 22:47:15 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/04/28 15:46:16 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_ERROR_H
 # define FT_ERROR_H
 
-# include <ft_utils.h>
-
 # include <unistd.h>
+# include <stdbool.h>
 # include <stdlib.h>
 
 typedef enum e_error

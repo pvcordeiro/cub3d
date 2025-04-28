@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 22:00:34 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/27 11:34:16 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/04/28 15:47:49 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,23 @@ void	ft_error(t_error _error)
 	ft_error_storage()->error = _error;
 }
 
+static ssize_t	ft_error_fputstr(int fd, char *string)
+{
+	size_t	len;
+
+	len = 0;
+	while (string[len])
+		++len;
+	return (write(fd, string, len));
+}
+
 void	ft_error_assert(void)
 {
 	if (ft_error_storage()->error == ERROR_NO_ERROR)
 		return ;
-	ft_fputstr(STDERR_FILENO, "Error\n");
-	ft_fputstr(STDERR_FILENO, ft_error_message(ft_error_storage()->error));
-	ft_fputstr(STDERR_FILENO, "\n");
+	ft_error_fputstr(STDERR_FILENO, "Error\n");
+	ft_error_fputstr(STDERR_FILENO, ft_error_message(ft_error_storage()->error));
+	ft_error_fputstr(STDERR_FILENO, "\n");
 	ft_error_storage()->exit(ft_error_storage()->error);
 }
 
