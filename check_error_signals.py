@@ -36,7 +36,7 @@ def check_c_file(file):
         if "ft_error(" not in line:
             continue
         if not last_function_name.endswith("_e"):
-            print(f"{file}:{index + 1}: Missing ft_error (*_e) symbol in throwing function's name")
+            print(f"{file}:{index + 1}: Missing ft_error (_e) symbol in throwing function's name")
 
 dir = None
 match (len(sys.argv)):
