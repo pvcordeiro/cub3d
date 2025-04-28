@@ -31,12 +31,12 @@ def check_c_file(file):
                     next_line = lines[index + index2 + 1]
                     break
             if not next_line or ("ft_has_error()" not in next_line and "ft_error_assert()" not in next_line and "}" not in next_line):
-                print(f"{file}:{index + 1}: Function that sets errors called without any check after")
+                print(f"{file}:{index + 1}: Function that throws errors called without any check after")
             continue
         if "ft_error(" not in line:
             continue
         if not last_function_name.endswith("_e"):
-            print(f"{file}:{index + 1}: Missing ft_error symbol in function name")
+            print(f"{file}:{index + 1}: Missing ft_error (*_e) symbol in throwing function's name")
 
 dir = None
 match (len(sys.argv)):
