@@ -24,6 +24,9 @@ def check_c_file(file):
         if not line.startswith("\t") and "\t" in line and "(" in line:
             last_function_name = line[line.find("\t") + 1:line.find("(")]
             continue
+        if "_e(" in line:
+            print(f"{file}:{index + 1}: Used ft_error function")
+            continue
         if "ft_error(" not in line:
             continue
         if not last_function_name.endswith("_e"):
