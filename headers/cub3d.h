@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/27 21:56:03 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/04/28 15:52:30 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ typedef struct s_cub3d
 
 t_cub3d	*cub3d(void);
 void	cub3d_exit(int code);
-void	create_window(t_window *window, int width, int height, char *title);
-void	parse_map(t_map *map, int argc, char **argv);
+void	create_window_e(t_window *window, int width, int height, char *title);
+void	parse_map_e(t_map *map, int argc, char **argv);
 void	destroy_map(t_map *map);
 void	destroy_window(t_window *window);
 

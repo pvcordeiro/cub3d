@@ -6,13 +6,13 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 21:54:58 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/27 08:56:37 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/04/28 15:50:35 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
-void	create_window(t_window *window, int width, int height, char *title)
+void	create_window_e(t_window *window, int width, int height, char *title)
 {
 	window->mlx = mlx_init();
 	if (!window->mlx)

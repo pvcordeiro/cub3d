@@ -6,13 +6,13 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 08:42:58 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/27 22:47:18 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/04/28 15:52:14 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
-static void	read_map_raw_lines(t_map *map)
+static void	read_map_raw_lines_e(t_map *map)
 {
 	int		fd;
 	char	*line;
@@ -45,7 +45,7 @@ static bool	is_map_char(char c)
 	return (ft_isspace(c) || ft_strchr(MAP_CHARS, c));
 }
 
-static void	add_variable_to_types(t_hashmap *types, char *line)
+static void	add_variable_to_types_e(t_hashmap *types, char *line)
 {
 	size_t	i;
 	char	*clean_line;
@@ -72,7 +72,7 @@ static void	add_variable_to_types(t_hashmap *types, char *line)
 	ft_error(ERROR_NO_ERROR);
 }
 
-static void	process_raw_map(t_map *map)
+static void	process_raw_map_e(t_map *map)
 {
 	size_t	i;
 
@@ -86,7 +86,7 @@ static void	process_raw_map(t_map *map)
 			continue ;
 		if (!ft_str_all(map->raw[i], is_map_char))
 		{
-			add_variable_to_types(map->types, map->raw[i]);
+			add_variable_to_types_e(map->types, map->raw[i]);
 			if (ft_has_error())
 				return ;
 			continue ;
@@ -96,7 +96,7 @@ static void	process_raw_map(t_map *map)
 	}
 }
 
-void	parse_map(t_map *map, int argc, char **argv)
+void	parse_map_e(t_map *map, int argc, char **argv)
 {
 	if (map->initialized)
 		return (ft_error(ERROR_MAP_ALREADY_INITIALIZED));
@@ -105,10 +105,10 @@ void	parse_map(t_map *map, int argc, char **argv)
 	map->path = argv[1];
 	if (!ft_str_endswith(map->path, ".cub"))
 		return (ft_error(ERROR_INVALID_MAP));
-	read_map_raw_lines(map);
+	read_map_raw_lines_e(map);
 	if (ft_has_error())
 		return (ft_strvfree(map->raw), ft_bzero(map, sizeof(t_map)));
-	process_raw_map(map);
+	process_raw_map_e(map);
 	if (ft_has_error())
 		return (ft_strvfree(map->raw), ft_hashmap_destroy(map->types),
 			ft_bzero(map, sizeof(t_map)));
