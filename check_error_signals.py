@@ -25,7 +25,13 @@ def check_c_file(file):
             last_function_name = line[line.find("\t") + 1:line.find("(")]
             continue
         if "_e(" in line:
-            print(f"{file}:{index + 1}: Used ft_error function")
+            next_line = None
+            for index2, line2 in enumerate(lines[index:]):
+                if line2.endswith(";\n"):
+                    next_line = lines[index + index2 + 1]
+                    break
+            if not next_line or ("ft_has_error()" not in next_line and "ft_error_assert()" not in next_line):
+                print(f"{file}:{index + 1}: Function that sets errors called without any check after")
             continue
         if "ft_error(" not in line:
             continue
