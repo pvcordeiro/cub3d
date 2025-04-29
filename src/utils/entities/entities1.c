@@ -6,13 +6,13 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 20:49:46 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/29 14:09:10 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/04/29 16:30:00 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "entities.h"
 
-static void	create_entity_e(t_list **list, char c)
+static void	create_entity_e(t_list **list, char c, int x, int y)
 {
 	t_entity	*entity;
 
@@ -25,6 +25,8 @@ static void	create_entity_e(t_list **list, char c)
 		entity = entity_player_new(c);
 	if (!entity)
 		return (ft_error(ERROR_ENTITY_CREATION));
+	entity->x = x;
+	entity->y = y;
 	ft_list_add(list, entity, entity->free);
 	ft_error(ERROR_NO_ERROR);
 }
@@ -40,7 +42,7 @@ void	create_entities_e(t_map *map, t_list **list)
 		j = -1;
 		while (map->map[i][++j])
 		{
-			create_entity_e(list, map->map[i][++j]);
+			create_entity_e(list, map->map[i][j], j, i);
 			if (ft_has_error())
 				return ;
 		}

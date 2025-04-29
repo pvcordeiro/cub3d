@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 12:15:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/04/29 10:29:12 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/04/29 16:33:28 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void					ft_list_add(t_list **list, void *data,
 							void (*data_free)(void *data));
 void					ft_list_destroy(t_list **list);
 size_t					ft_list_size(t_list *list);
-char					**ft_list_to_strv(t_list *list);
+char					**ft_list_to_strv(t_list *list, char *(*to_str)(void *data));
 
 t_hashmap				*ft_hashmap_new(void);
 t_element				*ft_element_new(char *key, void *value,
@@ -115,5 +115,6 @@ bool					ft_str_all(char *str, bool (*func)(char));
 bool					ft_str_endswith(char *str, char *ending);
 char					*ft_strtrim(char *s);
 t_time					ft_get_time(void);
+void					ft_fprint_list(int fd, t_list *list, char *(*to_str)(void *data));
 
 #endif

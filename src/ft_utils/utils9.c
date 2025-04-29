@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils9.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 14:18:24 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/29 15:15:58 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/04/29 16:33:09 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ size_t	ft_list_size(t_list *list)
 	return (size);
 }
 
-char	**ft_list_to_strv(t_list *list)
+char	**ft_list_to_strv(t_list *list, char *(*to_str)(void *data))
 {
 	size_t	size;
 	char	**strv;
@@ -89,7 +89,7 @@ char	**ft_list_to_strv(t_list *list)
 	i = 0;
 	while (list)
 	{
-		strv[i] = ft_strdup(list->data);
+		strv[i] = to_str(list->data);
 		list = list->next;
 		i++;
 	}

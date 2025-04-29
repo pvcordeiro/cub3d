@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 13:52:26 by paude-so          #+#    #+#             */
-/*   Updated: 2025/04/29 10:29:13 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/04/29 16:33:35 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,17 @@ t_time	ft_get_time(void)
 
 	gettimeofday(&tv, NULL);
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
+}
+
+void	ft_fprint_list(int fd, t_list *list, char *(*to_str)(void *data))
+{
+	char	**strv;
+
+	if (!list)
+		return ;
+	strv = ft_list_to_strv(list, to_str);
+	if (!strv)
+		return ;
+	ft_fprint_strv(fd, strv);
+	free(strv);
 }

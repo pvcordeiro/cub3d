@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/29 14:09:29 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/04/29 14:21:41 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ typedef struct s_cub3d
 {
 	t_window	window;
 	t_map		map;
-	t_list		entities;
+	t_list		*entities;
 }	t_cub3d;
 
 t_cub3d	*cub3d(void);
