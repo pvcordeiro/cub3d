@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/29 00:11:40 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/04/29 10:32:00 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	create_player(t_list **list, char direction)
 	t_entity	*entity;
 	t_player	*player;
 
+	(void)list;
 	player = ft_calloc(1, sizeof(t_player));
 	if (!player)
 		return ;

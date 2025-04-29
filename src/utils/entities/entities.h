@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 18:04:16 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/29 00:09:08 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/04/29 10:31:36 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 
 # include <cub3d.h>
 
-void	create_wall(t_list **list);
-void	create_player(t_list **list, char direction);
-double	normalize_angle(double angle);
+void		create_wall(t_list **list);
+void		create_player(t_list **list, char direction);
+double		normalize_angle(double angle);
+t_entity	*entity_new(t_entity_type type, void *private);
 
 #endif
