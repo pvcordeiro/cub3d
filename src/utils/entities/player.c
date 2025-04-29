@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/29 10:32:00 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/04/29 14:01:42 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,21 +51,30 @@ static void	player_frame(t_entity *entity)
 	player_walks(entity, player);
 }
 
-void	create_player(t_list **list, char direction)
+static void	free_player(void *entity)
+{
+	free(((t_entity *)entity)->private);
+	free(entity);
+}
+
+t_entity	*entity_player_new(char direction)
 {
 	t_entity	*entity;
 	t_player	*player;
 
-	(void)list;
 	player = ft_calloc(1, sizeof(t_player));
 	if (!player)
-		return ;
+		return (NULL);
 	entity = entity_new(ENTITY_PLAYER, player);
+	if (!entity)
+		return (free(player), NULL);
 	entity->frame = player_frame;
+	entity->free = free_player;
 	if (direction == 'S')
 		entity->yaw = 180.0;
 	else if (direction == 'E')
 		entity->yaw = 90.0;
 	else if (direction == 'W')
 		entity->yaw = 270.0;
+	return (entity);
 }

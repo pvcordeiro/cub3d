@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/29 10:29:53 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/04/29 14:09:29 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ typedef struct s_entity
 	t_entity_type	type;
 	t_sprite		*sprite;
 	void			(*frame)(struct s_entity *this);
+	void			(*free)(void *this);
 	void			*private;
 }	t_entity;
 
@@ -124,5 +125,8 @@ void	destroy_window(t_window *window);
 void	free_image(void *_image);
 t_image	*image_from_file(char *path);
 t_list	*images_from_files(char **file_paths);
+
+// Entities
+void	create_entities_e(t_map *map, t_list **list);
 
 #endif

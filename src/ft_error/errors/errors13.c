@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors12.c                                         :+:      :+:    :+:   */
+/*   errors13.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,11 +12,8 @@
 
 #include <ft_error.h>
 
-char	*get_error_message13(t_error _error);
-
-char	*get_error_message12(t_error _error)
+char	*get_error_message13(t_error _error)
 {
-	if (_error == ERROR_ENTITY_CREATION)
-		return (ERROR_ENTITY_CREATION_MSG);
-	return (get_error_message13(_error));
+	(void)_error;
+	return (ERROR_INVALID_MSG);
 }
