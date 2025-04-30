@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/29 14:01:57 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/04/30 11:34:21 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ t_entity	*entity_wall_new(void)
 		return (NULL);
 	entity->frame = wall_frame;
 	entity->free = free_wall;
+	entity->hard = true;
 	return (entity);
 }

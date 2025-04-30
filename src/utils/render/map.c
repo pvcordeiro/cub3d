@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 22:33:42 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/30 09:50:40 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/04/30 11:30:37 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	render_map_entity(t_image *canvas, t_entity *entity, t_coords coords
 		border_color = 0xCC0000;
 	}
 	render_map_rectangle(canvas,
-			(t_coords){coords.x + (entity->coords.x * entity_size.width), coords.y + (entity->coords.y * entity_size.height), 0, 0},
+			(t_coords){(int)(coords.x + (entity->coords.x * entity_size.width)), (int)(coords.y + (entity->coords.y * entity_size.height)), 0, 0},
 			entity_size,
 			color, border_color);
 }
@@ -76,6 +76,10 @@ static void	render_map_entities(t_map *map, t_image *canvas, t_coords coords, t_
 
 void	render_map(t_map *map, t_image *canvas, t_coords coords, t_size size)
 {
+	printf("PLAYER -> x: %f y: %f yaw: %f\n",
+		cub3d()->player->coords.x,
+		cub3d()->player->coords.y,
+		cub3d()->player->coords.yaw);
 	render_map_rectangle(canvas, coords, size, 0x888888, 0xFFFFFF);
 	render_map_entities(map, canvas, coords, size);
 }
