@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/30 00:44:28 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/04/30 09:35:19 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,14 @@
 # ifndef W_HEIGHT
 #  define W_HEIGHT 720
 # endif
+
+#ifndef MINIMAP_WIDTH
+# define MINIMAP_WIDTH (W_WIDTH / 4)
+#endif
+
+#ifndef MINIMAP_HEIGHT
+# define MINIMAP_HEIGHT (W_HEIGHT / 4)
+#endif
 
 # define PLAYER_SPEED 0.5
 # define PLAYER_TURN_SPEED 10.0
