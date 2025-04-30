@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/29 14:21:41 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/04/30 00:44:28 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,34 +41,50 @@
 # define PLAYER_TURN_SPEED 10.0
 # define MAP_CHARS "10NSEW"
 
-typedef struct s_window
+typedef struct s_coords
 {
-	int		height;
-	int		width;
-	void	*win;
-	void	*mlx;
-	bool	initialized;
-}	t_window;
+	double	x;
+	double	y;
+	double	z;
+	double	yaw;
+}	t_coords;
 
-typedef struct s_map
+typedef struct s_size
 {
-	char		*path;
-	t_hashmap	*types;
-	char		**raw;
-	char		**map;
-	bool		initialized;
-}	t_map;
+	int	width;
+	int	height;
+}	t_size;
 
 typedef struct s_image
 {
 	char	*path;
 	void	*img_ptr;
-	int		*bits_per_pixel;
-	int		*size_line;
-	int		*endian;
-	int		width;
-	int		height;
+	int		bits_per_pixel;
+	int		size_line;
+	int		endian;
+	void	*data;
+	t_size	size;
 }	t_image;
+
+typedef struct s_window
+{
+	t_size	size;
+	void	*win;
+	void	*mlx;
+	t_image	*canvas;
+	bool	initialized;
+}	t_window;
+
+typedef struct s_map
+{
+	t_list		*entities;
+	char		*path;
+	t_hashmap	*types;
+	char		**raw;
+	char		**map;
+	t_size		size;
+	bool		initialized;
+}	t_map;
 
 typedef struct s_sprite
 {
@@ -86,10 +102,7 @@ typedef enum e_entity_type
 
 typedef struct s_entity
 {
-	double			x;
-	double			y;
-	double			z;
-	double			yaw;
+	t_coords		coords;
 	t_entity_type	type;
 	t_sprite		*sprite;
 	void			(*frame)(struct s_entity *this);
@@ -111,22 +124,26 @@ typedef struct s_cub3d
 {
 	t_window	window;
 	t_map		map;
-	t_list		*entities;
 }	t_cub3d;
 
+// cub3d
 t_cub3d	*cub3d(void);
 void	cub3d_exit(int code);
-void	create_window_e(t_window *window, int width, int height, char *title);
+int		cub3d_loop(void *_);
+
+void	create_window_e(t_window *window, t_size size, char *title);
 void	parse_map_e(t_map *map, int argc, char **argv);
 void	destroy_map(t_map *map);
 void	destroy_window(t_window *window);
 
 // Images
-void	free_image(void *_image);
+void	free_image(t_image *image);
 t_image	*image_from_file(char *path);
 t_list	*images_from_files(char **file_paths);
+t_image	*image_new(t_size size);
 
 // Entities
-void	create_entities_e(t_map *map, t_list **list);
+void	render_map(t_map *map, t_image *canvas, t_coords coords, t_size size);
+void	create_entities_e(t_map *map);
 
 #endif

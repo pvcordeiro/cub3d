@@ -6,20 +6,24 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 21:54:58 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/28 15:50:35 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/04/29 23:21:11 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
-void	create_window_e(t_window *window, int width, int height, char *title)
+void	create_window_e(t_window *window, t_size size, char *title)
 {
 	window->mlx = mlx_init();
 	if (!window->mlx)
 		return (ft_error(ERROR_INIT_MLX));
-	window->win = mlx_new_window(window->mlx, width, height, title);
+	window->win = mlx_new_window(window->mlx, size.width, size.height, title);
 	if (!window->win)
 		return (mlx_destroy_display(window->mlx), ft_error(ERROR_INIT_WINDOW));
+	window->canvas = image_new(size);
+	if (!window->canvas)
+		return (mlx_destroy_window(window->mlx, window->win), mlx_destroy_display(window->mlx),
+			ft_error(ERROR_INIT_CANVAS));
 	window->initialized = true;
 	ft_error(ERROR_NO_ERROR);
 }
@@ -28,6 +32,7 @@ void	destroy_window(t_window *window)
 {
 	if (!window || !window->initialized)
 		return ;
+	free_image(window->canvas);
 	mlx_destroy_window(window->mlx, window->win);
 	mlx_destroy_display(window->mlx);
 }

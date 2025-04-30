@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 08:42:58 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/28 18:06:34 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/04/30 00:49:20 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,22 @@ void	process_raw_map_e(t_map *map)
 		map->map = ft_strvdup(&map->raw[i]);
 		break ;
 	}
+}
+
+void	set_map_size(t_map *map)
+{
+	size_t	i;
+	size_t	biggest;
+	size_t	tmp;
+
+	i = -1;
+	biggest = 0;
+	while (map->map[++i])
+	{
+		tmp = ft_strlen(map->map[i]);
+		if (tmp > biggest)
+			biggest = tmp;
+	}
+	map->size.width = biggest;
+	map->size.height = i;
 }

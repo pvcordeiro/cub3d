@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 08:42:58 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/28 18:06:44 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/04/30 00:49:56 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,15 @@ void	parse_map_e(t_map *map, int argc, char **argv)
 	if (ft_has_error())
 		return (ft_strvfree(map->raw), ft_hashmap_destroy(map->types),
 			ft_bzero(map, sizeof(t_map)));
+	set_map_size(map);
 	map->initialized = true;
+	ft_error(ERROR_NO_ERROR);
 }
 
 void	destroy_map(t_map *map)
 {
 	ft_strvfree(map->raw);
 	ft_hashmap_destroy(map->types);
+	ft_list_destroy(&map->entities);
 	ft_bzero(map, sizeof(t_map));
 }

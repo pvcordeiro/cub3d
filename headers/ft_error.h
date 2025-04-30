@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 22:05:32 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/29 14:04:18 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/04/29 16:47:41 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef enum e_error
 	ERROR_DUPLICATE_TYPE,
 	ERROR_MAP_HASHMAP,
 	ERROR_ENTITY_CREATION,
+	ERROR_INIT_CANVAS,
 	ERROR_INVALID_TYPE
 }	t_error;
 
@@ -51,6 +52,7 @@ typedef struct s_error_storage
 # define ERROR_MAP_HASHMAP_MSG "Map Hashmap error"
 # define ERROR_INVALID_TYPE_MSG "Invalid Type"
 # define ERROR_ENTITY_CREATION_MSG "Entity Creation error"
+# define ERROR_INIT_CANVAS_MSG "Initializing canvas"
 # define ERROR_INVALID_MSG "Invalid Error"
 
 void			ft_error(t_error _error);

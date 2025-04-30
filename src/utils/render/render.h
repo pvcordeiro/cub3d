@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/26 17:15:19 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/29 23:20:24 by afpachec         ###   ########.fr       */
+/*   Created: 2025/04/29 22:31:49 by afpachec          #+#    #+#             */
+/*   Updated: 2025/04/29 23:45:34 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef RENDER_H
+# define RENDER_H
+
 #include <cub3d.h>
 
-int	main(int argc, char **argv)
-{
-	ft_error_storage()->exit = cub3d_exit;
-	parse_map_e(&cub3d()->map, argc, argv);
-	ft_error_assert();
-	create_entities_e(&cub3d()->map);
-	ft_error_assert();
-	create_window_e(&cub3d()->window, (t_size){W_WIDTH, W_HEIGHT}, W_TITLE);
-	ft_error_assert();
-	mlx_loop_hook(cub3d()->window.mlx, cub3d_loop, NULL);
-	mlx_loop(cub3d()->window.mlx);
-	cub3d_exit(0);
-}
+unsigned int	*get_pixel(t_image *image, t_coords coords);
+void			render_image_to_canvas(t_image *canvas, t_image *image, t_coords coords);
+void			put_pixel_in_image(t_image *image, t_coords coords, unsigned int pixel);
+
+#endif
