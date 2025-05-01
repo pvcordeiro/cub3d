@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+         #
+#    By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/26 17:16:21 by afpachec          #+#    #+#              #
-#    Updated: 2025/04/28 16:30:15 by afpachec         ###   ########.fr        #
+#    Updated: 2025/05/01 14:08:12 by afpachec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,7 @@ fclean: clean
 
 re: fclean all
 
-run: $(NAME)
+run: clean $(NAME)
 	@for map in $(MAPS); do echo "Running with $$map" && ./$(NAME) $$map; done
 
 val: re

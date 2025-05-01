@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/30 11:34:08 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/01 14:16:17 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <ft_error.h>
 # include <ft_utils.h>
 
+# include <X11/keysym.h>
 # include <stdio.h>
 # include <stdbool.h>
 # include <unistd.h>
@@ -45,15 +46,9 @@
 # define MINIMAP_HEIGHT (W_HEIGHT / 4)
 #endif
 
-# define PLAYER_SPEED 0.1
-# define PLAYER_TURN_SPEED 10.0
+# define PLAYER_SPEED 0.02
+# define PLAYER_TURN_SPEED 1.0
 # define MAP_CHARS "10NSEW"
-
-# define KEY_ESC 65307
-# define KEY_W 119
-# define KEY_A 97
-# define KEY_S 115
-# define KEY_D 100
 
 typedef struct s_coords
 {
@@ -146,8 +141,8 @@ typedef struct s_cub3d
 t_cub3d	*cub3d(void);
 void	cub3d_exit(int code);
 int		cub3d_loop(void *_);
-int		key_press_frame(int key_code);
 int		key_release_frame(int key_code);
+int		key_press_frame(int key_code);
 
 void	create_window_e(t_window *window, t_size size, char *title);
 void	parse_map_e(t_map *map, int argc, char **argv);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 21:53:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/30 10:18:21 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/01 14:15:07 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,19 @@ int	key_press_frame(int key_code)
 	if (!cub3d()->player)
 		return (0);
 	player = cub3d()->player->private;
-	if (key_code == KEY_W)
+	if (key_code == XK_w)
 		player->walking_forward = true;
-	if (key_code == KEY_A)
+	if (key_code == XK_a)
 		player->walking_left = true;
-	if (key_code == KEY_S)
+	if (key_code == XK_s)
 		player->walking_backward = true;
-	if (key_code == KEY_D)
+	if (key_code == XK_d)
 		player->walking_right = true;
-	if (key_code == KEY_ESC)
+	if (key_code == XK_Right)
+		player->looking_right = !!!false;
+	if (key_code == XK_Left)
+		player->looking_left = !!!false;
+	if (key_code == XK_Escape)
 		cub3d_exit(0);
 	return (0);
 }
@@ -55,14 +59,18 @@ int	key_release_frame(int key_code)
 	if (!cub3d()->player)
 		return (0);
 	player = cub3d()->player->private;
-	if (key_code == KEY_W)
+	if (key_code == XK_w)
 		player->walking_forward = false;
-	if (key_code == KEY_A)
+	if (key_code == XK_a)
 		player->walking_left = false;
-	if (key_code == KEY_S)
+	if (key_code == XK_s)
 		player->walking_backward = false;
-	if (key_code == KEY_D)
+	if (key_code == XK_d)
 		player->walking_right = false;
+	if (key_code == XK_Right)
+		player->looking_right = false;
+	if (key_code == XK_Left)
+		player->looking_left = false;
 	return (0);
 }
 

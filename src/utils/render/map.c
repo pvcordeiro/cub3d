@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 22:33:42 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/30 11:30:37 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/01 14:18:49 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,20 @@ static void	render_map_entity(t_image *canvas, t_entity *entity, t_coords coords
 {
 	unsigned int	color;
 	unsigned int	border_color;
+	t_coords		new_coords;
 
 	color = 0xFFFFFF;
 	border_color = 0xFFFFFF;
+	new_coords = (t_coords){(int)(coords.x + (entity->coords.x * entity_size.width)), (int)(coords.y + (entity->coords.y * entity_size.height)), 0, 0};
 	if (entity->type == ENTITY_PLAYER)
 	{
 		color = 0xFF0000;
 		border_color = 0xCC0000;
+		entity_size.width = 1;
+		entity_size.height = 1;
 	}
 	render_map_rectangle(canvas,
-			(t_coords){(int)(coords.x + (entity->coords.x * entity_size.width)), (int)(coords.y + (entity->coords.y * entity_size.height)), 0, 0},
+			new_coords,
 			entity_size,
 			color, border_color);
 }
