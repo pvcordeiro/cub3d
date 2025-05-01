@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/01 14:09:04 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/01 18:21:50 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "entities.h"
+#include "../entities.h"
 
 static void	player_looks(t_entity *entity, t_player *player)
 {
@@ -47,7 +47,7 @@ static void	player_walk(t_entity *entity, double angle)
 	double	new_y;
 
 	angle_radians = normalize_angle(angle) * (M_PI / 180.0);
-	new_x = entity->coords.x + PLAYER_SPEED * cos(angle_radians);
+	new_x = entity->coords.x + 1 * cos(angle_radians);
 	if (!position_overlaps(entity, (t_coords){new_x, entity->coords.y, 0, 0}))
 	{
 		printf("new_x: %f\n", new_x);
@@ -73,6 +73,13 @@ static void	player_walks(t_entity *entity, t_player *player)
 		player_walk(entity, entity->coords.yaw);
 }
 
+static void	player_rays(t_entity *entity, t_map *map)
+{
+	double	length;
+
+	length = get_size_ray(cub3d()->map, cub3d()->player->coords)
+}
+
 static void	player_frame(t_entity *entity)
 {
 	t_player	*player;
@@ -80,6 +87,7 @@ static void	player_frame(t_entity *entity)
 	player = (t_player *)(entity->private);
 	player_looks(entity, player);
 	player_walks(entity, player);
+	player_rays(entity)
 }
 
 static void	free_player(void *entity)

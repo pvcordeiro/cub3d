@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/01 14:16:17 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/01 18:21:32 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@
 
 # define PLAYER_SPEED 0.02
 # define PLAYER_TURN_SPEED 1.0
+# define PLAYER_RAYS W_WIDTH
 # define MAP_CHARS "10NSEW"
 
 typedef struct s_coords
@@ -120,6 +121,12 @@ typedef struct s_entity
 	void			*private;
 }	t_entity;
 
+typedef struct s_ray
+{
+	float	length;
+	double	angle;
+}	t_ray;
+
 typedef struct	s_player
 {
 	bool	walking_forward;
@@ -128,6 +135,7 @@ typedef struct	s_player
 	bool	walking_right;
 	bool	looking_right;
 	bool	looking_left;
+	t_ray	rays[PLAYER_RAYS];
 }	t_player;
 
 typedef struct s_cub3d
