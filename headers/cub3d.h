@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/03 12:43:46 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/03 15:35:00 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,6 @@ typedef struct s_map
 typedef struct s_ray
 {
 	float	length;
-	double	angle;
 }	t_ray;
 
 typedef struct	s_player
