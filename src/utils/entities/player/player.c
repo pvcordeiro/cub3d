@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/03 16:38:36 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/03 18:38:55 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static void	player_rays(t_map *map, t_entity *entity)
 	(void)map;
 	player = entity->private;
 	i = -1;
-	angle = entity->coords.yaw - PLAYER_RAYS / 2;
+	angle = entity->coords.yaw - PLAYER_FOV / 2;
 	ray_coords = entity->coords;
 	while (++i < PLAYER_RAYS)
 	{

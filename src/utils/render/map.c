@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 22:33:42 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/03 16:28:25 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/03 18:41:22 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	render_map_rectangle(t_image *canvas, t_coords coords, t_size size, 
 	}
 }
 
-static void	render_map_rays(t_image *canvas, t_entity *entity, t_coords coords)
+static void	render_map_rays(t_image *canvas, t_entity *entity, t_coords coords, t_size entity_size)
 {
 	t_player	*player;
 	double		start_angle;
@@ -45,7 +45,8 @@ static void	render_map_rays(t_image *canvas, t_entity *entity, t_coords coords)
 	while (++i < PLAYER_RAYS)
 	{
 		angle = ft_normalize_angle(start_angle + i);
-		draw_line_angle(canvas, coords, angle, player->rays[i].length, 0x0FFF00);
+		printf("RAIO: %f\n", player->rays[i].length);
+		draw_line_angle(canvas, coords, angle, player->rays[i].length * entity_size.width, 0x0FFF00);
 	}
 }
 
@@ -62,9 +63,9 @@ static void	render_map_entity(t_image *canvas, t_entity *entity, t_coords coords
 	{
 		color = 0xFF0000;
 		border_color = 0xCC0000;
+		render_map_rays(canvas, entity, new_coords, entity_size);
 		entity_size.width = 1;
 		entity_size.height = 1;
-		render_map_rays(canvas, entity, new_coords);
 	}
 	render_map_rectangle(canvas,
 			new_coords,

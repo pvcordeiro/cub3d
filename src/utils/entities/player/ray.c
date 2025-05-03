@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 12:05:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/03 16:51:12 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/03 18:41:09 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,17 @@ double	send_ray(t_map *map, t_entity *player, t_coords coords)
 	double		length;
 	double		step;
 
-	ray_dir.x = cos(coords.yaw * PI / 180.0);
-	ray_dir.y = sin(coords.yaw * PI / 180.0);
+	ray_dir.x = cos(ft_normalize_angle(coords.yaw - 90) * PI / 180.0);
+	ray_dir.y = sin(ft_normalize_angle(coords.yaw - 90) * PI / 180.0);
 	step = 0.01;
 	length = 0.0;
 	while (length < PLAYER_RAYS_MAX_LENGTH)
 	{
 		coords.x += ray_dir.x * step;
 		coords.y += ray_dir.y * step;
+		length += step;
 		if (hits_something(map, player, coords))
 			return (length);
-		length += step;
 	}
 	return (length);
 }
