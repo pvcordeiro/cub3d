@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/03 20:48:14 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/03 21:36:44 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@
 # endif
 
 # define LINE_STEP 1024
+# define MISSING_IMAGE_PATH "assets/missing.xpm"
+# define MISSING_SPRITE_UPDATE_DELAY -1
 
 # define PLAYER_SPEED 0.3
 # define PLAYER_TURN_SPEED 6.0
@@ -145,10 +147,16 @@ typedef struct	s_player
 	t_ray	rays[PLAYER_RAYS];
 }	t_player;
 
+typedef struct	s_master_sprites
+{
+	t_sprite	missing;
+}	t_master_sprites;
+
 typedef struct s_cub3d
 {
-	t_window	window;
-	t_map		map;
+	t_master_sprites	master_sprites;
+	t_window			window;
+	t_map				map;
 }	t_cub3d;
 
 // cub3d
@@ -179,5 +187,8 @@ void	create_entities_e(t_map *map);
 
 // Raycasting
 void			render_raycasting_mega(t_map *map, t_image *canvas);
+
+// Sprites
+void	load_master_sprites(t_master_sprites *master_sprites, t_hashmap *types);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_error.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 22:05:32 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/29 16:47:41 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/03 21:24:54 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ typedef enum e_error
 	ERROR_MAP_HASHMAP,
 	ERROR_ENTITY_CREATION,
 	ERROR_INIT_CANVAS,
-	ERROR_INVALID_TYPE
+	ERROR_INVALID_TYPE,
+	MISSING_TEXTURE_LOAD
 }	t_error;
 
 typedef struct s_error_storage
@@ -53,6 +54,7 @@ typedef struct s_error_storage
 # define ERROR_INVALID_TYPE_MSG "Invalid Type"
 # define ERROR_ENTITY_CREATION_MSG "Entity Creation error"
 # define ERROR_INIT_CANVAS_MSG "Initializing canvas"
+# define ERROR_MISSING_TEXTURE_LOAD_MSG "Missing Texture Load"
 # define ERROR_INVALID_MSG "Invalid Error"
 
 void			ft_error(t_error _error);
