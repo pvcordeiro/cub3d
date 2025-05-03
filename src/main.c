@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:15:19 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/03 18:03:32 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/03 19:31:12 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static int	exit_game(void)
 {
-	printf("teste\n");
 	cub3d_exit(0);
 	return (0);
 }

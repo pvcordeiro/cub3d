@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/03 19:00:45 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/03 20:00:20 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@
 
 # define LINE_STEP 1024
 
-# define PLAYER_SPEED 0.02
-# define PLAYER_TURN_SPEED 2.0
+# define PLAYER_SPEED 0.3
+# define PLAYER_TURN_SPEED 6.0
 # define PLAYER_FOV 72.0
-# define PLAYER_RAYS 1
+# define PLAYER_RAYS 72
 # define PLAYER_RAYS_MAX_LENGTH 100.0
 # define MAP_CHARS "10NSEW"
 
@@ -169,9 +169,15 @@ t_image	*image_from_file(char *path);
 t_list	*images_from_files(char **file_paths);
 t_image	*image_new(t_size size);
 
+// Render
+void	clear_canvas(t_image *canvas);
+
 // Entities
 void	call_entity_frames(t_list *entities);
 void	render_map(t_map *map, t_image *canvas, t_coords coords, t_size size);
 void	create_entities_e(t_map *map);
+
+// Raycasting
+void			render_raycasting_mega(t_map *map, t_image *canvas);
 
 #endif

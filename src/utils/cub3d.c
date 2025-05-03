@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 21:53:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/03 15:31:46 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/03 19:40:00 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,9 @@ int	key_release_frame(int key_code)
 int	cub3d_loop(void *_)
 {
 	(void)_;
+	clear_canvas(cub3d()->window.canvas);
 	call_entity_frames(cub3d()->map.entities);
+	render_raycasting_mega(&cub3d()->map, cub3d()->window.canvas);
 	render_map(&cub3d()->map, cub3d()->window.canvas, (t_coords){0, W_HEIGHT - MINIMAP_HEIGHT, 0, 0}, (t_size){MINIMAP_WIDTH, MINIMAP_HEIGHT});
 	mlx_put_image_to_window(cub3d()->window.mlx, cub3d()->window.win,
 		cub3d()->window.canvas->img_ptr, 0, 0);

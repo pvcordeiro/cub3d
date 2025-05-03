@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 16:50:17 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/03 18:31:52 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/03 19:38:12 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,29 @@ void	draw_line_angle(t_image *canvas, t_coords start, double angle, double lengt
     end.x = start.x + cos(angle * PI / 180.0) * length;
     end.y = start.y + sin(angle * PI / 180.0) * length;
 	draw_line(canvas, start, end, color);
+}
+
+void	draw_rectangle(t_image *canvas, t_coords coords, t_size size, unsigned int color, unsigned int border_color)
+{
+	int				i;
+	int				j;
+	unsigned int	tmp_color;
+
+	i = -1;
+	while (++i < size.width)
+	{
+		j = -1;
+		while (++j < size.height)
+		{
+			tmp_color = color;
+			if (i == 0 || i == size.width - 1 || j == 0 || j == size.height - 1)
+				tmp_color = border_color;
+			put_pixel_in_image(canvas, (t_coords){coords.x + i, coords.y + j, 0, 0}, tmp_color);
+		}
+	}
+}
+
+void	clear_canvas(t_image *canvas)
+{
+	draw_rectangle(canvas, (t_coords){0, 0, 0 ,0}, (t_size){W_WIDTH, W_HEIGHT}, 0x000000, 0x000000);
 }

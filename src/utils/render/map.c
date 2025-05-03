@@ -6,31 +6,11 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 22:33:42 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/03 18:58:51 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/03 19:23:32 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render.h"
-
-static void	render_map_rectangle(t_image *canvas, t_coords coords, t_size size, unsigned int color, unsigned int border_color)
-{
-	int				i;
-	int				j;
-	unsigned int	tmp_color;
-
-	i = -1;
-	while (++i < size.width)
-	{
-		j = -1;
-		while (++j < size.height)
-		{
-			tmp_color = color;
-			if (i == 0 || i == size.width - 1 || j == 0 || j == size.height - 1)
-				tmp_color = border_color;
-			put_pixel_in_image(canvas, (t_coords){coords.x + i, coords.y + j, 0, 0}, tmp_color);
-		}
-	}
-}
 
 static void	render_map_rays(t_image *canvas, t_entity *entity, t_coords coords, t_size entity_size)
 {
@@ -60,7 +40,7 @@ static void	render_map_entity(t_image *canvas, t_entity *entity, t_coords coords
 		entity_size.width = 1;
 		entity_size.height = 1;
 	}
-	render_map_rectangle(canvas,
+	draw_rectangle(canvas,
 			new_coords,
 			entity_size,
 			color, border_color);
@@ -97,6 +77,6 @@ static void	render_map_entities(t_map *map, t_image *canvas, t_coords coords, t_
 
 void	render_map(t_map *map, t_image *canvas, t_coords coords, t_size size)
 {
-	render_map_rectangle(canvas, coords, size, 0x888888, 0xFFFFFF);
+	draw_rectangle(canvas, coords, size, 0x888888, 0xFFFFFF);
 	render_map_entities(map, canvas, coords, size);
 }

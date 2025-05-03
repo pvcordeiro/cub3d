@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils0.c                                           :+:      :+:    :+:   */
+/*   raycasting.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/03 15:44:32 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/03 19:06:22 by paude-so         ###   ########.fr       */
+/*   Created: 2025/05/03 19:10:57 by paude-so          #+#    #+#             */
+/*   Updated: 2025/05/03 19:13:02 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_utils.h>
+#ifndef RAYCASTING_H
+# define RAYCASTING_H
 
-double ft_normalize_angle(double angle)
-{
-    angle = fmod(angle, 360.0);
-    if (angle < 0)
-        angle += 360.0;
-    return (angle);
-}
+# include "../render.h"
+
+#endif
