@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 19:05:41 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/04 00:54:21 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/04 00:58:50 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	render_raycasting_mega(t_map *map, t_image *canvas)
 	{
 		angle_diff = player->rays[i].angle - map->player->coords.yaw;
 		angle_diff = ft_normalize_angle(angle_diff) * (PI / 180.0);
-		ray_size.height = W_HEIGHT / (fmax(player->rays[i].length, 0.1) * cos(angle_diff));
+		ray_size.height = W_HEIGHT / (fmax(player->rays[i].length, 0.5) * cos(angle_diff));
 		ray_size.height = fmin(ray_size.height, W_HEIGHT * 3);
 		gradient = fmin(ray_size.height / (W_HEIGHT / 2.0), 1.0);
         int r = (int)(gradient * 255);
