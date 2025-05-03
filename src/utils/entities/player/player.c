@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/03 18:38:55 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/03 18:59:56 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,9 @@ static void	player_rays(t_map *map, t_entity *entity)
 	ray_coords = entity->coords;
 	while (++i < PLAYER_RAYS)
 	{
-		ray_coords.yaw = ft_normalize_angle(angle + i);
+		ray_coords.yaw = ft_normalize_angle(angle + ((PLAYER_FOV / PLAYER_RAYS) * i));
 		player->rays[i].length = send_ray(map, entity, ray_coords);
+		player->rays[i].angle = ray_coords.yaw;
 	}
 }
 

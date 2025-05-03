@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 12:05:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/03 18:41:09 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/03 18:51:49 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ static t_entity	*hits_something(t_map *map, t_entity *entity, t_coords coords)
 			&& curr_entity->hard
 			&& (int)curr_entity->coords.x == (int)coords.x
 			&& (int)curr_entity->coords.y == (int)coords.y)
-			return (curr_entity);
+			{
+				printf("entity: {x: %f, y: %f}; ray: x: {%f y: %f}\n", curr_entity->coords.x, curr_entity->coords.y, coords.x, coords.y);
+				return (curr_entity);
+			}
 		curr = curr->next;
 	}
 	return (NULL);

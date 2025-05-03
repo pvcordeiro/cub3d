@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/03 18:41:47 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/03 19:00:45 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@
 # define PLAYER_SPEED 0.02
 # define PLAYER_TURN_SPEED 2.0
 # define PLAYER_FOV 72.0
-# define PLAYER_RAYS 72
+# define PLAYER_RAYS 1
 # define PLAYER_RAYS_MAX_LENGTH 100.0
 # define MAP_CHARS "10NSEW"
 
@@ -130,7 +130,8 @@ typedef struct s_map
 
 typedef struct s_ray
 {
-	float	length;
+	double	length;
+	double	angle;
 }	t_ray;
 
 typedef struct	s_player
