@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   entities.h                                         :+:      :+:    :+:   */
+/*   utils0.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/28 18:04:16 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/03 15:44:06 by paude-so         ###   ########.fr       */
+/*   Created: 2025/05/03 15:44:32 by paude-so          #+#    #+#             */
+/*   Updated: 2025/05/03 15:44:49 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENTITIES_H
-# define ENTITIES_H
+#include <ft_utils.h>
 
-# include <cub3d.h>
-
-t_entity	*entity_wall_new(void);
-t_entity	*entity_player_new(char direction);
-t_entity	*entity_new(t_entity_type type, void *private);
-
-#endif
+double ft_normalize_angle(double angle)
+{
+    angle = fmod(angle, 360.0);
+    if (angle < 0)
+        angle += 360.0;
+    return angle;
+}

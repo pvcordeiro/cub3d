@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 12:05:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/03 12:19:53 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/03 16:51:12 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ double	send_ray(t_map *map, t_entity *player, t_coords coords)
 	ray_dir.y = sin(coords.yaw * PI / 180.0);
 	step = 0.01;
 	length = 0.0;
-	while (length < 100.0)
+	while (length < PLAYER_RAYS_MAX_LENGTH)
 	{
 		coords.x += ray_dir.x * step;
 		coords.y += ray_dir.y * step;

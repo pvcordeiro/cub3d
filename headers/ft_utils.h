@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 12:15:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/03 11:47:17 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/03 15:48:44 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <sys/time.h>
+# include <math.h>
 
 # ifndef GNL_BUFFER_SIZE
 #  define GNL_BUFFER_SIZE 1024
@@ -117,6 +118,6 @@ char					*ft_strtrim(char *s);
 t_time					ft_get_time(void);
 void					ft_fprint_list(int fd, t_list *list, char *(*to_str)(void *data));
 
-double					normalize_angle(double angle);
+double					ft_normalize_angle(double angle);
 
 #endif

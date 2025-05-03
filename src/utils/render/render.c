@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 16:50:17 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/03 15:15:52 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/03 16:45:38 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	draw_line(t_image *canvas, t_coords start, t_coords end, unsigned int color
 
 	dx = end.x - start.x;
 	dy = end.y - start.y;
-	step = 100;
+	step = 50;
 	dx /= step;
 	dy /= step;
 	x = start.x;
@@ -79,4 +79,14 @@ void	draw_line(t_image *canvas, t_coords start, t_coords end, unsigned int color
 		y += dy;
 		i++;
 	}
+}
+
+void	draw_line_angle(t_image *canvas, t_coords start, double angle, double length, unsigned int color)
+{
+	static t_coords	end;
+
+	angle = ft_normalize_angle(angle - 90);
+    end.x = start.x + cos(angle * PI / 180.0) * length;
+    end.y = start.y + sin(angle * PI / 180.0) * length;
+	draw_line(canvas, start, end, color);
 }

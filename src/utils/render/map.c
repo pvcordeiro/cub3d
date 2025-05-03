@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 22:33:42 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/03 15:28:37 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/03 16:28:25 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,22 +32,20 @@ static void	render_map_rectangle(t_image *canvas, t_coords coords, t_size size, 
 	}
 }
 
-static void	render_map_rays(t_image *canvas, t_entity *entity, t_coords coords, t_size entity_size)
+static void	render_map_rays(t_image *canvas, t_entity *entity, t_coords coords)
 {
 	t_player	*player;
-	t_coords	end;
+	double		start_angle;
 	double		angle;
-	double		ray_length;
 	size_t		i;
 
 	player = entity->private;
+	start_angle = entity->coords.yaw - PLAYER_RAYS / 2;
 	i = -1;
 	while (++i < PLAYER_RAYS)
 	{
-		angle = normalize_angle(entity->coords.yaw + i);
-		ray_length = player->rays[i].length;
-		end = (t_coords){coords.x + cos(angle * PI / 180.0) * ray_length * entity_size.width, coords.y + sin(angle * PI / 180.0) * ray_length * entity_size.height, 0, 0};
-		draw_line(canvas, coords, end, 0x00FF00);
+		angle = ft_normalize_angle(start_angle + i);
+		draw_line_angle(canvas, coords, angle, player->rays[i].length, 0x0FFF00);
 	}
 }
 
@@ -66,7 +64,7 @@ static void	render_map_entity(t_image *canvas, t_entity *entity, t_coords coords
 		border_color = 0xCC0000;
 		entity_size.width = 1;
 		entity_size.height = 1;
-		render_map_rays(canvas, entity, new_coords, entity_size);
+		render_map_rays(canvas, entity, new_coords);
 	}
 	render_map_rectangle(canvas,
 			new_coords,

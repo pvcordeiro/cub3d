@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/03 15:00:51 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/03 16:38:36 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	player_looks(t_entity *entity, t_player *player)
 		entity->coords.yaw -= PLAYER_TURN_SPEED;
 	else if (player->looking_right)
 		entity->coords.yaw += PLAYER_TURN_SPEED;
-	entity->coords.yaw = normalize_angle(entity->coords.yaw);
+	entity->coords.yaw = ft_normalize_angle(entity->coords.yaw);
 }
 
 static bool	position_overlaps(t_entity *entity, t_coords coords)
@@ -46,19 +46,13 @@ static void	player_walk(t_entity *entity, double angle)
 	double	new_x;
 	double	new_y;
 
-	angle_radians = normalize_angle(angle) * (PI / 180.0);
+	angle_radians = ft_normalize_angle(angle) * (PI / 180.0);
 	new_x = entity->coords.x + PLAYER_SPEED * cos(angle_radians);
 	if (!position_overlaps(entity, (t_coords){new_x, entity->coords.y, 0, 0}))
-	{
-		printf("new_x: %f\n", new_x);
 		entity->coords.x = new_x;
-	}
 	new_y = entity->coords.y + PLAYER_SPEED * sin(angle_radians);
 	if (!position_overlaps(entity, (t_coords){entity->coords.x, new_y, 0, 0}))
-	{
-		printf("new_y: %f\n", new_y);
 		entity->coords.y = new_y;
-	}
 }
 
 static void	player_walks(t_entity *entity, t_player *player)
@@ -76,13 +70,20 @@ static void	player_walks(t_entity *entity, t_player *player)
 static void	player_rays(t_map *map, t_entity *entity)
 {
 	t_player	*player;
+	t_coords	ray_coords;
 	size_t		i;
+	double		angle;
 
 	(void)map;
 	player = entity->private;
 	i = -1;
+	angle = entity->coords.yaw - PLAYER_RAYS / 2;
+	ray_coords = entity->coords;
 	while (++i < PLAYER_RAYS)
-		player->rays[i].length = 25;
+	{
+		ray_coords.yaw = ft_normalize_angle(angle + i);
+		player->rays[i].length = send_ray(map, entity, ray_coords);
+	}
 }
 
 static void	player_frame(t_entity *entity)
