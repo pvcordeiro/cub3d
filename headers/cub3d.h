@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/03 21:36:44 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/03 23:29:34 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@
 # define MISSING_IMAGE_PATH "assets/missing.xpm"
 # define MISSING_SPRITE_UPDATE_DELAY -1
 
-# define PLAYER_SPEED 0.3
-# define PLAYER_TURN_SPEED 6.0
+# define PLAYER_SPEED 0.1
+# define PLAYER_TURN_SPEED 3.0
 # define PLAYER_FOV 72.0
 # define PLAYER_RAYS 256
 # define PLAYER_RAYS_MAX_LENGTH 100.0
@@ -134,6 +134,12 @@ typedef struct s_ray
 {
 	double	length;
 	double	angle;
+	t_coords	ray_dir;
+	t_coords	delta_dist;
+	t_coords	side_dist;
+	t_coords	map_pos;
+	t_coords	step;
+	int			side;
 }	t_ray;
 
 typedef struct	s_player

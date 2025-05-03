@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 12:05:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/03 19:31:16 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/03 23:30:48 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,33 +21,110 @@ static t_entity	*hits_something(t_map *map, t_entity *entity, t_coords coords)
 	while (curr)
 	{
 		curr_entity = curr->data;
-		if (curr_entity != entity
-			&& curr_entity->hard
+		if (curr_entity != entity && curr_entity->hard
 			&& (int)curr_entity->coords.x == (int)coords.x
 			&& (int)curr_entity->coords.y == (int)coords.y)
-				return (curr_entity);
+			return (curr_entity);
 		curr = curr->next;
 	}
 	return (NULL);
 }
 
+static void	init_ray_data(t_ray *data, t_coords coords)
+{
+	double	angle_rad;
+
+	angle_rad = ft_normalize_angle(coords.yaw - 90) * PI / 180.0;
+	data->ray_dir.x = cos(angle_rad);
+	data->ray_dir.y = sin(angle_rad);
+	data->map_pos.x = (int)coords.x;
+	data->map_pos.y = (int)coords.y;
+	if (data->ray_dir.x == 0)
+		data->delta_dist.x = 1e30;
+	else
+		data->delta_dist.x = fabs(1 / data->ray_dir.x);
+	if (data->ray_dir.y == 0)
+		data->delta_dist.y = 1e30;
+	else
+		data->delta_dist.y = fabs(1 / data->ray_dir.y);
+}
+
+static void	set_step_and_side_dist(t_ray *data, t_coords coords)
+{
+	if (data->ray_dir.x < 0)
+	{
+		data->step.x = -1;
+		data->side_dist.x = (coords.x - data->map_pos.x) * data->delta_dist.x;
+	}
+	else
+	{
+		data->step.x = 1;
+		data->side_dist.x = (data->map_pos.x + 1.0 - coords.x)
+			* data->delta_dist.x;
+	}
+	if (data->ray_dir.y < 0)
+	{
+		data->step.y = -1;
+		data->side_dist.y = (coords.y - data->map_pos.y) * data->delta_dist.y;
+	}
+	else
+	{
+		data->step.y = 1;
+		data->side_dist.y = (data->map_pos.y + 1.0 - coords.y)
+			* data->delta_dist.y;
+	}
+}
+
+static double	perform_dda(t_ray *data, t_map *map, t_entity *player)
+{
+	t_coords	check_pos;
+
+	while (1)
+	{
+		if (data->side_dist.x < data->side_dist.y)
+		{
+			data->side_dist.x += data->delta_dist.x;
+			data->map_pos.x += data->step.x;
+			data->side = 0;
+		}
+		else
+		{
+			data->side_dist.y += data->delta_dist.y;
+			data->map_pos.y += data->step.y;
+			data->side = 1;
+		}
+		check_pos = (t_coords){data->map_pos.x, data->map_pos.y, 0, 0};
+		if (hits_something(map, player, check_pos))
+			break ;
+		if (data->map_pos.x < 0 || data->map_pos.x >= map->size.width
+			|| data->map_pos.y < 0 || data->map_pos.y >= map->size.height)
+			return (PLAYER_RAYS_MAX_LENGTH);
+	}
+	return (0);
+}
+
+static double	calculate_wall_dist(t_ray *data, t_coords coords)
+{
+	double	wall_dist;
+
+	if (data->side == 0)
+		wall_dist = (data->map_pos.x - coords.x + (1 - data->step.x) / 2)
+			/ data->ray_dir.x;
+	else
+		wall_dist = (data->map_pos.y - coords.y + (1 - data->step.y) / 2)
+			/ data->ray_dir.y;
+	return (wall_dist);
+}
+
 double	send_ray(t_map *map, t_entity *player, t_coords coords)
 {
-	t_coords	ray_dir;
-	double		length;
-	double		step;
+	t_ray	data;
+	double	result;
 
-	ray_dir.x = cos(ft_normalize_angle(coords.yaw - 90) * PI / 180.0);
-	ray_dir.y = sin(ft_normalize_angle(coords.yaw - 90) * PI / 180.0);
-	step = 0.01;
-	length = 0.0;
-	while (length < PLAYER_RAYS_MAX_LENGTH)
-	{
-		coords.x += ray_dir.x * step;
-		coords.y += ray_dir.y * step;
-		length += step;
-		if (hits_something(map, player, coords))
-			return (length);
-	}
-	return (length);
+	init_ray_data(&data, coords);
+	set_step_and_side_dist(&data, coords);
+	result = perform_dda(&data, map, player);
+	if (result > 0)
+		return (result);
+	return (calculate_wall_dist(&data, coords));
 }
