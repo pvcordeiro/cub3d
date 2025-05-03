@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 12:15:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/04/29 16:33:28 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/03 11:47:17 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,5 +116,7 @@ bool					ft_str_endswith(char *str, char *ending);
 char					*ft_strtrim(char *s);
 t_time					ft_get_time(void);
 void					ft_fprint_list(int fd, t_list *list, char *(*to_str)(void *data));
+
+double					normalize_angle(double angle);
 
 #endif

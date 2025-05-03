@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 22:33:42 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/01 14:18:49 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/03 15:28:37 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,25 @@ static void	render_map_rectangle(t_image *canvas, t_coords coords, t_size size, 
 	}
 }
 
+static void	render_map_rays(t_image *canvas, t_entity *entity, t_coords coords, t_size entity_size)
+{
+	t_player	*player;
+	t_coords	end;
+	double		angle;
+	double		ray_length;
+	size_t		i;
+
+	player = entity->private;
+	i = -1;
+	while (++i < PLAYER_RAYS)
+	{
+		angle = normalize_angle(entity->coords.yaw + i);
+		ray_length = player->rays[i].length;
+		end = (t_coords){coords.x + cos(angle * PI / 180.0) * ray_length * entity_size.width, coords.y + sin(angle * PI / 180.0) * ray_length * entity_size.height, 0, 0};
+		draw_line(canvas, coords, end, 0x00FF00);
+	}
+}
+
 static void	render_map_entity(t_image *canvas, t_entity *entity, t_coords coords, t_size entity_size)
 {
 	unsigned int	color;
@@ -47,6 +66,7 @@ static void	render_map_entity(t_image *canvas, t_entity *entity, t_coords coords
 		border_color = 0xCC0000;
 		entity_size.width = 1;
 		entity_size.height = 1;
+		render_map_rays(canvas, entity, new_coords, entity_size);
 	}
 	render_map_rectangle(canvas,
 			new_coords,
@@ -63,6 +83,7 @@ static void	render_map_entities(t_map *map, t_image *canvas, t_coords coords, t_
 
 	entity_size = (t_size){(double)size.width / (double)map->size.width,
 			(double)size.height / (double)map->size.height};
+	add_to_last = (t_size){0, 0};
 	if (entity_size.width * map->size.width < size.width)
 		add_to_last = (t_size){size.width - (entity_size.width * map->size.width), add_to_last.height};
 	if (entity_size.height * map->size.height < size.height)
@@ -71,19 +92,19 @@ static void	render_map_entities(t_map *map, t_image *canvas, t_coords coords, t_
 	while (entity_item)
 	{
 		entity = entity_item->data;
-		render_map_entity(canvas, entity,
-				(t_coords){coords.x + add_to_last.width / 2, coords.y + add_to_last.height / 2, 0, 0},
-				entity_size);
+		if (entity != map->player)
+			render_map_entity(canvas, entity,
+					(t_coords){coords.x + add_to_last.width / 2, coords.y + add_to_last.height / 2, 0, 0},
+					entity_size);
 		entity_item = entity_item->next;
 	}
+	render_map_entity(canvas, map->player,
+		(t_coords){coords.x + add_to_last.width / 2, coords.y + add_to_last.height / 2, 0, 0},
+		entity_size);
 }
 
 void	render_map(t_map *map, t_image *canvas, t_coords coords, t_size size)
 {
-	printf("PLAYER -> x: %f y: %f yaw: %f\n",
-		cub3d()->player->coords.x,
-		cub3d()->player->coords.y,
-		cub3d()->player->coords.yaw);
 	render_map_rectangle(canvas, coords, size, 0x888888, 0xFFFFFF);
 	render_map_entities(map, canvas, coords, size);
 }

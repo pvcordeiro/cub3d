@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   entities2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:25:11 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/30 10:16:30 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/03 11:46:43 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ t_entity	*entity_new(t_entity_type type, void *private)
 	return (entity);
 }
 
-double normalize_angle(double angle) {
+double normalize_angle(double angle)
+{
     angle = fmod(angle, 360.0);
     if (angle < 0)
         angle += 360.0;

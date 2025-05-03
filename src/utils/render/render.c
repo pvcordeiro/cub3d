@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 16:50:17 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/30 00:03:28 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/03 15:15:52 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,31 @@ void	render_image_to_canvas(t_image *canvas, t_image *image, t_coords coords)
 		while (++j < image->size.height)
 			put_pixel_in_image(canvas, (t_coords){coords.x + i, coords.y + j, 0, 0},
 				*get_pixel(image, (t_coords){i, j, 0, 0}));
+	}
+}
+
+void	draw_line(t_image *canvas, t_coords start, t_coords end, unsigned int color)
+{
+	double	dx;
+	double	dy;
+	double	step;
+	double	x;
+	double	y;
+	int		i;
+
+	dx = end.x - start.x;
+	dy = end.y - start.y;
+	step = 100;
+	dx /= step;
+	dy /= step;
+	x = start.x;
+	y = start.y;
+	i = 0;
+	while (i <= step)
+	{
+		put_pixel_in_image(canvas, (t_coords){(int)x, (int)y, 0, 0}, color);
+		x += dx;
+		y += dy;
+		i++;
 	}
 }

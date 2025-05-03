@@ -6,12 +6,14 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/01 18:21:32 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/03 12:43:46 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
+
+# define PI 3.14159265359
 
 # include <mlx.h>
 
@@ -48,7 +50,8 @@
 
 # define PLAYER_SPEED 0.02
 # define PLAYER_TURN_SPEED 1.0
-# define PLAYER_RAYS W_WIDTH
+# define PLAYER_FOV 72
+# define PLAYER_RAYS PLAYER_FOV
 # define MAP_CHARS "10NSEW"
 
 typedef struct s_coords
@@ -85,17 +88,6 @@ typedef struct s_window
 	bool	initialized;
 }	t_window;
 
-typedef struct s_map
-{
-	t_list		*entities;
-	char		*path;
-	t_hashmap	*types;
-	char		**raw;
-	char		**map;
-	t_size		size;
-	bool		initialized;
-}	t_map;
-
 typedef struct s_sprite
 {
 	t_list	*images;
@@ -121,6 +113,18 @@ typedef struct s_entity
 	void			*private;
 }	t_entity;
 
+typedef struct s_map
+{
+	t_entity	*player;
+	t_list		*entities;
+	char		*path;
+	t_hashmap	*types;
+	char		**raw;
+	char		**map;
+	t_size		size;
+	bool		initialized;
+}	t_map;
+
 typedef struct s_ray
 {
 	float	length;
@@ -141,7 +145,6 @@ typedef struct	s_player
 typedef struct s_cub3d
 {
 	t_window	window;
-	t_entity	*player;
 	t_map		map;
 }	t_cub3d;
 

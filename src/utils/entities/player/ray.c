@@ -5,17 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/01 16:50:22 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/01 18:10:10 by paude-so         ###   ########.fr       */
+/*   Created: 2025/05/03 12:05:46 by paude-so          #+#    #+#             */
+/*   Updated: 2025/05/03 12:19:53 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cub3d.h>
-
-void	draw_line(void)
-{
-
-}
+#include "player.h"
 
 static t_entity	*hits_something(t_map *map, t_entity *entity, t_coords coords)
 {
@@ -36,16 +31,23 @@ static t_entity	*hits_something(t_map *map, t_entity *entity, t_coords coords)
 	return (NULL);
 }
 
-double	get_size_ray(t_map *map, t_coords coords)
+double	send_ray(t_map *map, t_entity *player, t_coords coords)
 {
-	t_list		*curr;
-	t_entity	*entity;
+	t_coords	ray_dir;
 	double		length;
+	double		step;
 
-	length = 0;
-	curr = map->entities;
-	while (!hits_something(map, cub3d()->player, coords))
+	ray_dir.x = cos(coords.yaw * PI / 180.0);
+	ray_dir.y = sin(coords.yaw * PI / 180.0);
+	step = 0.01;
+	length = 0.0;
+	while (length < 100.0)
 	{
-		coords
+		coords.x += ray_dir.x * step;
+		coords.y += ray_dir.y * step;
+		if (hits_something(map, player, coords))
+			return (length);
+		length += step;
 	}
+	return (length);
 }
