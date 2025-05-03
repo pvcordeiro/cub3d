@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+         #
+#    By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/26 17:16:21 by afpachec          #+#    #+#              #
-#    Updated: 2025/05/01 14:08:12 by afpachec         ###   ########.fr        #
+#    Updated: 2025/05/03 23:07:41 by afpachec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ UNAME_S = $(shell uname -s)
 
 ifeq ($(UNAME_S),Darwin)
 	LIBS += -L /opt/homebrew/lib
+	INCLUDES += -I /opt/X11/include
 	LDLIBS += -framework OpenGL -framework AppKit
 endif
 
