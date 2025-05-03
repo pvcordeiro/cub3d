@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/03 20:00:20 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/03 20:12:26 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@
 # define PLAYER_SPEED 0.3
 # define PLAYER_TURN_SPEED 6.0
 # define PLAYER_FOV 72.0
-# define PLAYER_RAYS 72
+# define PLAYER_RAYS 256
 # define PLAYER_RAYS_MAX_LENGTH 100.0
 # define MAP_CHARS "10NSEW"
 
