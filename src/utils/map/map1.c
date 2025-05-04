@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 08:42:58 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/03 18:05:51 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/04 10:52:57 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,17 @@ void	parse_map_e(t_map *map, int argc, char **argv)
 
 void	destroy_map(t_map *map)
 {
+	int	i;
+
 	ft_strvfree(map->raw);
 	ft_hashmap_destroy(map->types);
 	ft_list_destroy(&map->entities);
+	if (map->entity_grid)
+	{
+		i = -1;
+		while(++i < map->size.height)
+			free(map->entity_grid[i]);
+		free(map->entity_grid);
+	}
 	ft_bzero(map, sizeof(t_map));
 }

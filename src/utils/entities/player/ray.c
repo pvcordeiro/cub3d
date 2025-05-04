@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 12:05:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/03 23:30:48 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/04 10:47:52 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,17 @@
 
 static t_entity	*hits_something(t_map *map, t_entity *entity, t_coords coords)
 {
-	t_list		*curr;
-	t_entity	*curr_entity;
+	int			x;
+	int			y;
+	t_entity	*hit_entity;
 
-	curr = map->entities;
-	while (curr)
-	{
-		curr_entity = curr->data;
-		if (curr_entity != entity && curr_entity->hard
-			&& (int)curr_entity->coords.x == (int)coords.x
-			&& (int)curr_entity->coords.y == (int)coords.y)
-			return (curr_entity);
-		curr = curr->next;
-	}
+	x = (int)coords.x;
+	y = (int)coords.y;
+	if (x < 0 || x >= map->size.width || y < 0 || y >= map->size.height)
+		return (NULL);
+	hit_entity = map->entity_grid[y][x];
+	if (hit_entity && hit_entity != entity && hit_entity->hard)
+		return (hit_entity);
 	return (NULL);
 }
 
