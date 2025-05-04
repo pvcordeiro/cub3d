@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 19:01:44 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/04 15:52:11 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/04 16:11:29 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ void	init_sprite(t_sprite *sprite, t_list *images, t_time update_delay)
 	sprite->images = images;
 	sprite->update_delay = update_delay;
 	sprite->updated_at = ft_get_time();
+}
+
+void	destroy_master_sprites(t_master_sprites *master_sprites)
+{
+	ft_list_destroy(&master_sprites->missing.images);
 }
 
 static t_list	*get_missing_images_e(void)
@@ -46,6 +51,8 @@ void	load_missing_e(t_sprite *sprite, t_list	*(*get_images_list_e)(void))
 void	load_master_sprites(t_master_sprites *master_sprites, t_hashmap *types)
 {
 	(void)types;
+	master_sprites->initialized = false;
 	load_missing_e(&master_sprites->missing, get_missing_images_e);
+	master_sprites->initialized = true;
 }
 
