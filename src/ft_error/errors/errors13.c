@@ -12,8 +12,11 @@
 
 #include <ft_error.h>
 
+char	*get_error_message14(t_error _error);
+
 char	*get_error_message13(t_error _error)
 {
-	(void)_error;
-	return (ERROR_INVALID_MSG);
+	if (_error == ERROR_INIT_CANVAS)
+		return (ERROR_INIT_CANVAS_MSG);
+	return (get_error_message14(_error));
 }

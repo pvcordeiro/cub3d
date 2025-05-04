@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 19:01:44 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/03 21:33:17 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/04 15:52:11 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static t_list	*get_missing_images_e(void)
 	list = NULL;
 	image = image_from_file(MISSING_IMAGE_PATH);
 	if (!image)
-		return (ft_error(MISSING_TEXTURE_LOAD), NULL);
+		return (ft_error(ERROR_MISSING_TEXTURE_LOAD), NULL);
 	ft_list_add(&list, image, (void (*)(void *))free_image);
 	return (list);
 }

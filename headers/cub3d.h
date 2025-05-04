@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/04 13:43:21 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/04 15:48:51 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,7 @@ typedef struct	s_player
 
 typedef struct	s_master_sprites
 {
+	bool		initialized;
 	t_sprite	missing;
 }	t_master_sprites;
 
@@ -202,5 +203,6 @@ void			render_raycasting_mega(t_map *map, t_image *canvas);
 
 // Sprites
 void	load_master_sprites(t_master_sprites *master_sprites, t_hashmap *types);
+void	destroy_master_sprites(t_master_sprites *master_sprites);
 
 #endif
