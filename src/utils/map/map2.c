@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 08:42:58 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/04 10:54:41 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/04 15:58:18 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	process_raw_map_e(t_map *map)
 				return ;
 			continue ;
 		}
-		map->map = ft_strvdup(&map->raw[i]);
+		map->map = &map->raw[i];
 		break ;
 	}
 }
