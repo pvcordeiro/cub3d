@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/04 11:06:13 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/04 12:17:23 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,13 +100,13 @@ static void	player_walk(t_entity *entity, double angle)
 
 static void	player_walks(t_entity *entity, t_player *player)
 {
-	if (player->walking_forward)
-		player_walk(entity, entity->coords.yaw - 90.0);
-	if (player->walking_left)
-		player_walk(entity, entity->coords.yaw - 180.0);
 	if (player->walking_backward)
-		player_walk(entity, entity->coords.yaw + 90.0);
+		player_walk(entity, entity->coords.yaw - 180.0);
 	if (player->walking_right)
+		player_walk(entity, entity->coords.yaw + 90.0);
+	if (player->walking_left)
+		player_walk(entity, entity->coords.yaw - 90.0);
+	if (player->walking_forward)
 		player_walk(entity, entity->coords.yaw);
 }
 
@@ -162,13 +162,13 @@ t_entity	*entity_player_new(char direction)
 		return (free(player), NULL);
 	entity->frame = player_frame;
 	entity->free = free_player;
-	if (direction == 'N')
-		entity->coords.yaw = 0.0;
-	else if (direction == 'S')
+	if (direction == 'W')
 		entity->coords.yaw = 180.0;
+	else if (direction == 'S')
+		entity->coords.yaw = 0.0;
+	else if (direction == 'N')
+		entity->coords.yaw = 270.0;
 	else if (direction == 'E')
 		entity->coords.yaw = 90.0;
-	else if (direction == 'W')
-		entity->coords.yaw = 270.0;
 	return (entity);
 }

@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 16:50:17 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/03 19:38:12 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/04 12:11:14 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	draw_line_angle(t_image *canvas, t_coords start, double angle, double lengt
 {
 	static t_coords	end;
 
-	angle = ft_normalize_angle(angle - 90);
+	angle = ft_normalize_angle(angle);
     end.x = start.x + cos(angle * PI / 180.0) * length;
     end.y = start.y + sin(angle * PI / 180.0) * length;
 	draw_line(canvas, start, end, color);

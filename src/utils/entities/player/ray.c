@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 12:05:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/04 11:21:02 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/04 12:11:33 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	init_ray_data(t_ray *data, t_coords coords)
 {
 	double	angle_rad;
 
-	angle_rad = ft_normalize_angle(coords.yaw - 90) * PI / 180.0;
+	angle_rad = ft_normalize_angle(coords.yaw) * PI / 180.0;
 	data->ray_dir.x = cos(angle_rad);
 	data->ray_dir.y = sin(angle_rad);
 	data->map_pos.x = (int)coords.x;
