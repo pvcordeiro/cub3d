@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 12:05:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/04 10:47:52 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/04 11:21:02 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,15 +114,29 @@ static double	calculate_wall_dist(t_ray *data, t_coords coords)
 	return (wall_dist);
 }
 
+static void	calculate_wall_hit(t_ray *data, t_coords coords, t_entity *hit_entity)
+{
+	data->hit_entity = hit_entity;
+	if (data->side == 0)
+		data->wall_x = coords.y + data->length * data->ray_dir.y;
+	else
+		data->wall_x = coords.x + data->length * data->ray_dir.x;
+	data->wall_x -= floor(data->wall_x);
+}
+
 double	send_ray(t_map *map, t_entity *player, t_coords coords)
 {
-	t_ray	data;
-	double	result;
+	t_ray		data;
+	double		result;
+	t_entity	*hit_entity;
 
 	init_ray_data(&data, coords);
 	set_step_and_side_dist(&data, coords);
 	result = perform_dda(&data, map, player);
 	if (result > 0)
 		return (result);
-	return (calculate_wall_dist(&data, coords));
+	data.length = calculate_wall_dist(&data, coords);
+	hit_entity = hits_something(map, player, (t_coords){data.map_pos.x, data.map_pos.y, 0, 0});
+	calculate_wall_hit(&data, coords, hit_entity);
+	return (data.length);
 }
