@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 12:15:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/03 15:48:44 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/04 13:27:04 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@ typedef struct s_list
 	struct s_list		*next;
 	void				(*data_free)(void *data);
 }						t_list;
+
+double					ft_normalize_angle(double angle);
+int						ft_atoi(const char *nptr);
 
 size_t					ft_strlen(const char *s);
 size_t					ft_strlcpy(char *dst, const char *src, size_t dstsize);
@@ -117,7 +120,5 @@ bool					ft_str_endswith(char *str, char *ending);
 char					*ft_strtrim(char *s);
 t_time					ft_get_time(void);
 void					ft_fprint_list(int fd, t_list *list, char *(*to_str)(void *data));
-
-double					ft_normalize_angle(double angle);
 
 #endif

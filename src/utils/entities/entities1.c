@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 20:49:46 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/03 12:56:49 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/04 10:51:16 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ static void	create_entity_e(t_list **list, char c, int x, int y)
 	ft_list_add(list, entity, entity->free);
 	if (entity->type == ENTITY_PLAYER)
 		cub3d()->map.player = entity;
+	if (entity->hard && x >= 0 && x < cub3d()->map.size.width && y >= 0 && y <cub3d()->map.size.height)
+		cub3d()->map.entity_grid[y][x] = entity;
 	ft_error(ERROR_NO_ERROR);
 }
 

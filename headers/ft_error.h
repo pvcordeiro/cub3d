@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 22:05:32 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/03 21:24:54 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/04 15:15:17 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@ typedef enum e_error
 	ERROR_ENTITY_CREATION,
 	ERROR_INIT_CANVAS,
 	ERROR_INVALID_TYPE,
-	MISSING_TEXTURE_LOAD
+	ERROR_MISSING_TEXTURE_LOAD,
+	ERROR_INIT_MAP_GRID_TRIPLE,
+	ERROR_INIT_MAP_GRID_DOUBLE,
 }	t_error;
 
 typedef struct s_error_storage
@@ -55,6 +57,8 @@ typedef struct s_error_storage
 # define ERROR_ENTITY_CREATION_MSG "Entity Creation error"
 # define ERROR_INIT_CANVAS_MSG "Initializing canvas"
 # define ERROR_MISSING_TEXTURE_LOAD_MSG "Missing Texture Load"
+# define ERROR_INIT_MAP_GRID_TRIPLE_MSG "Initializing map grid triple"
+# define ERROR_INIT_MAP_GRID_DOUBLE_MSG "Initializing map grid double"
 # define ERROR_INVALID_MSG "Invalid Error"
 
 void			ft_error(t_error _error);

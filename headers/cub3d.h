@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/03 21:36:44 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/04 16:04:00 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@
 # endif
 
 # ifndef W_WIDTH
-#  define W_WIDTH 1024
+#  define W_WIDTH 960
 # endif
 
 # ifndef W_HEIGHT
-#  define W_HEIGHT 768
+#  define W_HEIGHT ((W_WIDTH * 3) / 4)
 # endif
 
 #ifndef MINIMAP_WIDTH
@@ -52,10 +52,10 @@
 # define MISSING_IMAGE_PATH "assets/missing.xpm"
 # define MISSING_SPRITE_UPDATE_DELAY -1
 
-# define PLAYER_SPEED 0.3
-# define PLAYER_TURN_SPEED 6.0
-# define PLAYER_FOV 72.0
-# define PLAYER_RAYS 256
+# define PLAYER_SPEED 0.05
+# define PLAYER_TURN_SPEED 2.0
+# define PLAYER_FOV 65.0
+# define PLAYER_RAYS (W_WIDTH / 2)
 # define PLAYER_RAYS_MAX_LENGTH 100.0
 # define MAP_CHARS "10NSEW"
 
@@ -122,18 +122,29 @@ typedef struct s_map
 {
 	t_entity	*player;
 	t_list		*entities;
+	t_entity	***entity_grid;
 	char		*path;
 	t_hashmap	*types;
 	char		**raw;
 	char		**map;
+	unsigned	floor_color;
+	unsigned	ceiling_color;
 	t_size		size;
 	bool		initialized;
 }	t_map;
 
 typedef struct s_ray
 {
-	double	length;
-	double	angle;
+	double		length;
+	double		angle;
+	t_coords	ray_dir;
+	t_coords	delta_dist;
+	t_coords	side_dist;
+	t_coords	map_pos;
+	t_coords	step;
+	int			side;
+	double		wall_x;
+	t_entity	*hit_entity;
 }	t_ray;
 
 typedef struct	s_player
@@ -149,6 +160,7 @@ typedef struct	s_player
 
 typedef struct	s_master_sprites
 {
+	bool		initialized;
 	t_sprite	missing;
 }	t_master_sprites;
 
@@ -156,6 +168,7 @@ typedef struct s_cub3d
 {
 	t_master_sprites	master_sprites;
 	t_window			window;
+	bool				map_fullscreen;
 	t_map				map;
 }	t_cub3d;
 
@@ -172,7 +185,7 @@ void	destroy_map(t_map *map);
 void	destroy_window(t_window *window);
 
 // Images
-void	free_image(t_image *image);
+void	free_image(void *image);
 t_image	*image_from_file(char *path);
 t_list	*images_from_files(char **file_paths);
 t_image	*image_new(t_size size);
@@ -190,5 +203,6 @@ void			render_raycasting_mega(t_map *map, t_image *canvas);
 
 // Sprites
 void	load_master_sprites(t_master_sprites *master_sprites, t_hashmap *types);
+void	destroy_master_sprites(t_master_sprites *master_sprites);
 
 #endif

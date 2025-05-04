@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors13.c                                         :+:      :+:    :+:   */
+/*   errors14.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,11 +12,11 @@
 
 #include <ft_error.h>
 
-char	*get_error_message14(t_error _error);
+char	*get_error_message15(t_error _error);
 
-char	*get_error_message13(t_error _error)
+char	*get_error_message14(t_error _error)
 {
-	if (_error == ERROR_INIT_CANVAS)
-		return (ERROR_INIT_CANVAS_MSG);
-	return (get_error_message14(_error));
+	if (_error == ERROR_MISSING_TEXTURE_LOAD)
+		return (ERROR_MISSING_TEXTURE_LOAD_MSG);
+	return (get_error_message15(_error));
 }

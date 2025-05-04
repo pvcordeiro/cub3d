@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors13.c                                         :+:      :+:    :+:   */
+/*   errors16.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,11 +12,11 @@
 
 #include <ft_error.h>
 
-char	*get_error_message14(t_error _error);
+char	*get_error_message17(t_error _error);
 
-char	*get_error_message13(t_error _error)
+char	*get_error_message16(t_error _error)
 {
-	if (_error == ERROR_INIT_CANVAS)
-		return (ERROR_INIT_CANVAS_MSG);
-	return (get_error_message14(_error));
+	if (_error == ERROR_INIT_MAP_GRID_DOUBLE)
+		return (ERROR_INIT_MAP_GRID_DOUBLE_MSG);
+	return (get_error_message17(_error));
 }

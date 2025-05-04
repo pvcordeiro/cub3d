@@ -6,15 +6,15 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 18:51:44 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/03 21:38:15 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/04 16:03:39 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
-void	free_image(t_image *image)
+void	free_image(void *image)
 {
-	mlx_destroy_image(cub3d()->window.mlx, image->img_ptr);
+	mlx_destroy_image(cub3d()->window.mlx, ((t_image *)image)->img_ptr);
 	free(image);
 }
 

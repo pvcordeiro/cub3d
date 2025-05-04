@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 08:42:58 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/30 00:49:20 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/04 15:58:18 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,14 @@ void	process_raw_map_e(t_map *map)
 				return ;
 			continue ;
 		}
-		map->map = ft_strvdup(&map->raw[i]);
+		map->map = &map->raw[i];
 		break ;
 	}
 }
 
 void	set_map_size(t_map *map)
 {
-	size_t	i;
+	int		i;
 	size_t	biggest;
 	size_t	tmp;
 
@@ -79,4 +79,14 @@ void	set_map_size(t_map *map)
 	}
 	map->size.width = biggest;
 	map->size.height = i;
+	map->entity_grid = ft_calloc(map->size.height, sizeof(t_entity **));
+	if (!map->entity_grid)
+		return ;
+	i = -1;
+	while (++i < map->size.height)
+	{
+		map->entity_grid[i] = ft_calloc(map->size.width, sizeof(t_entity *));
+		if (!map->entity_grid[i])
+			return ;
+	}
 }
