@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/03 23:29:34 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/04 01:07:55 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@
 # endif
 
 # ifndef W_WIDTH
-#  define W_WIDTH 1024
+#  define W_WIDTH 960
 # endif
 
 # ifndef W_HEIGHT
-#  define W_HEIGHT 768
+#  define W_HEIGHT ((W_WIDTH * 3) / 4)
 # endif
 
 #ifndef MINIMAP_WIDTH
@@ -55,7 +55,7 @@
 # define PLAYER_SPEED 0.1
 # define PLAYER_TURN_SPEED 3.0
 # define PLAYER_FOV 72.0
-# define PLAYER_RAYS 256
+# define PLAYER_RAYS (W_WIDTH / 4)
 # define PLAYER_RAYS_MAX_LENGTH 100.0
 # define MAP_CHARS "10NSEW"
 
