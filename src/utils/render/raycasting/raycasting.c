@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 19:05:41 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/04 00:58:50 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/04 13:45:33 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	render_raycasting_mega(t_map *map, t_image *canvas)
 	double			gradient;
 
     draw_rectangle(canvas, (t_coords){0, 0, 0, 0}, 
-        (t_size){W_WIDTH, W_HEIGHT / 2}, 0x4682B4, 0x4682B4);
+        (t_size){W_WIDTH, W_HEIGHT / 2}, map->ceiling_color, map->ceiling_color);
     draw_rectangle(canvas, (t_coords){0, W_HEIGHT / 2, 0, 0}, 
-        (t_size){W_WIDTH, W_HEIGHT / 2}, 0x5D4037, 0x5D4037);
+        (t_size){W_WIDTH, W_HEIGHT / 2}, map->floor_color, map->floor_color);
 	player = map->player->private;
 	ray_width = W_WIDTH / PLAYER_RAYS;
 	ray_size.width = ray_width;

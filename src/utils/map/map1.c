@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 08:42:58 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/04 10:52:57 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/04 13:12:00 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	parse_map_e(t_map *map, int argc, char **argv)
 		return (ft_strvfree(map->raw), ft_hashmap_destroy(map->types),
 			ft_bzero(map, sizeof(t_map)));
 	set_map_size(map);
+	set_map_colors(map);
 	map->initialized = true;
 	ft_error(ERROR_NO_ERROR);
 }

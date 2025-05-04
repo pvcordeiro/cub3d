@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/04 11:11:22 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/04 13:43:21 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@
 # define MISSING_IMAGE_PATH "assets/missing.xpm"
 # define MISSING_SPRITE_UPDATE_DELAY -1
 
-# define PLAYER_SPEED 0.1
-# define PLAYER_TURN_SPEED 3.0
+# define PLAYER_SPEED 0.05
+# define PLAYER_TURN_SPEED 2.0
 # define PLAYER_FOV 65.0
 # define PLAYER_RAYS (W_WIDTH / 2)
 # define PLAYER_RAYS_MAX_LENGTH 100.0
@@ -127,6 +127,8 @@ typedef struct s_map
 	t_hashmap	*types;
 	char		**raw;
 	char		**map;
+	unsigned	floor_color;
+	unsigned	ceiling_color;
 	t_size		size;
 	bool		initialized;
 }	t_map;
@@ -165,6 +167,7 @@ typedef struct s_cub3d
 {
 	t_master_sprites	master_sprites;
 	t_window			window;
+	bool				map_fullscreen;
 	t_map				map;
 }	t_cub3d;
 
