@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 21:53:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/04 15:58:27 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/04 16:04:52 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,11 @@ t_cub3d	*cub3d(void)
 
 void	cub3d_exit(int code)
 {
-	if (cub3d()->window.initialized)
-		destroy_window(&cub3d()->window);
 	if (cub3d()->map.initialized)
 		destroy_map(&cub3d()->map);
+	ft_list_destroy(&cub3d()->master_sprites.missing.images);
+	if (cub3d()->window.initialized)
+		destroy_window(&cub3d()->window);
 	exit(code);
 }
 

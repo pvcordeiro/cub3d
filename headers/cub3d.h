@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/04 15:48:51 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/04 16:04:00 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,7 +185,7 @@ void	destroy_map(t_map *map);
 void	destroy_window(t_window *window);
 
 // Images
-void	free_image(t_image *image);
+void	free_image(void *image);
 t_image	*image_from_file(char *path);
 t_list	*images_from_files(char **file_paths);
 t_image	*image_new(t_size size);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 21:54:58 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/29 23:21:11 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/04 16:07:57 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,5 @@ void	destroy_window(t_window *window)
 	free_image(window->canvas);
 	mlx_destroy_window(window->mlx, window->win);
 	mlx_destroy_display(window->mlx);
+	free(window->mlx);
 }

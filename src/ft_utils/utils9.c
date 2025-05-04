@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 14:18:24 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/04 15:35:25 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/04 16:06:20 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void	ft_list_destroy(t_list **list)
 		free(curr);
 		curr = next;
 	}
-	free(*list);
 	*list = NULL;
 }
 
