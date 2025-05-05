@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 20:49:46 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/05 01:12:47 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/05 21:40:22 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,17 @@ void	create_entities_e(t_map *map)
 				return ;
 		}
 	}
+}
+
+t_sprite	*get_entity_sprite(t_entity *entity, t_direction direction)
+{
+	if (direction == NORTH)
+		return (entity->north_sprite);
+	else if (direction == SOUTH)
+		return (entity->south_sprite);
+	else if (direction == WEST)
+		return (entity->west_sprite);
+	else if (direction == EAST)
+		return (entity->east_sprite);
+	return (NULL);
 }

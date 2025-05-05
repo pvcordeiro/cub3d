@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 12:15:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/05 01:06:25 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/05 21:55:35 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <stdio.h>
 # include <sys/time.h>
 # include <math.h>
+# include <fcntl.h>
 
 # ifndef GNL_BUFFER_SIZE
 #  define GNL_BUFFER_SIZE 1024
@@ -51,6 +52,7 @@ typedef struct s_list
 double					ft_normalize_angle(double angle);
 int						ft_atoi(const char *nptr);
 t_list					*ft_list_index(t_list *list, size_t index);
+bool					ft_is_file(char *path);
 
 size_t					ft_strlen(const char *s);
 size_t					ft_strlcpy(char *dst, const char *src, size_t dstsize);

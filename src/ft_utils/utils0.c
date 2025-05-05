@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 15:44:32 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/05 01:06:15 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/05 22:24:46 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,17 @@ t_list	*ft_list_index(t_list *list, size_t index)
 	while (list && ++i < index)
 		list = list->next;
 	return (list);
+}
+
+bool	ft_is_file(char *path)
+{
+	int	fd;
+
+	if (!path)
+		return (false);
+	fd = open(path, O_RDONLY);
+	if (fd == -1)
+		return (false);
+	close(fd);
+	return (true);
 }

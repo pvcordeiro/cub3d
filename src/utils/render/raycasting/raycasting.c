@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 19:05:41 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/05 01:16:35 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/05 23:04:29 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void	render_raycasting_mega(t_map *map, t_image *canvas)
 	while (++i < PLAYER_RAYS)
 	{
 		hit_entity_sprite = &cub3d()->master_sprites.missing;
-		if (player->rays[i].hit_entity && player->rays[i].hit_entity->sprite)
-			hit_entity_sprite = player->rays[i].hit_entity->sprite;
+		if (player->rays[i].hit_entity && get_entity_sprite(player->rays[i].hit_entity, player->rays[i].direction_of_hit_on_entity))
+			hit_entity_sprite = get_entity_sprite(player->rays[i].hit_entity, player->rays[i].direction_of_hit_on_entity);
 		hit_entity_image = get_sprite_image(hit_entity_sprite);
 		if (!hit_entity_image)
 			continue ;
@@ -56,8 +56,8 @@ void	render_raycasting_mega(t_map *map, t_image *canvas)
 			hit_entity_image,
 			(t_render_cropped_image_config){
 				(t_coords){i * ray_width, (W_HEIGHT - ray_size.height) / 2, 0, 0},
-				(t_coords){(int)(player->rays[i].x_of_hit_in_entity * 64), 0, 0, 0}, 
-				(t_coords){(int)(player->rays[i].x_of_hit_in_entity * 64) + 1, 64, 0, 0},
+				(t_coords){(int)(player->rays[i].x_of_hit_in_entity * hit_entity_image->size.width), 0, 0, 0}, 
+				(t_coords){(int)(player->rays[i].x_of_hit_in_entity * hit_entity_image->size.width) + 1, hit_entity_image->size.height, 0, 0},
 				ray_size,
 				&ray_size.height,
 				pixel_modifier

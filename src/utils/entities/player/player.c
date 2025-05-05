@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/05 01:12:35 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/05 21:49:44 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ static void	player_rays(t_map *map, t_entity *entity)
 		ray_coords.yaw = ft_normalize_angle(angle + ((PLAYER_FOV / PLAYER_RAYS)
 					* i));
 		raycast = send_ray(map, entity, ray_coords);
+		player->rays[i].direction_of_hit_on_entity = raycast.direction_of_hit_on_entity;
 		player->rays[i].length = raycast.length;
 		player->rays[i].hit_entity = raycast.hit_entity;
 		player->rays[i].x_of_hit_in_entity = raycast.x_of_hit_in_entity;

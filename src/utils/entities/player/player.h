@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 18:09:30 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/04 23:25:58 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/05 21:49:10 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_dda_ray
 	int			side;
 	double		wall_x;
 	t_entity	*hit_entity;
+	t_direction	direction_of_hit_on_entity;
 }	t_dda_ray;
 
 typedef struct	s_raycast
@@ -35,6 +36,7 @@ typedef struct	s_raycast
 	double		length;
 	t_entity	*hit_entity;
 	double		x_of_hit_in_entity;
+	t_direction	direction_of_hit_on_entity;
 }	t_raycast;
 
 void		draw_line(t_image *canvas, t_coords start, t_coords end, 

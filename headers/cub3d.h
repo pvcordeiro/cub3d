@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/05 01:10:55 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/05 23:32:56 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,14 @@
 # define PLAYER_FOV 75.0
 # define PLAYER_RAYS 1024
 # define MAP_CHARS "10NSEW"
+
+typedef enum s_direction
+{
+	NORTH,
+	SOUTH,
+	WEST,
+	EAST
+}	t_direction;
 
 typedef struct s_coords
 {
@@ -112,7 +120,10 @@ typedef struct s_entity
 	bool			hard;
 	t_coords		coords;
 	t_entity_type	type;
-	t_sprite		*sprite;
+	t_sprite		*north_sprite;
+	t_sprite		*south_sprite;
+	t_sprite		*west_sprite;
+	t_sprite		*east_sprite;
 	void			(*frame)(struct s_entity *this);
 	void			(*free)(void *this);
 	void			*private;
@@ -138,6 +149,7 @@ typedef struct s_ray
 	double		length;
 	double		angle;
 	t_entity	*hit_entity;
+	t_direction	direction_of_hit_on_entity;
 	double		x_of_hit_in_entity;
 }	t_ray;
 
@@ -156,6 +168,7 @@ typedef struct	s_master_sprites
 {
 	bool		initialized;
 	t_sprite	missing;
+	t_hashmap	*sprites;
 }	t_master_sprites;
 
 typedef struct s_cub3d
@@ -189,15 +202,16 @@ void	clear_canvas(t_image *canvas);
 void	render_ceiling_and_floor(t_map *map, t_image *canvas);
 
 // Entities
-void	call_entity_frames(t_list *entities);
-void	render_map(t_map *map, t_image *canvas, t_coords coords, t_size size);
-void	create_entities_e(t_map *map);
+void		call_entity_frames(t_list *entities);
+void		render_map(t_map *map, t_image *canvas, t_coords coords, t_size size);
+void		create_entities_e(t_map *map);
+t_sprite	*get_entity_sprite(t_entity *entity, t_direction direction);
 
 // Raycasting
 void			render_raycasting_mega(t_map *map, t_image *canvas);
 
 // Sprites
-void	load_master_sprites(t_master_sprites *master_sprites, t_hashmap *types);
+void	load_master_sprites_e(t_master_sprites *master_sprites, t_hashmap *types);
 void	destroy_master_sprites(t_master_sprites *master_sprites);
 t_image	*get_sprite_image(t_sprite *sprite);
 

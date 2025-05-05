@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors14.c                                         :+:      :+:    :+:   */
+/*   missing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/26 22:25:55 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/26 22:26:16 by afpachec         ###   ########.fr       */
+/*   Created: 2025/05/05 17:31:41 by afpachec          #+#    #+#             */
+/*   Updated: 2025/05/05 17:32:12 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_error.h>
+#include "sprites.h"
 
-char	*get_error_message15(t_error _error);
-
-char	*get_error_message14(t_error _error)
+t_list	*get_missing_images(void)
 {
-	if (_error == ERROR_LOAD_SPRITE)
-		return (ERROR_LOAD_SPRITE_MSG);
-	return (get_error_message15(_error));
+	t_list	*list;
+	t_image	*image;
+
+	list = NULL;
+	image = image_from_file(MISSING_IMAGE_PATH);
+	if (image)
+		ft_list_add(&list, image, (void (*)(void *))free_image);
+	return (list);
 }

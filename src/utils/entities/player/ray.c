@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 12:05:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/05 00:59:31 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/05 21:49:27 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,11 +106,23 @@ static double	calculate_wall_dist(t_dda_ray *data, t_coords coords)
 	double	wall_dist;
 
 	if (data->side == 0)
+	{
 		wall_dist = (data->map_pos.x - coords.x + (1 - data->step.x) / 2)
-			/ data->ray_dir.x;
+		/ data->ray_dir.x;
+		if (data->step.x > 0)
+        	data->direction_of_hit_on_entity = WEST;
+		else
+			data->direction_of_hit_on_entity = EAST;
+	}
 	else
+	{
 		wall_dist = (data->map_pos.y - coords.y + (1 - data->step.y) / 2)
 			/ data->ray_dir.y;
+		if (data->step.y > 0)
+			data->direction_of_hit_on_entity = NORTH;
+		else
+			data->direction_of_hit_on_entity = SOUTH;
+	}
 	return (wall_dist);
 }
 
@@ -134,9 +146,9 @@ t_raycast	send_ray(t_map *map, t_entity *player, t_coords coords)
 	set_step_and_side_dist(&data, coords);
 	result = perform_dda(&data, map, player);
 	if (result > 0)
-		return ((t_raycast){result, NULL, 0});
+		return ((t_raycast){result, NULL, 0, 0});
 	data.length = calculate_wall_dist(&data, coords);
 	hit_entity = hits_something(map, player, (t_coords){data.map_pos.x, data.map_pos.y, 0, 0});
 	calculate_wall_hit(&data, coords, hit_entity);
-	return ((t_raycast){data.length, hit_entity, data.wall_x});
+	return ((t_raycast){data.length, hit_entity, data.wall_x, data.direction_of_hit_on_entity});
 }
