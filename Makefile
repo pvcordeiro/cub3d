@@ -6,7 +6,7 @@
 #    By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/26 17:16:21 by afpachec          #+#    #+#              #
-#    Updated: 2025/05/03 23:07:41 by afpachec         ###   ########.fr        #
+#    Updated: 2025/05/04 20:45:07 by afpachec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,9 @@ fclean: clean
 	@rm -rf headers/mlx.h
 
 re: fclean all
+
+debug: clean $(NAME)
+	./$(NAME) maps/subject.cub
 
 run: clean $(NAME)
 	@for map in $(MAPS); do echo "Running with $$map" && ./$(NAME) $$map; done

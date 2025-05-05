@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 12:15:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/04 13:27:04 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/05 01:06:25 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_list
 
 double					ft_normalize_angle(double angle);
 int						ft_atoi(const char *nptr);
+t_list					*ft_list_index(t_list *list, size_t index);
 
 size_t					ft_strlen(const char *s);
 size_t					ft_strlcpy(char *dst, const char *src, size_t dstsize);

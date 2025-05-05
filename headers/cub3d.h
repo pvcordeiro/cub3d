@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/04 16:04:00 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/05 01:10:55 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@
 # endif
 
 # ifndef W_WIDTH
-#  define W_WIDTH 960
+#  define W_WIDTH 1024
 # endif
 
 # ifndef W_HEIGHT
-#  define W_HEIGHT ((W_WIDTH * 3) / 4)
+#  define W_HEIGHT 768
 # endif
 
 #ifndef MINIMAP_WIDTH
@@ -54,9 +54,9 @@
 
 # define PLAYER_SPEED 0.05
 # define PLAYER_TURN_SPEED 2.0
-# define PLAYER_FOV 65.0
-# define PLAYER_RAYS (W_WIDTH / 2)
-# define PLAYER_RAYS_MAX_LENGTH 100.0
+# define PLAYER_RAYS_NO_HIT_LENGTH 100.0
+# define PLAYER_FOV 75.0
+# define PLAYER_RAYS 1024
 # define MAP_CHARS "10NSEW"
 
 typedef struct s_coords
@@ -137,14 +137,8 @@ typedef struct s_ray
 {
 	double		length;
 	double		angle;
-	t_coords	ray_dir;
-	t_coords	delta_dist;
-	t_coords	side_dist;
-	t_coords	map_pos;
-	t_coords	step;
-	int			side;
-	double		wall_x;
 	t_entity	*hit_entity;
+	double		x_of_hit_in_entity;
 }	t_ray;
 
 typedef struct	s_player
@@ -192,6 +186,7 @@ t_image	*image_new(t_size size);
 
 // Render
 void	clear_canvas(t_image *canvas);
+void	render_ceiling_and_floor(t_map *map, t_image *canvas);
 
 // Entities
 void	call_entity_frames(t_list *entities);
@@ -204,5 +199,6 @@ void			render_raycasting_mega(t_map *map, t_image *canvas);
 // Sprites
 void	load_master_sprites(t_master_sprites *master_sprites, t_hashmap *types);
 void	destroy_master_sprites(t_master_sprites *master_sprites);
+t_image	*get_sprite_image(t_sprite *sprite);
 
 #endif

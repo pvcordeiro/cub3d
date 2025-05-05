@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   entities.h                                         :+:      :+:    :+:   */
+/*   render2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/28 18:04:16 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/05 01:12:40 by afpachec         ###   ########.fr       */
+/*   Created: 2025/05/04 19:13:29 by afpachec          #+#    #+#             */
+/*   Updated: 2025/05/04 19:15:24 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENTITIES_H
-# define ENTITIES_H
+#include "render.h"
 
-# include <cub3d.h>
-
-t_entity	*entity_wall_new(void);
-t_entity	*entity_player_new(char direction);
-t_entity	*entity_new(t_entity_type type, void *private);
-
-#endif
+void	render_ceiling_and_floor(t_map *map, t_image *canvas)
+{
+    draw_rectangle(canvas, (t_coords){0, 0, 0, 0}, 
+        (t_size){W_WIDTH, W_HEIGHT / 2}, map->ceiling_color, map->ceiling_color);
+    draw_rectangle(canvas, (t_coords){0, W_HEIGHT / 2, 0, 0}, 
+        (t_size){W_WIDTH, W_HEIGHT / 2}, map->floor_color, map->floor_color);
+}

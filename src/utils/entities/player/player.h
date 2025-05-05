@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 18:09:30 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/03 12:45:33 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/04 23:25:58 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,29 @@
 # include <cub3d.h>
 # include "../entities.h"
 
-void	draw_line(t_image *canvas, t_coords start, t_coords end, 
+typedef struct s_dda_ray
+{
+	double		length;
+	double		angle;
+	t_coords	ray_dir;
+	t_coords	delta_dist;
+	t_coords	side_dist;
+	t_coords	map_pos;
+	t_coords	step;
+	int			side;
+	double		wall_x;
+	t_entity	*hit_entity;
+}	t_dda_ray;
+
+typedef struct	s_raycast
+{
+	double		length;
+	t_entity	*hit_entity;
+	double		x_of_hit_in_entity;
+}	t_raycast;
+
+void		draw_line(t_image *canvas, t_coords start, t_coords end, 
 	unsigned int color);
-double	send_ray(t_map *map, t_entity *player, t_coords coords);
+t_raycast	send_ray(t_map *map, t_entity *player, t_coords coords);
 
 #endif

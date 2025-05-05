@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 12:05:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/04 12:31:01 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/05 00:59:31 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static t_entity	*hits_something(t_map *map, t_entity *entity, t_coords coords)
 	return (NULL);
 }
 
-static void	init_ray_data(t_ray *data, t_coords coords)
+static void	init_dda_ray_data(t_dda_ray *data, t_coords coords)
 {
 	double	angle_rad;
 
@@ -47,7 +47,7 @@ static void	init_ray_data(t_ray *data, t_coords coords)
 		data->delta_dist.y = fabs(1 / data->ray_dir.y);
 }
 
-static void	set_step_and_side_dist(t_ray *data, t_coords coords)
+static void	set_step_and_side_dist(t_dda_ray *data, t_coords coords)
 {
 	if (data->ray_dir.x < 0)
 	{
@@ -73,7 +73,7 @@ static void	set_step_and_side_dist(t_ray *data, t_coords coords)
 	}
 }
 
-static double	perform_dda(t_ray *data, t_map *map, t_entity *player)
+static double	perform_dda(t_dda_ray *data, t_map *map, t_entity *entity)
 {
 	t_coords	check_pos;
 
@@ -92,16 +92,16 @@ static double	perform_dda(t_ray *data, t_map *map, t_entity *player)
 			data->side = 1;
 		}
 		check_pos = (t_coords){data->map_pos.x, data->map_pos.y, 0, 0};
-		if (hits_something(map, player, check_pos))
+		if (hits_something(map, entity, check_pos))
 			break ;
 		if (data->map_pos.x < 0 || data->map_pos.x >= map->size.width
 			|| data->map_pos.y < 0 || data->map_pos.y >= map->size.height)
-			return (PLAYER_RAYS_MAX_LENGTH);
+			return (PLAYER_RAYS_NO_HIT_LENGTH);
 	}
 	return (0);
 }
 
-static double	calculate_wall_dist(t_ray *data, t_coords coords)
+static double	calculate_wall_dist(t_dda_ray *data, t_coords coords)
 {
 	double	wall_dist;
 
@@ -114,7 +114,7 @@ static double	calculate_wall_dist(t_ray *data, t_coords coords)
 	return (wall_dist);
 }
 
-static void	calculate_wall_hit(t_ray *data, t_coords coords, t_entity *hit_entity)
+static void	calculate_wall_hit(t_dda_ray *data, t_coords coords, t_entity *hit_entity)
 {
 	data->hit_entity = hit_entity;
 	if (data->side == 0)
@@ -124,19 +124,19 @@ static void	calculate_wall_hit(t_ray *data, t_coords coords, t_entity *hit_entit
 	data->wall_x -= floor(data->wall_x);
 }
 
-double	send_ray(t_map *map, t_entity *player, t_coords coords)
+t_raycast	send_ray(t_map *map, t_entity *player, t_coords coords)
 {
-	t_ray		data;
+	t_dda_ray	data;
 	double		result;
 	t_entity	*hit_entity;
 
-	init_ray_data(&data, coords);
+	init_dda_ray_data(&data, coords);
 	set_step_and_side_dist(&data, coords);
 	result = perform_dda(&data, map, player);
 	if (result > 0)
-		return (result);
+		return ((t_raycast){result, NULL, 0});
 	data.length = calculate_wall_dist(&data, coords);
 	hit_entity = hits_something(map, player, (t_coords){data.map_pos.x, data.map_pos.y, 0, 0});
 	calculate_wall_hit(&data, coords, hit_entity);
-	return (data.length);
+	return ((t_raycast){data.length, hit_entity, data.wall_x});
 }

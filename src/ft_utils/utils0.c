@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils0.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 15:44:32 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/04 13:26:43 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/05 01:06:15 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,14 @@ int	ft_atoi(const char *nptr)
 		nptr++;
 	}
 	return (result * sign);
+}
+
+t_list	*ft_list_index(t_list *list, size_t index)
+{
+	size_t	i;
+
+	i = -1;
+	while (list && ++i < index)
+		list = list->next;
+	return (list);
 }

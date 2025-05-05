@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
+/*   render1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 16:50:17 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/04 12:11:14 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/05 01:14:41 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 unsigned int	*get_pixel(t_image *image, t_coords coords)
 {
-	return (image->data + (int)round((coords.y * image->size_line)
+	return (image->data + (int)((coords.y * image->size_line)
 		+ (coords.x * (image->bits_per_pixel / 8))));
 }
 
@@ -40,18 +40,38 @@ void	put_pixel_in_image(t_image *image, t_coords coords, unsigned int pixel)
 	*get_pixel(image, coords) = pixel;
 }
 
-void	render_image_to_canvas(t_image *canvas, t_image *image, t_coords coords)
+void	render_cropped_image_to_canvas(t_image *canvas, t_image *image, t_render_cropped_image_config rcic)
 {
 	int				i;
 	int				j;
+	t_coords		src_coords;
+	double			x_scale;
+	double			y_scale;
+	int				crop_width;
+	int				crop_height;
 
+	crop_width = rcic.crop_end.x - rcic.crop_start.x;
+	crop_height = rcic.crop_end.y - rcic.crop_start.y;
+	if (crop_width <= 0 || crop_height <= 0 || rcic.size.width <= 0 || rcic.size.height <= 0)
+		return;
+	x_scale = (double)crop_width / rcic.size.width;
+	y_scale = (double)crop_height / rcic.size.height;
 	i = -1;
-	while (++i < image->size.width)
+	while (++i < rcic.size.width)
 	{
 		j = -1;
-		while (++j < image->size.height)
-			put_pixel_in_image(canvas, (t_coords){coords.x + i, coords.y + j, 0, 0},
-				*get_pixel(image, (t_coords){i, j, 0, 0}));
+		while (++j < rcic.size.height)
+		{
+			src_coords.x = rcic.crop_start.x + (int)(i * x_scale);
+			src_coords.y = rcic.crop_start.y + (int)(j * y_scale);
+			if (src_coords.x >= 0 && src_coords.x < image->size.width &&
+				src_coords.y >= 0 && src_coords.y < image->size.height)
+			{
+				put_pixel_in_image(canvas,
+					(t_coords){rcic.coords.x + i, rcic.coords.y + j, 0, 0},
+					rcic.pixel_modifier(rcic.pixel_modifier_data, *get_pixel(image, src_coords)));
+			}
+		}
 	}
 }
 

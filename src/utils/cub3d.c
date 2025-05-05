@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 21:53:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/04 16:12:05 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/04 19:16:58 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,10 @@ int	key_release_frame(int key_code)
 	return (0);
 }
 
-int	cub3d_loop(void *_)
+static void	render_to_canvas(t_image *canvas, t_map *map)
 {
 	t_coords	map_coords;
 	t_size		map_size;
-	(void)_;
 
 	map_coords = (t_coords){0, W_HEIGHT - MINIMAP_HEIGHT, 0, 0};
 	map_size = (t_size){MINIMAP_WIDTH, MINIMAP_HEIGHT};
@@ -92,10 +91,17 @@ int	cub3d_loop(void *_)
 		map_coords = (t_coords){0, 0, 0, 0};
 		map_size = (t_size){W_WIDTH, W_HEIGHT};
 	}
+	render_ceiling_and_floor(map, canvas);
+	render_raycasting_mega(map, canvas);
+	render_map(map, canvas, map_coords, map_size);
+}
+
+int	cub3d_loop(void *_)
+{
+	(void)_;
 	clear_canvas(cub3d()->window.canvas);
 	call_entity_frames(cub3d()->map.entities);
-	render_raycasting_mega(&cub3d()->map, cub3d()->window.canvas);
-	render_map(&cub3d()->map, cub3d()->window.canvas, map_coords, map_size);
+	render_to_canvas(cub3d()->window.canvas, &cub3d()->map);
 	mlx_put_image_to_window(cub3d()->window.mlx, cub3d()->window.win,
 		cub3d()->window.canvas->img_ptr, 0, 0);
 	return (0);
