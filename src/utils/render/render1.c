@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 16:50:17 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/05 01:14:41 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 12:25:23 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	draw_line(t_image *canvas, t_coords start, t_coords end, unsigned int color
 
 	dx = end.x - start.x;
 	dy = end.y - start.y;
-	step = LINE_STEP;
+	step = DRAW_LINE_STEP;
 	dx /= step;
 	dy /= step;
 	x = start.x;

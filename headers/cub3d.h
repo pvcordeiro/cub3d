@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 12:13:31 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 12:26:30 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define CUB3D_H
 
 # define PI 3.14159265359
-
 
 // MLX
 # include <mlx.h>
@@ -41,18 +40,21 @@
 # define MINIMAP_WIDTH_MULTIPLIER 0.25
 # define MINIMAP_HEIGHT__MULTIPLIER 0.25
 
-
-# define LINE_STEP 1024
+// Diagonal line drawing step size
+# define DRAW_LINE_STEP 1024
 
 // Placeholder Image
 # define PLACEHOLDER_IMAGE_PATH "assets/placeholder.xpm"
 # define PLACEHOLDER_SPRITE_UPDATE_DELAY 0
 
+// Player Config
 # define PLAYER_SPEED 0.05
 # define PLAYER_TURN_SPEED 2.0
 # define PLAYER_RAYS_NO_HIT_LENGTH 100.0
 # define PLAYER_FOV 75.0
 # define PLAYER_RAYS 1024
+
+// Map Config
 # define MAP_CHARS "10NSEW"
 
 typedef enum s_direction
