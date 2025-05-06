@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 21:53:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/04 19:16:58 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 12:13:34 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	cub3d_exit(int code)
 {
 	if (cub3d()->map.initialized)
 		destroy_map(&cub3d()->map);
-	ft_list_destroy(&cub3d()->master_sprites.missing.images);
+	ft_list_destroy(&cub3d()->master_sprites.placeholder.images);
 	if (cub3d()->window.initialized)
 		destroy_window(&cub3d()->window);
 	if (cub3d()->master_sprites.initialized)
@@ -84,8 +84,8 @@ static void	render_to_canvas(t_image *canvas, t_map *map)
 	t_coords	map_coords;
 	t_size		map_size;
 
-	map_coords = (t_coords){0, W_HEIGHT - MINIMAP_HEIGHT, 0, 0};
-	map_size = (t_size){MINIMAP_WIDTH, MINIMAP_HEIGHT};
+	map_coords = (t_coords){0, W_HEIGHT - W_HEIGHT * MINIMAP_HEIGHT__MULTIPLIER, 0, 0};
+	map_size = (t_size){W_WIDTH * MINIMAP_WIDTH_MULTIPLIER, W_HEIGHT * MINIMAP_HEIGHT__MULTIPLIER};
 	if (cub3d()->map_fullscreen)
 	{
 		map_coords = (t_coords){0, 0, 0, 0};

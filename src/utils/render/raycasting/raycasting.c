@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 19:05:41 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/05 23:04:29 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 12:13:38 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	render_raycasting_mega(t_map *map, t_image *canvas)
 	ray_size.width = ray_width;
 	while (++i < PLAYER_RAYS)
 	{
-		hit_entity_sprite = &cub3d()->master_sprites.missing;
+		hit_entity_sprite = &cub3d()->master_sprites.placeholder;
 		if (player->rays[i].hit_entity && get_entity_sprite(player->rays[i].hit_entity, player->rays[i].direction_of_hit_on_entity))
 			hit_entity_sprite = get_entity_sprite(player->rays[i].hit_entity, player->rays[i].direction_of_hit_on_entity);
 		hit_entity_image = get_sprite_image(hit_entity_sprite);

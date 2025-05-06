@@ -1,5 +1,5 @@
 /* XPM */
-static char * Untitled_xpm[] = {
+static char * placeholder_xpm[] = {
 "64 64 2 1",
 " 	c #FF00E0",
 ".	c #000000",

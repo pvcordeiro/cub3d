@@ -6,13 +6,13 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:32:44 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/05 22:32:37 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 12:18:00 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sprites.h"
 
-static void	init_sprite(t_sprite *sprite, t_list *images, t_time update_delay)
+void	init_sprite(t_sprite *sprite, t_list *images, t_time update_delay)
 {
 	sprite->images = images;
 	sprite->update_delay = update_delay;
@@ -28,17 +28,6 @@ t_sprite	*sprite_new(t_list *images, t_time update_delay)
 		return (NULL);
 	init_sprite(sprite, images, update_delay);
 	return (sprite);
-}
-
-static void	load_sprite_e(t_sprite *sprite, t_list	*(*get_images_list)(void))
-{
-	t_list	*images;
-
-	ft_error(ERROR_NO_ERROR);
-	images = get_images_list();
-	if (!images)
-		return (ft_error(ERROR_LOAD_SPRITE));
-	init_sprite(sprite, images, 0);
 }
 
 static void	load_from_types_e(t_master_sprites *master_sprites, t_hashmap *types)
@@ -78,16 +67,15 @@ static void	load_from_types_e(t_master_sprites *master_sprites, t_hashmap *types
 
 void	load_master_sprites_e(t_master_sprites *master_sprites, t_hashmap *types)
 {
-	(void)types;
 	master_sprites->initialized = false;
-	load_sprite_e(&master_sprites->missing, get_missing_images);
+	load_placeholder_sprite_e(&master_sprites->placeholder);
 	if (ft_has_error())
 		return ;
 	master_sprites->sprites = ft_hashmap_new();
 	if (!master_sprites->sprites)
-		return (ft_list_destroy(&master_sprites->missing.images), ft_error(ERROR_INIT_SPRITES));
+		return (ft_list_destroy(&master_sprites->placeholder.images), ft_error(ERROR_INIT_SPRITES));
 	load_from_types_e(master_sprites, types);
 	if (ft_has_error())
-		return (ft_list_destroy(&master_sprites->missing.images));
+		return (ft_list_destroy(&master_sprites->placeholder.images));
 	master_sprites->initialized = true;
 }

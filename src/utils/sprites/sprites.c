@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 19:01:44 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/05 22:28:03 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 12:17:24 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	destroy_master_sprites(t_master_sprites *master_sprites)
 {
-	ft_list_destroy(&master_sprites->missing.images);
+	ft_list_destroy(&master_sprites->placeholder.images);
+	ft_hashmap_destroy(master_sprites->sprites);
 }
 
 t_image	*get_sprite_image(t_sprite *sprite)
@@ -23,8 +24,8 @@ t_image	*get_sprite_image(t_sprite *sprite)
 
 	if (!sprite->images)
 	{
-		if (sprite != &cub3d()->master_sprites.missing)
-			return (get_sprite_image(&cub3d()->master_sprites.missing));
+		if (sprite != &cub3d()->master_sprites.placeholder)
+			return (get_sprite_image(&cub3d()->master_sprites.placeholder));
 		return (NULL);
 	}
 	if (ft_get_time() - sprite->updated_at > sprite->update_delay)

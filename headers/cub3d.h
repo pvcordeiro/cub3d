@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/05 23:32:56 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 12:13:31 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,15 @@
 
 # define PI 3.14159265359
 
+
+// MLX
 # include <mlx.h>
 
+// Internal Libs
 # include <ft_error.h>
 # include <ft_utils.h>
 
+// External Libs
 # include <X11/keysym.h>
 # include <stdio.h>
 # include <stdbool.h>
@@ -28,29 +32,21 @@
 # include <fcntl.h>
 # include <math.h>
 
-# ifndef W_TITLE
-#  define W_TITLE "Wolfenstein"
-# endif
+// Window Config
+# define W_TITLE "Wolfenstein"
+# define W_WIDTH 1024
+# define W_HEIGHT 768
 
-# ifndef W_WIDTH
-#  define W_WIDTH 1024
-# endif
+// Default minimap size multipliers
+# define MINIMAP_WIDTH_MULTIPLIER 0.25
+# define MINIMAP_HEIGHT__MULTIPLIER 0.25
 
-# ifndef W_HEIGHT
-#  define W_HEIGHT 768
-# endif
-
-#ifndef MINIMAP_WIDTH
-# define MINIMAP_WIDTH (W_WIDTH / 4)
-#endif
-
-# ifndef MINIMAP_HEIGHT
-#  define MINIMAP_HEIGHT (W_HEIGHT / 4)
-# endif
 
 # define LINE_STEP 1024
-# define MISSING_IMAGE_PATH "assets/missing.xpm"
-# define MISSING_SPRITE_UPDATE_DELAY -1
+
+// Placeholder Image
+# define PLACEHOLDER_IMAGE_PATH "assets/placeholder.xpm"
+# define PLACEHOLDER_SPRITE_UPDATE_DELAY 0
 
 # define PLAYER_SPEED 0.05
 # define PLAYER_TURN_SPEED 2.0
@@ -167,7 +163,7 @@ typedef struct	s_player
 typedef struct	s_master_sprites
 {
 	bool		initialized;
-	t_sprite	missing;
+	t_sprite	placeholder;
 	t_hashmap	*sprites;
 }	t_master_sprites;
 
