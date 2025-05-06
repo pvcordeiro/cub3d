@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:20:20 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 17:45:39 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 17:49:36 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	render_to_canvas(t_image *canvas, t_map *map)
 int	loop(void *_)
 {
 	(void)_;
-	clear_canvas(cub3d()->window.canvas);
+	ftm_image_clear(cub3d()->window.canvas);
 	call_entity_frames(cub3d()->map.entities);
 	render_to_canvas(cub3d()->window.canvas, &cub3d()->map);
 	ftm_update_window(&cub3d()->window);

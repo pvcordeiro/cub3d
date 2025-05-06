@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 17:37:38 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 17:49:26 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,6 @@ int	key_up_handler(int key);
 int	key_down_handler(int key);
 
 // Render
-void	clear_canvas(t_image *canvas);
 void	render_ceiling_and_floor(t_map *map, t_image *canvas);
 
 // Entities

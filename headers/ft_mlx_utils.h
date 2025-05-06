@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:46:27 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 17:42:56 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 17:49:14 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void			ftm_free_image(void *image);
 t_image			*ftm_image_from_file(t_window *window, char *path);
 t_image			*ftm_image_new(t_window *window, t_size size);
 t_list			*ftm_images_from_files(t_window *window, char **file_paths);
+
+void			ftm_image_clear(t_image *image);
 
 void			ftm_free_window(void *window);
 void			ftm_create_window_e(t_window *window, t_size size, char *title);
