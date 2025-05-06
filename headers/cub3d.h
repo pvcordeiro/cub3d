@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 15:37:32 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 16:45:45 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,28 +56,6 @@
 
 // Map Config
 # define MAP_CHARS "10NSEW"
-
-typedef enum s_direction
-{
-	NORTH,
-	SOUTH,
-	WEST,
-	EAST
-}	t_direction;
-
-typedef struct s_coords
-{
-	double	x;
-	double	y;
-	double	z;
-	double	yaw;
-}	t_coords;
-
-typedef struct s_size
-{
-	int	width;
-	int	height;
-}	t_size;
 
 typedef struct s_image
 {

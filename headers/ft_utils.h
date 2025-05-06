@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 12:15:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/05 21:55:35 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 16:45:46 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,29 @@
 # include <math.h>
 # include <fcntl.h>
 
-# ifndef GNL_BUFFER_SIZE
-#  define GNL_BUFFER_SIZE 1024
-# endif
+# define GNL_BUFFER_SIZE 1024
+
+typedef enum s_direction
+{
+	NORTH,
+	SOUTH,
+	WEST,
+	EAST
+}	t_direction;
+
+typedef struct s_coords
+{
+	double	x;
+	double	y;
+	double	z;
+	double	yaw;
+}	t_coords;
+
+typedef struct s_size
+{
+	int	width;
+	int	height;
+}	t_size;
 
 typedef size_t	t_time;
 
