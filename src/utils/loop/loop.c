@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:20:20 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 17:00:26 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 17:45:39 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	cub3d_exit(int code)
 	if (cub3d()->master_sprites.initialized)
 		destroy_master_sprites(&cub3d()->master_sprites);
 	if (cub3d()->window.initialized)
-		free_window(&cub3d()->window);
+		ftm_free_window(&cub3d()->window);
 	exit(code);
 }
 
@@ -46,6 +46,6 @@ int	loop(void *_)
 	clear_canvas(cub3d()->window.canvas);
 	call_entity_frames(cub3d()->map.entities);
 	render_to_canvas(cub3d()->window.canvas, &cub3d()->map);
-	update_window(&cub3d()->window);
+	ftm_update_window(&cub3d()->window);
 	return (0);
 }

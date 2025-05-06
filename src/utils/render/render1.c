@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 16:50:17 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 17:37:09 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 17:45:03 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ void	render_cropped_image_to_canvas(t_image *canvas, t_image *image, t_render_cr
 		{
 			src_coords.x = rcic.crop_start.x + (int)(i * x_scale);
 			src_coords.y = rcic.crop_start.y + (int)(j * y_scale);
-			if (!image_pixel(image, src_coords))
+			if (!ftm_image_pixel(image, src_coords))
 				continue ;
-			set_pixel(
-				image_pixel(canvas, (t_coords){rcic.coords.x + i, rcic.coords.y + j, 0, 0}),
-				rcic.pixel_modifier(rcic.pixel_modifier_data, *image_pixel(image, src_coords))
+			ftm_set_pixel(
+				ftm_image_pixel(canvas, (t_coords){rcic.coords.x + i, rcic.coords.y + j, 0, 0}),
+				rcic.pixel_modifier(rcic.pixel_modifier_data, *ftm_image_pixel(image, src_coords))
 			);
 		}
 	}
@@ -48,5 +48,5 @@ void	render_cropped_image_to_canvas(t_image *canvas, t_image *image, t_render_cr
 
 void	clear_canvas(t_image *canvas)
 {
-	draw_rectangle(canvas, (t_coords){0, 0, 0 ,0}, (t_size){W_WIDTH, W_HEIGHT}, 0x000000, 0x000000);
+	ftm_draw_rectangle(canvas, (t_coords){0, 0, 0 ,0}, (t_size){W_WIDTH, W_HEIGHT}, 0x000000, 0x000000);
 }

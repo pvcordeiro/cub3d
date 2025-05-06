@@ -6,13 +6,13 @@
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:05:31 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 17:36:43 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 17:43:58 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_mlx_utils.h>
 
-unsigned int	*image_pixel(t_image *image, t_coords coords)
+unsigned int	*ftm_image_pixel(t_image *image, t_coords coords)
 {
 	int	x;
 	int	y;
@@ -29,7 +29,7 @@ static inline bool	is_transparent_value(unsigned int value)
 	return (value == 0xFF000000);
 }
 
-void	set_pixel(unsigned *pixel, unsigned value)
+void	ftm_set_pixel(unsigned *pixel, unsigned value)
 {
 	if (pixel && !is_transparent_value(value))
 		*pixel = value;

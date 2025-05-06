@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 22:33:42 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/03 23:38:28 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/06 17:44:48 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void render_map_rays(t_image *canvas, t_entity *entity, t_coords coords, 
     scale = fmin(entity_size.width, entity_size.height);
     i = -1;
     while (++i < PLAYER_RAYS)
-        draw_line_angle(canvas, coords, player->rays[i].angle, player->rays[i].length * scale, 0x0FFF00);
+		ftm_draw_line_angle(canvas, coords, player->rays[i].angle, player->rays[i].length * scale, 0x0FFF00);
 }
 
 static void	render_map_entity(t_image *canvas, t_entity *entity, t_coords coords, t_size entity_size)
@@ -42,7 +42,7 @@ static void	render_map_entity(t_image *canvas, t_entity *entity, t_coords coords
 		entity_size.width = 1;
 		entity_size.height = 1;
 	}
-	draw_rectangle(canvas,
+	ftm_draw_rectangle(canvas,
 			new_coords,
 			entity_size,
 			color, border_color);
@@ -78,6 +78,6 @@ static void render_map_entities(t_map *map, t_image *canvas, t_coords coords, t_
 
 void	render_map(t_map *map, t_image *canvas, t_coords coords, t_size size)
 {
-	draw_rectangle(canvas, coords, size, 0x888888, 0xFFFFFF);
+	ftm_draw_rectangle(canvas, coords, size, 0x888888, 0xFFFFFF);
 	render_map_entities(map, canvas, coords, size);
 }

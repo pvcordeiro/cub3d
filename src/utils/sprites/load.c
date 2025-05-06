@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:32:44 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 16:56:16 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 17:45:15 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,17 @@ static void	load_from_types_e(t_window *window, t_master_sprites *master_sprites
 			element = element->next;
 			continue ;
 		}
-		image = image_from_file(window, element->value);
+		image = ftm_image_from_file(window, element->value);
 		if (!image)
 			return (ft_hashmap_destroy(master_sprites->sprites), ft_error(ERROR_LOAD_SPRITE));
 		if (ft_hashmap_get_value(master_sprites->sprites, element->key))
 		{
 			image_list = ((t_sprite *)ft_hashmap_get_value(master_sprites->sprites, element->key))->images;
-			ft_list_add(&image_list, image, free_image);
+			ft_list_add(&image_list, image, ftm_free_image);
 		}
 		else
 		{
-			sprite = sprite_new(ft_list_new(image, free_image), 0);
+			sprite = sprite_new(ft_list_new(image, ftm_free_image), 0);
 			if (!sprite)
 				return (ft_hashmap_destroy(master_sprites->sprites), ft_error(ERROR_LOAD_SPRITE));
 			ft_hashmap_set(master_sprites->sprites, element->key, sprite, free_sprite);
