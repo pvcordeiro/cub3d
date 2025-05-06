@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render2.c                                          :+:      :+:    :+:   */
+/*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/04 19:13:29 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 17:44:28 by afpachec         ###   ########.fr       */
+/*   Created: 2025/05/06 19:49:48 by afpachec          #+#    #+#             */
+/*   Updated: 2025/05/06 19:56:00 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "render.h"
+#include <cub3d.h>
 
 void	render_ceiling_and_floor(t_map *map, t_image *canvas)
 {

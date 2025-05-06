@@ -6,11 +6,11 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 19:05:41 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/06 19:48:07 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 19:58:48 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "raycasting.h"
+# include <cub3d.h>
 
 static unsigned	pixel_modifier(void *data, unsigned pixel)
 {
