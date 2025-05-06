@@ -3,44 +3,65 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 19:05:41 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/04 13:45:33 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/05 23:04:29 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raycasting.h"
 
+static unsigned	pixel_modifier(void *data, unsigned pixel)
+{
+	double			gradient;
+	int				r;
+	int				g;
+	int				b;
+
+	gradient = fmin(*(int *)data / (W_HEIGHT / 1.5), 1.0);
+	r = ((pixel >> 16) & 0xEE) * gradient;
+	g = ((pixel >> 8) & 0xEE) * gradient;
+	b = (pixel & 0xEE) * gradient;
+	return ((r << 16) | (g << 8) | b);
+}
+
 void	render_raycasting_mega(t_map *map, t_image *canvas)
 {
 	t_player		*player;
 	t_size			ray_size;
+	t_sprite		*hit_entity_sprite;
+	t_image			*hit_entity_image;
 	int				ray_width;
 	int				i;
-	unsigned int	color;
 	double			angle_diff;
-	double			gradient;
 
-    draw_rectangle(canvas, (t_coords){0, 0, 0, 0}, 
-        (t_size){W_WIDTH, W_HEIGHT / 2}, map->ceiling_color, map->ceiling_color);
-    draw_rectangle(canvas, (t_coords){0, W_HEIGHT / 2, 0, 0}, 
-        (t_size){W_WIDTH, W_HEIGHT / 2}, map->floor_color, map->floor_color);
+	i = -1;
 	player = map->player->private;
 	ray_width = W_WIDTH / PLAYER_RAYS;
 	ray_size.width = ray_width;
-	i = -1;
 	while (++i < PLAYER_RAYS)
 	{
+		hit_entity_sprite = &cub3d()->master_sprites.missing;
+		if (player->rays[i].hit_entity && get_entity_sprite(player->rays[i].hit_entity, player->rays[i].direction_of_hit_on_entity))
+			hit_entity_sprite = get_entity_sprite(player->rays[i].hit_entity, player->rays[i].direction_of_hit_on_entity);
+		hit_entity_image = get_sprite_image(hit_entity_sprite);
+		if (!hit_entity_image)
+			continue ;
 		angle_diff = player->rays[i].angle - map->player->coords.yaw;
 		angle_diff = ft_normalize_angle(angle_diff) * (PI / 180.0);
 		ray_size.height = W_HEIGHT / (fmax(player->rays[i].length, 0.5) * cos(angle_diff));
 		ray_size.height = fmin(ray_size.height, W_HEIGHT * 3);
-		gradient = fmin(ray_size.height / (W_HEIGHT / 2.0), 1.0);
-        int r = (int)(gradient * 255);
-        int g = (int)(gradient * 255);
-        int b = (int)(gradient * 255);
-        color = (r << 16) | (g << 8) | b;
-		draw_rectangle(canvas, (t_coords){i * ray_width, (W_HEIGHT - ray_size.height) / 2, 0, 0}, ray_size, color, color); 
+		render_cropped_image_to_canvas(canvas,
+			hit_entity_image,
+			(t_render_cropped_image_config){
+				(t_coords){i * ray_width, (W_HEIGHT - ray_size.height) / 2, 0, 0},
+				(t_coords){(int)(player->rays[i].x_of_hit_in_entity * hit_entity_image->size.width), 0, 0, 0}, 
+				(t_coords){(int)(player->rays[i].x_of_hit_in_entity * hit_entity_image->size.width) + 1, hit_entity_image->size.height, 0, 0},
+				ray_size,
+				&ray_size.height,
+				pixel_modifier
+			}
+		);
 	}
 }

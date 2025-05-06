@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   entities1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 20:49:46 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/04 10:51:16 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/05 21:40:22 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "entities.h"
 
-static void	create_entity_e(t_list **list, char c, int x, int y)
+static void	create_entity_e(t_map *map, char c, int x, int y)
 {
 	t_entity	*entity;
 
@@ -27,7 +27,7 @@ static void	create_entity_e(t_list **list, char c, int x, int y)
 		return (ft_error(ERROR_ENTITY_CREATION));
 	entity->coords.x = x;
 	entity->coords.y = y;
-	ft_list_add(list, entity, entity->free);
+	ft_list_add(&map->entities, entity, entity->free);
 	if (entity->type == ENTITY_PLAYER)
 		cub3d()->map.player = entity;
 	if (entity->hard && x >= 0 && x < cub3d()->map.size.width && y >= 0 && y <cub3d()->map.size.height)
@@ -46,9 +46,22 @@ void	create_entities_e(t_map *map)
 		j = -1;
 		while (map->map[i][++j])
 		{
-			create_entity_e(&map->entities, map->map[i][j], j, i);
+			create_entity_e(map, map->map[i][j], j, i);
 			if (ft_has_error())
 				return ;
 		}
 	}
+}
+
+t_sprite	*get_entity_sprite(t_entity *entity, t_direction direction)
+{
+	if (direction == NORTH)
+		return (entity->north_sprite);
+	else if (direction == SOUTH)
+		return (entity->south_sprite);
+	else if (direction == WEST)
+		return (entity->west_sprite);
+	else if (direction == EAST)
+		return (entity->east_sprite);
+	return (NULL);
 }

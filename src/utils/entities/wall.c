@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wall.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/03 21:31:34 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/05 22:39:36 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,9 @@ t_entity	*entity_wall_new(void)
 	entity->frame = wall_frame;
 	entity->free = free_wall;
 	entity->hard = true;
+	entity->north_sprite = ft_hashmap_get_value(cub3d()->master_sprites.sprites, "NO");
+	entity->south_sprite = ft_hashmap_get_value(cub3d()->master_sprites.sprites, "SO");
+	entity->west_sprite = ft_hashmap_get_value(cub3d()->master_sprites.sprites, "WE");
+	entity->east_sprite = ft_hashmap_get_value(cub3d()->master_sprites.sprites, "EA");
 	return (entity);
 }

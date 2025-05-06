@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors14.c                                         :+:      :+:    :+:   */
+/*   render2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/26 22:25:55 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/26 22:26:16 by afpachec         ###   ########.fr       */
+/*   Created: 2025/05/04 19:13:29 by afpachec          #+#    #+#             */
+/*   Updated: 2025/05/04 19:15:24 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_error.h>
+#include "render.h"
 
-char	*get_error_message15(t_error _error);
-
-char	*get_error_message14(t_error _error)
+void	render_ceiling_and_floor(t_map *map, t_image *canvas)
 {
-	if (_error == ERROR_LOAD_SPRITE)
-		return (ERROR_LOAD_SPRITE_MSG);
-	return (get_error_message15(_error));
+    draw_rectangle(canvas, (t_coords){0, 0, 0, 0}, 
+        (t_size){W_WIDTH, W_HEIGHT / 2}, map->ceiling_color, map->ceiling_color);
+    draw_rectangle(canvas, (t_coords){0, W_HEIGHT / 2, 0, 0}, 
+        (t_size){W_WIDTH, W_HEIGHT / 2}, map->floor_color, map->floor_color);
 }

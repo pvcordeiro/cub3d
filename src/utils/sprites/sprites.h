@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors14.c                                         :+:      :+:    :+:   */
+/*   sprites.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/26 22:25:55 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/26 22:26:16 by afpachec         ###   ########.fr       */
+/*   Created: 2025/05/05 17:29:32 by afpachec          #+#    #+#             */
+/*   Updated: 2025/05/05 22:28:07 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_error.h>
+#ifndef SPRITES_H
+# define SPRITES_H
 
-char	*get_error_message15(t_error _error);
+#include <cub3d.h>
 
-char	*get_error_message14(t_error _error)
-{
-	if (_error == ERROR_LOAD_SPRITE)
-		return (ERROR_LOAD_SPRITE_MSG);
-	return (get_error_message15(_error));
-}
+t_list	*get_missing_images(void);
+void	free_sprite(void *data);
+
+#endif

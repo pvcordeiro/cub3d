@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_error.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 22:05:32 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/04 15:15:17 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/05 22:06:17 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,10 @@ typedef enum e_error
 	ERROR_ENTITY_CREATION,
 	ERROR_INIT_CANVAS,
 	ERROR_INVALID_TYPE,
-	ERROR_MISSING_TEXTURE_LOAD,
+	ERROR_LOAD_SPRITE,
 	ERROR_INIT_MAP_GRID_TRIPLE,
 	ERROR_INIT_MAP_GRID_DOUBLE,
+	ERROR_INIT_SPRITES,
 }	t_error;
 
 typedef struct s_error_storage
@@ -56,9 +57,10 @@ typedef struct s_error_storage
 # define ERROR_INVALID_TYPE_MSG "Invalid Type"
 # define ERROR_ENTITY_CREATION_MSG "Entity Creation error"
 # define ERROR_INIT_CANVAS_MSG "Initializing canvas"
-# define ERROR_MISSING_TEXTURE_LOAD_MSG "Missing Texture Load"
+# define ERROR_LOAD_SPRITE_MSG "Loading sprite error"
 # define ERROR_INIT_MAP_GRID_TRIPLE_MSG "Initializing map grid triple"
 # define ERROR_INIT_MAP_GRID_DOUBLE_MSG "Initializing map grid double"
+# define ERROR_INIT_SPRITES_MSG "Initializing sprites error"
 # define ERROR_INVALID_MSG "Invalid Error"
 
 void			ft_error(t_error _error);

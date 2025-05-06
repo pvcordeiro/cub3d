@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/04 12:17:23 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/05 21:49:44 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ static void	player_rays(t_map *map, t_entity *entity)
 {
 	t_player	*player;
 	t_coords	ray_coords;
+	t_raycast	raycast;
 	size_t		i;
 	double		angle;
 
@@ -126,7 +127,11 @@ static void	player_rays(t_map *map, t_entity *entity)
 	{
 		ray_coords.yaw = ft_normalize_angle(angle + ((PLAYER_FOV / PLAYER_RAYS)
 					* i));
-		player->rays[i].length = send_ray(map, entity, ray_coords);
+		raycast = send_ray(map, entity, ray_coords);
+		player->rays[i].direction_of_hit_on_entity = raycast.direction_of_hit_on_entity;
+		player->rays[i].length = raycast.length;
+		player->rays[i].hit_entity = raycast.hit_entity;
+		player->rays[i].x_of_hit_in_entity = raycast.x_of_hit_in_entity;
 		player->rays[i].angle = ray_coords.yaw;
 	}
 }
