@@ -6,33 +6,12 @@
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 16:50:17 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 17:07:02 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 17:28:13 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render.h"
 
-static bool	valid_position_inside_image(t_image *image, t_coords coords)
-{
-	int	x;
-	int	y;
-
-	x = coords.x;
-	y = coords.y;
-	return (x >= 0 && x < image->size.width && y >= 0 && y < image->size.height);
-}
-
-static bool	is_transparent_pixel(unsigned int pixel)
-{
-	return (pixel == 0xFF000000);
-}
-
-void	put_pixel_in_image(t_image *image, t_coords coords, unsigned int pixel)
-{
-	if (is_transparent_pixel(pixel) || !valid_position_inside_image(image, coords))
-		return ;
-	*image_pixel(image, coords) = pixel;
-}
 
 void	render_cropped_image_to_canvas(t_image *canvas, t_image *image, t_render_cropped_image_config rcic)
 {
@@ -58,13 +37,12 @@ void	render_cropped_image_to_canvas(t_image *canvas, t_image *image, t_render_cr
 		{
 			src_coords.x = rcic.crop_start.x + (int)(i * x_scale);
 			src_coords.y = rcic.crop_start.y + (int)(j * y_scale);
-			if (src_coords.x >= 0 && src_coords.x < image->size.width &&
-				src_coords.y >= 0 && src_coords.y < image->size.height)
-			{
-				put_pixel_in_image(canvas,
-					(t_coords){rcic.coords.x + i, rcic.coords.y + j, 0, 0},
-					rcic.pixel_modifier(rcic.pixel_modifier_data, *image_pixel(image, src_coords)));
-			}
+			if (!image_pixel(image, src_coords))
+				continue ;
+			set_pixel(
+				image_pixel(canvas, (t_coords){rcic.coords.x + i, rcic.coords.y + j, 0, 0}),
+				rcic.pixel_modifier(rcic.pixel_modifier_data, *image_pixel(image, src_coords))
+			);
 		}
 	}
 }
@@ -88,7 +66,7 @@ void	draw_line(t_image *canvas, t_coords start, t_coords end, unsigned int color
 	i = 0;
 	while (i <= step)
 	{
-		put_pixel_in_image(canvas, (t_coords){(int)x, (int)y, 0, 0}, color);
+		set_pixel(image_pixel(canvas, (t_coords){(int)x, (int)y, 0, 0}), color);
 		x += dx;
 		y += dy;
 		i++;
@@ -120,7 +98,7 @@ void	draw_rectangle(t_image *canvas, t_coords coords, t_size size, unsigned int 
 			tmp_color = color;
 			if (i == 0 || i == size.width - 1 || j == 0 || j == size.height - 1)
 				tmp_color = border_color;
-			put_pixel_in_image(canvas, (t_coords){coords.x + i, coords.y + j, 0, 0}, tmp_color);
+			set_pixel(image_pixel(canvas, (t_coords){coords.x + i, coords.y + j, 0, 0}), tmp_color);
 		}
 	}
 }

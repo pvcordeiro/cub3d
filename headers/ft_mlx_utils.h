@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:46:27 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 17:06:32 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 17:24:00 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,6 @@ void			create_window_e(t_window *window, t_size size, char *title);
 void			update_window(t_window *window);
 
 unsigned int	*image_pixel(t_image *image, t_coords coords);
+void			set_pixel(unsigned *pixel, unsigned value);
 
 #endif
