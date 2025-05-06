@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 19:05:41 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/06 19:58:48 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 20:33:59 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static t_ftm_pitc_config	get_pitc_config(int i, t_size *ray_size, t_image *image
 		});
 }
 
-void	render_raycasting_mega(t_map *map, t_image *canvas)
+void	render_raycasting_mega(t_game *game, t_image *canvas)
 {
 	t_player		*player;
 	t_size			ray_size;
@@ -50,7 +50,7 @@ void	render_raycasting_mega(t_map *map, t_image *canvas)
 	double			angle_diff;
 
 	i = -1;
-	player = map->player->private;
+	player = game->player->private;
 	ray_size.width = W_WIDTH / PLAYER_RAYS;
 	while (++i < PLAYER_RAYS)
 	{
@@ -60,7 +60,7 @@ void	render_raycasting_mega(t_map *map, t_image *canvas)
 		hit_entity_image = get_sprite_image(hit_entity_sprite);
 		if (!hit_entity_image)
 			continue ;
-		angle_diff = player->rays[i].angle - map->player->coords.yaw;
+		angle_diff = player->rays[i].angle - game->player->coords.yaw;
 		angle_diff = ft_normalize_angle(angle_diff) * (PI / 180.0);
 		ray_size.height = W_HEIGHT / (fmax(player->rays[i].length, 0.5) * cos(angle_diff));
 		ray_size.height = fmin(ray_size.height, W_HEIGHT * 3);

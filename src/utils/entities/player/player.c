@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 20:16:49 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 20:38:52 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static bool	position_overlaps(t_entity *entity, t_coords coords)
 	t_list		*curr;
 	t_entity	*curr_entity;
 
-	curr = cub3d()->game.map->entities;
+	curr = cub3d()->game.entities;
 	while (curr)
 	{
 		curr_entity = curr->data;
@@ -42,15 +42,15 @@ static bool	position_overlaps(t_entity *entity, t_coords coords)
 static void	update_entity_grid(t_entity *entity, int old_x, int old_y,
 		int new_x, int new_y)
 {
-	t_map	*map;
+	t_game	*game;
 
-	map = cub3d()->game.map;
-	if (old_x >= 0 && old_x < map->size.width && old_y >= 0
-		&& old_y < map->size.height)
-		map->entity_grid[old_y][old_x] = NULL;
-	if (new_x >= 0 && new_x < map->size.width && new_y >= 0
-		&& new_y < map->size.height)
-		map->entity_grid[new_y][new_x] = entity;
+	game = &cub3d()->game;
+	if (old_x >= 0 && old_x < game->map->size.width && old_y >= 0
+		&& old_y < game->map->size.height)
+		game->entity_grid[old_y][old_x] = NULL;
+	if (new_x >= 0 && new_x < game->map->size.width && new_y >= 0
+		&& new_y < game->map->size.height)
+		game->entity_grid[new_y][new_x] = entity;
 }
 
 static void	move_player_x(t_entity *entity, double angle_radians)
@@ -110,7 +110,7 @@ static void	player_walks(t_entity *entity, t_player *player)
 		player_walk(entity, entity->coords.yaw);
 }
 
-static void	player_rays(t_map *map, t_entity *entity)
+static void	player_rays(t_game *game, t_entity *entity)
 {
 	t_player	*player;
 	t_coords	ray_coords;
@@ -118,7 +118,6 @@ static void	player_rays(t_map *map, t_entity *entity)
 	size_t		i;
 	double		angle;
 
-	(void)map;
 	player = entity->private;
 	i = -1;
 	angle = entity->coords.yaw - PLAYER_FOV / 2;
@@ -127,7 +126,7 @@ static void	player_rays(t_map *map, t_entity *entity)
 	{
 		ray_coords.yaw = ft_normalize_angle(angle + ((PLAYER_FOV / PLAYER_RAYS)
 					* i));
-		raycast = send_ray(map, entity, ray_coords);
+		raycast = send_ray(game, entity, ray_coords);
 		player->rays[i].direction_of_hit_on_entity = raycast.direction_of_hit_on_entity;
 		player->rays[i].length = raycast.length;
 		player->rays[i].hit_entity = raycast.hit_entity;
@@ -139,13 +138,11 @@ static void	player_rays(t_map *map, t_entity *entity)
 static void	player_frame(t_entity *entity)
 {
 	t_player	*player;
-	t_map		*map;
 
-	map = cub3d()->game.map;
 	player = (t_player *)(entity->private);
 	player_looks(entity, player);
 	player_walks(entity, player);
-	player_rays(map, entity);
+	player_rays(&cub3d()->game, entity);
 }
 
 static void	free_player(void *entity)

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:15:19 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 20:12:47 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 20:28:00 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,8 @@ int	main(int argc, char **argv)
 	ft_error_assert();
 	load_master_sprites_e(&cub3d()->window, &cub3d()->master_sprites, map->types);
 	ft_error_assert();
-	create_entities_e(map);
+	game_load_map_e(&cub3d()->game, map);
 	ft_error_assert();
-	game_load_map(&cub3d()->game, map);
 	mlx_loop_hook(cub3d()->window.display, loop, NULL);
 	mlx_hook(cub3d()->window.win, 3, 2, key_up_handler, NULL);
 	mlx_hook(cub3d()->window.win, 2, 3, key_down_handler, NULL);

@@ -6,13 +6,13 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 20:49:46 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 20:19:23 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 20:36:00 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "entities.h"
 
-static void	create_entity_e(t_map *map, char c, int x, int y)
+static void	create_entity_e(t_game *game, char c, int x, int y)
 {
 	t_entity	*entity;
 
@@ -27,26 +27,36 @@ static void	create_entity_e(t_map *map, char c, int x, int y)
 		return (ft_error(ERROR_ENTITY_CREATION));
 	entity->coords.x = x;
 	entity->coords.y = y;
-	ft_list_add(&map->entities, entity, entity->free);
+	ft_list_add(&game->entities, entity, entity->free);
 	if (entity->type == ENTITY_PLAYER)
-		map->player = entity;
-	if (entity->hard && x >= 0 && x < map->size.width && y >= 0 && y < map->size.height)
-		map->entity_grid[y][x] = entity;
+		game->player = entity;
+	if (entity->hard && x >= 0 && x < game->map->size.width && y >= 0 && y < game->map->size.height)
+		game->entity_grid[y][x] = entity;
 	ft_error(ERROR_NO_ERROR);
 }
 
-void	create_entities_e(t_map *map)
+void	create_entities_e(t_game *game)
 {
-	size_t	i;
-	size_t	j;
+	int	i;
+	int	j;
 
+	game->entity_grid = ft_calloc(game->map->size.height, sizeof(t_entity **));
+	if (!game->entity_grid)
+		return ;
 	i = -1;
-	while (map->map[++i])
+	while (++i < game->map->size.height)
+	{
+		game->entity_grid[i] = ft_calloc(game->map->size.width, sizeof(t_entity *));
+		if (!game->entity_grid[i])
+			return ;
+	}
+	i = -1;
+	while (game->map->map[++i])
 	{
 		j = -1;
-		while (map->map[i][++j])
+		while (game->map->map[i][++j])
 		{
-			create_entity_e(map, map->map[i][j], j, i);
+			create_entity_e(game, game->map->map[i][j], j, i);
 			if (ft_has_error())
 				return ;
 		}

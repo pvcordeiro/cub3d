@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 22:33:42 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 19:50:11 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 20:32:15 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	render_map_entity(t_image *canvas, t_entity *entity, t_coords coords
 			color, border_color);
 }
 
-static void render_map_entities(t_map *map, t_image *canvas, t_coords coords, t_size size)
+static void render_map_entities(t_game *game, t_image *canvas, t_coords coords, t_size size)
 {
     t_list *entity_item;
     t_entity *entity;
@@ -56,28 +56,28 @@ static void render_map_entities(t_map *map, t_image *canvas, t_coords coords, t_
     t_size add_to_last;
     double scale;
 
-    scale = fmin((double)size.width / (double)map->size.width,
-                (double)size.height / (double)map->size.height);
+    scale = fmin((double)size.width / (double)game->map->size.width,
+                (double)size.height / (double)game->map->size.height);
     entity_size = (t_size){scale, scale};
-    add_to_last.width = (size.width - (entity_size.width * map->size.width)) / 2;
-    add_to_last.height = (size.height - (entity_size.height * map->size.height)) / 2;
-    entity_item = map->entities;
+    add_to_last.width = (size.width - (entity_size.width * game->map->size.width)) / 2;
+    add_to_last.height = (size.height - (entity_size.height * game->map->size.height)) / 2;
+    entity_item = game->entities;
     while (entity_item)
     {
         entity = entity_item->data;
-        if (entity != map->player)
+        if (entity != game->player)
             render_map_entity(canvas, entity,
                     (t_coords){coords.x + add_to_last.width, coords.y + add_to_last.height, 0, 0},
                     entity_size);
         entity_item = entity_item->next;
     }
-    render_map_entity(canvas, map->player,
+    render_map_entity(canvas, game->player,
         (t_coords){coords.x + add_to_last.width, coords.y + add_to_last.height, 0, 0},
         entity_size);
 }
 
-void	render_map(t_map *map, t_image *canvas, t_coords coords, t_size size)
+void	render_map(t_game *game, t_image *canvas, t_coords coords, t_size size)
 {
 	ftm_draw_rectangle(canvas, coords, size, 0x888888, 0xFFFFFF);
-	render_map_entities(map, canvas, coords, size);
+	render_map_entities(game, canvas, coords, size);
 }

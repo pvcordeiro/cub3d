@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:20:20 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 20:16:03 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 20:34:13 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	cub3d_exit(int code)
 	exit(code);
 }
 
-static void	render_to_canvas(t_image *canvas, t_map *map)
+static void	render_to_canvas(t_image *canvas, t_game *game)
 {
 	t_coords	map_coords;
 	t_size		map_size;
@@ -35,17 +35,17 @@ static void	render_to_canvas(t_image *canvas, t_map *map)
 		map_coords = (t_coords){0, 0, 0, 0};
 		map_size = (t_size){W_WIDTH, W_HEIGHT};
 	}
-	render_ceiling_and_floor(map, canvas);
-	render_raycasting_mega(map, canvas);
-	render_map(map, canvas, map_coords, map_size);
+	render_ceiling_and_floor(game->map, canvas);
+	render_raycasting_mega(game, canvas);
+	render_map(game, canvas, map_coords, map_size);
 }
 
 int	loop(void *_)
 {
 	(void)_;
 	ftm_image_clear(cub3d()->window.canvas);
-	call_entity_frames(cub3d()->game.map->entities);
-	render_to_canvas(cub3d()->window.canvas, cub3d()->game.map);
+	call_entity_frames(cub3d()->game.entities);
+	render_to_canvas(cub3d()->window.canvas, &cub3d()->game);
 	ftm_update_window(&cub3d()->window);
 	return (0);
 }

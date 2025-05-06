@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 08:42:58 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/04 15:58:18 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/06 20:34:24 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,14 +79,4 @@ void	set_map_size(t_map *map)
 	}
 	map->size.width = biggest;
 	map->size.height = i;
-	map->entity_grid = ft_calloc(map->size.height, sizeof(t_entity **));
-	if (!map->entity_grid)
-		return ;
-	i = -1;
-	while (++i < map->size.height)
-	{
-		map->entity_grid[i] = ft_calloc(map->size.width, sizeof(t_entity *));
-		if (!map->entity_grid[i])
-			return ;
-	}
 }

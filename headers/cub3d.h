@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 20:13:04 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 20:35:50 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,6 @@ typedef struct s_entity
 
 typedef struct s_map
 {
-	t_entity	*player;
-	t_list		*entities;
-	t_entity	***entity_grid;
 	char		*path;
 	t_hashmap	*types;
 	char		**raw;
@@ -128,6 +125,9 @@ typedef struct	s_master_sprites
 typedef struct	s_game
 {
 	t_map				*map;
+	t_entity			*player;
+	t_list				*entities;
+	t_entity			***entity_grid;
 	// t_minimap			minimap;
 	// t_master_sprites	sprites;
 }	t_game;
@@ -140,7 +140,7 @@ typedef struct s_cub3d
 	t_game				game;
 }	t_cub3d;
 
-void	game_load_map(t_game *game, t_map *map);
+void	game_load_map_e(t_game *game, t_map *map);
 
 // cub3d
 t_cub3d	*cub3d(void);
@@ -159,12 +159,12 @@ void	render_ceiling_and_floor(t_map *map, t_image *canvas);
 
 // Entities
 void		call_entity_frames(t_list *entities);
-void		render_map(t_map *map, t_image *canvas, t_coords coords, t_size size);
-void		create_entities_e(t_map *map);
+void		render_map(t_game *game, t_image *canvas, t_coords coords, t_size size);
+void		create_entities_e(t_game *game);
 t_sprite	*get_entity_sprite(t_entity *entity, t_direction direction);
 
 // Raycasting
-void			render_raycasting_mega(t_map *map, t_image *canvas);
+void			render_raycasting_mega(t_game *game, t_image *canvas);
 
 // Sprites
 void	load_master_sprites_e(t_window *window, t_master_sprites *master_sprites, t_hashmap *types);
