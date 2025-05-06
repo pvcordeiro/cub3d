@@ -6,12 +6,11 @@
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 16:50:17 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 17:28:13 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 17:35:23 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render.h"
-
 
 void	render_cropped_image_to_canvas(t_image *canvas, t_image *image, t_render_cropped_image_config rcic)
 {
@@ -66,7 +65,7 @@ void	draw_line(t_image *canvas, t_coords start, t_coords end, unsigned int color
 	i = 0;
 	while (i <= step)
 	{
-		set_pixel(image_pixel(canvas, (t_coords){(int)x, (int)y, 0, 0}), color);
+		set_pixel(image_pixel(canvas, (t_coords){x, y, 0, 0}), color);
 		x += dx;
 		y += dy;
 		i++;

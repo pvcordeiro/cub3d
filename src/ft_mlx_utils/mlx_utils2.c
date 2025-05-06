@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:05:31 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 17:23:50 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 17:34:59 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,14 @@
 
 unsigned int	*image_pixel(t_image *image, t_coords coords)
 {
-	if (coords.x < 0 || coords.y < 0 || coords.x > image->size.width || coords.y > image->size.height)
+	int	x;
+	int	y;
+
+	x = coords.x;
+	y = coords.y;
+	if (x < 0 || y < 0 || x > image->size.width || y > image->size.height)
 		return (NULL);
-	return (image->data + (int)((coords.y * image->size_line)
-		+ (coords.x * (image->bits_per_pixel / 8))));
+	return (image->data + (y * image->size_line) + (x * (image->bits_per_pixel / 8)));
 }
 
 static inline bool	is_transparent_value(unsigned int value)
