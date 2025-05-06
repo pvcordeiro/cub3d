@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 21:54:58 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/04 16:07:57 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/06 15:37:09 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,10 @@ void	destroy_window(t_window *window)
 	mlx_destroy_window(window->mlx, window->win);
 	mlx_destroy_display(window->mlx);
 	free(window->mlx);
+}
+
+void	update_window(t_window *window)
+{
+	mlx_put_image_to_window(window->mlx, window->win,
+		window->canvas->img_ptr, 0, 0);
 }

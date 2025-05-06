@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:20:20 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 14:21:50 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 15:38:23 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int	loop(void *_)
 	clear_canvas(cub3d()->window.canvas);
 	call_entity_frames(cub3d()->map.entities);
 	render_to_canvas(cub3d()->window.canvas, &cub3d()->map);
-	mlx_put_image_to_window(cub3d()->window.mlx, cub3d()->window.win,
-		cub3d()->window.canvas->img_ptr, 0, 0);
+	update_window(&cub3d()->window);
 	return (0);
 }
