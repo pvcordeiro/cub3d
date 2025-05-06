@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 20:35:50 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 20:41:51 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,6 @@ typedef struct s_map
 	t_hashmap	*types;
 	char		**raw;
 	char		**map;
-	unsigned	floor_color;
-	unsigned	ceiling_color;
 	t_size		size;
 	bool		initialized;
 }	t_map;
@@ -122,14 +120,19 @@ typedef struct	s_master_sprites
 	t_hashmap	*sprites;
 }	t_master_sprites;
 
+typedef struct	s_environment
+{
+	unsigned	floor_color;
+	unsigned	ceiling_color;
+}	t_environment;
+
 typedef struct	s_game
 {
+	t_environment		environment;
 	t_map				*map;
 	t_entity			*player;
 	t_list				*entities;
 	t_entity			***entity_grid;
-	// t_minimap			minimap;
-	// t_master_sprites	sprites;
 }	t_game;
 
 typedef struct s_cub3d
@@ -155,7 +158,7 @@ int	key_up_handler(int key);
 int	key_down_handler(int key);
 
 // Render
-void	render_ceiling_and_floor(t_map *map, t_image *canvas);
+void	render_ceiling_and_floor(t_game *game, t_image *canvas);
 
 // Entities
 void		call_entity_frames(t_list *entities);

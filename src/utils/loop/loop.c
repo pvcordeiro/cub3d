@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:20:20 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 20:34:13 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 20:41:56 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	render_to_canvas(t_image *canvas, t_game *game)
 		map_coords = (t_coords){0, 0, 0, 0};
 		map_size = (t_size){W_WIDTH, W_HEIGHT};
 	}
-	render_ceiling_and_floor(game->map, canvas);
+	render_ceiling_and_floor(game, canvas);
 	render_raycasting_mega(game, canvas);
 	render_map(game, canvas, map_coords, map_size);
 }
