@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 22:31:49 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 17:24:42 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 17:40:36 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,5 @@ typedef struct	s_render_cropped_image_config
 }	t_render_cropped_image_config;
 
 void			render_cropped_image_to_canvas(t_image *canvas, t_image *image, t_render_cropped_image_config rcic);
-void			draw_line(t_image *canvas, t_coords start, t_coords end, unsigned int color);
-void			draw_line_angle(t_image *canvas, t_coords start, double angle, double length, unsigned int color);
-void			draw_rectangle(t_image *canvas, t_coords coords, t_size size, unsigned int color, unsigned int border_color);
 
 #endif

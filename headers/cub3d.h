@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 16:58:40 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 17:37:38 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,6 @@
 // Default minimap size multipliers
 # define MINIMAP_WIDTH_MULTIPLIER 0.25
 # define MINIMAP_HEIGHT__MULTIPLIER 0.25
-
-// Diagonal line drawing step size
-# define DRAW_LINE_STEP 1024
 
 // Placeholder Image
 # define PLACEHOLDER_IMAGE_PATH "assets/placeholder.xpm"

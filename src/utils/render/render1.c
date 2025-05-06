@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 16:50:17 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 17:35:23 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 17:37:09 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,62 +42,6 @@ void	render_cropped_image_to_canvas(t_image *canvas, t_image *image, t_render_cr
 				image_pixel(canvas, (t_coords){rcic.coords.x + i, rcic.coords.y + j, 0, 0}),
 				rcic.pixel_modifier(rcic.pixel_modifier_data, *image_pixel(image, src_coords))
 			);
-		}
-	}
-}
-
-void	draw_line(t_image *canvas, t_coords start, t_coords end, unsigned int color)
-{
-	double	dx;
-	double	dy;
-	double	step;
-	double	x;
-	double	y;
-	int		i;
-
-	dx = end.x - start.x;
-	dy = end.y - start.y;
-	step = DRAW_LINE_STEP;
-	dx /= step;
-	dy /= step;
-	x = start.x;
-	y = start.y;
-	i = 0;
-	while (i <= step)
-	{
-		set_pixel(image_pixel(canvas, (t_coords){x, y, 0, 0}), color);
-		x += dx;
-		y += dy;
-		i++;
-	}
-}
-
-void	draw_line_angle(t_image *canvas, t_coords start, double angle, double length, unsigned int color)
-{
-	static t_coords	end;
-
-	angle = ft_normalize_angle(angle);
-    end.x = start.x + cos(angle * PI / 180.0) * length;
-    end.y = start.y + sin(angle * PI / 180.0) * length;
-	draw_line(canvas, start, end, color);
-}
-
-void	draw_rectangle(t_image *canvas, t_coords coords, t_size size, unsigned int color, unsigned int border_color)
-{
-	int				i;
-	int				j;
-	unsigned int	tmp_color;
-
-	i = -1;
-	while (++i < size.width)
-	{
-		j = -1;
-		while (++j < size.height)
-		{
-			tmp_color = color;
-			if (i == 0 || i == size.width - 1 || j == 0 || j == size.height - 1)
-				tmp_color = border_color;
-			set_pixel(image_pixel(canvas, (t_coords){coords.x + i, coords.y + j, 0, 0}), tmp_color);
 		}
 	}
 }
