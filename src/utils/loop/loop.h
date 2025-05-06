@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   loop.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/26 21:53:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 14:20:34 by afpachec         ###   ########.fr       */
+/*   Created: 2025/05/06 14:20:56 by afpachec          #+#    #+#             */
+/*   Updated: 2025/05/06 14:21:13 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cub3d.h>
+#ifndef LOOP_H
+# define LOOP_H
 
-t_cub3d	*cub3d(void)
-{
-	static t_cub3d	singleton;
+# include <cub3d.h>
 
-	return (&singleton);
-}
+#endif

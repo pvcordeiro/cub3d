@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 12:26:30 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 14:30:02 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,14 +180,16 @@ typedef struct s_cub3d
 // cub3d
 t_cub3d	*cub3d(void);
 void	cub3d_exit(int code);
-int		cub3d_loop(void *_);
-int		key_release_frame(int key_code);
-int		key_press_frame(int key_code);
 
 void	create_window_e(t_window *window, t_size size, char *title);
 void	parse_map_e(t_map *map, int argc, char **argv);
 void	destroy_map(t_map *map);
 void	destroy_window(t_window *window);
+
+// Loop
+int	loop(void *_);
+int	key_up_handler(int key);
+int	key_down_handler(int key);
 
 // Images
 void	free_image(void *image);

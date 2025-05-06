@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:15:19 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/05 23:29:20 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 14:30:06 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ int	main(int argc, char **argv)
 	ft_error_assert();
 	create_entities_e(&cub3d()->map);
 	ft_error_assert();
-	mlx_loop_hook(cub3d()->window.mlx, cub3d_loop, NULL);
-	mlx_hook(cub3d()->window.win, 3, 2, key_release_frame, NULL);
-	mlx_hook(cub3d()->window.win, 2, 3, key_press_frame, NULL);
+	mlx_loop_hook(cub3d()->window.mlx, loop, NULL);
+	mlx_hook(cub3d()->window.win, 3, 2, key_up_handler, NULL);
+	mlx_hook(cub3d()->window.win, 2, 3, key_down_handler, NULL);
 	mlx_hook(cub3d()->window.win, 17, 1L << 0, exit_game, NULL);
 	mlx_loop(cub3d()->window.mlx);
 	cub3d_exit(0);
