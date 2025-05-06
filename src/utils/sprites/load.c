@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:32:44 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 12:18:00 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 16:56:16 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_sprite	*sprite_new(t_list *images, t_time update_delay)
 	return (sprite);
 }
 
-static void	load_from_types_e(t_master_sprites *master_sprites, t_hashmap *types)
+static void	load_from_types_e(t_window *window, t_master_sprites *master_sprites, t_hashmap *types)
 {
 	t_sprite	*sprite;
 	t_image		*image;
@@ -46,7 +46,7 @@ static void	load_from_types_e(t_master_sprites *master_sprites, t_hashmap *types
 			element = element->next;
 			continue ;
 		}
-		image = image_from_file(element->value);
+		image = image_from_file(window, element->value);
 		if (!image)
 			return (ft_hashmap_destroy(master_sprites->sprites), ft_error(ERROR_LOAD_SPRITE));
 		if (ft_hashmap_get_value(master_sprites->sprites, element->key))
@@ -65,16 +65,16 @@ static void	load_from_types_e(t_master_sprites *master_sprites, t_hashmap *types
 	}
 }
 
-void	load_master_sprites_e(t_master_sprites *master_sprites, t_hashmap *types)
+void	load_master_sprites_e(t_window *window, t_master_sprites *master_sprites, t_hashmap *types)
 {
 	master_sprites->initialized = false;
-	load_placeholder_sprite_e(&master_sprites->placeholder);
+	load_placeholder_sprite_e(window, &master_sprites->placeholder);
 	if (ft_has_error())
 		return ;
 	master_sprites->sprites = ft_hashmap_new();
 	if (!master_sprites->sprites)
 		return (ft_list_destroy(&master_sprites->placeholder.images), ft_error(ERROR_INIT_SPRITES));
-	load_from_types_e(master_sprites, types);
+	load_from_types_e(window, master_sprites, types);
 	if (ft_has_error())
 		return (ft_list_destroy(&master_sprites->placeholder.images));
 	master_sprites->initialized = true;

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 16:45:45 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 16:55:28 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 // Internal Libs
 # include <ft_error.h>
 # include <ft_utils.h>
+# include <ft_mlx_utils.h>
 
 // External Libs
 # include <X11/keysym.h>
@@ -56,26 +57,6 @@
 
 // Map Config
 # define MAP_CHARS "10NSEW"
-
-typedef struct s_image
-{
-	char	*path;
-	void	*img_ptr;
-	int		bits_per_pixel;
-	int		size_line;
-	int		endian;
-	void	*data;
-	t_size	size;
-}	t_image;
-
-typedef struct s_window
-{
-	t_size	size;
-	void	*win;
-	void	*mlx;
-	t_image	*canvas;
-	bool	initialized;
-}	t_window;
 
 typedef struct s_sprite
 {
@@ -172,12 +153,6 @@ int	loop(void *_);
 int	key_up_handler(int key);
 int	key_down_handler(int key);
 
-// Images
-void	free_image(void *image);
-t_image	*image_from_file(char *path);
-t_list	*images_from_files(char **file_paths);
-t_image	*image_new(t_size size);
-
 // Render
 void	clear_canvas(t_image *canvas);
 void	render_ceiling_and_floor(t_map *map, t_image *canvas);
@@ -192,7 +167,7 @@ t_sprite	*get_entity_sprite(t_entity *entity, t_direction direction);
 void			render_raycasting_mega(t_map *map, t_image *canvas);
 
 // Sprites
-void	load_master_sprites_e(t_master_sprites *master_sprites, t_hashmap *types);
+void	load_master_sprites_e(t_window *window, t_master_sprites *master_sprites, t_hashmap *types);
 void	destroy_master_sprites(t_master_sprites *master_sprites);
 t_image	*get_sprite_image(t_sprite *sprite);
 

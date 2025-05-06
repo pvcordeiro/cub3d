@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprites.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:29:32 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 12:17:51 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 16:56:08 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <cub3d.h>
 
 t_list	*get_missing_images(void);
-void	load_placeholder_sprite_e(t_sprite *placeholder);
+void	load_placeholder_sprite_e(t_window *window, t_sprite *placeholder);
 void	init_sprite(t_sprite *sprite, t_list *images, t_time update_delay);
 void	free_sprite(void *data);
 
