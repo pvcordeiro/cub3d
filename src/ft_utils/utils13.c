@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils13.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 13:52:26 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/03 18:08:45 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/06 20:53:45 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,8 @@ bool	ft_str_endswith(char *str, char *ending)
     
     str_len = ft_strlen(str);
     ending_len = ft_strlen(ending);
-    
     if (str_len < ending_len)
         return (false);
-        
     return (ft_strcmp(str + (str_len - ending_len), ending) == 0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 08:42:58 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 20:43:31 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 20:54:51 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,30 +45,32 @@ bool	is_map_char(char c)
 	return (ft_isspace(c) || ft_strchr(MAP_CHARS, c));
 }
 
-void	parse_map_e(t_map *map, int argc, char **argv)
+t_map	*parse_map_e(char *path)
 {
-	if (map->initialized)
-		return (ft_error(ERROR_MAP_ALREADY_INITIALIZED));
-	if (argc != 2 || !argv || !argv[0] || !argv[1] || argv[2])
-		return (ft_error(ERROR_INVALID_ARGS));
-	if (!ft_str_endswith(argv[1], ".cub"))
-		return (ft_error(ERROR_INVALID_MAP));
-	map->path = argv[1];
+	t_map	*map;
+
+	ft_error(ERROR_NO_ERROR);
+	map = ft_calloc(1, sizeof(t_map));
+	if (!map)
+		return (ft_error(ERROR_MAP_ALLOC), NULL);
+	map->path = ft_strdup(path);
+	if (!map->path || !ft_str_endswith(map->path, ".cub"))
+		return (ft_error(ERROR_INVALID_MAP), NULL);
 	read_map_raw_lines_e(map);
 	if (ft_has_error())
-		return (ft_strvfree(map->raw), ft_bzero(map, sizeof(t_map)));
+		return (ft_strvfree(map->raw), free(map), NULL);
 	process_raw_map_e(map);
 	if (ft_has_error())
-		return (ft_strvfree(map->raw), ft_hashmap_destroy(map->types),
-			ft_bzero(map, sizeof(t_map)));
+		return (ft_strvfree(map->raw), ft_hashmap_destroy(map->types), free(map), NULL);
 	set_map_size(map);
-	map->initialized = true;
-	ft_error(ERROR_NO_ERROR);
+	return (map);
 }
 
 void	destroy_map(t_map *map)
 {
+	if (!map)
+		return ;
 	ft_strvfree(map->raw);
 	ft_hashmap_destroy(map->types);
-	ft_bzero(map, sizeof(t_map));
+	free(map);
 }

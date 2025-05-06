@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 20:41:51 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 21:44:57 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ typedef struct s_map
 	char		**raw;
 	char		**map;
 	t_size		size;
-	bool		initialized;
 }	t_map;
 
 typedef struct s_ray
@@ -137,6 +136,7 @@ typedef struct	s_game
 
 typedef struct s_cub3d
 {
+	t_map				*curr_map;
 	t_master_sprites	master_sprites;
 	t_window			window;
 	bool				map_fullscreen;
@@ -144,12 +144,13 @@ typedef struct s_cub3d
 }	t_cub3d;
 
 void	game_load_map_e(t_game *game, t_map *map);
+void	free_game(void *game);
 
 // cub3d
 t_cub3d	*cub3d(void);
 void	cub3d_exit(int code);
 
-void	parse_map_e(t_map *map, int argc, char **argv);
+t_map	*parse_map_e(char *path);
 void	destroy_map(t_map *map);
 
 // Loop

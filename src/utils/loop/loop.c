@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:20:20 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 20:41:56 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 21:45:20 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	cub3d_exit(int code)
 {
-	if (cub3d()->game.map->initialized)
-		destroy_map(cub3d()->game.map);
+	destroy_map(cub3d()->curr_map);
+	free_game(&cub3d()->game);
 	if (cub3d()->master_sprites.initialized)
 		destroy_master_sprites(&cub3d()->master_sprites);
 	if (cub3d()->window.initialized)

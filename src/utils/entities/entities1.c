@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 20:49:46 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 20:36:00 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 21:42:28 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ void	create_entities_e(t_game *game)
 
 	game->entity_grid = ft_calloc(game->map->size.height, sizeof(t_entity **));
 	if (!game->entity_grid)
-		return ;
+		return (ft_error(ERROR_INIT_MAP_GRID_TRIPLE));
 	i = -1;
 	while (++i < game->map->size.height)
 	{
 		game->entity_grid[i] = ft_calloc(game->map->size.width, sizeof(t_entity *));
 		if (!game->entity_grid[i])
-			return ;
+			return (ft_strvfree((char **)game->entity_grid), ft_error(ERROR_INIT_MAP_GRID_DOUBLE));
 	}
 	i = -1;
 	while (game->map->map[++i])

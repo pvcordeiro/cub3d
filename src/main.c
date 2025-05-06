@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:15:19 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 20:28:00 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 20:55:04 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,15 @@ static int	exit_game(void)
 
 int	main(int argc, char **argv)
 {
-	t_map	*map;
-
-	map = ft_calloc(1, sizeof(t_map));
+	(void)argc;
 	ft_error_storage()->exit = cub3d_exit;
-	parse_map_e(map, argc, argv);
+	cub3d()->curr_map = parse_map_e(argv[1]);
 	ft_error_assert();
 	ftm_create_window_e(&cub3d()->window, (t_size){W_WIDTH, W_HEIGHT}, W_TITLE);
 	ft_error_assert();
-	load_master_sprites_e(&cub3d()->window, &cub3d()->master_sprites, map->types);
+	load_master_sprites_e(&cub3d()->window, &cub3d()->master_sprites, cub3d()->curr_map->types);
 	ft_error_assert();
-	game_load_map_e(&cub3d()->game, map);
+	game_load_map_e(&cub3d()->game, cub3d()->curr_map);
 	ft_error_assert();
 	mlx_loop_hook(cub3d()->window.display, loop, NULL);
 	mlx_hook(cub3d()->window.win, 3, 2, key_up_handler, NULL);

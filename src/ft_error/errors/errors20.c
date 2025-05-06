@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors19.c                                         :+:      :+:    :+:   */
+/*   errors20.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,11 +12,8 @@
 
 #include <ft_error.h>
 
-char	*get_error_message20(t_error _error);
-
-char	*get_error_message19(t_error _error)
+char	*get_error_message20(t_error _error)
 {
-	if (_error == ERROR_MAP_ALLOC)
-		return (ERROR_MAP_ALLOC_MSG);
-	return (get_error_message20(_error));
+	(void)_error;
+	return (ERROR_INVALID_MSG);
 }

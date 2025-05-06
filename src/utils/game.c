@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 20:06:36 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 20:43:18 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 21:44:49 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,13 @@ void	game_load_map_e(t_game *game, t_map *map)
 		return ;
 	}
 	init_enviroment(game);
+}
+
+void	free_game(void *game)
+{
+	if (!game)
+		return ;
+	ft_list_destroy(&((t_game *)game)->entities);
+	ft_strvfree((char **)(((t_game *)game)->entity_grid));
+	ft_bzero(game, sizeof(t_game));
 }
