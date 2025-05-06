@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_mlx_utils.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:46:27 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 17:49:14 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 19:46:09 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,25 @@ typedef struct s_window
 	bool	initialized;
 }	t_window;
 
+typedef struct	s_ftm_pitc_config
+{
+	t_coords 	coords;
+	bool		crop;
+	t_coords	crop_start;
+	t_coords	crop_end;
+	bool		resize;
+	t_size 		size;
+	void		*pixel_modifier_data;
+	unsigned	(*pixel_modifier)(void *data, unsigned pixel);
+}	t_ftm_pitc_config;
+
 void			ftm_free_image(void *image);
 t_image			*ftm_image_from_file(t_window *window, char *path);
 t_image			*ftm_image_new(t_window *window, t_size size);
 t_list			*ftm_images_from_files(t_window *window, char **file_paths);
 
 void			ftm_image_clear(t_image *image);
+void			ftm_put_image_to_canvas(t_image *canvas, t_image *image, t_ftm_pitc_config pitc);
 
 void			ftm_free_window(void *window);
 void			ftm_create_window_e(t_window *window, t_size size, char *title);
