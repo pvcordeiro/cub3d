@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   window.c                                           :+:      :+:    :+:   */
+/*   mlx_utils1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/26 21:54:58 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 16:56:23 by afpachec         ###   ########.fr       */
+/*   Created: 2025/05/06 16:58:13 by afpachec          #+#    #+#             */
+/*   Updated: 2025/05/06 17:00:47 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cub3d.h>
+#include <ft_mlx_utils.h>
 
 void	create_window_e(t_window *window, t_size size, char *title)
 {
@@ -28,14 +28,14 @@ void	create_window_e(t_window *window, t_size size, char *title)
 	ft_error(ERROR_NO_ERROR);
 }
 
-void	destroy_window(t_window *window)
+void	free_window(void *window)
 {
-	if (!window || !window->initialized)
+	if (!window || !((t_window *)window)->initialized)
 		return ;
-	free_image(window->canvas);
-	mlx_destroy_window(window->display, window->win);
-	mlx_destroy_display(window->display);
-	free(window->display);
+	free_image(((t_window *)window)->canvas);
+	mlx_destroy_window(((t_window *)window)->display, ((t_window *)window)->win);
+	mlx_destroy_display(((t_window *)window)->display);
+	free(((t_window *)window)->display);
 }
 
 void	update_window(t_window *window)

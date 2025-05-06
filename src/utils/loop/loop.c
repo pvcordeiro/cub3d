@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:20:20 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 15:38:23 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 17:00:26 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	cub3d_exit(int code)
 	if (cub3d()->master_sprites.initialized)
 		destroy_master_sprites(&cub3d()->master_sprites);
 	if (cub3d()->window.initialized)
-		destroy_window(&cub3d()->window);
+		free_window(&cub3d()->window);
 	exit(code);
 }
 

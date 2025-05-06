@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:48:06 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 16:52:49 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 17:03:28 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	free_image(void *image)
 {
+	if (!image)
+		return ;
 	mlx_destroy_image(((t_image *)image)->display, ((t_image *)image)->img_ptr);
 	free(image);
 }
@@ -31,7 +33,8 @@ t_image	*image_from_file(t_window *window, char *path)
 	image = ft_calloc(1, sizeof(t_image));
 	if (!image)
 		return (NULL);
-	image->img_ptr = mlx_xpm_file_to_image(window->display, path, &image->size.width, &image->size.height);
+	image->display = window->display;
+	image->img_ptr = mlx_xpm_file_to_image(image->display, path, &image->size.width, &image->size.height);
 	if (!image->img_ptr)
 		return (free(image), NULL);
 	if (!load_image_addresses(image))	
@@ -46,7 +49,8 @@ t_image	*image_new(t_window *window, t_size size)
 	image = ft_calloc(1, sizeof(t_image));
 	if (!image)
 		return (NULL);
-	image->img_ptr = mlx_new_image(window->display, size.width, size.height);
+	image->display = window->display;
+	image->img_ptr = mlx_new_image(image->display, size.width, size.height);
 	if (!image->img_ptr)
 		return (free(image), NULL);
 	image->size = size;
