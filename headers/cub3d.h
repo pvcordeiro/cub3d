@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 21:44:57 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 23:17:44 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 
 // Default minimap size multipliers
 # define MINIMAP_WIDTH_MULTIPLIER 0.25
-# define MINIMAP_HEIGHT__MULTIPLIER 0.25
+# define MINIMAP_HEIGHT_MULTIPLIER 0.25
 
 // Placeholder Image
 # define PLACEHOLDER_IMAGE_PATH "assets/placeholder.xpm"
@@ -71,6 +71,7 @@ typedef enum e_entity_type
 
 typedef struct s_entity
 {
+	bool			transparent;
 	bool			hard;
 	t_coords		coords;
 	t_entity_type	type;
@@ -99,6 +100,7 @@ typedef struct s_ray
 	t_entity	*hit_entity;
 	t_direction	direction_of_hit_on_entity;
 	double		x_of_hit_in_entity;
+	int			_height;
 }	t_ray;
 
 typedef struct	s_player
@@ -125,9 +127,25 @@ typedef struct	s_environment
 	unsigned	ceiling_color;
 }	t_environment;
 
+typedef struct	s_minimap
+{
+	t_coords	coords;
+	t_size		size;
+	bool		full;
+	double		width_multiplier;
+	double		height_multiplier;
+	unsigned	background_color;
+	unsigned	border_color;
+	unsigned	entity_color;
+	unsigned	wall_color;
+	unsigned	player_color;
+	unsigned	player_ray_color;
+}	t_minimap;
+
 typedef struct	s_game
 {
 	t_environment		environment;
+	t_minimap			minimap;
 	t_map				*map;
 	t_entity			*player;
 	t_list				*entities;
@@ -143,8 +161,9 @@ typedef struct s_cub3d
 	t_game				game;
 }	t_cub3d;
 
-void	game_load_map_e(t_game *game, t_map *map);
+void	game_load_map_e(t_game *game, t_window *window, t_map *map);
 void	free_game(void *game);
+void	render_game(t_window *window, t_game *game);
 
 // cub3d
 t_cub3d	*cub3d(void);

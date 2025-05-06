@@ -6,28 +6,33 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 19:05:41 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/06 20:33:59 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 23:19:58 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <cub3d.h>
+#include "render.h"
 
 static unsigned	pixel_modifier(void *data, unsigned pixel)
 {
+	t_ray			*ray;
 	double			gradient;
 	int				r;
 	int				g;
 	int				b;
 
-	gradient = fmin(*(int *)data / (W_HEIGHT / 1.5), 1.0);
+	ray = data;
+	gradient = fmin(ray->_height / (W_HEIGHT / 1.5), 1.0);
 	r = ((pixel >> 16) & 0xEE) * gradient;
 	g = ((pixel >> 8) & 0xEE) * gradient;
 	b = (pixel & 0xEE) * gradient;
+	if (!ray->hit_entity->transparent)
+		return ((0xFF << 24) | (r << 16) | (g << 8) | b);
 	return ((r << 16) | (g << 8) | b);
 }
 
 static t_ftm_pitc_config	get_pitc_config(int i, t_size *ray_size, t_image *image, t_ray *ray)
 {
+	ray->_height = ray_size->height;
 	return ((t_ftm_pitc_config){
 			(t_coords){i * ray_size->width, (W_HEIGHT - ray_size->height) / 2, 0, 0},
 			true,
@@ -35,7 +40,7 @@ static t_ftm_pitc_config	get_pitc_config(int i, t_size *ray_size, t_image *image
 			(t_coords){(int)(ray->x_of_hit_in_entity * image->size.width) + 1, image->size.height, 0, 0},
 			true,
 			*ray_size,
-			&ray_size->height,
+			ray,
 			pixel_modifier
 		});
 }
@@ -54,6 +59,8 @@ void	render_raycasting_mega(t_game *game, t_image *canvas)
 	ray_size.width = W_WIDTH / PLAYER_RAYS;
 	while (++i < PLAYER_RAYS)
 	{
+		if (!player->rays[i].hit_entity)
+			continue ;
 		hit_entity_sprite = &cub3d()->master_sprites.placeholder;
 		if (player->rays[i].hit_entity && get_entity_sprite(player->rays[i].hit_entity, player->rays[i].direction_of_hit_on_entity))
 			hit_entity_sprite = get_entity_sprite(player->rays[i].hit_entity, player->rays[i].direction_of_hit_on_entity);

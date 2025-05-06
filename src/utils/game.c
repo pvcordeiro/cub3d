@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 20:06:36 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 21:44:49 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 22:55:26 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,23 @@ void	init_enviroment(t_game *game)
 	game->environment.floor_color = convert_color_to_hex(ft_hashmap_get_value(game->map->types, "F"));
 }
 
-void	game_load_map_e(t_game *game, t_map *map)
+void	init_minimap(t_game *game, t_window *window)
+{
+	t_minimap	*minimap;
+
+	minimap = &game->minimap;
+	minimap->width_multiplier = MINIMAP_WIDTH_MULTIPLIER;
+	minimap->height_multiplier = MINIMAP_HEIGHT_MULTIPLIER;
+	minimap->coords = (t_coords){10, window->size.height - (window->size.height * minimap->height_multiplier) - 10, 0, 0};
+	minimap->size = (t_size){window->size.width * game->minimap.width_multiplier, window->size.height * game->minimap.height_multiplier};
+	minimap->background_color = 0xCC555555;
+	minimap->border_color = 0xAAAAAA;
+	minimap->wall_color = 0xAAAAAA;
+	minimap->player_color = 0xFF0000;
+	minimap->player_ray_color = 0x114C00B0;
+}
+
+void	game_load_map_e(t_game *game, t_window *window, t_map *map)
 {
 	game->map = map;
 	create_entities_e(game);
@@ -43,6 +59,7 @@ void	game_load_map_e(t_game *game, t_map *map)
 		return ;
 	}
 	init_enviroment(game);
+	init_minimap(game, window);
 }
 
 void	free_game(void *game)

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:21:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 20:35:39 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 22:30:04 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void    key_handler(int key, bool down)
 	if (key == XK_Left)
 		player->looking_left = down;
 	if (key == XK_e)
-		cub3d()->map_fullscreen = down;
+		cub3d()->game.minimap.full = down;
 	if (key == XK_Escape)
 		cub3d_exit(0);
 }

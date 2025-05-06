@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:58:13 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 17:46:05 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 22:29:43 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	ftm_create_window_e(t_window *window, t_size size, char *title)
 	if (!window->canvas)
 		return (mlx_destroy_window(window->display, window->win), mlx_destroy_display(window->display),
 			ft_error(ERROR_INIT_CANVAS));
+	window->size = size;
 	window->initialized = true;
 	ft_error(ERROR_NO_ERROR);
 }
