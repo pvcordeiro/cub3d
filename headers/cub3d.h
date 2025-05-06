@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 17:49:26 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 20:13:04 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,13 +125,22 @@ typedef struct	s_master_sprites
 	t_hashmap	*sprites;
 }	t_master_sprites;
 
+typedef struct	s_game
+{
+	t_map				*map;
+	// t_minimap			minimap;
+	// t_master_sprites	sprites;
+}	t_game;
+
 typedef struct s_cub3d
 {
 	t_master_sprites	master_sprites;
 	t_window			window;
 	bool				map_fullscreen;
-	t_map				map;
+	t_game				game;
 }	t_cub3d;
+
+void	game_load_map(t_game *game, t_map *map);
 
 // cub3d
 t_cub3d	*cub3d(void);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:20:20 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 17:49:36 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 20:16:03 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	cub3d_exit(int code)
 {
-	if (cub3d()->map.initialized)
-		destroy_map(&cub3d()->map);
+	if (cub3d()->game.map->initialized)
+		destroy_map(cub3d()->game.map);
 	if (cub3d()->master_sprites.initialized)
 		destroy_master_sprites(&cub3d()->master_sprites);
 	if (cub3d()->window.initialized)
@@ -44,8 +44,8 @@ int	loop(void *_)
 {
 	(void)_;
 	ftm_image_clear(cub3d()->window.canvas);
-	call_entity_frames(cub3d()->map.entities);
-	render_to_canvas(cub3d()->window.canvas, &cub3d()->map);
+	call_entity_frames(cub3d()->game.map->entities);
+	render_to_canvas(cub3d()->window.canvas, cub3d()->game.map);
 	ftm_update_window(&cub3d()->window);
 	return (0);
 }

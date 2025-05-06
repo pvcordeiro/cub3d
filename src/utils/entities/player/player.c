@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/05 21:49:44 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 20:16:49 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static bool	position_overlaps(t_entity *entity, t_coords coords)
 	t_list		*curr;
 	t_entity	*curr_entity;
 
-	curr = cub3d()->map.entities;
+	curr = cub3d()->game.map->entities;
 	while (curr)
 	{
 		curr_entity = curr->data;
@@ -44,7 +44,7 @@ static void	update_entity_grid(t_entity *entity, int old_x, int old_y,
 {
 	t_map	*map;
 
-	map = &cub3d()->map;
+	map = cub3d()->game.map;
 	if (old_x >= 0 && old_x < map->size.width && old_y >= 0
 		&& old_y < map->size.height)
 		map->entity_grid[old_y][old_x] = NULL;
@@ -141,7 +141,7 @@ static void	player_frame(t_entity *entity)
 	t_player	*player;
 	t_map		*map;
 
-	map = &cub3d()->map;
+	map = cub3d()->game.map;
 	player = (t_player *)(entity->private);
 	player_looks(entity, player);
 	player_walks(entity, player);

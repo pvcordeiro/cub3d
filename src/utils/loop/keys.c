@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:21:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 15:32:57 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 20:16:11 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void    key_handler(int key, bool down)
 {
 	t_player	*player;
 
-	player = cub3d()->map.player->private;
+	player = cub3d()->game.map->player->private;
 	if (key == XK_w)
 		player->walking_forward = down;
 	if (key == XK_a)
