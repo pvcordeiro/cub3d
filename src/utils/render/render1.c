@@ -3,20 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   render1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 16:50:17 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 12:25:23 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 17:07:02 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render.h"
-
-unsigned int	*get_pixel(t_image *image, t_coords coords)
-{
-	return (image->data + (int)((coords.y * image->size_line)
-		+ (coords.x * (image->bits_per_pixel / 8))));
-}
 
 static bool	valid_position_inside_image(t_image *image, t_coords coords)
 {
@@ -37,7 +31,7 @@ void	put_pixel_in_image(t_image *image, t_coords coords, unsigned int pixel)
 {
 	if (is_transparent_pixel(pixel) || !valid_position_inside_image(image, coords))
 		return ;
-	*get_pixel(image, coords) = pixel;
+	*image_pixel(image, coords) = pixel;
 }
 
 void	render_cropped_image_to_canvas(t_image *canvas, t_image *image, t_render_cropped_image_config rcic)
@@ -69,7 +63,7 @@ void	render_cropped_image_to_canvas(t_image *canvas, t_image *image, t_render_cr
 			{
 				put_pixel_in_image(canvas,
 					(t_coords){rcic.coords.x + i, rcic.coords.y + j, 0, 0},
-					rcic.pixel_modifier(rcic.pixel_modifier_data, *get_pixel(image, src_coords)));
+					rcic.pixel_modifier(rcic.pixel_modifier_data, *image_pixel(image, src_coords)));
 			}
 		}
 	}

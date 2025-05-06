@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:46:27 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 16:59:18 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/06 17:06:32 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,15 @@ typedef struct s_window
 	bool	initialized;
 }	t_window;
 
-void	free_image(void *image);
-t_image	*image_from_file(t_window *window, char *path);
-t_image	*image_new(t_window *window, t_size size);
-t_list	*images_from_files(t_window *window, char **file_paths);
+void			free_image(void *image);
+t_image			*image_from_file(t_window *window, char *path);
+t_image			*image_new(t_window *window, t_size size);
+t_list			*images_from_files(t_window *window, char **file_paths);
 
-void	free_window(void *window);
-void	create_window_e(t_window *window, t_size size, char *title);
-void	update_window(t_window *window);
+void			free_window(void *window);
+void			create_window_e(t_window *window, t_size size, char *title);
+void			update_window(t_window *window);
 
+unsigned int	*image_pixel(t_image *image, t_coords coords);
 
 #endif
