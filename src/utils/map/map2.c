@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 08:42:58 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/07 14:59:28 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/07 23:20:20 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,16 @@ static void	add_variable_to_types_e(t_hashmap *types, char *line)
 	while (ft_isalnum(clean_line[i]) || clean_line[i] == '_')
 		++i;
 	if (!ft_isspace(clean_line[i]))
-		return (free(clean_line), ft_error(ERROR_INVALID_TYPE));
+		return (free(clean_line), fte_set(ERROR_INVALID_TYPE));
 	clean_line[i++] = '\0';
 	if (ft_hashmap_get(types, key))
-		return (free(clean_line), ft_error(ERROR_DUPLICATE_TYPE));
+		return (free(clean_line), fte_set(ERROR_DUPLICATE_TYPE));
 	while (ft_isspace(clean_line[i]))
 		++i;
 	value = ft_strdup(&clean_line[i]);
 	ft_hashmap_set(types, key, value, free);
 	free(clean_line);
-	ft_error(ERROR_NO_ERROR);
+	fte_set(ERROR_NO_ERROR);
 }
 
 void	process_raw_map_e(t_map *map)
@@ -45,7 +45,7 @@ void	process_raw_map_e(t_map *map)
 
 	map->types = ft_hashmap_new();
 	if (!map->types)
-		return (ft_error(ERROR_MAP_HASHMAP));
+		return (fte_set(ERROR_MAP_HASHMAP));
 	i = -1;
 	while (map->raw[++i])
 	{
@@ -54,7 +54,7 @@ void	process_raw_map_e(t_map *map)
 		if (!ft_str_all(map->raw[i], is_map_char))
 		{
 			add_variable_to_types_e(map->types, map->raw[i]);
-			if (ft_has_error())
+			if (fte_flagged())
 				return ;
 			continue ;
 		}

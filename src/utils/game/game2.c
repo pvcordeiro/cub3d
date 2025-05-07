@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:20:04 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/07 23:17:10 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/07 23:19:20 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void	init_sprites_e(t_ftm_window *window, t_game *game)
 	t_list		*image_list;
 	t_element	*element;
 
-	ft_error(ERROR_NO_ERROR);
+	fte_set(ERROR_NO_ERROR);
 	game->sprites = ft_hashmap_new();
 	if (!game->sprites)
-		return (ft_error(ERROR_INIT_SPRITES));
+		return (fte_set(ERROR_INIT_SPRITES));
 	element = *game->map->types->table;
 	while (element)
 	{
@@ -33,7 +33,7 @@ void	init_sprites_e(t_ftm_window *window, t_game *game)
 		}
 		image = ftm_image_from_file(window, element->value);
 		if (!image)
-			return (ft_hashmap_destroy(game->sprites), ft_error(ERROR_LOAD_SPRITE));
+			return (ft_hashmap_destroy(game->sprites), fte_set(ERROR_LOAD_SPRITE));
 		if (ft_hashmap_get_value(game->sprites, element->key))
 		{
 			image_list = ((t_sprite *)ft_hashmap_get_value(game->sprites, element->key))->images;
@@ -43,7 +43,7 @@ void	init_sprites_e(t_ftm_window *window, t_game *game)
 		{
 			sprite = sprite_new(ft_list_new(image, ftm_free_image), 0);
 			if (!sprite)
-				return (ft_hashmap_destroy(game->sprites), ft_error(ERROR_LOAD_SPRITE));
+				return (ft_hashmap_destroy(game->sprites), fte_set(ERROR_LOAD_SPRITE));
 			ft_hashmap_set(game->sprites, element->key, sprite, free_sprite);
 		}
 		element = element->next;

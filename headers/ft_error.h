@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_error.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 22:05:32 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/07 16:23:04 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/07 23:21:38 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,10 @@ typedef struct s_error_storage
 # define ERROR_CEILING_OR_FLOORING_UNDEFINED_MSG "Ceiling or Flooring are undifined"
 # define ERROR_INVALID_MSG "Invalid Error"
 
-void			ft_error(t_error _error);
-bool			ft_has_error(void);
-char			*ft_error_message(t_error _error);
-t_error_storage	*ft_error_storage(void);
-void			ft_error_assert(void);
+void			fte_set(t_error _error);
+bool			fte_flagged(void);
+char			*fte_error_to_message(t_error _error);
+t_error_storage	*fte_storage(void);
+void			fte_assert(void);
 
 #endif

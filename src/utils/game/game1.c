@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:16:16 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/07 23:17:10 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/07 23:19:20 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ void	init_enviroment_e(t_game *game)
 	char	*ceiling;
 	char	*flooring;
 
-	ft_error(ERROR_NO_ERROR);
+	fte_set(ERROR_NO_ERROR);
 	ceiling = ft_hashmap_get_value(game->map->types, "C");
 	flooring = ft_hashmap_get_value(game->map->types, "F");
 	if (!ceiling || !flooring)
-		return (ft_error(ERROR_CEILING_OR_FLOORING_UNDEFINED));
+		return (fte_set(ERROR_CEILING_OR_FLOORING_UNDEFINED));
 	game->environment.ceiling_color = ft_rgb_to_unsigned(ceiling, ",");
 	game->environment.floor_color = ft_rgb_to_unsigned(flooring, ",");
 }

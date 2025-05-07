@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map1.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 08:42:58 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/07 16:00:39 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/07 23:20:20 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	read_map_raw_lines_e(t_map *map)
 
 	fd = open(map->path, O_RDONLY);
 	if (fd < 0)
-		return (ft_error(ERROR_MAP_OPEN));
+		return (fte_set(ERROR_MAP_OPEN));
 	while (1)
 	{
 		line = ft_get_next_line(fd);
@@ -36,8 +36,8 @@ static void	read_map_raw_lines_e(t_map *map)
 	}
 	ft_close(fd);
 	if (!map->raw)
-		return (ft_error(ERROR_MAP_READ));
-	ft_error(ERROR_NO_ERROR);
+		return (fte_set(ERROR_MAP_READ));
+	fte_set(ERROR_NO_ERROR);
 }
 
 bool	is_map_char(char c)
@@ -49,18 +49,18 @@ t_map	*parse_map_e(char *path)
 {
 	t_map	*map;
 
-	ft_error(ERROR_NO_ERROR);
+	fte_set(ERROR_NO_ERROR);
 	map = ft_calloc(1, sizeof(t_map));
 	if (!map)
-		return (ft_error(ERROR_MAP_ALLOC), NULL);
+		return (fte_set(ERROR_MAP_ALLOC), NULL);
 	map->path = ft_strdup(path);
 	if (!map->path || !ft_str_endswith(map->path, ".cub"))
-		return (ft_error(ERROR_INVALID_MAP), NULL);
+		return (fte_set(ERROR_INVALID_MAP), NULL);
 	read_map_raw_lines_e(map);
-	if (ft_has_error())
+	if (fte_flagged())
 		return (ft_strvfree(map->raw), free(map), NULL);
 	process_raw_map_e(map);
-	if (ft_has_error())
+	if (fte_flagged())
 		return (ft_strvfree(map->raw), ft_hashmap_destroy(map->types), free(map), NULL);
 	set_map_size(map);
 	return (map);

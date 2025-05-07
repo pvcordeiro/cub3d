@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:58:13 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/07 23:17:10 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/07 23:19:20 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 void	ftm_create_window_e(t_ftm_window *window, t_size size, char *title)
 {
-	ft_error(ERROR_NO_ERROR);
+	fte_set(ERROR_NO_ERROR);
 	window->display = mlx_init();
 	if (!window->display)
-		return (ft_error(ERROR_INIT_MLX));
+		return (fte_set(ERROR_INIT_MLX));
 	window->win = mlx_new_window(window->display, size.width, size.height, title);
 	if (!window->win)
-		return (mlx_destroy_display(window->display), ft_error(ERROR_INIT_WINDOW));
+		return (mlx_destroy_display(window->display), fte_set(ERROR_INIT_WINDOW));
 	window->canvas = ftm_image_new(window, size);
 	if (!window->canvas)
 		return (mlx_destroy_window(window->display, window->win), mlx_destroy_display(window->display),
-			ft_error(ERROR_INIT_CANVAS));
+			fte_set(ERROR_INIT_CANVAS));
 	window->size = size;
 }
 
