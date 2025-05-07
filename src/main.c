@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:15:19 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/07 23:21:37 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/07 23:51:50 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static void	load_placeholder_sprite_e(t_ftm_window *window, t_sprite *placeholde
 	init_sprite(placeholder, list, PLACEHOLDER_SPRITE_UPDATE_DELAY);
 }
 
+int mouse_motion_handler(int x, int y);
 int	main(int argc, char **argv)
 {
 	(void)argc;
@@ -47,6 +48,7 @@ int	main(int argc, char **argv)
 	mlx_loop_hook(cub3d()->window.display, loop, NULL);
 	mlx_hook(cub3d()->window.win, 3, 2, key_up_handler, NULL);
 	mlx_hook(cub3d()->window.win, 2, 3, key_down_handler, NULL);
+	mlx_hook(cub3d()->window.win, 6, 1L << 0, mouse_motion_handler, NULL);
 	mlx_hook(cub3d()->window.win, 17, 1L << 0, exit_game, NULL);
 	mlx_loop(cub3d()->window.display);
 	cub3d_exit(0);

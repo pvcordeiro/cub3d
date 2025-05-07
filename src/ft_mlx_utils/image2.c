@@ -6,13 +6,13 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:48:02 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/07 23:15:58 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/07 23:47:53 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_mlx_utils.h>
 
-void	ftm_image_clear(t_ftm_image *image)
+void	ftm_image_clean(t_ftm_image *image)
 {
 	ftm_draw_rectangle(image, (t_coords){0, 0, 0 ,0}, image->size, 0, 0);
 }

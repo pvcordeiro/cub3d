@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 19:49:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/07 23:17:10 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/07 23:50:03 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 void	render_ceiling_and_floor(t_game *game, t_ftm_image *canvas)
 {
+	int horizon = W_HEIGHT / 2 + game->player->pitch;
+    
     ftm_draw_rectangle(canvas, (t_coords){0, 0, 0, 0}, 
-        (t_size){W_WIDTH, W_HEIGHT / 2}, game->environment.ceiling_color, game->environment.ceiling_color);
-    ftm_draw_rectangle(canvas, (t_coords){0, W_HEIGHT / 2, 0, 0}, 
-        (t_size){W_WIDTH, W_HEIGHT / 2}, game->environment.floor_color, game->environment.floor_color);
+        (t_size){W_WIDTH, horizon}, game->environment.ceiling_color, game->environment.ceiling_color);
+    ftm_draw_rectangle(canvas, (t_coords){0, horizon, 0, 0}, 
+        (t_size){W_WIDTH, W_HEIGHT - horizon}, game->environment.floor_color, game->environment.floor_color);
 }
 
 void	render_game(t_ftm_window *window, t_game *game)
@@ -32,6 +34,7 @@ void	render_game(t_ftm_window *window, t_game *game)
 		map_coords = game->minimap.coords;
 		map_size = game->minimap.size;
 	}
+	ftm_image_clean(window->canvas);
 	render_ceiling_and_floor(game, window->canvas);
 	render_raycasting_mega(game, window->canvas);
 	render_minimap(game, window->canvas, map_coords, map_size);

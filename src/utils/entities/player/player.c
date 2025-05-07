@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/07 23:00:17 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/07 23:44:14 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@ static void	player_looks(t_player *player)
 	else if (player->looking_right)
 		player->base.coords.yaw += PLAYER_TURN_SPEED;
 	player->base.coords.yaw = ft_normalize_angle(player->base.coords.yaw);
+	if (player->looking_up)
+		player->pitch += PLAYER_UPDOWN_SPEED;
+	else if (player->looking_down)
+		player->pitch -= PLAYER_UPDOWN_SPEED;
 }
 
 static bool	position_overlaps(t_player *player, t_coords coords)

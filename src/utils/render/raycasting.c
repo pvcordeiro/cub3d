@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 19:05:41 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/07 23:15:58 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/07 23:43:29 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ static unsigned	pixel_modifier(void *data, unsigned pixel)
 	return ((r << 16) | (g << 8) | b);
 }
 
-static t_ftm_pitc_config	get_pitc_config(int i, t_size *ray_size, t_ftm_image *image, t_ray *ray)
+static t_ftm_pitc_config	get_pitc_config(int i, t_player *player, t_size *ray_size, t_ftm_image *image, t_ray *ray)
 {
 	ray->_height = ray_size->height;
 	return ((t_ftm_pitc_config){
-			(t_coords){i * ray_size->width, (W_HEIGHT - ray_size->height) / 2, 0, 0},
+			(t_coords){i * ray_size->width, (W_HEIGHT - ray_size->height + player->pitch) / 2, 0, 0},
 			true,
 			(t_coords){(int)(ray->x_of_hit_in_entity * image->size.width), 0, 0, 0}, 
 			(t_coords){(int)(ray->x_of_hit_in_entity * image->size.width) + 1, image->size.height, 0, 0},
@@ -67,6 +67,6 @@ void	render_raycasting_mega(t_game *game, t_ftm_image *canvas)
 		angle_diff = ft_normalize_angle(angle_diff) * (PI / 180.0);
 		ray_size.height = W_HEIGHT / (fmax(player->rays[i].length, 0.5) * cos(angle_diff));
 		ray_size.height = fmin(ray_size.height, W_HEIGHT * 3);
-		ftm_put_image_to_canvas(canvas, hit_entity_image, get_pitc_config(i, &ray_size, hit_entity_image, &player->rays[i]));
+		ftm_put_image_to_canvas(canvas, hit_entity_image, get_pitc_config(i, game->player, &ray_size, hit_entity_image, &player->rays[i]));
 	}
 }

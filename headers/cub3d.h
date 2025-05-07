@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/07 23:17:10 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/07 23:44:36 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@
 // Player Config
 # define PLAYER_SPEED 0.15
 # define PLAYER_TURN_SPEED 3.0
+# define PLAYER_UPDOWN_SPEED 100.0
 # define PLAYER_RAYS_NO_HIT_LENGTH 100.0
 # define PLAYER_FOV 75.0
 # define PLAYER_RAYS 1024
@@ -98,6 +99,9 @@ typedef struct	s_player
 	bool		walking_right;
 	bool		looking_right;
 	bool		looking_left;
+	bool		looking_up;
+	bool		looking_down;
+	double		pitch;
 	t_ray		rays[PLAYER_RAYS];
 }	t_player;
 
