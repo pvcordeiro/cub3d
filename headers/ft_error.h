@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 22:05:32 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/07 23:21:38 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/07 23:32:05 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,21 @@ typedef struct s_error_storage
 # define ERROR_CEILING_OR_FLOORING_UNDEFINED_MSG "Ceiling or Flooring are undifined"
 # define ERROR_INVALID_MSG "Invalid Error"
 
+// Set ft_error global error
 void			fte_set(t_error _error);
+
+// Check if there is an error
 bool			fte_flagged(void);
+
+// Get the current error as a string
 char			*fte_error_to_message(t_error _error);
+
+// ft_error's singleton for storage
 t_error_storage	*fte_storage(void);
+
+// Assert that there are no errors.
+// If an error is found, it will be printed to stdout
+// and the program will exit using the `exit` function set in `fte_storage()->exit`
 void			fte_assert(void);
 
 #endif
