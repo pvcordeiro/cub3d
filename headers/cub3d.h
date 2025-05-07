@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/07 23:15:58 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/07 23:17:10 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,15 +159,15 @@ typedef struct s_cub3d
 {
 	t_sprite			placeholder;
 	t_map				*curr_map;
-	t_window			window;
+	t_ftm_window			window;
 	bool				map_fullscreen;
 	t_game				game;
 }	t_cub3d;
 
-void	game_load_map_e(t_game *game, t_window *window, t_map *map);
+void	game_load_map_e(t_game *game, t_ftm_window *window, t_map *map);
 void	clear_game(void *game);
 void	free_game(void *game);
-void	render_game(t_window *window, t_game *game);
+void	render_game(t_ftm_window *window, t_game *game);
 void	free_sprite(void *data);
 void	clear_sprite(void *data);
 void	init_sprite(t_sprite *sprite, t_list *images, t_time update_delay);

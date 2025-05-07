@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game0.c                                            :+:      :+:    :+:   */
+/*   game1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:16:16 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/07 16:26:54 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/07 23:17:10 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	init_enviroment_e(t_game *game)
 	game->environment.floor_color = ft_rgb_to_unsigned(flooring, ",");
 }
 
-void	init_minimap(t_window *window, t_game *game)
+void	init_minimap(t_ftm_window *window, t_game *game)
 {
 	t_minimap	*minimap;
 

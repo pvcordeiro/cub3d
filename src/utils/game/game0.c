@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:27:08 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/07 23:10:35 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/07 23:17:10 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	free_game(void *game)
 	free(game);
 }
 
-void	game_load_map_e(t_game *game, t_window *window, t_map *map)
+void	game_load_map_e(t_game *game, t_ftm_window *window, t_map *map)
 {
 	game->map = map;
 	init_sprites_e(window, game);

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:15:19 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/07 23:15:58 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/07 23:17:10 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	exit_game(void)
 	return (0);
 }
 
-static void	load_placeholder_sprite_e(t_window *window, t_sprite *placeholder)
+static void	load_placeholder_sprite_e(t_ftm_window *window, t_sprite *placeholder)
 {
 	t_list	*list;
 	t_ftm_image	*image;

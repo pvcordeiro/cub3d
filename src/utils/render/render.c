@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 19:49:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/07 23:15:58 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/07 23:17:10 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	render_ceiling_and_floor(t_game *game, t_ftm_image *canvas)
         (t_size){W_WIDTH, W_HEIGHT / 2}, game->environment.floor_color, game->environment.floor_color);
 }
 
-void	render_game(t_window *window, t_game *game)
+void	render_game(t_ftm_window *window, t_game *game)
 {
 	t_coords	map_coords;
 	t_size		map_size;
