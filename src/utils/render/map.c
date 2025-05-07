@@ -6,19 +6,17 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 22:33:42 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 22:42:40 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/07 22:56:43 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render.h"
 
-static void render_rays(t_image *canvas, t_game *game, t_entity *entity, t_coords coords, t_size entity_size)
+static void render_rays(t_image *canvas, t_game *game, t_player *player, t_coords coords, t_size entity_size)
 {
-    t_player *player;
     size_t i;
     double scale;
 
-    player = entity->private;
     scale = fmin(entity_size.width, entity_size.height);
     i = -1;
     while (++i < PLAYER_RAYS)
@@ -44,7 +42,7 @@ static void	render_entity(t_image *canvas, t_game *game, t_entity *entity, t_coo
 	set_entity_color(game, entity, &color);
 	if (entity->type == ENTITY_PLAYER)
 	{
-		render_rays(canvas, game, entity, new_coords, entity_size);
+		render_rays(canvas, game, (t_player *)entity, new_coords, entity_size);
 		entity_size = (t_size){0, 0};
 	}
 	ftm_draw_rectangle(canvas,
@@ -70,13 +68,13 @@ static void render_entities(t_image *canvas, t_game *game, t_coords coords, t_si
     while (entity_item)
     {
         entity = entity_item->data;
-        if (entity != game->player)
+        if (entity != (t_entity *)game->player)
             render_entity(canvas, game, entity,
                     (t_coords){coords.x + add_to_last.width, coords.y + add_to_last.height, 0, 0},
                     entity_size);
         entity_item = entity_item->next;
     }
-    render_entity(canvas, game, game->player,
+    render_entity(canvas, game, (t_entity *)game->player,
         (t_coords){coords.x + add_to_last.width, coords.y + add_to_last.height, 0, 0},
         entity_size);
 }

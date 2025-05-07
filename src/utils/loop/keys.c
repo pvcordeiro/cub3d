@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:21:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 22:30:04 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/07 22:56:51 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void    key_handler(int key, bool down)
 {
 	t_player	*player;
 
-	player = cub3d()->game.player->private;
+	player = cub3d()->game.player;
 	if (key == XK_w)
 		player->walking_forward = down;
 	if (key == XK_a)

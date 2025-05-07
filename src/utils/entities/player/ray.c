@@ -6,13 +6,13 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 12:05:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/06 20:37:54 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/07 22:59:45 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "player.h"
 
-static t_entity	*hits_something(t_game *game, t_entity *entity, t_coords coords)
+static t_entity	*hits_something(t_game *game, t_player *player, t_coords coords)
 {
 	int			x;
 	int			y;
@@ -23,7 +23,7 @@ static t_entity	*hits_something(t_game *game, t_entity *entity, t_coords coords)
 	if (x < 0 || x >= game->map->size.width || y < 0 || y >= game->map->size.height)
 		return (NULL);
 	hit_entity = game->entity_grid[y][x];
-	if (hit_entity && hit_entity != entity && hit_entity->hard)
+	if (hit_entity && hit_entity != (t_entity *)player && hit_entity->hard)
 		return (hit_entity);
 	return (NULL);
 }
@@ -73,7 +73,7 @@ static void	set_step_and_side_dist(t_dda_ray *data, t_coords coords)
 	}
 }
 
-static double	perform_dda(t_dda_ray *data, t_game *game, t_entity *entity)
+static double	perform_dda(t_dda_ray *data, t_game *game, t_player *player)
 {
 	t_coords	check_pos;
 
@@ -92,7 +92,7 @@ static double	perform_dda(t_dda_ray *data, t_game *game, t_entity *entity)
 			data->side = 1;
 		}
 		check_pos = (t_coords){data->map_pos.x, data->map_pos.y, 0, 0};
-		if (hits_something(game, entity, check_pos))
+		if (hits_something(game, player, check_pos))
 			break ;
 		if (data->map_pos.x < 0 || data->map_pos.x >= game->map->size.width
 			|| data->map_pos.y < 0 || data->map_pos.y >= game->map->size.height)
@@ -136,7 +136,7 @@ static void	calculate_wall_hit(t_dda_ray *data, t_coords coords, t_entity *hit_e
 	data->wall_x -= floor(data->wall_x);
 }
 
-t_raycast	send_ray(t_game *game, t_entity *player, t_coords coords)
+t_raycast	send_ray(t_game *game, t_player *player, t_coords coords)
 {
 	t_dda_ray	data;
 	double		result;

@@ -6,22 +6,22 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 20:38:52 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/07 23:00:17 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "player.h"
 
-static void	player_looks(t_entity *entity, t_player *player)
+static void	player_looks(t_player *player)
 {
 	if (player->looking_left)
-		entity->coords.yaw -= PLAYER_TURN_SPEED;
+		player->base.coords.yaw -= PLAYER_TURN_SPEED;
 	else if (player->looking_right)
-		entity->coords.yaw += PLAYER_TURN_SPEED;
-	entity->coords.yaw = ft_normalize_angle(entity->coords.yaw);
+		player->base.coords.yaw += PLAYER_TURN_SPEED;
+	player->base.coords.yaw = ft_normalize_angle(player->base.coords.yaw);
 }
 
-static bool	position_overlaps(t_entity *entity, t_coords coords)
+static bool	position_overlaps(t_player *player, t_coords coords)
 {
 	t_list		*curr;
 	t_entity	*curr_entity;
@@ -30,7 +30,7 @@ static bool	position_overlaps(t_entity *entity, t_coords coords)
 	while (curr)
 	{
 		curr_entity = curr->data;
-		if (curr_entity != entity && curr_entity->hard
+		if (curr_entity != (t_entity *)player && curr_entity->hard
 			&& (int)curr_entity->coords.x == (int)coords.x
 			&& (int)curr_entity->coords.y == (int)coords.y)
 			return (true);
@@ -39,94 +39,86 @@ static bool	position_overlaps(t_entity *entity, t_coords coords)
 	return (false);
 }
 
-static void	update_entity_grid(t_entity *entity, int old_x, int old_y,
-		int new_x, int new_y)
+static void	update_entity_grid(t_game *game, t_player *player, t_coords old_coords, t_coords new_coords)
 {
-	t_game	*game;
-
-	game = &cub3d()->game;
-	if (old_x >= 0 && old_x < game->map->size.width && old_y >= 0
-		&& old_y < game->map->size.height)
-		game->entity_grid[old_y][old_x] = NULL;
-	if (new_x >= 0 && new_x < game->map->size.width && new_y >= 0
-		&& new_y < game->map->size.height)
-		game->entity_grid[new_y][new_x] = entity;
+	if ((int)old_coords.x >= 0 && (int)old_coords.x < game->map->size.width && (int)old_coords.y >= 0
+		&& (int)old_coords.y < game->map->size.height)
+		game->entity_grid[(int)old_coords.y][(int)old_coords.x] = NULL;
+	if ((int)new_coords.x >= 0 && (int)new_coords.x < game->map->size.width && (int)new_coords.y >= 0
+		&& (int)new_coords.y < game->map->size.height)
+		game->entity_grid[(int)new_coords.y][(int)new_coords.x] = (t_entity *)player;
 }
 
-static void	move_player_x(t_entity *entity, double angle_radians)
+static void	move_player_x(t_game *game, t_player *player, double angle_radians)
 {
 	double	new_x;
 	int		old_x;
 	int		grid_x;
 
-	old_x = (int)entity->coords.x;
-	new_x = entity->coords.x + PLAYER_SPEED * cos(angle_radians);
+	old_x = (int)player->base.coords.x;
+	new_x = player->base.coords.x + PLAYER_SPEED * cos(angle_radians);
 	grid_x = (int)new_x;
-	if (!position_overlaps(entity, (t_coords){new_x, entity->coords.y, 0, 0}))
+	if (!position_overlaps(player, (t_coords){new_x, player->base.coords.y, 0, 0}))
 	{
-		entity->coords.x = new_x;
-		if (grid_x != old_x && entity->hard)
-			update_entity_grid(entity, old_x, (int)entity->coords.y, grid_x,
-				(int)entity->coords.y);
+		player->base.coords.x = new_x;
+		if (grid_x != old_x && player->base.hard)
+			update_entity_grid(game, player, (t_coords){old_x, player->base.coords.y, 0, 0}, (t_coords){grid_x, player->base.coords.y, 0, 0});
 	}
 }
 
-static void	move_player_y(t_entity *entity, double angle_radians)
+static void	move_player_y(t_game *game, t_player *player, double angle_radians)
 {
 	double	new_y;
 	int		old_y;
 	int		grid_y;
 
-	old_y = (int)entity->coords.y;
-	new_y = entity->coords.y + PLAYER_SPEED * sin(angle_radians);
+	old_y = (int)player->base.coords.y;
+	new_y = player->base.coords.y + PLAYER_SPEED * sin(angle_radians);
 	grid_y = (int)new_y;
-	if (!position_overlaps(entity, (t_coords){entity->coords.x, new_y, 0, 0}))
+	if (!position_overlaps(player, (t_coords){player->base.coords.x, new_y, 0, 0}))
 	{
-		entity->coords.y = new_y;
-		if (grid_y != old_y && entity->hard)
-			update_entity_grid(entity, (int)entity->coords.x, old_y,
-				(int)entity->coords.x, grid_y);
+		player->base.coords.y = new_y;
+		if (grid_y != old_y && player->base.hard)
+			update_entity_grid(game, player, (t_coords){player->base.coords.x, old_y, 0, 0}, (t_coords){player->base.coords.x, grid_y, 0, 0});
 	}
 }
 
-static void	player_walk(t_entity *entity, double angle)
+static void	player_walk(t_game *game, t_player *player, double angle)
 {
 	double	angle_radians;
 
 	angle_radians = ft_normalize_angle(angle) * (PI / 180.0);
-	move_player_x(entity, angle_radians);
-	move_player_y(entity, angle_radians);
+	move_player_x(game, player, angle_radians);
+	move_player_y(game, player, angle_radians);
 }
 
-static void	player_walks(t_entity *entity, t_player *player)
+static void	player_walks(t_game *game, t_player *player)
 {
 	if (player->walking_backward)
-		player_walk(entity, entity->coords.yaw - 180.0);
+		player_walk(game, player, player->base.coords.yaw - 180.0);
 	if (player->walking_right)
-		player_walk(entity, entity->coords.yaw + 90.0);
+		player_walk(game, player, player->base.coords.yaw + 90.0);
 	if (player->walking_left)
-		player_walk(entity, entity->coords.yaw - 90.0);
+		player_walk(game, player, player->base.coords.yaw - 90.0);
 	if (player->walking_forward)
-		player_walk(entity, entity->coords.yaw);
+		player_walk(game, player, player->base.coords.yaw);
 }
 
-static void	player_rays(t_game *game, t_entity *entity)
+static void	player_rays(t_game *game, t_player *player)
 {
-	t_player	*player;
 	t_coords	ray_coords;
 	t_raycast	raycast;
 	size_t		i;
 	double		angle;
 
-	player = entity->private;
 	i = -1;
-	angle = entity->coords.yaw - PLAYER_FOV / 2;
-	ray_coords = entity->coords;
+	angle = player->base.coords.yaw - PLAYER_FOV / 2;
+	ray_coords = player->base.coords;
 	while (++i < PLAYER_RAYS)
 	{
 		ray_coords.yaw = ft_normalize_angle(angle + ((PLAYER_FOV / PLAYER_RAYS)
 					* i));
-		raycast = send_ray(game, entity, ray_coords);
+		raycast = send_ray(game, player, ray_coords);
 		player->rays[i].direction_of_hit_on_entity = raycast.direction_of_hit_on_entity;
 		player->rays[i].length = raycast.length;
 		player->rays[i].hit_entity = raycast.hit_entity;
@@ -137,40 +129,33 @@ static void	player_rays(t_game *game, t_entity *entity)
 
 static void	player_frame(t_entity *entity)
 {
-	t_player	*player;
-
-	player = (t_player *)(entity->private);
-	player_looks(entity, player);
-	player_walks(entity, player);
-	player_rays(&cub3d()->game, entity);
+	player_looks((t_player *)entity);
+	player_walks(&cub3d()->game, (t_player *)entity);
+	player_rays(&cub3d()->game, (t_player *)entity);
 }
 
 static void	free_player(void *entity)
 {
-	free(((t_entity *)entity)->private);
 	free(entity);
 }
 
-t_entity	*entity_player_new(char direction)
+t_player	*player_new(char direction)
 {
-	t_entity	*entity;
 	t_player	*player;
 
 	player = ft_calloc(1, sizeof(t_player));
 	if (!player)
 		return (NULL);
-	entity = entity_new(ENTITY_PLAYER, player);
-	if (!entity)
-		return (free(player), NULL);
-	entity->frame = player_frame;
-	entity->free = free_player;
+	player->base.type = ENTITY_PLAYER;
+	player->base.frame = player_frame;
+	player->base.free = free_player;
 	if (direction == 'W')
-		entity->coords.yaw = 180.0;
+		player->base.coords.yaw = 180.0;
 	else if (direction == 'S')
-		entity->coords.yaw = 0.0;
+		player->base.coords.yaw = 0.0;
 	else if (direction == 'N')
-		entity->coords.yaw = 270.0;
+		player->base.coords.yaw = 270.0;
 	else if (direction == 'E')
-		entity->coords.yaw = 90.0;
-	return (entity);
+		player->base.coords.yaw = 90.0;
+	return (player);
 }

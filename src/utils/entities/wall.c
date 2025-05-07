@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wall.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/07 17:30:25 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/07 22:58:57 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,25 @@ static void	wall_frame(t_entity *entity)
 	(void)entity;
 }
 
-static void	free_wall(void *entity)
+static void	free_wall(void *wall)
 {
-	free(entity);
+	free(wall);
 }
 
-t_entity	*entity_wall_new(t_game *game)
+t_wall	*wall_new(t_game *game)
 {
-	t_entity	*entity;
+	t_wall	*wall;
 
-	entity = entity_new(ENTITY_WALL, NULL);
-	if (!entity)
+	wall = ft_calloc(1, sizeof(t_wall));
+	if (!wall)
 		return (NULL);
-	entity->frame = wall_frame;
-	entity->free = free_wall;
-	entity->hard = true;
-	entity->north_sprite = ft_hashmap_get_value(game->sprites, "NO");
-	entity->south_sprite = ft_hashmap_get_value(game->sprites, "SO");
-	entity->west_sprite = ft_hashmap_get_value(game->sprites, "WE");
-	entity->east_sprite = ft_hashmap_get_value(game->sprites, "EA");
-	return (entity);
+	wall->base.type = ENTITY_WALL;
+	wall->base.frame = wall_frame;
+	wall->base.free = free_wall;
+	wall->base.hard = true;
+	wall->north_sprite = ft_hashmap_get_value(game->sprites, "NO");
+	wall->south_sprite = ft_hashmap_get_value(game->sprites, "SO");
+	wall->west_sprite = ft_hashmap_get_value(game->sprites, "WE");
+	wall->east_sprite = ft_hashmap_get_value(game->sprites, "EA");
+	return (wall);
 }

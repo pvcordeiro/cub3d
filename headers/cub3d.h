@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/07 17:48:34 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/07 23:04:31 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,33 +65,19 @@ typedef struct s_sprite
 
 typedef enum e_entity_type
 {
+	ENTITY_PLAYER,
 	ENTITY_WALL,
-	ENTITY_PLAYER
 }	t_entity_type;
 
 typedef struct s_entity
 {
+	void			(*frame)(struct s_entity *this);
+	void			(*free)(void *this);
 	bool			transparent;
 	bool			hard;
 	t_coords		coords;
 	t_entity_type	type;
-	t_sprite		*north_sprite;
-	t_sprite		*south_sprite;
-	t_sprite		*west_sprite;
-	t_sprite		*east_sprite;
-	void			(*frame)(struct s_entity *this);
-	void			(*free)(void *this);
-	void			*private;
 }	t_entity;
-
-typedef struct s_map
-{
-	char		*path;
-	t_hashmap	*types;
-	char		**raw;
-	char		**map;
-	t_size		size;
-}	t_map;
 
 typedef struct s_ray
 {
@@ -105,14 +91,37 @@ typedef struct s_ray
 
 typedef struct	s_player
 {
-	bool	walking_forward;
-	bool	walking_left;
-	bool	walking_backward;
-	bool	walking_right;
-	bool	looking_right;
-	bool	looking_left;
-	t_ray	rays[PLAYER_RAYS];
+	t_entity	base;
+	bool		walking_forward;
+	bool		walking_left;
+	bool		walking_backward;
+	bool		walking_right;
+	bool		looking_right;
+	bool		looking_left;
+	t_ray		rays[PLAYER_RAYS];
 }	t_player;
+
+typedef struct	s_wall
+{
+	t_entity	base;
+	t_sprite	*north_sprite;
+	t_sprite	*south_sprite;
+	t_sprite	*west_sprite;
+	t_sprite	*east_sprite;
+	double		north_depth;
+	double		south_depth;
+	double		west_depth;
+	double		east_depth;
+}	t_wall;
+
+typedef struct s_map
+{
+	char		*path;
+	t_hashmap	*types;
+	char		**raw;
+	char		**map;
+	t_size		size;
+}	t_map;
 
 typedef struct	s_environment
 {
@@ -140,7 +149,7 @@ typedef struct	s_game
 	t_environment		environment;
 	t_minimap			minimap;
 	t_map				*map;
-	t_entity			*player;
+	t_player			*player;
 	t_list				*entities;
 	t_entity			***entity_grid;
 	t_hashmap			*sprites;
