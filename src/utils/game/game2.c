@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:20:04 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/07 17:47:31 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/07 23:15:58 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	init_sprites_e(t_window *window, t_game *game)
 {
 	t_sprite	*sprite;
-	t_image		*image;
+	t_ftm_image		*image;
 	t_list		*image_list;
 	t_element	*element;
 

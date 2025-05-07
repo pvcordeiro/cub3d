@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:15:19 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/07 17:48:42 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/07 23:15:58 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	exit_game(void)
 static void	load_placeholder_sprite_e(t_window *window, t_sprite *placeholder)
 {
 	t_list	*list;
-	t_image	*image;
+	t_ftm_image	*image;
 
 	ft_error(ERROR_NO_ERROR);
 	list = NULL;

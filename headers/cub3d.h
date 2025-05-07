@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/07 23:11:12 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/07 23:15:58 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,17 +186,17 @@ int	key_up_handler(int key);
 int	key_down_handler(int key);
 
 // Render
-void	render_ceiling_and_floor(t_game *game, t_image *canvas);
+void	render_ceiling_and_floor(t_game *game, t_ftm_image *canvas);
 
 // Entities
 void		call_entity_frames(t_list *entities);
 t_sprite	*get_entity_sprite(t_entity *entity, t_direction direction);
 
 // Raycasting
-void			render_raycasting_mega(t_game *game, t_image *canvas);
+void			render_raycasting_mega(t_game *game, t_ftm_image *canvas);
 
 // Sprites
-t_image	*get_sprite_image(t_sprite *sprite);
+t_ftm_image	*get_sprite_image(t_sprite *sprite);
 
 // Entities
 t_player	*player_new(char direction);

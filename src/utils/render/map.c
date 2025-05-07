@@ -6,13 +6,13 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 22:33:42 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/07 22:56:43 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/07 23:15:58 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render.h"
 
-static void render_rays(t_image *canvas, t_game *game, t_player *player, t_coords coords, t_size entity_size)
+static void render_rays(t_ftm_image *canvas, t_game *game, t_player *player, t_coords coords, t_size entity_size)
 {
     size_t i;
     double scale;
@@ -33,7 +33,7 @@ static void	set_entity_color(t_game *game, t_entity *entity, unsigned *color)
 		*color = game->minimap.entity_color;
 }
 
-static void	render_entity(t_image *canvas, t_game *game, t_entity *entity, t_coords coords, t_size entity_size)
+static void	render_entity(t_ftm_image *canvas, t_game *game, t_entity *entity, t_coords coords, t_size entity_size)
 {
 	unsigned	color;
 	t_coords		new_coords;
@@ -51,7 +51,7 @@ static void	render_entity(t_image *canvas, t_game *game, t_entity *entity, t_coo
 			color, color);
 }
 
-static void render_entities(t_image *canvas, t_game *game, t_coords coords, t_size size)
+static void render_entities(t_ftm_image *canvas, t_game *game, t_coords coords, t_size size)
 {
     t_list *entity_item;
     t_entity *entity;
@@ -79,7 +79,7 @@ static void render_entities(t_image *canvas, t_game *game, t_coords coords, t_si
         entity_size);
 }
 
-void	render_minimap(t_game *game, t_image *canvas, t_coords coords, t_size size)
+void	render_minimap(t_game *game, t_ftm_image *canvas, t_coords coords, t_size size)
 {
 	ftm_draw_rectangle(canvas, coords, size, game->minimap.background_color, game->minimap.border_color);
 	render_entities(canvas, game, coords, size);

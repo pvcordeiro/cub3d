@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:48:06 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 17:45:59 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/07 23:15:58 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,21 @@ void	ftm_free_image(void *image)
 {
 	if (!image)
 		return ;
-	mlx_destroy_image(((t_image *)image)->display, ((t_image *)image)->img_ptr);
+	mlx_destroy_image(((t_ftm_image *)image)->display, ((t_ftm_image *)image)->img_ptr);
 	free(image);
 }
 
-static bool	load_image_addresses(t_image *image)
+static bool	load_image_addresses(t_ftm_image *image)
 {
 	image->data = mlx_get_data_addr(image->img_ptr, &image->bits_per_pixel, &image->size_line, &image->endian);
 	return (!!image->data);
 }
 
-t_image	*ftm_image_from_file(t_window *window, char *path)
+t_ftm_image	*ftm_image_from_file(t_window *window, char *path)
 {
-	t_image *image;
+	t_ftm_image *image;
 
-	image = ft_calloc(1, sizeof(t_image));
+	image = ft_calloc(1, sizeof(t_ftm_image));
 	if (!image)
 		return (NULL);
 	image->display = window->display;
@@ -42,11 +42,11 @@ t_image	*ftm_image_from_file(t_window *window, char *path)
 	return (image);
 }
 
-t_image	*ftm_image_new(t_window *window, t_size size)
+t_ftm_image	*ftm_image_new(t_window *window, t_size size)
 {
-	t_image *image;
+	t_ftm_image *image;
 
-	image = ft_calloc(1, sizeof(t_image));
+	image = ft_calloc(1, sizeof(t_ftm_image));
 	if (!image)
 		return (NULL);
 	image->display = window->display;
@@ -63,7 +63,7 @@ t_list	*ftm_images_from_files(t_window *window, char **file_paths)
 {
 	size_t	i;
 	t_list	*list;
-	t_image	*tmp_image;
+	t_ftm_image	*tmp_image;
 
 	list = NULL;
 	i = -1;

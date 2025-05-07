@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprites.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 19:01:44 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/07 17:47:04 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/07 23:15:58 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_sprite	*sprite_new(t_list *images, t_time update_delay)
 	return (sprite);
 }
 
-t_image	*get_sprite_image(t_sprite *sprite)
+t_ftm_image	*get_sprite_image(t_sprite *sprite)
 {
 	t_list	*curr_image_node;
 

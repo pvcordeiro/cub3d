@@ -6,32 +6,32 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:48:02 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 19:40:04 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/07 23:15:58 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_mlx_utils.h>
 
-void	ftm_image_clear(t_image *image)
+void	ftm_image_clear(t_ftm_image *image)
 {
 	ftm_draw_rectangle(image, (t_coords){0, 0, 0 ,0}, image->size, 0, 0);
 }
 
-static inline t_size	get_crop_size(t_image *image, t_ftm_pitc_config pitc)
+static inline t_size	get_crop_size(t_ftm_image *image, t_ftm_pitc_config pitc)
 {
 	if (pitc.crop)
 		return ((t_size){pitc.crop_end.x - pitc.crop_start.x, pitc.crop_end.y - pitc.crop_start.y});
 	return (image->size);
 }
 
-static inline void	set_size(t_image *image, t_ftm_pitc_config *pitc)
+static inline void	set_size(t_ftm_image *image, t_ftm_pitc_config *pitc)
 {
 	if (pitc->resize)
 		return ;
 	pitc->size = image->size;
 }
 
-void	ftm_put_image_to_canvas(t_image *canvas, t_image *image, t_ftm_pitc_config pitc)
+void	ftm_put_image_to_canvas(t_ftm_image *canvas, t_ftm_image *image, t_ftm_pitc_config pitc)
 {
 	t_size			index;
 	t_coords		src_coords;

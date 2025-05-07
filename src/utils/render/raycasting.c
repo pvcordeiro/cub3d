@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 19:05:41 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/07 22:55:50 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/07 23:15:58 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static unsigned	pixel_modifier(void *data, unsigned pixel)
 	return ((r << 16) | (g << 8) | b);
 }
 
-static t_ftm_pitc_config	get_pitc_config(int i, t_size *ray_size, t_image *image, t_ray *ray)
+static t_ftm_pitc_config	get_pitc_config(int i, t_size *ray_size, t_ftm_image *image, t_ray *ray)
 {
 	ray->_height = ray_size->height;
 	return ((t_ftm_pitc_config){
@@ -45,11 +45,11 @@ static t_ftm_pitc_config	get_pitc_config(int i, t_size *ray_size, t_image *image
 		});
 }
 
-void	render_raycasting_mega(t_game *game, t_image *canvas)
+void	render_raycasting_mega(t_game *game, t_ftm_image *canvas)
 {
 	t_player		*player;
 	t_size			ray_size;
-	t_image			*hit_entity_image;
+	t_ftm_image			*hit_entity_image;
 	int				i;
 	double			angle_diff;
 

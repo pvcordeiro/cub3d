@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   lines.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:37:16 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 17:43:50 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/07 23:15:58 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_mlx_utils.h>
 
-void	ftm_draw_line(t_image *canvas, t_coords start, t_coords end, unsigned color)
+void	ftm_draw_line(t_ftm_image *canvas, t_coords start, t_coords end, unsigned color)
 {
 	double	dx;
 	double	dy;
@@ -38,7 +38,7 @@ void	ftm_draw_line(t_image *canvas, t_coords start, t_coords end, unsigned color
 	}
 }
 
-void	ftm_draw_line_angle(t_image *canvas, t_coords start, double angle, double length, unsigned color)
+void	ftm_draw_line_angle(t_ftm_image *canvas, t_coords start, double angle, double length, unsigned color)
 {
 	static t_coords	end;
 
@@ -48,7 +48,7 @@ void	ftm_draw_line_angle(t_image *canvas, t_coords start, double angle, double l
 	ftm_draw_line(canvas, start, end, color);
 }
 
-void	ftm_draw_rectangle(t_image *canvas, t_coords coords, t_size size, unsigned color, unsigned border_color)
+void	ftm_draw_rectangle(t_ftm_image *canvas, t_coords coords, t_size size, unsigned color, unsigned border_color)
 {
 	int			i;
 	int			j;

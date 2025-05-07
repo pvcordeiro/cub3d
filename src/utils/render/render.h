@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:23:25 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 22:23:43 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/07 23:15:58 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 
 # include <cub3d.h>
 
-void	render_minimap(t_game *game, t_image *canvas, t_coords coords, t_size size);
+void	render_minimap(t_game *game, t_ftm_image *canvas, t_coords coords, t_size size);
 
 #endif

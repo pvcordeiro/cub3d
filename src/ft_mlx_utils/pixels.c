@@ -6,13 +6,13 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:05:31 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 22:53:27 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/07 23:15:58 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_mlx_utils.h>
 
-unsigned int	*ftm_image_pixel(t_image *image, t_coords coords)
+unsigned int	*ftm_image_pixel(t_ftm_image *image, t_coords coords)
 {
 	int	x;
 	int	y;
