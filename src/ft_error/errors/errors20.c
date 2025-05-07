@@ -12,8 +12,11 @@
 
 #include <ft_error.h>
 
+char	*get_error_message21(t_error _error);
+
 char	*get_error_message20(t_error _error)
 {
-	(void)_error;
-	return (ERROR_INVALID_MSG);
+	if (_error == ERROR_CEILING_OR_FLOORING_UNDEFINED)
+		return (ERROR_CEILING_OR_FLOORING_UNDEFINED_MSG);
+	return (get_error_message21(_error));
 }

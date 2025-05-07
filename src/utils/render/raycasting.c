@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 19:05:41 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/06 23:19:58 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/07 17:45:26 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	render_raycasting_mega(t_game *game, t_image *canvas)
 {
 	t_player		*player;
 	t_size			ray_size;
-	t_sprite		*hit_entity_sprite;
 	t_image			*hit_entity_image;
 	int				i;
 	double			angle_diff;
@@ -61,10 +60,7 @@ void	render_raycasting_mega(t_game *game, t_image *canvas)
 	{
 		if (!player->rays[i].hit_entity)
 			continue ;
-		hit_entity_sprite = &cub3d()->master_sprites.placeholder;
-		if (player->rays[i].hit_entity && get_entity_sprite(player->rays[i].hit_entity, player->rays[i].direction_of_hit_on_entity))
-			hit_entity_sprite = get_entity_sprite(player->rays[i].hit_entity, player->rays[i].direction_of_hit_on_entity);
-		hit_entity_image = get_sprite_image(hit_entity_sprite);
+		hit_entity_image = get_sprite_image(get_entity_sprite(player->rays[i].hit_entity, player->rays[i].direction_of_hit_on_entity));
 		if (!hit_entity_image)
 			continue ;
 		angle_diff = player->rays[i].angle - game->player->coords.yaw;

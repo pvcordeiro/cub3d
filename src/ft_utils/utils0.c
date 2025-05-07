@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils0.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 15:44:32 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/05 22:24:46 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/07 16:18:18 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,19 @@ bool	ft_is_file(char *path)
 		return (false);
 	close(fd);
 	return (true);
+}
+
+unsigned ft_rgb_to_unsigned(char *rgb_str, char *separator)
+{
+	unsigned color;
+	char **strs;
+
+	strs = ft_split(rgb_str, separator);
+	color = ft_atoi(strs[0]);
+	color *= 0x000100;
+	color += ft_atoi(strs[1]);
+	color *= 0x000100;
+	color += ft_atoi(strs[2]);
+	ft_strvfree(strs);
+	return (color);
 }

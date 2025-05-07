@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_error.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 22:05:32 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 20:47:46 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/07 16:23:04 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef enum e_error
 	ERROR_INIT_SPRITES,
 	ERROR_LOAD_PLACEHOLDER_SPRITE,
 	ERROR_MAP_ALLOC,
+	ERROR_CEILING_OR_FLOORING_UNDEFINED,
 }	t_error;
 
 typedef struct s_error_storage
@@ -65,6 +66,7 @@ typedef struct s_error_storage
 # define ERROR_INIT_SPRITES_MSG "Initializing sprites error"
 # define ERROR_LOAD_PLACEHOLDER_SPRITE_MSG "Loading placeholder sprite error"
 # define ERROR_MAP_ALLOC_MSG "Map allocation error"
+# define ERROR_CEILING_OR_FLOORING_UNDEFINED_MSG "Ceiling or Flooring are undifined"
 # define ERROR_INVALID_MSG "Invalid Error"
 
 void			ft_error(t_error _error);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 23:17:44 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/07 17:48:34 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@
 # define PLACEHOLDER_SPRITE_UPDATE_DELAY 0
 
 // Player Config
-# define PLAYER_SPEED 0.05
-# define PLAYER_TURN_SPEED 2.0
+# define PLAYER_SPEED 0.15
+# define PLAYER_TURN_SPEED 3.0
 # define PLAYER_RAYS_NO_HIT_LENGTH 100.0
 # define PLAYER_FOV 75.0
 # define PLAYER_RAYS 1024
@@ -57,10 +57,10 @@
 
 typedef struct s_sprite
 {
-	t_list	*images;
-	size_t	index;
-	t_time	updated_at;
-	t_time	update_delay;
+	t_list			*images;
+	size_t			index;
+	t_time			updated_at;
+	t_time			update_delay;
 }	t_sprite;
 
 typedef enum e_entity_type
@@ -114,13 +114,6 @@ typedef struct	s_player
 	t_ray	rays[PLAYER_RAYS];
 }	t_player;
 
-typedef struct	s_master_sprites
-{
-	bool		initialized;
-	t_sprite	placeholder;
-	t_hashmap	*sprites;
-}	t_master_sprites;
-
 typedef struct	s_environment
 {
 	unsigned	floor_color;
@@ -150,20 +143,26 @@ typedef struct	s_game
 	t_entity			*player;
 	t_list				*entities;
 	t_entity			***entity_grid;
+	t_hashmap			*sprites;
 }	t_game;
 
 typedef struct s_cub3d
 {
+	t_sprite			placeholder;
 	t_map				*curr_map;
-	t_master_sprites	master_sprites;
 	t_window			window;
 	bool				map_fullscreen;
 	t_game				game;
 }	t_cub3d;
 
 void	game_load_map_e(t_game *game, t_window *window, t_map *map);
+void	clear_game(void *game);
 void	free_game(void *game);
 void	render_game(t_window *window, t_game *game);
+void	free_sprite(void *data);
+void	clear_sprite(void *data);
+void	init_sprite(t_sprite *sprite, t_list *images, t_time update_delay);
+t_sprite	*sprite_new(t_list *images, t_time update_delay);
 
 // cub3d
 t_cub3d	*cub3d(void);
@@ -182,7 +181,6 @@ void	render_ceiling_and_floor(t_game *game, t_image *canvas);
 
 // Entities
 void		call_entity_frames(t_list *entities);
-void		render_map(t_game *game, t_image *canvas, t_coords coords, t_size size);
 void		create_entities_e(t_game *game);
 t_sprite	*get_entity_sprite(t_entity *entity, t_direction direction);
 
@@ -190,8 +188,6 @@ t_sprite	*get_entity_sprite(t_entity *entity, t_direction direction);
 void			render_raycasting_mega(t_game *game, t_image *canvas);
 
 // Sprites
-void	load_master_sprites_e(t_window *window, t_master_sprites *master_sprites, t_hashmap *types);
-void	destroy_master_sprites(t_master_sprites *master_sprites);
 t_image	*get_sprite_image(t_sprite *sprite);
 
 #endif

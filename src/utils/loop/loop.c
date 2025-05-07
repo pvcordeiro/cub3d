@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:20:20 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 22:22:55 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/07 16:15:32 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 void	cub3d_exit(int code)
 {
 	destroy_map(cub3d()->curr_map);
-	free_game(&cub3d()->game);
-	if (cub3d()->master_sprites.initialized)
-		destroy_master_sprites(&cub3d()->master_sprites);
+	clear_game(&cub3d()->game);
 	if (cub3d()->window.initialized)
 		ftm_free_window(&cub3d()->window);
 	exit(code);

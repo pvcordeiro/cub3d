@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wall.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/05 22:39:36 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/07 17:30:25 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	free_wall(void *entity)
 	free(entity);
 }
 
-t_entity	*entity_wall_new(void)
+t_entity	*entity_wall_new(t_game *game)
 {
 	t_entity	*entity;
 
@@ -32,9 +32,9 @@ t_entity	*entity_wall_new(void)
 	entity->frame = wall_frame;
 	entity->free = free_wall;
 	entity->hard = true;
-	entity->north_sprite = ft_hashmap_get_value(cub3d()->master_sprites.sprites, "NO");
-	entity->south_sprite = ft_hashmap_get_value(cub3d()->master_sprites.sprites, "SO");
-	entity->west_sprite = ft_hashmap_get_value(cub3d()->master_sprites.sprites, "WE");
-	entity->east_sprite = ft_hashmap_get_value(cub3d()->master_sprites.sprites, "EA");
+	entity->north_sprite = ft_hashmap_get_value(game->sprites, "NO");
+	entity->south_sprite = ft_hashmap_get_value(game->sprites, "SO");
+	entity->west_sprite = ft_hashmap_get_value(game->sprites, "WE");
+	entity->east_sprite = ft_hashmap_get_value(game->sprites, "EA");
 	return (entity);
 }

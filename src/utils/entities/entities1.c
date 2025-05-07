@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   entities1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 20:49:46 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 21:42:28 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/07 17:26:05 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	create_entity_e(t_game *game, char c, int x, int y)
 	if (ft_isspace(c) || c == '0')
 		return ;
 	else if (c == '1')
-		entity = entity_wall_new();
+		entity = entity_wall_new(game);
 	else if (ft_strchr("NSEW", c))
 		entity = entity_player_new(c);
 	if (!entity)

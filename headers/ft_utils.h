@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 12:15:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/06 16:45:46 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/07 16:18:31 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ double					ft_normalize_angle(double angle);
 int						ft_atoi(const char *nptr);
 t_list					*ft_list_index(t_list *list, size_t index);
 bool					ft_is_file(char *path);
+unsigned				ft_rgb_to_unsigned(char *rgb_str, char *separator);
 
 size_t					ft_strlen(const char *s);
 size_t					ft_strlcpy(char *dst, const char *src, size_t dstsize);
