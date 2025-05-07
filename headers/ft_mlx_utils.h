@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:46:27 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/07 23:17:12 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/07 23:32:50 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ typedef struct	s_ftm_pitc_config
 }	t_ftm_pitc_config;
 
 void			ftm_free_image(void *image);
-t_ftm_image			*ftm_image_from_file(t_ftm_window *window, char *path);
-t_ftm_image			*ftm_image_new(t_ftm_window *window, t_size size);
+t_ftm_image		*ftm_image_from_file(t_ftm_window *window, char *path);
+t_ftm_image		*ftm_image_new(t_ftm_window *window, t_size size);
 t_list			*ftm_images_from_files(t_ftm_window *window, char **file_paths);
 
 void			ftm_image_clear(t_ftm_image *image);
