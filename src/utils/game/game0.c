@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game0.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:27:08 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/07 17:47:23 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/07 23:10:35 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	game_load_map_e(t_game *game, t_window *window, t_map *map)
 	if (ft_has_error())
 		return (clear_game(game));
 	init_minimap(window, game);
-	create_entities_e(game);
+	init_entities_e(game);
 	if (ft_has_error())
 		return (clear_game(game));
 }

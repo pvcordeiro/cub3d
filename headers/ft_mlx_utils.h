@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_mlx_utils.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:46:27 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/07 16:34:50 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/07 23:14:17 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ typedef struct s_window
 	void	*win;
 	void	*display;
 	t_image	*canvas;
-	bool	initialized;
 }	t_window;
 
 typedef struct	s_ftm_pitc_config
@@ -66,6 +65,7 @@ t_list			*ftm_images_from_files(t_window *window, char **file_paths);
 void			ftm_image_clear(t_image *image);
 void			ftm_put_image_to_canvas(t_image *canvas, t_image *image, t_ftm_pitc_config pitc);
 
+void			ftm_clear_window(void *window);
 void			ftm_free_window(void *window);
 void			ftm_create_window_e(t_window *window, t_size size, char *title);
 void			ftm_update_window(t_window *window);

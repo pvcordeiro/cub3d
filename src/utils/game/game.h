@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:16:32 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/07 17:47:13 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/07 23:10:22 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,6 @@
 void	init_enviroment_e(t_game *game);
 void	init_minimap(t_window *window, t_game *game);
 void	init_sprites_e(t_window *window, t_game *game);
+void	init_entities_e(t_game *game);
 
 #endif

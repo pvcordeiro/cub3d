@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:58:13 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 22:29:43 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/07 23:14:33 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	ftm_create_window_e(t_window *window, t_size size, char *title)
 {
+	ft_error(ERROR_NO_ERROR);
 	window->display = mlx_init();
 	if (!window->display)
 		return (ft_error(ERROR_INIT_MLX));
@@ -25,18 +26,24 @@ void	ftm_create_window_e(t_window *window, t_size size, char *title)
 		return (mlx_destroy_window(window->display, window->win), mlx_destroy_display(window->display),
 			ft_error(ERROR_INIT_CANVAS));
 	window->size = size;
-	window->initialized = true;
-	ft_error(ERROR_NO_ERROR);
 }
 
-void	ftm_free_window(void *window)
+void	ftm_clear_window(void *window)
 {
-	if (!window || !((t_window *)window)->initialized)
+	if (!window)
 		return ;
 	ftm_free_image(((t_window *)window)->canvas);
 	mlx_destroy_window(((t_window *)window)->display, ((t_window *)window)->win);
 	mlx_destroy_display(((t_window *)window)->display);
 	free(((t_window *)window)->display);
+}
+
+void	ftm_free_window(void *window)
+{
+	if (!window)
+		return ;
+	ftm_clear_window(window);
+	free(window);
 }
 
 void	ftm_update_window(t_window *window)
