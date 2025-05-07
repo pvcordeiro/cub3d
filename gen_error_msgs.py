@@ -39,7 +39,7 @@ with open(os.path.join(OUTPUT_DIR, 'errors.c'), 'w') as f:
     f.write(HEADER_42.format('errors.c'))
     f.write('#include <ft_error.h>\n\n')
     f.write('char\t*get_error_message1(t_error _error);\n\n')
-    f.write('char\t*ft_error_message(t_error _error)\n')
+    f.write('char\t*fte_error_to_message(t_error _error)\n')
     f.write('{\n')
     f.write('\treturn (get_error_message1(_error));\n')
     f.write('}\n')

@@ -30,7 +30,7 @@ def check_c_file(file):
                 if line2.endswith(";\n"):
                     next_line = lines[index + index2 + 1]
                     break
-            if not next_line or ("ft_has_error()" not in next_line and "ft_error_assert()" not in next_line):
+            if not next_line or ("fte_flagged()" not in next_line and "fte_assert()" not in next_line):
                 print(f"{file}:{index + 1}: Function that throws errors called without any check after")
             continue
         if "ft_error(" not in line:
