@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 08:42:58 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 20:34:24 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/07 14:59:28 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	add_variable_to_types_e(t_hashmap *types, char *line)
 	while (ft_isspace(clean_line[i]))
 		++i;
 	key = &clean_line[i];
-	while (ft_isalpha(clean_line[i]))
+	while (ft_isalnum(clean_line[i]) || clean_line[i] == '_')
 		++i;
 	if (!ft_isspace(clean_line[i]))
 		return (free(clean_line), ft_error(ERROR_INVALID_TYPE));

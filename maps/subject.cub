@@ -1,7 +1,11 @@
-NO assets/wolfenstein/blue_stone.xpm
-SO assets/wolfenstein/blue_stone.xpm
-WE assets/wolfenstein/blue_stone.xpm
-EA assets/wolfenstein/blue_stone.xpm
+NO assets/portugal.xpm
+SO assets/wolfenstein/grey_stone.xpm
+WE assets/portugal.xpm
+EA assets/wolfenstein/grey_stone.xpm
+2_NO assets/wolfenstein/grey_stone.xpm
+2_SO assets/portugal.xpm
+2_WE assets/wolfenstein/grey_stone.xpm
+2_EA assets/wolfenstein/grey_stone.xpm
 
 F 46,39,30
 C 67,63,1
