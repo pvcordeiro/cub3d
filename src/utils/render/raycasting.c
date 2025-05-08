@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 19:05:41 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/07 23:15:58 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/08 18:38:08 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	render_raycasting_mega(t_game *game, t_ftm_image *canvas)
 			continue ;
 		angle_diff = player->rays[i].angle - player->base.coords.yaw;
 		angle_diff = ft_normalize_angle(angle_diff) * (PI / 180.0);
-		ray_size.height = W_HEIGHT / (fmax(player->rays[i].length, 0.5) * cos(angle_diff));
+		ray_size.height = W_HEIGHT / (fmax(player->rays[i].length, 0) * cos(angle_diff));
 		ray_size.height = fmin(ray_size.height, W_HEIGHT * 3);
 		ftm_put_image_to_canvas(canvas, hit_entity_image, get_pitc_config(i, &ray_size, hit_entity_image, &player->rays[i]));
 	}
