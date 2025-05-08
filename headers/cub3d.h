@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/07 23:17:10 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/08 12:33:27 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,7 @@ typedef struct s_cub3d
 {
 	t_sprite			placeholder;
 	t_map				*curr_map;
-	t_ftm_window			window;
+	t_ftm_window		window;
 	bool				map_fullscreen;
 	t_game				game;
 }	t_cub3d;
