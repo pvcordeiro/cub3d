@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils6.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 00:46:10 by afonsocouti       #+#    #+#             */
-/*   Updated: 2025/04/27 22:38:34 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/08 14:57:52 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	**ft_strvndup(char **v, size_t n)
 	while (i < n && v[i])
 	{
 		new[i] = ft_strdup(v[i]);
-		++i;	
+		++i;
 	}
 	return (new);
 }

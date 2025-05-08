@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils13.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 13:52:26 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/06 20:53:45 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/08 14:54:59 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ bool	ft_str_all(char *str, bool (*func)(char))
 
 bool	ft_str_endswith(char *str, char *ending)
 {
-    size_t str_len;
-    size_t ending_len;
-    
-    str_len = ft_strlen(str);
-    ending_len = ft_strlen(ending);
-    if (str_len < ending_len)
-        return (false);
-    return (ft_strcmp(str + (str_len - ending_len), ending) == 0);
+	size_t	str_len;
+	size_t	ending_len;
+
+	str_len = ft_strlen(str);
+	ending_len = ft_strlen(ending);
+	if (str_len < ending_len)
+		return (false);
+	return (ft_strcmp(str + (str_len - ending_len), ending) == 0);
 }
 
 char	*ft_strtrim(char *s)
