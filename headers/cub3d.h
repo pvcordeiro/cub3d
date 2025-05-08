@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/08 13:03:01 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/08 15:34:43 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@
 # define PLAYER_TURN_SPEED 3.0
 # define PLAYER_RAYS_NO_HIT_LENGTH 100.0
 # define PLAYER_FOV 75.0
-# define PLAYER_RAYS 1024
+# define PLAYER_RAYS 128
+# define PLAYER_HITBOX_RADIUS 0.23
 
 // Map Config
 # define MAP_CHARS "10NSEW"

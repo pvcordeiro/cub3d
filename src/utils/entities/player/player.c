@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/07 23:00:17 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/08 15:36:52 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,12 @@ static bool	position_overlaps(t_player *player, t_coords coords)
 	while (curr)
 	{
 		curr_entity = curr->data;
-		if (curr_entity != (t_entity *)player && curr_entity->hard
-			&& (int)curr_entity->coords.x == (int)coords.x
-			&& (int)curr_entity->coords.y == (int)coords.y)
-			return (true);
+        if (curr_entity != (t_entity *)player && curr_entity->hard
+            && (int)(coords.x + PLAYER_HITBOX_RADIUS) >= (int)curr_entity->coords.x
+            && (int)(coords.x - PLAYER_HITBOX_RADIUS) <= (int)(curr_entity->coords.x + 0.9)
+            && (int)(coords.y + PLAYER_HITBOX_RADIUS) >= (int)curr_entity->coords.y
+            && (int)(coords.y - PLAYER_HITBOX_RADIUS) <= (int)(curr_entity->coords.y + 0.9))
+            return (true);
 		curr = curr->next;
 	}
 	return (false);
