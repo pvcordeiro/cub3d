@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/08 12:33:27 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/08 13:03:01 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ typedef struct s_ray
 	int			_height;
 }	t_ray;
 
-typedef struct	s_player
+typedef struct s_player
 {
 	t_entity	base;
 	bool		walking_forward;
@@ -101,7 +101,7 @@ typedef struct	s_player
 	t_ray		rays[PLAYER_RAYS];
 }	t_player;
 
-typedef struct	s_wall
+typedef struct s_wall
 {
 	t_entity	base;
 	t_sprite	*north_sprite;
@@ -123,28 +123,28 @@ typedef struct s_map
 	t_size		size;
 }	t_map;
 
-typedef struct	s_environment
+typedef struct s_environment
 {
-	unsigned	floor_color;
-	unsigned	ceiling_color;
+	unsigned int	floor_color;
+	unsigned int	ceiling_color;
 }	t_environment;
 
-typedef struct	s_minimap
+typedef struct s_minimap
 {
-	t_coords	coords;
-	t_size		size;
-	bool		full;
-	double		width_multiplier;
-	double		height_multiplier;
-	unsigned	background_color;
-	unsigned	border_color;
-	unsigned	entity_color;
-	unsigned	wall_color;
-	unsigned	player_color;
-	unsigned	player_ray_color;
+	t_coords		coords;
+	t_size			size;
+	bool			full;
+	double			width_multiplier;
+	double			height_multiplier;
+	unsigned int	background_color;
+	unsigned int	border_color;
+	unsigned int	entity_color;
+	unsigned int	wall_color;
+	unsigned int	player_color;
+	unsigned int	player_ray_color;
 }	t_minimap;
 
-typedef struct	s_game
+typedef struct s_game
 {
 	t_environment		environment;
 	t_minimap			minimap;
@@ -164,36 +164,36 @@ typedef struct s_cub3d
 	t_game				game;
 }	t_cub3d;
 
-void	game_load_map_e(t_game *game, t_ftm_window *window, t_map *map);
-void	clear_game(void *game);
-void	free_game(void *game);
-void	render_game(t_ftm_window *window, t_game *game);
-void	free_sprite(void *data);
-void	clear_sprite(void *data);
-void	init_sprite(t_sprite *sprite, t_list *images, t_time update_delay);
+void		game_load_map_e(t_game *game, t_ftm_window *window, t_map *map);
+void		clear_game(void *game);
+void		free_game(void *game);
+void		render_game(t_ftm_window *window, t_game *game);
+void		free_sprite(void *data);
+void		clear_sprite(void *data);
+void		init_sprite(t_sprite *sprite, t_list *images, t_time update_delay);
 t_sprite	*sprite_new(t_list *images, t_time update_delay);
 
 // cub3d
-t_cub3d	*cub3d(void);
-void	cub3d_exit(int code);
+t_cub3d		*cub3d(void);
+void		cub3d_exit(int code);
 
-t_map	*parse_map_e(char *path);
-void	destroy_map(t_map *map);
+t_map		*parse_map_e(char *path);
+void		destroy_map(t_map *map);
 
 // Loop
-int	loop(void *_);
-int	key_up_handler(int key);
-int	key_down_handler(int key);
+int			loop(void *_);
+int			key_up_handler(int key);
+int			key_down_handler(int key);
 
 // Render
-void	render_ceiling_and_floor(t_game *game, t_ftm_image *canvas);
+void		render_ceiling_and_floor(t_game *game, t_ftm_image *canvas);
 
 // Entities
 void		call_entity_frames(t_list *entities);
 t_sprite	*get_entity_sprite(t_entity *entity, t_direction direction);
 
 // Raycasting
-void			render_raycasting_mega(t_game *game, t_ftm_image *canvas);
+void		render_raycasting_mega(t_game *game, t_ftm_image *canvas);
 
 // Sprites
 t_ftm_image	*get_sprite_image(t_sprite *sprite);
