@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:48:02 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/07 23:15:58 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/08 12:59:58 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ftm_image_clear(t_ftm_image *image)
 {
-	ftm_draw_rectangle(image, (t_coords){0, 0, 0 ,0}, image->size, 0, 0);
+	ftm_draw_rectangle(image, (t_coords){0, 0, 0 ,0}, image->size, (t_ftm_rectangle){0, 0, (t_size){0, 0}});
 }
 
 static inline t_size	get_crop_size(t_ftm_image *image, t_ftm_pitc_config pitc)

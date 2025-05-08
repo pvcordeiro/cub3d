@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 22:33:42 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/07 23:15:58 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/08 12:59:03 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ static void render_rays(t_ftm_image *canvas, t_game *game, t_player *player, t_c
     scale = fmin(entity_size.width, entity_size.height);
     i = -1;
     while (++i < PLAYER_RAYS)
-		ftm_draw_line_angle(canvas, coords, player->rays[i].angle, player->rays[i].length * scale, game->minimap.player_ray_color);
+	{
+		coords.yaw = player->rays[i].angle;
+		ftm_draw_line_angle(canvas, coords, player->rays[i].length * scale, game->minimap.player_ray_color);
+	}
 }
 
 static void	set_entity_color(t_game *game, t_entity *entity, unsigned *color)
@@ -48,7 +51,7 @@ static void	render_entity(t_ftm_image *canvas, t_game *game, t_entity *entity, t
 	ftm_draw_rectangle(canvas,
 			new_coords,
 			entity_size,
-			color, color);
+			(t_ftm_rectangle){color, color, (t_size){1, 1}});
 }
 
 static void render_entities(t_ftm_image *canvas, t_game *game, t_coords coords, t_size size)
@@ -81,6 +84,6 @@ static void render_entities(t_ftm_image *canvas, t_game *game, t_coords coords, 
 
 void	render_minimap(t_game *game, t_ftm_image *canvas, t_coords coords, t_size size)
 {
-	ftm_draw_rectangle(canvas, coords, size, game->minimap.background_color, game->minimap.border_color);
+	ftm_draw_rectangle(canvas, coords, size, (t_ftm_rectangle){game->minimap.background_color, game->minimap.border_color, (t_size){1, 1}});
 	render_entities(canvas, game, coords, size);
 }
