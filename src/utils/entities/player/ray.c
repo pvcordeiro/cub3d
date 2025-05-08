@@ -3,29 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 12:05:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/07 22:59:45 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/08 16:07:28 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "player.h"
 
-static t_entity	*hits_something(t_game *game, t_player *player, t_coords coords)
+static t_wall	*hit_wall(t_game *game, t_coords coords)
 {
 	int			x;
 	int			y;
-	t_entity	*hit_entity;
+	t_wall		*wall;
 
 	x = (int)coords.x;
 	y = (int)coords.y;
 	if (x < 0 || x >= game->map->size.width || y < 0 || y >= game->map->size.height)
 		return (NULL);
-	hit_entity = game->entity_grid[y][x];
-	if (hit_entity && hit_entity != (t_entity *)player && hit_entity->hard)
-		return (hit_entity);
-	return (NULL);
+	wall = game->wall_grid[y][x];
+	return (wall);
 }
 
 static void	init_dda_ray_data(t_dda_ray *data, t_coords coords)
@@ -73,7 +71,7 @@ static void	set_step_and_side_dist(t_dda_ray *data, t_coords coords)
 	}
 }
 
-static double	perform_dda(t_dda_ray *data, t_game *game, t_player *player)
+static double	perform_dda(t_dda_ray *data, t_game *game)
 {
 	t_coords	check_pos;
 
@@ -92,7 +90,7 @@ static double	perform_dda(t_dda_ray *data, t_game *game, t_player *player)
 			data->side = 1;
 		}
 		check_pos = (t_coords){data->map_pos.x, data->map_pos.y, 0, 0};
-		if (hits_something(game, player, check_pos))
+		if (hit_wall(game, check_pos))
 			break ;
 		if (data->map_pos.x < 0 || data->map_pos.x >= game->map->size.width
 			|| data->map_pos.y < 0 || data->map_pos.y >= game->map->size.height)
@@ -126,9 +124,9 @@ static double	calculate_wall_dist(t_dda_ray *data, t_coords coords)
 	return (wall_dist);
 }
 
-static void	calculate_wall_hit(t_dda_ray *data, t_coords coords, t_entity *hit_entity)
+static void	calculate_wall_hit(t_dda_ray *data, t_coords coords, t_wall *wall_hit)
 {
-	data->hit_entity = hit_entity;
+	data->hit_entity = (t_entity *)wall_hit;
 	if (data->side == 0)
 		data->wall_x = coords.y + data->length * data->ray_dir.y;
 	else
@@ -136,19 +134,19 @@ static void	calculate_wall_hit(t_dda_ray *data, t_coords coords, t_entity *hit_e
 	data->wall_x -= floor(data->wall_x);
 }
 
-t_raycast	send_ray(t_game *game, t_player *player, t_coords coords)
+t_raycast	send_ray(t_game *game, t_coords coords)
 {
 	t_dda_ray	data;
 	double		result;
-	t_entity	*hit_entity;
+	t_wall	*wall_hit;
 
 	init_dda_ray_data(&data, coords);
 	set_step_and_side_dist(&data, coords);
-	result = perform_dda(&data, game, player);
+	result = perform_dda(&data, game);
 	if (result > 0)
 		return ((t_raycast){result, NULL, 0, 0});
 	data.length = calculate_wall_dist(&data, coords);
-	hit_entity = hits_something(game, player, (t_coords){data.map_pos.x, data.map_pos.y, 0, 0});
-	calculate_wall_hit(&data, coords, hit_entity);
-	return ((t_raycast){data.length, hit_entity, data.wall_x, data.direction_of_hit_on_entity});
+	wall_hit = hit_wall(game, (t_coords){data.map_pos.x, data.map_pos.y, 0, 0});
+	calculate_wall_hit(&data, coords, wall_hit);
+	return ((t_raycast){data.length, (t_entity *)wall_hit, data.wall_x, data.direction_of_hit_on_entity});
 }

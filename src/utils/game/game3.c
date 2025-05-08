@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game3.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 23:10:00 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/08 15:03:02 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/08 16:31:01 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ static void	create_entity_e(t_game *game, char c, int x, int y)
 	ft_list_add(&game->entities, entity, entity->free);
 	if (entity->type == ENTITY_PLAYER)
 		game->player = (t_player *)entity;
-	if (entity->hard && x >= 0 && x < game->map->size.width
+	if (entity->type == ENTITY_WALL && x >= 0 && x < game->map->size.width
 		&& y >= 0 && y < game->map->size.height)
-		game->entity_grid[y][x] = entity;
+		game->wall_grid[y][x] = (t_wall *)entity;
 	fte_set(ERROR_NO_ERROR);
 }
 
@@ -40,16 +40,16 @@ void	init_entities_e(t_game *game)
 {
 	t_size	s;
 
-	game->entity_grid = ft_calloc(game->map->size.height, sizeof(t_entity **));
-	if (!game->entity_grid)
+	game->wall_grid = ft_calloc(game->map->size.height, sizeof(t_entity **));
+	if (!game->wall_grid)
 		return (fte_set(ERROR_INIT_MAP_GRID_TRIPLE));
 	s.height = -1;
 	while (++s.height < game->map->size.height)
 	{
-		game->entity_grid[s.height] = ft_calloc(game->map->size.width,
+		game->wall_grid[s.height] = ft_calloc(game->map->size.width,
 				sizeof(t_entity *));
-		if (!game->entity_grid[s.height])
-			return (ft_strvfree((char **)game->entity_grid),
+		if (!game->wall_grid[s.height])
+			return (ft_strvfree((char **)game->wall_grid),
 				fte_set(ERROR_INIT_MAP_GRID_DOUBLE));
 	}
 	s.height = -1;

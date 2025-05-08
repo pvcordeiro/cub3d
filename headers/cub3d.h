@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/08 15:34:43 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/08 15:55:27 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,7 @@ typedef struct s_game
 	t_map				*map;
 	t_player			*player;
 	t_list				*entities;
-	t_entity			***entity_grid;
+	t_wall				***wall_grid;
 	t_hashmap			*sprites;
 }	t_game;
 
