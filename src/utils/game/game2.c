@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:20:04 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/08 15:36:14 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/08 15:46:18 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	init_sprites_e(t_ftm_window *window, t_game *game)
 			image = ftm_image_from_file(window, el->value);
 			if (!image)
 				return (fte_set(ERROR_LOAD_SPRITE));
-			if (ft_hashmap_get_value(game->sprites, el->key))
+			if (!ft_hashmap_get_value(game->sprites, el->key))
 			{
 				sprite = sprite_new(NULL, 0);
 				if (!sprite)
