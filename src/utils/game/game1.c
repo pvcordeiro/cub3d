@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:16:16 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/08 12:52:27 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/08 15:39:05 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,11 @@ void	init_minimap(t_ftm_window *window, t_game *game)
 	minimap = &game->minimap;
 	minimap->width_multiplier = MINIMAP_WIDTH_MULTIPLIER;
 	minimap->height_multiplier = MINIMAP_HEIGHT_MULTIPLIER;
-	minimap->coords = (t_coords){10, window->size.height - (window->size.height * minimap->height_multiplier) - 10, 0, 0};
-	minimap->size = (t_size){window->size.width * game->minimap.width_multiplier, window->size.height * game->minimap.height_multiplier};
+	minimap->coords = (t_coords){10, window->size.height
+		- (window->size.height * minimap->height_multiplier) - 10, 0, 0};
+	minimap->size = (t_size){window->size.width
+		* game->minimap.width_multiplier, window->size.height
+		* game->minimap.height_multiplier};
 	minimap->background_color = 0xCC555555;
 	minimap->border_color = 0xFFAAAAAA;
 	minimap->wall_color = 0xFFAAAAAA;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game3.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 23:10:00 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/07 23:20:20 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/08 15:03:02 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,34 +30,36 @@ static void	create_entity_e(t_game *game, char c, int x, int y)
 	ft_list_add(&game->entities, entity, entity->free);
 	if (entity->type == ENTITY_PLAYER)
 		game->player = (t_player *)entity;
-	if (entity->hard && x >= 0 && x < game->map->size.width && y >= 0 && y < game->map->size.height)
+	if (entity->hard && x >= 0 && x < game->map->size.width
+		&& y >= 0 && y < game->map->size.height)
 		game->entity_grid[y][x] = entity;
 	fte_set(ERROR_NO_ERROR);
 }
 
 void	init_entities_e(t_game *game)
 {
-	int	i;
-	int	j;
+	t_size	s;
 
 	game->entity_grid = ft_calloc(game->map->size.height, sizeof(t_entity **));
 	if (!game->entity_grid)
 		return (fte_set(ERROR_INIT_MAP_GRID_TRIPLE));
-	i = -1;
-	while (++i < game->map->size.height)
+	s.height = -1;
+	while (++s.height < game->map->size.height)
 	{
-		game->entity_grid[i] = ft_calloc(game->map->size.width, sizeof(t_entity *));
-		if (!game->entity_grid[i])
-			return (ft_strvfree((char **)game->entity_grid), fte_set(ERROR_INIT_MAP_GRID_DOUBLE));
+		game->entity_grid[s.height] = ft_calloc(game->map->size.width,
+				sizeof(t_entity *));
+		if (!game->entity_grid[s.height])
+			return (ft_strvfree((char **)game->entity_grid),
+				fte_set(ERROR_INIT_MAP_GRID_DOUBLE));
 	}
-	i = -1;
-	while (game->map->map[++i])
+	s.height = -1;
+	while (game->map->map[++s.height])
 	{
-		j = -1;
-		while (game->map->map[i][++j])
+		s.width = -1;
+		while (game->map->map[s.height][++s.width])
 		{
-			create_entity_e(game, game->map->map[i][j], j, i);
-			if (fte_flagged())
+			if (create_entity_e(game, game->map->map[s.height][s.width],
+				s.width, s.height), fte_flagged())
 				return ;
 		}
 	}
