@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/09 16:44:08 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/09 19:26:21 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 static void	player_looks(t_player *player)
 {
 	if (player->looking_left)
-		player->base.coords.yaw -= PLAYER_TURN_SPEED;
+		player->base.coords.yaw -= player->key_look_sens;
 	else if (player->looking_right)
-		player->base.coords.yaw += PLAYER_TURN_SPEED;
+		player->base.coords.yaw += player->key_look_sens;
 	player->base.coords.yaw = ft_normalize_angle(player->base.coords.yaw);
 }
 

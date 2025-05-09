@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/08 15:55:27 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/09 19:16:57 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 
 // External Libs
 # include <X11/keysym.h>
+# include <X11/X.h>
 # include <stdio.h>
 # include <stdbool.h>
 # include <unistd.h>
@@ -47,11 +48,11 @@
 
 // Player Config
 # define PLAYER_SPEED 0.15
-# define PLAYER_TURN_SPEED 3.0
 # define PLAYER_RAYS_NO_HIT_LENGTH 100.0
-# define PLAYER_FOV 75.0
-# define PLAYER_RAYS 128
+# define PLAYER_FOV 60.0
+# define PLAYER_RAYS 512
 # define PLAYER_HITBOX_RADIUS 0.23
+# define PLAYER_AIM_SENSITIVITY 0.01
 
 // Map Config
 # define MAP_CHARS "10NSEW"
@@ -99,6 +100,9 @@ typedef struct s_player
 	bool		walking_right;
 	bool		looking_right;
 	bool		looking_left;
+	bool		using_mouse;
+	double		mouse_look_sens;
+	double		key_look_sens;
 	t_ray		rays[PLAYER_RAYS];
 }	t_player;
 
@@ -161,7 +165,6 @@ typedef struct s_cub3d
 	t_sprite			placeholder;
 	t_map				*curr_map;
 	t_ftm_window		window;
-	bool				map_fullscreen;
 	t_game				game;
 }	t_cub3d;
 
@@ -185,6 +188,7 @@ void		destroy_map(t_map *map);
 int			loop(void *_);
 int			key_up_handler(int key);
 int			key_down_handler(int key);
+int			mouse_aim(int x, int y);
 
 // Render
 void		render_ceiling_and_floor(t_game *game, t_ftm_image *canvas);
