@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/08 16:27:43 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/09 16:44:08 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,8 @@ static bool	position_overlaps(t_list *entities, t_player *player, t_coords coord
 static void	move_player_x(t_list *entities, t_player *player, double angle_radians)
 {
 	double	new_x;
-	int		old_x;
-	int		grid_x;
 
-	old_x = (int)player->base.coords.x;
 	new_x = player->base.coords.x + PLAYER_SPEED * cos(angle_radians);
-	grid_x = (int)new_x;
 	if (!position_overlaps(entities, player, (t_coords){new_x, player->base.coords.y, 0, 0}))
 		player->base.coords.x = new_x;
 }
@@ -57,12 +53,8 @@ static void	move_player_x(t_list *entities, t_player *player, double angle_radia
 static void	move_player_y(t_list *entities, t_player *player, double angle_radians)
 {
 	double	new_y;
-	int		old_y;
-	int		grid_y;
 
-	old_y = (int)player->base.coords.y;
 	new_y = player->base.coords.y + PLAYER_SPEED * sin(angle_radians);
-	grid_y = (int)new_y;
 	if (!position_overlaps(entities, player, (t_coords){player->base.coords.x, new_y, 0, 0}))
 		player->base.coords.y = new_y;
 }
