@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:21:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/09 19:32:30 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/09 21:44:52 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,19 +49,35 @@ int	key_down_handler(int key)
 
 int	mouse_aim(int x, int y)
 {
-	static int	prev_x = W_WIDTH / 2;
-	int			movement;
-	t_player	*player;
+    static int	prev_x = W_WIDTH / 2;
+    int			movement;
+    t_player	*player;
+    double		rotation_speed;
+    double		old_dir_x;
+    double		old_plane_x;
 
-	(void)y;
-	player = cub3d()->game.player;
-	movement = x - prev_x;
-	if (movement != 0 && player && !player->using_mouse)
-	{
-		player->base.coords.yaw += movement * player->mouse_look_sens;
-		player->base.coords.yaw = ft_normalize_angle(player->base.coords.yaw);
-		mlx_mouse_move(cub3d()->window.display, cub3d()->window.win, W_WIDTH / 2, W_HEIGHT / 2);
-		prev_x = W_WIDTH / 2;
-	}
-	return (0);
+    (void)y;
+    player = cub3d()->game.player;
+    movement = x - prev_x;
+    if (movement != 0 && player && !player->using_mouse)
+    {
+        rotation_speed = movement * player->mouse_look_sens;
+        
+        // Rotate direction vector
+        old_dir_x = player->dir.x;
+        player->dir.x = player->dir.x * cos(rotation_speed) - player->dir.y * sin(rotation_speed);
+        player->dir.y = old_dir_x * sin(rotation_speed) + player->dir.y * cos(rotation_speed);
+        
+        // Rotate camera plane
+        old_plane_x = player->plane.x;
+        player->plane.x = player->plane.x * cos(rotation_speed) - player->plane.y * sin(rotation_speed);
+        player->plane.y = old_plane_x * sin(rotation_speed) + player->plane.y * cos(rotation_speed);
+        
+        // Update yaw for compatibility with other systems
+        player->base.coords.yaw = ft_normalize_angle(atan2(player->dir.y, player->dir.x) * 180.0 / PI);
+        
+        mlx_mouse_move(cub3d()->window.display, cub3d()->window.win, W_WIDTH / 2, W_HEIGHT / 2);
+        prev_x = W_WIDTH / 2;
+    }
+    return (0);
 }

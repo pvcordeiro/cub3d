@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 18:09:30 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/08 16:06:14 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/09 21:39:09 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,6 @@ typedef struct	s_raycast
 
 void		draw_line(t_ftm_image *canvas, t_coords start, t_coords end, 
 	unsigned int color);
-t_raycast	send_ray(t_game *game, t_coords coords);
+t_raycast send_ray(t_game *game, t_coords coords, int ray_index);
 
 #endif

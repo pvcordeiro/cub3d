@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 22:33:42 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/08 12:59:03 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/09 21:48:01 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,26 @@ static void render_rays(t_ftm_image *canvas, t_game *game, t_player *player, t_c
 {
     size_t i;
     double scale;
+    t_coords end;
+    double camera_x;
+    double ray_dir_x, ray_dir_y;
 
     scale = fmin(entity_size.width, entity_size.height);
     i = -1;
     while (++i < PLAYER_RAYS)
-	{
-		coords.yaw = player->rays[i].angle;
-		ftm_draw_line_angle(canvas, coords, player->rays[i].length * scale, game->minimap.player_ray_color);
-	}
+    {
+        // Get ray direction vector
+        camera_x = 2 * i / (double)PLAYER_RAYS - 1;
+        ray_dir_x = player->dir.x + player->plane.x * camera_x;
+        ray_dir_y = player->dir.y + player->plane.y * camera_x;
+        
+        // Calculate ray endpoint using the actual ray direction
+        if (player->rays[i].hit_entity) {
+            end.x = coords.x + ray_dir_x * player->rays[i].length * scale;
+            end.y = coords.y + ray_dir_y * player->rays[i].length * scale;
+            ftm_draw_line(canvas, coords, end, game->minimap.player_ray_color);
+        }
+    }
 }
 
 static void	set_entity_color(t_game *game, t_entity *entity, unsigned *color)

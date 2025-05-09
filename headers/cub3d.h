@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/09 19:16:57 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/09 21:48:13 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@
 # define PLAYER_RAYS_NO_HIT_LENGTH 100.0
 # define PLAYER_FOV 60.0
 # define PLAYER_RAYS 512
-# define PLAYER_HITBOX_RADIUS 0.23
+# define PLAYER_HITBOX_RADIUS 0.1
 # define PLAYER_AIM_SENSITIVITY 0.01
 
 // Map Config
@@ -94,6 +94,8 @@ typedef struct s_ray
 typedef struct s_player
 {
 	t_entity	base;
+	t_coords	dir;
+	t_coords	plane;
 	bool		walking_forward;
 	bool		walking_left;
 	bool		walking_backward;
