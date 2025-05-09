@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:21:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/09 22:08:46 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/09 22:20:35 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	mouse_aim(int x, int y)
 		adjusted_movement = movement;
 		if (abs(movement) < 10)
 			adjusted_movement = movement * (0.5 + (abs(movement) / 20.0));
-		player->base.coords.yaw += movement * player->mouse_look_sens;
+		player->base.coords.yaw += adjusted_movement * player->mouse_look_sens;
 		player->base.coords.yaw = ft_normalize_angle(player->base.coords.yaw);
 		mlx_mouse_move(cub3d()->window.display, cub3d()->window.win, W_WIDTH / 2, W_HEIGHT / 2);
 		prev_x = W_WIDTH / 2;
