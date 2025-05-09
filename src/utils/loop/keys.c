@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:21:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/09 21:44:52 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/09 21:59:34 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,19 @@ int	mouse_aim(int x, int y)
     movement = x - prev_x;
     if (movement != 0 && player && !player->using_mouse)
     {
+        // Apply reduced sensitivity and limit maximum rotation per frame
         rotation_speed = movement * player->mouse_look_sens;
+        
+        // Cap maximum rotation per frame (prevents jerky movement with sudden large mouse movements)
+        double max_rotation = 0.1; // About 5.7 degrees maximum per frame
+        if (rotation_speed > max_rotation)
+            rotation_speed = max_rotation;
+        else if (rotation_speed < -max_rotation)
+            rotation_speed = -max_rotation;
+            
+        // Apply non-linear response for small movements (more precise aiming)
+        if (fabs(rotation_speed) < 0.02)
+            rotation_speed *= 0.5;
         
         // Rotate direction vector
         old_dir_x = player->dir.x;

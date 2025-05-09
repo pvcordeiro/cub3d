@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:15:19 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/09 19:34:48 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/09 21:58:41 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	main(int argc, char **argv)
 	fte_assert();
 	game_load_map_e(&cub3d()->game, &cub3d()->window, cub3d()->curr_map);
 	fte_assert();
-	cub3d()->game.player->mouse_look_sens = 0.01;
+	cub3d()->game.player->mouse_look_sens = 0.001;
 	cub3d()->game.player->key_look_sens = 3.0;
 	mlx_loop_hook(cub3d()->window.display, loop, NULL);
 	mlx_hook(cub3d()->window.win, KeyPress, KeyPressMask, key_down_handler, NULL);
