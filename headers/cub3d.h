@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/09 22:23:46 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/09 22:32:05 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@
 # define PLACEHOLDER_SPRITE_UPDATE_DELAY 0
 
 // Player Config
-# define PLAYER_SPEED 0.15
 # define PLAYER_RAYS_NO_HIT_LENGTH 100.0
 # define PLAYER_FOV 55.0
 # define PLAYER_RAYS 400
@@ -103,6 +102,7 @@ typedef struct s_player
 	bool		using_mouse;
 	double		mouse_look_sens;
 	double		key_look_sens;
+	double		move_speed;
 	t_ray		rays[PLAYER_RAYS];
 }	t_player;
 

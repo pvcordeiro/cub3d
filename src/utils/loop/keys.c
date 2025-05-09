@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:21:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/09 22:20:35 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/09 22:31:46 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,10 @@ void    key_handler(int key, bool down)
 		cub3d_exit(0);
 	if (key == XK_m && down)
 		player->using_mouse = !player->using_mouse;
+	if (key == XK_Shift_L && down)
+		player->move_speed = 0.30;
+	if (key == XK_Shift_L && !down)
+		player->move_speed = 0.15;
 }
 
 int	key_up_handler(int key)
