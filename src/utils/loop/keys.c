@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:21:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/09 22:31:46 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/09 22:35:36 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ void    key_handler(int key, bool down)
 	if (key == XK_m && down)
 		player->using_mouse = !player->using_mouse;
 	if (key == XK_Shift_L && down)
-		player->move_speed = 0.30;
+		player->move_speed = PLAYER_SPRINTING_SPEED;
 	if (key == XK_Shift_L && !down)
-		player->move_speed = 0.15;
+		player->move_speed = PLAYER_SPEED;
 }
 
 int	key_up_handler(int key)
