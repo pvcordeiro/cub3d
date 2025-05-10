@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:21:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/07 22:56:51 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/10 11:06:23 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ void    key_handler(int key, bool down)
 		player->looking_right = down;
 	if (key == XK_Left)
 		player->looking_left = down;
-	if (key == XK_e)
+	if (key == XK_Shift_L || key == XK_Shift_R)
+		player->sprinting = down;
+	if (key == XK_Tab)
 		cub3d()->game.minimap.full = down;
 	if (key == XK_Escape)
 		cub3d_exit(0);
@@ -44,3 +46,4 @@ int	key_down_handler(int key)
 {
 	return (key_handler(key, true), 0);
 }
+

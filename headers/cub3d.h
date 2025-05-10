@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/08 15:55:27 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/10 11:53:50 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 
 // External Libs
 # include <X11/keysym.h>
+# include <X11/X.h>
 # include <stdio.h>
 # include <stdbool.h>
 # include <unistd.h>
@@ -46,12 +47,14 @@
 # define PLACEHOLDER_SPRITE_UPDATE_DELAY 0
 
 // Player Config
-# define PLAYER_SPEED 0.15
-# define PLAYER_TURN_SPEED 3.0
-# define PLAYER_RAYS_NO_HIT_LENGTH 100.0
+# define PLAYER_RAYS_NO_HIT_LENGTH 50.0
 # define PLAYER_FOV 75.0
 # define PLAYER_RAYS 128
 # define PLAYER_HITBOX_RADIUS 0.23
+# define PLAYER_MOUSE_LOOK_VELOCITY 0.1
+# define PLAYER_KEY_LOOK_VELOCITY 3.0
+# define PLAYER_WALK_VELOCITY 0.15
+# define PLAYER_SPRINT_VELOCITY 0.3
 
 // Map Config
 # define MAP_CHARS "10NSEW"
@@ -99,6 +102,12 @@ typedef struct s_player
 	bool		walking_right;
 	bool		looking_right;
 	bool		looking_left;
+	bool		sprinting;
+	double		mouse_moviment;
+	double		mouse_look_velocity;
+	double		key_look_velocity;
+	double		walk_velocity;
+	double		sprint_velocity;
 	t_ray		rays[PLAYER_RAYS];
 }	t_player;
 
@@ -161,7 +170,6 @@ typedef struct s_cub3d
 	t_sprite			placeholder;
 	t_map				*curr_map;
 	t_ftm_window		window;
-	bool				map_fullscreen;
 	t_game				game;
 }	t_cub3d;
 
@@ -182,9 +190,10 @@ t_map		*parse_map_e(char *path);
 void		destroy_map(t_map *map);
 
 // Loop
-int			loop(void *_);
+void		loop(void);
 int			key_up_handler(int key);
 int			key_down_handler(int key);
+int			mouse_motion_handler(int x, int y);
 
 // Render
 void		render_ceiling_and_floor(t_game *game, t_ftm_image *canvas);
