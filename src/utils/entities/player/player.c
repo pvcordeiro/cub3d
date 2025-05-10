@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/09 22:28:24 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/10 11:26:55 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,9 @@
 static void	player_looks(t_player *player)
 {
 	if (player->looking_left)
-		player->base.coords.yaw -= player->key_look_sens;
+		player->base.coords.yaw = ft_normalize_angle(player->base.coords.yaw - player->key_look_velocity);
 	else if (player->looking_right)
-		player->base.coords.yaw += player->key_look_sens;
-	player->base.coords.yaw = ft_normalize_angle(player->base.coords.yaw);
+		player->base.coords.yaw = ft_normalize_angle(player->base.coords.yaw + player->key_look_velocity);
 }
 
 static bool	position_overlaps(t_list *entities, t_player *player, t_coords coords)
@@ -41,20 +40,20 @@ static bool	position_overlaps(t_list *entities, t_player *player, t_coords coord
 	return (false);
 }
 
-static void	move_player_x(t_list *entities, t_player *player, double angle_radians)
+static void	move_player_x(t_list *entities, t_player *player, double angle_radians, double velocity)
 {
 	double	new_x;
 
-	new_x = player->base.coords.x + player->move_speed * cos(angle_radians);
+	new_x = player->base.coords.x + velocity * cos(angle_radians);
 	if (!position_overlaps(entities, player, (t_coords){new_x, player->base.coords.y, 0, 0}))
 		player->base.coords.x = new_x;
 }
 
-static void	move_player_y(t_list *entities, t_player *player, double angle_radians)
+static void	move_player_y(t_list *entities, t_player *player, double angle_radians, double velocity)
 {
 	double	new_y;
 
-	new_y = player->base.coords.y + player->move_speed * sin(angle_radians);
+	new_y = player->base.coords.y + velocity * sin(angle_radians);
 	if (!position_overlaps(entities, player, (t_coords){player->base.coords.x, new_y, 0, 0}))
 		player->base.coords.y = new_y;
 }
@@ -62,10 +61,14 @@ static void	move_player_y(t_list *entities, t_player *player, double angle_radia
 static void	player_walk(t_list *entities, t_player *player, double angle)
 {
 	double	angle_radians;
+	double	velocity;
 
+	velocity = player->walk_velocity;
+	if (player->sprinting)
+		velocity = player->sprint_velocity;
 	angle_radians = ft_normalize_angle(angle) * (PI / 180.0);
-	move_player_x(entities, player, angle_radians);
-	move_player_y(entities, player, angle_radians);
+	move_player_x(entities, player, angle_radians, velocity);
+	move_player_y(entities, player, angle_radians, velocity);
 }
 
 static void	player_walks(t_list *entities, t_player *player)
@@ -125,6 +128,11 @@ t_player	*player_new(char direction)
 	player->base.type = ENTITY_PLAYER;
 	player->base.frame = player_frame;
 	player->base.free = free_player;
+	player->key_look_velocity = PLAYER_KEY_LOOK_VELOCITY;
+	player->mouse_look_velocity = PLAYER_MOUSE_LOOK_VELOCITY;
+	player->using_mouse = true;
+	player->walk_velocity = PLAyER_WALK_VELOCITY;
+	player->sprint_velocity = PLAYER_SPRINT_VELOCITY;
 	if (direction == 'W')
 		player->base.coords.yaw = 180.0;
 	else if (direction == 'S')

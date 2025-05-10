@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/10 10:59:25 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/10 11:25:36 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,14 @@
 # define PLACEHOLDER_SPRITE_UPDATE_DELAY 0
 
 // Player Config
-# define PLAYER_SPEED 0.15
-# define PLAYER_SPRINTING_SPEED 0.30
 # define PLAYER_RAYS_NO_HIT_LENGTH 50.0
 # define PLAYER_FOV 75.0
 # define PLAYER_RAYS 128
 # define PLAYER_HITBOX_RADIUS 0.23
+# define PLAYER_MOUSE_LOOK_VELOCITY 0.02
+# define PLAYER_KEY_LOOK_VELOCITY 3.0
+# define PLAyER_WALK_VELOCITY 0.15
+# define PLAYER_SPRINT_VELOCITY 0.3
 
 // Map Config
 # define MAP_CHARS "10NSEW"
@@ -100,10 +102,12 @@ typedef struct s_player
 	bool		walking_right;
 	bool		looking_right;
 	bool		looking_left;
+	bool		sprinting;
 	bool		using_mouse;
-	double		mouse_look_sens;
-	double		key_look_sens;
-	double		move_speed;
+	double		mouse_look_velocity;
+	double		key_look_velocity;
+	double		walk_velocity;
+	double		sprint_velocity;
 	t_ray		rays[PLAYER_RAYS];
 }	t_player;
 
@@ -189,7 +193,7 @@ void		destroy_map(t_map *map);
 int			loop(void *_);
 int			key_up_handler(int key);
 int			key_down_handler(int key);
-int			mouse_aim(int x, int y);
+int			mouse_motion_handler(int x, int y);
 
 // Render
 void		render_ceiling_and_floor(t_game *game, t_ftm_image *canvas);
