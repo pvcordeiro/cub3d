@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/10 11:52:31 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/10 11:53:50 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@
 # define PLAYER_HITBOX_RADIUS 0.23
 # define PLAYER_MOUSE_LOOK_VELOCITY 0.1
 # define PLAYER_KEY_LOOK_VELOCITY 3.0
-# define PLAyER_WALK_VELOCITY 0.15
+# define PLAYER_WALK_VELOCITY 0.15
 # define PLAYER_SPRINT_VELOCITY 0.3
 
 // Map Config
