@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 19:01:44 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/07 23:15:58 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/10 13:36:04 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_ftm_image	*get_sprite_image(t_sprite *sprite)
 {
 	t_list	*curr_image_node;
 
-	if (!sprite || !sprite->images)
+	if (!sprite)
 		return (get_sprite_image(&cub3d()->placeholder));
 	if (ft_get_time() - sprite->updated_at > sprite->update_delay)
 	{

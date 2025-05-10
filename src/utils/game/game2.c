@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:20:04 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/08 15:46:18 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/10 13:35:38 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,14 @@ void	init_sprites_e(t_ftm_window *window, t_game *game)
 	el = *game->map->types->table;
 	while (el)
 	{
-		if (ft_str_endswith(el->value, ".xpm") && ft_is_file(el->value))
+		if (ft_strequal(el->value, "NULL") || (ft_str_endswith(el->value, ".xpm") && ft_is_file(el->value)))
 		{
-			image = ftm_image_from_file(window, el->value);
-			if (!image)
-				return (fte_set(ERROR_LOAD_SPRITE));
+			if (!ft_strequal(el->value, "NULL"))
+			{
+				image = ftm_image_from_file(window, el->value);
+				if (!image)
+					return (fte_set(ERROR_LOAD_SPRITE));
+			}
 			if (!ft_hashmap_get_value(game->sprites, el->key))
 			{
 				sprite = sprite_new(NULL, 0);
@@ -34,8 +37,9 @@ void	init_sprites_e(t_ftm_window *window, t_game *game)
 					return (fte_set(ERROR_LOAD_SPRITE));
 				ft_hashmap_set(game->sprites, el->key, sprite, free_sprite);
 			}
-			ft_list_add(&((t_sprite *)ft_hashmap_get_value(game->sprites,
-						el->key))->images, image, ftm_free_image);
+			if (!ft_strequal(el->value, "NULL"))
+				ft_list_add(&((t_sprite *)ft_hashmap_get_value(game->sprites,
+							el->key))->images, image, ftm_free_image);
 		}
 		el = el->next;
 	}
