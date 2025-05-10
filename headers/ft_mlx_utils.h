@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_mlx_utils.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:46:27 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/08 12:57:20 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/10 11:50:37 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ typedef struct s_ftm_window
 	void		*win;
 	void		*display;
 	t_ftm_image	*canvas;
+	void		(*loop_hook)(void);
+	bool		using_mouse;
 }	t_ftm_window;
 
 typedef struct s_ftm_pitc_config

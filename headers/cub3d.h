@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/10 11:25:36 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/10 11:52:31 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@
 # define PLAYER_FOV 75.0
 # define PLAYER_RAYS 128
 # define PLAYER_HITBOX_RADIUS 0.23
-# define PLAYER_MOUSE_LOOK_VELOCITY 0.02
+# define PLAYER_MOUSE_LOOK_VELOCITY 0.1
 # define PLAYER_KEY_LOOK_VELOCITY 3.0
 # define PLAyER_WALK_VELOCITY 0.15
 # define PLAYER_SPRINT_VELOCITY 0.3
@@ -103,7 +103,7 @@ typedef struct s_player
 	bool		looking_right;
 	bool		looking_left;
 	bool		sprinting;
-	bool		using_mouse;
+	double		mouse_moviment;
 	double		mouse_look_velocity;
 	double		key_look_velocity;
 	double		walk_velocity;
@@ -190,7 +190,7 @@ t_map		*parse_map_e(char *path);
 void		destroy_map(t_map *map);
 
 // Loop
-int			loop(void *_);
+void		loop(void);
 int			key_up_handler(int key);
 int			key_down_handler(int key);
 int			mouse_motion_handler(int x, int y);

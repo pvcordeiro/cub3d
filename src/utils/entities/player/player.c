@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/10 11:26:55 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/10 11:42:20 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,9 +106,17 @@ static void	player_rays(t_game *game, t_player *player)
 	}
 }
 
+static void	player_mouse_moviment(t_player *player)
+{
+	if (!player->mouse_moviment)
+		return ;
+	player->base.coords.yaw = ft_normalize_angle(player->base.coords.yaw + (player->mouse_moviment * player->mouse_look_velocity));
+}
+
 static void	player_frame(t_entity *entity)
 {
 	player_looks((t_player *)entity);
+	player_mouse_moviment((t_player *)entity);
 	player_walks(cub3d()->game.entities, (t_player *)entity);
 	player_rays(&cub3d()->game, (t_player *)entity);
 }
@@ -130,7 +138,6 @@ t_player	*player_new(char direction)
 	player->base.free = free_player;
 	player->key_look_velocity = PLAYER_KEY_LOOK_VELOCITY;
 	player->mouse_look_velocity = PLAYER_MOUSE_LOOK_VELOCITY;
-	player->using_mouse = true;
 	player->walk_velocity = PLAyER_WALK_VELOCITY;
 	player->sprint_velocity = PLAYER_SPRINT_VELOCITY;
 	if (direction == 'W')

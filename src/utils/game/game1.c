@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:16:16 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/08 15:39:05 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/10 11:45:17 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,12 @@ void	init_minimap(t_ftm_window *window, t_game *game)
 	minimap->wall_color = 0xFFAAAAAA;
 	minimap->player_color = 0xFFFF0000;
 	minimap->player_ray_color = 0x11FF0000;
+}
+
+void	init_window(t_ftm_window *window, t_game *game)
+{
+	char	*value;
+
+	value = ft_hashmap_get_value(game->map->types, "MOUSE");
+	window->using_mouse = ft_strequal(value, "TRUE");
 }

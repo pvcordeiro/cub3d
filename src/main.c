@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:15:19 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/10 11:07:15 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/10 11:52:06 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,11 @@ int	main(int argc, char **argv)
 	fte_assert();
 	game_load_map_e(&cub3d()->game, &cub3d()->window, cub3d()->curr_map);
 	fte_assert();
-	mlx_loop_hook(cub3d()->window.display, loop, NULL);
+	cub3d()->window.loop_hook = loop;
 	mlx_hook(cub3d()->window.win, KeyPress, KeyPressMask, key_down_handler, NULL);
 	mlx_hook(cub3d()->window.win, KeyRelease, KeyReleaseMask, key_up_handler, NULL);
 	mlx_hook(cub3d()->window.win, DestroyNotify, KeyPressMask, exit_game, NULL);
 	mlx_hook(cub3d()->window.win, MotionNotify, PointerMotionMask, mouse_motion_handler, NULL);
-	mlx_mouse_hide(cub3d()->window.display, cub3d()->window.win);
 	mlx_loop(cub3d()->window.display);
 	cub3d_exit(0);
 }
