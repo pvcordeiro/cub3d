@@ -6,17 +6,11 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:15:19 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/10 11:52:06 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/10 14:54:39 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
-
-static int	exit_game(void)
-{
-	cub3d_exit(0);
-	return (0);
-}
 
 static void	load_placeholder_sprite_e(t_ftm_window *window, t_sprite *placeholder)
 {
@@ -45,10 +39,10 @@ int	main(int argc, char **argv)
 	game_load_map_e(&cub3d()->game, &cub3d()->window, cub3d()->curr_map);
 	fte_assert();
 	cub3d()->window.loop_hook = loop;
-	mlx_hook(cub3d()->window.win, KeyPress, KeyPressMask, key_down_handler, NULL);
-	mlx_hook(cub3d()->window.win, KeyRelease, KeyReleaseMask, key_up_handler, NULL);
-	mlx_hook(cub3d()->window.win, DestroyNotify, KeyPressMask, exit_game, NULL);
-	mlx_hook(cub3d()->window.win, MotionNotify, PointerMotionMask, mouse_motion_handler, NULL);
-	mlx_loop(cub3d()->window.display);
+	cub3d()->window.key_hook = key_hook;
+	cub3d()->window.exit_hook = cub3d_exit;
+	cub3d()->window.mouse_hook = mouse_hook;
+	ftm_update_hooks(&cub3d()->window);
+	ftm_window_loop(&cub3d()->window);
 	cub3d_exit(0);
 }

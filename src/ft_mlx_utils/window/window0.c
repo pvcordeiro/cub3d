@@ -1,27 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   window.c                                           :+:      :+:    :+:   */
+/*   window0.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:58:13 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/10 11:51:38 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/10 14:53:38 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_mlx_utils.h>
-
-static int	window_hook(void *window)
-{
-	if (((t_ftm_window *)window)->using_mouse)
-		mlx_mouse_hide(((t_ftm_window *)window)->display, ((t_ftm_window *)window)->win);
-	else
-		mlx_mouse_show(((t_ftm_window *)window)->display, ((t_ftm_window *)window)->win);
-	if (((t_ftm_window *)window)->loop_hook)
-		((t_ftm_window *)window)->loop_hook();
-	return (0);
-}
+#include "window.h"
 
 void	ftm_create_window_e(t_ftm_window *window, t_size size, char *title)
 {
@@ -39,7 +28,6 @@ void	ftm_create_window_e(t_ftm_window *window, t_size size, char *title)
 		return (mlx_destroy_window(window->display, window->win),
 			mlx_destroy_display(window->display), fte_set(ERROR_INIT_CANVAS));
 	window->size = size;
-	mlx_loop_hook(window->display, window_hook, window);
 }
 
 void	ftm_clear_window(void *window)

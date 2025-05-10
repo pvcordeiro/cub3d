@@ -6,13 +6,13 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:21:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/10 11:06:23 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/10 14:50:24 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "loop.h"
 
-void    key_handler(int key, bool down)
+void    key_hook(int key, bool down)
 {
 	t_player	*player;
 
@@ -35,15 +35,5 @@ void    key_handler(int key, bool down)
 		cub3d()->game.minimap.full = down;
 	if (key == XK_Escape)
 		cub3d_exit(0);
-}
-
-int	key_up_handler(int key)
-{
-	return (key_handler(key, false), 0);
-}
-
-int	key_down_handler(int key)
-{
-	return (key_handler(key, true), 0);
 }
 

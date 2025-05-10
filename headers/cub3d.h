@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/10 11:53:50 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/10 14:50:20 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 
 // External Libs
 # include <X11/keysym.h>
-# include <X11/X.h>
 # include <stdio.h>
 # include <stdbool.h>
 # include <unistd.h>
@@ -191,9 +190,8 @@ void		destroy_map(t_map *map);
 
 // Loop
 void		loop(void);
-int			key_up_handler(int key);
-int			key_down_handler(int key);
-int			mouse_motion_handler(int x, int y);
+void	    key_hook(int key, bool down);
+void		mouse_hook(t_coords coords);
 
 // Render
 void		render_ceiling_and_floor(t_game *game, t_ftm_image *canvas);

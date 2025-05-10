@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:46:27 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/10 11:50:37 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/10 14:55:51 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 // External Libs
 # include <mlx.h>
+# include <X11/X.h>
 
 // Internal Libs
 # include <ft_utils.h>
@@ -43,8 +44,11 @@ typedef struct s_ftm_window
 	void		*win;
 	void		*display;
 	t_ftm_image	*canvas;
-	void		(*loop_hook)(void);
 	bool		using_mouse;
+	void		(*loop_hook)(void);
+	void		(*key_hook)(int key, bool down);
+	void		(*exit_hook)(int code);
+	void		(*mouse_hook)(t_coords coords);
 }	t_ftm_window;
 
 typedef struct s_ftm_pitc_config
@@ -80,6 +84,9 @@ void			ftm_free_window(void *window);
 void			ftm_create_window_e(t_ftm_window *window,
 					t_size size, char *title);
 void			ftm_update_window(t_ftm_window *window);
+void			ftm_update_hooks(t_ftm_window *window);
+void			ftm_window_loop(t_ftm_window *window);
+
 
 unsigned int	*ftm_image_pixel(t_ftm_image *image, t_coords coords);
 void			ftm_set_pixel(unsigned int *pixel, unsigned int value);
