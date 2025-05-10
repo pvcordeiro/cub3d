@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/09 22:55:29 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/10 10:59:25 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@
 
 // Window Config
 # define W_TITLE "Wolfenstein"
-# define W_WIDTH 960
-# define W_HEIGHT 720
+# define W_WIDTH 1024
+# define W_HEIGHT 768
 
 // Default minimap size multipliers
 # define MINIMAP_WIDTH_MULTIPLIER 0.25
@@ -50,8 +50,8 @@
 # define PLAYER_SPEED 0.15
 # define PLAYER_SPRINTING_SPEED 0.30
 # define PLAYER_RAYS_NO_HIT_LENGTH 50.0
-# define PLAYER_FOV 66.0
-# define PLAYER_RAYS 480
+# define PLAYER_FOV 75.0
+# define PLAYER_RAYS 128
 # define PLAYER_HITBOX_RADIUS 0.23
 
 // Map Config
