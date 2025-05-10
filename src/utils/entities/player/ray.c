@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 12:05:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/08 16:07:28 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/10 20:43:22 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,21 @@
 
 static t_wall	*hit_wall(t_game *game, t_coords coords)
 {
-	int			x;
-	int			y;
 	t_wall		*wall;
+	t_list		*curr;
 
-	x = (int)coords.x;
-	y = (int)coords.y;
-	if (x < 0 || x >= game->map->size.width || y < 0 || y >= game->map->size.height)
-		return (NULL);
-	wall = game->wall_grid[y][x];
-	return (wall);
+	curr = game->entities;
+	while (curr)
+	{
+		wall = curr->data;
+		curr = curr->next;
+		if (!wall->base.block
+			|| (int)wall->base.coords.x != (int)coords.x
+			|| (int)wall->base.coords.y != (int)coords.y)
+			continue ;
+		return (wall);
+	}
+	return (NULL);
 }
 
 static void	init_dda_ray_data(t_dda_ray *data, t_coords coords)

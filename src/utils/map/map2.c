@@ -6,11 +6,22 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 08:42:58 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/07 23:20:20 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/10 21:35:25 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map.h"
+
+static char **get_last_empty_line(char **raw)
+{
+	int	i;
+
+	i = ft_strvlen(raw);
+	while (raw[--i])
+		if (ft_str_all(raw[i], ft_isspace))
+			return (&raw[i]);
+	return (raw);
+}
 
 static void	add_variable_to_types_e(t_hashmap *types, char *line)
 {
@@ -46,20 +57,17 @@ void	process_raw_map_e(t_map *map)
 	map->types = ft_hashmap_new();
 	if (!map->types)
 		return (fte_set(ERROR_MAP_HASHMAP));
-	i = -1;
-	while (map->raw[++i])
+	map->map = get_last_empty_line(map->raw);
+	i = 0;
+	while (map->raw[i] && &map->raw[i] != map->map)
 	{
-		if (ft_str_all(map->raw[i], ft_isspace))
-			continue ;
-		if (!ft_str_all(map->raw[i], is_map_char))
+		if (!ft_str_all(map->raw[i], ft_isspace))
 		{
 			add_variable_to_types_e(map->types, map->raw[i]);
 			if (fte_flagged())
 				return ;
-			continue ;
 		}
-		map->map = &map->raw[i];
-		break ;
+		++i;
 	}
 }
 

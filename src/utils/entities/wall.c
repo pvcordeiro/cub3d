@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/07 22:58:57 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/10 21:58:08 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,22 @@ static void	free_wall(void *wall)
 	free(wall);
 }
 
-t_wall	*wall_new(t_game *game)
+static void	*hashmap_get_with_identifier(t_hashmap *hashmap, char identifier, char *rest)
+{
+	char	*key;
+	void	*data;
+
+	key = ft_strdup(rest);
+	if (identifier != '1')
+	{
+		free(key);
+		key = ft_strf("%c_%s", identifier, rest);
+	}
+	data = ft_hashmap_get_value(hashmap, key);
+	return (data);
+}
+
+t_wall	*wall_new(char identifier, t_game *game)
 {
 	t_wall	*wall;
 
@@ -33,9 +48,10 @@ t_wall	*wall_new(t_game *game)
 	wall->base.frame = wall_frame;
 	wall->base.free = free_wall;
 	wall->base.hard = true;
-	wall->north_sprite = ft_hashmap_get_value(game->sprites, "NO");
-	wall->south_sprite = ft_hashmap_get_value(game->sprites, "SO");
-	wall->west_sprite = ft_hashmap_get_value(game->sprites, "WE");
-	wall->east_sprite = ft_hashmap_get_value(game->sprites, "EA");
+	wall->base.block = true;
+	wall->north_sprite = hashmap_get_with_identifier(game->sprites, identifier, "NO");
+	wall->south_sprite = hashmap_get_with_identifier(game->sprites, identifier, "SO");
+	wall->west_sprite = hashmap_get_with_identifier(game->sprites, identifier, "WE");
+	wall->east_sprite = hashmap_get_with_identifier(game->sprites, identifier, "EA");
 	return (wall);
 }

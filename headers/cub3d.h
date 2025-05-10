@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/10 14:50:20 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/10 21:40:54 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@
 // Player Config
 # define PLAYER_RAYS_NO_HIT_LENGTH 50.0
 # define PLAYER_FOV 75.0
-# define PLAYER_RAYS 128
+# define PLAYER_RAYS 1024
 # define PLAYER_HITBOX_RADIUS 0.23
 # define PLAYER_MOUSE_LOOK_VELOCITY 0.1
 # define PLAYER_KEY_LOOK_VELOCITY 3.0
@@ -56,7 +56,9 @@
 # define PLAYER_SPRINT_VELOCITY 0.3
 
 // Map Config
-# define MAP_CHARS "10NSEW"
+# define DEFAULT_AIR_TYPES "0 \t\n\v\f\r"
+# define DEFAULT_WALL_TYPES "1"
+# define DEFAULT_PLAYER_TYPES "NSEW"
 
 typedef struct s_sprite
 {
@@ -78,6 +80,8 @@ typedef struct s_entity
 	void			(*free)(void *this);
 	bool			transparent;
 	bool			hard;
+	bool			block;
+	char			identifier;
 	t_coords		coords;
 	t_entity_type	type;
 }	t_entity;
@@ -123,13 +127,21 @@ typedef struct s_wall
 	double		east_depth;
 }	t_wall;
 
+typedef struct	s_identifiers
+{
+	t_list	*wall;
+	t_list	*player;
+	t_list	*air;
+}	t_identifiers;
+
 typedef struct s_map
 {
-	char		*path;
-	t_hashmap	*types;
-	char		**raw;
-	char		**map;
-	t_size		size;
+	char			*path;
+	t_hashmap		*types;
+	char			**raw;
+	char			**map;
+	t_size			size;
+	t_identifiers	identifiers;
 }	t_map;
 
 typedef struct s_environment
@@ -160,7 +172,6 @@ typedef struct s_game
 	t_map				*map;
 	t_player			*player;
 	t_list				*entities;
-	t_wall				***wall_grid;
 	t_hashmap			*sprites;
 }	t_game;
 
@@ -208,6 +219,6 @@ t_ftm_image	*get_sprite_image(t_sprite *sprite);
 
 // Entities
 t_player	*player_new(char direction);
-t_wall		*wall_new(t_game *game);
+t_wall		*wall_new(char identifier, t_game *game);
 
 #endif

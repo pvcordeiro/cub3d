@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 08:42:58 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/07 23:20:20 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/10 21:17:04 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,21 @@ static void	read_map_raw_lines_e(t_map *map)
 	fte_set(ERROR_NO_ERROR);
 }
 
-bool	is_map_char(char c)
+bool	is_map_char(char c, void *params)
 {
-	return (ft_isspace(c) || ft_strchr(MAP_CHARS, c));
+	char	*c_str;
+	t_map	*map;
+	bool	result;
+
+	map = params;
+	c_str = ft_strndup(&c, 1);
+	result = (ft_list_any(map->identifiers.air, (bool (*)(void *, void *))ft_strequal, c_str)
+	|| ft_list_any(map->identifiers.wall, (bool (*)(void *, void *))ft_strequal, c_str)
+	|| ft_list_any(map->identifiers.player, (bool (*)(void *, void *))ft_strequal, c_str));
+	printf("Char: %c\nChar STR: '%s'\nAir: %d\nWall: %d\nPlayer: %d\n", c, c_str, ft_list_any(map->identifiers.air, (bool (*)(void *, void *))ft_strequal, c_str),
+		ft_list_any(map->identifiers.wall, (bool (*)(void *, void *))ft_strequal, c_str),
+		ft_list_any(map->identifiers.player, (bool (*)(void *, void *))ft_strequal, c_str));
+	return (free(c_str), result);
 }
 
 t_map	*parse_map_e(char *path)
@@ -62,6 +74,7 @@ t_map	*parse_map_e(char *path)
 	process_raw_map_e(map);
 	if (fte_flagged())
 		return (ft_strvfree(map->raw), ft_hashmap_destroy(map->types), free(map), NULL);
+	parse_identifiers_e(map);
 	set_map_size(map);
 	return (map);
 }

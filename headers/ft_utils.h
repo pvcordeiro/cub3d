@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 12:15:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/08 12:39:36 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/10 21:55:42 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <sys/time.h>
 # include <math.h>
 # include <fcntl.h>
+# include <stdarg.h>
 
 # define GNL_BUFFER_SIZE 1024
 
@@ -154,5 +155,9 @@ char					*ft_strtrim(char *s);
 t_time					ft_get_time(void);
 void					ft_fprint_list(int fd, t_list *list,
 							char *(*to_str)(void *data));
+
+bool					ft_list_any(t_list *list, bool (*condition)(void *data, void *params), void *params);
+bool					ft_str_all_params(char *str, bool (*func)(char, void *), void *params);
+char					*ft_strf(char *format, ...);
 
 #endif

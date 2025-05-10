@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_error.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 22:05:32 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/08 13:23:56 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/10 20:55:09 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@ typedef enum e_error
 	ERROR_INIT_SPRITES,
 	ERROR_LOAD_PLACEHOLDER_SPRITE,
 	ERROR_MAP_ALLOC,
+	ERROR_EMPTY_TYPE_IDENTIFIER,
+	ERROR_DUPLICATE_TYPE_IDENTIFIER,
+	ERROR_INVALID_IDENTIFIER_TYPE,
 	ERROR_CEILING_OR_FLOORING_UNDEFINED,
 }	t_error;
 
@@ -67,6 +70,9 @@ typedef struct s_error_storage
 # define ERROR_LOAD_PLACEHOLDER_SPRITE_MSG "Loading placeholder sprite error"
 # define ERROR_MAP_ALLOC_MSG "Map allocation error"
 # define ERROR_CEILING_OR_FLOORING_UNDEFINED_MSG "Ceiling/Flooring undefined"
+# define ERROR_EMPTY_TYPE_IDENTIFIER_MSG "Empty type identifier"
+# define ERROR_DUPLICATE_TYPE_IDENTIFIER_MSG "Duplicate type identifier"
+# define ERROR_INVALID_IDENTIFIER_TYPE_MSG "Invalid identifier type"
 # define ERROR_INVALID_MSG "Invalid Error"
 
 // Set ft_error global error
