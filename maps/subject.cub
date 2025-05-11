@@ -3,16 +3,31 @@ SO assets/wolfenstein/blue_stone.xpm
 WE assets/wolfenstein/blue_stone.xpm
 EA assets/wolfenstein/blue_stone.xpm
 2_TYPE WALL
-2_NO assets/backrooms.xpm
 2_SO assets/backrooms.xpm
-2_WE assets/backrooms.xpm
-2_EA assets/backrooms.xpm
+2_NO NULL
+2_WE NULL
+2_EA NULL
+3_TYPE WALL
+3_SO assets/dommigueli.xpm
+3_NO NULL
+3_WE NULL
+3_EA NULL
+s_TYPE WALL
+s_SO assets/salazar.xpm
+s_NO NULL
+s_WE NULL
+s_EA NULL
+p_TYPE WALL
+p_SO assets/portugal.xpm
+p_NO NULL
+p_WE NULL
+p_EA NULL
 MOUSE TRUE
 
 F 46,39,30
 C 67,63,1
 
-        1111111111111111112111111
+        11111111111111p1s12131111
         1000000000110000000000001
         1011000001110000000000001
         1001000000000000000000001
