@@ -1,7 +1,7 @@
-NO assets/wolfenstein/blue_stone.xpm
-SO assets/wolfenstein/blue_stone.xpm
-WE assets/wolfenstein/blue_stone.xpm
-EA assets/wolfenstein/blue_stone.xpm
+NO assets/cashier.xpm
+SO assets/cashier.xpm
+WE assets/cashier.xpm
+EA assets/cashier.xpm
 2_TYPE WALL
 2_SO assets/backrooms.xpm
 2_NO NULL
@@ -15,8 +15,8 @@ EA assets/wolfenstein/blue_stone.xpm
 s_TYPE WALL
 s_SO assets/salazar.xpm
 s_NO NULL
-s_WE NULL
-s_EA NULL
+s_WE assets/wolfenstein/eagle.xpm
+s_EA assets/wolfenstein/red_brick.xpm
 p_TYPE WALL
 p_SO assets/portugal.xpm
 p_NO NULL
