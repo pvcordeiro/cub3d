@@ -6,152 +6,99 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 12:05:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/10 20:43:22 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/13 14:32:42 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "player.h"
 
-static t_wall	*hit_wall(t_game *game, t_coords coords)
+static t_entity	*get_hit_entity(t_game *game, t_coords coords)
 {
-	t_wall		*wall;
-	t_list		*curr;
+    t_list		*curr;
+    t_entity	*curr_entity;
 
 	curr = game->entities;
-	while (curr)
-	{
-		wall = curr->data;
-		curr = curr->next;
-		if (!wall->base.block
-			|| (int)wall->base.coords.x != (int)coords.x
-			|| (int)wall->base.coords.y != (int)coords.y)
-			continue ;
-		return (wall);
-	}
-	return (NULL);
+    while (curr)
+    {
+        curr_entity = curr->data;
+        curr = curr->next;
+        if (curr_entity->block
+            && coords.x >= curr_entity->coords.x
+            && coords.x <= (curr_entity->coords.x + 0.99999999)
+            && coords.y >= curr_entity->coords.y
+            && coords.y <= (curr_entity->coords.y + 0.99999999))
+            return (curr_entity);
+    }
+    return (NULL);
+}
+static int get_hit_direction(double angle, t_coords hit_pos, t_entity *entity)
+{
+    double rel_x;
+    double rel_y;
+
+	if (!entity)
+		return (0);
+	rel_x = hit_pos.x - entity->coords.x;
+	rel_y = hit_pos.y - entity->coords.y;
+    if (rel_x < 0.01)
+        return (WEST);
+    if (rel_x > 0.99)
+        return (EAST);
+    if (rel_y < 0.01)
+        return (NORTH);
+    if (rel_y > 0.99)
+        return (SOUTH);
+    angle = fmod(angle + 360.0, 360.0);
+    if (angle >= 315 || angle < 45)
+        return (EAST);
+    if (angle >= 45 && angle < 135)
+        return (SOUTH);
+    if (angle >= 135 && angle < 225)
+        return (WEST);
+    return (NORTH);
 }
 
-static void	init_dda_ray_data(t_dda_ray *data, t_coords coords)
+static double	get_x_or_y_of_hit(t_coords hit, t_entity *entity)
 {
-	double	angle_rad;
+	double	rel_x;
+	double	rel_y;
 
-	angle_rad = ft_normalize_angle(coords.yaw) * PI / 180.0;
-	data->ray_dir.x = cos(angle_rad);
-	data->ray_dir.y = sin(angle_rad);
-	data->map_pos.x = (int)coords.x;
-	data->map_pos.y = (int)coords.y;
-	if (data->ray_dir.x == 0)
-		data->delta_dist.x = 1e30;
-	else
-		data->delta_dist.x = fabs(1 / data->ray_dir.x);
-	if (data->ray_dir.y == 0)
-		data->delta_dist.y = 1e30;
-	else
-		data->delta_dist.y = fabs(1 / data->ray_dir.y);
-}
-
-static void	set_step_and_side_dist(t_dda_ray *data, t_coords coords)
-{
-	if (data->ray_dir.x < 0)
-	{
-		data->step.x = -1;
-		data->side_dist.x = (coords.x - data->map_pos.x) * data->delta_dist.x;
-	}
-	else
-	{
-		data->step.x = 1;
-		data->side_dist.x = (data->map_pos.x + 1.0 - coords.x)
-			* data->delta_dist.x;
-	}
-	if (data->ray_dir.y < 0)
-	{
-		data->step.y = -1;
-		data->side_dist.y = (coords.y - data->map_pos.y) * data->delta_dist.y;
-	}
-	else
-	{
-		data->step.y = 1;
-		data->side_dist.y = (data->map_pos.y + 1.0 - coords.y)
-			* data->delta_dist.y;
-	}
-}
-
-static double	perform_dda(t_dda_ray *data, t_game *game)
-{
-	t_coords	check_pos;
-
-	while (1)
-	{
-		if (data->side_dist.x < data->side_dist.y)
-		{
-			data->side_dist.x += data->delta_dist.x;
-			data->map_pos.x += data->step.x;
-			data->side = 0;
-		}
-		else
-		{
-			data->side_dist.y += data->delta_dist.y;
-			data->map_pos.y += data->step.y;
-			data->side = 1;
-		}
-		check_pos = (t_coords){data->map_pos.x, data->map_pos.y, 0, 0};
-		if (hit_wall(game, check_pos))
-			break ;
-		if (data->map_pos.x < 0 || data->map_pos.x >= game->map->size.width
-			|| data->map_pos.y < 0 || data->map_pos.y >= game->map->size.height)
-			return (PLAYER_RAYS_NO_HIT_LENGTH);
-	}
-	return (0);
-}
-
-static double	calculate_wall_dist(t_dda_ray *data, t_coords coords)
-{
-	double	wall_dist;
-
-	if (data->side == 0)
-	{
-		wall_dist = (data->map_pos.x - coords.x + (1 - data->step.x) / 2)
-		/ data->ray_dir.x;
-		if (data->step.x > 0)
-        	data->direction_of_hit_on_entity = WEST;
-		else
-			data->direction_of_hit_on_entity = EAST;
-	}
-	else
-	{
-		wall_dist = (data->map_pos.y - coords.y + (1 - data->step.y) / 2)
-			/ data->ray_dir.y;
-		if (data->step.y > 0)
-			data->direction_of_hit_on_entity = NORTH;
-		else
-			data->direction_of_hit_on_entity = SOUTH;
-	}
-	return (wall_dist);
-}
-
-static void	calculate_wall_hit(t_dda_ray *data, t_coords coords, t_wall *wall_hit)
-{
-	data->hit_entity = (t_entity *)wall_hit;
-	if (data->side == 0)
-		data->wall_x = coords.y + data->length * data->ray_dir.y;
-	else
-		data->wall_x = coords.x + data->length * data->ray_dir.x;
-	data->wall_x -= floor(data->wall_x);
+	if (!entity)
+		return (0);
+	rel_x = hit.x - entity->coords.x;
+	rel_y = hit.y - entity->coords.y;
+	if (rel_x < 0.01)
+		return (rel_y);
+	if (rel_x > 0.99)
+		return (rel_y);
+	if (rel_y < 0.01)
+		return (rel_x);
+	if (rel_y > 0.99)
+		return (rel_x);
+	return (-1);
 }
 
 t_raycast	send_ray(t_game *game, t_coords coords)
 {
-	t_dda_ray	data;
-	double		result;
-	t_wall	*wall_hit;
+	t_entity	*entity;
+	t_coords	ray_coords;
+	double		step_x;
+	double		step_y;
+	double		travelled;
 
-	init_dda_ray_data(&data, coords);
-	set_step_and_side_dist(&data, coords);
-	result = perform_dda(&data, game);
-	if (result > 0)
-		return ((t_raycast){result, NULL, 0, 0});
-	data.length = calculate_wall_dist(&data, coords);
-	wall_hit = hit_wall(game, (t_coords){data.map_pos.x, data.map_pos.y, 0, 0});
-	calculate_wall_hit(&data, coords, wall_hit);
-	return ((t_raycast){data.length, (t_entity *)wall_hit, data.wall_x, data.direction_of_hit_on_entity});
+	step_x = cos(coords.yaw * FT_MLX_UTILS_PI / 180.0) * 0.01;
+	step_y = sin(coords.yaw * FT_MLX_UTILS_PI / 180.0) * 0.01;
+	ray_coords = coords;
+	travelled = 0;
+	while (travelled < 200)
+	{
+		entity = get_hit_entity(game, ray_coords);
+		if (entity)
+			break;
+		ray_coords.x += step_x;
+		ray_coords.y += step_y;
+		travelled += 0.01;
+	}
+	return ((t_raycast){ft_distance(coords, ray_coords), entity,
+				get_x_or_y_of_hit(ray_coords, entity), get_hit_direction(coords.yaw, ray_coords, entity)});
 }

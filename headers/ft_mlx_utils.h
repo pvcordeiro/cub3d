@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:46:27 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/10 14:55:51 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/12 21:13:09 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 // External Libs
 # include <mlx.h>
 # include <X11/X.h>
+# include <math.h>
 
 // Internal Libs
 # include <ft_utils.h>

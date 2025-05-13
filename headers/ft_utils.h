@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 12:15:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/10 21:55:42 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/12 21:07:16 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <sys/time.h>
-# include <math.h>
 # include <fcntl.h>
 # include <stdarg.h>
 
@@ -159,5 +158,13 @@ void					ft_fprint_list(int fd, t_list *list,
 bool					ft_list_any(t_list *list, bool (*condition)(void *data, void *params), void *params);
 bool					ft_str_all_params(char *str, bool (*func)(char, void *), void *params);
 char					*ft_strf(char *format, ...);
+
+double					ft_abs(double x);
+double					ft_pow(double base, double exp);
+double					ft_sqrt(double x);
+double					ft_distance(t_coords a, t_coords b);
+
+double					ft_floor(double x);
+double					ft_fmod(double x, double y);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/10 21:40:54 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/13 14:41:31 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@
 # define PLACEHOLDER_SPRITE_UPDATE_DELAY 0
 
 // Player Config
-# define PLAYER_RAYS_NO_HIT_LENGTH 50.0
+# define PLAYER_RAYS_MOVES 2000
 # define PLAYER_FOV 75.0
-# define PLAYER_RAYS 1024
+# define PLAYER_RAYS 512
 # define PLAYER_HITBOX_RADIUS 0.23
 # define PLAYER_MOUSE_LOOK_VELOCITY 0.1
 # define PLAYER_KEY_LOOK_VELOCITY 3.0
@@ -94,6 +94,7 @@ typedef struct s_ray
 	t_direction	direction_of_hit_on_entity;
 	double		x_of_hit_in_entity;
 	int			_height;
+	t_coords	moves[PLAYER_RAYS_MOVES];
 }	t_ray;
 
 typedef struct s_player

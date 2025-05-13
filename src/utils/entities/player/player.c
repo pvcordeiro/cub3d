@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/10 11:53:55 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/12 18:52:34 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,22 @@ static void	player_looks(t_player *player)
 
 static bool	position_overlaps(t_list *entities, t_player *player, t_coords coords)
 {
-	t_list		*curr;
-	t_entity	*curr_entity;
+    t_list		*curr;
+    t_entity	*curr_entity;
 
-	curr = entities;
-	while (curr)
-	{
-		curr_entity = curr->data;
+    curr = entities;
+    while (curr)
+    {
+        curr_entity = curr->data;
         if (curr_entity != (t_entity *)player && curr_entity->hard
-            && (int)(coords.x + PLAYER_HITBOX_RADIUS) >= (int)curr_entity->coords.x
-            && (int)(coords.x - PLAYER_HITBOX_RADIUS) <= (int)(curr_entity->coords.x + 0.9)
-            && (int)(coords.y + PLAYER_HITBOX_RADIUS) >= (int)curr_entity->coords.y
-            && (int)(coords.y - PLAYER_HITBOX_RADIUS) <= (int)(curr_entity->coords.y + 0.9))
+            && (coords.x + PLAYER_HITBOX_RADIUS) >= curr_entity->coords.x
+            && (coords.x - PLAYER_HITBOX_RADIUS) <= (curr_entity->coords.x + 0.9)
+            && (coords.y + PLAYER_HITBOX_RADIUS) >= curr_entity->coords.y
+            && (coords.y - PLAYER_HITBOX_RADIUS) <= (curr_entity->coords.y + 0.9))
             return (true);
-		curr = curr->next;
-	}
-	return (false);
+        curr = curr->next;
+    }
+    return (false);
 }
 
 static void	move_player_x(t_list *entities, t_player *player, double angle_radians, double velocity)

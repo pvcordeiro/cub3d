@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 23:10:00 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/12 11:45:48 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/13 14:36:28 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ static void	create_entity_e(t_game *game, char c, int x, int y)
 	entity->identifier = c;
 	entity->coords.x = x;
 	entity->coords.y = y;
+	if (entity->identifier == 's')
+		entity->coords.y -= 0.5;
 	ft_list_add(&game->entities, entity, entity->free);
 	if (entity->type == ENTITY_PLAYER)
 		game->player = (t_player *)entity;
