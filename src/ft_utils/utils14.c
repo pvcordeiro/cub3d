@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 15:31:27 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/10 21:58:56 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/14 16:41:04 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,10 @@ char	*ft_strf(char *format, ...)
 	}
 	va_end(args);
 	return (str);
+}
+
+double	ft_atof(const char *str)
+{
+	// FAZER
+	return (atof(str));
 }

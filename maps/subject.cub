@@ -3,7 +3,8 @@ SO assets/cashier.xpm
 WE assets/cashier.xpm
 EA assets/cashier.xpm
 2_TYPE WALL
-2_SO assets/backrooms.xpm
+2_SO assets/wolfenstein/blue_stone.xpm
+2_SO_DEPTH 0.5
 2_NO NULL
 2_WE NULL
 2_EA NULL
