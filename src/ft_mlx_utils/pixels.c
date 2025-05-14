@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pixels.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:05:31 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/08 13:12:27 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/14 23:26:13 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ unsigned int	*ftm_image_pixel(t_ftm_image *image, t_coords coords)
 
 	x = coords.x;
 	y = coords.y;
-	if (x < 0 || y < 0 || x > image->size.width || y > image->size.height)
+	if (x < 0 || y < 0 || x >= image->size.width || y >= image->size.height)
 		return (NULL);
 	return (image->data + (y * image->size_line)
 		+ (x * (image->bits_per_pixel / 8)));

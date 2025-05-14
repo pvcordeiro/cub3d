@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/14 23:00:36 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/14 23:27:37 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@
 # define PLAYER_RAY_HIT_ENTITIES_NUMBER 5
 
 // Door Config
-# define DOOR_ANIMATION_FRAMES 8
-# define DOOR_ANIMATION_UPDATE_DELAY 100
+# define DOOR_ANIMATION_FRAMES 60
+# define DOOR_ANIMATION_UPDATE_DELAY 15
 
 // Map Config
 # define DEFAULT_AIR_TYPES "0 \t\n\v\f\r"

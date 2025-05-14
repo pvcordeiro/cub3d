@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/14 23:00:25 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/14 23:24:42 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,29 @@
 
 static t_sprite	*get_door_sprite(t_door *door)
 {
-	if (ft_get_time() - door->animated_at > DOOR_ANIMATION_UPDATE_DELAY * DOOR_ANIMATION_FRAMES)
+    double	current_time;
+    double	elapsed_time;
+	int		frame_index;
+
+	current_time = ft_get_time();
+	elapsed_time = current_time - door->animated_at;
+	if (elapsed_time > DOOR_ANIMATION_UPDATE_DELAY * DOOR_ANIMATION_FRAMES)
 	{
+		door->opening_sprite.index = 0;
+		door->closing_sprite.index = 0;
 		if (door->opened)
 			return (&door->door_opened_sprite);
 		return (door->door_sprite);
 	}
+	frame_index = (int)(elapsed_time / DOOR_ANIMATION_UPDATE_DELAY);
+    if (frame_index >= DOOR_ANIMATION_FRAMES)
+        frame_index = DOOR_ANIMATION_FRAMES - 1;
 	if (door->opened)
+	{
+		door->opening_sprite.index = frame_index;
 		return (&door->opening_sprite);
+	}
+	door->closing_sprite.index = frame_index;
 	return (&door->closing_sprite);
 }
 
@@ -57,6 +72,7 @@ static void	door_action(t_entity *entity, t_entity *actioner)
 {
 	(void)actioner;
 	((t_door *)entity)->opened = !((t_door *)entity)->opened;
+	((t_door *)entity)->animated_at = ft_get_time();
 }
 
 static void	*hashmap_get_with_identifier(t_hashmap *hashmap, char identifier, char *rest)
@@ -119,8 +135,8 @@ static void	init_animation_sprites(t_door *door, t_ftm_window *window)
 	int			i;
 
 	door_image = door->door_sprite->images->data;
-	init_sprite(&door->opening_sprite, NULL, DOOR_ANIMATION_UPDATE_DELAY);
-	init_sprite(&door->closing_sprite, NULL, DOOR_ANIMATION_UPDATE_DELAY);
+	init_sprite(&door->opening_sprite, NULL, 0);
+	init_sprite(&door->closing_sprite, NULL, 0);
 	i = -1;
 	while (++i < DOOR_ANIMATION_FRAMES)
 	{
