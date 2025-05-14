@@ -3,21 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/10 11:53:55 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/14 16:56:10 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "player.h"
 
-static void	player_looks(t_player *player)
+static void	player_looks(t_player *player, double delta_time)
 {
+	double	look_velocity;
+
+	look_velocity = player->key_look_velocity * delta_time;
 	if (player->looking_left)
-		player->base.coords.yaw = ft_normalize_angle(player->base.coords.yaw - player->key_look_velocity);
+		player->base.coords.yaw = ft_normalize_angle(player->base.coords.yaw - player->key_look_velocity - look_velocity);
 	else if (player->looking_right)
-		player->base.coords.yaw = ft_normalize_angle(player->base.coords.yaw + player->key_look_velocity);
+		player->base.coords.yaw = ft_normalize_angle(player->base.coords.yaw + player->key_look_velocity + look_velocity);
 }
 
 static bool	position_overlaps(t_list *entities, t_player *player, t_coords coords)
@@ -58,7 +61,7 @@ static void	move_player_y(t_list *entities, t_player *player, double angle_radia
 		player->base.coords.y = new_y;
 }
 
-static void	player_walk(t_list *entities, t_player *player, double angle)
+static void	player_walk(t_list *entities, t_player *player, double angle, double delta_time)
 {
 	double	angle_radians;
 	double	velocity;
@@ -66,21 +69,22 @@ static void	player_walk(t_list *entities, t_player *player, double angle)
 	velocity = player->walk_velocity;
 	if (player->sprinting)
 		velocity = player->sprint_velocity;
+	velocity *= delta_time;
 	angle_radians = ft_normalize_angle(angle) * (PI / 180.0);
 	move_player_x(entities, player, angle_radians, velocity);
 	move_player_y(entities, player, angle_radians, velocity);
 }
 
-static void	player_walks(t_list *entities, t_player *player)
+static void	player_walks(t_list *entities, t_player *player, double delta_time)
 {
 	if (player->walking_backward)
-		player_walk(entities, player, player->base.coords.yaw - 180.0);
+		player_walk(entities, player, player->base.coords.yaw - 180.0, delta_time);
 	if (player->walking_right)
-		player_walk(entities, player, player->base.coords.yaw + 90.0);
+		player_walk(entities, player, player->base.coords.yaw + 90.0, delta_time);
 	if (player->walking_left)
-		player_walk(entities, player, player->base.coords.yaw - 90.0);
+		player_walk(entities, player, player->base.coords.yaw - 90.0, delta_time);
 	if (player->walking_forward)
-		player_walk(entities, player, player->base.coords.yaw);
+		player_walk(entities, player, player->base.coords.yaw, delta_time);
 }
 
 static void	player_rays(t_game *game, t_player *player)
@@ -106,18 +110,18 @@ static void	player_rays(t_game *game, t_player *player)
 	}
 }
 
-static void	player_mouse_moviment(t_player *player)
+static void	player_mouse_moviment(t_player *player, double delta_time)
 {
 	if (!player->mouse_moviment)
 		return ;
-	player->base.coords.yaw = ft_normalize_angle(player->base.coords.yaw + (player->mouse_moviment * player->mouse_look_velocity));
+	player->base.coords.yaw = ft_normalize_angle(player->base.coords.yaw + (player->mouse_moviment * player->mouse_look_velocity * delta_time));
 }
 
-static void	player_frame(t_entity *entity)
+static void	player_frame(t_entity *entity, double delta_time)
 {
-	player_looks((t_player *)entity);
-	player_mouse_moviment((t_player *)entity);
-	player_walks(cub3d()->game.entities, (t_player *)entity);
+	player_looks((t_player *)entity, delta_time);
+	player_mouse_moviment((t_player *)entity, delta_time);
+	player_walks(cub3d()->game.entities, (t_player *)entity, delta_time);
 	player_rays(&cub3d()->game, (t_player *)entity);
 }
 

@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   wall.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/10 21:58:08 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/14 16:59:11 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "entities.h"
 
-static void	wall_frame(t_entity *entity)
+static void	wall_frame(t_entity *entity, double delta_time)
 {
 	(void)entity;
+	(void)delta_time;
 }
 
 static void	free_wall(void *wall)

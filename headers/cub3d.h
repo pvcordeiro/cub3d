@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/10 21:40:54 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/14 17:09:33 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 # define W_TITLE "Wolfenstein"
 # define W_WIDTH 1024
 # define W_HEIGHT 768
+# define FPS60 0.016
 
 // Default minimap size multipliers
 # define MINIMAP_WIDTH_MULTIPLIER 0.25
@@ -48,12 +49,12 @@
 // Player Config
 # define PLAYER_RAYS_NO_HIT_LENGTH 50.0
 # define PLAYER_FOV 75.0
-# define PLAYER_RAYS 1024
+# define PLAYER_RAYS 512
 # define PLAYER_HITBOX_RADIUS 0.23
-# define PLAYER_MOUSE_LOOK_VELOCITY 0.1
-# define PLAYER_KEY_LOOK_VELOCITY 3.0
-# define PLAYER_WALK_VELOCITY 0.15
-# define PLAYER_SPRINT_VELOCITY 0.3
+# define PLAYER_MOUSE_LOOK_VELOCITY 3.5
+# define PLAYER_KEY_LOOK_VELOCITY 7.0
+# define PLAYER_WALK_VELOCITY 3.0
+# define PLAYER_SPRINT_VELOCITY 6.0
 
 // Map Config
 # define DEFAULT_AIR_TYPES "0 \t\n\v\f\r"
@@ -76,7 +77,7 @@ typedef enum e_entity_type
 
 typedef struct s_entity
 {
-	void			(*frame)(struct s_entity *this);
+	void			(*frame)(struct s_entity *this, double delta_time);
 	void			(*free)(void *this);
 	bool			transparent;
 	bool			hard;
@@ -208,7 +209,7 @@ void		mouse_hook(t_coords coords);
 void		render_ceiling_and_floor(t_game *game, t_ftm_image *canvas);
 
 // Entities
-void		call_entity_frames(t_list *entities);
+void	call_entity_frames(t_list *entities, double delta_time);
 t_sprite	*get_entity_sprite(t_entity *entity, t_direction direction);
 
 // Raycasting

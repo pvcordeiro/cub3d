@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:20:56 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/06 14:21:13 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/14 16:44:38 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 # define LOOP_H
 
 # include <cub3d.h>
+# include <sys/time.h>
 
 #endif
