@@ -6,67 +6,107 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 19:05:41 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/08 19:20:28 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/14 18:57:38 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render.h"
 
-static unsigned	pixel_modifier(void *data, unsigned pixel)
+static void	setup_wall_dimensions(t_render_data *data)
 {
-	t_ray			*ray;
-	double			gradient;
-	int				r;
-	int				g;
-	int				b;
+	double	angle_diff;
 
-	ray = data;
-	gradient = fmin(ray->_height / (W_HEIGHT / 1.5), 1.0);
-	r = ((pixel >> 16) & 0xEE) * gradient;
-	g = ((pixel >> 8) & 0xEE) * gradient;
-	b = (pixel & 0xEE) * gradient;
-	if (!ray->hit_entity->transparent)
-		return ((0xFF << 24) | (r << 16) | (g << 8) | b);
-	return ((r << 16) | (g << 8) | b);
+	angle_diff = data->player->rays[data->ray_idx].angle;
+	angle_diff -= data->player->base.coords.yaw;
+	angle_diff = ft_normalize_angle(angle_diff) * (PI / 180.0);
+	data->wall_height = W_HEIGHT
+		/ (fmax(data->player->rays[data->ray_idx].length, 0.1)
+			* cos(angle_diff));
+	data->draw_start = (W_HEIGHT - data->wall_height) / 2;
+	if (data->draw_start < 0)
+		data->draw_start = 0;
+	data->draw_end = (W_HEIGHT + data->wall_height) / 2;
+	if (data->draw_end >= W_HEIGHT)
+		data->draw_end = W_HEIGHT - 1;
 }
 
-static t_ftm_pitc_config	get_pitc_config(int i, t_size *ray_size, t_ftm_image *image, t_ray *ray)
+static t_ftm_image	*get_wall_texture(t_render_data *data)
 {
-	ray->_height = ray_size->height;
-	return ((t_ftm_pitc_config){
-			(t_coords){i * ray_size->width, (W_HEIGHT - ray_size->height) / 2, 0, 0},
-			true,
-			(t_coords){(int)(ray->x_of_hit_in_entity * image->size.width), 0, 0, 0}, 
-			(t_coords){(int)(ray->x_of_hit_in_entity * image->size.width) + 1, image->size.height, 0, 0},
-			true,
-			*ray_size,
-			ray,
-			pixel_modifier
-		});
+	t_ftm_image	*texture;
+
+	texture = get_sprite_image(get_entity_sprite(data->player->rays[data->ray_idx].hit_entity,
+				data->player->rays[data->ray_idx].direction_of_hit_on_entity));
+	if (!texture)
+		return (NULL);
+	data->tex_x = data->player->rays[data->ray_idx].x_of_hit_in_entity
+		* texture->size.width;
+	if (data->tex_x < 0)
+		data->tex_x = 0;
+	if (data->tex_x >= texture->size.width)
+		data->tex_x = texture->size.width - 1;
+	data->tex_y_step = texture->size.height / (double)data->wall_height;
+	return (texture);
+}
+
+static void	draw_vertical_line(t_render_data *data, int x_offset)
+{
+	int				y;
+	double			tex_pos;
+	int				tex_y;
+	unsigned int	*texture_data;
+	unsigned int	*canvas_data;
+
+	texture_data = (unsigned int *)data->texture->data;
+	canvas_data = (unsigned int *)data->canvas->data;
+	tex_pos = (data->draw_start - (W_HEIGHT - data->wall_height) / 2)
+		* data->tex_y_step;
+	y = data->draw_start;
+	while (y < data->draw_end)
+	{
+		tex_y = (int)tex_pos % data->texture->size.height;
+		if (tex_y < 0)
+			tex_y += data->texture->size.height;
+		tex_pos += data->tex_y_step;
+		canvas_data[y * W_WIDTH + (data->screen_x
+				+ x_offset)] = texture_data[tex_y * data->texture->size.width
+			+ (int)data->tex_x];
+		y++;
+	}
+}
+
+static void	draw_vertical_strip(t_render_data *data)
+{
+	int	x;
+
+	x = 0;
+	while (x < data->strip_width)
+	{
+		draw_vertical_line(data, x);
+		x++;
+	}
 }
 
 void	render_raycasting_mega(t_game *game, t_ftm_image *canvas)
 {
-	t_player		*player;
-	t_size			ray_size;
-	t_ftm_image			*hit_entity_image;
+	t_render_data	data;
 	int				i;
-	double			angle_diff;
 
-	i = -1;
-	player = game->player;
-	ray_size.width = W_WIDTH / PLAYER_RAYS;
-	while (++i < PLAYER_RAYS)
+	data.player = game->player;
+	data.canvas = canvas;
+	data.width_scale = (double)W_WIDTH / PLAYER_RAYS;
+	i = 0;
+	while (i < PLAYER_RAYS)
 	{
-		if (!player->rays[i].hit_entity)
-			continue ;
-		hit_entity_image = get_sprite_image(get_entity_sprite(player->rays[i].hit_entity, player->rays[i].direction_of_hit_on_entity));
-		if (!hit_entity_image)
-			continue ;
-		angle_diff = player->rays[i].angle - player->base.coords.yaw;
-		angle_diff = ft_normalize_angle(angle_diff) * (PI / 180.0);
-		ray_size.height = W_HEIGHT / (fmax(player->rays[i].length, 0.1) * cos(angle_diff));
-		ray_size.height = fmin(ray_size.height, W_HEIGHT * 3);
-		ftm_put_image_to_canvas(canvas, hit_entity_image, get_pitc_config(i, &ray_size, hit_entity_image, &player->rays[i]));
+		if (data.player->rays[i].hit_entity)
+		{
+			data.ray_idx = i;
+			data.screen_x = i * data.width_scale;
+			data.strip_width = ceil((i + 1) * data.width_scale) - data.screen_x;
+			setup_wall_dimensions(&data);
+			data.texture = get_wall_texture(&data);
+			if (data.texture)
+				draw_vertical_strip(&data);
+		}
+		i++;
 	}
 }

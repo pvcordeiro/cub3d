@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/14 17:57:24 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/14 19:02:01 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,6 +175,23 @@ typedef struct	s_fps_data
 	int				frame_count;
 	time_t			last_update_time;
 }	t_fps_data;
+
+
+typedef struct s_render_data
+{
+    t_player	*player;
+    t_ftm_image	*canvas;
+    int			ray_idx;
+    double		width_scale;
+    int			screen_x;
+    int			strip_width;
+    t_ftm_image	*texture;
+    double		wall_height;
+    int			draw_start;
+    int			draw_end;
+    double		tex_x;
+    double		tex_y_step;
+}	t_render_data;
 
 typedef struct s_game
 {
