@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:21:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/10 14:50:24 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/14 23:01:50 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void    key_hook(int key, bool down)
 		player->looking_right = down;
 	if (key == XK_Left)
 		player->looking_left = down;
+	if (key == XK_space)
+		player->action = down;
 	if (key == XK_Shift_L || key == XK_Shift_R)
 		player->sprinting = down;
 	if (key == XK_Tab)

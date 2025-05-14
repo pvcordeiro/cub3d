@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 22:05:32 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/10 20:55:09 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/14 20:43:18 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,10 @@ typedef enum e_error
 	ERROR_EMPTY_TYPE_IDENTIFIER,
 	ERROR_DUPLICATE_TYPE_IDENTIFIER,
 	ERROR_INVALID_IDENTIFIER_TYPE,
+	ERROR_DOOR_DIRECTION_MISSING,
+	ERROR_INIT_DOOR_FRAME,
 	ERROR_CEILING_OR_FLOORING_UNDEFINED,
+	ERROR_DOOR_SPRITE_MISSING,
 }	t_error;
 
 typedef struct s_error_storage
@@ -73,6 +76,9 @@ typedef struct s_error_storage
 # define ERROR_EMPTY_TYPE_IDENTIFIER_MSG "Empty type identifier"
 # define ERROR_DUPLICATE_TYPE_IDENTIFIER_MSG "Duplicate type identifier"
 # define ERROR_INVALID_IDENTIFIER_TYPE_MSG "Invalid identifier type"
+# define ERROR_DOOR_DIRECTION_MISSING_MSG "Door direction missing"
+# define ERROR_INIT_DOOR_FRAME_MSG "Initializing door frame error"
+# define ERROR_DOOR_SPRITE_MISSING_MSG "Door sprite missing"
 # define ERROR_INVALID_MSG "Invalid Error"
 
 // Set ft_error global error

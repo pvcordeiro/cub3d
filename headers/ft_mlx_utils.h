@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:46:27 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/10 14:55:51 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/14 21:26:00 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ t_list			*ftm_images_from_files(t_ftm_window *window, char **file_paths);
 void			ftm_image_clear(t_ftm_image *image);
 void			ftm_put_image_to_canvas(t_ftm_image *canvas,
 					t_ftm_image *image, t_ftm_pitc_config pitc);
+
+char			*ftm_image_to_str(t_ftm_image *image);
 
 void			ftm_clear_window(void *window);
 void			ftm_free_window(void *window);

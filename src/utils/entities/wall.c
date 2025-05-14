@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/14 16:46:16 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/14 17:33:03 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,6 @@ static void	*hashmap_get_with_identifier(t_hashmap *hashmap, char identifier, ch
 	return (free(key), data);
 }
 
-static double	hashmap_get_with_identifier_double(t_hashmap *hashmap, char identifier, char *rest)
-{
-	char	*data;
-
-	data = hashmap_get_with_identifier(hashmap, identifier, rest);
-	if (!data)
-		return (0);
-	return (ft_atof(data));
-}
-
 t_wall	*wall_new(char identifier, t_game *game)
 {
 	t_wall	*wall;
@@ -60,9 +50,5 @@ t_wall	*wall_new(char identifier, t_game *game)
 	wall->south_sprite = hashmap_get_with_identifier(game->sprites, identifier, "SO");
 	wall->west_sprite = hashmap_get_with_identifier(game->sprites, identifier, "WE");
 	wall->east_sprite = hashmap_get_with_identifier(game->sprites, identifier, "EA");
-	wall->north_depth = hashmap_get_with_identifier_double(game->sprites, identifier, "NO_DEPTH");
-	wall->south_depth = hashmap_get_with_identifier_double(game->sprites, identifier, "SO_DEPTH");
-	wall->west_depth = hashmap_get_with_identifier_double(game->sprites, identifier, "WE_DEPTH");
-	wall->east_depth = hashmap_get_with_identifier_double(game->sprites, identifier, "EA_DEPTH");
 	return (wall);
 }

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 20:52:20 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/10 21:16:55 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/14 20:33:57 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 static bool	identifier_already_defined(t_identifiers *identifiers, char *identifier)
 {
 	return (ft_list_any(identifiers->wall, (bool (*)(void *, void *))ft_strequal, identifier)
-		|| ft_list_any(identifiers->player, (bool (*)(void *, void *))ft_strequal, identifier));
+		|| ft_list_any(identifiers->player, (bool (*)(void *, void *))ft_strequal, identifier)
+		|| ft_list_any(identifiers->door, (bool (*)(void *, void *))ft_strequal, identifier)
+		|| ft_list_any(identifiers->air, (bool (*)(void *, void *))ft_strequal, identifier));
 }
 
 static void	add_identifier_e(t_identifiers *identifiers, char *identifier, char *type)
@@ -25,6 +27,8 @@ static void	add_identifier_e(t_identifiers *identifiers, char *identifier, char 
 		ft_list_add(&identifiers->wall, ft_strdup(identifier), free);
 	else if (ft_strequal(type, "PLAYER"))
 		ft_list_add(&identifiers->player, ft_strdup(identifier), free);
+	else if (ft_strequal(type, "DOOR"))
+		ft_list_add(&identifiers->door, ft_strdup(identifier), free);
 	else
 		fte_set(ERROR_INVALID_IDENTIFIER_TYPE);
 }

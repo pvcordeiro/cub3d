@@ -1,0 +1,35 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   image3.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/08 14:51:11 by afpachec          #+#    #+#             */
+/*   Updated: 2025/05/14 21:37:48 by afpachec         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "image.h"
+
+void	ftm_image_clear(t_ftm_image *image)
+{
+	ftm_draw_rectangle(image, (t_coords){0, 0, 0, 0},
+		image->size, (t_ftm_rectangle){0, 0, (t_size){0, 0}});
+}
+
+unsigned int get_modified_pixel(unsigned int (*pm)(void *, unsigned int),
+	void *data, unsigned int pixel)
+{
+	if (!pm)
+		return (pixel);
+	return (pm(data, pixel));
+}
+
+char	*ftm_image_to_str(t_ftm_image *image)
+{
+	if (!image)
+		return (NULL);
+	return (ft_strf("Image<path: \"%s\", size: {width: %d, height: %d}>", 
+		image->path, image->size.width, image->size.height));
+}

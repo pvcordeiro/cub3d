@@ -12,8 +12,11 @@
 
 #include <ft_error.h>
 
+char	*get_error_message22(t_error _error);
+
 char	*get_error_message21(t_error _error)
 {
-	(void)_error;
-	return (ERROR_INVALID_MSG);
+	if (_error == ERROR_EMPTY_TYPE_IDENTIFIER)
+		return (ERROR_EMPTY_TYPE_IDENTIFIER_MSG);
+	return (get_error_message22(_error));
 }

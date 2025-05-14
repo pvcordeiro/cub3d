@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/10 11:53:55 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/14 23:01:23 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ static void	player_rays(t_game *game, t_player *player)
 		player->rays[i].x_of_hit_in_entity = raycast.x_of_hit_in_entity;
 		player->rays[i].angle = ray_coords.yaw;
 	}
+	player->looking_at_entity = player->rays[PLAYER_RAYS / 2].hit_entity;
 }
 
 static void	player_mouse_moviment(t_player *player)
@@ -113,12 +114,23 @@ static void	player_mouse_moviment(t_player *player)
 	player->base.coords.yaw = ft_normalize_angle(player->base.coords.yaw + (player->mouse_moviment * player->mouse_look_velocity));
 }
 
+static void	player_actions(t_player *player)
+{
+	if (player->action && player->already_actioned)
+		return ;
+	player->already_actioned = player->action;
+	if (player->action && player->looking_at_entity
+		&& player->looking_at_entity->action)
+		player->looking_at_entity->action(player->looking_at_entity, (t_entity *)player);
+}
+
 static void	player_frame(t_entity *entity)
 {
 	player_looks((t_player *)entity);
 	player_mouse_moviment((t_player *)entity);
 	player_walks(cub3d()->game.entities, (t_player *)entity);
 	player_rays(&cub3d()->game, (t_player *)entity);
+	player_actions((t_player *)entity);
 }
 
 static void	free_player(void *entity)

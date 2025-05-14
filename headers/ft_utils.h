@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 12:15:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/13 21:25:30 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/14 20:30:46 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,5 +160,8 @@ bool					ft_list_any(t_list *list, bool (*condition)(void *data, void *params), 
 bool					ft_str_all_params(char *str, bool (*func)(char, void *), void *params);
 char					*ft_strf(char *format, ...);
 double					ft_atof(const char *str);
+
+t_list					*ft_list_clone(t_list *list);
+void					ft_list_reverse(t_list **list);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 15:31:27 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/14 16:41:04 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/14 21:35:42 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,23 @@ bool	ft_str_all_params(char *str, bool (*func)(char, void *), void *params)
 static char	*parse_thing(char c, va_list *args)
 {
 	char	c2;
+	char	*result;
 
+	result = NULL;
 	if (c == 's')
-		return (ft_strdup(va_arg(*args, char *)));
+	{
+		result = ft_strdup(va_arg(*args, char *));
+		if (!result)
+			result = ft_strdup("(null)");
+	}
 	else if (c == 'd')
-		return (ft_itoa(va_arg(*args, int)));
+		result = ft_itoa(va_arg(*args, int));
 	else if (c == 'c')
 	{
 		c2 = va_arg(*args, int);
-		return (ft_strndup(&c2, 1));
+		result = ft_strndup(&c2, 1);
 	}
-	return (NULL);
+	return (result);
 }
 
 char	*ft_strf(char *format, ...)

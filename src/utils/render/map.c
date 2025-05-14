@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 22:33:42 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/08 12:59:03 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/14 22:53:18 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,19 @@
 
 static void render_rays(t_ftm_image *canvas, t_game *game, t_player *player, t_coords coords, t_size entity_size)
 {
-    size_t i;
-    double scale;
+    size_t 			i;
+    double 			scale;
+	unsigned int	color;
 
     scale = fmin(entity_size.width, entity_size.height);
     i = -1;
     while (++i < PLAYER_RAYS)
 	{
+		color = game->minimap.player_ray_color;
+		if (i == PLAYER_RAYS / 2)
+			color = game->minimap.player_middle_ray_color;
 		coords.yaw = player->rays[i].angle;
-		ftm_draw_line_angle(canvas, coords, player->rays[i].length * scale, game->minimap.player_ray_color);
+		ftm_draw_line_angle(canvas, coords, player->rays[i].length * scale, color);
 	}
 }
 
@@ -32,6 +36,8 @@ static void	set_entity_color(t_game *game, t_entity *entity, unsigned *color)
 		*color = game->minimap.wall_color;
 	else if (entity->type == ENTITY_PLAYER)
 		*color = game->minimap.player_color;
+	else if (entity->type == ENTITY_DOOR)
+		*color = game->minimap.door_color;
 	else
 		*color = game->minimap.entity_color;
 }

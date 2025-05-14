@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/10 21:40:54 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/14 23:00:36 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,11 @@
 # define PLAYER_KEY_LOOK_VELOCITY 3.0
 # define PLAYER_WALK_VELOCITY 0.15
 # define PLAYER_SPRINT_VELOCITY 0.3
+# define PLAYER_RAY_HIT_ENTITIES_NUMBER 5
+
+// Door Config
+# define DOOR_ANIMATION_FRAMES 8
+# define DOOR_ANIMATION_UPDATE_DELAY 100
 
 // Map Config
 # define DEFAULT_AIR_TYPES "0 \t\n\v\f\r"
@@ -72,17 +77,20 @@ typedef enum e_entity_type
 {
 	ENTITY_PLAYER,
 	ENTITY_WALL,
+	ENTITY_DOOR,
 }	t_entity_type;
 
 typedef struct s_entity
 {
 	void			(*frame)(struct s_entity *this);
 	void			(*free)(void *this);
+	void			(*action)(struct s_entity *entity, struct s_entity *actioner);
 	bool			transparent;
 	bool			hard;
 	bool			block;
 	char			identifier;
 	t_coords		coords;
+	t_size			size;
 	t_entity_type	type;
 }	t_entity;
 
@@ -99,6 +107,7 @@ typedef struct s_ray
 typedef struct s_player
 {
 	t_entity	base;
+	t_entity	*looking_at_entity;
 	bool		walking_forward;
 	bool		walking_left;
 	bool		walking_backward;
@@ -106,6 +115,8 @@ typedef struct s_player
 	bool		looking_right;
 	bool		looking_left;
 	bool		sprinting;
+	bool		action;
+	bool		already_actioned;
 	double		mouse_moviment;
 	double		mouse_look_velocity;
 	double		key_look_velocity;
@@ -121,16 +132,25 @@ typedef struct s_wall
 	t_sprite	*south_sprite;
 	t_sprite	*west_sprite;
 	t_sprite	*east_sprite;
-	double		north_depth;
-	double		south_depth;
-	double		west_depth;
-	double		east_depth;
 }	t_wall;
+
+typedef struct s_door
+{
+	t_wall		base;
+	t_direction	direction;
+	t_sprite	opening_sprite;
+	t_sprite	closing_sprite;
+	t_sprite	door_opened_sprite;
+	t_sprite	*door_sprite;
+	bool		opened;
+	t_time		animated_at;
+}	t_door;
 
 typedef struct	s_identifiers
 {
 	t_list	*wall;
 	t_list	*player;
+	t_list	*door;
 	t_list	*air;
 }	t_identifiers;
 
@@ -160,9 +180,11 @@ typedef struct s_minimap
 	unsigned int	background_color;
 	unsigned int	border_color;
 	unsigned int	entity_color;
+	unsigned int	door_color;
 	unsigned int	wall_color;
 	unsigned int	player_color;
 	unsigned int	player_ray_color;
+	unsigned int	player_middle_ray_color;
 }	t_minimap;
 
 typedef struct s_game
@@ -220,5 +242,6 @@ t_ftm_image	*get_sprite_image(t_sprite *sprite);
 // Entities
 t_player	*player_new(char direction);
 t_wall		*wall_new(char identifier, t_game *game);
+t_door		*door_new_e(char identifier, t_ftm_window *window, t_game *game);
 
 #endif

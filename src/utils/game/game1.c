@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:16:16 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/10 11:45:17 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/14 22:55:03 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,10 @@ void	init_minimap(t_ftm_window *window, t_game *game)
 	minimap->border_color = 0xFFAAAAAA;
 	minimap->wall_color = 0xFFAAAAAA;
 	minimap->player_color = 0xFFFF0000;
-	minimap->player_ray_color = 0x11FF0000;
+	minimap->player_ray_color = 0x11880088;
+	minimap->player_middle_ray_color = 0xFFFF0000;
+	minimap->entity_color = 0xFF888888;
+	minimap->door_color = 0xFF8888DD;
 }
 
 void	init_window(t_ftm_window *window, t_game *game)

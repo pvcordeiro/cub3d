@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 20:49:46 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/07 23:11:51 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/14 21:03:51 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static t_sprite	*get_wall_sprite(t_wall *wall, t_direction direction)
 
 t_sprite	*get_entity_sprite(t_entity *entity, t_direction direction)
 {
-	if (entity->type == ENTITY_WALL)
+	if (entity->type == ENTITY_WALL || entity->type == ENTITY_DOOR)
 		return (get_wall_sprite((t_wall *)entity, direction));
 	return (NULL);
 }

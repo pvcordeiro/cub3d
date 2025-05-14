@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 19:05:41 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/08 19:20:28 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/14 22:12:07 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,16 @@
 static unsigned	pixel_modifier(void *data, unsigned pixel)
 {
 	t_ray			*ray;
+	t_rgba			rgba;
 	double			gradient;
-	int				r;
-	int				g;
-	int				b;
 
 	ray = data;
 	gradient = fmin(ray->_height / (W_HEIGHT / 1.5), 1.0);
-	r = ((pixel >> 16) & 0xEE) * gradient;
-	g = ((pixel >> 8) & 0xEE) * gradient;
-	b = (pixel & 0xEE) * gradient;
-	if (!ray->hit_entity->transparent)
-		return ((0xFF << 24) | (r << 16) | (g << 8) | b);
-	return ((r << 16) | (g << 8) | b);
+	rgba.r = ((pixel >> 16) & 0xEE) * gradient;
+	rgba.g = ((pixel >> 8) & 0xEE) * gradient;
+	rgba.b = (pixel & 0xEE) * gradient;
+	rgba.a = (pixel >> 24);
+	return ((rgba.a << 24) | (rgba.r << 16) | (rgba.g << 8) | rgba.b);
 }
 
 static t_ftm_pitc_config	get_pitc_config(int i, t_size *ray_size, t_ftm_image *image, t_ray *ray)
