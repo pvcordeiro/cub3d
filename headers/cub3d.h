@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/14 17:09:33 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/14 17:57:24 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # define W_TITLE "Wolfenstein"
 # define W_WIDTH 1024
 # define W_HEIGHT 768
-# define FPS60 0.016
+# define FPS60 0.01666666667
 
 // Default minimap size multipliers
 # define MINIMAP_WIDTH_MULTIPLIER 0.25
@@ -166,6 +166,16 @@ typedef struct s_minimap
 	unsigned int	player_ray_color;
 }	t_minimap;
 
+
+typedef struct	s_fps_data
+{
+	double			frametime;
+	double			fps;
+	char			fps_string[50];
+	int				frame_count;
+	time_t			last_update_time;
+}	t_fps_data;
+
 typedef struct s_game
 {
 	t_environment		environment;
@@ -174,6 +184,7 @@ typedef struct s_game
 	t_player			*player;
 	t_list				*entities;
 	t_hashmap			*sprites;
+	t_fps_data			fps;
 }	t_game;
 
 typedef struct s_cub3d
@@ -207,6 +218,8 @@ void		mouse_hook(t_coords coords);
 
 // Render
 void		render_ceiling_and_floor(t_game *game, t_ftm_image *canvas);
+void	update_fps_data(t_fps_data *fps_data, double delta_time);
+void	render_fps_counter(t_fps_data *fps_data, t_ftm_window *window);
 
 // Entities
 void	call_entity_frames(t_list *entities, double delta_time);
