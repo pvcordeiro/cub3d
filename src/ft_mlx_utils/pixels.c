@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pixels.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:05:31 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/14 23:26:13 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/15 17:12:54 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,8 @@ void	ftm_set_pixel(unsigned int *pixel, unsigned int value)
 {
 	if (!pixel)
 		return ;
-	*pixel = blend_pixel(*pixel, value);
+	if (value / 0x01000000 == 0xFF)
+		*pixel = value;
+	else
+		*pixel = blend_pixel(*pixel, value);
 }
