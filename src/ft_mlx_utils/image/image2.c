@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:48:02 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/15 19:12:34 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/15 19:16:53 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,16 +57,14 @@ void	ftm_put_image_to_canvas(t_ftm_image *canvas, t_ftm_image *image,
 		index.height = -1;
 		while (++index.height < pitc.size.height)
 		{
-			if (index.width + pitc.coords.x > canvas->size.width || index.height + pitc.coords.y > canvas->size.height)
-				break ;
 			src_coords = (t_coords){pitc.crop_start.x
 				+ (int)(index.width * scale.x), pitc.crop_start.y
 				+ (int)(index.height * scale.y), 0, 0};
 			if (ftm_image_pixel(image, src_coords))
 				ftm_set_pixel(ftm_image_pixel(canvas, (t_coords){pitc.coords.x
 						+ index.width, pitc.coords.y + index.height, 0, 0}),
-						get_modified_pixel(pitc.pixel_modifier, pitc.pixel_modifier_data,
-							*ftm_image_pixel(image, src_coords)));
+					get_modified_pixel(pitc.pixel_modifier, pitc.pixel_modifier_data,
+						*ftm_image_pixel(image, src_coords)));
 		}
 	}
 }
