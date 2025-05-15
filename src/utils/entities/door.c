@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   door.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/14 23:24:42 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/15 15:05:19 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static t_sprite	*get_door_sprite(t_door *door)
 	}
 	frame_index = (int)(elapsed_time / DOOR_ANIMATION_UPDATE_DELAY);
     if (frame_index >= DOOR_ANIMATION_FRAMES)
-        frame_index = DOOR_ANIMATION_FRAMES - 1;
+		frame_index = DOOR_ANIMATION_FRAMES - 1;
 	if (door->opened)
 	{
 		door->opening_sprite.index = frame_index;
