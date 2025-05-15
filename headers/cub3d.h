@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/14 23:27:37 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/15 19:48:24 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <ft_error.h>
 # include <ft_utils.h>
 # include <ft_mlx_utils.h>
+# include <ft_threads.h>
 
 // External Libs
 # include <X11/keysym.h>
@@ -64,6 +65,9 @@
 # define DEFAULT_AIR_TYPES "0 \t\n\v\f\r"
 # define DEFAULT_WALL_TYPES "1"
 # define DEFAULT_PLAYER_TYPES "NSEW"
+
+// Raytracing Threads
+# define RENDERING_THREADS 4
 
 typedef struct s_sprite
 {
@@ -195,6 +199,7 @@ typedef struct s_game
 	t_player			*player;
 	t_list				*entities;
 	t_hashmap			*sprites;
+	pthread_t			rendering_threads[RENDERING_THREADS]
 }	t_game;
 
 typedef struct s_cub3d
