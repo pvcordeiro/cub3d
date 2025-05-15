@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 19:48:43 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/15 22:30:15 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/15 23:12:23 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static void	*thread_routine(void *data)
 	{
 		if (thread->running)
 		{
-			thread->routine(thread->data);
+			if (thread->routine)
+				thread->routine(thread->data);
 			thread->running = false;
 		}
 		ft_sleep(1);
@@ -35,15 +36,13 @@ void	ftt_thread_init(t_ftt_thread *thread)
 	pthread_create(&thread->thread, NULL, thread_routine, thread);
 }
 
-t_ftt_thread	*ftt_thread_new(void (*routine)(void *), void *data)
+t_ftt_thread	*ftt_thread_new(void)
 {
 	t_ftt_thread	*thread;
 
 	thread = ft_calloc(1, sizeof(t_ftt_thread));
 	if (!thread)
 		return (NULL);
-	thread->routine = routine;
-	thread->data = data;
 	ftt_thread_init(thread);
 	return (thread);
 }

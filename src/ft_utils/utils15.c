@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils15.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 20:26:55 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/15 20:13:03 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/15 23:25:45 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,11 @@ void	ft_list_reverse(t_list **list)
 	*list = prev;
 }
 
-
-void	ft_sleep(double ms)
+void	ft_sleep(double miliseconds)
 {
-	t_time	microseconds;
 	t_time	start;
 
 	start = ft_get_time();
-	microseconds = ms * 1000;
-	while (ft_get_time() - start < microseconds)
+	while (ft_get_time() - start < miliseconds)
 		usleep(100);
 }

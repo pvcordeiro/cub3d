@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game0.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:27:08 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/15 19:47:27 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/15 22:50:55 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	clear_game(void *game)
 		return ;
 	ft_list_destroy(&((t_game *)game)->entities);
 	ft_hashmap_destroy(((t_game *)game)->sprites);
+	kill_threads(game);
 	ft_bzero(game, sizeof(t_game));
 }
 
@@ -44,6 +45,9 @@ void	game_load_map_e(t_game *game, t_ftm_window *window, t_map *map)
 		return (clear_game(game));
 	init_minimap(window, game);
 	init_entities_e(game, window);
+	if (fte_flagged())
+		return (clear_game(game));
+	init_threads_e(game);
 	if (fte_flagged())
 		return (clear_game(game));
 	init_window(window, game);

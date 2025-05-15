@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors27.c                                         :+:      :+:    :+:   */
+/*   errors28.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,11 +12,8 @@
 
 #include <ft_error.h>
 
-char	*get_error_message28(t_error _error);
-
-char	*get_error_message27(t_error _error)
+char	*get_error_message28(t_error _error)
 {
-	if (_error == ERROR_THREAD_INIT)
-		return (ERROR_THREAD_INIT_MSG);
-	return (get_error_message28(_error));
+	(void)_error;
+	return (ERROR_INVALID_MSG);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 12:15:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/15 20:13:36 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/15 23:25:52 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,6 +163,6 @@ double					ft_atof(const char *str);
 
 t_list					*ft_list_clone(t_list *list);
 void					ft_list_reverse(t_list **list);
-void					ft_sleep(double ms);
+void					ft_sleep(double miliseconds);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:23:25 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/07 23:15:58 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/15 22:41:41 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,15 @@
 # define RENDER_H
 
 # include <cub3d.h>
+
+typedef struct s_raycasting_slice
+{
+	t_ftm_image	*canvas;
+	t_player	*player;
+	t_ray		*rays;
+	int			starting_index;
+	int			ending_index;
+}	t_raycasting_slice;
 
 void	render_minimap(t_game *game, t_ftm_image *canvas, t_coords coords, t_size size);
 

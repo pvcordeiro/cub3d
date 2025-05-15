@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/15 19:48:24 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/15 23:18:48 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@
 # define DEFAULT_PLAYER_TYPES "NSEW"
 
 // Raytracing Threads
-# define RENDERING_THREADS 4
+# define RENDERING_THREADS 8
 
 typedef struct s_sprite
 {
@@ -199,7 +199,7 @@ typedef struct s_game
 	t_player			*player;
 	t_list				*entities;
 	t_hashmap			*sprites;
-	pthread_t			rendering_threads[RENDERING_THREADS]
+	t_ftt_thread		*rendering_threads[RENDERING_THREADS];
 }	t_game;
 
 typedef struct s_cub3d
