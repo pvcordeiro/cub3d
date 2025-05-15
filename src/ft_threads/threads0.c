@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   threads0.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 19:48:43 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/15 20:16:32 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/15 22:30:15 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,10 @@ static void	*thread_routine(void *data)
 	}
 }
 
-void	ftt_thread_init(t_ftt_thread *thread, void (*routine)(void *), void *data)
+void	ftt_thread_init(t_ftt_thread *thread)
 {
 	if (!thread)
 		return ;
-	ft_bzero(thread, sizeof(t_ftt_thread));
-	thread->routine = routine;
-	thread->data = data;
 	pthread_create(&thread->thread, NULL, thread_routine, thread);
 }
 
@@ -45,7 +42,9 @@ t_ftt_thread	*ftt_thread_new(void (*routine)(void *), void *data)
 	thread = ft_calloc(1, sizeof(t_ftt_thread));
 	if (!thread)
 		return (NULL);
-	ftt_thread_init(thread, routine, data);
+	thread->routine = routine;
+	thread->data = data;
+	ftt_thread_init(thread);
 	return (thread);
 }
 
@@ -54,4 +53,13 @@ void	ftt_thread_run(t_ftt_thread *thread)
 	if (!thread || thread->running)
 		return ;
 	thread->running = true;
+}
+
+void	ftt_thread_stop(t_ftt_thread *thread)
+{
+	if (!thread)
+		return ;
+	thread->running = false;
+	pthread_kill(thread->thread, 0);
+	ftt_thread_init(thread);
 }
