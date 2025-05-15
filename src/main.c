@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:15:19 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/10 14:54:39 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/15 14:23:05 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	main(int argc, char **argv)
 	cub3d()->window.exit_hook = cub3d_exit;
 	cub3d()->window.mouse_hook = mouse_hook;
 	ftm_update_hooks(&cub3d()->window);
-	ftm_window_loop(&cub3d()->window);
+	// ftm_window_loop(&cub3d()->window);
+	mlx_loop(cub3d()->window.display);
 	cub3d_exit(0);
 }

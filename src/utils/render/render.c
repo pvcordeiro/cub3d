@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 19:49:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/08 12:59:31 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/15 14:11:07 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,6 @@ void	render_game(t_ftm_window *window, t_game *game)
 	render_ceiling_and_floor(game, window->canvas);
 	render_raycasting_mega(game, window->canvas);
 	render_minimap(game, window->canvas, map_coords, map_size);
+	render_fps_counter(&cub3d()->game.fps, &cub3d()->window);
+	// ftm_update_window(window);
 }

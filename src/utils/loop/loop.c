@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:20:20 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/14 17:54:57 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/15 14:17:31 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,9 @@ void	loop(void)
 {
 	double	delta_time;
 
-	ftm_image_clear(cub3d()->window.canvas);
+	mlx_clear_window(cub3d()->window.display, cub3d()->window.win);
 	delta_time = get_delta_time();
 	update_fps_data(&cub3d()->game.fps, delta_time);
 	call_entity_frames(cub3d()->game.entities, delta_time);
 	render_game(&cub3d()->window, &cub3d()->game);
-	render_fps_counter(&cub3d()->game.fps, &cub3d()->window);
 }
