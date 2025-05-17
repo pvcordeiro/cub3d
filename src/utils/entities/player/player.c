@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/14 23:01:23 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/17 15:21:12 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ static bool	position_overlaps(t_list *entities, t_player *player, t_coords coord
 	{
 		curr_entity = curr->data;
         if (curr_entity != (t_entity *)player && curr_entity->hard
-            && (int)(coords.x + PLAYER_HITBOX_RADIUS) >= (int)curr_entity->coords.x
-            && (int)(coords.x - PLAYER_HITBOX_RADIUS) <= (int)(curr_entity->coords.x + 0.9)
-            && (int)(coords.y + PLAYER_HITBOX_RADIUS) >= (int)curr_entity->coords.y
-            && (int)(coords.y - PLAYER_HITBOX_RADIUS) <= (int)(curr_entity->coords.y + 0.9))
+            && coords.x + PLAYER_HITBOX_RADIUS >= curr_entity->coords.x
+            && coords.x - PLAYER_HITBOX_RADIUS <= (curr_entity->coords.x + curr_entity->size.width)
+            && coords.y + PLAYER_HITBOX_RADIUS >= curr_entity->coords.y
+            && coords.y - PLAYER_HITBOX_RADIUS <= (curr_entity->coords.y + curr_entity->size.height))
             return (true);
 		curr = curr->next;
 	}
@@ -83,28 +83,81 @@ static void	player_walks(t_list *entities, t_player *player)
 		player_walk(entities, player, player->base.coords.yaw);
 }
 
+typedef struct s_rays_slice
+{
+	int			starting_index;
+	int			ending_index;
+	double		angle;
+	t_coords	player_coords;
+	t_game		*game;
+	t_player	*player;
+}	t_rays_slice;
+
+static void	send_rays(void *data)
+{
+	t_raycast		raycast;
+	t_coords		ray_coords;
+	t_rays_slice	*rays_slice;
+	int				i;
+	int				j;
+	bool			already_hit_non_transparent;
+	t_entity		*entity_to_ignore;
+	t_direction		direction_to_ignore;
+
+	rays_slice = data;
+	i = rays_slice->starting_index - 1;
+	ray_coords = rays_slice->player_coords;
+	while (++i < rays_slice->ending_index)
+	{
+		already_hit_non_transparent = false;
+		ray_coords.yaw = ft_normalize_angle(rays_slice->angle + ((PLAYER_FOV / PLAYER_RAYS)
+			* i));
+		entity_to_ignore = (t_entity *)rays_slice->player;
+		direction_to_ignore = NORTH;
+		j = -1;
+		while (++j < PLAYER_RAY_SUBRAYS)
+		{
+			if (already_hit_non_transparent)
+			{
+				rays_slice->player->rays[i][j].hit_entity = NULL;
+				continue ;
+			}
+			raycast = send_ray(rays_slice->game, ray_coords, entity_to_ignore, direction_to_ignore);
+			rays_slice->player->rays[i][j].direction_of_hit_on_entity = raycast.direction_of_hit_on_entity;
+			rays_slice->player->rays[i][j].length = raycast.length;
+			rays_slice->player->rays[i][j].hit_entity = raycast.hit_entity;
+			rays_slice->player->rays[i][j].x_of_hit_in_entity = raycast.x_of_hit_in_entity;
+			rays_slice->player->rays[i][j].angle = ray_coords.yaw;
+			entity_to_ignore = rays_slice->player->rays[i][j].hit_entity;
+			direction_to_ignore = rays_slice->player->rays[i][j].direction_of_hit_on_entity;
+			if (rays_slice->player->rays[i][j].hit_entity && !rays_slice->player->rays[i][j].hit_entity->transparent)
+				already_hit_non_transparent = true;
+		}
+	}	
+}
+
 static void	player_rays(t_game *game, t_player *player)
 {
-	t_coords	ray_coords;
-	t_raycast	raycast;
-	size_t		i;
-	double		angle;
+	static t_rays_slice	rays_slices[RAYCASTING_THREADS];
+	int					i;
 
 	i = -1;
-	angle = player->base.coords.yaw - PLAYER_FOV / 2;
-	ray_coords = player->base.coords;
-	while (++i < PLAYER_RAYS)
+	while (++i < RAYCASTING_THREADS)
 	{
-		ray_coords.yaw = ft_normalize_angle(angle + ((PLAYER_FOV / PLAYER_RAYS)
-					* i));
-		raycast = send_ray(game, ray_coords);
-		player->rays[i].direction_of_hit_on_entity = raycast.direction_of_hit_on_entity;
-		player->rays[i].length = raycast.length;
-		player->rays[i].hit_entity = raycast.hit_entity;
-		player->rays[i].x_of_hit_in_entity = raycast.x_of_hit_in_entity;
-		player->rays[i].angle = ray_coords.yaw;
+		rays_slices[i].starting_index = (PLAYER_RAYS / RAYCASTING_THREADS) * i;
+		rays_slices[i].ending_index = (PLAYER_RAYS / RAYCASTING_THREADS) * (i + 1);
+		rays_slices[i].angle = player->base.coords.yaw - (PLAYER_FOV / 2);
+		rays_slices[i].player_coords = player->base.coords;
+		rays_slices[i].game = game;
+		rays_slices[i].player = player;
+		game->raycasting_threads[i]->routine = send_rays;
+		game->raycasting_threads[i]->data = &rays_slices[i];
+		ftt_thread_run(game->raycasting_threads[i]);
 	}
-	player->looking_at_entity = player->rays[PLAYER_RAYS / 2].hit_entity;
+	i = -1;
+	while (++i < RAYCASTING_THREADS)
+		ftt_thread_wait(game->raycasting_threads[i]);
+	player->looking_at_entity = player->rays[PLAYER_RAYS / 2][0].hit_entity;
 }
 
 static void	player_mouse_moviment(t_player *player)

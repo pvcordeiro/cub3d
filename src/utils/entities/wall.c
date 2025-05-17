@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wall.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/14 17:33:03 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/17 13:48:49 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ t_wall	*wall_new(char identifier, t_game *game)
 	wall->base.free = free_wall;
 	wall->base.hard = true;
 	wall->base.block = true;
+	wall->base.size = (t_size){1, 1};
 	wall->north_sprite = hashmap_get_with_identifier(game->sprites, identifier, "NO");
 	wall->south_sprite = hashmap_get_with_identifier(game->sprites, identifier, "SO");
 	wall->west_sprite = hashmap_get_with_identifier(game->sprites, identifier, "WE");

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/14 23:27:37 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/17 18:23:15 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <ft_error.h>
 # include <ft_utils.h>
 # include <ft_mlx_utils.h>
+# include <ft_threads.h>
 
 // External Libs
 # include <X11/keysym.h>
@@ -47,8 +48,9 @@
 
 // Player Config
 # define PLAYER_RAYS_NO_HIT_LENGTH 50.0
-# define PLAYER_FOV 75.0
+# define PLAYER_FOV 72.0
 # define PLAYER_RAYS 1024
+# define PLAYER_RAY_SUBRAYS 5
 # define PLAYER_HITBOX_RADIUS 0.23
 # define PLAYER_MOUSE_LOOK_VELOCITY 0.1
 # define PLAYER_KEY_LOOK_VELOCITY 3.0
@@ -64,6 +66,10 @@
 # define DEFAULT_AIR_TYPES "0 \t\n\v\f\r"
 # define DEFAULT_WALL_TYPES "1"
 # define DEFAULT_PLAYER_TYPES "NSEW"
+
+// Raytracing Threads
+# define RENDERING_THREADS 8
+# define RAYCASTING_THREADS 8
 
 typedef struct s_sprite
 {
@@ -122,7 +128,7 @@ typedef struct s_player
 	double		key_look_velocity;
 	double		walk_velocity;
 	double		sprint_velocity;
-	t_ray		rays[PLAYER_RAYS];
+	t_ray		rays[PLAYER_RAYS][PLAYER_RAY_SUBRAYS];
 }	t_player;
 
 typedef struct s_wall
@@ -195,6 +201,8 @@ typedef struct s_game
 	t_player			*player;
 	t_list				*entities;
 	t_hashmap			*sprites;
+	t_ftt_thread		*rendering_threads[RENDERING_THREADS];
+	t_ftt_thread		*raycasting_threads[RAYCASTING_THREADS];
 }	t_game;
 
 typedef struct s_cub3d
@@ -219,7 +227,8 @@ t_cub3d		*cub3d(void);
 void		cub3d_exit(int code);
 
 t_map		*parse_map_e(char *path);
-void		destroy_map(t_map *map);
+void		clear_map(void *map);
+void		free_map(t_map *map);
 
 // Loop
 void		loop(void);

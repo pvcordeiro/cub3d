@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:37:16 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/08 14:42:03 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/17 14:28:35 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	ftm_draw_line(t_ftm_image *canvas, t_coords start, t_coords end,
 void	ftm_draw_line_angle(t_ftm_image *canvas, t_coords start,
 	double length, unsigned int color)
 {
-	static t_coords	end;
+	t_coords	end;
 
 	start.yaw = ft_normalize_angle(start.yaw);
 	end.x = start.x + cos(start.yaw * FT_MLX_UTILS_PI / 180.0) * length;

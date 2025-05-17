@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:48:06 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/14 21:37:08 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/17 18:50:08 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ t_ftm_image	*ftm_image_from_file(t_ftm_window *window, char *path)
 		return (free(image), NULL);
 	if (!load_image_addresses(image))
 		return (ftm_free_image(image), NULL);
+	ftm_image_remove_transparency(image);
 	return (image);
 }
 
