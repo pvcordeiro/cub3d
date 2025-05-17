@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   threads0.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 19:48:43 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/15 23:12:23 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/17 11:25:40 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	*thread_routine(void *data)
 	t_ftt_thread *thread;
 
 	thread = data;
-	while (1)
+	while (thread->active)
 	{
 		if (thread->running)
 		{
@@ -27,12 +27,14 @@ static void	*thread_routine(void *data)
 		}
 		ft_sleep(1);
 	}
+	return (NULL);
 }
 
 void	ftt_thread_init(t_ftt_thread *thread)
 {
 	if (!thread)
 		return ;
+	thread->active = true;
 	pthread_create(&thread->thread, NULL, thread_routine, thread);
 }
 
@@ -59,6 +61,4 @@ void	ftt_thread_stop(t_ftt_thread *thread)
 	if (!thread)
 		return ;
 	thread->running = false;
-	pthread_kill(thread->thread, 0);
-	ftt_thread_init(thread);
 }

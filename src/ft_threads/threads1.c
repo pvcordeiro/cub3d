@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   threads1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 22:30:02 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/15 23:10:25 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/17 11:45:15 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void	ftt_clear_thread(t_ftt_thread *thread)
 {
 	if (!thread)
 		return ;
-	pthread_kill(thread->thread, 0);
+	thread->active = false;
+	pthread_join(thread->thread, NULL);
 	ft_bzero(thread, sizeof(t_ftt_thread));
 }
 

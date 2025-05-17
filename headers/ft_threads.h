@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_threads.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 19:48:00 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/15 22:48:33 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/17 11:24:18 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct s_ftt_thread
 {
 	pthread_t	thread;
 	bool		running;
+	bool		active;
 	void		(*routine)(void *);
 	void		*data;
 }	t_ftt_thread;

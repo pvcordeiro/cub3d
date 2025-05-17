@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/15 15:05:19 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/17 11:59:24 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,10 @@ static void	door_frame(t_entity *entity)
 
 static void	free_door(void *door)
 {
+	clear_sprite(&((t_door *)door)->opening_sprite);
+	clear_sprite(&((t_door *)door)->door_opened_sprite);
+	ft_list_clear_without_free(((t_door *)door)->closing_sprite.images);
+	ft_list_destroy(&((t_door *)door)->closing_sprite.images);
 	free(door);
 }
 

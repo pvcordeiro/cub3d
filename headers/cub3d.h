@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/16 16:41:00 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/17 11:59:27 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,7 +226,8 @@ t_cub3d		*cub3d(void);
 void		cub3d_exit(int code);
 
 t_map		*parse_map_e(char *path);
-void		destroy_map(t_map *map);
+void		clear_map(void *map);
+void		free_map(t_map *map);
 
 // Loop
 void		loop(void);

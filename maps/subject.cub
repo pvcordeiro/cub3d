@@ -21,7 +21,7 @@ p_SO assets/portugal.xpm
 p_NO NULL
 p_WE NULL
 p_EA NULL
-MOUSE TRUE
+MOUSE FALSE
 
 F 46,39,30
 C 67,63,1
