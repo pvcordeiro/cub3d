@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:52:09 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/10 14:53:22 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/17 19:37:03 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,9 @@ void	ftm_update_hooks(t_ftm_window *window)
 void	ftm_window_loop(t_ftm_window *window)
 {
 	mlx_loop(window->display);
+}
+
+void	ftm_window_wipe(t_ftm_window *window)
+{
+	mlx_clear_window(window->display, window->win);
 }

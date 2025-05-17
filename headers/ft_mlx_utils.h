@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_mlx_utils.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:46:27 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/17 18:46:23 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/17 19:36:57 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void			ftm_create_window_e(t_ftm_window *window,
 void			ftm_update_window(t_ftm_window *window);
 void			ftm_update_hooks(t_ftm_window *window);
 void			ftm_window_loop(t_ftm_window *window);
-
+void			ftm_window_wipe(t_ftm_window *window);
 
 unsigned int	*ftm_image_pixel(t_ftm_image *image, t_coords coords);
 unsigned int	ftm_remove_pixel_transparency(unsigned int value);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/17 18:23:15 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/17 21:01:08 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,8 +193,22 @@ typedef struct s_minimap
 	unsigned int	player_middle_ray_color;
 }	t_minimap;
 
+typedef struct s_hud_debug
+{
+	char	*dbg_str;
+}	t_hud_debug;
+
+typedef struct s_hud
+{
+	t_hud_debug		debug;
+}	t_hud;
+
 typedef struct s_game
 {
+	t_time				last_frame;
+	int					frames;
+	int					fps;
+	t_hud				hud;
 	t_environment		environment;
 	t_minimap			minimap;
 	t_map				*map;
@@ -237,6 +251,7 @@ void		mouse_hook(t_coords coords);
 
 // Render
 void		render_ceiling_and_floor(t_game *game, t_ftm_image *canvas);
+void		render_hud(t_game *game);
 
 // Entities
 void		call_entity_frames(t_list *entities);
