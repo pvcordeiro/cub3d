@@ -6,13 +6,13 @@
 #    By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/26 17:16:21 by afpachec          #+#    #+#              #
-#    Updated: 2025/05/10 13:29:13 by afpachec         ###   ########.fr        #
+#    Updated: 2025/05/18 00:23:35 by afpachec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3d
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -O3 -g
 INCLUDES = -I headers
 LIBS = -L lib
 LDLIBS = -lmlx -lX11 -lXext -lm

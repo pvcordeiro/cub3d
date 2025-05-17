@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:20:04 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/10 13:35:38 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/18 00:21:09 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	init_sprites_e(t_ftm_window *window, t_game *game)
 	t_element	*el;
 
 	fte_set(ERROR_NO_ERROR);
+	image = NULL;
 	el = *game->map->types->table;
 	while (el)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils5.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 00:03:31 by afonsocouti       #+#    #+#             */
-/*   Updated: 2025/03/29 14:10:59 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/18 00:19:40 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static void	free_all(char **strs)
 	i = -1;
 	while (strs[++i])
 		free(strs[i]);
-	free(strs);
 }
 
 static int	count_items(const char *s1, const char *s2)
@@ -51,10 +50,7 @@ static int	split(const char *s1, const char *s2, char **strs)
 			s1++;
 		strs[i] = malloc(s1 - start + 1);
 		if (!strs[i])
-		{
-			free_all(strs);
-			return (0);
-		}
+			return (free_all(strs), 0);
 		ft_strlcpy(strs[i], start, s1 - start + 1);
 		while (*s1 && ft_strchr(s2, *s1))
 			s1++;
