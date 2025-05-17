@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:48:02 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/18 00:41:28 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/18 00:42:24 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	ftm_put_image_to_canvas(t_ftm_image *canvas, t_ftm_image *image,
 	t_ftm_pitc_config pitc)
 {
 	t_size			index;
-	t_coords		src_coords;
 	t_coords		scale;
 	t_size			cs;
 
