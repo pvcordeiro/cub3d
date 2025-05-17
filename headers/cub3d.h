@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/17 21:01:08 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/17 21:47:53 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,7 @@
 # define PLAYER_RAY_HIT_ENTITIES_NUMBER 5
 
 // Door Config
-# define DOOR_ANIMATION_FRAMES 60
-# define DOOR_ANIMATION_UPDATE_DELAY 15
+# define DOOR_ANIMATION_FRAMES 64
 
 // Map Config
 # define DEFAULT_AIR_TYPES "0 \t\n\v\f\r"
@@ -145,11 +144,8 @@ typedef struct s_door
 	t_wall		base;
 	t_direction	direction;
 	t_sprite	opening_sprite;
-	t_sprite	closing_sprite;
-	t_sprite	door_opened_sprite;
 	t_sprite	*door_sprite;
 	bool		opened;
-	t_time		animated_at;
 }	t_door;
 
 typedef struct	s_identifiers
