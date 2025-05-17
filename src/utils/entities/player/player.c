@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/17 15:21:12 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/17 21:51:39 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,7 @@ static void	player_rays(t_game *game, t_player *player)
 	while (++i < RAYCASTING_THREADS)
 		ftt_thread_wait(game->raycasting_threads[i]);
 	player->looking_at_entity = player->rays[PLAYER_RAYS / 2][0].hit_entity;
+	player->looking_at_entity_direction = player->rays[PLAYER_RAYS / 2][0].direction_of_hit_on_entity;
 }
 
 static void	player_mouse_moviment(t_player *player)

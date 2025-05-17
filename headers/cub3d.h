@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/17 21:47:53 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/17 22:03:15 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ typedef struct s_player
 	double		key_look_velocity;
 	double		walk_velocity;
 	double		sprint_velocity;
+	t_direction	looking_at_entity_direction;
 	t_ray		rays[PLAYER_RAYS][PLAYER_RAY_SUBRAYS];
 }	t_player;
 
@@ -197,6 +198,7 @@ typedef struct s_hud_debug
 typedef struct s_hud
 {
 	t_hud_debug		debug;
+	bool			enabled;
 }	t_hud;
 
 typedef struct s_game
