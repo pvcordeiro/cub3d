@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 19:05:41 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/15 23:16:25 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/17 15:13:09 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,19 +49,26 @@ void	render_raycasting_slice(void *data)
 	t_size				ray_size;
 	t_ftm_image			*hit_entity_image;
 	int					i;
+	int					j;
 
 	slice = data;
 	ray_size.width = W_WIDTH / PLAYER_RAYS;
 	i = slice->starting_index - 1;
 	while (++i < slice->ending_index)
 	{
-		ray = slice->rays[i];
-		hit_entity_image = get_sprite_image(get_entity_sprite(ray.hit_entity, ray.direction_of_hit_on_entity));
-		if (!hit_entity_image)
-			continue ;
-		ray_size.height = W_HEIGHT / (fmax(ray.length, 0.1) * cos(ft_normalize_angle(ray.angle - slice->player->base.coords.yaw) * (PI / 180.0)));
-		ray_size.height = fmin(ray_size.height, W_HEIGHT * 3);
-		ftm_put_image_to_canvas(slice->canvas, hit_entity_image, get_pitc_config(i, &ray_size, hit_entity_image, &ray));
+		j = PLAYER_RAY_SUBRAYS;
+		while (j--)
+		{
+			ray = slice->player->rays[i][j];
+			if (!ray.hit_entity)
+				continue ;
+			hit_entity_image = get_sprite_image(get_entity_sprite(ray.hit_entity, ray.direction_of_hit_on_entity));
+			if (!hit_entity_image)
+				continue ;
+			ray_size.height = W_HEIGHT / (fmax(ray.length, 0.1) * cos(ft_normalize_angle(ray.angle - slice->player->base.coords.yaw) * (PI / 180.0)));
+			ray_size.height = fmin(ray_size.height, W_HEIGHT * 3);
+			ftm_put_image_to_canvas(slice->canvas, hit_entity_image, get_pitc_config(i, &ray_size, hit_entity_image, &ray));
+		}
 	}
 }
 
@@ -77,7 +84,6 @@ void	render_raycasting_mega(t_game *game, t_ftm_image *canvas)
 		curr_thread = game->rendering_threads[i];
 		raycasting_slices[i].canvas = canvas;
 		raycasting_slices[i].player = game->player;
-		raycasting_slices[i].rays = game->player->rays;
 		raycasting_slices[i].starting_index = i * (PLAYER_RAYS / RENDERING_THREADS);
 		raycasting_slices[i].ending_index = (i + 1) * (PLAYER_RAYS / RENDERING_THREADS);
 		curr_thread->routine = render_raycasting_slice;

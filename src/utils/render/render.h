@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:23:25 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/15 22:41:41 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/17 14:55:10 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ typedef struct s_raycasting_slice
 {
 	t_ftm_image	*canvas;
 	t_player	*player;
-	t_ray		*rays;
 	int			starting_index;
 	int			ending_index;
 }	t_raycasting_slice;

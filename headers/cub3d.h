@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/17 13:50:34 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/17 15:35:40 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,9 @@
 
 // Player Config
 # define PLAYER_RAYS_NO_HIT_LENGTH 50.0
-# define PLAYER_FOV 75.0
+# define PLAYER_FOV 50.0
 # define PLAYER_RAYS 1024
+# define PLAYER_RAY_SUBRAYS 5
 # define PLAYER_HITBOX_RADIUS 0.23
 # define PLAYER_MOUSE_LOOK_VELOCITY 0.1
 # define PLAYER_KEY_LOOK_VELOCITY 3.0
@@ -127,7 +128,7 @@ typedef struct s_player
 	double		key_look_velocity;
 	double		walk_velocity;
 	double		sprint_velocity;
-	t_ray		rays[PLAYER_RAYS];
+	t_ray		rays[PLAYER_RAYS][PLAYER_RAY_SUBRAYS];
 }	t_player;
 
 typedef struct s_wall

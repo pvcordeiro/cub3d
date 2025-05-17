@@ -6,13 +6,38 @@
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 12:05:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/17 13:49:53 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/17 15:21:53 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "player.h"
 
-static t_entity	*hit_entity(t_game *game, t_coords coords)
+static double	calculate_wall_dist(t_dda_ray *data, t_coords coords)
+{
+	double	wall_dist;
+
+	if (data->side == 0)
+	{
+		wall_dist = (data->map_pos.x - coords.x + (1 - data->step.x) / 2)
+		/ data->ray_dir.x;
+		if (data->step.x > 0)
+        	data->direction_of_hit_on_entity = WEST;
+		else
+			data->direction_of_hit_on_entity = EAST;
+	}
+	else
+	{
+		wall_dist = (data->map_pos.y - coords.y + (1 - data->step.y) / 2)
+			/ data->ray_dir.y;
+		if (data->step.y > 0)
+			data->direction_of_hit_on_entity = NORTH;
+		else
+			data->direction_of_hit_on_entity = SOUTH;
+	}
+	return (wall_dist);
+}
+
+static t_entity	*hit_entity(t_game *game, t_dda_ray *data, t_coords coords)
 {
 	t_entity	*entity;
 	t_list		*curr;
@@ -25,6 +50,9 @@ static t_entity	*hit_entity(t_game *game, t_coords coords)
 		if (!entity->block
 			|| (int)entity->coords.x != (int)coords.x
 			|| (int)entity->coords.y != (int)coords.y)
+			continue ;
+		data->length = calculate_wall_dist(data, coords);
+		if (data->direction_of_hit_on_entity == data->direction_to_ignore && entity == data->entity_to_ignore)
 			continue ;
 		return (entity);
 	}
@@ -95,38 +123,13 @@ static double	perform_dda(t_dda_ray *data, t_game *game)
 			data->side = 1;
 		}
 		check_pos = (t_coords){data->map_pos.x, data->map_pos.y, 0, 0};
-		if (hit_entity(game, check_pos))
+		if (hit_entity(game, data, check_pos))
 			break ;
 		if (data->map_pos.x < 0 || data->map_pos.x >= game->map->size.width
 			|| data->map_pos.y < 0 || data->map_pos.y >= game->map->size.height)
 			return (PLAYER_RAYS_NO_HIT_LENGTH);
 	}
 	return (0);
-}
-
-static double	calculate_wall_dist(t_dda_ray *data, t_coords coords)
-{
-	double	wall_dist;
-
-	if (data->side == 0)
-	{
-		wall_dist = (data->map_pos.x - coords.x + (1 - data->step.x) / 2)
-		/ data->ray_dir.x;
-		if (data->step.x > 0)
-        	data->direction_of_hit_on_entity = WEST;
-		else
-			data->direction_of_hit_on_entity = EAST;
-	}
-	else
-	{
-		wall_dist = (data->map_pos.y - coords.y + (1 - data->step.y) / 2)
-			/ data->ray_dir.y;
-		if (data->step.y > 0)
-			data->direction_of_hit_on_entity = NORTH;
-		else
-			data->direction_of_hit_on_entity = SOUTH;
-	}
-	return (wall_dist);
 }
 
 static void	calculate_wall_hit(t_dda_ray *data, t_coords coords, t_entity *entity_hit)
@@ -139,19 +142,21 @@ static void	calculate_wall_hit(t_dda_ray *data, t_coords coords, t_entity *entit
 	data->wall_x -= floor(data->wall_x);
 }
 
-t_raycast	send_ray(t_game *game, t_coords coords)
+t_raycast	send_ray(t_game *game, t_coords coords, t_entity *entity_to_ignore, t_direction direction_to_ignore)
 {
 	t_dda_ray	data;
 	double		result;
 	t_entity	*entity_hit;
 
 	init_dda_ray_data(&data, coords);
+	data.entity_to_ignore = entity_to_ignore;
+	data.direction_to_ignore = direction_to_ignore;
 	set_step_and_side_dist(&data, coords);
 	result = perform_dda(&data, game);
 	if (result > 0)
-		return ((t_raycast){result, NULL, 0, 0});
+		return ((t_raycast){result, NULL, 0, 0, {0}});
+	entity_hit = hit_entity(game, &data, (t_coords){data.map_pos.x, data.map_pos.y, 0, 0});
 	data.length = calculate_wall_dist(&data, coords);
-	entity_hit = hit_entity(game, (t_coords){data.map_pos.x, data.map_pos.y, 0, 0});
 	calculate_wall_hit(&data, coords, entity_hit);
-	return ((t_raycast){data.length, entity_hit, data.wall_x, data.direction_of_hit_on_entity});
+	return ((t_raycast){data.length, entity_hit, data.wall_x, data.direction_of_hit_on_entity, data.map_pos});
 }
