@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:46:27 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/14 21:26:00 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/17 18:46:23 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void			ftm_window_loop(t_ftm_window *window);
 
 
 unsigned int	*ftm_image_pixel(t_ftm_image *image, t_coords coords);
+unsigned int	ftm_remove_pixel_transparency(unsigned int value);
 void			ftm_set_pixel(unsigned int *pixel, unsigned int value);
 
 void			ftm_draw_line(t_ftm_image *canvas, t_coords start,

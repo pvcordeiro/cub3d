@@ -5,7 +5,7 @@ EA assets/portugal.xpm
 2_TYPE DOOR
 2_DIRECTION NORTH
 2_DOOR assets/wolfenstein/door.xpm
-2_SIDES assets/wolfenstein/door-side.xpm
+2_SIDES assets/wolfenstein/door-frame.xpm
 6_TYPE DOOR
 6_DIRECTION WEST
 6_DOOR assets/salazar.xpm

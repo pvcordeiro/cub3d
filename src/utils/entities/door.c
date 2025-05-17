@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   door.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/17 15:33:51 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/17 18:56:46 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,12 @@ static t_sprite	*get_door_sprite(t_door *door)
 	{
 		door->opening_sprite.index = 0;
 		door->closing_sprite.index = 0;
+		door->base.base.transparent = door->opened;
 		if (door->opened)
 			return (&door->door_opened_sprite);
 		return (door->door_sprite);
 	}
+	door->base.base.transparent = true;
 	frame_index = (int)(elapsed_time / DOOR_ANIMATION_UPDATE_DELAY);
     if (frame_index >= DOOR_ANIMATION_FRAMES)
 		frame_index = DOOR_ANIMATION_FRAMES - 1;
@@ -61,7 +63,6 @@ static void	door_frame(t_entity *entity)
 	door = (t_door *)entity;
 	set_door_sprite(door);
 	door->base.base.hard = !door->opened;
-	entity->transparent = door->opened;
 }
 
 static void	free_door(void *door)

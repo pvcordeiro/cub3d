@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 14:51:11 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/15 19:12:49 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/17 18:50:43 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,19 @@ char	*ftm_image_to_str(t_ftm_image *image)
 		return (NULL);
 	return (ft_strf("Image<path: \"%s\", size: {width: %d, height: %d}>", 
 		image->path, image->size.width, image->size.height));
+}
+
+void	ftm_image_remove_transparency(t_ftm_image *image)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (++i < image->size.width)
+	{
+		j = -1;
+		while (++j < image->size.height)
+			ftm_set_pixel(ftm_image_pixel(image, (t_coords){i, j, 0, 0}),
+				ftm_remove_pixel_transparency(*ftm_image_pixel(image, (t_coords){i, j, 0, 0})));
+	}
 }
