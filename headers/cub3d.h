@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/17 11:59:27 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/17 13:50:34 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@
 # define DEFAULT_PLAYER_TYPES "NSEW"
 
 // Raytracing Threads
-# define RENDERING_THREADS 4
-# define RAYCASTING_THREADS 4
+# define RENDERING_THREADS 8
+# define RAYCASTING_THREADS 8
 
 typedef struct s_sprite
 {

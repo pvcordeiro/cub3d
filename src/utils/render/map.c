@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 22:33:42 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/14 22:53:18 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/17 14:30:19 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,12 @@ static void	render_entity(t_ftm_image *canvas, t_game *game, t_entity *entity, t
 	if (entity->type == ENTITY_PLAYER)
 	{
 		render_rays(canvas, game, (t_player *)entity, new_coords, entity_size);
-		entity_size = (t_size){0, 0};
+		entity_size = (t_size){1, 1};
+	}
+	else
+	{
+		entity_size.width *= entity->size.width;
+		entity_size.height *= entity->size.height;
 	}
 	ftm_draw_rectangle(canvas,
 			new_coords,

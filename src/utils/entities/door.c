@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/17 11:59:24 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/17 13:48:34 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,6 +169,7 @@ t_door	*door_new_e(char identifier, t_ftm_window *window, t_game *game)
 	((t_entity *)door)->hard = true;
 	((t_entity *)door)->block = true;
 	((t_entity *)door)->transparent = true;
+	((t_entity *)door)->size = (t_size){1, 1};
 	init_sprite(&door->door_opened_sprite, NULL, 0);
 	init_door_direction_e(door, game, identifier);
 	if (fte_flagged())
