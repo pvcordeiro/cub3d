@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 12:05:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/17 15:21:53 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/17 18:24:34 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,7 @@ t_raycast	send_ray(t_game *game, t_coords coords, t_entity *entity_to_ignore, t_
 	set_step_and_side_dist(&data, coords);
 	result = perform_dda(&data, game);
 	if (result > 0)
-		return ((t_raycast){result, NULL, 0, 0, {0}});
+		return ((t_raycast){result, NULL, 0, 0, {0, 0, 0, 0}});
 	entity_hit = hit_entity(game, &data, (t_coords){data.map_pos.x, data.map_pos.y, 0, 0});
 	data.length = calculate_wall_dist(&data, coords);
 	calculate_wall_hit(&data, coords, entity_hit);
