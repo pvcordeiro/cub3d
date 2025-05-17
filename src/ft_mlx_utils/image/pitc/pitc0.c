@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   image2.c                                           :+:      :+:    :+:   */
+/*   pitc0.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:48:02 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/15 19:16:53 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/18 00:41:28 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "image.h"
+#include "pitc.h"
 
 static inline t_size	get_crop_size(t_ftm_image *image,
 	t_ftm_pitc_config pitc)
@@ -57,14 +57,11 @@ void	ftm_put_image_to_canvas(t_ftm_image *canvas, t_ftm_image *image,
 		index.height = -1;
 		while (++index.height < pitc.size.height)
 		{
-			src_coords = (t_coords){pitc.crop_start.x
-				+ (int)(index.width * scale.x), pitc.crop_start.y
-				+ (int)(index.height * scale.y), 0, 0};
-			if (ftm_image_pixel(image, src_coords))
-				ftm_set_pixel(ftm_image_pixel(canvas, (t_coords){pitc.coords.x
-						+ index.width, pitc.coords.y + index.height, 0, 0}),
-					get_modified_pixel(pitc.pixel_modifier, pitc.pixel_modifier_data,
-						*ftm_image_pixel(image, src_coords)));
+			if (!ftm_image_pixel(canvas, get_canvas_coords(pitc, index)))
+				continue ;
+			ftm_set_pixel(ftm_image_pixel(canvas, get_canvas_coords(pitc, index)),
+				get_modified_pixel(pitc.pixel_modifier, pitc.pixel_modifier_data,
+					*ftm_image_pixel(image, get_src_coords(pitc, index, scale))));
 		}
 	}
 }

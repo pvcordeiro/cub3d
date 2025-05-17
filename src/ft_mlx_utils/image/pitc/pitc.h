@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   image.h                                            :+:      :+:    :+:   */
+/*   pitc.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/14 20:22:33 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/18 00:40:38 by afpachec         ###   ########.fr       */
+/*   Created: 2025/05/18 00:39:15 by afpachec          #+#    #+#             */
+/*   Updated: 2025/05/18 00:41:45 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef IMAGE_H
-# define IMAGE_H
+#ifndef PITC_H
+# define PITC_H
 
-# include <ft_mlx_utils.h>
+# include "../image.h"
 
-void	ftm_image_remove_transparency(t_ftm_image *image);
+unsigned int get_modified_pixel(unsigned int (*pm)(void *, unsigned int),
+	void *data, unsigned int pixel);
+inline t_coords	get_src_coords(t_ftm_pitc_config pitc,
+	t_size index, t_coords scale);
+inline t_coords	get_canvas_coords(t_ftm_pitc_config pitc, t_size index);
 
 #endif
