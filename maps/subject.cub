@@ -9,7 +9,7 @@ EA assets/portugal.xpm
 6_TYPE DOOR
 6_DIRECTION WEST
 6_DOOR assets/salazar.xpm
-6_SIDES assets/wolfenstein/door-side.xpm
+6_SIDES assets/wolfenstein/door-frame.xpm
 3_TYPE WALL
 3_SO assets/dommigueli.xpm
 3_NO NULL
@@ -25,6 +25,11 @@ p_SO assets/portugal.xpm
 p_NO NULL
 p_WE NULL
 p_EA NULL
+9_TYPE WALL
+9_SO assets/cashier.xpm
+9_NO assets/cashier.xpm
+9_WE assets/wolfenstein/door-frame.xpm
+9_EA assets/wolfenstein/door-frame.xpm
 MOUSE FALSE
 
 F 46,39,30
@@ -35,7 +40,7 @@ C 67,63,1
         1011000001110000000000001
         1001000000000000060002001
 111111111011000001110000000000001
-100000000011000001110111112111111
+100000000011000001110111192911111
 11110111111111011100000010001
 11110111111111011101010010001
 11000000110101011100000010001
