@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 22:43:09 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/15 22:50:39 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/16 15:03:25 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@ void	kill_threads(t_game *game)
 	i = -1;
 	while (++i < RENDERING_THREADS)
 		ftt_free_thread(game->rendering_threads[i]);
+	i = -1;
+	while (++i < RAYCASTING_THREADS)
+		ftt_free_thread(game->raycasting_threads[i]);
 }
 
 void	init_threads_e(t_game *game)
@@ -31,6 +34,13 @@ void	init_threads_e(t_game *game)
 	{
 		game->rendering_threads[i] = ftt_thread_new();
 		if (!game->rendering_threads[i])
+			return (fte_set(ERROR_THREAD_INIT));
+	}
+	i = -1;
+	while (++i < RAYCASTING_THREADS)
+	{
+		game->raycasting_threads[i] = ftt_thread_new();
+		if (!game->raycasting_threads[i])
 			return (fte_set(ERROR_THREAD_INIT));
 	}
 }

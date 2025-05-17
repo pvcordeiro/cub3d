@@ -6,152 +6,111 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 12:05:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/14 21:17:10 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/17 02:21:01 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "player.h"
 
-static t_entity	*hit_entity(t_game *game, t_coords coords)
+double	ft_distance(t_coords a, t_coords b)
 {
-	t_entity	*entity;
-	t_list		*curr;
+	return (sqrt(pow(a.x - b.x, 2) + pow(a.y - b.y, 2)));
+}
+
+static t_entity	*get_hit_entity(t_game *game, t_coords coords)
+{
+    t_list		*curr;
+    t_entity	*curr_entity;
 
 	curr = game->entities;
-	while (curr)
-	{
-		entity = curr->data;
-		curr = curr->next;
-		if (!entity->block
-			|| (int)entity->coords.x != (int)coords.x
-			|| (int)entity->coords.y != (int)coords.y)
-			continue ;
-		return (entity);
-	}
-	return (NULL);
+    while (curr)
+    {
+        curr_entity = curr->data;
+        curr = curr->next;
+        if (curr_entity->block
+            && coords.x >= curr_entity->coords.x
+            && coords.x <= (curr_entity->coords.x + 1.0)
+            && coords.y >= curr_entity->coords.y
+            && coords.y <= (curr_entity->coords.y + 1.0))
+            return (curr_entity);
+    }
+    return (NULL);
 }
 
-static void	init_dda_ray_data(t_dda_ray *data, t_coords coords)
+static t_direction	get_hit_direction(bool last_move_was_x, t_coords hit_pos, t_entity *entity)
 {
-	double	angle_rad;
-
-	angle_rad = ft_normalize_angle(coords.yaw) * PI / 180.0;
-	data->ray_dir.x = cos(angle_rad);
-	data->ray_dir.y = sin(angle_rad);
-	data->map_pos.x = (int)coords.x;
-	data->map_pos.y = (int)coords.y;
-	if (data->ray_dir.x == 0)
-		data->delta_dist.x = 1e30;
-	else
-		data->delta_dist.x = fabs(1 / data->ray_dir.x);
-	if (data->ray_dir.y == 0)
-		data->delta_dist.y = 1e30;
-	else
-		data->delta_dist.y = fabs(1 / data->ray_dir.y);
+    if (last_move_was_x)
+    {
+        if(hit_pos.x > entity->coords.x + 0.5)
+			return (EAST);
+		return (WEST);
+    }
+	if (hit_pos.y > entity->coords.y + 0.5)
+		return (SOUTH);
+	return (NORTH);
 }
 
-static void	set_step_and_side_dist(t_dda_ray *data, t_coords coords)
+static double	get_x_or_y_of_hit(t_coords hit, t_entity *entity, t_direction direction)
 {
-	if (data->ray_dir.x < 0)
-	{
-		data->step.x = -1;
-		data->side_dist.x = (coords.x - data->map_pos.x) * data->delta_dist.x;
-	}
-	else
-	{
-		data->step.x = 1;
-		data->side_dist.x = (data->map_pos.x + 1.0 - coords.x)
-			* data->delta_dist.x;
-	}
-	if (data->ray_dir.y < 0)
-	{
-		data->step.y = -1;
-		data->side_dist.y = (coords.y - data->map_pos.y) * data->delta_dist.y;
-	}
-	else
-	{
-		data->step.y = 1;
-		data->side_dist.y = (data->map_pos.y + 1.0 - coords.y)
-			* data->delta_dist.y;
-	}
-}
-
-static double	perform_dda(t_dda_ray *data, t_game *game)
-{
-	t_coords	check_pos;
-
-	while (1)
-	{
-		if (data->side_dist.x < data->side_dist.y)
-		{
-			data->side_dist.x += data->delta_dist.x;
-			data->map_pos.x += data->step.x;
-			data->side = 0;
-		}
-		else
-		{
-			data->side_dist.y += data->delta_dist.y;
-			data->map_pos.y += data->step.y;
-			data->side = 1;
-		}
-		check_pos = (t_coords){data->map_pos.x, data->map_pos.y, 0, 0};
-		if (hit_entity(game, check_pos))
-			break ;
-		if (data->map_pos.x < 0 || data->map_pos.x >= game->map->size.width
-			|| data->map_pos.y < 0 || data->map_pos.y >= game->map->size.height)
-			return (PLAYER_RAYS_NO_HIT_LENGTH);
-	}
+	if (!entity)
+		return (0);
+	if (direction == NORTH || direction == SOUTH)
+		return (hit.x - entity->coords.x);
+	else if (direction == EAST || direction == WEST)
+		return (hit.y - entity->coords.y);
 	return (0);
 }
 
-static double	calculate_wall_dist(t_dda_ray *data, t_coords coords)
+double	get_distance(t_coords coords, t_entity *entity, t_direction hit_direction, double x)
 {
-	double	wall_dist;
+	t_coords	entity_coords;
 
-	if (data->side == 0)
-	{
-		wall_dist = (data->map_pos.x - coords.x + (1 - data->step.x) / 2)
-		/ data->ray_dir.x;
-		if (data->step.x > 0)
-        	data->direction_of_hit_on_entity = WEST;
-		else
-			data->direction_of_hit_on_entity = EAST;
-	}
-	else
-	{
-		wall_dist = (data->map_pos.y - coords.y + (1 - data->step.y) / 2)
-			/ data->ray_dir.y;
-		if (data->step.y > 0)
-			data->direction_of_hit_on_entity = NORTH;
-		else
-			data->direction_of_hit_on_entity = SOUTH;
-	}
-	return (wall_dist);
-}
-
-static void	calculate_wall_hit(t_dda_ray *data, t_coords coords, t_entity *entity_hit)
-{
-	data->hit_entity = entity_hit;
-	if (data->side == 0)
-		data->wall_x = coords.y + data->length * data->ray_dir.y;
-	else
-		data->wall_x = coords.x + data->length * data->ray_dir.x;
-	data->wall_x -= floor(data->wall_x);
+	entity_coords = entity->coords;
+	if (hit_direction == SOUTH)
+		entity_coords.y += 1.0;
+	if (hit_direction == EAST)
+		entity_coords.x += 1.0;
+	if (hit_direction == WEST || hit_direction == EAST)
+		entity_coords.y += x;
+	if (hit_direction == NORTH || hit_direction == SOUTH)
+		entity_coords.x += x;
+	return (ft_distance(coords, entity_coords));
 }
 
 t_raycast	send_ray(t_game *game, t_coords coords)
 {
-	t_dda_ray	data;
-	double		result;
-	t_entity	*entity_hit;
+	t_entity	*entity;
+	t_coords	ray_coords;
+	t_direction	hit_direction;
+	double		step_x;
+	double		step_y;
+	bool		last_move_was_x;
+	int			travelled;
+	double		xhit;
 
-	init_dda_ray_data(&data, coords);
-	set_step_and_side_dist(&data, coords);
-	result = perform_dda(&data, game);
-	if (result > 0)
-		return ((t_raycast){result, NULL, 0, 0});
-	data.length = calculate_wall_dist(&data, coords);
-	entity_hit = hit_entity(game, (t_coords){data.map_pos.x, data.map_pos.y, 0, 0});
-	calculate_wall_hit(&data, coords, entity_hit);
-	return ((t_raycast){data.length, entity_hit, data.wall_x, data.direction_of_hit_on_entity});
+	step_x = cos(coords.yaw * FT_MLX_UTILS_PI / 180.0) * 0.1;
+	step_y = sin(coords.yaw * FT_MLX_UTILS_PI / 180.0) * 0.1;
+	ray_coords = coords;
+	last_move_was_x = false;
+	travelled = 0;
+	while (travelled < 200)
+	{
+		ray_coords.y += step_y;
+		last_move_was_x = false;
+		entity = get_hit_entity(game, ray_coords);
+		if (entity)
+			break;
+		ray_coords.x += step_x;
+		last_move_was_x = true;
+		entity = get_hit_entity(game, ray_coords);
+		if (entity)
+			break;
+		++travelled;
+	}
+	if (!entity)
+		return ((t_raycast){0, NULL, 0, 0});
+	hit_direction = get_hit_direction(last_move_was_x, ray_coords, entity);
+	xhit = get_x_or_y_of_hit(ray_coords, entity, hit_direction);
+	return ((t_raycast){get_distance(coords, entity, hit_direction, xhit), entity,
+		xhit, hit_direction});
 }
