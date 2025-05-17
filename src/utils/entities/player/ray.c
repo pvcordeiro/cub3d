@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 12:05:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/10 20:43:22 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/17 13:08:21 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,17 @@ static void	init_dda_ray_data(t_dda_ray *data, t_coords coords)
 {
 	double	angle_rad;
 
-	angle_rad = ft_normalize_angle(coords.yaw) * PI / 180.0;
+	angle_rad = ft_normalize_angle(coords.yaw) * (PI / 180.0);
 	data->ray_dir.x = cos(angle_rad);
 	data->ray_dir.y = sin(angle_rad);
 	data->map_pos.x = (int)coords.x;
 	data->map_pos.y = (int)coords.y;
 	if (data->ray_dir.x == 0)
-		data->delta_dist.x = 1e30;
+		data->delta_dist.x = INFINITY;
 	else
 		data->delta_dist.x = fabs(1 / data->ray_dir.x);
 	if (data->ray_dir.y == 0)
-		data->delta_dist.y = 1e30;
+		data->delta_dist.y = INFINITY;
 	else
 		data->delta_dist.y = fabs(1 / data->ray_dir.y);
 }

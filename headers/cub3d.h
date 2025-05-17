@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/15 14:26:07 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/17 13:12:50 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@
 
 // Window Config
 # define W_TITLE "Wolfenstein"
-# define W_WIDTH 1024
-# define W_HEIGHT 768
+# define W_WIDTH 960
+# define W_HEIGHT 720
 # define FPS60 0.01666666667
 
 // Default minimap size multipliers
@@ -48,8 +48,8 @@
 
 // Player Config
 # define PLAYER_RAYS_NO_HIT_LENGTH 50.0
-# define PLAYER_FOV 90.0
-# define PLAYER_RAYS 512
+# define PLAYER_FOV 50.0
+# define PLAYER_RAYS 480
 # define PLAYER_HITBOX_RADIUS 0.23
 # define PLAYER_MOUSE_LOOK_VELOCITY 3.5
 # define PLAYER_KEY_LOOK_VELOCITY 7.0

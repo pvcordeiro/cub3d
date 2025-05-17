@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lines.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:37:16 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/08 14:42:03 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/17 13:08:19 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void	ftm_draw_line_angle(t_ftm_image *canvas, t_coords start,
 	static t_coords	end;
 
 	start.yaw = ft_normalize_angle(start.yaw);
-	end.x = start.x + cos(start.yaw * FT_MLX_UTILS_PI / 180.0) * length;
-	end.y = start.y + sin(start.yaw * FT_MLX_UTILS_PI / 180.0) * length;
+	end.x = start.x + cos(start.yaw * (FT_MLX_UTILS_PI / 180.0)) * length;
+	end.y = start.y + sin(start.yaw * (FT_MLX_UTILS_PI / 180.0)) * length;
 	ftm_draw_line(canvas, start, end, color);
 }
 
