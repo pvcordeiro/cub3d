@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/17 22:13:02 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/18 10:42:41 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ static t_ftm_pitc_config	get_animation_config(t_ftm_image *frame, int i)
 	t_ftm_pitc_config	config;
 
 	ft_bzero(&config, sizeof(t_ftm_pitc_config));
-	config.coords = (t_coords){(frame->size.width / DOOR_ANIMATION_FRAMES) * i, 0, 0, 0};
+	config.coords = (t_coords){(frame->size.width / DOOR_ANIMATION_FRAMES) * i, 0, 0};
 	return (config);
 }
 

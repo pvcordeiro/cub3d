@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:16:16 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/15 17:08:28 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/18 10:43:14 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	init_minimap(t_ftm_window *window, t_game *game)
 	minimap->width_multiplier = MINIMAP_WIDTH_MULTIPLIER;
 	minimap->height_multiplier = MINIMAP_HEIGHT_MULTIPLIER;
 	minimap->coords = (t_coords){10, window->size.height
-		- (window->size.height * minimap->height_multiplier) - 10, 0, 0};
+		- (window->size.height * minimap->height_multiplier) - 10, 0};
 	minimap->size = (t_size){window->size.width
 		* game->minimap.width_multiplier, window->size.height
 		* game->minimap.height_multiplier};
