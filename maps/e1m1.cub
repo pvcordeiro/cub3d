@@ -12,6 +12,15 @@ EA assets/wolfenstein/blue-wall-cage-skull.xpm
 3_NO assets/wolfenstein/blue-wall-cage.xpm
 3_WE assets/wolfenstein/door-frame.xpm
 3_EA assets/wolfenstein/door-frame.xpm
+4_TYPE DOOR
+4_DIRECTION WEST
+4_DOOR assets/wolfenstein/electric-door-button.xpm
+4_SIDES NULL
+5_TYPE WALL
+5_SO assets/wolfenstein/lever-up.xpm
+5_NO assets/wolfenstein/lever-up.xpm
+5_WE assets/wolfenstein/lever-up.xpm
+5_EA assets/wolfenstein/lever-up.xpm
 6_TYPE DOOR
 6_DIRECTION WEST
 6_DOOR assets/wolfenstein/door.xpm
@@ -66,7 +75,7 @@ C 50, 50, 50
 1000111110001                   1100011       11000600000000011
 100011111000111111111111111     1100011       11000700000000011
 100000000000000070000000111     1100011       11111110101010111
-100000000000000060000000001     1100011       11111111111111111
+100000000000000060000000405     1100011       11111111111111111
 100000000000000070000000111     1100011
 111111111111111172111111111  111110001111111
         111001006001        1111113231111111
