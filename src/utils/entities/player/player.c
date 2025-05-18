@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/18 10:42:32 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/18 14:03:36 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,10 +209,10 @@ t_player	*player_new(char direction)
 	if (direction == 'W')
 		player->base.coords.yaw = 180.0;
 	else if (direction == 'S')
-		player->base.coords.yaw = 0.0;
+		player->base.coords.yaw = 90.0;
 	else if (direction == 'N')
 		player->base.coords.yaw = 270.0;
 	else if (direction == 'E')
-		player->base.coords.yaw = 90.0;
+		player->base.coords.yaw = 00.0;
 	return (player);
 }
