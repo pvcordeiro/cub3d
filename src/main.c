@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:15:19 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/17 11:53:50 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/18 12:23:34 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	main(int argc, char **argv)
 {
 	(void)argc;
 	fte_storage()->exit = cub3d_exit;
+	fta_init_engine_e();
+	fte_assert();
 	ftm_create_window_e(&cub3d()->window, (t_size){W_WIDTH, W_HEIGHT}, W_TITLE);
 	fte_assert();
 	load_placeholder_sprite_e(&cub3d()->window, &cub3d()->placeholder);
@@ -43,6 +45,8 @@ int	main(int argc, char **argv)
 	cub3d()->window.exit_hook = cub3d_exit;
 	cub3d()->window.mouse_hook = mouse_hook;
 	ftm_update_hooks(&cub3d()->window);
+	t_fta_audio *billiosmustsmile = fta_audio_new("billiosmustsmile.mp3");
+	fta_play(billiosmustsmile);
 	ftm_window_loop(&cub3d()->window);
 	cub3d_exit(0);
 }

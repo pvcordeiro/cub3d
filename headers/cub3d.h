@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/17 21:47:53 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/18 12:00:33 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <ft_utils.h>
 # include <ft_mlx_utils.h>
 # include <ft_threads.h>
+# include <ft_audio.h>
 
 // External Libs
 # include <X11/keysym.h>
@@ -199,6 +200,10 @@ typedef struct s_hud
 	t_hud_debug		debug;
 }	t_hud;
 
+typedef struct s_audio
+{
+}	t_audio;
+
 typedef struct s_game
 {
 	t_time				last_frame;
@@ -207,6 +212,7 @@ typedef struct s_game
 	t_hud				hud;
 	t_environment		environment;
 	t_minimap			minimap;
+	t_audio				audio;
 	t_map				*map;
 	t_player			*player;
 	t_list				*entities;

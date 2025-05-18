@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 22:05:32 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/15 22:46:31 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/18 11:40:51 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef enum e_error
 	ERROR_CEILING_OR_FLOORING_UNDEFINED,
 	ERROR_DOOR_SPRITE_MISSING,
 	ERROR_THREAD_INIT,
+	ERROR_AUDIO_ENGINE_INIT,
 }	t_error;
 
 typedef struct s_error_storage
@@ -81,6 +82,7 @@ typedef struct s_error_storage
 # define ERROR_INIT_DOOR_FRAME_MSG "Initializing door frame error"
 # define ERROR_DOOR_SPRITE_MISSING_MSG "Door sprite missing"
 # define ERROR_THREAD_INIT_MSG "Thread initialization error"
+# define ERROR_AUDIO_ENGINE_INIT_MSG "Audio engine initialization error"
 # define ERROR_INVALID_MSG "Invalid Error"
 
 // Set ft_error global error
