@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+         #
+#    By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/26 17:16:21 by afpachec          #+#    #+#              #
-#    Updated: 2025/05/10 13:29:13 by afpachec         ###   ########.fr        #
+#    Updated: 2025/05/18 14:54:59 by paude-so         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3d
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -g -O3
 INCLUDES = -I headers
 LIBS = -L lib
 LDLIBS = -lmlx -lX11 -lXext -lm

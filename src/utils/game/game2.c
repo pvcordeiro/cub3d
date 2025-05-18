@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:20:04 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/10 13:35:38 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/18 14:52:59 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	init_sprites_e(t_ftm_window *window, t_game *game)
 
 	fte_set(ERROR_NO_ERROR);
 	el = *game->map->types->table;
+	image = NULL;
 	while (el)
 	{
 		if (ft_strequal(el->value, "NULL") || (ft_str_endswith(el->value, ".xpm") && ft_is_file(el->value)))
