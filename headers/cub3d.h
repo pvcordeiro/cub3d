@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/18 14:09:04 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/18 17:45:50 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,7 +249,7 @@ void		mouse_hook(t_coords coords);
 
 // Render
 void		render_ceiling_and_floor(t_game *game, t_ftm_image *canvas);
-void		render_hud(t_game *game);
+void		render_overlay(t_game *game);
 
 // Entities
 void		call_entity_frames(t_list *entities);

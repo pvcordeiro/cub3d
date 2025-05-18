@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hud.h                                              :+:      :+:    :+:   */
+/*   overlay.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/17 20:04:15 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/17 21:42:25 by paude-so         ###   ########.fr       */
+/*   Created: 2025/05/17 19:59:12 by paude-so          #+#    #+#             */
+/*   Updated: 2025/05/18 17:49:16 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HUD_H
-# define HUD_H
+#include "overlay.h"
 
-# include "../render.h"
-
-void	render_debug(t_game *game);
-void	render_image_info(t_game *game);
-
-#endif
+void	render_overlay(t_game *game)
+{
+	if (!game->hud.enabled)
+		return ;
+	render_debug(game);
+	//TODO render_weapon(game);
+	//TODO render_hud(game);
+}
