@@ -6,7 +6,7 @@
 #    By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/26 17:16:21 by afpachec          #+#    #+#              #
-#    Updated: 2025/05/18 19:25:38 by afpachec         ###   ########.fr        #
+#    Updated: 2025/05/18 19:29:23 by afpachec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,9 +76,11 @@ encrypt-wolf3d-assets:
 	@cd assets/wolf3d && zip --password "$$(curl -L accounts.omelhorsite.pt)" -r assets.zip *
 	@cd assets/wolf3d && zip --password "$$(curl -L jokes.omelhorsite.pt)" -r wolf3d-assets.zip assets.zip
 	@cd assets/wolf3d && rm -rf assets.zip
+	@rm -rf assets/wolf3d-assets.zip
 	@mv assets/wolf3d/wolf3d-assets.zip assets
 
 decrypt-wolf3d-assets:
+	@rm -rf assets/wolf3d
 	@cd assets && unzip -P "$$(curl -L jokes.omelhorsite.pt)" wolf3d-assets.zip
 	@cd assets && mkdir -p wolf3d
 	@cd assets/wolf3d && unzip -P "$$(curl -L accounts.omelhorsite.pt)" ../assets.zip
