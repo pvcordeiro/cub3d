@@ -6,7 +6,7 @@
 #    By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/26 17:16:21 by afpachec          #+#    #+#              #
-#    Updated: 2025/05/18 14:54:59 by paude-so         ###   ########.fr        #
+#    Updated: 2025/05/18 16:51:29 by paude-so         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,6 +65,9 @@ re: fclean all
 
 dev: clean $(NAME)
 	./$(NAME) maps/subject.cub
+
+w: clean $(NAME)
+	./$(NAME) maps/e1m1.cub
 
 run: clean $(NAME)
 	@for map in $(MAPS); do echo "Running with $$map" && ./$(NAME) $$map; done
