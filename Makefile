@@ -3,24 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+         #
+#    By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/26 17:16:21 by afpachec          #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2025/05/19 22:33:31 by afpachec         ###   ########.fr        #
-=======
-#    Updated: 2025/05/18 14:54:59 by paude-so         ###   ########.fr        #
->>>>>>> 587033f (added flag and initialized variable to silence warning)
+#    Updated: 2025/05/19 23:30:59 by afpachec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3d
 CC = cc
-<<<<<<< HEAD
 CFLAGS = -Wall -Wextra -Werror -O3 -g -std=c99
-=======
-CFLAGS = -Wall -Wextra -Werror -g -O3
->>>>>>> 587033f (added flag and initialized variable to silence warning)
 INCLUDES = -I headers
 LIBS = -L lib
 LDLIBS = -lmlx -lX11 -lXext -lm -ldl -lpthread
