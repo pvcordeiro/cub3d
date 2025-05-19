@@ -30,6 +30,7 @@ EA assets/wolfenstein/blue-wall-cage-skull.xpm
 7_NO assets/wolfenstein/door-frame.xpm
 7_WE assets/wolfenstein/blue-wall1.xpm
 7_EA assets/wolfenstein/blue-wall-cage-skull.xpm
+MOUSE TRUE
 
 F 50, 50, 50
 C 50, 50, 50
