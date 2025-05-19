@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:27:08 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/19 17:41:55 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/19 21:28:31 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ void	game_start(t_game *game, t_ftm_window *window)
 	window->exit_hook = cub3d_exit;
 	window->mouse_hook = mouse_hook;
 	ftm_update_hooks(window);
-	ft_fprint_hashmap(1, game->sounds);
 	fta_play(ft_hashmap_get_value(game->sounds, "BACKGROUND"));
 	ftm_window_loop(window);
 }

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 11:02:20 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/19 21:02:23 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/19 21:24:39 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ t_fta_audio	*fta_audio_new(const char *path)
 	t_fta_audio	*audio;
 	ma_result	result;
 
+	if (!fta_engine()->initialized)
+		return (NULL);
 	audio = ft_calloc(1, sizeof(t_fta_audio *));
 	if (!audio)
 		return (NULL);
@@ -55,7 +57,7 @@ t_fta_audio	*fta_audio_new(const char *path)
 
 void	fta_clear_audio(void *audio)
 {
-	if (!audio)
+	if (!audio || !fta_engine()->initialized)
 		return ;
 	ma_sound_uninit(&((t_fta_audio *)audio)->sound);
 }
@@ -68,7 +70,7 @@ void	fta_free_audio(void *audio)
 
 void	fta_play(t_fta_audio *audio)
 {
-	if (!audio)
+	if (!audio || !fta_engine()->initialized)
 		return ;
 	ma_sound_start(&audio->sound);
 }

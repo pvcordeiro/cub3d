@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors31.c                                         :+:      :+:    :+:   */
+/*   errors32.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,11 +12,8 @@
 
 #include <ft_error.h>
 
-char	*get_error_message32(t_error _error);
-
-char	*get_error_message31(t_error _error)
+char	*get_error_message32(t_error _error)
 {
-	if (_error == ERROR_LOAD_SOUND)
-		return (ERROR_LOAD_SOUND_MSG);
-	return (get_error_message32(_error));
+	(void)_error;
+	return (ERROR_INVALID_MSG);
 }

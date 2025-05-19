@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 17:18:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/19 17:42:21 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/19 21:28:13 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,10 @@ void	init_sounds_e(t_game *game)
 		if (!ft_str_endswith(curr->value, ".mp3"))
 			return (fte_set(ERROR_INVALID_AUDIO_FORMAT));
 		audio = fta_audio_new(curr->value);
+		if (!audio && fta_engine()->initialized)
+			return (fte_set(ERROR_LOAD_SOUND));
 		if (!audio)
-			return (fte_set(ERROR_LOAD_SPRITE));
+			continue ;
 		key = ft_strndup(curr->key, ft_strlen(curr->key) - 6);
 		ft_hashmap_set(game->sounds, key, audio, fta_free_audio);
 		free(key);

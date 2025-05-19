@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:15:19 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/19 17:38:28 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/19 21:24:58 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main(int argc, char **argv)
 {
 	(void)argc;
 	fte_storage()->exit = cub3d_exit;
-	fta_init_engine_e();
+	// fta_init_engine_e();
 	fte_assert();
 	ftm_create_window_e(&cub3d()->window, (t_size){W_WIDTH, W_HEIGHT}, W_TITLE);
 	fte_assert();
