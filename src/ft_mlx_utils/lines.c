@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lines.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:37:16 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/17 14:28:35 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/18 10:40:57 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,16 @@ void	ftm_draw_line(t_ftm_image *canvas, t_coords start, t_coords end,
 	double		step;
 	int			i;
 
-	dxy = (t_coords){end.x - start.x, end.y - start.y, 0, 0};
+	dxy = (t_coords){end.x - start.x, end.y - start.y, 0};
 	step = FT_MLX_UTILS_DRAW_LINE_STEP;
 	dxy.x /= step;
 	dxy.y /= step;
-	xy = (t_coords){start.x, start.y, 0, 0};
+	xy = (t_coords){start.x, start.y, 0};
 	i = 0;
 	while (i <= step)
 	{
 		ftm_set_pixel(ftm_image_pixel(canvas,
-				(t_coords){xy.x, xy.y, 0, 0}), color);
+				(t_coords){xy.x, xy.y, 0}), color);
 		xy.x += dxy.x;
 		xy.y += dxy.y;
 		i++;
@@ -65,7 +65,7 @@ void	ftm_draw_rectangle(t_ftm_image *canvas, t_coords coords, t_size size,
 				|| j == 0 || j == size.height - rectangle.border_size.height)
 				tmp_color = rectangle.border_color;
 			ftm_set_pixel(ftm_image_pixel(canvas,
-					(t_coords){coords.x + i, coords.y + j, 0, 0}), tmp_color);
+					(t_coords){coords.x + i, coords.y + j, 0}), tmp_color);
 		}
 	}
 }

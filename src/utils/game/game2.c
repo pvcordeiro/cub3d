@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:20:04 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/18 00:21:09 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/19 23:29:51 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	init_sprites_e(t_ftm_window *window, t_game *game)
 	fte_set(ERROR_NO_ERROR);
 	image = NULL;
 	el = *game->map->types->table;
+	image = NULL;
 	while (el)
 	{
 		if (ft_strequal(el->value, "NULL") || (ft_str_endswith(el->value, ".xpm") && ft_is_file(el->value)))

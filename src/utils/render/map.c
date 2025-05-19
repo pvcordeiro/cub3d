@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 22:33:42 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/17 15:25:36 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/18 10:43:47 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	render_entity(t_ftm_image *canvas, t_game *game, t_entity *entity, t
 	unsigned	color;
 	t_coords		new_coords;
 
-	new_coords = (t_coords){(int)(coords.x + (entity->coords.x * entity_size.width)), (int)(coords.y + (entity->coords.y * entity_size.height)), 0, 0};
+	new_coords = (t_coords){(int)(coords.x + (entity->coords.x * entity_size.width)), (int)(coords.y + (entity->coords.y * entity_size.height)), 0};
 	set_entity_color(game, entity, &color);
 	if (entity->type == ENTITY_PLAYER)
 	{
@@ -91,12 +91,12 @@ static void render_entities(t_ftm_image *canvas, t_game *game, t_coords coords, 
         entity = entity_item->data;
         if (entity != (t_entity *)game->player)
             render_entity(canvas, game, entity,
-                    (t_coords){coords.x + add_to_last.width, coords.y + add_to_last.height, 0, 0},
+                    (t_coords){coords.x + add_to_last.width, coords.y + add_to_last.height, 0},
                     entity_size);
         entity_item = entity_item->next;
     }
     render_entity(canvas, game, (t_entity *)game->player,
-        (t_coords){coords.x + add_to_last.width, coords.y + add_to_last.height, 0, 0},
+        (t_coords){coords.x + add_to_last.width, coords.y + add_to_last.height, 0},
         entity_size);
 }
 

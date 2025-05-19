@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/17 15:21:12 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/19 22:52:17 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	move_player_x(t_list *entities, t_player *player, double angle_radia
 	double	new_x;
 
 	new_x = player->base.coords.x + velocity * cos(angle_radians);
-	if (!position_overlaps(entities, player, (t_coords){new_x, player->base.coords.y, 0, 0}))
+	if (!position_overlaps(entities, player, (t_coords){new_x, player->base.coords.y, 0}))
 		player->base.coords.x = new_x;
 }
 
@@ -54,7 +54,7 @@ static void	move_player_y(t_list *entities, t_player *player, double angle_radia
 	double	new_y;
 
 	new_y = player->base.coords.y + velocity * sin(angle_radians);
-	if (!position_overlaps(entities, player, (t_coords){player->base.coords.x, new_y, 0, 0}))
+	if (!position_overlaps(entities, player, (t_coords){player->base.coords.x, new_y, 0}))
 		player->base.coords.y = new_y;
 }
 
@@ -157,7 +157,8 @@ static void	player_rays(t_game *game, t_player *player)
 	i = -1;
 	while (++i < RAYCASTING_THREADS)
 		ftt_thread_wait(game->raycasting_threads[i]);
-	player->looking_at_entity = player->rays[PLAYER_RAYS / 2][0].hit_entity;
+	player->target_entity = player->rays[PLAYER_RAYS / 2][0].hit_entity;
+	player->target_entity_direction = player->rays[PLAYER_RAYS / 2][0].direction_of_hit_on_entity;
 }
 
 static void	player_mouse_moviment(t_player *player)
@@ -172,9 +173,9 @@ static void	player_actions(t_player *player)
 	if (player->action && player->already_actioned)
 		return ;
 	player->already_actioned = player->action;
-	if (player->action && player->looking_at_entity
-		&& player->looking_at_entity->action)
-		player->looking_at_entity->action(player->looking_at_entity, (t_entity *)player);
+	if (player->action && player->target_entity
+		&& player->target_entity->action)
+		player->target_entity->action(player->target_entity, (t_entity *)player);
 }
 
 static void	player_frame(t_entity *entity)
@@ -205,13 +206,11 @@ t_player	*player_new(char direction)
 	player->mouse_look_velocity = PLAYER_MOUSE_LOOK_VELOCITY;
 	player->walk_velocity = PLAYER_WALK_VELOCITY;
 	player->sprint_velocity = PLAYER_SPRINT_VELOCITY;
-	if (direction == 'W')
-		player->base.coords.yaw = 180.0;
-	else if (direction == 'S')
-		player->base.coords.yaw = 0.0;
-	else if (direction == 'N')
+	if (direction == 'N')
 		player->base.coords.yaw = 270.0;
-	else if (direction == 'E')
+	else if (direction == 'S')
 		player->base.coords.yaw = 90.0;
+	else if (direction == 'W')
+		player->base.coords.yaw = 180.0;
 	return (player);
 }

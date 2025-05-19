@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hud.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 20:04:15 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/17 21:16:22 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/19 23:14:32 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 
 # include "../render.h"
 
-void	render_debug(t_game *game);
+void	render_debug(t_game *game, t_ftm_image *canvas);
 
 #endif

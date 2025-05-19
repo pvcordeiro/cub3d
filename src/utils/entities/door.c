@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   door.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/17 21:34:13 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/18 10:42:41 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ static t_ftm_pitc_config	get_animation_config(t_ftm_image *frame, int i)
 	t_ftm_pitc_config	config;
 
 	ft_bzero(&config, sizeof(t_ftm_pitc_config));
-	config.coords = (t_coords){(frame->size.width / DOOR_ANIMATION_FRAMES) * i, 0, 0, 0};
+	config.coords = (t_coords){(frame->size.width / DOOR_ANIMATION_FRAMES) * i, 0, 0};
 	return (config);
 }
 
@@ -127,7 +127,7 @@ static void	init_animation_sprites(t_door *door, t_ftm_window *window)
 	door_image = door->door_sprite->images->data;
 	init_sprite(&door->opening_sprite, NULL, 0);
 	i = -1;
-	while (++i < DOOR_ANIMATION_FRAMES)
+	while (++i < DOOR_ANIMATION_FRAMES - 1)
 	{
 		frame = ftm_image_new(window, door_image->size);
 		if (!frame)
@@ -135,6 +135,7 @@ static void	init_animation_sprites(t_door *door, t_ftm_window *window)
 		ftm_put_image_to_canvas(frame, door_image, get_animation_config(frame, i));
 		ft_list_add(&door->opening_sprite.images, frame, ftm_free_image);
 	}
+	ft_list_add(&door->opening_sprite.images, NULL, NULL);
 }
 
 t_door	*door_new_e(char identifier, t_ftm_window *window, t_game *game)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:38:00 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/10 14:56:05 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/18 10:42:03 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,6 @@ int window_exit_hook(void *window)
 int window_mouse_hook(int x, int y, void *window)
 {
 	if (((t_ftm_window *)window)->mouse_hook)
-		((t_ftm_window *)window)->mouse_hook((t_coords){x, y, 0, 0});
+		((t_ftm_window *)window)->mouse_hook((t_coords){x, y, 0});
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:48:02 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/18 00:42:24 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/19 23:32:28 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static inline bool	is_under_zero(t_size a, t_size b)
 static inline t_coords	get_scale(t_size a, t_size b)
 {
 	return ((t_coords){(double)a.width / b.width,
-		(double)a.height / b.height, 0, 0});
+		(double)a.height / b.height, 0});
 }
 
 void	ftm_put_image_to_canvas(t_ftm_image *canvas, t_ftm_image *image,

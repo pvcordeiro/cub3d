@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 19:05:41 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/17 15:13:09 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/18 10:44:04 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ static t_ftm_pitc_config	get_pitc_config(int i, t_size *ray_size, t_ftm_image *i
 {
 	ray->_height = ray_size->height;
 	return ((t_ftm_pitc_config){
-			(t_coords){i * ray_size->width, (W_HEIGHT - ray_size->height) / 2, 0, 0},
+			(t_coords){i * ray_size->width, (W_HEIGHT - ray_size->height) / 2, 0},
 			true,
-			(t_coords){(int)(ray->x_of_hit_in_entity * image->size.width), 0, 0, 0}, 
-			(t_coords){(int)(ray->x_of_hit_in_entity * image->size.width) + 1, image->size.height, 0, 0},
+			(t_coords){(int)(ray->x_of_hit_in_entity * image->size.width), 0, 0}, 
+			(t_coords){(int)(ray->x_of_hit_in_entity * image->size.width) + 1, image->size.height, 0},
 			true,
 			*ray_size,
 			ray,
