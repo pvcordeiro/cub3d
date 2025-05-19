@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 12:15:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/17 11:56:11 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/19 22:27:57 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,8 +156,10 @@ t_time					ft_get_time(void);
 void					ft_fprint_list(int fd, t_list *list,
 							char *(*to_str)(void *data));
 
-bool					ft_list_any(t_list *list, bool (*condition)(void *data, void *params), void *params);
-bool					ft_str_all_params(char *str, bool (*func)(char, void *), void *params);
+bool					ft_list_any(t_list *list, bool (*condition)(void *data,
+								void *params), void *params);
+bool					ft_str_all_params(char *str, bool (*func)(char, void *),
+							void *params);
 char					*ft_strf(char *format, ...);
 double					ft_atof(const char *str);
 

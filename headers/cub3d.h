@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/19 21:57:35 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/19 22:26:38 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,8 @@ typedef struct s_entity
 {
 	void			(*frame)(struct s_entity *this);
 	void			(*free)(void *this);
-	void			(*action)(struct s_entity *entity, struct s_entity *actioner);
+	void			(*action)(struct s_entity *entity,
+			struct s_entity *actioner);
 	bool			transparent;
 	bool			hard;
 	bool			block;
@@ -149,7 +150,7 @@ typedef struct s_door
 	bool		opened;
 }	t_door;
 
-typedef struct	s_identifiers
+typedef struct s_identifiers
 {
 	t_list	*wall;
 	t_list	*player;
@@ -245,7 +246,7 @@ void		free_map(t_map *map);
 
 // Loop
 void		loop(void);
-void	    key_hook(int key, bool down);
+void		key_hook(int key, bool down);
 void		mouse_hook(t_coords coords);
 
 // Render
