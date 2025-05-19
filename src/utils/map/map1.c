@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map1.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 08:42:58 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/17 11:46:35 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/19 21:01:52 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,13 @@ t_map	*parse_map_e(char *path)
 		return (fte_set(ERROR_INVALID_MAP), NULL);
 	read_map_raw_lines_e(map);
 	if (fte_flagged())
-		return (ft_strvfree(map->raw), free(map), NULL);
+		return (clear_map(map), NULL);
 	process_raw_map_e(map);
 	if (fte_flagged())
-		return (ft_strvfree(map->raw), ft_hashmap_destroy(map->types), free(map), NULL);
+		return (clear_map(map), NULL);
 	parse_identifiers_e(map);
+	if (fte_flagged())
+		return (clear_map(map), NULL);
 	set_map_size(map);
 	return (map);
 }

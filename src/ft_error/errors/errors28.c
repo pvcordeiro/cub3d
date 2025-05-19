@@ -12,8 +12,11 @@
 
 #include <ft_error.h>
 
+char	*get_error_message29(t_error _error);
+
 char	*get_error_message28(t_error _error)
 {
-	(void)_error;
-	return (ERROR_INVALID_MSG);
+	if (_error == ERROR_AUDIO_ENGINE_INIT)
+		return (ERROR_AUDIO_ENGINE_INIT_MSG);
+	return (get_error_message29(_error));
 }

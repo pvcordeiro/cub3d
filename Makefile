@@ -6,16 +6,16 @@
 #    By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/26 17:16:21 by afpachec          #+#    #+#              #
-#    Updated: 2025/05/18 00:23:35 by afpachec         ###   ########.fr        #
+#    Updated: 2025/05/19 22:33:31 by afpachec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3d
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -O3 -g
+CFLAGS = -Wall -Wextra -Werror -O3 -g -std=c99
 INCLUDES = -I headers
 LIBS = -L lib
-LDLIBS = -lmlx -lX11 -lXext -lm
+LDLIBS = -lmlx -lX11 -lXext -lm -ldl -lpthread
 SRCS = $(shell find src -name "**.c")
 OBJ_DIR = obj
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
@@ -30,7 +30,7 @@ endif
 
 all: $(NAME)
 
-$(NAME): lib/libmlx.a $(OBJS)
+$(NAME): assets/wolf3d lib/libmlx.a $(OBJS)
 	@$(CC) -o $(NAME) $(OBJS) $(CFLAGS) $(INCLUDES) $(LIBS) $(LDLIBS)
 	@echo "\033[1;32mCompiled \033[1;0m\"$(OBJS)\"\033[1;32m into \033[1;0m\"$(NAME)\"\033[1;32m.\033[0m"
 
@@ -71,6 +71,22 @@ run: clean $(NAME)
 
 val: re
 	@valgrind --show-leak-kinds=all --leak-check=full --track-fds=all ./$(NAME) maps/subject.cub
+
+update-wolf3d-assets:
+	@echo "\033[1;32mEncrypting \033[1;0m\"assets/wolf3d\"\033[1;32m into \033[1;0m\"assets/wolf3d-assets.zip\"\033[1;32m.\033[0m"
+	@cd assets/wolf3d && zip --password "$$(curl -sSL accounts.omelhorsite.pt)" -qr assets.zip *
+	@cd assets/wolf3d && zip --password "$$(curl -sSL jokes.omelhorsite.pt)" -qr wolf3d-assets.zip assets.zip
+	@cd assets/wolf3d && rm -rf assets.zip
+	@rm -rf assets/wolf3d-assets.zip
+	@mv assets/wolf3d/wolf3d-assets.zip assets
+
+assets/wolf3d:
+	@echo "\033[1;32mDecrypting \033[1;0m\"assets/wolf3d-assets.zip\"\033[1;32m into \033[1;0m\"assets/wolf3d\"\033[1;32m.\033[0m"
+	@rm -rf assets/wolf3d
+	@cd assets && unzip -q -P "$$(curl -sSL jokes.omelhorsite.pt)" wolf3d-assets.zip
+	@cd assets && mkdir -p wolf3d
+	@cd assets/wolf3d && unzip -q -P "$$(curl -sSL accounts.omelhorsite.pt)" ../assets.zip
+	@rm -rf assets/assets.zip
 
 errors:
 	@bash -c "python3 <(git show error-msgs-script:gen_error_msgs.py)"

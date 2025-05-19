@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:15:19 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/17 11:53:50 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/19 21:32:38 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	main(int argc, char **argv)
 {
 	(void)argc;
 	fte_storage()->exit = cub3d_exit;
+	fta_init_e();
+	fte_assert();
 	ftm_create_window_e(&cub3d()->window, (t_size){W_WIDTH, W_HEIGHT}, W_TITLE);
 	fte_assert();
 	load_placeholder_sprite_e(&cub3d()->window, &cub3d()->placeholder);
@@ -38,11 +40,6 @@ int	main(int argc, char **argv)
 	fte_assert();
 	game_load_map_e(&cub3d()->game, &cub3d()->window, cub3d()->curr_map);
 	fte_assert();
-	cub3d()->window.loop_hook = loop;
-	cub3d()->window.key_hook = key_hook;
-	cub3d()->window.exit_hook = cub3d_exit;
-	cub3d()->window.mouse_hook = mouse_hook;
-	ftm_update_hooks(&cub3d()->window);
-	ftm_window_loop(&cub3d()->window);
+	game_start(&cub3d()->game, &cub3d()->window);
 	cub3d_exit(0);
 }

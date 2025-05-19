@@ -4,3 +4,4 @@ headers/mlx.h
 lib/libmlx.a
 lib/minilibx-linux
 .vscode
+assets/wolf3d
