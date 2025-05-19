@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:21:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/14 23:01:50 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/17 21:31:05 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,7 @@ void    key_hook(int key, bool down)
 		cub3d()->game.minimap.full = down;
 	if (key == XK_Escape)
 		cub3d_exit(0);
+	if (key == XK_F3 && down)
+		cub3d()->game.hud.enabled = !cub3d()->game.hud.enabled;
 }
 

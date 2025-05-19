@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 20:04:15 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/17 21:16:22 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/17 21:42:25 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,6 @@
 # include "../render.h"
 
 void	render_debug(t_game *game);
+void	render_image_info(t_game *game);
 
 #endif
