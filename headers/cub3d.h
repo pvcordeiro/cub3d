@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/19 21:00:51 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/19 21:57:35 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@
 # define MINIMAP_HEIGHT_MULTIPLIER 0.25
 
 // Placeholder Image
-# define PLACEHOLDER_IMAGE_PATH "assets/placeholder.xpm"
+# define PLACEHOLDER_IMAGE_PATH "assets/textures/placeholder.xpm"
 # define PLACEHOLDER_SPRITE_UPDATE_DELAY 0
 
 // Player Config
@@ -60,7 +60,7 @@
 # define PLAYER_RAY_HIT_ENTITIES_NUMBER 5
 
 // Door Config
-# define DOOR_ANIMATION_FRAMES 10
+# define DOOR_ANIMATION_FRAMES 64
 
 // Map Config
 # define DEFAULT_AIR_TYPES "0 \t\n\v\f\r"

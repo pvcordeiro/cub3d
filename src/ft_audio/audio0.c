@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 11:02:20 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/19 21:29:17 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/19 21:32:19 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_fta_engine	*fta_engine(void)
 	return (&engine);
 }
 
-void	fta_init_engine_e(void)
+void	fta_init_e(void)
 {
 	ma_result	result;
 
@@ -30,7 +30,7 @@ void	fta_init_engine_e(void)
 	fta_engine()->initialized = true;
 }
 
-void	fta_clear_engine(void)
+void	fta_destroy(void)
 {
 	if (!fta_engine()->initialized)
 		return ;
