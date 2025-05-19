@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/19 23:30:06 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/19 23:31:21 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,7 +194,9 @@ typedef struct s_minimap
 
 typedef struct s_hud_debug
 {
-	char	*dbg_str;
+	char	*fps;
+	char	*target;
+	bool	enabled;
 }	t_hud_debug;
 
 typedef struct s_hud
@@ -250,10 +252,6 @@ void		free_map(t_map *map);
 void		loop(void);
 void		key_hook(int key, bool down);
 void		mouse_hook(t_coords coords);
-
-// Render
-void		render_ceiling_and_floor(t_game *game, t_ftm_image *canvas);
-void		render_hud(t_game *game);
 
 // Entities
 void		call_entity_frames(t_list *entities);

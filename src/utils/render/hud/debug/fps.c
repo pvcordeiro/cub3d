@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   image_info.c                                       :+:      :+:    :+:   */
+/*   fps.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/17 21:41:28 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/19 22:43:05 by afpachec         ###   ########.fr       */
+/*   Created: 2025/05/19 23:04:16 by afpachec          #+#    #+#             */
+/*   Updated: 2025/05/19 23:07:13 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "hud.h"
+#include "debug.h"
 
-void	render_image_info(t_game *game)
+void	set_fps(t_game *game)
 {
-	char	*str;
-	
-	if (!game->player->target_entity)
+	static int	last_fps;
+
+	if (game->fps == last_fps)
 		return ;
-	str = ftm_image_to_str(get_sprite_image(get_entity_sprite(game->player->target_entity, game->player->target_entity_direction)));
-	if (str)
-		mlx_string_put(cub3d()->window.display, cub3d()->window.win, 38, 60, 0xFFFFFFFF, str);
+	last_fps = game->fps;
+	free(game->hud.debug.fps);
+	game->hud.debug.fps = ft_strf("FPS: %d", game->fps);
 }

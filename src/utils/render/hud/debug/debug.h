@@ -1,32 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   loop.c                                             :+:      :+:    :+:   */
+/*   debug.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/06 14:20:20 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/19 23:14:00 by afpachec         ###   ########.fr       */
+/*   Created: 2025/05/17 20:04:15 by paude-so          #+#    #+#             */
+/*   Updated: 2025/05/19 23:08:35 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "loop.h"
+#ifndef DEBUG_H
+# define DEBUG_H
 
-static void	update_frame(t_game *game)
-{
-	++game->frames;
-	if (ft_get_time() - game->last_frame > 1000)
-	{
-		game->last_frame = ft_get_time();
-		game->fps = game->frames;
-		game->frames = 0;
-	}
-}
+# include "../hud.h"
 
-void	loop(void)
-{
-	call_entity_frames(cub3d()->game.entities);
-	render_game(&cub3d()->window, &cub3d()->game);
-	ftm_update_window(&cub3d()->window);
-	update_frame(&cub3d()->game);
-}
+void	set_fps(t_game *game);
+void	set_target(t_game *game);
+
+#endif

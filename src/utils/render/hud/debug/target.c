@@ -1,32 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   loop.c                                             :+:      :+:    :+:   */
+/*   target.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/06 14:20:20 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/19 23:14:00 by afpachec         ###   ########.fr       */
+/*   Created: 2025/05/17 21:41:28 by paude-so          #+#    #+#             */
+/*   Updated: 2025/05/19 23:12:08 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "loop.h"
+#include "debug.h"
 
-static void	update_frame(t_game *game)
+void	set_target(t_game *game)
 {
-	++game->frames;
-	if (ft_get_time() - game->last_frame > 1000)
-	{
-		game->last_frame = ft_get_time();
-		game->fps = game->frames;
-		game->frames = 0;
-	}
-}
-
-void	loop(void)
-{
-	call_entity_frames(cub3d()->game.entities);
-	render_game(&cub3d()->window, &cub3d()->game);
-	ftm_update_window(&cub3d()->window);
-	update_frame(&cub3d()->game);
+	if (!game->player->target_entity)
+		return ;
+	free(game->hud.debug.target);
+	game->hud.debug.target = ftm_image_to_str(get_sprite_image(get_entity_sprite(game->player->target_entity, game->player->target_entity_direction)));
 }

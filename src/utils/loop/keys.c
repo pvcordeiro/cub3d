@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:21:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/19 22:56:34 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/19 23:22:41 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ void    key_hook(int key, bool down)
 	if (key == XK_Escape)
 		cub3d_exit(0);
 	if (key == XK_F3 && down)
+	{
 		cub3d()->game.hud.enabled = !cub3d()->game.hud.enabled;
+		cub3d()->game.hud.debug.enabled = !cub3d()->game.hud.debug.enabled;
+	}
 }
 

@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   hud.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 19:59:12 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/17 22:01:06 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/19 23:21:50 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "hud.h"
-//TODO
-void	render_hud(t_game *game)
+
+void	render_hud(t_game *game, t_ftm_image *canvas)
 {
 	if (!game->hud.enabled)
 		return ;
-	render_debug(game);
-	render_image_info(game);
+	if (game->hud.debug.enabled)
+		render_debug(game, canvas);
 }
