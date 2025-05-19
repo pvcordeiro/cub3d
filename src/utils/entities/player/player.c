@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/18 14:03:36 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/19 22:43:21 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,8 +157,8 @@ static void	player_rays(t_game *game, t_player *player)
 	i = -1;
 	while (++i < RAYCASTING_THREADS)
 		ftt_thread_wait(game->raycasting_threads[i]);
-	player->looking_at_entity = player->rays[PLAYER_RAYS / 2][0].hit_entity;
-	player->looking_at_entity_direction = player->rays[PLAYER_RAYS / 2][0].direction_of_hit_on_entity;
+	player->target_entity = player->rays[PLAYER_RAYS / 2][0].hit_entity;
+	player->target_entity_direction = player->rays[PLAYER_RAYS / 2][0].direction_of_hit_on_entity;
 }
 
 static void	player_mouse_moviment(t_player *player)
@@ -173,9 +173,9 @@ static void	player_actions(t_player *player)
 	if (player->action && player->already_actioned)
 		return ;
 	player->already_actioned = player->action;
-	if (player->action && player->looking_at_entity
-		&& player->looking_at_entity->action)
-		player->looking_at_entity->action(player->looking_at_entity, (t_entity *)player);
+	if (player->action && player->target_entity
+		&& player->target_entity->action)
+		player->target_entity->action(player->target_entity, (t_entity *)player);
 }
 
 static void	player_frame(t_entity *entity)
