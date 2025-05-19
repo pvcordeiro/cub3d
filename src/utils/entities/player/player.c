@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/19 22:43:21 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/19 22:52:17 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,13 +206,11 @@ t_player	*player_new(char direction)
 	player->mouse_look_velocity = PLAYER_MOUSE_LOOK_VELOCITY;
 	player->walk_velocity = PLAYER_WALK_VELOCITY;
 	player->sprint_velocity = PLAYER_SPRINT_VELOCITY;
-	if (direction == 'W')
-		player->base.coords.yaw = 180.0;
+	if (direction == 'N')
+		player->base.coords.yaw = 270.0;
 	else if (direction == 'S')
 		player->base.coords.yaw = 90.0;
-	else if (direction == 'N')
-		player->base.coords.yaw = 270.0;
-	else if (direction == 'E')
-		player->base.coords.yaw = 00.0;
+	else if (direction == 'W')
+		player->base.coords.yaw = 180.0;
 	return (player);
 }
