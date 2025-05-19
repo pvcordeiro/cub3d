@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 11:02:20 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/19 21:24:39 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/19 21:29:17 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_fta_audio	*fta_audio_new(const char *path)
 
 	if (!fta_engine()->initialized)
 		return (NULL);
-	audio = ft_calloc(1, sizeof(t_fta_audio *));
+	audio = ft_calloc(1, sizeof(t_fta_audio));
 	if (!audio)
 		return (NULL);
 	result = ma_sound_init_from_file(&fta_engine()->engine,
