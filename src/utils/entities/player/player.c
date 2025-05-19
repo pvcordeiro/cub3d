@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/17 21:51:39 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/18 10:42:32 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	move_player_x(t_list *entities, t_player *player, double angle_radia
 	double	new_x;
 
 	new_x = player->base.coords.x + velocity * cos(angle_radians);
-	if (!position_overlaps(entities, player, (t_coords){new_x, player->base.coords.y, 0, 0}))
+	if (!position_overlaps(entities, player, (t_coords){new_x, player->base.coords.y, 0}))
 		player->base.coords.x = new_x;
 }
 
@@ -54,7 +54,7 @@ static void	move_player_y(t_list *entities, t_player *player, double angle_radia
 	double	new_y;
 
 	new_y = player->base.coords.y + velocity * sin(angle_radians);
-	if (!position_overlaps(entities, player, (t_coords){player->base.coords.x, new_y, 0, 0}))
+	if (!position_overlaps(entities, player, (t_coords){player->base.coords.x, new_y, 0}))
 		player->base.coords.y = new_y;
 }
 

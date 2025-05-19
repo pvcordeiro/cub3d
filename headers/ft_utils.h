@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 12:15:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/19 22:27:57 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/19 23:29:08 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ typedef struct s_coords
 {
 	double	x;
 	double	y;
-	double	z;
 	double	yaw;
 }	t_coords;
 
