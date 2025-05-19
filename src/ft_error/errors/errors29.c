@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors28.c                                         :+:      :+:    :+:   */
+/*   errors29.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,11 +12,11 @@
 
 #include <ft_error.h>
 
-char	*get_error_message29(t_error _error);
+char	*get_error_message30(t_error _error);
 
-char	*get_error_message28(t_error _error)
+char	*get_error_message29(t_error _error)
 {
-	if (_error == ERROR_AUDIO_ENGINE_INIT)
-		return (ERROR_AUDIO_ENGINE_INIT_MSG);
-	return (get_error_message29(_error));
+	if (_error == ERROR_INVALID_AUDIO_FORMAT)
+		return (ERROR_INVALID_AUDIO_FORMAT_MSG);
+	return (get_error_message30(_error));
 }

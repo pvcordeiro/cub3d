@@ -6,7 +6,7 @@
 #    By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/26 17:16:21 by afpachec          #+#    #+#              #
-#    Updated: 2025/05/18 21:14:31 by afpachec         ###   ########.fr        #
+#    Updated: 2025/05/19 21:00:45 by afpachec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,7 +63,7 @@ fclean: clean
 
 re: fclean all
 
-dev: $(NAME)
+dev: clean $(NAME)
 	./$(NAME) maps/subject.cub
 
 run: clean $(NAME)

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:15:19 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/18 21:12:57 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/19 17:38:28 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,6 @@ int	main(int argc, char **argv)
 	fte_assert();
 	game_load_map_e(&cub3d()->game, &cub3d()->window, cub3d()->curr_map);
 	fte_assert();
-	cub3d()->window.loop_hook = loop;
-	cub3d()->window.key_hook = key_hook;
-	cub3d()->window.exit_hook = cub3d_exit;
-	cub3d()->window.mouse_hook = mouse_hook;
-	ftm_update_hooks(&cub3d()->window);
-	t_fta_audio *billiosmustsmile = fta_audio_new("billiosmustsmile.mp3");
-	fta_play(billiosmustsmile);
-	ftm_window_loop(&cub3d()->window);
+	game_start(&cub3d()->game, &cub3d()->window);
 	cub3d_exit(0);
 }

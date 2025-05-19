@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/18 12:00:33 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/19 21:00:51 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@
 # define PLAYER_RAY_HIT_ENTITIES_NUMBER 5
 
 // Door Config
-# define DOOR_ANIMATION_FRAMES 64
+# define DOOR_ANIMATION_FRAMES 10
 
 // Map Config
 # define DEFAULT_AIR_TYPES "0 \t\n\v\f\r"
@@ -200,10 +200,6 @@ typedef struct s_hud
 	t_hud_debug		debug;
 }	t_hud;
 
-typedef struct s_audio
-{
-}	t_audio;
-
 typedef struct s_game
 {
 	t_time				last_frame;
@@ -212,7 +208,7 @@ typedef struct s_game
 	t_hud				hud;
 	t_environment		environment;
 	t_minimap			minimap;
-	t_audio				audio;
+	t_hashmap			*sounds;
 	t_map				*map;
 	t_player			*player;
 	t_list				*entities;
@@ -230,6 +226,7 @@ typedef struct s_cub3d
 }	t_cub3d;
 
 void		game_load_map_e(t_game *game, t_ftm_window *window, t_map *map);
+void		game_start(t_game *game, t_ftm_window *window);
 void		clear_game(void *game);
 void		free_game(void *game);
 void		render_game(t_ftm_window *window, t_game *game);

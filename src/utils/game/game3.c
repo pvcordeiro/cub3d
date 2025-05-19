@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 23:10:00 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/14 21:07:47 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/19 21:01:07 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ void	init_entities_e(t_game *game, t_ftm_window *window)
 		while (game->map->map[s.height][++s.width])
 		{
 			if (create_entity_e(game, window, game->map->map[s.height][s.width], s), fte_flagged())
+				return ;
+			if (fte_flagged())
 				return ;
 		}
 	}

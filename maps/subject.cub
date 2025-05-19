@@ -31,6 +31,7 @@ p_EA NULL
 9_WE assets/billiosn-ust-smile.xpm
 9_EA assets/billiosn-ust-smile.xpm
 MOUSE FALSE
+BACKGROUND_SOUND assets/wolf3d/sounds/getthem.mp3
 
 F 46,39,30
 C 67,63,1
