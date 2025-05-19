@@ -1,35 +1,36 @@
-NO assets/wolfenstein/blue-wall-cage.xpm
-SO assets/wolfenstein/blue-wall0.xpm
-WE assets/wolfenstein/blue-wall1.xpm
-EA assets/wolfenstein/blue-wall-cage-skull.xpm
+NO assets/wolf3d/textures/blue-wall-cage.xpm
+SO assets/wolf3d/textures/blue-wall0.xpm
+WE assets/wolf3d/textures/blue-wall1.xpm
+EA assets/wolf3d/textures/blue-wall-cage-skull.xpm
 
 2_TYPE DOOR
 2_DIRECTION NORTH
-2_DOOR assets/wolfenstein/door.xpm
+2_DOOR assets/wolf3d/textures/door.xpm
 2_SIDES NULL
 3_TYPE WALL
-3_SO assets/wolfenstein/blue-wall0.xpm
-3_NO assets/wolfenstein/blue-wall-cage.xpm
-3_WE assets/wolfenstein/door-frame.xpm
-3_EA assets/wolfenstein/door-frame.xpm
+3_SO assets/wolf3d/textures/blue-wall0.xpm
+3_NO assets/wolf3d/textures/blue-wall-cage.xpm
+3_WE assets/wolf3d/textures/door-frame.xpm
+3_EA assets/wolf3d/textures/door-frame.xpm
 4_TYPE DOOR
 4_DIRECTION WEST
-4_DOOR assets/wolfenstein/electric-door-button.xpm
+4_DOOR assets/wolf3d/textures/electric-door-button.xpm
 4_SIDES NULL
 5_TYPE WALL
-5_SO assets/wolfenstein/lever-up.xpm
-5_NO assets/wolfenstein/lever-up.xpm
-5_WE assets/wolfenstein/lever-up.xpm
-5_EA assets/wolfenstein/lever-up.xpm
+5_SO assets/wolf3d/textures/lever-up.xpm
+5_NO assets/wolf3d/textures/lever-up.xpm
+5_WE assets/wolf3d/textures/lever-up.xpm
+5_EA assets/wolf3d/textures/lever-up.xpm
 6_TYPE DOOR
 6_DIRECTION WEST
-6_DOOR assets/wolfenstein/door.xpm
+6_DOOR assets/wolf3d/textures/door.xpm
 6_SIDES NULL
 7_TYPE WALL
-7_SO assets/wolfenstein/door-frame.xpm
-7_NO assets/wolfenstein/door-frame.xpm
-7_WE assets/wolfenstein/blue-wall1.xpm
-7_EA assets/wolfenstein/blue-wall-cage-skull.xpm
+7_SO assets/wolf3d/textures/door-frame.xpm
+7_NO assets/wolf3d/textures/door-frame.xpm
+7_WE assets/wolf3d/textures/blue-wall1.xpm
+7_EA assets/wolf3d/textures/blue-wall-cage-skull.xpm
+BACKGROUND_SOUND assets/wolf3d/sounds/getthem.mp3
 
 F 50, 50, 50
 C 50, 50, 50
