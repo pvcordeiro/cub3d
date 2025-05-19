@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 19:05:41 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/18 10:44:04 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/19 23:42:37 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,17 @@ static unsigned	pixel_modifier(void *data, unsigned pixel)
 
 static t_ftm_pitc_config	get_pitc_config(int i, t_size *ray_size, t_ftm_image *image, t_ray *ray)
 {
+	double	x_of_hit;
+
+	x_of_hit = ray->x_of_hit_in_entity;
+	if (ray->direction_of_hit_on_entity == NORTH || ray->direction_of_hit_on_entity == EAST)
+		x_of_hit = 1.0 - ray->x_of_hit_in_entity;
 	ray->_height = ray_size->height;
 	return ((t_ftm_pitc_config){
 			(t_coords){i * ray_size->width, (W_HEIGHT - ray_size->height) / 2, 0},
 			true,
-			(t_coords){(int)(ray->x_of_hit_in_entity * image->size.width), 0, 0}, 
-			(t_coords){(int)(ray->x_of_hit_in_entity * image->size.width) + 1, image->size.height, 0},
+			(t_coords){(int)(x_of_hit * image->size.width), 0, 0}, 
+			(t_coords){(int)(x_of_hit * image->size.width) + 1, image->size.height, 0},
 			true,
 			*ray_size,
 			ray,
