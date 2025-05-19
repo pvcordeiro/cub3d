@@ -3,20 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   keys.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:21:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/17 21:31:05 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/19 22:56:34 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "loop.h"
 
-void    key_hook(int key, bool down)
+static void	player_keys(t_player *player, int key, bool down)
 {
-	t_player	*player;
-
-	player = cub3d()->game.player;
+	if (!player)
+		return ;
 	if (key == XK_w)
 		player->walking_forward = down;
 	if (key == XK_a)
@@ -33,6 +32,11 @@ void    key_hook(int key, bool down)
 		player->action = down;
 	if (key == XK_Shift_L || key == XK_Shift_R)
 		player->sprinting = down;
+}
+
+void    key_hook(int key, bool down)
+{
+	player_keys(cub3d()->game.player, key, down);
 	if (key == XK_Tab)
 		cub3d()->game.minimap.full = down;
 	if (key == XK_Escape)
