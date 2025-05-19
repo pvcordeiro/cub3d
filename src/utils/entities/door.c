@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/18 10:42:41 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/19 14:41:02 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,10 @@ static void	door_frame(t_entity *entity)
 	door = (t_door *)entity;
 	set_door_sprite(door);
 	door->base.base.hard = !door->opened;
+	if (door->opened)
+		door->base.base.transparent = true;
+	else
+		door->base.base.transparent = (door->opening_sprite.index > 0);
 }
 
 static void	free_door(void *door)
