@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   door.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/20 15:38:14 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/20 20:35:19 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,7 @@ t_door	*door_new_e(char identifier, t_ftm_window *window, t_game *game)
 	door->wall.entity.free = free_door;
 	door->wall.entity.action = door_action;
 	door->wall.entity.hard = true;
-	door->wall.entity.block = true;
+	door->wall.entity.wall = true;
 	door->wall.entity.size = (t_size){1, 1};
 	init_door_direction_e(door, game, identifier);
 	if (fte_flagged())

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 15:40:06 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/20 19:43:35 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/20 21:40:57 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,10 @@ typedef struct s_dda_ray
 	t_entity	*hit_entity;
 	t_direction	direction_of_hit_on_entity;
 	t_entity	*ignored_entity;
+	t_size		map_size;
 }	t_dda_ray;
 
-typedef struct	s_ray
+typedef struct s_ray
 {
 	double		distance;
 	t_entity	*hit_entity;
@@ -42,21 +43,21 @@ typedef struct	s_ray
 
 typedef struct s_draw_ray_config
 {
-	t_ftm_image *canvas;
-	t_camera 	*camera;
-	t_game 		*game;
-	t_coords 	coords;
-	t_entity 	*ignored_entity;
-	double	 	previous_distance;
+	t_ftm_image	*canvas;
+	t_camera	*camera;
+	t_game		*game;
+	t_coords	coords;
+	t_entity	*ignored_entity;
+	double		previous_distance;
 	double		yaw;
 	int			i;
 }	t_draw_ray_config;
 
 typedef struct s_thread_render_rays_data
 {
-	t_ftm_image *canvas;
-	t_camera 	*camera;
-	t_game 		*game;
+	t_ftm_image	*canvas;
+	t_camera	*camera;
+	t_game		*game;
 	int			start;
 	int			end;
 }	t_thread_render_rays_data;

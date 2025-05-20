@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/20 18:08:52 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/20 20:28:19 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ typedef struct s_entity
 			struct s_entity *actioner);
 	bool			transparent;
 	bool			hard;
-	bool			block;
+	bool			wall;
 	char			identifier;
 	t_coords		coords;
 	t_size			size;
@@ -220,6 +220,7 @@ typedef struct s_game
 	t_player			*player;
 	t_list				*entities;
 	t_hashmap			*sprites;
+	t_entity			***walls;
 	t_ftt_thread		*camera_threads[CAMERA_THREADS];
 }	t_game;
 
