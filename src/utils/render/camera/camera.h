@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 15:40:06 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/20 17:39:06 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/20 19:43:35 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,22 @@ typedef struct s_thread_render_rays_data
 	int			start;
 	int			end;
 }	t_thread_render_rays_data;
+
+typedef struct s_pixel_modifier_data
+{
+	t_ftm_image	*canvas;
+	t_size		*ray_size;
+}	t_pixel_modifier_data;
+
+typedef struct s_get_pitc_config_config
+{
+	int						i;
+	t_size					*ray_size;
+	t_ftm_image				*image;
+	t_ray					*ray;
+	t_ftm_image				*canvas;
+	t_pixel_modifier_data	*pixel_modifier_data;
+}	t_get_pitc_config_config;
 
 t_ray	send_ray(t_game *game, t_coords coords, t_entity *ignored_entity);
 void	draw_ray_line(t_ftm_image *canvas, t_camera *camera, t_ray ray, int i);

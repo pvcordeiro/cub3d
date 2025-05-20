@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/20 15:37:22 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/20 19:54:55 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static bool	position_overlaps(t_list *entities, t_player *player, t_coords coord
 	t_list		*curr;
 	t_entity	*curr_entity;
 
+	if (!player->entity.hard)
+		return (false);
 	curr = entities;
 	while (curr)
 	{
@@ -123,6 +125,7 @@ t_player	*player_new(char direction)
 	player->entity.type = ENTITY_PLAYER;
 	player->entity.frame = player_frame;
 	player->entity.free = free_player;
+	player->entity.hard = true;
 	player->key_look_velocity = PLAYER_KEY_LOOK_VELOCITY;
 	player->mouse_look_velocity = PLAYER_MOUSE_LOOK_VELOCITY;
 	player->walk_velocity = PLAYER_WALK_VELOCITY;

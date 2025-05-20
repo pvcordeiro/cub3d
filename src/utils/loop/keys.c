@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:21:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/19 23:22:41 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/20 19:59:18 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,36 @@ static void	player_keys(t_player *player, int key, bool down)
 		player->sprinting = down;
 }
 
+static void hud_debug_keys(t_hud_debug *hud_debug, int key, bool down)
+{
+	if (key == XK_F3 && down)
+		hud_debug->enabled = !hud_debug->enabled;
+	if (!hud_debug->enabled)
+		return ;
+	if (key == XK_c && down)
+		cub3d()->game.camera.rays /= 1.5;
+	if (key == XK_v && down)
+		cub3d()->game.camera.rays = PLAYER_RAYS;
+	if (key == XK_b && down)
+		cub3d()->game.player->entity.hard = !cub3d()->game.player->entity.hard;
+}
+
+static void	hud_keys(t_hud *hud, int key, bool down)
+{
+	if (key == XK_h && down)
+		hud->enabled = !hud->enabled;
+	if (!hud->enabled)
+		return ;
+	hud_debug_keys(&hud->debug, key, down);
+}
+
 void    key_hook(int key, bool down)
 {
 	player_keys(cub3d()->game.player, key, down);
+	hud_keys(&cub3d()->game.hud, key, down);
 	if (key == XK_Tab)
 		cub3d()->game.minimap.full = down;
 	if (key == XK_Escape)
 		cub3d_exit(0);
-	if (key == XK_F3 && down)
-	{
-		cub3d()->game.hud.enabled = !cub3d()->game.hud.enabled;
-		cub3d()->game.hud.debug.enabled = !cub3d()->game.hud.debug.enabled;
-	}
 }
 
