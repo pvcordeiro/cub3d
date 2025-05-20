@@ -33,7 +33,7 @@ def check_c_file(file):
             if not next_line or ("fte_flagged()" not in next_line and "fte_assert()" not in next_line):
                 print(f"{file}:{index + 1}: Function that throws errors called without any check after")
             continue
-        if "ft_error(" not in line:
+        if "fte_set(" not in line:
             continue
         if not last_function_name.endswith("_e"):
             print(f"{file}:{index + 1}: Missing ft_error (_e) symbol in throwing function's name")
