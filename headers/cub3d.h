@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/20 01:33:28 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/20 01:50:37 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,6 +199,7 @@ typedef struct s_hud_debug
 {
 	char	*fps;
 	char	*target;
+	char	*player;
 	bool	enabled;
 }	t_hud_debug;
 
