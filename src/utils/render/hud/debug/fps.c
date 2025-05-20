@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 23:04:16 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/19 23:07:13 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/20 21:57:02 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,21 @@
 void	set_fps(t_game *game)
 {
 	static int	last_fps;
+	t_fps		fps;
 
-	if (game->fps == last_fps)
+	fps = game->fps;
+	if (fps.fps == last_fps)
 		return ;
-	last_fps = game->fps;
+	last_fps = fps.fps;
 	free(game->hud.debug.fps);
-	game->hud.debug.fps = ft_strf("FPS: %d", game->fps);
+	game->hud.debug.fps = ft_strf("FPS: %d", fps.fps);
+	game->hud.debug.fps_min = ft_strf("Min: %d", fps.min);
+	game->hud.debug.fps_max = ft_strf("Max: %d", fps.max);
+}
+
+void	render_debug_fps_strs(t_game *game, t_ftm_image *canvas, t_coords coords)
+{
+	coords.x += render_debug_str(game->font, canvas, game->hud.debug.fps, coords) + 5;
+	coords.x += render_debug_str(game->font, canvas, game->hud.debug.fps_min, coords) + 5;
+	render_debug_str(game->font, canvas, game->hud.debug.fps_max, coords);
 }

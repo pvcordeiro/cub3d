@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/20 20:28:19 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/20 21:58:09 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,8 +193,12 @@ typedef struct s_minimap
 typedef struct s_hud_debug
 {
 	char	*fps;
+	char	*fps_min;
+	char	*fps_max;
 	char	*target;
-	char	*player;
+	char	*player_x;
+	char	*player_y;
+	char	*player_yaw;
 	char	*entities;
 	bool	enabled;
 }	t_hud_debug;
@@ -205,11 +209,19 @@ typedef struct s_hud
 	bool			enabled;
 }	t_hud;
 
+typedef struct s_fps
+{
+	t_time	beginning;
+	t_time	last_frame_update;
+	int		frame_count;
+	int		fps;
+	int		max;
+	int		min;
+}	t_fps;
+
 typedef struct s_game
 {
-	t_time				last_frame;
-	int					frames;
-	int					fps;
+	t_fps				fps;
 	t_hud				hud;
 	t_environment		environment;
 	t_minimap			minimap;

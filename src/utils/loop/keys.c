@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:21:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/20 19:59:18 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/20 22:22:10 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,10 @@ static void	player_keys(t_player *player, int key, bool down)
 		player->sprinting = down;
 }
 
-static void hud_debug_keys(t_hud_debug *hud_debug, int key, bool down)
+static void	hud_debug_keys(t_hud_debug *hud_debug, int key, bool down)
 {
+	t_size	map_size;
+
 	if (key == XK_F3 && down)
 		hud_debug->enabled = !hud_debug->enabled;
 	if (!hud_debug->enabled)
@@ -46,6 +48,12 @@ static void hud_debug_keys(t_hud_debug *hud_debug, int key, bool down)
 		cub3d()->game.camera.rays = PLAYER_RAYS;
 	if (key == XK_b && down)
 		cub3d()->game.player->entity.hard = !cub3d()->game.player->entity.hard;
+	if (key == XK_n && down)
+	{
+		map_size = cub3d()->game.map->size;
+		cub3d()->game.player->entity.coords = (t_coords){map_size.width / 2,
+		map_size.height / 2, 0};
+	}
 }
 
 static void	hud_keys(t_hud *hud, int key, bool down)
@@ -57,7 +65,7 @@ static void	hud_keys(t_hud *hud, int key, bool down)
 	hud_debug_keys(&hud->debug, key, down);
 }
 
-void    key_hook(int key, bool down)
+void	key_hook(int key, bool down)
 {
 	player_keys(cub3d()->game.player, key, down);
 	hud_keys(&cub3d()->game.hud, key, down);
@@ -66,4 +74,3 @@ void    key_hook(int key, bool down)
 	if (key == XK_Escape)
 		cub3d_exit(0);
 }
-
