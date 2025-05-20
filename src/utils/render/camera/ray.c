@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 12:05:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/20 15:39:54 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/20 15:55:24 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static t_entity	*hit_entity(t_game *game, t_dda_ray *data, t_coords coords)
 			|| (int)entity->coords.y != (int)coords.y)
 			continue ;
 		data->length = calculate_wall_dist(data, coords);
-		if (data->direction_of_hit_on_entity == data->direction_to_ignore && entity == data->entity_to_ignore)
+		if (entity == data->ignored_entity)
 			continue ;
 		return (entity);
 	}
@@ -142,21 +142,20 @@ static void	calculate_wall_hit(t_dda_ray *data, t_coords coords, t_entity *entit
 	data->wall_x -= floor(data->wall_x);
 }
 
-t_raycast	send_ray(t_game *game, t_coords coords, t_entity *entity_to_ignore, t_direction direction_to_ignore)
+t_ray	send_ray(t_game *game, t_coords coords, t_entity *ignored_entity)
 {
 	t_dda_ray	data;
 	double		result;
 	t_entity	*entity_hit;
 
 	init_dda_ray_data(&data, coords);
-	data.entity_to_ignore = entity_to_ignore;
-	data.direction_to_ignore = direction_to_ignore;
+	data.ignored_entity = ignored_entity;
 	set_step_and_side_dist(&data, coords);
 	result = perform_dda(&data, game);
 	if (result > 0)
-		return ((t_raycast){result, NULL, 0, 0, {0, 0, 0}});
+		return ((t_ray){result, NULL, 0, 0, {0, 0, 0}});
 	entity_hit = hit_entity(game, &data, (t_coords){data.map_pos.x, data.map_pos.y, 0});
 	data.length = calculate_wall_dist(&data, coords);
 	calculate_wall_hit(&data, coords, entity_hit);
-	return ((t_raycast){data.length, entity_hit, data.wall_x, data.direction_of_hit_on_entity, data.map_pos});
+	return ((t_ray){data.length, entity_hit, data.wall_x, data.direction_of_hit_on_entity, data.map_pos});
 }

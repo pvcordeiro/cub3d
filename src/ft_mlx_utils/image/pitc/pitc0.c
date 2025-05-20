@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pitc0.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:48:02 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/19 23:32:28 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/20 17:17:16 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,8 @@ void	ftm_put_image_to_canvas(t_ftm_image *canvas, t_ftm_image *image,
 	{
 		index.height = -1;
 		while (++index.height < pitc.size.height)
-		{
-			if (!ftm_image_pixel(canvas, get_canvas_coords(pitc, index)))
-				continue ;
-			ftm_set_pixel(ftm_image_pixel(canvas, get_canvas_coords(pitc, index)),
-				get_modified_pixel(pitc.pixel_modifier, pitc.pixel_modifier_data,
-					*ftm_image_pixel(image, get_src_coords(pitc, index, scale))));
-		}
+			set_pixel((t_set_pixel_config){
+				canvas, image, pitc, index, scale
+			});
 	}
 }

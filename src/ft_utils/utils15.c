@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 20:26:55 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/20 14:40:11 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/20 18:07:23 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,12 @@ void	ft_list_reverse(t_list **list)
 	*list = prev;
 }
 
-void	ft_sleep(double miliseconds)
+void	ft_sleep(double milliseconds)
 {
 	t_time	start;
 
 	start = ft_get_time();
-	while (ft_get_time() - start < miliseconds)
+	while (ft_get_time() - start < milliseconds)
 		;
 }
 

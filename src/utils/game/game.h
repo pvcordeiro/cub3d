@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:16:32 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/20 00:47:30 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/20 16:18:11 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ void	init_entities_e(t_game *game, t_ftm_window *window);
 void	kill_threads(t_game *game);
 void	init_threads_e(t_game *game);
 void	init_sounds_e(t_game *game);
+void	init_camera(t_game *game);
 
 #endif

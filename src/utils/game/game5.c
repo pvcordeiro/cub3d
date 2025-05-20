@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 17:18:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/20 15:41:15 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/20 16:18:06 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,9 @@ void	init_sounds_e(t_game *game)
 	}
 }
 
-void	init_camera_e(t_game *game)
+void	init_camera(t_game *game)
 {
 	game->camera.entity = (t_entity *)game->player;
 	game->camera.rays = PLAYER_RAYS;
+	game->camera.fov = PLAYER_FOV;
 }

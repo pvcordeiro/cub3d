@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/20 15:36:36 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/20 18:08:52 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,7 @@
 # define DEFAULT_PLAYER_TYPES "NSEW"
 
 // Raytracing Threads
-# define RENDERING_THREADS 8
-# define RAYCASTING_THREADS 8
+# define CAMERA_THREADS 4
 
 typedef struct s_sprite
 {
@@ -109,6 +108,7 @@ typedef struct s_entity
 typedef struct s_camera
 {
 	t_entity		*entity;
+	double			fov;
 	unsigned int	rays;
 }	t_camera;
 
@@ -220,8 +220,7 @@ typedef struct s_game
 	t_player			*player;
 	t_list				*entities;
 	t_hashmap			*sprites;
-	t_ftt_thread		*rendering_threads[RENDERING_THREADS];
-	t_ftt_thread		*raycasting_threads[RAYCASTING_THREADS];
+	t_ftt_thread		*camera_threads[CAMERA_THREADS];
 }	t_game;
 
 typedef struct s_cub3d

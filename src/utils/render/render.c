@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 19:49:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/20 15:41:41 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/20 16:14:21 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	render_game(t_ftm_window *window, t_game *game)
 		map_size = game->minimap.size;
 	}
 	render_ceiling_and_floor(game, window->canvas);
+	render_camera(game, window->canvas, &game->camera);
 	render_hud(game, window->canvas);
 	render_minimap(game, window->canvas, map_coords, map_size);
 }

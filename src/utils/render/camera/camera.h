@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 15:40:06 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/20 15:41:01 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/20 17:39:06 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,40 @@ typedef struct s_dda_ray
 	double		wall_x;
 	t_entity	*hit_entity;
 	t_direction	direction_of_hit_on_entity;
-	t_direction direction_to_ignore;
-	t_entity	*entity_to_ignore;
+	t_entity	*ignored_entity;
 }	t_dda_ray;
 
-typedef struct	s_raycast
+typedef struct	s_ray
 {
-	double		length;
+	double		distance;
 	t_entity	*hit_entity;
-	double		x_of_hit_in_entity;
-	t_direction	direction_of_hit_on_entity;
+	double		hit_x;
+	t_direction	hit_direction;
 	t_coords	hit_coords;
-}	t_raycast;
+}	t_ray;
+
+typedef struct s_draw_ray_config
+{
+	t_ftm_image *canvas;
+	t_camera 	*camera;
+	t_game 		*game;
+	t_coords 	coords;
+	t_entity 	*ignored_entity;
+	double	 	previous_distance;
+	double		yaw;
+	int			i;
+}	t_draw_ray_config;
+
+typedef struct s_thread_render_rays_data
+{
+	t_ftm_image *canvas;
+	t_camera 	*camera;
+	t_game 		*game;
+	int			start;
+	int			end;
+}	t_thread_render_rays_data;
+
+t_ray	send_ray(t_game *game, t_coords coords, t_entity *ignored_entity);
+void	draw_ray_line(t_ftm_image *canvas, t_camera *camera, t_ray ray, int i);
 
 #endif
