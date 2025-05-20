@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:46:27 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/19 22:25:41 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/20 01:07:45 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,12 @@ typedef struct s_ftm_window
 	void		(*mouse_hook)(t_coords coords);
 }	t_ftm_window;
 
+typedef struct s_ftm_font
+{
+	char		*dir;
+	t_ftm_image	*characters[255];
+}	t_ftm_font;
+
 typedef struct s_ftm_pitc_config
 {
 	t_coords	coords;
@@ -63,6 +69,14 @@ typedef struct s_ftm_pitc_config
 	unsigned	(*pixel_modifier)(void *data, unsigned pixel);
 }	t_ftm_pitc_config;
 
+typedef struct s_ftm_text_config
+{
+	char		*text;
+	t_coords	coords;
+	int			height;
+	int			spacing;
+}	t_ftm_text_config;
+
 typedef struct s_ftm_rectangle
 {
 	unsigned int	background_color;
@@ -71,15 +85,22 @@ typedef struct s_ftm_rectangle
 }	t_ftm_rectangle;
 
 void			ftm_free_image(void *image);
-t_ftm_image		*ftm_image_from_file(t_ftm_window *window, char *path);
+t_ftm_image		*ftm_image_from_file(t_ftm_window *window, char *path, bool transparency);
 t_ftm_image		*ftm_image_new(t_ftm_window *window, t_size size);
-t_list			*ftm_images_from_files(t_ftm_window *window, char **file_paths);
+t_list			*ftm_images_from_files(t_ftm_window *window, char **file_paths, bool transparency);
 
 void			ftm_image_clear(t_ftm_image *image);
 void			ftm_put_image_to_canvas(t_ftm_image *canvas,
 					t_ftm_image *image, t_ftm_pitc_config pitc);
 
 char			*ftm_image_to_str(t_ftm_image *image);
+
+t_ftm_font		*ftm_font_new(t_ftm_window *window, const char *dir);
+void			ftm_clear_font(void *font);
+void			ftm_free_font(void *font);
+
+void			ftm_draw_text(t_ftm_image *canvas, t_ftm_font *font, t_ftm_text_config text_config);
+int				ftm_get_text_size_prediction(t_ftm_font *font, t_ftm_text_config text_config);
 
 void			ftm_clear_window(void *window);
 void			ftm_free_window(void *window);

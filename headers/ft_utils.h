@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 12:15:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/19 23:29:08 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/20 00:58:44 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ char					*ft_strappend(char *str, char append);
 char					*ft_get_next_line(int fd);
 
 bool					ft_str_all(char *str, bool (*func)(char));
-bool					ft_str_endswith(char *str, char *ending);
+bool					ft_str_endswith(const char *str, const char *ending);
 char					*ft_strtrim(char *s);
 t_time					ft_get_time(void);
 void					ft_fprint_list(int fd, t_list *list,

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:20:04 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/19 23:29:51 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/20 01:07:39 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	init_sprites_e(t_ftm_window *window, t_game *game)
 		{
 			if (!ft_strequal(el->value, "NULL"))
 			{
-				image = ftm_image_from_file(window, el->value);
+				image = ftm_image_from_file(window, el->value, false);
 				if (!image)
 					return (fte_set(ERROR_LOAD_SPRITE));
 			}

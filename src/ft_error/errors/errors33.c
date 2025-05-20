@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors32.c                                         :+:      :+:    :+:   */
+/*   errors33.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,11 +12,8 @@
 
 #include <ft_error.h>
 
-char	*get_error_message33(t_error _error);
-
-char	*get_error_message32(t_error _error)
+char	*get_error_message33(t_error _error)
 {
-	if (_error == ERROR_FONT_NOT_FOUND)
-		return (ERROR_FONT_NOT_FOUND_MSG);
-	return (get_error_message33(_error));
+	(void)_error;
+	return (ERROR_INVALID_MSG);
 }

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/19 23:31:21 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/20 01:33:28 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@
 // Default minimap size multipliers
 # define MINIMAP_WIDTH_MULTIPLIER 0.25
 # define MINIMAP_HEIGHT_MULTIPLIER 0.25
+
+// Default Font
+# define DEFAULT_FONT_PATH "assets/fonts/IBM-VGA-8x16"
 
 // Placeholder Image
 # define PLACEHOLDER_IMAGE_PATH "assets/textures/placeholder.xpm"
@@ -213,6 +216,7 @@ typedef struct s_game
 	t_hud				hud;
 	t_environment		environment;
 	t_minimap			minimap;
+	t_ftm_font			*font;
 	t_hashmap			*sounds;
 	t_map				*map;
 	t_player			*player;

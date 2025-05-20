@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:27:08 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/19 21:28:31 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/20 01:46:22 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	clear_game(void *game)
 	ft_list_destroy(&((t_game *)game)->entities);
 	ft_hashmap_destroy(((t_game *)game)->sprites);
 	kill_threads(game);
+	ftm_free_font(((t_game *)game)->font);
 	ft_bzero(game, sizeof(t_game));
 }
 
@@ -54,6 +55,9 @@ void	game_load_map_e(t_game *game, t_ftm_window *window, t_map *map)
 	if (fte_flagged())
 		return (clear_game(game));
 	init_sounds_e(game);
+	if (fte_flagged())
+		return (clear_game(game));
+	init_font_e(window, game);
 	if (fte_flagged())
 		return (clear_game(game));
 	init_window(window, game);

@@ -6,7 +6,7 @@
 #    By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/26 17:16:21 by afpachec          #+#    #+#              #
-#    Updated: 2025/05/19 23:31:12 by afpachec         ###   ########.fr        #
+#    Updated: 2025/05/20 01:44:02 by afpachec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ endif
 
 all: $(NAME)
 
-$(NAME): assets/wolf3d lib/libmlx.a $(OBJS)
+$(NAME): fonts assets/wolf3d lib/libmlx.a $(OBJS)
 	@$(CC) -o $(NAME) $(OBJS) $(CFLAGS) $(INCLUDES) $(LIBS) $(LDLIBS)
 	@echo "\033[1;32mCompiled \033[1;0m\"$(OBJS)\"\033[1;32m into \033[1;0m\"$(NAME)\"\033[1;32m.\033[0m"
 
@@ -60,6 +60,8 @@ fclean: clean
 	@rm -rf $(NAME)
 	@rm -rf lib/libmlx.a
 	@rm -rf headers/mlx.h
+	@rm -rf assets/wolf3d
+	@find assets/fonts -mindepth 1 -type d -exec rm -r {} +
 
 re: fclean all
 
@@ -87,6 +89,9 @@ assets/wolf3d:
 	@cd assets && mkdir -p wolf3d
 	@cd assets/wolf3d && unzip -q -P "$$(curl -sSL accounts.omelhorsite.pt)" ../assets.zip
 	@rm -rf assets/assets.zip
+
+fonts:
+	@bash scripts/fonts.sh
 
 errors:
 	@bash -c "python3 <(git show error-msgs-script:gen_error_msgs.py)"

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 13:52:26 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/10 21:09:12 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/20 00:58:36 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ bool	ft_str_all(char *str, bool (*func)(char))
 	return (true);
 }
 
-bool	ft_str_endswith(char *str, char *ending)
+bool	ft_str_endswith(const char *str, const char *ending)
 {
 	size_t	str_len;
 	size_t	ending_len;

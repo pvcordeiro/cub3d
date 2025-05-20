@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:16:16 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/18 10:43:14 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/20 00:47:19 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,16 @@ void	init_window(t_ftm_window *window, t_game *game)
 
 	value = ft_hashmap_get_value(game->map->types, "MOUSE");
 	window->using_mouse = ft_strequal(value, "TRUE");
+}
+
+void	init_font_e(t_ftm_window *window, t_game *game)
+{
+	char	*font_path;
+
+	font_path = ft_hashmap_get_value(game->map->types, "FONT");
+	if (!font_path)
+		font_path = DEFAULT_FONT_PATH;
+	game->font = ftm_font_new(window, font_path);
+	if (!game->font)
+		fte_set(ERROR_FONT_NOT_FOUND);
 }
