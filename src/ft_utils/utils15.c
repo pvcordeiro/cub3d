@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 20:26:55 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/17 11:55:50 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/20 14:40:11 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	ft_sleep(double miliseconds)
 
 	start = ft_get_time();
 	while (ft_get_time() - start < miliseconds)
-		usleep(100);
+		;
 }
 
 void	ft_list_clear_without_free(t_list *list)

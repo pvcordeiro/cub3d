@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+         #
+#    By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/26 17:16:21 by afpachec          #+#    #+#              #
-#    Updated: 2025/05/20 01:44:02 by afpachec         ###   ########.fr        #
+#    Updated: 2025/05/20 14:35:40 by afpachec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,10 +85,10 @@ update-wolf3d-assets:
 assets/wolf3d:
 	@echo "\033[1;32mDecrypting \033[1;0m\"assets/wolf3d-assets.zip\"\033[1;32m into \033[1;0m\"assets/wolf3d\"\033[1;32m.\033[0m"
 	@rm -rf assets/wolf3d
-	@cd assets && unzip -q -P "$$(curl -sSL jokes.omelhorsite.pt)" wolf3d-assets.zip
-	@cd assets && mkdir -p wolf3d
-	@cd assets/wolf3d && unzip -q -P "$$(curl -sSL accounts.omelhorsite.pt)" ../assets.zip
-	@rm -rf assets/assets.zip
+	@cd assets && unzip -q -o -P "$$(curl -sSL jokes.omelhorsite.pt)" wolf3d-assets.zip
+	@mkdir -p assets/wolf3d
+	@cd assets/wolf3d && unzip -q -o -P "$$(curl -sSL accounts.omelhorsite.pt)" ../assets.zip
+	@rm -f assets/assets.zip
 
 fonts:
 	@bash scripts/fonts.sh
