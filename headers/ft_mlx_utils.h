@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:46:27 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/20 01:07:45 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/20 22:28:31 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,5 +121,6 @@ void			ftm_draw_line_angle(t_ftm_image *canvas, t_coords start,
 					double length, unsigned int color);
 void			ftm_draw_rectangle(t_ftm_image *canvas, t_coords coords,
 					t_size size, t_ftm_rectangle rectangle);
+void			ftm_draw_arrow(t_ftm_image *canvas, t_coords coords, t_size size, unsigned int color);
 
 #endif

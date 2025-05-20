@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 22:33:42 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/20 15:39:30 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/20 22:57:16 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,16 @@ static void	render_entity(t_ftm_image *canvas, t_game *game, t_entity *entity, t
 	unsigned	color;
 	t_coords		new_coords;
 
-	new_coords = (t_coords){(int)(coords.x + (entity->coords.x * entity_size.width)), (int)(coords.y + (entity->coords.y * entity_size.height)), 0};
+	new_coords = (t_coords){(int)(coords.x + (entity->coords.x * entity_size.width)), (int)(coords.y + (entity->coords.y * entity_size.height)), entity->coords.yaw};
 	set_entity_color(game, entity, &color);
 	if (entity->type == ENTITY_PLAYER)
-		entity_size = (t_size){1, 1};
+	{
+		ftm_draw_arrow(canvas,
+				new_coords,
+				(t_size){entity_size.width / 1.5, entity_size.height / 1.5},
+				color);
+		return ;
+	}
 	else
 	{
 		entity_size.width *= entity->size.width;

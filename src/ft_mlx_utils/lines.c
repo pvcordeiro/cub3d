@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lines.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:37:16 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/18 10:40:57 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/20 22:56:38 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,31 @@ void	ftm_draw_rectangle(t_ftm_image *canvas, t_coords coords, t_size size,
 					(t_coords){coords.x + i, coords.y + j, 0}), tmp_color);
 		}
 	}
+}
+
+void	ftm_draw_arrow(t_ftm_image *canvas, t_coords coords, t_size size, unsigned int color)
+{
+	t_coords	end;
+	t_coords	head1;
+	t_coords	head2;
+	double		angle;
+	double		head_length;
+	double		head_angle;
+
+	coords.yaw = ft_normalize_angle(coords.yaw);
+	angle = coords.yaw;
+	end.x = coords.x + cos(angle * FT_MLX_UTILS_PI / 180.0) * size.height;
+	end.y = coords.y + sin(angle * FT_MLX_UTILS_PI / 180.0) * size.height;
+	head_length = size.width;
+	head_angle = 30.0;
+	head1.x = end.x - cos((angle - head_angle) * FT_MLX_UTILS_PI / 180.0) * head_length;
+	head1.y = end.y - sin((angle - head_angle) * FT_MLX_UTILS_PI / 180.0) * head_length;
+	ftm_draw_line(canvas, end, head1, color);
+	head2.x = end.x - cos((angle + head_angle) * FT_MLX_UTILS_PI / 180.0) * head_length;
+	head2.y = end.y - sin((angle + head_angle) * FT_MLX_UTILS_PI / 180.0) * head_length;
+	ftm_draw_line(canvas, end, head2, color);
+	end.x = coords.x + cos(angle * FT_MLX_UTILS_PI / 180.0) * size.height / 2;
+	end.y = coords.y + sin(angle * FT_MLX_UTILS_PI / 180.0) * size.height / 2;
+	ftm_draw_line(canvas, end, head1, color);
+	ftm_draw_line(canvas, end, head2, color);
 }
