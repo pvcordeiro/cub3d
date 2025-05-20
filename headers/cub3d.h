@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/20 02:07:53 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/20 15:36:36 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,21 +102,19 @@ typedef struct s_entity
 	t_coords		coords;
 	t_size			size;
 	t_entity_type	type;
+	struct s_entity	*target_entity;
+	t_direction		target_entity_direction;
 }	t_entity;
 
-typedef struct s_ray
+typedef struct s_camera
 {
-	double		length;
-	double		angle;
-	t_entity	*hit_entity;
-	t_direction	direction_of_hit_on_entity;
-	double		x_of_hit_in_entity;
-	int			_height;
-}	t_ray;
+	t_entity		*entity;
+	unsigned int	rays;
+}	t_camera;
 
 typedef struct s_player
 {
-	t_entity	base;
+	t_entity	entity;
 	bool		walking_forward;
 	bool		walking_left;
 	bool		walking_backward;
@@ -131,14 +129,11 @@ typedef struct s_player
 	double		key_look_velocity;
 	double		walk_velocity;
 	double		sprint_velocity;
-	t_entity	*target_entity;
-	t_direction	target_entity_direction;
-	t_ray		rays[PLAYER_RAYS][PLAYER_RAY_SUBRAYS];
 }	t_player;
 
 typedef struct s_wall
 {
-	t_entity	base;
+	t_entity	entity;
 	t_sprite	*north_sprite;
 	t_sprite	*south_sprite;
 	t_sprite	*west_sprite;
@@ -147,7 +142,7 @@ typedef struct s_wall
 
 typedef struct s_door
 {
-	t_wall		base;
+	t_wall		wall;
 	t_direction	direction;
 	t_sprite	opening_sprite;
 	t_sprite	*door_sprite;
@@ -221,6 +216,7 @@ typedef struct s_game
 	t_ftm_font			*font;
 	t_hashmap			*sounds;
 	t_map				*map;
+	t_camera			camera;
 	t_player			*player;
 	t_list				*entities;
 	t_hashmap			*sprites;

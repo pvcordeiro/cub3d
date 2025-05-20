@@ -3,39 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 22:33:42 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/18 10:43:47 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/20 15:39:30 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render.h"
-
-static void render_rays(t_ftm_image *canvas, t_game *game, t_player *player, t_coords coords, t_size entity_size)
-{
-    size_t 			i;
-    size_t 			j;
-    double 			scale;
-	unsigned int	color;
-
-    scale = fmin(entity_size.width, entity_size.height);
-    i = -1;
-    while (++i < PLAYER_RAYS)
-	{
-		j = -1;
-		while (++j < PLAYER_RAY_SUBRAYS)
-		{
-			if (!player->rays[i][j].hit_entity)
-				break ;
-			color = game->minimap.player_ray_color;
-			if (i == PLAYER_RAYS / 2)
-				color = game->minimap.player_middle_ray_color;
-			coords.yaw = player->rays[i][j].angle;
-			ftm_draw_line_angle(canvas, coords, player->rays[i][j].length * scale, color + (0x00FF00 * j));
-		}
-	}
-}
 
 static void	set_entity_color(t_game *game, t_entity *entity, unsigned *color)
 {
@@ -57,10 +32,7 @@ static void	render_entity(t_ftm_image *canvas, t_game *game, t_entity *entity, t
 	new_coords = (t_coords){(int)(coords.x + (entity->coords.x * entity_size.width)), (int)(coords.y + (entity->coords.y * entity_size.height)), 0};
 	set_entity_color(game, entity, &color);
 	if (entity->type == ENTITY_PLAYER)
-	{
-		render_rays(canvas, game, (t_player *)entity, new_coords, entity_size);
 		entity_size = (t_size){1, 1};
-	}
 	else
 	{
 		entity_size.width *= entity->size.width;

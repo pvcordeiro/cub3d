@@ -1,23 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player.c                                           :+:      :+:    :+:   */
+/*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/20 01:49:57 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/20 15:38:29 by afpachec         ###   ########.fr       */
+/*   Created: 2025/05/20 15:32:59 by afpachec          #+#    #+#             */
+/*   Updated: 2025/05/20 15:33:53 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "debug.h"
-
-void	set_player(t_game *game)
-{
-	if (!game->player)
-		return ;
-	free(game->hud.debug.player);
-	game->hud.debug.player = ft_strf("X: %d | Y: %d | Yaw: %d",
-		(int)game->player->entity.coords.x, (int)game->player->entity.coords.y,
-		(int)game->player->entity.coords.yaw);;
-}
+#include <cub3d.h>
