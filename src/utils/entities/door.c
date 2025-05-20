@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/20 01:58:11 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/20 02:02:17 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,12 +119,13 @@ static t_ftm_pitc_config	get_animation_config(t_ftm_image *frame, int i)
 	return (config);
 }
 
-static void	init_animation_sprites(t_door *door, t_ftm_window *window)
+static void	init_animation_sprites_e(t_door *door, t_ftm_window *window)
 {
 	t_ftm_image	*frame;
 	t_ftm_image	*door_image;
 	int			i;
 
+	fte_set(ERROR_NO_ERROR);
 	door_image = door->door_sprite->images->data;
 	init_sprite(&door->opening_sprite, NULL, 0);
 	i = -1;
@@ -161,6 +162,8 @@ t_door	*door_new_e(char identifier, t_ftm_window *window, t_game *game)
 	if (!door->door_sprite)
 		return (free(door), fte_set(ERROR_DOOR_SPRITE_MISSING), NULL);
 	init_door_sides(door, game, identifier);
-	init_animation_sprites(door, window);
+	init_animation_sprites_e(door, window);
+	if (fte_flagged())
+		return (free(door), NULL);
 	return (door);
 }
