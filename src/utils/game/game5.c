@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 17:18:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/19 21:28:13 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/20 20:00:28 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,16 @@ void	init_sounds_e(t_game *game)
 		ft_hashmap_set(game->sounds, key, audio, fta_free_audio);
 		free(key);
 	}
+}
+
+void	init_camera(t_game *game)
+{
+	game->camera.entity = (t_entity *)game->player;
+	game->camera.rays = PLAYER_RAYS;
+	game->camera.fov = PLAYER_FOV;
+}
+
+void	init_hud(t_game *game)
+{
+	game->hud.enabled = true;
 }

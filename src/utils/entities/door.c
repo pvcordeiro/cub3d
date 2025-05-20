@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/20 02:02:17 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/20 20:35:19 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static t_sprite	*get_door_sprite(t_door *door)
 {
 	ssize_t	frame_index;
 
-	door->base.base.transparent = true;
+	door->wall.entity.transparent = true;
 	frame_index = door->opening_sprite.index;
 	if (door->opened)
 		++frame_index;
@@ -34,13 +34,13 @@ static void	set_door_sprite(t_door *door)
 {
 	if (door->direction == NORTH || door->direction == SOUTH)
 	{
-		door->base.north_sprite = get_door_sprite(door);
-		door->base.south_sprite = get_door_sprite(door);
+		door->wall.north_sprite = get_door_sprite(door);
+		door->wall.south_sprite = get_door_sprite(door);
 	}
 	else if (door->direction == EAST || door->direction == WEST)
 	{
-		door->base.east_sprite = get_door_sprite(door);
-		door->base.west_sprite = get_door_sprite(door);
+		door->wall.east_sprite = get_door_sprite(door);
+		door->wall.west_sprite = get_door_sprite(door);
 	}
 }
 
@@ -50,8 +50,8 @@ static void	door_frame(t_entity *entity)
 
 	door = (t_door *)entity;
 	set_door_sprite(door);
-	door->base.base.hard = !door->opened;
-	door->base.base.transparent = door->opening_sprite.index;
+	door->wall.entity.hard = !door->opened;
+	door->wall.entity.transparent = door->opening_sprite.index;
 }
 
 static void	free_door(void *door)
@@ -100,13 +100,13 @@ static void	init_door_sides(t_door *door, t_game *game, char identifier)
 {
 	if (door->direction == NORTH || door->direction == SOUTH)
 	{
-		door->base.west_sprite = hashmap_get_with_identifier(game->sprites, identifier, "SIDES");
-		door->base.east_sprite = hashmap_get_with_identifier(game->sprites, identifier, "SIDES");
+		door->wall.west_sprite = hashmap_get_with_identifier(game->sprites, identifier, "SIDES");
+		door->wall.east_sprite = hashmap_get_with_identifier(game->sprites, identifier, "SIDES");
 	}
 	else if (door->direction == WEST || door->direction == EAST)
 	{
-		door->base.north_sprite = hashmap_get_with_identifier(game->sprites, identifier, "SIDES");
-		door->base.south_sprite = hashmap_get_with_identifier(game->sprites, identifier, "SIDES");
+		door->wall.north_sprite = hashmap_get_with_identifier(game->sprites, identifier, "SIDES");
+		door->wall.south_sprite = hashmap_get_with_identifier(game->sprites, identifier, "SIDES");
 	}
 }
 
@@ -148,13 +148,13 @@ t_door	*door_new_e(char identifier, t_ftm_window *window, t_game *game)
 	door = ft_calloc(1, sizeof(t_door));
 	if (!door)
 		return (NULL);
-	((t_entity *)door)->type = ENTITY_DOOR;
-	((t_entity *)door)->frame = door_frame;
-	((t_entity *)door)->free = free_door;
-	((t_entity *)door)->action = door_action;
-	((t_entity *)door)->hard = true;
-	((t_entity *)door)->block = true;
-	((t_entity *)door)->size = (t_size){1, 1};
+	door->wall.entity.type = ENTITY_DOOR;
+	door->wall.entity.frame = door_frame;
+	door->wall.entity.free = free_door;
+	door->wall.entity.action = door_action;
+	door->wall.entity.hard = true;
+	door->wall.entity.wall = true;
+	door->wall.entity.size = (t_size){1, 1};
 	init_door_direction_e(door, game, identifier);
 	if (fte_flagged())
 		return (free(door), NULL);

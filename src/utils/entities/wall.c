@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wall.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/17 13:48:49 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/20 20:35:26 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,12 @@ t_wall	*wall_new(char identifier, t_game *game)
 	wall = ft_calloc(1, sizeof(t_wall));
 	if (!wall)
 		return (NULL);
-	wall->base.type = ENTITY_WALL;
-	wall->base.frame = wall_frame;
-	wall->base.free = free_wall;
-	wall->base.hard = true;
-	wall->base.block = true;
-	wall->base.size = (t_size){1, 1};
+	wall->entity.type = ENTITY_WALL;
+	wall->entity.frame = wall_frame;
+	wall->entity.free = free_wall;
+	wall->entity.hard = true;
+	wall->entity.wall = true;
+	wall->entity.size = (t_size){1, 1};
 	wall->north_sprite = hashmap_get_with_identifier(game->sprites, identifier, "NO");
 	wall->south_sprite = hashmap_get_with_identifier(game->sprites, identifier, "SO");
 	wall->west_sprite = hashmap_get_with_identifier(game->sprites, identifier, "WE");

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/20 02:07:53 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/20 21:58:09 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,7 @@
 # define DEFAULT_PLAYER_TYPES "NSEW"
 
 // Raytracing Threads
-# define RENDERING_THREADS 8
-# define RAYCASTING_THREADS 8
+# define CAMERA_THREADS 4
 
 typedef struct s_sprite
 {
@@ -97,26 +96,25 @@ typedef struct s_entity
 			struct s_entity *actioner);
 	bool			transparent;
 	bool			hard;
-	bool			block;
+	bool			wall;
 	char			identifier;
 	t_coords		coords;
 	t_size			size;
 	t_entity_type	type;
+	struct s_entity	*target_entity;
+	t_direction		target_entity_direction;
 }	t_entity;
 
-typedef struct s_ray
+typedef struct s_camera
 {
-	double		length;
-	double		angle;
-	t_entity	*hit_entity;
-	t_direction	direction_of_hit_on_entity;
-	double		x_of_hit_in_entity;
-	int			_height;
-}	t_ray;
+	t_entity		*entity;
+	double			fov;
+	unsigned int	rays;
+}	t_camera;
 
 typedef struct s_player
 {
-	t_entity	base;
+	t_entity	entity;
 	bool		walking_forward;
 	bool		walking_left;
 	bool		walking_backward;
@@ -131,14 +129,11 @@ typedef struct s_player
 	double		key_look_velocity;
 	double		walk_velocity;
 	double		sprint_velocity;
-	t_entity	*target_entity;
-	t_direction	target_entity_direction;
-	t_ray		rays[PLAYER_RAYS][PLAYER_RAY_SUBRAYS];
 }	t_player;
 
 typedef struct s_wall
 {
-	t_entity	base;
+	t_entity	entity;
 	t_sprite	*north_sprite;
 	t_sprite	*south_sprite;
 	t_sprite	*west_sprite;
@@ -147,7 +142,7 @@ typedef struct s_wall
 
 typedef struct s_door
 {
-	t_wall		base;
+	t_wall		wall;
 	t_direction	direction;
 	t_sprite	opening_sprite;
 	t_sprite	*door_sprite;
@@ -198,8 +193,12 @@ typedef struct s_minimap
 typedef struct s_hud_debug
 {
 	char	*fps;
+	char	*fps_min;
+	char	*fps_max;
 	char	*target;
-	char	*player;
+	char	*player_x;
+	char	*player_y;
+	char	*player_yaw;
 	char	*entities;
 	bool	enabled;
 }	t_hud_debug;
@@ -210,22 +209,31 @@ typedef struct s_hud
 	bool			enabled;
 }	t_hud;
 
+typedef struct s_fps
+{
+	t_time	beginning;
+	t_time	last_frame_update;
+	int		frame_count;
+	int		fps;
+	int		max;
+	int		min;
+}	t_fps;
+
 typedef struct s_game
 {
-	t_time				last_frame;
-	int					frames;
-	int					fps;
+	t_fps				fps;
 	t_hud				hud;
 	t_environment		environment;
 	t_minimap			minimap;
 	t_ftm_font			*font;
 	t_hashmap			*sounds;
 	t_map				*map;
+	t_camera			camera;
 	t_player			*player;
 	t_list				*entities;
 	t_hashmap			*sprites;
-	t_ftt_thread		*rendering_threads[RENDERING_THREADS];
-	t_ftt_thread		*raycasting_threads[RAYCASTING_THREADS];
+	t_entity			***walls;
+	t_ftt_thread		*camera_threads[CAMERA_THREADS];
 }	t_game;
 
 typedef struct s_cub3d

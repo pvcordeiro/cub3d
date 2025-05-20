@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game4.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 22:43:09 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/16 15:03:25 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/20 17:54:24 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,8 @@ void	kill_threads(t_game *game)
 	int	i;
 
 	i = -1;
-	while (++i < RENDERING_THREADS)
-		ftt_free_thread(game->rendering_threads[i]);
-	i = -1;
-	while (++i < RAYCASTING_THREADS)
-		ftt_free_thread(game->raycasting_threads[i]);
+	while (++i < CAMERA_THREADS)
+		ftt_free_thread(game->camera_threads[i]);
 }
 
 void	init_threads_e(t_game *game)
@@ -30,17 +27,10 @@ void	init_threads_e(t_game *game)
 
 	fte_set(ERROR_NO_ERROR);
 	i = -1;
-	while (++i < RENDERING_THREADS)
+	while (++i < CAMERA_THREADS)
 	{
-		game->rendering_threads[i] = ftt_thread_new();
-		if (!game->rendering_threads[i])
-			return (fte_set(ERROR_THREAD_INIT));
-	}
-	i = -1;
-	while (++i < RAYCASTING_THREADS)
-	{
-		game->raycasting_threads[i] = ftt_thread_new();
-		if (!game->raycasting_threads[i])
+		game->camera_threads[i] = ftt_thread_new();
+		if (!game->camera_threads[i])
 			return (fte_set(ERROR_THREAD_INIT));
 	}
 }
