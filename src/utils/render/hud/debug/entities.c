@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   debug.h                                            :+:      :+:    :+:   */
+/*   entities.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/17 20:04:15 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/20 02:08:50 by afpachec         ###   ########.fr       */
+/*   Created: 2025/05/20 02:07:13 by afpachec          #+#    #+#             */
+/*   Updated: 2025/05/20 02:08:43 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DEBUG_H
-# define DEBUG_H
+#include "debug.h"
 
-# include "../hud.h"
+void	set_entities(t_game *game)
+{
+	static t_time	last_check;
 
-void	set_fps(t_game *game);
-void	set_target(t_game *game);
-void	set_player(t_game *game);
-void	set_entities(t_game *game);
-
-#endif
+	if (ft_get_time() - last_check < 1000)
+		return ;
+	free(game->hud.debug.entities);
+	game->hud.debug.entities = ft_strf("Entities: %d", ft_list_size(game->entities));
+}
