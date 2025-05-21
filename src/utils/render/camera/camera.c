@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 15:32:59 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/20 23:05:51 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/21 17:56:43 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	draw_ray(t_draw_ray_config draw_ray_config)
 	}
 	draw_ray_line(draw_ray_config.canvas, draw_ray_config.camera,
 		ray, draw_ray_config.i);
-	if ((unsigned int)draw_ray_config.i == draw_ray_config.camera->rays / 2)
+	if (draw_ray_config.i == draw_ray_config.camera->rays / 2)
 	{
 		draw_ray_config.camera->entity->target_entity = ray.hit_entity;
 		draw_ray_config.camera->entity
@@ -64,16 +64,17 @@ static void	thread_render_rays(void *data)
 	unsigned int				i;
 
 	trrd = data;
-	i = -1;
+	i = trrd->start;
 	drc = (t_draw_ray_config){trrd->canvas, trrd->camera, trrd->game,
 		trrd->camera->entity->coords, trrd->camera->entity, 0, 0, 0};
-	while (++i < trrd->camera->rays)
+	while (i < trrd->end)
 	{
 		drc.i = i;
 		drc.yaw = ft_normalize_angle(((trrd->camera->entity->coords.yaw
 						- (trrd->camera->fov / 2)))
 				+ ((trrd->camera->fov / trrd->camera->rays) * i));
 		draw_ray(drc);
+		++i;
 	}
 }
 

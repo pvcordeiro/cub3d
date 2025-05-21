@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 15:40:06 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/21 13:20:39 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/21 17:56:08 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,23 +44,23 @@ typedef struct s_ray
 
 typedef struct s_draw_ray_config
 {
-	t_ftm_image	*canvas;
-	t_camera	*camera;
-	t_game		*game;
-	t_coords	coords;
-	t_entity	*ignored_entity;
-	double		previous_distance;
-	double		yaw;
-	int			i;
+	t_ftm_image		*canvas;
+	t_camera		*camera;
+	t_game			*game;
+	t_coords		coords;
+	t_entity		*ignored_entity;
+	double			previous_distance;
+	double			yaw;
+	unsigned int	i;
 }	t_draw_ray_config;
 
 typedef struct s_thread_render_rays_data
 {
-	t_ftm_image	*canvas;
-	t_camera	*camera;
-	t_game		*game;
-	int			start;
-	int			end;
+	t_ftm_image		*canvas;
+	t_camera		*camera;
+	t_game			*game;
+	unsigned int	start;
+	unsigned int	end;
 }	t_thread_render_rays_data;
 
 typedef struct s_pixel_modifier_data
