@@ -2,10 +2,13 @@ NO assets/textures/cashier.xpm
 SO assets/pt/textures/salazar.xpm
 WE assets/wolf3d/textures/eagle-wall.xpm
 EA assets/pt/textures/portugal.xpm
+COLLISION_SOUND assets/wolf3d/sounds/hitwall.mp3
 2_TYPE DOOR
 2_DIRECTION NORTH
 2_DOOR assets/wolf3d/textures/door.xpm
 2_SIDES assets/wolf3d/textures/door-frame.xpm
+2_OPEN_SOUND assets/wolf3d/sounds/opendoor.mp3
+2_CLOSE_SOUND assets/wolf3d/sounds/closedoor.mp3
 6_TYPE DOOR
 6_DIRECTION WEST
 6_DOOR assets/pt/textures/salazar.xpm

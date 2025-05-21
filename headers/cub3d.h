@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/20 21:58:09 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/21 10:49:54 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ typedef struct s_player
 	double		key_look_velocity;
 	double		walk_velocity;
 	double		sprint_velocity;
+	t_fta_audio	*collision_sound;
 }	t_player;
 
 typedef struct s_wall
@@ -147,6 +148,8 @@ typedef struct s_door
 	t_sprite	opening_sprite;
 	t_sprite	*door_sprite;
 	bool		opened;
+	t_fta_audio	*open_sound;
+	t_fta_audio	*close_sound;
 }	t_door;
 
 typedef struct s_identifiers
@@ -278,7 +281,7 @@ void		render_raycasting_mega(t_game *game, t_ftm_image *canvas);
 t_ftm_image	*get_sprite_image(t_sprite *sprite);
 
 // Entities
-t_player	*player_new(char direction);
+t_player	*player_new(char direction, t_game *game);
 t_wall		*wall_new(char identifier, t_game *game);
 t_door		*door_new_e(char identifier, t_ftm_window *window, t_game *game);
 

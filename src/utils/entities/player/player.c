@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/20 19:54:55 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/21 10:46:17 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@ static bool	position_overlaps(t_list *entities, t_player *player, t_coords coord
             && coords.x - PLAYER_HITBOX_RADIUS <= (curr_entity->coords.x + curr_entity->size.width)
             && coords.y + PLAYER_HITBOX_RADIUS >= curr_entity->coords.y
             && coords.y - PLAYER_HITBOX_RADIUS <= (curr_entity->coords.y + curr_entity->size.height))
-            return (true);
+		{
+			fta_play(player->collision_sound);
+			return (true);
+		}
 		curr = curr->next;
 	}
 	return (false);
@@ -115,7 +118,12 @@ static void	free_player(void *entity)
 	free(entity);
 }
 
-t_player	*player_new(char direction)
+static void	init_sounds(t_player *player, t_game *game)
+{
+	player->collision_sound = ft_hashmap_get_value(game->sounds, "COLLISION");
+}
+
+t_player	*player_new(char direction, t_game *game)
 {
 	t_player	*player;
 
@@ -130,6 +138,7 @@ t_player	*player_new(char direction)
 	player->mouse_look_velocity = PLAYER_MOUSE_LOOK_VELOCITY;
 	player->walk_velocity = PLAYER_WALK_VELOCITY;
 	player->sprint_velocity = PLAYER_SPRINT_VELOCITY;
+	init_sounds(player, game);
 	if (direction == 'N')
 		player->entity.coords.yaw = 270.0;
 	else if (direction == 'S')

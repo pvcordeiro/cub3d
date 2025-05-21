@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 23:10:00 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/19 21:01:07 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/21 10:45:23 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	create_entity_e(t_game *game, t_ftm_window *window, char c, t_size p
 	else if (ft_list_any(game->map->identifiers.wall, cmp_str_to_char, &c))
 		entity = (t_entity *)wall_new(c, game);
 	else if (ft_list_any(game->map->identifiers.player, cmp_str_to_char, &c))
-		entity = (t_entity *)player_new(c);
+		entity = (t_entity *)player_new(c, game);
 	else if (ft_list_any(game->map->identifiers.door, cmp_str_to_char, &c))
 	{
 		entity = (t_entity *)door_new_e(c, window, game);

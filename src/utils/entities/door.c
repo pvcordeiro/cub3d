@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/20 20:35:19 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/21 10:50:07 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,19 @@ static void	free_door(void *door)
 	free(door);
 }
 
+static void	play_door_open_sounds(t_door *door)
+{
+	if (door->opened)
+		fta_play(door->open_sound);
+	else
+		fta_play(door->close_sound);
+}
+
 static void	door_action(t_entity *entity, t_entity *actioner)
 {
 	(void)actioner;
 	((t_door *)entity)->opened = !((t_door *)entity)->opened;
+	play_door_open_sounds((t_door *)entity);
 }
 
 static void	*hashmap_get_with_identifier(t_hashmap *hashmap, char identifier, char *rest)
@@ -140,6 +149,12 @@ static void	init_animation_sprites_e(t_door *door, t_ftm_window *window)
 	ft_list_add(&door->opening_sprite.images, NULL, NULL);
 }
 
+static void	init_sounds(char identifier, t_door *door, t_game *game)
+{
+	door->open_sound = hashmap_get_with_identifier(game->sounds, identifier, "OPEN");
+	door->close_sound = hashmap_get_with_identifier(game->sounds, identifier, "CLOSE");
+}
+
 t_door	*door_new_e(char identifier, t_ftm_window *window, t_game *game)
 {
 	t_door	*door;
@@ -165,5 +180,6 @@ t_door	*door_new_e(char identifier, t_ftm_window *window, t_game *game)
 	init_animation_sprites_e(door, window);
 	if (fte_flagged())
 		return (free(door), NULL);
+	init_sounds(identifier, door, game);
 	return (door);
 }
