@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map3.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 20:52:20 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/14 20:33:57 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/21 14:47:20 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static bool	identifier_already_defined(t_identifiers *identifiers, char *identifier)
 {
-	return (ft_list_any(identifiers->wall, (bool (*)(void *, void *))ft_strequal, identifier)
-		|| ft_list_any(identifiers->player, (bool (*)(void *, void *))ft_strequal, identifier)
-		|| ft_list_any(identifiers->door, (bool (*)(void *, void *))ft_strequal, identifier)
-		|| ft_list_any(identifiers->air, (bool (*)(void *, void *))ft_strequal, identifier));
+	return (ft_list_any(identifiers->wall, (void *)ft_strequal, identifier)
+		|| ft_list_any(identifiers->player, (void *)ft_strequal, identifier)
+		|| ft_list_any(identifiers->door, (void *)ft_strequal, identifier)
+		|| ft_list_any(identifiers->air, (void *)ft_strequal, identifier));
 }
 
 static void	add_identifier_e(t_identifiers *identifiers, char *identifier, char *type)

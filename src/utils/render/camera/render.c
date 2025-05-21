@@ -3,30 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 15:59:45 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/21 15:26:46 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/21 15:39:58 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "camera.h"
 
-static unsigned int	pixel_modifier(void *data, unsigned int pixel)
-{
-	t_pixel_modifier_data	*pmd;
-	t_rgba					rgba;
-	double					gradient;
+// static unsigned int	pixel_modifier(void *data, unsigned int pixel)
+// {
+// 	t_pixel_modifier_data	*pmd;
+// 	t_rgba					rgba;
+// 	double					gradient;
 
-	pmd = data;
-	gradient = fmin(pmd->ray_size->height
-			/ (pmd->canvas->size.width / 1.5), 1.0);
-	rgba.r = ((pixel >> 16) & 0xEE) * gradient;
-	rgba.g = ((pixel >> 8) & 0xEE) * gradient;
-	rgba.b = (pixel & 0xEE) * gradient;
-	rgba.a = (pixel >> 24);
-	return ((rgba.a << 24) | (rgba.r << 16) | (rgba.g << 8) | rgba.b);
-}
+// 	pmd = data;
+// 	gradient = fmin(pmd->ray_size->height
+// 			/ (pmd->canvas->size.width / 1.5), 1.0);
+// 	rgba.r = ((pixel >> 16) & 0xEE) * gradient;
+// 	rgba.g = ((pixel >> 8) & 0xEE) * gradient;
+// 	rgba.b = (pixel & 0xEE) * gradient;
+// 	rgba.a = (pixel >> 24);
+// 	return ((rgba.a << 24) | (rgba.r << 16) | (rgba.g << 8) | rgba.b);
+// }
 
 static t_ftm_pitc_config	get_pitc_config(t_get_pitc_config_config gpcc)
 {
@@ -44,8 +44,8 @@ static t_ftm_pitc_config	get_pitc_config(t_get_pitc_config_config gpcc)
 		gpcc.image->size.height, 0},
 		true,
 		*gpcc.ray_size,
-		gpcc.pixel_modifier_data,
-		pixel_modifier
+		NULL,
+		NULL
 	});
 }
 
