@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 12:15:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/20 18:05:47 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/21 14:16:18 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <fcntl.h>
 # include <stdarg.h>
 
+# define FT_UTILS_PI 3.14159265359
 # define GNL_BUFFER_SIZE 1024
 
 typedef enum s_direction
@@ -166,5 +167,8 @@ t_list					*ft_list_clone(t_list *list);
 void					ft_list_reverse(t_list **list);
 void					ft_sleep(double milliseconds);
 void					ft_list_clear_without_free(t_list *list);
+
+double					ft_cos_degrees(double angle_degree);
+double					ft_sin_degrees(double angle_degree);
 
 #endif

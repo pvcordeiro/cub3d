@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/21 10:46:17 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/21 14:16:18 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,35 +45,33 @@ static bool	position_overlaps(t_list *entities, t_player *player, t_coords coord
 	return (false);
 }
 
-static void	move_player_x(t_list *entities, t_player *player, double angle_radians, double velocity)
+static void	move_player_x(t_list *entities, t_player *player, double angle, double velocity)
 {
 	double	new_x;
 
-	new_x = player->entity.coords.x + velocity * cos(angle_radians);
+	new_x = player->entity.coords.x + velocity * ft_cos_degrees(angle);
 	if (!position_overlaps(entities, player, (t_coords){new_x, player->entity.coords.y, 0}))
 		player->entity.coords.x = new_x;
 }
 
-static void	move_player_y(t_list *entities, t_player *player, double angle_radians, double velocity)
+static void	move_player_y(t_list *entities, t_player *player, double angle, double velocity)
 {
 	double	new_y;
 
-	new_y = player->entity.coords.y + velocity * sin(angle_radians);
+	new_y = player->entity.coords.y + velocity * ft_sin_degrees(angle);
 	if (!position_overlaps(entities, player, (t_coords){player->entity.coords.x, new_y, 0}))
 		player->entity.coords.y = new_y;
 }
 
 static void	player_walk(t_list *entities, t_player *player, double angle)
 {
-	double	angle_radians;
 	double	velocity;
 
 	velocity = player->walk_velocity;
 	if (player->sprinting)
 		velocity = player->sprint_velocity;
-	angle_radians = ft_normalize_angle(angle) * (PI / 180.0);
-	move_player_x(entities, player, angle_radians, velocity);
-	move_player_y(entities, player, angle_radians, velocity);
+	move_player_x(entities, player, angle, velocity);
+	move_player_y(entities, player, angle, velocity);
 }
 
 static void	player_walks(t_list *entities, t_player *player)

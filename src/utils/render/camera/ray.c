@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 12:05:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/21 13:21:13 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/21 14:16:18 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,8 @@
 
 static void	init_dda_ray_data(t_game *game, t_dda_ray *ray, t_coords coords)
 {
-	double	angle_rad;
-
-	angle_rad = ft_normalize_angle(coords.yaw) * PI / 180.0;
-	ray->ray_dir.x = cos(angle_rad);
-	ray->ray_dir.y = sin(angle_rad);
+	ray->ray_dir.x = ft_cos_degrees(coords.yaw);
+	ray->ray_dir.y = ft_sin_degrees(coords.yaw);
 	ray->map_pos.x = (int)coords.x;
 	ray->map_pos.y = (int)coords.y;
 	ray->map_size = game->map->size;
