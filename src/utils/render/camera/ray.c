@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 12:05:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/20 21:29:54 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/21 13:21:13 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ t_ray	send_ray(t_game *game, t_coords coords, t_entity *ignored_entity)
 	set_step_and_side_dist(&ray, coords);
 	ray.hit_entity = perform_dda(&ray, game);
 	if (!ray.hit_entity)
-		return ((t_ray){PLAYER_RAYS_NO_HIT_LENGTH,
+		return ((t_ray){PLAYER_RAYS_NO_HIT_LENGTH, coords.yaw,
 			NULL, 0, 0, (t_coords){0, 0, 0}});
 	ray.length = calculate_wall_dist(&ray, coords);
 	if (ray.side == 0)
@@ -127,6 +127,7 @@ t_ray	send_ray(t_game *game, t_coords coords, t_entity *ignored_entity)
 	ray.wall_x -= floor(ray.wall_x);
 	return ((t_ray){
 		ray.length,
+		coords.yaw,
 		ray.hit_entity,
 		ray.wall_x,
 		ray.direction_of_hit_on_entity,
