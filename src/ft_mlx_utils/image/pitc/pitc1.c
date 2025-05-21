@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   pitc1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 00:39:42 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/20 17:17:15 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/20 23:14:45 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pitc.h"
 
-unsigned int inline get_modified_pixel(unsigned int (*pm)(void *, unsigned int),
+inline unsigned int get_modified_pixel(unsigned int (*pm)(void *, unsigned int),
 	void *data, unsigned int pixel)
 {
 	if (!pm)

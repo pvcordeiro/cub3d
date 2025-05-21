@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+         #
+#    By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/26 17:16:21 by afpachec          #+#    #+#              #
-#    Updated: 2025/05/20 14:35:40 by afpachec         ###   ########.fr        #
+#    Updated: 2025/05/20 23:13:11 by afpachec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3d
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -O3 -g -std=c99
+CFLAGS = -Wall -Wextra -Werror -O3 -g -std=c99 -Wno-error=stringop-overflow
 INCLUDES = -I headers
 LIBS = -L lib
 LDLIBS = -lmlx -lX11 -lXext -lm -ldl -lpthread

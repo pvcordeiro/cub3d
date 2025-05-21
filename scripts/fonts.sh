@@ -3,7 +3,16 @@
 export MAGICK='magick'
 if ! command -v $MAGICK 2>&1 >/dev/null
 then
-    export MAGICK="docker run --entrypoint=magick -v $PWD:/imgs dpokidov/imagemagick"
+    export MAGICK='convert'
+    if ! command -v $MAGICK 2>&1 >/dev/null
+    then
+        export MAGICK="docker run --entrypoint=magick -v $PWD:/imgs dpokidov/imagemagick"
+        if ! command -v $MAGICK 2>&1 >/dev/null
+        then
+            echo "Error: ImageMagick is not installed and cannot be run in a container."
+            exit 1
+        fi
+    fi
 fi
 
 if [[ "$OSTYPE" == "darwin"* ]]; then

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 15:32:59 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/20 21:32:03 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/20 23:05:51 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	draw_ray(t_draw_ray_config draw_ray_config)
 	}
 	draw_ray_line(draw_ray_config.canvas, draw_ray_config.camera,
 		ray, draw_ray_config.i);
-	if (draw_ray_config.i == draw_ray_config.camera->rays / 2)
+	if ((unsigned int)draw_ray_config.i == draw_ray_config.camera->rays / 2)
 	{
 		draw_ray_config.camera->entity->target_entity = ray.hit_entity;
 		draw_ray_config.camera->entity
