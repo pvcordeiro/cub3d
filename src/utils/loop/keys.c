@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:21:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/20 22:22:10 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/21 15:29:12 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ static void	hud_debug_keys(t_hud_debug *hud_debug, int key, bool down)
 		cub3d()->game.player->entity.coords = (t_coords){map_size.width / 2,
 		map_size.height / 2, 0};
 	}
+	if (key == XK_m && down)
+		cub3d()->window.using_mouse = !cub3d()->window.using_mouse;
 }
 
 static void	hud_keys(t_hud *hud, int key, bool down)
