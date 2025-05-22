@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:27:08 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/21 10:42:27 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/22 21:49:39 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	game_load_map_e(t_game *game, t_ftm_window *window, t_map *map)
 	init_camera(game);
 	init_hud(game);
 	init_window(window, game);
+	init_fps(game);
 }
 
 void	game_start(t_game *game, t_ftm_window *window)

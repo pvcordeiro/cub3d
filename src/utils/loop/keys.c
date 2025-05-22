@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:21:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/21 15:29:12 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/22 22:47:50 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,10 @@ static void	hud_debug_keys(t_hud_debug *hud_debug, int key, bool down)
 	}
 	if (key == XK_m && down)
 		cub3d()->window.using_mouse = !cub3d()->window.using_mouse;
+	if (key == XK_k && down)
+		cub3d()->game.fps.fps_limit /= 1.5;
+	if (key == XK_l && down)
+		cub3d()->game.fps.fps_limit = FPS_LIMIT;
 }
 
 static void	hud_keys(t_hud *hud, int key, bool down)

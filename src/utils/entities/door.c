@@ -6,11 +6,18 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/22 19:56:08 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/22 22:39:12 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "entities.h"
+
+static void	play_close_sound(t_door *door)
+{
+	if (door->opening_sprite.index == 0 && door->opening_sprite.index != door->last_animation_index)
+		fta_play(door->close_sound);
+	door->last_animation_index = door->opening_sprite.index;
+}
 
 static void	door_frame(t_entity *entity, double delta_time)
 {
@@ -18,8 +25,9 @@ static void	door_frame(t_entity *entity, double delta_time)
 
 	(void)delta_time;
 	door = (t_door *)entity;
-	door->wall.entity.hard = door->opening_sprite.index != DOOR_ANIMATION_FRAMES;
+	door->wall.entity.hard = door->opening_sprite.index != DOOR_ANIMATION_FRAMES - 1;
 	door->wall.entity.transparent = door->opening_sprite.index;
+	play_close_sound(door);
 }
 
 static void	free_door(void *door)
@@ -28,26 +36,23 @@ static void	free_door(void *door)
 	free(door);
 }
 
-static void	play_door_open_sounds(t_door *door)
-{
-	if (door->opened)
-		fta_play(door->open_sound);
-	else
-		fta_play(door->close_sound);
-}
-
 static void	update_door_animation(t_door *door)
 {
 	door->opening_sprite.reversed = !door->opened;
 	door->opening_sprite.running = true;
+	door->opening_sprite.updated_at = ft_get_time();
 }
 
 static void	door_action(t_entity *entity, t_entity *actioner)
 {
+	t_door	*door;
+
 	(void)actioner;
-	((t_door *)entity)->opened = !((t_door *)entity)->opened;
-	play_door_open_sounds((t_door *)entity);
-	update_door_animation((t_door *)entity);
+	door = (t_door *)entity;
+	door->opened = !door->opened;
+	update_door_animation(door);
+	if (door->opened)
+		fta_play(door->open_sound);
 }
 
 static void	*hashmap_get_with_identifier(t_hashmap *hashmap, char identifier, char *rest)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game4.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 22:43:09 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/20 17:54:24 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/22 23:12:40 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,12 @@ void	init_threads_e(t_game *game)
 		if (!game->camera_threads[i])
 			return (fte_set(ERROR_THREAD_INIT));
 	}
+}
+
+void	init_fps(t_game *game)
+{
+	game->fps.fps_limit = FPS_LIMIT;
+	game->fps.beginning = ft_get_time();
+	game->fps.last_frame_time = ft_get_time();
+	game->fps.delta_time = DELTA_TIME_START;
 }

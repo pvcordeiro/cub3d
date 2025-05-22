@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/22 18:22:31 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/22 23:09:11 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,14 @@
 # define PLAYER_RAYS 1024
 # define PLAYER_RAY_SUBRAYS 5
 # define PLAYER_HITBOX_RADIUS 0.23
-# define PLAYER_MOUSE_LOOK_VELOCITY 1.5
+# define PLAYER_MOUSE_LOOK_VELOCITY 30.0
 # define PLAYER_KEY_LOOK_VELOCITY 90.0
 # define PLAYER_WALK_VELOCITY 3.0
 # define PLAYER_SPRINT_VELOCITY 5.0
 # define PLAYER_RAY_HIT_ENTITIES_NUMBER 5
 
 // Door Config
-# define DOOR_ANIMATION_DURATION 10
+# define DOOR_ANIMATION_DURATION 20.0
 # define DOOR_ANIMATION_FRAMES 60
 
 // Map Config
@@ -76,6 +76,9 @@
 
 // Delta Time Config
 # define DELTA_TIME_START 0.016f
+
+// FPS Config
+# define FPS_LIMIT 1000
 
 typedef struct s_sprite
 {
@@ -155,6 +158,7 @@ typedef struct s_door
 	t_sprite	opening_sprite;
 	t_sprite	*door_sprite;
 	bool		opened;
+	int			last_animation_index;
 	t_fta_audio	*open_sound;
 	t_fta_audio	*close_sound;
 }	t_door;
@@ -205,11 +209,16 @@ typedef struct s_hud_debug
 	char	*fps;
 	char	*fps_min;
 	char	*fps_max;
-	char	*target;
+	char	*fps_limit;
+	char	*target_x;
+	char	*target_y;
+	char	*target_yaw;
+	char	*target_type;
+	char	*target_id;
 	char	*player_x;
 	char	*player_y;
 	char	*player_yaw;
-	char	*entities;
+	char	*entities_count;
 	bool	enabled;
 }	t_hud_debug;
 
@@ -225,6 +234,7 @@ typedef struct s_fps
 	t_time	fps_update_time;
 	t_time	last_frame_time;
 	double	delta_time;
+	int		fps_limit;
 	int		frame_count;
 	int		fps;
 	int		max;

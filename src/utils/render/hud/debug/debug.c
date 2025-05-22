@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 23:03:13 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/20 22:00:01 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/22 23:10:05 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ static void	set_strs(t_game *game)
 static void	render_debug_strs(t_game *game, t_ftm_image *canvas)
 {
 	render_debug_fps_strs(game, canvas, (t_coords){20, 20, 0});
-	render_debug_str(game->font, canvas, game->hud.debug.target, (t_coords){20, 60, 0});
+	render_debug_target_strs(game, canvas, (t_coords){20, 60, 0});
 	render_debug_player_strs(game, canvas, (t_coords){20, 100, 0});
-	render_debug_str(game->font, canvas, game->hud.debug.entities, (t_coords){20, 140, 0});
+	render_debug_entities_strs(game, canvas, (t_coords){20, 140, 0});
 }
 
 void	render_debug(t_game *game, t_ftm_image *canvas)

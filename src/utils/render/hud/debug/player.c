@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 01:49:57 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/20 21:59:45 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/22 23:08:07 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	set_player(t_game *game)
 
 void	render_debug_player_strs(t_game *game, t_ftm_image *canvas, t_coords coords)
 {
+	coords.x += render_debug_str(game->font, canvas, "Player", coords) + 5;
 	coords.x += render_debug_str(game->font, canvas, game->hud.debug.player_x, coords) + 5;
 	coords.x += render_debug_str(game->font, canvas, game->hud.debug.player_y, coords) + 5;
 	render_debug_str(game->font, canvas, game->hud.debug.player_yaw, coords);

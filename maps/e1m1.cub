@@ -1,3 +1,7 @@
+BACKGROUND_SOUND assets/wolf3d/sounds/getthem.mp3
+BACKGROUND_SOUND_VOLUME 0.1
+BACKGROUND_SOUND_LOOP TRUE
+
 NO NULL
 SO NULL
 WE NULL
@@ -7,11 +11,15 @@ EA NULL
 2_DOOR assets/wolf3d/textures/door.xpm
 2_SIDES NULL
 2_DIRECTION WEST
+2_OPEN_SOUND assets/wolf3d/sounds/opendoor.mp3
+2_CLOSE_SOUND assets/wolf3d/sounds/closedoor.mp3
 
 3_TYPE DOOR
 3_DOOR assets/wolf3d/textures/door.xpm
 3_SIDES NULL
 3_DIRECTION NORTH
+3_OPEN_SOUND assets/wolf3d/sounds/opendoor.mp3
+3_CLOSE_SOUND assets/wolf3d/sounds/closedoor.mp3
 
 a_TYPE WALL
 a_NO assets/wolf3d/textures/blue-wall1.xpm
@@ -66,8 +74,6 @@ i_NO assets/wolf3d/textures/grey-wall-nazi.xpm
 i_SO assets/wolf3d/textures/grey-wall-nazi.xpm
 i_WE assets/wolf3d/textures/grey-wall-nazi-dark.xpm
 i_EA assets/wolf3d/textures/grey-wall-nazi-dark.xpm
-
-BACKGROUND_SOUND assets/wolf3d/sounds/getthem.mp3
 
 F 100, 100, 100
 C 50, 50, 50

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 19:01:44 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/22 18:17:18 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/22 22:46:27 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,22 +45,27 @@ t_ftm_image	*get_sprite_image(t_sprite *sprite)
 {
 	t_list	*curr_image_node;
 	ssize_t	new_index;
+	t_time	update_diference;
 
 	if (!sprite)
 		return (get_sprite_image(&cub3d()->placeholder));
+	update_diference = ft_get_time() - sprite->updated_at;
 	if (sprite->update_delay && sprite->running
-		&& ft_get_time() - sprite->updated_at > sprite->update_delay)
+		&& update_diference > sprite->update_delay)
 	{
+		int delta = (int)(update_diference / sprite->update_delay);
+		ssize_t count = (ssize_t)ft_list_size(sprite->images);
 		if (sprite->reversed)
-			new_index = sprite->index - 1;
+			new_index = sprite->index - delta;
 		else
-			new_index = sprite->index + 1;
-		if (!sprite->loop && (new_index <= 0 || new_index >= (ssize_t)ft_list_size(sprite->images)))
+			new_index = sprite->index + delta;
+		if (sprite->loop)
+			new_index = ((new_index % count) + count) % count;
+		else if (new_index < 0 || new_index >= count)
+		{
 			sprite->running = false;
-		else if (new_index > (ssize_t)ft_list_size(sprite->images))
-			new_index = 0;
-		else if (new_index < 0)
-			new_index = (ssize_t)ft_list_size(sprite->images) - 1;
+			new_index = (count - 1) * (new_index >= count);
+		}
 		sprite->index = new_index;
 		sprite->updated_at = ft_get_time();
 	}
