@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/21 16:08:18 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/22 18:22:31 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,15 @@
 # define PLAYER_RAYS 1024
 # define PLAYER_RAY_SUBRAYS 5
 # define PLAYER_HITBOX_RADIUS 0.23
-# define PLAYER_MOUSE_LOOK_VELOCITY 0.1
-# define PLAYER_KEY_LOOK_VELOCITY 3.0
-# define PLAYER_WALK_VELOCITY 0.15
-# define PLAYER_SPRINT_VELOCITY 0.3
+# define PLAYER_MOUSE_LOOK_VELOCITY 1.5
+# define PLAYER_KEY_LOOK_VELOCITY 90.0
+# define PLAYER_WALK_VELOCITY 3.0
+# define PLAYER_SPRINT_VELOCITY 5.0
 # define PLAYER_RAY_HIT_ENTITIES_NUMBER 5
 
 // Door Config
-# define DOOR_ANIMATION_FRAMES 64
+# define DOOR_ANIMATION_DURATION 10
+# define DOOR_ANIMATION_FRAMES 60
 
 // Map Config
 # define DEFAULT_AIR_TYPES "0 \t\n\v\f\r"
@@ -73,12 +74,18 @@
 // Raytracing Threads
 # define CAMERA_THREADS 4
 
+// Delta Time Config
+# define DELTA_TIME_START 0.016f
+
 typedef struct s_sprite
 {
 	t_list			*images;
-	size_t			index;
+	ssize_t			index;
 	t_time			updated_at;
 	t_time			update_delay;
+	bool			reversed;
+	bool			running;
+	bool			loop;
 }	t_sprite;
 
 typedef enum e_entity_type
@@ -90,7 +97,7 @@ typedef enum e_entity_type
 
 typedef struct s_entity
 {
-	void			(*frame)(struct s_entity *this);
+	void			(*frame)(struct s_entity *this, double delta_time);
 	void			(*free)(void *this);
 	void			(*action)(struct s_entity *entity,
 			struct s_entity *actioner);
@@ -215,7 +222,9 @@ typedef struct s_hud
 typedef struct s_fps
 {
 	t_time	beginning;
-	t_time	last_frame_update;
+	t_time	fps_update_time;
+	t_time	last_frame_time;
+	double	delta_time;
 	int		frame_count;
 	int		fps;
 	int		max;
@@ -271,7 +280,7 @@ void		key_hook(int key, bool down);
 void		mouse_hook(t_coords coords);
 
 // Entities
-void		call_entity_frames(t_list *entities);
+void		call_entity_frames(t_list *entities, t_fps *fps);
 t_sprite	*get_entity_sprite(t_entity *entity, t_direction direction);
 
 // Raycasting

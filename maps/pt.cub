@@ -3,6 +3,9 @@ SO assets/pt/textures/pt2.xpm
 WE assets/pt/textures/pt3.xpm
 EA assets/textures/oms.xpm
 2_TYPE DOOR
+2_OPEN_SOUND assets/wolf3d/sounds/halt.mp3
+2_CLOSE_SOUND_LOOP TRUE
+2_CLOSE_SOUND assets/wolf3d/sounds/halt.mp3
 2_DIRECTION NORTH
 2_DOOR assets/pt/textures/salazar.xpm
 2_SIDES assets/pt/textures/salazar.xpm
@@ -31,7 +34,8 @@ p_EA NULL
 9_WE assets/pt/textures/portugal.xpm
 9_EA assets/pt/textures/portugal.xpm
 MOUSE FALSE
-BACKGROUND_SOUND assets/pt/sounds/anossaterra.mp3
+BACKGROUND_SOUND assets/pt/sounds/01. Deus, Pátria, Rei.mp3
+BACKGROUND_SOUND_VOLUME 0.1
 
 F 255,255,255
 C 12,36,84

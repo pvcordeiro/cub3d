@@ -12,8 +12,11 @@
 
 #include <ft_error.h>
 
+char	*get_error_message34(t_error _error);
+
 char	*get_error_message33(t_error _error)
 {
-	(void)_error;
-	return (ERROR_INVALID_MSG);
+	if (_error == ERROR_WALLS_INIT)
+		return (ERROR_WALLS_INIT_MSG);
+	return (get_error_message34(_error));
 }

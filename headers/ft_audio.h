@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 11:01:45 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/19 22:25:35 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/22 20:25:07 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,18 @@
 // External Libs
 # include <miniaudio.h>
 
+# define FT_AUDIO_SOUND_INSTANCES 50
+
+typedef struct s_fta_audio_config
+{
+	float	volume;
+	bool	loop;
+}	t_fta_audio_config;
+
 typedef struct s_fta_audio
 {
-	ma_sound	sound;
+	ma_sound			sound[FT_AUDIO_SOUND_INSTANCES];
+	t_fta_audio_config	config;
 }	t_fta_audio;
 
 typedef struct s_fta_engine
@@ -35,6 +44,7 @@ t_fta_engine	*fta_engine(void);
 void			fta_init_e(void);
 void			fta_destroy(void);
 t_fta_audio		*fta_audio_new(const char *path);
+void			fta_audio_config(t_fta_audio *audio, t_fta_audio_config config);
 void			fta_play(t_fta_audio *audio);
 void			fta_clear_audio(void *audio);
 void			fta_free_audio(void *audio);

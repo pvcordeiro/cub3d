@@ -6,51 +6,19 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/21 10:50:07 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/22 19:56:08 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "entities.h"
 
-static t_sprite	*get_door_sprite(t_door *door)
-{
-	ssize_t	frame_index;
-
-	door->wall.entity.transparent = true;
-	frame_index = door->opening_sprite.index;
-	if (door->opened)
-		++frame_index;
-	else
-		--frame_index;
-	if (frame_index >= DOOR_ANIMATION_FRAMES)
-		frame_index = DOOR_ANIMATION_FRAMES - 1;
-	else if (frame_index < 0)
-		frame_index = 0;
-	door->opening_sprite.index = frame_index;
-	return (&door->opening_sprite);
-}
-
-static void	set_door_sprite(t_door *door)
-{
-	if (door->direction == NORTH || door->direction == SOUTH)
-	{
-		door->wall.north_sprite = get_door_sprite(door);
-		door->wall.south_sprite = get_door_sprite(door);
-	}
-	else if (door->direction == EAST || door->direction == WEST)
-	{
-		door->wall.east_sprite = get_door_sprite(door);
-		door->wall.west_sprite = get_door_sprite(door);
-	}
-}
-
-static void	door_frame(t_entity *entity)
+static void	door_frame(t_entity *entity, double delta_time)
 {
 	t_door	*door;
 
+	(void)delta_time;
 	door = (t_door *)entity;
-	set_door_sprite(door);
-	door->wall.entity.hard = !door->opened;
+	door->wall.entity.hard = door->opening_sprite.index != DOOR_ANIMATION_FRAMES;
 	door->wall.entity.transparent = door->opening_sprite.index;
 }
 
@@ -68,11 +36,18 @@ static void	play_door_open_sounds(t_door *door)
 		fta_play(door->close_sound);
 }
 
+static void	update_door_animation(t_door *door)
+{
+	door->opening_sprite.reversed = !door->opened;
+	door->opening_sprite.running = true;
+}
+
 static void	door_action(t_entity *entity, t_entity *actioner)
 {
 	(void)actioner;
 	((t_door *)entity)->opened = !((t_door *)entity)->opened;
 	play_door_open_sounds((t_door *)entity);
+	update_door_animation((t_door *)entity);
 }
 
 static void	*hashmap_get_with_identifier(t_hashmap *hashmap, char identifier, char *rest)
@@ -136,7 +111,7 @@ static void	init_animation_sprites_e(t_door *door, t_ftm_window *window)
 
 	fte_set(ERROR_NO_ERROR);
 	door_image = door->door_sprite->images->data;
-	init_sprite(&door->opening_sprite, NULL, 0);
+	init_sprite(&door->opening_sprite, NULL, DOOR_ANIMATION_DURATION);
 	i = -1;
 	while (++i < DOOR_ANIMATION_FRAMES - 1)
 	{
@@ -153,6 +128,20 @@ static void	init_sounds(char identifier, t_door *door, t_game *game)
 {
 	door->open_sound = hashmap_get_with_identifier(game->sounds, identifier, "OPEN");
 	door->close_sound = hashmap_get_with_identifier(game->sounds, identifier, "CLOSE");
+}
+
+static void	set_sprites(t_door *door)
+{
+	if (door->direction == NORTH || door->direction == SOUTH)
+	{
+		door->wall.north_sprite = &door->opening_sprite;
+		door->wall.south_sprite = &door->opening_sprite;
+	}
+	else if (door->direction == EAST || door->direction == WEST)
+	{
+		door->wall.east_sprite = &door->opening_sprite;
+		door->wall.west_sprite = &door->opening_sprite;
+	}
 }
 
 t_door	*door_new_e(char identifier, t_ftm_window *window, t_game *game)
@@ -181,5 +170,6 @@ t_door	*door_new_e(char identifier, t_ftm_window *window, t_game *game)
 	if (fte_flagged())
 		return (free(door), NULL);
 	init_sounds(identifier, door, game);
+	set_sprites(door);
 	return (door);
 }

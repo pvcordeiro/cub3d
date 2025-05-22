@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 22:05:32 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/20 20:34:34 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/22 20:29:33 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef enum e_error
 	ERROR_LOAD_SOUND,
 	ERROR_FONT_NOT_FOUND,
 	ERROR_WALLS_INIT,
+	ERROR_AUDIO_CONFIG_ON_INVALID,
 }	t_error;
 
 typedef struct s_error_storage
@@ -93,6 +94,7 @@ typedef struct s_error_storage
 # define ERROR_LOAD_SOUND_MSG "Loading sound error"
 # define ERROR_FONT_NOT_FOUND_MSG "Font not found"
 # define ERROR_WALLS_INIT_MSG "Walls initialization error"
+# define ERROR_AUDIO_CONFIG_ON_INVALID_MSG "Audio config on invalid type"
 # define ERROR_INVALID_MSG "Invalid Error"
 
 // Set ft_error global error
