@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 12:15:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/21 14:16:18 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/23 17:47:21 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,5 +170,6 @@ void					ft_list_clear_without_free(t_list *list);
 
 double					ft_cos_degrees(double angle_degree);
 double					ft_sin_degrees(double angle_degree);
+double					ft_distance(t_coords a, t_coords b);
 
 #endif
