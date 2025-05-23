@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/22 23:09:11 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/23 14:18:52 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@
 # define PLAYER_RAY_HIT_ENTITIES_NUMBER 5
 
 // Door Config
-# define DOOR_ANIMATION_DURATION 20.0
+# define DOOR_ANIMATION_DURATION 10.0
 # define DOOR_ANIMATION_FRAMES 60
 
 // Map Config

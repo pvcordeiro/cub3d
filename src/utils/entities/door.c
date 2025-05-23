@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/22 22:39:12 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/23 14:23:36 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void	play_close_sound(t_door *door)
 {
+	(void)get_sprite_image(&door->opening_sprite);
 	if (door->opening_sprite.index == 0 && door->opening_sprite.index != door->last_animation_index)
 		fta_play(door->close_sound);
 	door->last_animation_index = door->opening_sprite.index;
