@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:27:08 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/22 21:49:39 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/23 16:20:57 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,9 @@ void	game_load_map_e(t_game *game, t_ftm_window *window, t_map *map)
 	if (fte_flagged())
 		return (clear_game(game));
 	init_walls_e(game);
+	if (fte_flagged())
+		return (clear_game(game));
+	init_billboards_e(game);
 	if (fte_flagged())
 		return (clear_game(game));
 	init_camera(game);

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/23 16:10:50 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/23 16:19:24 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -269,6 +269,7 @@ typedef struct s_game
 	t_list				*entities;
 	t_hashmap			*sprites;
 	t_entity			***walls;
+	t_entity			**billboards;
 	t_ftt_thread		*camera_threads[CAMERA_THREADS];
 }	t_game;
 
