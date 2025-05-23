@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 23:10:00 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/23 15:04:49 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/23 17:26:04 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ static void	*get_creator_e(t_identifiers *identifiers, char identifier)
 		return ((void *)player_new);
 	if (ft_list_any(identifiers->door, cmp_str_to_char, &identifier))
 		return ((void *)door_new_e);
+	if (ft_list_any(identifiers->billboard, cmp_str_to_char, &identifier))
+		return ((void *)billboard_new);
 	return (fte_set(ERROR_INVALID_IDENTIFIER_TYPE), NULL);
 }
 

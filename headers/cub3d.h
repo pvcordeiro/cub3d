@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/23 16:26:43 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/23 17:26:00 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -319,5 +319,6 @@ t_player	*player_new(char identifier, t_ftm_window *window, t_game *game);
 t_wall		*wall_new(char identifier, t_ftm_window *window, t_game *game);
 t_door		*door_new_e(char identifier, t_ftm_window *window, t_game *game);
 t_enemy		*enemy_new(char identifier, t_ftm_window *window, t_game *game);
+t_billboard	*billboard_new(char identifier, t_ftm_window *window, t_game *game);
 
 #endif
