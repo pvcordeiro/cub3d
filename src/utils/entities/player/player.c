@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/22 14:31:45 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/23 15:03:01 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ static void	player_looks(t_player *player, double delta_time)
 
 	velocity = player->key_look_velocity * delta_time;
 	if (player->looking_left)
-		player->entity.coords.yaw = ft_normalize_angle(player->entity.coords.yaw - velocity);
+		player->billboard.entity.coords.yaw = ft_normalize_angle(player->billboard.entity.coords.yaw - velocity);
 	else if (player->looking_right)
-		player->entity.coords.yaw = ft_normalize_angle(player->entity.coords.yaw + velocity);
+		player->billboard.entity.coords.yaw = ft_normalize_angle(player->billboard.entity.coords.yaw + velocity);
 }
 
 static bool	position_overlaps(t_list *entities, t_player *player, t_coords coords)
@@ -28,7 +28,7 @@ static bool	position_overlaps(t_list *entities, t_player *player, t_coords coord
 	t_list		*curr;
 	t_entity	*curr_entity;
 
-	if (!player->entity.hard)
+	if (!player->billboard.entity.hard)
 		return (false);
 	curr = entities;
 	while (curr)
@@ -52,18 +52,18 @@ static void	move_player_x(t_list *entities, t_player *player, double angle, doub
 {
 	double	new_x;
 
-	new_x = player->entity.coords.x + velocity * ft_cos_degrees(angle);
-	if (!position_overlaps(entities, player, (t_coords){new_x, player->entity.coords.y, 0}))
-		player->entity.coords.x = new_x;
+	new_x = player->billboard.entity.coords.x + velocity * ft_cos_degrees(angle);
+	if (!position_overlaps(entities, player, (t_coords){new_x, player->billboard.entity.coords.y, 0}))
+		player->billboard.entity.coords.x = new_x;
 }
 
 static void	move_player_y(t_list *entities, t_player *player, double angle, double velocity)
 {
 	double	new_y;
 
-	new_y = player->entity.coords.y + velocity * ft_sin_degrees(angle);
-	if (!position_overlaps(entities, player, (t_coords){player->entity.coords.x, new_y, 0}))
-		player->entity.coords.y = new_y;
+	new_y = player->billboard.entity.coords.y + velocity * ft_sin_degrees(angle);
+	if (!position_overlaps(entities, player, (t_coords){player->billboard.entity.coords.x, new_y, 0}))
+		player->billboard.entity.coords.y = new_y;
 }
 
 static void	player_walk(t_list *entities, t_player *player, double angle, double delta_time)
@@ -81,13 +81,13 @@ static void	player_walk(t_list *entities, t_player *player, double angle, double
 static void	player_walks(t_list *entities, t_player *player, double delta_time)
 {
 	if (player->walking_backward)
-		player_walk(entities, player, player->entity.coords.yaw - 180.0, delta_time);
+		player_walk(entities, player, player->billboard.entity.coords.yaw - 180.0, delta_time);
 	if (player->walking_right)
-		player_walk(entities, player, player->entity.coords.yaw + 90.0, delta_time);
+		player_walk(entities, player, player->billboard.entity.coords.yaw + 90.0, delta_time);
 	if (player->walking_left)
-		player_walk(entities, player, player->entity.coords.yaw - 90.0, delta_time);
+		player_walk(entities, player, player->billboard.entity.coords.yaw - 90.0, delta_time);
 	if (player->walking_forward)
-		player_walk(entities, player, player->entity.coords.yaw, delta_time);
+		player_walk(entities, player, player->billboard.entity.coords.yaw, delta_time);
 }
 
 static void	player_mouse_moviment(t_player *player, double delta_time)
@@ -97,7 +97,7 @@ static void	player_mouse_moviment(t_player *player, double delta_time)
 	if (!player->mouse_moviment)
 		return ;
 	velocity = (player->mouse_moviment * player->mouse_look_velocity) * delta_time;
-	player->entity.coords.yaw = ft_normalize_angle(player->entity.coords.yaw + velocity);
+	player->billboard.entity.coords.yaw = ft_normalize_angle(player->billboard.entity.coords.yaw + velocity);
 }
 
 static void	player_actions(t_player *player)
@@ -105,9 +105,9 @@ static void	player_actions(t_player *player)
 	if (player->action && player->already_actioned)
 		return ;
 	player->already_actioned = player->action;
-	if (player->action && player->entity.target_entity
-		&& player->entity.target_entity->action)
-		player->entity.target_entity->action(player->entity.target_entity, (t_entity *)player);
+	if (player->action && player->billboard.entity.target_entity
+		&& player->billboard.entity.target_entity->action)
+		player->billboard.entity.target_entity->action(player->billboard.entity.target_entity, (t_entity *)player);
 }
 
 static void	player_frame(t_entity *entity, double delta_time)
@@ -128,27 +128,29 @@ static void	init_sounds(t_player *player, t_game *game)
 	player->collision_sound = ft_hashmap_get_value(game->sounds, "COLLISION");
 }
 
-t_player	*player_new(char direction, t_game *game)
+t_player	*player_new(char identifier, t_ftm_window *window, t_game *game)
 {
 	t_player	*player;
 
+	(void)window;
 	player = ft_calloc(1, sizeof(t_player));
 	if (!player)
 		return (NULL);
-	player->entity.type = ENTITY_PLAYER;
-	player->entity.frame = player_frame;
-	player->entity.free = free_player;
-	player->entity.hard = true;
+	player->billboard.entity.type = ENTITY_PLAYER;
+	player->billboard.entity.frame = player_frame;
+	player->billboard.entity.free = free_player;
+	player->billboard.entity.hard = true;
+	player->billboard.entity.identifier = identifier;
 	player->key_look_velocity = PLAYER_KEY_LOOK_VELOCITY;
 	player->mouse_look_velocity = PLAYER_MOUSE_LOOK_VELOCITY;
 	player->walk_velocity = PLAYER_WALK_VELOCITY;
 	player->sprint_velocity = PLAYER_SPRINT_VELOCITY;
 	init_sounds(player, game);
-	if (direction == 'N')
-		player->entity.coords.yaw = 270.0;
-	else if (direction == 'S')
-		player->entity.coords.yaw = 90.0;
-	else if (direction == 'W')
-		player->entity.coords.yaw = 180.0;
+	if (identifier == 'N')
+		player->billboard.entity.coords.yaw = 270.0;
+	else if (identifier == 'S')
+		player->billboard.entity.coords.yaw = 90.0;
+	else if (identifier == 'W')
+		player->billboard.entity.coords.yaw = 180.0;
 	return (player);
 }

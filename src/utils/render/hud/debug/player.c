@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 01:49:57 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/22 23:08:07 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/23 14:35:14 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void	set_player(t_game *game)
 		return ;
 	(free(game->hud.debug.player_x) ,free(game->hud.debug.player_y),
 		free(game->hud.debug.player_yaw));
-	game->hud.debug.player_x = ft_strf("X: %d", (int)game->player->entity.coords.x);
-	game->hud.debug.player_y = ft_strf("Y: %d", (int)game->player->entity.coords.y);
+	game->hud.debug.player_x = ft_strf("X: %d", (int)game->player->billboard.entity.coords.x);
+	game->hud.debug.player_y = ft_strf("Y: %d", (int)game->player->billboard.entity.coords.y);
 	game->hud.debug.player_yaw = ft_strf("Yaw: %d",
-		(int)game->player->entity.coords.yaw);
+		(int)game->player->billboard.entity.coords.yaw);
 }
 
 void	render_debug_player_strs(t_game *game, t_ftm_image *canvas, t_coords coords)

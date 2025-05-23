@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 21:41:28 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/22 23:10:46 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/23 14:34:59 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void	set_target(t_game *game)
 	static t_entity	*last_entity;
 	t_entity		*target_entity;
 
-	if (!game->player || !game->player->entity.target_entity)
+	if (!game->player || !game->player->billboard.entity.target_entity)
 		return ;
-	target_entity = game->player->entity.target_entity;
+	target_entity = game->player->billboard.entity.target_entity;
 	if (last_entity == target_entity)
 		return ;
 	(free(game->hud.debug.target_x), free(game->hud.debug.target_y),

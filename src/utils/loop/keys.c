@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:21:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/22 22:47:50 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/23 14:35:24 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ static void	hud_debug_keys(t_hud_debug *hud_debug, int key, bool down)
 	if (key == XK_v && down)
 		cub3d()->game.camera.rays = PLAYER_RAYS;
 	if (key == XK_b && down)
-		cub3d()->game.player->entity.hard = !cub3d()->game.player->entity.hard;
+		cub3d()->game.player->billboard.entity.hard = !cub3d()->game.player->billboard.entity.hard;
 	if (key == XK_n && down)
 	{
 		map_size = cub3d()->game.map->size;
-		cub3d()->game.player->entity.coords = (t_coords){map_size.width / 2,
+		cub3d()->game.player->billboard.entity.coords = (t_coords){map_size.width / 2,
 		map_size.height / 2, 0};
 	}
 	if (key == XK_m && down)

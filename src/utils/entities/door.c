@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/23 14:23:36 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/23 14:46:18 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,7 @@ t_door	*door_new_e(char identifier, t_ftm_window *window, t_game *game)
 	door->wall.entity.hard = true;
 	door->wall.entity.wall = true;
 	door->wall.entity.size = (t_size){1, 1};
+	door->wall.entity.identifier = identifier;
 	init_door_direction_e(door, game, identifier);
 	if (fte_flagged())
 		return (free(door), NULL);

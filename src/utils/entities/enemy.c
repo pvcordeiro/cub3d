@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wall.c                                             :+:      :+:    :+:   */
+/*   enemy.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/23 14:45:59 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/22 14:37:18 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "entities.h"
 
-static void	wall_frame(t_entity *entity, double delta_time)
+static void	enemy_frame(t_entity *entity, double delta_time)
 {
 	((void)entity, (void)delta_time);
 }
 
-static void	free_wall(void *wall)
+static void	free_enemy(void *enemy)
 {
-	free(wall);
+	free(enemy);
 }
 
 static void	*hashmap_get_with_identifier(t_hashmap *hashmap, char identifier, char *rest)
@@ -34,24 +34,21 @@ static void	*hashmap_get_with_identifier(t_hashmap *hashmap, char identifier, ch
 	return (free(key), data);
 }
 
-t_wall	*wall_new(char identifier, t_ftm_window *window, t_game *game)
+t_enemy	*enemy_new(char identifier, t_ftm_window *window, t_game *game)
 {
-	t_wall	*wall;
+	t_enemy	*enemy;
 
 	(void)window;
-	wall = ft_calloc(1, sizeof(t_wall));
-	if (!wall)
+	enemy = ft_calloc(1, sizeof(t_enemy));
+	if (!enemy)
 		return (NULL);
-	wall->entity.type = ENTITY_WALL;
-	wall->entity.frame = wall_frame;
-	wall->entity.free = free_wall;
-	wall->entity.hard = true;
-	wall->entity.wall = true;
-	wall->entity.size = (t_size){1, 1};
-	wall->entity.identifier = identifier;
-	wall->north_sprite = hashmap_get_with_identifier(game->sprites, identifier, "NO");
-	wall->south_sprite = hashmap_get_with_identifier(game->sprites, identifier, "SO");
-	wall->west_sprite = hashmap_get_with_identifier(game->sprites, identifier, "WE");
-	wall->east_sprite = hashmap_get_with_identifier(game->sprites, identifier, "EA");
-	return (wall);
+	enemy->billboard.entity.type = ENTITY_ENEMY;
+	enemy->billboard.entity.frame = enemy_frame;
+	enemy->billboard.entity.free = free_enemy;
+	enemy->billboard.entity.hard = true;
+	enemy->billboard.entity.billboard = true;
+	enemy->billboard.entity.identifier = identifier;
+	enemy->billboard.entity.size = (t_size){1, 1};
+	enemy->idle_sprite = hashmap_get_with_identifier(game->sprites, identifier, "IDLE");
+	return (enemy);
 }

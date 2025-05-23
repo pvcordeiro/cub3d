@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/23 14:18:52 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/23 16:10:50 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ typedef enum e_entity_type
 	ENTITY_PLAYER,
 	ENTITY_WALL,
 	ENTITY_DOOR,
+	ENTITY_ENEMY,
 }	t_entity_type;
 
 typedef struct s_entity
@@ -107,6 +108,7 @@ typedef struct s_entity
 	bool			transparent;
 	bool			hard;
 	bool			wall;
+	bool			billboard;
 	char			identifier;
 	t_coords		coords;
 	t_size			size;
@@ -122,9 +124,21 @@ typedef struct s_camera
 	unsigned int	rays;
 }	t_camera;
 
-typedef struct s_player
+typedef struct s_billboard
 {
 	t_entity	entity;
+	t_sprite	*sprite;
+}	t_billboard;
+
+typedef struct s_enemy
+{
+	t_billboard	billboard;
+	t_sprite	*idle_sprite;
+}	t_enemy;
+
+typedef struct s_player
+{
+	t_billboard	billboard;
 	bool		walking_forward;
 	bool		walking_left;
 	bool		walking_backward;
@@ -266,20 +280,18 @@ typedef struct s_cub3d
 	t_game				game;
 }	t_cub3d;
 
+// cub3d
+t_cub3d		*cub3d(void);
+void		cub3d_exit(int code);
+
+// Game
 void		game_load_map_e(t_game *game, t_ftm_window *window, t_map *map);
 void		game_start(t_game *game, t_ftm_window *window);
 void		clear_game(void *game);
 void		free_game(void *game);
 void		render_game(t_ftm_window *window, t_game *game);
-void		free_sprite(void *data);
-void		clear_sprite(void *data);
-void		init_sprite(t_sprite *sprite, t_list *images, t_time update_delay);
-t_sprite	*sprite_new(t_list *images, t_time update_delay);
 
-// cub3d
-t_cub3d		*cub3d(void);
-void		cub3d_exit(int code);
-
+// Map
 t_map		*parse_map_e(char *path);
 void		clear_map(void *map);
 void		free_map(t_map *map);
@@ -289,19 +301,19 @@ void		loop(void);
 void		key_hook(int key, bool down);
 void		mouse_hook(t_coords coords);
 
-// Entities
-void		call_entity_frames(t_list *entities, t_fps *fps);
-t_sprite	*get_entity_sprite(t_entity *entity, t_direction direction);
-
-// Raycasting
-void		render_raycasting_mega(t_game *game, t_ftm_image *canvas);
-
 // Sprites
 t_ftm_image	*get_sprite_image(t_sprite *sprite);
+t_sprite	*get_entity_sprite(t_entity *entity, t_direction direction);
+void		free_sprite(void *data);
+void		clear_sprite(void *data);
+void		init_sprite(t_sprite *sprite, t_list *images, t_time update_delay);
+t_sprite	*sprite_new(t_list *images, t_time update_delay);
 
 // Entities
-t_player	*player_new(char direction, t_game *game);
-t_wall		*wall_new(char identifier, t_game *game);
+void		call_entity_frames(t_list *entities, t_fps *fps);
+t_player	*player_new(char identifier, t_ftm_window *window, t_game *game);
+t_wall		*wall_new(char identifier, t_ftm_window *window, t_game *game);
 t_door		*door_new_e(char identifier, t_ftm_window *window, t_game *game);
+t_enemy		*enemy_new(char identifier, t_ftm_window *window, t_game *game);
 
 #endif

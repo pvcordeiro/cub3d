@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 23:10:00 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/21 10:45:23 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/23 15:04:49 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,23 +22,32 @@ static bool	cmp_str_to_char(void *str, void *c)
 	return (free(c_str), result);
 }
 
+static void	*get_creator_e(t_identifiers *identifiers, char identifier)
+{
+	fte_set(ERROR_NO_ERROR);
+	if (ft_list_any(identifiers->air, cmp_str_to_char, &identifier))
+		return (NULL);
+	if (ft_list_any(identifiers->wall, cmp_str_to_char, &identifier))
+		return ((void *)wall_new);
+	if (ft_list_any(identifiers->player, cmp_str_to_char, &identifier))
+		return ((void *)player_new);
+	if (ft_list_any(identifiers->door, cmp_str_to_char, &identifier))
+		return ((void *)door_new_e);
+	return (fte_set(ERROR_INVALID_IDENTIFIER_TYPE), NULL);
+}
+
+
 static void	create_entity_e(t_game *game, t_ftm_window *window, char c, t_size position)
 {
+	void		*creator;
 	t_entity	*entity;
 
+	fte_set(ERROR_NO_ERROR);
 	entity = NULL;
-	if (ft_list_any(game->map->identifiers.air, cmp_str_to_char, &c))
+	creator = get_creator_e(&game->map->identifiers, c);
+	if (fte_flagged() || !creator)
 		return ;
-	else if (ft_list_any(game->map->identifiers.wall, cmp_str_to_char, &c))
-		entity = (t_entity *)wall_new(c, game);
-	else if (ft_list_any(game->map->identifiers.player, cmp_str_to_char, &c))
-		entity = (t_entity *)player_new(c, game);
-	else if (ft_list_any(game->map->identifiers.door, cmp_str_to_char, &c))
-	{
-		entity = (t_entity *)door_new_e(c, window, game);
-		if (fte_flagged())
-			return ;
-	}
+	entity = ((t_entity *(*)(char, t_ftm_window *, t_game *))creator)(c, window, game);
 	if (!entity)
 		return (fte_set(ERROR_ENTITY_CREATION));
 	entity->identifier = c;
