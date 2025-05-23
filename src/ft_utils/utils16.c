@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 13:45:53 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/23 17:47:13 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/23 18:04:49 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,5 @@ double	ft_sin_degrees(double angle_degree)
 
 double	ft_distance(t_coords a, t_coords b)
 {
-	return (ft_sqrt(ft_pow(a.x - b.x, 2) + ft_pow(a.y - b.y, 2)));
+	return (sqrt(pow(a.x - b.x, 2) + pow(a.y - b.y, 2)));
 }
