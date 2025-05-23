@@ -75,6 +75,24 @@ i_SO assets/wolf3d/textures/grey-wall-nazi.xpm
 i_WE assets/wolf3d/textures/grey-wall-nazi-dark.xpm
 i_EA assets/wolf3d/textures/grey-wall-nazi-dark.xpm
 
+j_TYPE WALL
+j_NO assets/wolf3d/textures/wood-wall.xpm
+j_SO assets/wolf3d/textures/wood-wall.xpm
+j_WE assets/wolf3d/textures/wood-wall-dark.xpm
+j_EA assets/wolf3d/textures/wood-wall-dark.xpm
+
+k_TYPE WALL
+k_NO assets/wolf3d/textures/wood-wall-eagle.xpm
+k_SO assets/wolf3d/textures/wood-wall-eagle.xpm
+k_WE assets/wolf3d/textures/door-frame.xpm
+k_EA assets/wolf3d/textures/door-frame.xpm
+
+l_TYPE WALL
+l_NO assets/wolf3d/textures/wood-wall-eagle.xpm
+l_SO assets/wolf3d/textures/wood-wall-eagle.xpm
+l_WE assets/wolf3d/textures/wood-wall-eagle-dark.xpm
+l_EA assets/wolf3d/textures/wood-wall-eagle-dark.xpm
+
 F 100, 100, 100
 C 50, 50, 50
 
@@ -88,37 +106,37 @@ C 50, 50, 50
      11113331111 1   111111111           111111
      1         1 1   1       1           111111
      1         111   111     11111d3d111111
-     1         e       1     11111   111111
-     1         2       1       111   111111
-     1         e       1       111   11
-111111         111111111       111   11
-1   11         1           1111111   1111
-1   11111d3d1111           1111e11   1111
-1   1   1   1              11  2       11
-1d3d1   1   1              11  e11   1111
-1   11111   1              11  111   1111
-1   1   1   1              11  111   1111
-1       1   1              1111111   11
-1   1   1   1              1111111   11              
-1   11111d3d1111                fad3daf              aaaaaaaaaa
-1   11         1           ffffif     fiffff         a        aa
+     1         e       1         j   j
+     1         2       1         j   j
+     1         e       1         j   j
+111111         111111111         j   j
+1   11         1                 j   j
+1   11111d3d1111            jjjejj   jjj
+1   1   1   1               j  2       j
+1d3d1   1   1               j  ejj   jjj
+1   11111   1               j  1 j   j
+1   1   1   1               j  1 j   j
+1       1   1               jjjj l   l
+1   1   1   1                    j   j              
+1   11111d3d1111                fjk3kjf              aaaaaaaaaaa
+1   11         1           ffffif     fiffff         a         a
 1   11         1           f               f         aa        a
 1   11         1           g               gaaaaaaaaaaa        a
 1    e         1           f                e         e        a
 1    2         1           f                2         2        a
 1    e         1           f                e         e        a
 1   11         1           g               gaaa    aaaa        a
-1   11         1           f               f  a   a  a        aa
-1   11         1           ffhfff     ffhfff  a   a  a        a
-1   11111d2d1111                fad3daf       a   aaaaaaaaaaaa
-1   1   1   1                    a   a        a   a
-1   11111   1                    a   a        a   a
-1   1   1   1                    a   a        a   a aaaaaaaaa
-1       1   1                    a   a        a   aaa a a a aa
-1   1   1   1                    a   a        a    e         a
-1   11111   1                    a   a        a    2         b
-1   11111   111111111111111      a   a        a    e         a
-1               e       111      a   a        aaaaaaa a a a aa
+1   11         1           f               f  aa  a   a        a
+1   11         1           ffhfff     ffhfff   a  a   a        a
+1   11111d2d1111                fad3daf        a  aaaaaaa aa aaa
+1   1   1   1                    a   a         a  a     aaaaaa
+1   11111   1                    a   a         a  a
+1   1   1   1                    a   a         a  a aaaaaaaaa
+1       1   1                    a   a         a  aaa a a a aa
+1   1   1   1                    a   a         a   e         a
+1   11111   1                    a   a         a   2         b
+1   11111   111111111111111      a   a         a   e         a
+1               e       111      a   a         aaaaaa a a a aa
 1               2       0 0      a   a             aaaaaaaaaa
 1               e       111      a   a
 1111111111111111e3111111111      a   a
