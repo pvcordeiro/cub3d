@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   enemy.c                                             :+:      :+:    :+:   */
+/*   billboard.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,31 +12,31 @@
 
 #include "entities.h"
 
-static void	enemy_frame(t_entity *entity, double delta_time)
+static void	billboard_frame(t_entity *entity, double delta_time)
 {
 	((void)entity, (void)delta_time);
 }
 
-static void	free_enemy(void *enemy)
+static void	free_billboard(void *billboard)
 {
-	free(enemy);
+	free(billboard);
 }
 
-t_enemy	*enemy_new(char identifier, t_ftm_window *window, t_game *game)
+t_billboard	*billboard_new(char identifier, t_ftm_window *window, t_game *game)
 {
-	t_enemy	*enemy;
+	t_billboard	*billboard;
 
 	(void)window;
-	enemy = ft_calloc(1, sizeof(t_enemy));
-	if (!enemy)
+	billboard = ft_calloc(1, sizeof(t_billboard));
+	if (!billboard)
 		return (NULL);
-	enemy->billboard.entity.type = ENTITY_ENEMY;
-	enemy->billboard.entity.frame = enemy_frame;
-	enemy->billboard.entity.free = free_enemy;
-	enemy->billboard.entity.hard = true;
-	enemy->billboard.entity.billboard = true;
-	enemy->billboard.entity.identifier = identifier;
-	enemy->billboard.entity.size = (t_size){1, 1};
-	enemy->idle_sprite = hashmap_get_with_identifier(game->sprites, identifier, "IDLE");
-	return (enemy);
+	billboard->entity.type = ENTITY_BILLBOARD;
+	billboard->entity.frame = billboard_frame;
+	billboard->entity.free = free_billboard;
+	billboard->entity.hard = true;
+	billboard->entity.billboard = true;
+	billboard->entity.identifier = identifier;
+	billboard->entity.size = (t_size){1, 1};
+	billboard->sprite = hashmap_get_with_identifier(game->sprites, identifier, "SPRITE");
+	return (billboard);
 }

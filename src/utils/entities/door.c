@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/23 14:46:18 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/23 16:28:55 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,6 @@ static void	door_action(t_entity *entity, t_entity *actioner)
 	update_door_animation(door);
 	if (door->opened)
 		fta_play(door->open_sound);
-}
-
-static void	*hashmap_get_with_identifier(t_hashmap *hashmap, char identifier, char *rest)
-{
-	char	*key;
-	void	*data;
-
-	key = ft_strf("%c_%s", identifier, rest);
-	data = ft_hashmap_get_value(hashmap, key);
-	return (free(key), data);
 }
 
 static void	init_door_direction_e(t_door *door, t_game *game, char identifier)

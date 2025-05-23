@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/23 14:45:59 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/23 16:28:43 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,6 @@ static void	wall_frame(t_entity *entity, double delta_time)
 static void	free_wall(void *wall)
 {
 	free(wall);
-}
-
-static void	*hashmap_get_with_identifier(t_hashmap *hashmap, char identifier, char *rest)
-{
-	char	*key;
-	void	*data;
-
-	key = ft_strdup(rest);
-	if (identifier != '1')
-		key = (free(key), ft_strf("%c_%s", identifier, rest));
-	data = ft_hashmap_get_value(hashmap, key);
-	return (free(key), data);
 }
 
 t_wall	*wall_new(char identifier, t_ftm_window *window, t_game *game)

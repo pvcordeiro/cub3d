@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/23 16:19:24 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/23 16:26:43 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ typedef enum e_entity_type
 	ENTITY_WALL,
 	ENTITY_DOOR,
 	ENTITY_ENEMY,
+	ENTITY_BILLBOARD,
 }	t_entity_type;
 
 typedef struct s_entity
@@ -182,6 +183,8 @@ typedef struct s_identifiers
 	t_list	*wall;
 	t_list	*player;
 	t_list	*door;
+	t_list	*enemy;
+	t_list	*billboard;
 	t_list	*air;
 }	t_identifiers;
 
