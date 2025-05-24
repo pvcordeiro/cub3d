@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 00:45:35 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/24 15:02:02 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/24 20:04:10 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,16 +57,14 @@ static void	draw_ray(t_draw_ray_config draw_ray_config)
 	}
 }
 
-double	fix_ray_step(double	i, t_draw_ray_config drc)
+double	fix_ray_step(unsigned int i, t_thread_render_rays_data *trrd)
 {
 	double	half_rays;
 	double	dist_to_proj;
-	double	angle_step;
 
-	half_rays = drc.camera->rays * 0.5;
-	dist_to_proj = half_rays / tan(ft_radians(drc.camera->fov) * 0.5);
-	angle_step = atan((i - half_rays) / dist_to_proj);
-	return (angle_step);
+	half_rays = trrd->camera->rays / 2;
+	dist_to_proj = half_rays / tan(ft_radians(trrd->camera->fov) / 2);
+	return (ft_degrees(atan(((double)i - half_rays) / dist_to_proj)));
 }
 
 static void	thread_render_rays(void *data)
@@ -74,7 +72,6 @@ static void	thread_render_rays(void *data)
 	t_thread_render_rays_data	*trrd;
 	t_draw_ray_config			drc;
 	unsigned int				i;
-	double						angle_step;
 
 	trrd = data;
 	i = trrd->start;
@@ -83,8 +80,7 @@ static void	thread_render_rays(void *data)
 	while (i < trrd->end)
 	{
 		drc.i = i;
-		angle_step = fix_ray_step((double)i, drc);
-		drc.yaw = ft_normalize_angle(drc.camera->entity->coords.yaw + ft_degrees(angle_step));
+		drc.yaw = ft_normalize_angle(drc.camera->entity->coords.yaw + fix_ray_step(i, trrd));
 		draw_ray(drc);
 		++i;
 	}
