@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 00:45:35 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/24 00:46:30 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/24 15:02:02 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,24 @@ static void	draw_ray(t_draw_ray_config draw_ray_config)
 	}
 }
 
+double	fix_ray_step(double	i, t_draw_ray_config drc)
+{
+	double	half_rays;
+	double	dist_to_proj;
+	double	angle_step;
+
+	half_rays = drc.camera->rays * 0.5;
+	dist_to_proj = half_rays / tan(ft_radians(drc.camera->fov) * 0.5);
+	angle_step = atan((i - half_rays) / dist_to_proj);
+	return (angle_step);
+}
+
 static void	thread_render_rays(void *data)
 {
 	t_thread_render_rays_data	*trrd;
 	t_draw_ray_config			drc;
 	unsigned int				i;
+	double						angle_step;
 
 	trrd = data;
 	i = trrd->start;
@@ -70,9 +83,8 @@ static void	thread_render_rays(void *data)
 	while (i < trrd->end)
 	{
 		drc.i = i;
-		drc.yaw = ft_normalize_angle(((trrd->camera->entity->coords.yaw
-						- (trrd->camera->fov / 2)))
-				+ ((trrd->camera->fov / trrd->camera->rays) * i));
+		angle_step = fix_ray_step((double)i, drc);
+		drc.yaw = ft_normalize_angle(drc.camera->entity->coords.yaw + ft_degrees(angle_step));
 		draw_ray(drc);
 		++i;
 	}
