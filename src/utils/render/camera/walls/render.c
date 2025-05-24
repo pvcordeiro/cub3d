@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 00:45:35 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/24 00:46:30 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/25 00:54:38 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,33 +28,45 @@ static t_coords	get_coords(t_ray *ray)
 	return (coords);
 }
 
-static void	draw_ray(t_draw_ray_config draw_ray_config)
+static void	draw_ray(t_draw_ray_config drc)
 {
 	t_ray		ray;
 	t_coords	coords;
 
-	coords = draw_ray_config.coords;
-	coords.yaw = draw_ray_config.yaw;
-	ray = send_ray(draw_ray_config.game, coords,
-			draw_ray_config.ignored_entity);
+	coords = drc.coords;
+	coords.yaw = drc.yaw;
+	ray = send_ray(drc.game, coords,
+			drc.ignored_entity);
 	if (!ray.hit_entity)
 		return ;
-	ray.distance += draw_ray_config.previous_distance;
+	ray.distance += drc.previous_distance;
 	if (ray.hit_entity->transparent)
 	{
-		draw_ray_config.coords = get_coords(&ray);
-		draw_ray_config.ignored_entity = ray.hit_entity;
-		draw_ray_config.previous_distance = ray.distance;
-		draw_ray(draw_ray_config);
+		drc.coords = get_coords(&ray);
+		drc.ignored_entity = ray.hit_entity;
+		drc.previous_distance = ray.distance;
+		draw_ray(drc);
 	}
-	draw_ray_line(draw_ray_config.canvas, draw_ray_config.camera,
-		ray, draw_ray_config.i);
-	if (draw_ray_config.i == draw_ray_config.camera->rays / 2)
+	draw_ray_line(drc.canvas, drc.camera,
+		ray, drc.i);
+	if (drc.i == drc.camera->rays / 2)
 	{
-		draw_ray_config.camera->entity->target_entity = ray.hit_entity;
-		draw_ray_config.camera->entity
+		drc.camera->entity->target_entity = ray.hit_entity;
+		drc.camera->entity
 			->target_entity_direction = ray.hit_direction;
 	}
+}
+
+static double	get_ray_yaw(t_draw_ray_config drc)
+{
+	double	half_rays;
+	double	dist_to_proj;
+	double	angle_ajustment;
+
+	half_rays = drc.camera->rays / 2;
+	dist_to_proj = half_rays / tan(ft_radians(drc.camera->fov) / 2);
+	angle_ajustment = ft_degrees(atan(((double)drc.i - half_rays) / dist_to_proj));
+	return (ft_normalize_angle(drc.camera->entity->coords.yaw + angle_ajustment));
 }
 
 static void	thread_render_rays(void *data)
@@ -69,12 +81,9 @@ static void	thread_render_rays(void *data)
 		trrd->camera->entity->coords, trrd->camera->entity, 0, 0, 0};
 	while (i < trrd->end)
 	{
-		drc.i = i;
-		drc.yaw = ft_normalize_angle(((trrd->camera->entity->coords.yaw
-						- (trrd->camera->fov / 2)))
-				+ ((trrd->camera->fov / trrd->camera->rays) * i));
+		drc.i = i++;
+		drc.yaw = get_ray_yaw(drc);
 		draw_ray(drc);
-		++i;
 	}
 }
 

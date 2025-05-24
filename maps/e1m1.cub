@@ -5,7 +5,14 @@ BACKGROUND_SOUND_LOOP TRUE
 COLLISION_SOUND assets/wolf3d/sounds/hitwall.mp3
 
 ._TYPE BILLBOARD
+._HARD TRUE
 ._SPRITE *assets/wolf3d/textures/billboards/blue-plant.xpm
+
+,_TYPE BILLBOARD
+,_SPRITE *assets/wolf3d/textures/billboards/ceiling-light.xpm
+
+/_TYPE BILLBOARD
+/_SPRITE *assets/wolf3d/textures/billboards/chandelier.xpm
 
 2_TYPE DOOR
 2_DOOR assets/wolf3d/textures/door.xpm
@@ -101,56 +108,56 @@ C 50, 50, 50
      111111                  1           111111
      1    1      1111111111111           111111
      1    11     1           e           e   11
-     1     1     1           2           2   11
+     1     1     1 ,    ,    2     /     2   11
      1     1     1           e           e   11
      11113331111 1   111111111           111111
      1         1 1   1       1           111111
      1         111   111     11111d3d111111
      1         e       1         j   j
-     1         2       1         j   j
-     1         e       1         j   j
+     1         2   ,   1         j   j
+     1         e       1         j , j
 111111         111111111         j   j
 1   11         1                 j   j
-1   11111d3d1111            jjjejj   jjj
-1   1   1   1               j  2       j
-1d3d1   1   1               j  ejj   jjj
+1 , 11111d3d1111            jjjejj   jjj
+1   1   1   1               j  2   ,   j
+1d3d1   1 , 1               j  ejj   jjj
 1   11111   1               j  1 j   j
-1   1   1   1               j  1 j   j
-1       1   1               jjjj l   l
+1 , 1   1   1               j  1 j   j
+1     , 1 , 1               jjjj l , l
 1   1   1   1                    j   j              
 1   11111d3d1111                fjk3kjf              aaaaaaaaaaa
-1   11         1           ffffif     fiffff         a         a
+1 , 11         1           ffffif     fiffff         a         a
 1   11         1           f.             .f         aa        a
-1   11         1           g               gaaaaaaaaaaa        a
+1   11  ,   ,  1           g               gaaaaaaaaaaa        a
 1    e         1           f                e         e        a
-1    2         1           f                2         2        a
+1    2         1           f  /    /    /   2         2        a
 1    e         1           f                e         e        a
-1   11         1           g               gaaa    aaaa        a
-1   11         1           f.      N      .f  aa  a   a        a
+1   11  ,   ,  1           g               gaaa    aaaa        a
+1   11         1           f.             .f  aa  a   a        a
 1   11         1           ffhfff     ffhfff   a  a   a        a
-1   11111d2d1111                fad3daf        a  aaaaaaa aa aaa
+1 , 11111d2d1111                fad3daf        a  aaaaaaa aa aaa
 1   1   1   1                    a   a         a  a     aaaaaa
-1   11111   1                    a   a         a  a
+1   11111   1                    a , a         a  a
 1   1   1   1                    a   a         a  a aaaaaaaaa
-1       1   1                    a   a         a  aaa a a a aa
+1     , 1 , 1                    a   a         a  aaa a a a aa
 1   1   1   1                    a   a         a   e         a
-1   11111   1                    a   a         a   2         b
+1 , 11111   1                    a , a         a   2         b
 1   11111   111111111111111      a   a         a   e         a
 1               e       111      a   a         aaaaaa a a a aa
-1               2       0 0      a   a             aaaaaaaaaa
-1               e       111      a   a
+1     ,      ,  2       0 0      a   a             aaaaaaaaaa
+1               e       111      a , a
 1111111111111111e3111111111      a   a
         111  1  2  1        aaaaaad3daaaaaa
         1    1  e  1        a    e   e    a
-        111     1111        a    2   2    a
+        111     1111        a    2 , 2    a
           1d3d111           a    e   e    a
            1  1             a    a   a    a
            1  1             aaaaaa   aaaaaa
            1111             a    e   e    a
-                            a    2   2    a
+                            a E  2 , 2    a
                             a    e   e    a
                             aaaaaa   aaaaaa
                             a             a
-                            a             a
+                            a  ,   ,   ,  a
                             a             a
                             abaabaacaabaaba

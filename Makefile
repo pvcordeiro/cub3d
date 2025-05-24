@@ -6,7 +6,7 @@
 #    By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/26 17:16:21 by afpachec          #+#    #+#              #
-#    Updated: 2025/05/23 17:19:57 by afpachec         ###   ########.fr        #
+#    Updated: 2025/05/25 00:44:08 by afpachec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,8 @@ ifeq ($(UNAME_S),Darwin)
 	LIBS += -L /opt/homebrew/lib
 	INCLUDES += -I /opt/X11/include
 	LDLIBS += -framework OpenGL -framework AppKit
+else
+	CFLAGS += -Wno-error=stringop-overflow
 endif
 
 all: $(NAME)

@@ -33,7 +33,7 @@ t_billboard	*billboard_new(char identifier, t_ftm_window *window, t_game *game)
 	billboard->entity.type = ENTITY_BILLBOARD;
 	billboard->entity.frame = billboard_frame;
 	billboard->entity.free = free_billboard;
-	billboard->entity.hard = true;
+	billboard->entity.hard = ft_strequal(hashmap_get_with_identifier(game->map->types, identifier, "HARD"), "TRUE");
 	billboard->entity.billboard = true;
 	billboard->entity.identifier = identifier;
 	billboard->entity.size = (t_size){1, 1};
