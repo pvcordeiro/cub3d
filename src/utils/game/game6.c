@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game6.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 20:30:03 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/23 16:22:21 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/23 21:00:50 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	init_billboards_e(t_game *game)
 	size_t		i;
 
 	fte_set(ERROR_NO_ERROR);
-	game->billboards = ft_calloc(count_billboards(game->entities), sizeof(t_entity *));
+	game->billboards = ft_calloc(count_billboards(game->entities) + 1, sizeof(t_entity *));
 	if (!game->billboards)
 		return (fte_set(ERROR_BILLBOARDS_INIT));
 	curr = game->entities;

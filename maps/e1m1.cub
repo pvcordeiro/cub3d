@@ -2,8 +2,10 @@ BACKGROUND_SOUND assets/wolf3d/sounds/getthem.mp3
 BACKGROUND_SOUND_VOLUME 0.1
 BACKGROUND_SOUND_LOOP TRUE
 
+COLLISION_SOUND assets/wolf3d/sounds/hitwall.mp3
+
 ._TYPE BILLBOARD
-._SPRITE assets/wolf3d/textures/door.xpm
+._SPRITE *assets/wolf3d/textures/blue_plant.xpm
 
 2_TYPE DOOR
 2_DOOR assets/wolf3d/textures/door.xpm
@@ -121,10 +123,10 @@ C 50, 50, 50
 1   11         1           f.             .f         aa        a
 1   11         1           g               gaaaaaaaaaaa        a
 1    e         1           f                e         e        a
-1    2         1           f                2         2        a
+1    2         1           f       .        2         2        a
 1    e         1           f                e         e        a
 1   11         1           g               gaaa    aaaa        a
-1   11         1           f.             .f  aa  a   a        a
+1   11         1           f.      N      .f  aa  a   a        a
 1   11         1           ffhfff     ffhfff   a  a   a        a
 1   11111d2d1111                fad3daf        a  aaaaaaa aa aaa
 1   1   1   1                    a   a         a  a     aaaaaa
@@ -145,7 +147,7 @@ C 50, 50, 50
            1  1             a    a   a    a
            1  1             aaaaaa   aaaaaa
            1111             a    e   e    a
-                            a E  2   2    a
+                            a    2   2    a
                             a    e   e    a
                             aaaaaa   aaaaaa
                             a             a

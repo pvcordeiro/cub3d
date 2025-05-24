@@ -1,32 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
+/*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 15:59:45 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/21 15:39:58 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/24 00:45:50 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "camera.h"
-
-// static unsigned int	pixel_modifier(void *data, unsigned int pixel)
-// {
-// 	t_pixel_modifier_data	*pmd;
-// 	t_rgba					rgba;
-// 	double					gradient;
-
-// 	pmd = data;
-// 	gradient = fmin(pmd->ray_size->height
-// 			/ (pmd->canvas->size.width / 1.5), 1.0);
-// 	rgba.r = ((pixel >> 16) & 0xEE) * gradient;
-// 	rgba.g = ((pixel >> 8) & 0xEE) * gradient;
-// 	rgba.b = (pixel & 0xEE) * gradient;
-// 	rgba.a = (pixel >> 24);
-// 	return ((rgba.a << 24) | (rgba.r << 16) | (rgba.g << 8) | rgba.b);
-// }
+#include "walls.h"
 
 static t_ftm_pitc_config	get_pitc_config(t_get_pitc_config_config gpcc)
 {

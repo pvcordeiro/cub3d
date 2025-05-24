@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   camera.c                                           :+:      :+:    :+:   */
+/*   billboards.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/20 15:32:59 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/24 00:47:45 by paude-so         ###   ########.fr       */
+/*   Created: 2025/05/24 00:46:51 by paude-so          #+#    #+#             */
+/*   Updated: 2025/05/24 00:47:12 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "camera.h"
+#ifndef BILLBOARDS_H
+# define BILLBOARDS_H 
 
-void	render_camera(t_game *game, t_ftm_image *canvas, t_camera *camera)
-{
-	render_walls(game, canvas, camera);
-	render_billboards(game, canvas, camera);
-}
+# include "../camera.h"
+
+#endif
