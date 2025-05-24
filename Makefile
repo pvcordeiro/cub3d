@@ -3,17 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+         #
+#    By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/26 17:16:21 by afpachec          #+#    #+#              #
-#    Updated: 2025/05/24 21:40:11 by pvcordeiro       ###   ########.fr        #
+#    Updated: 2025/05/25 00:44:08 by afpachec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3d
 CC = cc
-PV = -Wno-error=stringop-overflow
-CFLAGS = -Wall -Wextra -Werror -O3 -g -std=c99 $(PV)
+CFLAGS = -Wall -Wextra -Werror -O3 -g -std=c99
 INCLUDES = -I headers
 LIBS = -L lib
 LDLIBS = -lmlx -lX11 -lXext -lm -ldl -lpthread
@@ -27,6 +26,8 @@ ifeq ($(UNAME_S),Darwin)
 	LIBS += -L /opt/homebrew/lib
 	INCLUDES += -I /opt/X11/include
 	LDLIBS += -framework OpenGL -framework AppKit
+else
+	CFLAGS += -Wno-error=stringop-overflow
 endif
 
 all: $(NAME)
