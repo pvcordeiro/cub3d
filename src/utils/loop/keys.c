@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:21:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/24 02:31:23 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/24 02:40:34 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void	hud_debug_keys(t_hud_debug *hud_debug, int key, bool down)
 	if (key == XK_o && down)
 		cub3d()->game.camera.fov /= 1.2;
 	if (key == XK_p && down)
-		cub3d()->game.camera.fov = PLAYER_FOV;
+		cub3d()->game.camera.fov *= 1.2;
 }
 
 static void	hud_keys(t_hud *hud, int key, bool down)
