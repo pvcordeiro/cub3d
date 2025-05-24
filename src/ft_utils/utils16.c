@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils16.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 13:45:53 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/23 23:15:11 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/24 14:07:25 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ double	ft_sin_degrees(double angle_degree)
 	return (sin(ft_radians(angle_degree)));
 }
 
-double	ft_distance(t_coords a, t_coords b)
+double	ft_tan_degrees(double angle_degree)
 {
-	return (sqrt(pow(a.x - b.x, 2) + pow(a.y - b.y, 2)));
+	return (tan(ft_radians(angle_degree)));
 }
+
