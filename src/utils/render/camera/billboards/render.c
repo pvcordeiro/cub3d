@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 00:47:16 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/24 11:54:53 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/24 13:56:41 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void	render_billboard(t_billboard *bill, t_ftm_image *canvas,
 	centered_bill_coords = get_centered_bill_cords(bill->entity.coords);
 	relative_angle = get_relative_angle(camera->entity->coords,
 			centered_bill_coords);
-	if (fabs(relative_angle) > (camera->fov / 2) + (image->size.width / 2))
+	if (fabs(relative_angle) > (camera->fov / 2) + 5.0)
 		return ;
 	screen_x = canvas->size.width / 2 + (relative_angle / (camera->fov / 2))
 		* (canvas->size.width / 2);
