@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 00:47:16 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/24 02:41:49 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/24 11:54:53 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,17 @@ inline static double	get_relative_angle(t_coords camera_coords,
 }
 
 inline static t_size	get_size(t_camera *camera, t_coords bill_coords,
-	t_size bill_image_size, t_size canvas_size)
+	t_size bill_image_size, t_size canvas_size, double relative_angle)
 {
 	double		distance;
 	double		fov_factor;
+	double		fix_fisheye;
 
 	distance = ft_distance(camera->entity->coords, bill_coords);
+	fix_fisheye = distance * ft_cos_degrees(relative_angle);
 	fov_factor = 73.5 / camera->fov;
 	return ((t_size){(bill_image_size.width / distance)
-		* (canvas_size.height / 125) * fov_factor, (bill_image_size.height / distance)
+		* (canvas_size.height / 125) * fov_factor, (bill_image_size.height / fix_fisheye)
 		* (canvas_size.height / 125)});
 }
 
@@ -62,7 +64,7 @@ static void	render_billboard(t_billboard *bill, t_ftm_image *canvas,
 	screen_x = canvas->size.width / 2 + (relative_angle / (camera->fov / 2))
 		* (canvas->size.width / 2);
 	new_size = get_size(camera, centered_bill_coords,
-			image->size, canvas->size);
+			image->size, canvas->size, relative_angle);
 	ftm_put_image_to_canvas(canvas, image,
 		(t_ftm_pitc_config){
 		(t_coords){screen_x - (new_size.width / 2),
