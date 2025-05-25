@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/24 02:31:43 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/25 02:42:33 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@
 # define PLAYER_WALK_VELOCITY 3.0
 # define PLAYER_SPRINT_VELOCITY 5.0
 # define PLAYER_RAY_HIT_ENTITIES_NUMBER 5
+# define PLAYER_MAX_TARGET_DISTANCE 1.2
 
 // Door Config
 # define DOOR_ANIMATION_DURATION 10.0

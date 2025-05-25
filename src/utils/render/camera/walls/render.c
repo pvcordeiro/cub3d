@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 00:45:35 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/25 00:54:38 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/25 02:43:49 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ static void	draw_ray(t_draw_ray_config drc)
 		ray, drc.i);
 	if (drc.i == drc.camera->rays / 2)
 	{
-		drc.camera->entity->target_entity = ray.hit_entity;
+		if (ray.distance < PLAYER_MAX_TARGET_DISTANCE)
+			drc.camera->entity->target_entity = ray.hit_entity;
+		else
+			drc.camera->entity->target_entity = NULL;
 		drc.camera->entity
 			->target_entity_direction = ray.hit_direction;
 	}
