@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 19:01:44 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/22 22:46:27 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/25 19:07:53 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ t_sprite	*sprite_new(t_list *images, t_time update_delay)
 	sprite = ft_calloc(1, sizeof(t_sprite));
 	if (!sprite)
 		return (NULL);
+	sprite->running = true;
 	init_sprite(sprite, images, update_delay);
 	return (sprite);
 }

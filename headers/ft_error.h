@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 22:05:32 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/23 16:19:06 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/25 16:01:59 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef enum e_error
 	ERROR_WALLS_INIT,
 	ERROR_AUDIO_CONFIG_ON_INVALID,
 	ERROR_BILLBOARDS_INIT,
+	ERROR_INVALID_STATS_HUD_DIRECTORY,
 }	t_error;
 
 typedef struct s_error_storage
@@ -97,6 +98,7 @@ typedef struct s_error_storage
 # define ERROR_WALLS_INIT_MSG "Walls initialization error"
 # define ERROR_AUDIO_CONFIG_ON_INVALID_MSG "Audio config on invalid type"
 # define ERROR_BILLBOARDS_INIT_MSG "Billboards initialization error"
+# define ERROR_INVALID_STATS_HUD_DIRECTORY_MSG "Invalid stats HUD directory"
 # define ERROR_INVALID_MSG "Invalid Error"
 
 // Set ft_error global error

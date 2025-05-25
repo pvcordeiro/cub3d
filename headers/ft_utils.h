@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 12:15:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/23 21:19:32 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/25 18:24:27 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <math.h>
 # include <fcntl.h>
 # include <stdarg.h>
+# include <dirent.h>
 
 # define FT_UTILS_PI 3.14159265359
 # define GNL_BUFFER_SIZE 1024
@@ -119,7 +120,7 @@ char					**ft_strvdup(char **v);
 void					ft_strvfree(char **v);
 void					ft_bzero(void *s, size_t n);
 
-bool					ft_strequal(char *s1, char *s2);
+bool					ft_strequal(const char *s1, const char *s2);
 
 t_list					*ft_list_new(void *data, void (*data_free)(void *data));
 void					ft_list_add(t_list **list, void *data,
@@ -175,5 +176,7 @@ double					ft_radians(double angle_degree);
 double					ft_degrees(double angle_radians);
 
 double					ft_angle_distance(t_coords a, t_coords b);
+bool					ft_is_directory(const char *path);
+char					*ft_clean_path(const char *path);
 
 #endif

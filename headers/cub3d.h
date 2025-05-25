@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/25 02:42:33 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/25 18:49:27 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,8 +241,15 @@ typedef struct s_hud_debug
 	bool	enabled;
 }	t_hud_debug;
 
+typedef struct s_hud_stats
+{
+	t_sprite	*sprite;
+	t_list		*states;
+}	t_hud_stats;
+
 typedef struct s_hud
 {
+	t_entity		*entity;
 	t_hud_debug		debug;
 	bool			enabled;
 }	t_hud;

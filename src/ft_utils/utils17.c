@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils17.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 13:45:53 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/23 23:25:55 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/25 16:09:52 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,23 @@ double	ft_angle_distance(t_coords a, t_coords b)
 	distance_y = b.y - a.y;
 	angle_to_b = ft_degrees(atan2(distance_y, distance_x));
 	return (ft_normalize_angle(angle_to_b - a.yaw));
+}
+
+bool	ft_is_directory(const char *path)
+{
+	DIR	*dir;
+
+	dir = opendir(path);
+	if (!dir)
+		return (false);
+	return (closedir(dir), true);
+}
+
+char	*ft_clean_path(const char *path)
+{
+	if (!path)
+		return (NULL);
+	if (ft_str_endswith(path, "/"))
+		return (ft_strndup(path, ft_strlen(path) - 1));
+	return (ft_strdup(path));
 }

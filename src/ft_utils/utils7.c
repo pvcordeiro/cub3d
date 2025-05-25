@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 14:49:35 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/10 19:52:20 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/25 18:24:14 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ char	*ft_itoa(int n)
 	return (str);
 }
 
-bool	ft_strequal(char *s1, char *s2)
+bool	ft_strequal(const char *s1, const char *s2)
 {
 	if (!s1 || !s2)
 		return (false);

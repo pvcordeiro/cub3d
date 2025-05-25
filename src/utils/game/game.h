@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:16:32 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/23 16:16:26 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/25 19:03:55 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ void	init_hud(t_game *game);
 void	init_walls_e(t_game *game);
 void	init_billboards_e(t_game *game);
 void	init_fps(t_game *game);
+void	set_sprite_configs(t_game *game);
 
 #endif

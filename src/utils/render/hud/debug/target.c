@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 21:41:28 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/23 14:34:59 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/25 19:06:41 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	set_target(t_game *game)
 	game->hud.debug.target_id = ft_strf("ID %c",
 		target_entity->identifier);
 	game->hud.debug.target_type = ft_strf("Type %d", target_entity->type);
+	printf("%d, %zd, %zd\n", get_entity_sprite(target_entity, game->player->billboard.entity.target_entity_direction)->loop, ft_get_time() - get_entity_sprite(target_entity, game->player->billboard.entity.target_entity_direction)->updated_at, get_entity_sprite(target_entity, game->player->billboard.entity.target_entity_direction)->update_delay);
 }
 
 void	render_debug_target_strs(t_game *game, t_ftm_image *canvas, t_coords coords)

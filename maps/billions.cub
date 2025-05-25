@@ -4,11 +4,11 @@ WE assets/textures/billiosn-ust-smile.xpm
 EA assets/textures/billiosn-ust-smile.xpm
 2_TYPE DOOR
 2_DIRECTION NORTH
-2_DOOR assets/textures/billiosn-ust-smile.xpm
+2_DOOR_SPRITE assets/textures/billiosn-ust-smile.xpm
 2_SIDES assets/textures/billiosn-ust-smile.xpm
 6_TYPE DOOR
 6_DIRECTION WEST
-6_DOOR assets/textures/billiosn-ust-smile.xpm
+6_DOOR_SPRITE assets/textures/billiosn-ust-smile.xpm
 6_SIDES assets/textures/billiosn-ust-smile.xpm
 3_TYPE WALL
 3_SO assets/textures/billiosn-ust-smile.xpm

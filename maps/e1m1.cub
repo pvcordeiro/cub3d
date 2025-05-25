@@ -4,6 +4,28 @@ BACKGROUND_SOUND_LOOP TRUE
 
 COLLISION_SOUND assets/wolf3d/sounds/hitwall.mp3
 
+STATS_HUD_1 assets/wolf3d/hud/stats/1-0.xpm:assets/wolf3d/hud/stats/1-1.xpm:assets/wolf3d/hud/stats/1-2.xpm
+STATS_HUD_1_UPDATE_DELAY 1
+
+STATS_HUD_2 assets/wolf3d/hud/stats/1-0.xpm:assets/wolf3d/hud/stats/1-1.xpm:assets/wolf3d/hud/stats/1-2.xpm
+STATS_HUD_2_UPDATE_DELAY 1
+
+STATS_HUD_3 assets/wolf3d/hud/stats/1-0.xpm:assets/wolf3d/hud/stats/1-1.xpm:assets/wolf3d/hud/stats/1-2.xpm
+STATS_HUD_3_UPDATE_DELAY 1
+
+STATS_HUD_4 assets/wolf3d/hud/stats/1-0.xpm:assets/wolf3d/hud/stats/1-1.xpm:assets/wolf3d/hud/stats/1-2.xpm
+STATS_HUD_4_UPDATE_DELAY 1
+
+STATS_HUD_5 assets/wolf3d/hud/stats/1-0.xpm:assets/wolf3d/hud/stats/1-1.xpm:assets/wolf3d/hud/stats/1-2.xpm
+STATS_HUD_5_UPDATE_DELAY 1
+
+STATS_HUD_6 assets/wolf3d/hud/stats/1-0.xpm:assets/wolf3d/hud/stats/1-1.xpm:assets/wolf3d/hud/stats/1-2.xpm
+STATS_HUD_6_UPDATE_DELAY 1
+
+STATS_HUD_7 assets/wolf3d/hud/stats/1-0.xpm:assets/wolf3d/hud/stats/1-1.xpm:assets/wolf3d/hud/stats/1-2.xpm
+STATS_HUD_7_UPDATE_DELAY 1
+
+
 ._TYPE BILLBOARD
 ._HARD TRUE
 ._SPRITE *assets/wolf3d/textures/billboards/blue-plant.xpm
@@ -15,14 +37,14 @@ COLLISION_SOUND assets/wolf3d/sounds/hitwall.mp3
 /_SPRITE *assets/wolf3d/textures/billboards/chandelier.xpm
 
 2_TYPE DOOR
-2_DOOR assets/wolf3d/textures/door.xpm
+2_DOOR_SPRITE assets/wolf3d/textures/door.xpm
 2_SIDES NULL
 2_DIRECTION WEST
 2_OPEN_SOUND assets/wolf3d/sounds/opendoor.mp3
 2_CLOSE_SOUND assets/wolf3d/sounds/closedoor.mp3
 
 3_TYPE DOOR
-3_DOOR assets/wolf3d/textures/door.xpm
+3_DOOR_SPRITE assets/wolf3d/textures/door.xpm
 3_SIDES NULL
 3_DIRECTION NORTH
 3_OPEN_SOUND assets/wolf3d/sounds/opendoor.mp3

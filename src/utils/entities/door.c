@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/23 16:28:55 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/25 18:20:22 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,7 @@ t_door	*door_new_e(char identifier, t_ftm_window *window, t_game *game)
 	init_door_direction_e(door, game, identifier);
 	if (fte_flagged())
 		return (free(door), NULL);
-	door->door_sprite = hashmap_get_with_identifier(game->sprites, identifier, "DOOR");
+	door->door_sprite = hashmap_get_with_identifier(game->sprites, identifier, "DOOR_SPRITE");
 	if (!door->door_sprite)
 		return (free(door), fte_set(ERROR_DOOR_SPRITE_MISSING), NULL);
 	init_door_sides(door, game, identifier);
