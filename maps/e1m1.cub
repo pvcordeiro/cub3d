@@ -4,26 +4,33 @@ BACKGROUND_SOUND_LOOP TRUE
 
 COLLISION_SOUND assets/wolf3d/sounds/hitwall.mp3
 
-STATS_HUD_1 assets/wolf3d/hud/stats/1-0.xpm:assets/wolf3d/hud/stats/1-1.xpm:assets/wolf3d/hud/stats/1-2.xpm
-STATS_HUD_1_UPDATE_DELAY 1
+STATS_HUD_1_SPRITE *assets/wolf3d/textures/hud/stats/1-0.xpm:*assets/wolf3d/textures/hud/stats/1-1.xpm:*assets/wolf3d/textures/hud/stats/1-0.xpm:*assets/wolf3d/textures/hud/stats/1-2.xpm
+STATS_HUD_1_SPRITE_LOOP TRUE
+STATS_HUD_1_SPRITE_UPDATE_DELAY 2
 
-STATS_HUD_2 assets/wolf3d/hud/stats/1-0.xpm:assets/wolf3d/hud/stats/1-1.xpm:assets/wolf3d/hud/stats/1-2.xpm
-STATS_HUD_2_UPDATE_DELAY 1
+STATS_HUD_2_SPRITE *assets/wolf3d/textures/hud/stats/2-0.xpm:*assets/wolf3d/textures/hud/stats/2-1.xpm:*assets/wolf3d/textures/hud/stats/2-0.xpm:*assets/wolf3d/textures/hud/stats/2-2.xpm
+STATS_HUD_2_SPRITE_LOOP TRUE
+STATS_HUD_2_SPRITE_UPDATE_DELAY 2
 
-STATS_HUD_3 assets/wolf3d/hud/stats/1-0.xpm:assets/wolf3d/hud/stats/1-1.xpm:assets/wolf3d/hud/stats/1-2.xpm
-STATS_HUD_3_UPDATE_DELAY 1
+STATS_HUD_3_SPRITE *assets/wolf3d/textures/hud/stats/3-0.xpm:*assets/wolf3d/textures/hud/stats/3-1.xpm:*assets/wolf3d/textures/hud/stats/3-0.xpm:*assets/wolf3d/textures/hud/stats/3-2.xpm
+STATS_HUD_3_SPRITE_LOOP TRUE
+STATS_HUD_3_SPRITE_UPDATE_DELAY 2
 
-STATS_HUD_4 assets/wolf3d/hud/stats/1-0.xpm:assets/wolf3d/hud/stats/1-1.xpm:assets/wolf3d/hud/stats/1-2.xpm
-STATS_HUD_4_UPDATE_DELAY 1
+STATS_HUD_4_SPRITE *assets/wolf3d/textures/hud/stats/4-0.xpm:*assets/wolf3d/textures/hud/stats/4-1.xpm:*assets/wolf3d/textures/hud/stats/4-0.xpm:*assets/wolf3d/textures/hud/stats/4-2.xpm
+STATS_HUD_4_SPRITE_LOOP TRUE
+STATS_HUD_4_SPRITE_UPDATE_DELAY 2
 
-STATS_HUD_5 assets/wolf3d/hud/stats/1-0.xpm:assets/wolf3d/hud/stats/1-1.xpm:assets/wolf3d/hud/stats/1-2.xpm
-STATS_HUD_5_UPDATE_DELAY 1
+STATS_HUD_5_SPRITE *assets/wolf3d/textures/hud/stats/5-0.xpm:*assets/wolf3d/textures/hud/stats/5-1.xpm:*assets/wolf3d/textures/hud/stats/5-0.xpm:*assets/wolf3d/textures/hud/stats/5-2.xpm
+STATS_HUD_5_SPRITE_LOOP TRUE
+STATS_HUD_5_SPRITE_UPDATE_DELAY 2
 
-STATS_HUD_6 assets/wolf3d/hud/stats/1-0.xpm:assets/wolf3d/hud/stats/1-1.xpm:assets/wolf3d/hud/stats/1-2.xpm
-STATS_HUD_6_UPDATE_DELAY 1
+STATS_HUD_6_SPRITE *assets/wolf3d/textures/hud/stats/6-0.xpm:*assets/wolf3d/textures/hud/stats/6-1.xpm:*assets/wolf3d/textures/hud/stats/6-0.xpm:*assets/wolf3d/textures/hud/stats/6-2.xpm
+STATS_HUD_6_SPRITE_LOOP TRUE
+STATS_HUD_6_SPRITE_UPDATE_DELAY 2
 
-STATS_HUD_7 assets/wolf3d/hud/stats/1-0.xpm:assets/wolf3d/hud/stats/1-1.xpm:assets/wolf3d/hud/stats/1-2.xpm
-STATS_HUD_7_UPDATE_DELAY 1
+STATS_HUD_7_SPRITE *assets/wolf3d/textures/hud/stats/7-0.xpm:*assets/wolf3d/textures/hud/stats/7-1.xpm:*assets/wolf3d/textures/hud/stats/7-0.xpm:*assets/wolf3d/textures/hud/stats/7-2.xpm
+STATS_HUD_7_SPRITE_LOOP TRUE
+STATS_HUD_7_SPRITE_UPDATE_DELAY 2
 
 
 ._TYPE BILLBOARD
