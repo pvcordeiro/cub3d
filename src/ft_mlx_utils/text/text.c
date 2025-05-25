@@ -6,11 +6,18 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 00:29:28 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/20 01:30:13 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/25 02:40:27 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "text.h"
+
+static unsigned int	get_text_color(t_ftm_text_config *text_config, unsigned int pixel)
+{
+	if (!pixel)
+		return (pixel);
+	return (text_config->color);
+}
 
 static t_ftm_pitc_config	get_pitc_config(t_ftm_text_config *text_config, t_ftm_image *character, int *x)
 {
@@ -28,8 +35,8 @@ static t_ftm_pitc_config	get_pitc_config(t_ftm_text_config *text_config, t_ftm_i
 		(t_coords){0, 0, 0},
 		true,
 		(t_size){scaled_width, text_config->height},
-		NULL,
-		NULL
+		text_config,
+		(void *)get_text_color
 	});
 }
 

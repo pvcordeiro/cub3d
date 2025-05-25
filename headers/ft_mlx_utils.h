@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:46:27 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/20 22:28:31 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/25 02:33:56 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,11 @@ typedef struct s_ftm_pitc_config
 
 typedef struct s_ftm_text_config
 {
-	char		*text;
-	t_coords	coords;
-	int			height;
-	int			spacing;
+	char			*text;
+	t_coords		coords;
+	int				height;
+	int				spacing;
+	unsigned int	color;
 }	t_ftm_text_config;
 
 typedef struct s_ftm_rectangle

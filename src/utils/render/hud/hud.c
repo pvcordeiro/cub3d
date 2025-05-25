@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 19:59:12 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/19 23:21:50 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/25 02:29:22 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@ void	render_hud(t_game *game, t_ftm_image *canvas)
 {
 	if (!game->hud.enabled)
 		return ;
-	if (game->hud.debug.enabled)
-		render_debug(game, canvas);
+	render_debug(game, canvas);
+	render_action(game, canvas);
 }
