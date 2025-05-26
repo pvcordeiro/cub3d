@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 02:27:23 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/25 02:38:36 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/26 22:19:39 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,8 @@ void	render_action(t_game *game, t_ftm_image *canvas)
 		.spacing = 0,
 		.color = 0xFFDDDDDD
 	};
-	text_config.coords = (t_coords){
-		canvas->size.width / 2 - ftm_get_text_size_prediction(game->font, text_config) / 2,
-		canvas->size.height / 1.3, 0
-	};
-	ftm_draw_text(canvas, game->font, text_config);
+	text_config.coords.x = (canvas->size.width / 2) - (ftm_get_text_size_prediction(game->font, text_config) / 2);
+	text_config.coords.y = canvas->size.height - 200;
+	ftm_draw_text_in_box(canvas, game->font, text_config,
+		(t_ftm_rectangle){0x55000000, 0x55EFBF04, (t_size){2, 2}});
 }

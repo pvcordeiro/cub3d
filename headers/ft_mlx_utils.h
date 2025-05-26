@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:46:27 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/26 21:44:59 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/26 22:19:29 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ void			ftm_free_font(void *font);
 
 void			ftm_draw_text(t_ftm_image *canvas, t_ftm_font *font, t_ftm_text_config text_config);
 int				ftm_get_text_size_prediction(t_ftm_font *font, t_ftm_text_config text_config);
+void			ftm_draw_text_in_box(t_ftm_image *canvas, t_ftm_font *font,
+					t_ftm_text_config text_config, t_ftm_rectangle rectangle);
 
 void			ftm_clear_window(void *window);
 void			ftm_free_window(void *window);

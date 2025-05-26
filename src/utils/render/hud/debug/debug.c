@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 23:03:13 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/25 02:35:43 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/26 22:20:23 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ int	render_debug_str(t_ftm_font *font, t_ftm_image *canvas, char *str, t_coords 
 		0xFFFFFFFF
 	};
 	width = ftm_get_text_size_prediction(font, config) + 25;
-	ftm_draw_rectangle(canvas, coords, (t_size){width, 35}, (t_ftm_rectangle){0x55000000, 0x55EFBF04, (t_size){2, 2}});
-	ftm_draw_text(canvas, font, config);
+	ftm_draw_text_in_box(canvas, font, config,
+		(t_ftm_rectangle){0x55000000, 0x55EFBF04, (t_size){2, 2}});
 	return (width);
 }
 

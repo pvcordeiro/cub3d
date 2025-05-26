@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:48:02 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/26 21:44:28 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/26 21:58:09 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ static unsigned int	gmp(unsigned int (*pm)(void *, unsigned int),
 
 static bool	set_pixel_maybe(t_pitc_data *pd)
 {
-	pd->sc = (t_coords){pd->pitc.crop_start.x + (int)(pd->index.width
+	pd->sc = (t_coords){pd->pitc.crop_start.x + round(pd->index.width
 			* pd->scale.x), pd->pitc.crop_start.y
-		+ (int)(pd->index.height * pd->scale.y), 0};
+		+ round(pd->index.height * pd->scale.y), 0};
 	pd->cc = (t_coords){pd->pitc.coords.x + pd->index.width, pd->pitc.coords.y
 		+ pd->index.height, 0};
 	if (pd->cc.x < 0 || pd->cc.x >= pd->canvas->size.width
