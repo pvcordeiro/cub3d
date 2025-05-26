@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:05:31 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/17 18:46:05 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/26 21:44:55 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ unsigned int	*ftm_image_pixel(t_ftm_image *image, t_coords coords)
 		+ (x * (image->bits_per_pixel / 8)));
 }
 
-static unsigned int	blend_pixel(unsigned int dst, unsigned int src)
+unsigned int	ftm_blend_pixel(unsigned int dst, unsigned int src)
 {
 	t_rgba			src_rgba;
 	t_rgba			out_rgba;
@@ -57,5 +57,5 @@ void	ftm_set_pixel(unsigned int *pixel, unsigned int value)
 	if (value / 0x01000000 == 0xFF)
 		*pixel = value;
 	else
-		*pixel = blend_pixel(*pixel, value);
+		*pixel = ftm_blend_pixel(*pixel, value);
 }

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:46:27 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/25 02:33:56 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/26 21:44:59 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@
 
 typedef struct s_ftm_image
 {
-	void	*display;
-	char	*path;
-	void	*img_ptr;
-	int		bits_per_pixel;
-	int		size_line;
-	int		endian;
-	void	*data;
-	t_size	size;
+	void			*display;
+	char			*path;
+	void			*img_ptr;
+	int				bits_per_pixel;
+	int				size_line;
+	int				endian;
+	void			*data;
+	t_size			size;
 }	t_ftm_image;
 
 typedef struct s_ftm_window
@@ -114,6 +114,7 @@ void			ftm_window_wipe(t_ftm_window *window);
 
 unsigned int	*ftm_image_pixel(t_ftm_image *image, t_coords coords);
 unsigned int	ftm_remove_pixel_transparency(unsigned int value);
+unsigned int	ftm_blend_pixel(unsigned int dst, unsigned int src);
 void			ftm_set_pixel(unsigned int *pixel, unsigned int value);
 
 void			ftm_draw_line(t_ftm_image *canvas, t_coords start,
