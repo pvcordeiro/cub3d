@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
+/*   render0.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 00:47:16 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/24 20:04:34 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/27 00:35:25 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "billboards.h"
 
-inline static t_coords	get_centered_bill_cords(t_coords bill_coords)
-{
-	return ((t_coords){bill_coords.x + 0.5, bill_coords.y + 0.5,
-		bill_coords.yaw});
-}
-
-inline static double	get_relative_angle(t_coords camera_coords,
+static double	get_relative_angle(t_coords camera_coords,
 	t_coords bill_coords)
 {
 	double	relative_angle;
@@ -29,7 +23,7 @@ inline static double	get_relative_angle(t_coords camera_coords,
 	return (relative_angle);
 }
 
-inline static t_size	get_size(t_get_size_config gsc)
+static t_size	get_size(t_get_size_config gsc)
 {
 	double		distance;
 	double		fov_factor;
@@ -39,11 +33,13 @@ inline static t_size	get_size(t_get_size_config gsc)
 	fix_fisheye = distance * ft_cos_degrees(gsc.relative_angle);
 	fov_factor = 73.5 / gsc.camera->fov;
 	return ((t_size){(gsc.bill_image_size.width / distance)
-		* (gsc.canvas_size.height / 125) * fov_factor, (gsc.bill_image_size.height / fix_fisheye)
+		* (gsc.canvas_size.height / 125) * fov_factor,
+		(gsc.bill_image_size.height / fix_fisheye)
 		* (gsc.canvas_size.height / 125)});
 }
 
-inline static double	get_screen_x(t_ftm_image *canvas, t_camera *camera, double relative_angle)
+static double	get_screen_x(t_ftm_image *canvas, t_camera *camera,
+	double relative_angle)
 {
 	double	screen_x;
 
@@ -68,20 +64,18 @@ static void	render_billboard(t_billboard *bill, t_ftm_image *canvas,
 	image = get_sprite_image(bill->sprite);
 	if (!image)
 		return ;
-	centered_bill_coords = get_centered_bill_cords(bill->entity.coords);
+	centered_bill_coords = (t_coords){bill->entity.coords.x + 0.5,
+		bill->entity.coords.y + 0.5, bill->entity.coords.yaw};
 	relative_angle = get_relative_angle(camera->entity->coords,
 			centered_bill_coords);
 	screen_x = get_screen_x(canvas, camera, relative_angle);
-	new_size = get_size((t_get_size_config){camera, centered_bill_coords,
+	new_size = get_size((t_get_size_config){
+			camera, centered_bill_coords,
 			image->size, canvas->size, relative_angle});
 	if (screen_x < 0 || screen_x > canvas->size.width)
 		return ;
-	ftm_put_image_to_canvas(canvas, image,
-		(t_ftm_pitc_config){
-		(t_coords){screen_x - (new_size.width / 2),
-		(canvas->size.height / 2) - (new_size.height / 2), 0},
-		false, (t_coords){0, 0, 0},
-		(t_coords){0, 0, 0}, true, new_size, NULL, NULL });
+	render_billboard_slices((t_render_billboard_slices_config){new_size,
+		screen_x, canvas, image, camera, centered_bill_coords});
 }
 
 void	render_billboards(t_game *game, t_ftm_image *canvas, t_camera *camera)

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 00:45:35 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/25 02:43:49 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/26 23:16:59 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ static void	draw_ray(t_draw_ray_config drc)
 	if (!ray.hit_entity)
 		return ;
 	ray.distance += drc.previous_distance;
+	if (ray.distance > drc.camera->ray_distances[drc.i])
+		drc.camera->ray_distances[drc.i] = ray.distance;
 	if (ray.hit_entity->transparent)
 	{
 		drc.coords = get_coords(&ray);
@@ -86,6 +88,7 @@ static void	thread_render_rays(void *data)
 	{
 		drc.i = i++;
 		drc.yaw = get_ray_yaw(drc);
+		drc.camera->ray_distances[drc.i] = -1;
 		draw_ray(drc);
 	}
 }
