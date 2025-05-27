@@ -6,7 +6,7 @@
 /*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 22:33:42 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/27 18:26:55 by pvcordeiro       ###   ########.fr       */
+/*   Updated: 2025/05/27 19:18:20 by pvcordeiro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,44 @@ static void	set_entity_color(t_game *game, t_entity *entity, unsigned *color)
 
 static bool in_boundaries(t_coords entity_pos, t_coords minimap_pos, t_size minimap_size)
 {
-    return (entity_pos.x >= minimap_pos.x &&
-            entity_pos.y >= minimap_pos.y &&
-            entity_pos.x < minimap_pos.x + minimap_size.width &&
-            entity_pos.y < minimap_pos.y + minimap_size.height);
+    return (entity_pos.x + 100>= minimap_pos.x &&
+            entity_pos.y + 100 >= minimap_pos.y &&
+            entity_pos.x - 100 < minimap_pos.x + minimap_size.width &&
+            entity_pos.y - 100 < minimap_pos.y + minimap_size.height);
+}
+
+static void fix_clipping(t_coords *pos, t_size *size, t_coords minimap_pos, t_size minimap_size)
+{
+	int	clip_left;
+	int	clip_right;
+	int	clip_top;
+	int	clip_bottom;
+	
+	clip_left = minimap_pos.x - pos->x;
+	clip_right = (pos->x + size->width) - (minimap_pos.x + minimap_size.width);
+	clip_top = minimap_pos.y - pos->y;
+	clip_bottom = (pos->y + size->height) - (minimap_pos.y + minimap_size.height);
+	if (clip_left > 0) 
+	{
+		pos->x += clip_left;
+		size->width -= clip_left;
+	}
+	if (clip_right > 0)
+		size->width -= clip_right;
+	if (clip_top > 0)
+	{
+		pos->y += clip_top;
+		size->height -= clip_top;
+	}
+	if (clip_bottom > 0)
+		size->height -= clip_bottom;
 }
 
 static void	render_entity(t_ftm_image *canvas, t_game *game, t_entity *entity, t_coords minimap_coords, t_size minimap_size, t_coords coords, t_size entity_size)
 {
-	unsigned	color;
+	unsigned int	color;
 	t_coords		new_coords;
+    t_size          draw_size;
 
 	new_coords = (t_coords){(int)(coords.x + (entity->coords.x * entity_size.width)), (int)(coords.y + (entity->coords.y * entity_size.height)), entity->coords.yaw};
     if (!in_boundaries(new_coords, minimap_coords, minimap_size))
@@ -49,14 +77,12 @@ static void	render_entity(t_ftm_image *canvas, t_game *game, t_entity *entity, t
 				color);
 		return ;
 	}
-	else
-	{
-		entity_size.width *= entity->size.width;
-		entity_size.height *= entity->size.height;
-	}
+    draw_size = (t_size){entity_size.width * entity->size.width,
+    entity_size.height * entity->size.height};
+    fix_clipping(&new_coords, &draw_size, minimap_coords, minimap_size);
 	ftm_draw_rectangle(canvas,
 			new_coords,
-			entity_size,
+			draw_size,
 			(t_ftm_rectangle){color, color, (t_size){1, 1}});
 }
 
