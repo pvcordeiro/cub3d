@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 01:49:57 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/27 14:42:47 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/27 14:50:33 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void	set_player(t_game *game)
 	if (!game->player)
 		return ;
 	(free(game->hud.debug.player_x), free(game->hud.debug.player_y),
-		free(game->hud.debug.player_yaw), free(game->hud.debug.player_fov));
+		free(game->hud.debug.player_yaw), free(game->hud.debug.player_fov),
+		free(game->hud.debug.player_health));
 	game->hud.debug.player_x = ft_strf("X: %d",
 			(int)game->player->billboard.entity.coords.x);
 	game->hud.debug.player_y = ft_strf("Y: %d",
@@ -25,6 +26,8 @@ void	set_player(t_game *game)
 	game->hud.debug.player_yaw = ft_strf("Yaw: %d",
 			(int)game->player->billboard.entity.coords.yaw);
 	game->hud.debug.player_fov = ft_strf("FOV: %d", (int)game->camera.fov);
+	game->hud.debug.player_health = ft_strf("Health: %d",
+			game->player->billboard.entity.health);
 }
 
 void	render_debug_player_strs(t_game *game, t_ftm_image *canvas,
@@ -37,5 +40,7 @@ void	render_debug_player_strs(t_game *game, t_ftm_image *canvas,
 			coords) + 5;
 	coords.x += render_debug_str(game->font, canvas, game->hud.debug.player_yaw,
 			coords) + 5;
-	render_debug_str(game->font, canvas, game->hud.debug.player_fov, coords);
+	coords.x += render_debug_str(game->font, canvas, game->hud.debug.player_fov,
+			coords) + 5;
+	render_debug_str(game->font, canvas, game->hud.debug.player_health, coords);
 }

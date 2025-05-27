@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/27 11:45:27 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/27 14:45:54 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,6 +238,7 @@ typedef struct s_hud_debug
 	char	*target_id;
 	char	*player_x;
 	char	*player_y;
+	char	*player_health;
 	char	*player_yaw;
 	char	*player_fov;
 	char	*entities_count;
