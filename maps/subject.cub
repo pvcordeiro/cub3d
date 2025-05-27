@@ -1,5 +1,5 @@
 NO assets/textures/cashier.xpm
-SO *assets/wolf3d/textures/hud/stats/1-0.xpm:*assets/wolf3d/textures/hud/stats/1-1.xpm:*assets/wolf3d/textures/hud/stats/1-2.xpm
+SO assets/wolf3d/textures/hud/stats/1-0.xpm:assets/wolf3d/textures/hud/stats/1-1.xpm:assets/wolf3d/textures/hud/stats/1-2.xpm
 SO_UPDATE_DELAY 1
 SO_LOOP TRUE
 WE assets/wolf3d/textures/eagle-wall.xpm
