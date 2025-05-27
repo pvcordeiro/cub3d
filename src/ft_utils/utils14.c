@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 15:31:27 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/14 21:35:42 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/27 20:35:47 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ static char	*parse_thing(char c, va_list *args)
 		c2 = va_arg(*args, int);
 		result = ft_strndup(&c2, 1);
 	}
+	else if (c == '%')
+		result = ft_strdup("%");
 	return (result);
 }
 

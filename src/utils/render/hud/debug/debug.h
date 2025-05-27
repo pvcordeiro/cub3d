@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 20:04:15 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/27 14:39:18 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/27 20:09:24 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "../hud.h"
 
-int		render_debug_str(t_ftm_font *font, t_ftm_image *canvas, char *str,
+int		render_debug_str(t_game *game, t_ftm_image *canvas, char *str,
 			t_coords coords);
 
 void	set_fps(t_game *game);

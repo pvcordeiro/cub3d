@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:27:08 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/23 16:20:57 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/27 19:49:44 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	clear_game(void *game)
 	ft_list_destroy(&((t_game *)game)->entities);
 	ft_hashmap_destroy(((t_game *)game)->sprites);
 	kill_threads(game);
-	ftm_free_font(((t_game *)game)->font);
+	ft_hashmap_destroy(((t_game *)game)->fonts);
 	ft_bzero(game, sizeof(t_game));
 }
 
@@ -41,6 +41,9 @@ void	game_load_map_e(t_game *game, t_ftm_window *window, t_map *map)
 	game->sounds = ft_hashmap_new();
 	if (!game->sounds)
 		return (fte_set(ERROR_INIT_SOUNDS));
+	game->fonts = ft_hashmap_new();
+	if (!game->fonts)
+		return (fte_set(ERROR_INIT_FONTS));
 	init_sprites_e(window, game);
 	if (fte_flagged())
 		return (clear_game(game));
@@ -55,6 +58,9 @@ void	game_load_map_e(t_game *game, t_ftm_window *window, t_map *map)
 	if (fte_flagged())
 		return (clear_game(game));
 	init_threads_e(game);
+	if (fte_flagged())
+		return (clear_game(game));
+	init_fonts_e(window, game);
 	if (fte_flagged())
 		return (clear_game(game));
 	init_font_e(window, game);

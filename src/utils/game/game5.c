@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 17:18:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/27 11:54:27 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/27 20:10:06 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,10 @@ static void	init_stats_hud(t_game *game)
 	t_sprite	*sprite;
 	char		*key;
 
+	game->hud.stats.enabled = ft_strequal(ft_hashmap_get_value(game->map->types, "STATS_HUD"), "TRUE");
+	game->hud.stats.font = ft_hashmap_get_value(game->fonts, "STATS_HUD");
+	if (!game->hud.stats.font)
+		game->hud.stats.font = ft_hashmap_get_value(game->fonts, "DEFAULT");
 	game->hud.stats.prev_health = -1;
 	game->hud.stats.states = -1;
 	while (++game->hud.stats.states || true)
@@ -106,8 +110,26 @@ static void	init_stats_hud(t_game *game)
 		game->hud.stats.sprite = ft_list_index(game->hud.stats.states_list, 0)->data;
 }
 
+static void	init_debug_hud(t_game *game)
+{
+	game->hud.debug.enabled = ft_strequal(ft_hashmap_get_value(game->map->types, "DEBUG_HUD"), "TRUE");
+	game->hud.debug.font = ft_hashmap_get_value(game->fonts, "DEBUG_HUD");
+	if (!game->hud.debug.font)
+		game->hud.debug.font = ft_hashmap_get_value(game->fonts, "DEFAULT");
+}
+
+static void	init_action_hud(t_game *game)
+{
+	game->hud.action.enabled = ft_strequal(ft_hashmap_get_value(game->map->types, "ACTION_HUD"), "TRUE");
+	game->hud.action.font = ft_hashmap_get_value(game->fonts, "ACTION_HUD");
+	if (!game->hud.action.font)
+		game->hud.action.font = ft_hashmap_get_value(game->fonts, "DEFAULT");
+}
+
 void	init_hud(t_game *game)
 {
-	game->hud.enabled = true;
+	game->hud.enabled = ft_strequal(ft_hashmap_get_value(game->map->types, "HUD"), "TRUE");
 	init_stats_hud(game);
+	init_debug_hud(game);
+	init_action_hud(game);
 }

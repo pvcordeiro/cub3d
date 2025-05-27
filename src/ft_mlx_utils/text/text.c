@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 00:29:28 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/26 22:21:03 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/27 20:01:07 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ void	ftm_draw_text(t_ftm_image *canvas, t_ftm_font *font, t_ftm_text_config text
 	while (text_config.text[++i])
 	{
 		img = font->characters[(unsigned char)text_config.text[i]];
-		ftm_put_image_to_canvas(canvas, img, get_pitc_config(&text_config, img, &x));
+		if (img)
+			ftm_put_image_to_canvas(canvas, img, get_pitc_config(&text_config, img, &x));
 	}
 }
 
@@ -71,6 +72,8 @@ int		ftm_get_text_size_prediction(t_ftm_font *font, t_ftm_text_config text_confi
 	while (text_config.text[++i])
 	{
 		img = font->characters[(unsigned char)text_config.text[i]];
+		if (!img)
+			continue ;
 		scaled_width = (img->size.width * text_config.height) / img->size.height;
 		x += scaled_width + text_config.spacing;
 	}

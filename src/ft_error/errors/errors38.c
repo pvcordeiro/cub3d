@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors35.c                                         :+:      :+:    :+:   */
+/*   errors38.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,11 +12,11 @@
 
 #include <ft_error.h>
 
-char	*get_error_message36(t_error _error);
+char	*get_error_message39(t_error _error);
 
-char	*get_error_message35(t_error _error)
+char	*get_error_message38(t_error _error)
 {
-	if (_error == ERROR_BILLBOARDS_INIT)
-		return (ERROR_BILLBOARDS_INIT_MSG);
-	return (get_error_message36(_error));
+	if (_error == ERROR_INIT_FONTS)
+		return (ERROR_INIT_FONTS_MSG);
+	return (get_error_message39(_error));
 }

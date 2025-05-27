@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:16:16 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/20 00:47:19 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/27 19:47:56 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,20 +50,17 @@ void	init_minimap(t_ftm_window *window, t_game *game)
 
 void	init_window(t_ftm_window *window, t_game *game)
 {
-	char	*value;
-
-	value = ft_hashmap_get_value(game->map->types, "MOUSE");
-	window->using_mouse = ft_strequal(value, "TRUE");
+	window->using_mouse = ft_strequal(ft_hashmap_get_value(game->map->types, "MOUSE"), "TRUE");
 }
 
 void	init_font_e(t_ftm_window *window, t_game *game)
 {
-	char	*font_path;
+	t_ftm_font	*font;
 
-	font_path = ft_hashmap_get_value(game->map->types, "FONT");
-	if (!font_path)
-		font_path = DEFAULT_FONT_PATH;
-	game->font = ftm_font_new(window, font_path);
-	if (!game->font)
-		fte_set(ERROR_FONT_NOT_FOUND);
+	if (ft_hashmap_get_value(game->fonts, "DEFAULT"))
+		return ;
+	font = ftm_font_new(window, DEFAULT_FONT_PATH);
+	if (!font)
+		fte_set(ERROR_DEFAULT_FONT_NOT_FOUND);
+	ft_hashmap_set(game->fonts, "DEFAULT", font, ftm_free_font);
 }

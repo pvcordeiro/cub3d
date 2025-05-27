@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 22:05:32 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/25 16:01:59 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/27 19:49:53 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ typedef enum e_error
 	ERROR_AUDIO_CONFIG_ON_INVALID,
 	ERROR_BILLBOARDS_INIT,
 	ERROR_INVALID_STATS_HUD_DIRECTORY,
+	ERROR_DEFAULT_FONT_NOT_FOUND,
+	ERROR_INIT_FONTS
 }	t_error;
 
 typedef struct s_error_storage
@@ -99,6 +101,8 @@ typedef struct s_error_storage
 # define ERROR_AUDIO_CONFIG_ON_INVALID_MSG "Audio config on invalid type"
 # define ERROR_BILLBOARDS_INIT_MSG "Billboards initialization error"
 # define ERROR_INVALID_STATS_HUD_DIRECTORY_MSG "Invalid stats HUD directory"
+# define ERROR_DEFAULT_FONT_NOT_FOUND_MSG "Default font not found"
+# define ERROR_INIT_FONTS_MSG "Initializing fonts error"
 # define ERROR_INVALID_MSG "Invalid Error"
 
 // Set ft_error global error

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/27 14:45:54 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/27 19:39:26 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,37 +227,47 @@ typedef struct s_minimap
 
 typedef struct s_hud_debug
 {
-	char	*fps;
-	char	*fps_min;
-	char	*fps_max;
-	char	*fps_limit;
-	char	*target_x;
-	char	*target_y;
-	char	*target_yaw;
-	char	*target_type;
-	char	*target_id;
-	char	*player_x;
-	char	*player_y;
-	char	*player_health;
-	char	*player_yaw;
-	char	*player_fov;
-	char	*entities_count;
-	bool	enabled;
+	t_ftm_font	*font;
+	char		*fps;
+	char		*fps_min;
+	char		*fps_max;
+	char		*fps_limit;
+	char		*target_x;
+	char		*target_y;
+	char		*target_yaw;
+	char		*target_type;
+	char		*target_id;
+	char		*player_x;
+	char		*player_y;
+	char		*player_health;
+	char		*player_yaw;
+	char		*player_fov;
+	char		*entities_count;
+	bool		enabled;
 }	t_hud_debug;
 
 typedef struct s_hud_stats
 {
+	t_ftm_font	*font;
 	t_sprite	*sprite;
 	t_list		*states_list;
 	int			states;
 	int			prev_health;
+	bool		enabled;
 }	t_hud_stats;
+
+typedef struct s_hud_action
+{
+	t_ftm_font	*font;
+	bool		enabled;
+}	t_hud_action;
 
 typedef struct s_hud
 {
 	t_entity		*entity;
 	t_hud_debug		debug;
 	t_hud_stats		stats;
+	t_hud_action	action;
 	bool			enabled;
 }	t_hud;
 
@@ -280,7 +290,7 @@ typedef struct s_game
 	t_hud				hud;
 	t_environment		environment;
 	t_minimap			minimap;
-	t_ftm_font			*font;
+	t_hashmap			*fonts;
 	t_hashmap			*sounds;
 	t_map				*map;
 	t_camera			camera;

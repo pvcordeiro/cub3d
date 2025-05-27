@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 23:44:03 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/25 16:39:59 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/27 20:49:35 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ static void	load_char(t_ftm_window *window, t_ftm_font *font, unsigned char c)
 		return ;
 	img = ftm_image_from_file(window, path, true);
 	free(path);
-	if (img)
-		font->characters[c] = img;
+	font->characters[c] = img;
 }
 
 t_ftm_font	*ftm_font_new(t_ftm_window *window, const char *dir)

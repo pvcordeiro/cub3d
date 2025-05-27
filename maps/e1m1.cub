@@ -4,6 +4,12 @@ BACKGROUND_SOUND_LOOP TRUE
 
 COLLISION_SOUND assets/wolf3d/sounds/hitwall.mp3
 
+HUD TRUE
+DEBUG_HUD TRUE
+STATUS_HUD TRUE
+
+STATS_HUD_FONT assets/fonts/wolf3d
+
 STATS_HUD_1_SPRITE *assets/wolf3d/textures/hud/stats/1-0.xpm:*assets/wolf3d/textures/hud/stats/1-1.xpm:*assets/wolf3d/textures/hud/stats/1-0.xpm:*assets/wolf3d/textures/hud/stats/1-2.xpm
 STATS_HUD_1_SPRITE_LOOP TRUE
 STATS_HUD_1_SPRITE_UPDATE_DELAY 2

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:20:04 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/25 19:04:10 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/27 19:45:34 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,29 @@ void	set_sprite_configs(t_game *game)
 		set_update_delay((t_sprite *)curr->value, game->map->types, curr->key);
 		set_loop((t_sprite *)curr->value, game->map->types, curr->key);
 		set_reversed((t_sprite *)curr->value, game->map->types, curr->key);
+	}
+}
+
+void	init_fonts_e(t_ftm_window *window, t_game *game)
+{
+	t_ftm_font			*font;
+	t_element			*el;
+	t_element			*curr;
+	char				*key;
+
+	fte_set(ERROR_NO_ERROR);
+	el = *game->map->types->table;
+	while (el)
+	{
+		curr = el;
+		el = el->next;
+		if (!ft_str_endswith(curr->key, "_FONT"))
+			continue ;
+		font = ftm_font_new(window, curr->value);
+		if (!font)
+			return (fte_set(ERROR_DEFAULT_FONT_NOT_FOUND));
+		key = ft_strndup(curr->key, ft_strlen(curr->key) - 5);
+		ft_hashmap_set(game->fonts, key, font, ftm_free_font);
+		free(key);
 	}
 }

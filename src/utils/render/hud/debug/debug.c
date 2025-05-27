@@ -6,13 +6,13 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 23:03:13 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/27 14:41:21 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/27 20:08:37 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "debug.h"
 
-int	render_debug_str(t_ftm_font *font, t_ftm_image *canvas, char *str,
+int	render_debug_str(t_game *game, t_ftm_image *canvas, char *str,
 	t_coords coords)
 {
 	t_ftm_text_config	config;
@@ -27,8 +27,8 @@ int	render_debug_str(t_ftm_font *font, t_ftm_image *canvas, char *str,
 		-5,
 		0xFFFFFFFF
 	};
-	width = ftm_get_text_size_prediction(font, config) + 25;
-	ftm_draw_text_in_box(canvas, font, config,
+	width = ftm_get_text_size_prediction(game->hud.debug.font, config) + 25;
+	ftm_draw_text_in_box(canvas, game->hud.debug.font, config,
 		(t_ftm_rectangle){0x55000000, 0x55EFBF04, (t_size){2, 2}});
 	return (width);
 }

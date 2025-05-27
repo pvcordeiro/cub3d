@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 20:49:46 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/27 01:03:30 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/27 19:55:50 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,15 @@ void	*hashmap_get_with_identifier(t_hashmap *hashmap, char identifier, char *res
 bool	entity_x_is_transparent(t_entity *entity, t_direction direction, double x)
 {t_ftm_image		*image;
 	unsigned int	*pixel;
+	double			actual_x;
 
+	actual_x = x;
+	if (direction == NORTH || direction == EAST)
+		actual_x = 1.0 - x;
 	image = get_sprite_image(get_entity_sprite(entity, direction));
 	if (!image)
 		return (true);
-	pixel = ftm_image_pixel(image, (t_coords){x * image->size.width, image->size.height / 2, 0});
+	pixel = ftm_image_pixel(image, (t_coords){actual_x * image->size.width, image->size.height / 2, 0});
 	if (!pixel)
 		return (true);
 	return (!(*pixel >> 24));
