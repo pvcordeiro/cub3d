@@ -6,7 +6,7 @@
 #    By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/26 17:16:21 by afpachec          #+#    #+#              #
-#    Updated: 2025/05/25 00:44:08 by afpachec         ###   ########.fr        #
+#    Updated: 2025/05/27 22:04:17 by afpachec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,7 +63,6 @@ fclean: clean
 	@rm -rf lib/libmlx.a
 	@rm -rf headers/mlx.h
 	@rm -rf assets/wolf3d
-	@find assets/fonts -mindepth 1 -type d -exec rm -r {} +
 
 re: fclean all
 
