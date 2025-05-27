@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 17:18:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/22 21:24:06 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/27 11:54:27 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,28 @@ void	init_camera(t_game *game)
 	game->camera.fov = PLAYER_FOV;
 }
 
+static void	init_stats_hud(t_game *game)
+{
+	t_sprite	*sprite;
+	char		*key;
+
+	game->hud.stats.prev_health = -1;
+	game->hud.stats.states = -1;
+	while (++game->hud.stats.states || true)
+	{
+		key = ft_strf("STATS_HUD_%d_SPRITE", game->hud.stats.states + 1);
+		sprite = ft_hashmap_get_value(game->sprites, key);
+		free(key);
+		if (!sprite)
+			break ;
+		ft_list_add(&game->hud.stats.states_list, sprite, NULL);
+	}
+	if (game->hud.stats.states)
+		game->hud.stats.sprite = ft_list_index(game->hud.stats.states_list, 0)->data;
+}
+
 void	init_hud(t_game *game)
 {
 	game->hud.enabled = true;
+	init_stats_hud(game);
 }

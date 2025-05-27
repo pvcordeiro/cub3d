@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/23 15:03:01 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/27 11:58:54 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,8 @@ t_player	*player_new(char identifier, t_ftm_window *window, t_game *game)
 	player->billboard.entity.free = free_player;
 	player->billboard.entity.hard = true;
 	player->billboard.entity.identifier = identifier;
+	player->billboard.entity.max_health = 100;
+	player->billboard.entity.health = player->billboard.entity.max_health;
 	player->key_look_velocity = PLAYER_KEY_LOOK_VELOCITY;
 	player->mouse_look_velocity = PLAYER_MOUSE_LOOK_VELOCITY;
 	player->walk_velocity = PLAYER_WALK_VELOCITY;

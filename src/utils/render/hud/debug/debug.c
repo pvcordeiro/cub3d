@@ -6,13 +6,14 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 23:03:13 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/26 22:20:23 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/27 14:41:21 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "debug.h"
 
-int	render_debug_str(t_ftm_font *font, t_ftm_image *canvas, char *str, t_coords coords)
+int	render_debug_str(t_ftm_font *font, t_ftm_image *canvas, char *str,
+	t_coords coords)
 {
 	t_ftm_text_config	config;
 	int					width;

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/27 01:03:44 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/27 11:45:27 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,8 @@ typedef struct s_entity
 	void			(*action)(struct s_entity *entity,
 			struct s_entity *actioner);
 	bool			transparent;
+	int				max_health;
+	int				health;
 	bool			hard;
 	bool			wall;
 	bool			billboard;
@@ -245,13 +247,16 @@ typedef struct s_hud_debug
 typedef struct s_hud_stats
 {
 	t_sprite	*sprite;
-	t_list		*states;
+	t_list		*states_list;
+	int			states;
+	int			prev_health;
 }	t_hud_stats;
 
 typedef struct s_hud
 {
 	t_entity		*entity;
 	t_hud_debug		debug;
+	t_hud_stats		stats;
 	bool			enabled;
 }	t_hud;
 
