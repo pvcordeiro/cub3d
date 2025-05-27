@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:21:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/27 12:06:54 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/27 18:18:57 by pvcordeiro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,12 @@ static void	hud_debug_keys(t_hud_debug *hud_debug, int key, bool down)
 		cub3d()->game.player->billboard.entity.health /= 1.2;
 	if (key == XK_u && down)
 		cub3d()->game.player->billboard.entity.health = cub3d()->game.player->billboard.entity.max_health;
+	if (key == XK_equal && down && cub3d()->game.minimap.zoom_level < 5.0)
+		cub3d()->game.minimap.zoom_level += 0.5;
+	if (key == XK_minus && down && cub3d()->game.minimap.zoom_level > 1.0)
+		cub3d()->game.minimap.zoom_level -= 0.5;
+	if (key == XK_0 && down)
+		cub3d()->game.minimap.zoom_level = 5.0;
 }
 
 static void	hud_keys(t_hud *hud, int key, bool down)
