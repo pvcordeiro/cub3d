@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 00:47:16 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/27 00:35:25 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/28 00:42:12 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,17 @@ static void	render_billboard(t_billboard *bill, t_ftm_image *canvas,
 
 void	render_billboards(t_game *game, t_ftm_image *canvas, t_camera *camera)
 {
+	static t_coords	prev_camera_coords;
 	int	i;
 
+	if (prev_camera_coords.x != camera->entity->coords.x
+		|| prev_camera_coords.y != camera->entity->coords.y
+		|| prev_camera_coords.yaw != camera->entity->coords.yaw)
+	{
+		prev_camera_coords = camera->entity->coords;
+		ft_strvorder((void *)game->billboards, &camera->entity->coords,
+			(void *)cmp_billboards);
+	}
 	i = -1;
 	while (game->billboards[++i])
 		render_billboard((t_billboard *)game->billboards[i], canvas, camera);

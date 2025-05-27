@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 13:45:53 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/25 16:09:52 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/28 00:37:02 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,28 @@ char	*ft_clean_path(const char *path)
 	if (ft_str_endswith(path, "/"))
 		return (ft_strndup(path, ft_strlen(path) - 1));
 	return (ft_strdup(path));
+}
+
+void	ft_strvorder(char **strv, const void *data, bool (*cmp)(const void
+	*data, const char *, const char *))
+{
+	size_t	i;
+	size_t	j;
+	char	*tmp;
+
+	if (!strv || !cmp)
+		return ;
+	i = -1;
+	while (strv[++i])
+	{
+		j = i;
+		while (strv[++j])
+		{
+			if (!cmp(data, strv[i], strv[j]))
+				continue ;
+			tmp = strv[i];
+			strv[i] = strv[j];
+			strv[j] = tmp;
+		}
+	}
 }

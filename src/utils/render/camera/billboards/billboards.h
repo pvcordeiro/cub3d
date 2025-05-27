@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 00:46:51 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/27 00:33:20 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/28 00:42:09 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,6 @@ typedef struct s_render_billboard_slices_config
 }	t_render_billboard_slices_config;
 
 void	render_billboard_slices(t_render_billboard_slices_config rbsc);
+bool	cmp_billboards(void *data, t_billboard *a, t_billboard *b);
 
 #endif
