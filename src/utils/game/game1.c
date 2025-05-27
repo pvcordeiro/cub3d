@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:16:16 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/27 19:47:56 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/27 20:55:28 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void	init_minimap(t_ftm_window *window, t_game *game)
 	minimap = &game->minimap;
 	minimap->width_multiplier = MINIMAP_WIDTH_MULTIPLIER;
 	minimap->height_multiplier = MINIMAP_HEIGHT_MULTIPLIER;
-	minimap->coords = (t_coords){10, window->size.height
-		- (window->size.height * minimap->height_multiplier) - 10, 0};
+	minimap->coords = (t_coords){window->size.width
+		- (window->size.width * minimap->width_multiplier) - 10, 10, 0};
 	minimap->size = (t_size){window->size.width
 		* game->minimap.width_multiplier, window->size.height
 		* game->minimap.height_multiplier};
@@ -46,6 +46,7 @@ void	init_minimap(t_ftm_window *window, t_game *game)
 	minimap->player_middle_ray_color = 0xFFFF0000;
 	minimap->entity_color = 0xFF888888;
 	minimap->door_color = 0xFF8888DD;
+	minimap->zoom_level = 5.0;
 }
 
 void	init_window(t_ftm_window *window, t_game *game)

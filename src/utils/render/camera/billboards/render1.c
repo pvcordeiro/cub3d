@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 00:47:16 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/27 00:41:51 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/27 18:23:05 by pvcordeiro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static bool	is_behind_wall(int i, t_render_billboard_slices_config rbsc)
 
 	ray_index = (int)((rbsc.screen_x + i - (rbsc.new_size.width / 2))
 			/ rbsc.canvas->size.width * rbsc.camera->rays);
-	if (ray_index < 0 || ray_index >= rbsc.camera->rays)
+	if (ray_index >= rbsc.camera->rays)
 		return (false);
 	offset = (i - rbsc.new_size.width / 2.0) / rbsc.new_size.width;
 	world_x = rbsc.centered_bill_coords.x + offset

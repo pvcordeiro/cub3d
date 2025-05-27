@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:21:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/27 12:06:54 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/27 21:01:03 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,16 @@ static void	hud_debug_keys(t_hud_debug *hud_debug, int key, bool down)
 		cub3d()->game.player->billboard.entity.health = cub3d()->game.player->billboard.entity.max_health;
 }
 
+static void	hud_minimap_keys(int key, bool down)
+{
+	if (key == XK_plus && down)
+		cub3d()->game.minimap.zoom_level *= 1.2;
+	if (key == XK_minus && down)
+		cub3d()->game.minimap.zoom_level /= 1.2;
+	if (key == XK_0 && down)
+		cub3d()->game.minimap.zoom_level = 5.0;
+}
+
 static void	hud_keys(t_hud *hud, int key, bool down)
 {
 	if (key == XK_h && down)
@@ -77,6 +87,7 @@ static void	hud_keys(t_hud *hud, int key, bool down)
 	if (!hud->enabled)
 		return ;
 	hud_debug_keys(&hud->debug, key, down);
+	hud_minimap_keys(key, down);
 }
 
 void	key_hook(int key, bool down)

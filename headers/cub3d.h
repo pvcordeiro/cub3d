@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/27 19:39:26 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/27 20:54:52 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,6 +223,7 @@ typedef struct s_minimap
 	unsigned int	player_color;
 	unsigned int	player_ray_color;
 	unsigned int	player_middle_ray_color;
+	double			zoom_level;
 }	t_minimap;
 
 typedef struct s_hud_debug
