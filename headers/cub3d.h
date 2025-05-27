@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/26 23:07:34 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/27 01:03:44 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -325,6 +325,7 @@ t_sprite	*sprite_new(t_list *images, t_time update_delay);
 
 // Entities
 void		call_entity_frames(t_list *entities, t_fps *fps);
+bool		entity_x_is_transparent(t_entity *entity, t_direction direction, double x);
 t_player	*player_new(char identifier, t_ftm_window *window, t_game *game);
 t_wall		*wall_new(char identifier, t_ftm_window *window, t_game *game);
 t_door		*door_new_e(char identifier, t_ftm_window *window, t_game *game);

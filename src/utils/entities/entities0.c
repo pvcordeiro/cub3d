@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 20:49:46 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/23 16:29:04 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/27 01:03:30 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,17 @@ void	*hashmap_get_with_identifier(t_hashmap *hashmap, char identifier, char *res
 		key = (free(key), ft_strf("%c_%s", identifier, rest));
 	data = ft_hashmap_get_value(hashmap, key);
 	return (free(key), data);
+}
+
+bool	entity_x_is_transparent(t_entity *entity, t_direction direction, double x)
+{t_ftm_image		*image;
+	unsigned int	*pixel;
+
+	image = get_sprite_image(get_entity_sprite(entity, direction));
+	if (!image)
+		return (true);
+	pixel = ftm_image_pixel(image, (t_coords){x * image->size.width, image->size.height / 2, 0});
+	if (!pixel)
+		return (true);
+	return (!(*pixel >> 24));
 }
