@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 20:22:33 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/26 21:40:36 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/28 00:23:42 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,5 @@ typedef struct s_pitc_data
 	t_size				it_limits;
 	t_ftm_image			*image;
 }	t_pitc_data;
-
-void	ftm_image_remove_transparency(t_ftm_image *image);
 
 #endif

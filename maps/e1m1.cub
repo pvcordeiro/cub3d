@@ -10,44 +10,64 @@ STATUS_HUD TRUE
 
 STATS_HUD_FONT assets/fonts/wolf3d
 
-STATS_HUD_1_SPRITE *assets/wolf3d/textures/hud/stats/1-0.xpm:*assets/wolf3d/textures/hud/stats/1-1.xpm:*assets/wolf3d/textures/hud/stats/1-0.xpm:*assets/wolf3d/textures/hud/stats/1-2.xpm
+STATS_HUD_1_SPRITE assets/wolf3d/textures/hud/stats/1-0.xpm:assets/wolf3d/textures/hud/stats/1-1.xpm:assets/wolf3d/textures/hud/stats/1-0.xpm:assets/wolf3d/textures/hud/stats/1-2.xpm
 STATS_HUD_1_SPRITE_LOOP TRUE
 STATS_HUD_1_SPRITE_UPDATE_DELAY 2
 
-STATS_HUD_2_SPRITE *assets/wolf3d/textures/hud/stats/2-0.xpm:*assets/wolf3d/textures/hud/stats/2-1.xpm:*assets/wolf3d/textures/hud/stats/2-0.xpm:*assets/wolf3d/textures/hud/stats/2-2.xpm
+STATS_HUD_2_SPRITE assets/wolf3d/textures/hud/stats/2-0.xpm:assets/wolf3d/textures/hud/stats/2-1.xpm:assets/wolf3d/textures/hud/stats/2-0.xpm:assets/wolf3d/textures/hud/stats/2-2.xpm
 STATS_HUD_2_SPRITE_LOOP TRUE
 STATS_HUD_2_SPRITE_UPDATE_DELAY 2
 
-STATS_HUD_3_SPRITE *assets/wolf3d/textures/hud/stats/3-0.xpm:*assets/wolf3d/textures/hud/stats/3-1.xpm:*assets/wolf3d/textures/hud/stats/3-0.xpm:*assets/wolf3d/textures/hud/stats/3-2.xpm
+STATS_HUD_3_SPRITE assets/wolf3d/textures/hud/stats/3-0.xpm:assets/wolf3d/textures/hud/stats/3-1.xpm:assets/wolf3d/textures/hud/stats/3-0.xpm:assets/wolf3d/textures/hud/stats/3-2.xpm
 STATS_HUD_3_SPRITE_LOOP TRUE
 STATS_HUD_3_SPRITE_UPDATE_DELAY 2
 
-STATS_HUD_4_SPRITE *assets/wolf3d/textures/hud/stats/4-0.xpm:*assets/wolf3d/textures/hud/stats/4-1.xpm:*assets/wolf3d/textures/hud/stats/4-0.xpm:*assets/wolf3d/textures/hud/stats/4-2.xpm
+STATS_HUD_4_SPRITE assets/wolf3d/textures/hud/stats/4-0.xpm:assets/wolf3d/textures/hud/stats/4-1.xpm:assets/wolf3d/textures/hud/stats/4-0.xpm:assets/wolf3d/textures/hud/stats/4-2.xpm
 STATS_HUD_4_SPRITE_LOOP TRUE
 STATS_HUD_4_SPRITE_UPDATE_DELAY 2
 
-STATS_HUD_5_SPRITE *assets/wolf3d/textures/hud/stats/5-0.xpm:*assets/wolf3d/textures/hud/stats/5-1.xpm:*assets/wolf3d/textures/hud/stats/5-0.xpm:*assets/wolf3d/textures/hud/stats/5-2.xpm
+STATS_HUD_5_SPRITE assets/wolf3d/textures/hud/stats/5-0.xpm:assets/wolf3d/textures/hud/stats/5-1.xpm:assets/wolf3d/textures/hud/stats/5-0.xpm:assets/wolf3d/textures/hud/stats/5-2.xpm
 STATS_HUD_5_SPRITE_LOOP TRUE
 STATS_HUD_5_SPRITE_UPDATE_DELAY 2
 
-STATS_HUD_6_SPRITE *assets/wolf3d/textures/hud/stats/6-0.xpm:*assets/wolf3d/textures/hud/stats/6-1.xpm:*assets/wolf3d/textures/hud/stats/6-0.xpm:*assets/wolf3d/textures/hud/stats/6-2.xpm
+STATS_HUD_6_SPRITE assets/wolf3d/textures/hud/stats/6-0.xpm:assets/wolf3d/textures/hud/stats/6-1.xpm:assets/wolf3d/textures/hud/stats/6-0.xpm:assets/wolf3d/textures/hud/stats/6-2.xpm
 STATS_HUD_6_SPRITE_LOOP TRUE
 STATS_HUD_6_SPRITE_UPDATE_DELAY 2
 
-STATS_HUD_7_SPRITE *assets/wolf3d/textures/hud/stats/7-0.xpm:*assets/wolf3d/textures/hud/stats/7-1.xpm:*assets/wolf3d/textures/hud/stats/7-0.xpm:*assets/wolf3d/textures/hud/stats/7-2.xpm
+STATS_HUD_7_SPRITE assets/wolf3d/textures/hud/stats/7-0.xpm:assets/wolf3d/textures/hud/stats/7-1.xpm:assets/wolf3d/textures/hud/stats/7-0.xpm:assets/wolf3d/textures/hud/stats/7-2.xpm
 STATS_HUD_7_SPRITE_LOOP TRUE
 STATS_HUD_7_SPRITE_UPDATE_DELAY 2
 
 
 ._TYPE BILLBOARD
 ._HARD TRUE
-._SPRITE *assets/wolf3d/textures/billboards/blue-plant.xpm
+._SPRITE assets/wolf3d/textures/billboards/blue-plant.xpm
 
 ,_TYPE BILLBOARD
-,_SPRITE *assets/wolf3d/textures/billboards/ceiling-light.xpm
+,_SPRITE assets/wolf3d/textures/billboards/ceiling-light.xpm
 
 /_TYPE BILLBOARD
-/_SPRITE *assets/wolf3d/textures/billboards/chandelier.xpm
+/_SPRITE assets/wolf3d/textures/billboards/chandelier.xpm
+
+=_TYPE BILLBOARD
+=_HARD TRUE
+=_SPRITE assets/wolf3d/textures/billboards/brown-pot.xpm
+
+'_TYPE BILLBOARD
+'_HARD TRUE
+'_SPRITE assets/wolf3d/textures/billboards/barrel.xpm
+
+?_TYPE BILLBOARD
+?_HARD TRUE
+?_SPRITE assets/wolf3d/textures/billboards/well.xpm
+
++_TYPE BILLBOARD
++_HARD TRUE
++_SPRITE assets/wolf3d/textures/billboards/well-water.xpm
+
+-_TYPE BILLBOARD
+-_HARD TRUE
+-_SPRITE assets/wolf3d/textures/billboards/table.xpm
 
 2_TYPE DOOR
 2_DOOR_SPRITE assets/wolf3d/textures/door.xpm
@@ -161,23 +181,23 @@ C 50, 50, 50
 1     , 1 , 1               jjjj l , l
 1   1   1   1                    j   j              
 1   11111d3d1111                fjk3kjf              aaaaaaaaaaa
-1 , 11         1           ffffif     fiffff         a         a
-1   11         1           f.             .f         aa        a
+1 , 11         1           ffffif.   .fiffff         a      '''a
+1   11         1           f.             .f         aa       'a
 1   11  ,   ,  1           g               gaaaaaaaaaaa        a
 1    e         1           f                e         e        a
 1    2         1           f  /    /    /   2         2        a
 1    e         1           f                e         e        a
-1   11  ,   ,  1           g               gaaa    aaaa        a
+1   11  ,   ,  1           g               gaaa    aaaa  -  -  a
 1   11         1           f.             .f  aa  a   a        a
 1   11         1           ffhfff     ffhfff   a  a   a        a
-1 , 11111d2d1111                fad3daf        a  aaaaaaa aa aaa
+1 , 11111d2d1111                fad3daf        a  aaaaaaa+aa?aaa
 1   1   1   1                    a   a         a  a     aaaaaa
 1   11111   1                    a , a         a  a
 1   1   1   1                    a   a         a  a aaaaaaaaa
 1     , 1 , 1                    a   a         a  aaa a a a aa
 1   1   1   1                    a   a         a   e         a
 1 , 11111   1                    a , a         a   2         b
-1   11111   111111111111111      a   a         a   e         a
+1   11111   111111111111111      a   a         a   e        =a
 1               e       111      a   a         aaaaaa a a a aa
 1     ,      ,  2       0 0      a   a             aaaaaaaaaa
 1               e       111      a , a

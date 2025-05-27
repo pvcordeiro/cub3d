@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:20:04 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/27 20:49:40 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/28 00:22:38 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ static char	**get_sprite_paths(const char *paths_str)
 {
 	int		i;
 	char	**paths;
-	char	*path;
 
 	if (!paths_str)
 		return (NULL);
@@ -37,12 +36,9 @@ static char	**get_sprite_paths(const char *paths_str)
 	i = -1;
 	while (paths[++i])
 	{
-		path = paths[i];
-		if (paths[i][0] == '*')
-			path = paths[i] + 1;
-		if (!ft_strequal(path, "NULL")
-			&& !ft_str_endswith(path, ".xpm")
-			&& !ft_is_file(path))
+		if (!ft_strequal(paths[i], "NULL")
+			&& !ft_str_endswith(paths[i], ".xpm")
+			&& !ft_is_file(paths[i]))
 			return (ft_strvfree(paths), NULL);
 	}
 	return (paths);
@@ -55,9 +51,7 @@ void	init_sprites_e(t_ftm_window *window, t_game *game)
 	t_element	*el;
 	t_element	*curr;
 	char		**paths;
-	char		*path;
 	int			i;
-	bool		transparency;
 
 	fte_set(ERROR_NO_ERROR);
 	image = NULL;
@@ -78,20 +72,13 @@ void	init_sprites_e(t_ftm_window *window, t_game *game)
 		i = -1;
 		while (paths[++i])
 		{
-			transparency = paths[i][0] == '*';
-			if (transparency)
-				path = ft_strdup(paths[i] + 1);
-			else
-				path = ft_strdup(paths[i]);
-			if (!ft_strequal(path, "NULL"))
-			{
-				image = ftm_image_from_file(window, path, transparency);
-				if (!image)
-					return (free(path), fte_set(ERROR_LOAD_SPRITE));
-				ft_list_add(&((t_sprite *)ft_hashmap_get_value(game->sprites,
-							curr->key))->images, image, ftm_free_image);
-			}
-			free(path);
+			if (ft_strequal(paths[i], "NULL"))
+				continue ;
+			image = ftm_image_from_file(window, paths[i]);
+			if (!image)
+				return (free(paths[i]), fte_set(ERROR_LOAD_SPRITE));
+			ft_list_add(&((t_sprite *)ft_hashmap_get_value(game->sprites,
+						curr->key))->images, image, ftm_free_image);
 		}
 	}
 	set_sprite_configs(game);

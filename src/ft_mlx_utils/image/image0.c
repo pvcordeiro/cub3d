@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:48:06 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/27 17:26:17 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/28 00:22:16 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static bool	load_image_addresses(t_ftm_image *image)
 	return (!!image->data);
 }
 
-t_ftm_image	*ftm_image_from_file(t_ftm_window *window, char *path, bool transparency)
+t_ftm_image	*ftm_image_from_file(t_ftm_window *window, char *path)
 {
 	t_ftm_image	*image;
 
@@ -43,8 +43,6 @@ t_ftm_image	*ftm_image_from_file(t_ftm_window *window, char *path, bool transpar
 		return (free(image), NULL);
 	if (!load_image_addresses(image))
 		return (ftm_free_image(image), NULL);
-	if (!transparency)
-		ftm_image_remove_transparency(image);
 	return (image);
 }
 
@@ -65,7 +63,7 @@ t_ftm_image	*ftm_image_new(t_ftm_window *window, t_size size)
 	return (image);
 }
 
-t_list	*ftm_images_from_files(t_ftm_window *window, char **file_paths, bool transparency)
+t_list	*ftm_images_from_files(t_ftm_window *window, char **file_paths)
 {
 	size_t		i;
 	t_list		*list;
@@ -75,7 +73,7 @@ t_list	*ftm_images_from_files(t_ftm_window *window, char **file_paths, bool tran
 	i = -1;
 	while (file_paths[++i])
 	{
-		tmp_image = ftm_image_from_file(window, file_paths[i], transparency);
+		tmp_image = ftm_image_from_file(window, file_paths[i]);
 		if (!tmp_image)
 			return (ft_list_destroy(&list), NULL);
 		ft_list_add(&list, tmp_image, (void (*)(void *))ftm_free_image);

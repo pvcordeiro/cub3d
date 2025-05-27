@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:15:19 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/20 01:07:02 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/28 00:05:22 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	load_placeholder_sprite_e(t_ftm_window *window, t_sprite *placeholde
 
 	fte_set(ERROR_NO_ERROR);
 	list = NULL;
-	image = ftm_image_from_file(window, PLACEHOLDER_IMAGE_PATH, false);
+	image = ftm_image_from_file(window, PLACEHOLDER_IMAGE_PATH);
 	if (!image)
 		return (fte_set(ERROR_LOAD_PLACEHOLDER_SPRITE));
 	ft_list_add(&list, image, ftm_free_image);
