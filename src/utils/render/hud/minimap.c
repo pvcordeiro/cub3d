@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.c                                              :+:      :+:    :+:   */
+/*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/29 22:33:42 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/27 19:18:20 by pvcordeiro       ###   ########.fr       */
+/*   Created: 2025/05/28 17:48:25 by paude-so          #+#    #+#             */
+/*   Updated: 2025/05/28 18:02:12 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "render.h"
+#include "hud.h"
 
 static void	set_entity_color(t_game *game, t_entity *entity, unsigned *color)
 {
 	if (entity->type == ENTITY_WALL)
-		*color = game->minimap.wall_color;
+		*color = game->hud.minimap.wall_color;
 	else if (entity->type == ENTITY_PLAYER)
-		*color = game->minimap.player_color;
+		*color = game->hud.minimap.player_color;
 	else if (entity->type == ENTITY_DOOR)
-		*color = game->minimap.door_color;
+		*color = game->hud.minimap.door_color;
 	else
-		*color = game->minimap.entity_color;
+		*color = game->hud.minimap.entity_color;
 }
 
 static bool in_boundaries(t_coords entity_pos, t_coords minimap_pos, t_size minimap_size)
@@ -98,7 +98,7 @@ static void render_entities(t_ftm_image *canvas, t_game *game, t_coords minimap_
 
     original_scale = fmin((double)minimap_size.width / (double)game->map->size.width,
                 (double)minimap_size.height / (double)game->map->size.height);
-    scale = original_scale * game->minimap.zoom_level;
+    scale = original_scale * game->hud.minimap.zoom_level;
     entity_size = (t_size){scale, scale};
     player_center = (t_coords){
         game->player->billboard.entity.coords.x,
@@ -126,8 +126,23 @@ static void render_entities(t_ftm_image *canvas, t_game *game, t_coords minimap_
         entity_size);
 }
 
-void	render_minimap(t_game *game, t_ftm_image *canvas, t_coords coords, t_size size)
+static void	render_minimapp(t_game *game, t_ftm_image *canvas, t_coords coords, t_size size)
 {
-	ftm_draw_rectangle(canvas, coords, size, (t_ftm_rectangle){game->minimap.background_color, game->minimap.border_color, (t_size){1, 1}});
+	ftm_draw_rectangle(canvas, coords, size, (t_ftm_rectangle){game->hud.minimap.background_color, game->hud.minimap.border_color, (t_size){1, 1}});
 	render_entities(canvas, game, coords, size);
+}
+
+void	render_minimap(t_game *game, t_ftm_image *canvas)
+{
+	t_coords	map_coords;
+	t_size		map_size;
+
+	map_coords = (t_coords){0, 0, 0};
+	map_size = canvas->size;
+	if (!game->hud.minimap.full)
+	{
+		map_coords = game->hud.minimap.coords;
+		map_size = game->hud.minimap.size;
+	}
+	render_minimapp(game, canvas, map_coords, map_size);
 }

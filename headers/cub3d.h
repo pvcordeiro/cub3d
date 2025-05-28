@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/28 17:27:59 by pvcordeiro       ###   ########.fr       */
+/*   Updated: 2025/05/28 18:00:28 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,8 +208,9 @@ typedef struct s_environment
 	unsigned int	ceiling_color;
 }	t_environment;
 
-typedef struct s_minimap
+typedef struct s_hud_minimap
 {
+	bool			enabled;
 	t_coords		coords;
 	t_size			size;
 	bool			full;
@@ -224,7 +225,7 @@ typedef struct s_minimap
 	unsigned int	player_ray_color;
 	unsigned int	player_middle_ray_color;
 	double			zoom_level;
-}	t_minimap;
+}	t_hud_minimap;
 
 typedef struct s_hud_debug
 {
@@ -269,6 +270,7 @@ typedef struct s_hud
 	t_hud_debug		debug;
 	t_hud_stats		stats;
 	t_hud_action	action;
+	t_hud_minimap	minimap;
 	bool			enabled;
 }	t_hud;
 
@@ -290,7 +292,6 @@ typedef struct s_game
 	t_fps				fps;
 	t_hud				hud;
 	t_environment		environment;
-	t_minimap			minimap;
 	t_hashmap			*fonts;
 	t_hashmap			*sounds;
 	t_map				*map;
