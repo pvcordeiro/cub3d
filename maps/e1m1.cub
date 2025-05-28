@@ -38,35 +38,33 @@ STATS_HUD_7_SPRITE assets/wolf3d/textures/hud/stats/7-0.xpm:assets/wolf3d/textur
 STATS_HUD_7_SPRITE_LOOP TRUE
 STATS_HUD_7_SPRITE_UPDATE_DELAY 2
 
+8_TYPE ENEMY
+8_SPRITE assets/wolf3d/textures/billboards/blue-plant.xpm
 
 ._TYPE BILLBOARD
-._HARD TRUE
 ._SPRITE assets/wolf3d/textures/billboards/blue-plant.xpm
 
 ,_TYPE BILLBOARD
+,_HARD FALSE
 ,_SPRITE assets/wolf3d/textures/billboards/ceiling-light.xpm
 
 /_TYPE BILLBOARD
+/_HARD FALSE
 /_SPRITE assets/wolf3d/textures/billboards/chandelier.xpm
 
 =_TYPE BILLBOARD
-=_HARD TRUE
 =_SPRITE assets/wolf3d/textures/billboards/brown-pot.xpm
 
 '_TYPE BILLBOARD
-'_HARD TRUE
 '_SPRITE assets/wolf3d/textures/billboards/barrel.xpm
 
 ?_TYPE BILLBOARD
-?_HARD TRUE
 ?_SPRITE assets/wolf3d/textures/billboards/well.xpm
 
 +_TYPE BILLBOARD
-+_HARD TRUE
 +_SPRITE assets/wolf3d/textures/billboards/well-water.xpm
 
 -_TYPE BILLBOARD
--_HARD TRUE
 -_SPRITE assets/wolf3d/textures/billboards/table.xpm
 
 2_TYPE DOOR

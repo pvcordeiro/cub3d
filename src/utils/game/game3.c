@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 23:10:00 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/25 18:19:35 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/28 20:03:23 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	create_entity_e(t_game *game, t_ftm_window *window, char c, t_size p
 	creator = get_creator_e(&game->map->identifiers, c);
 	if (fte_flagged() || !creator)
 		return ;
-	entity = ((t_entity *(*)(char, t_ftm_window *, t_game *))creator)(c, window, game);
+	entity = ((t_entity *(*)(t_game *, t_ftm_window *, char))creator)(game, window, c);
 	if (fte_flagged())
 		return ;
 	if (!entity)

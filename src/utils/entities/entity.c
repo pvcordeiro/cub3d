@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   billboard.c                                             :+:      :+:    :+:   */
+/*   enemy.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,23 +12,14 @@
 
 #include "entities.h"
 
-void	init_billboard(t_game *game, t_billboard *billboard, char identifier)
+void	init_entity(t_game *game, t_entity *entity, char identifier)
 {
-	init_entity(game, (t_entity *)billboard, identifier);
-	billboard->entity.type = ENTITY_BILLBOARD;
-	billboard->entity.billboard = true;
-	billboard->sprite = hashmap_get_with_identifier(game->sprites, billboard->entity.identifier, "SPRITE");
-}
-
-t_billboard	*billboard_new(t_game *game, t_ftm_window *window, char identifier)
-{
-	t_billboard	*billboard;
-
-	(void)window;
-	billboard = ft_calloc(1, sizeof(t_billboard));
-	if (!billboard)
-		return (NULL);
-	init_billboard(game, billboard, identifier);
-	billboard->entity.free = free;
-	return (billboard);
+	if (!entity)
+		return ;
+	entity->type = ENTITY;
+	entity->hard = !ft_strequal(
+		hashmap_get_with_identifier(game->map->types, identifier,
+			"HARD"), "FALSE");
+	entity->identifier = identifier;
+	entity->size = (t_size){1, 1};
 }

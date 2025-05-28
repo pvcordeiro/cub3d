@@ -12,17 +12,14 @@
 
 #include "entities.h"
 
-static void	enemy_frame(t_entity *entity, double delta_time)
+void	init_enemy(t_game *game, t_enemy *enemy, char identifier)
 {
-	((void)entity, (void)delta_time);
+	init_billboard(game, (t_billboard *)enemy, identifier);
+	enemy->billboard.entity.type = ENTITY_ENEMY;
+	enemy->idle_sprite = hashmap_get_with_identifier(game->sprites, identifier, "IDLE");
 }
 
-static void	free_enemy(void *enemy)
-{
-	free(enemy);
-}
-
-t_enemy	*enemy_new(char identifier, t_ftm_window *window, t_game *game)
+t_enemy	*enemy_new(t_game *game, t_ftm_window *window, char identifier)
 {
 	t_enemy	*enemy;
 
@@ -30,13 +27,7 @@ t_enemy	*enemy_new(char identifier, t_ftm_window *window, t_game *game)
 	enemy = ft_calloc(1, sizeof(t_enemy));
 	if (!enemy)
 		return (NULL);
-	enemy->billboard.entity.type = ENTITY_ENEMY;
-	enemy->billboard.entity.frame = enemy_frame;
-	enemy->billboard.entity.free = free_enemy;
-	enemy->billboard.entity.hard = true;
-	enemy->billboard.entity.billboard = true;
-	enemy->billboard.entity.identifier = identifier;
-	enemy->billboard.entity.size = (t_size){1, 1};
-	enemy->idle_sprite = hashmap_get_with_identifier(game->sprites, identifier, "IDLE");
+	init_enemy(game, enemy, identifier);
+	enemy->billboard.entity.free = free;
 	return (enemy);
 }

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/27 11:58:54 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/28 20:02:10 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ static void	init_sounds(t_player *player, t_game *game)
 	player->collision_sound = ft_hashmap_get_value(game->sounds, "COLLISION");
 }
 
-t_player	*player_new(char identifier, t_ftm_window *window, t_game *game)
+t_player	*player_new(t_game *game, t_ftm_window *window, char identifier)
 {
 	t_player	*player;
 

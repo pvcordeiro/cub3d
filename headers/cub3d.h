@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/28 18:00:28 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/28 20:00:50 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ typedef struct s_sprite
 
 typedef enum e_entity_type
 {
+	ENTITY,
 	ENTITY_PLAYER,
 	ENTITY_WALL,
 	ENTITY_DOOR,
@@ -344,10 +345,10 @@ t_sprite	*sprite_new(t_list *images, t_time update_delay);
 // Entities
 void		call_entity_frames(t_list *entities, t_fps *fps);
 bool		entity_x_is_transparent(t_entity *entity, t_direction direction, double x);
-t_player	*player_new(char identifier, t_ftm_window *window, t_game *game);
-t_wall		*wall_new(char identifier, t_ftm_window *window, t_game *game);
-t_door		*door_new_e(char identifier, t_ftm_window *window, t_game *game);
-t_enemy		*enemy_new(char identifier, t_ftm_window *window, t_game *game);
-t_billboard	*billboard_new(char identifier, t_ftm_window *window, t_game *game);
+t_player	*player_new(t_game *game, t_ftm_window *window, char identifier);
+t_wall		*wall_new(t_game *game, t_ftm_window *window, char identifier);
+t_door		*door_new_e(t_game *game, t_ftm_window *window, char identifier);
+t_enemy		*enemy_new(t_game *game, t_ftm_window *window, char identifier);
+t_billboard	*billboard_new(t_game *game, t_ftm_window *window, char identifier);
 
 #endif
