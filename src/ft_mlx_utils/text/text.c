@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   text.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 00:29:28 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/27 20:01:07 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/28 17:30:49 by pvcordeiro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static t_ftm_pitc_config	get_pitc_config(t_ftm_text_config *text_config, t_ftm_i
 	else
 		*x += scaled_width + text_config->spacing;
 	return ((t_ftm_pitc_config){
-		(t_coords){*x, text_config->coords.y, 0},
+		(t_coords){(int)*x, (int)text_config->coords.y, 0},
 		false,
 		(t_coords){0, 0, 0},
 		(t_coords){0, 0, 0},

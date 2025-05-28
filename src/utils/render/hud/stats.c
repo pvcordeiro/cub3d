@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stats.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 22:14:35 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/27 20:39:03 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/28 17:35:20 by pvcordeiro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,23 @@ void	render_stats_text(t_game *game, t_ftm_image *canvas)
 {
 	t_coords			text_pos;
 	char				*health_text;
+	double				health_scaler;
 
 	if (!game->hud.stats.states)
 		return ;
 	health_text = ft_strf("%d%%", game->player->billboard.entity.health);
-	text_pos = (t_coords){canvas->size.width / 2.83,
-		canvas->size.height / 1.1, 0};
+	health_scaler = 1.84;
+	if (ft_strlen(health_text) == 3)
+		health_scaler = 1.81;
+	if (ft_strlen(health_text) == 2)
+		health_scaler = 1.70;
+	text_pos = (t_coords){canvas->size.width / health_scaler,
+		canvas->size.height / 1.09, 0};
 	ftm_draw_text(canvas, game->hud.stats.font,
 		(t_ftm_text_config){
 			.text = health_text,
 			.coords = text_pos,
-			.height = 40,
+			.height = 0.05 * canvas->size.height,
 			.spacing = 4,
 			.color = 0xCFFFFFFF
 		});

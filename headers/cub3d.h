@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/27 20:54:52 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/28 17:27:59 by pvcordeiro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@
 // Player Config
 # define PLAYER_RAYS_NO_HIT_LENGTH 50.0
 # define PLAYER_FOV 73.5
-# define PLAYER_RAYS 1024
+# define PLAYER_RAYS W_WIDTH
 # define PLAYER_RAY_SUBRAYS 5
 # define PLAYER_HITBOX_RADIUS 0.23
 # define PLAYER_MOUSE_LOOK_VELOCITY 30.0
