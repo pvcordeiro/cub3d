@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+         #
+#    By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/26 17:16:21 by afpachec          #+#    #+#              #
-#    Updated: 2025/05/27 22:04:17 by afpachec         ###   ########.fr        #
+#    Updated: 2025/05/28 13:49:59 by paude-so         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,8 @@ ifeq ($(UNAME_S),Darwin)
 	LIBS += -L /opt/homebrew/lib
 	INCLUDES += -I /opt/X11/include
 	LDLIBS += -framework OpenGL -framework AppKit
-else
-	CFLAGS += -Wno-error=stringop-overflow
+# else
+# 	CFLAGS += -Wno-error=stringop-overflow
 endif
 
 all: $(NAME)
