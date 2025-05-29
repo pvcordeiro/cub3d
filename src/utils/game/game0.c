@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game0.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:27:08 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/27 19:49:44 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/29 16:25:08 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	game_load_map_e(t_game *game, t_ftm_window *window, t_map *map)
 	init_walls_e(game);
 	if (fte_flagged())
 		return (clear_game(game));
+	insert_door_frames(&cub3d()->game);
 	init_billboards_e(game);
 	if (fte_flagged())
 		return (clear_game(game));

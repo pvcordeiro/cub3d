@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/28 20:00:50 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/29 16:23:58 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -341,6 +341,7 @@ void		free_sprite(void *data);
 void		clear_sprite(void *data);
 void		init_sprite(t_sprite *sprite, t_list *images, t_time update_delay);
 t_sprite	*sprite_new(t_list *images, t_time update_delay);
+void 		insert_door_frames(t_game *game);
 
 // Entities
 void		call_entity_frames(t_list *entities, t_fps *fps);

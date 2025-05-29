@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   door.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/28 20:01:27 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/29 16:23:58 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,13 @@ static void	init_door_sides(t_door *door, t_game *game, char identifier)
 {
 	if (door->direction == NORTH || door->direction == SOUTH)
 	{
-		door->wall.west_sprite = hashmap_get_with_identifier(game->sprites, identifier, "SIDES");
-		door->wall.east_sprite = hashmap_get_with_identifier(game->sprites, identifier, "SIDES");
+		door->wall.west_sprite = hashmap_get_with_identifier(game->sprites, identifier, "SIDES_SPRITE");
+		door->wall.east_sprite = hashmap_get_with_identifier(game->sprites, identifier, "SIDES_SPRITE");
 	}
 	else if (door->direction == WEST || door->direction == EAST)
 	{
-		door->wall.north_sprite = hashmap_get_with_identifier(game->sprites, identifier, "SIDES");
-		door->wall.south_sprite = hashmap_get_with_identifier(game->sprites, identifier, "SIDES");
+		door->wall.north_sprite = hashmap_get_with_identifier(game->sprites, identifier, "SIDES_SPRITE");
+		door->wall.south_sprite = hashmap_get_with_identifier(game->sprites, identifier, "SIDES_SPRITE");
 	}
 }
 
@@ -174,4 +174,53 @@ t_door	*door_new_e(t_game *game, t_ftm_window *window, char identifier)
 	if (fte_flagged())
 		return (free(door), NULL);
 	return (door);
+}
+
+void insert_door_frames(t_game *game)
+{
+	int			y;
+	int			x;
+	t_door		*door;
+	t_wall		*adjacent_wall;
+	t_sprite	*door_frame_sprite;
+
+	door_frame_sprite = NULL;
+	y = -1;
+	while (++y < game->map->size.height)
+	{
+		x = -1;
+		while (++x < game->map->size.width)
+		{
+			if (game->walls[y][x] && game->walls[y][x]->type == ENTITY_DOOR)
+			{
+				door = (t_door *)game->walls[y][x];
+				if (!door_frame_sprite)
+					door_frame_sprite = hashmap_get_with_identifier(game->sprites, door->wall.entity.identifier, "SIDES_SPRITE");
+				if (y > 0 && game->walls[y-1][x] && 
+					game->walls[y-1][x]->type == ENTITY_WALL)
+				{
+					adjacent_wall = (t_wall *)game->walls[y-1][x];
+					adjacent_wall->south_sprite = door_frame_sprite;
+				}
+				if (y < game->map->size.height - 1 && game->walls[y+1][x] && 
+					game->walls[y+1][x]->type == ENTITY_WALL)
+				{
+					adjacent_wall = (t_wall *)game->walls[y+1][x];
+					adjacent_wall->north_sprite = door_frame_sprite;
+				}
+				if (x > 0 && game->walls[y][x-1] && 
+					game->walls[y][x-1]->type == ENTITY_WALL)
+				{
+					adjacent_wall = (t_wall *)game->walls[y][x-1];
+					adjacent_wall->east_sprite = door_frame_sprite;
+				}
+				if (x < game->map->size.width - 1 && game->walls[y][x+1] && 
+					game->walls[y][x+1]->type == ENTITY_WALL)
+				{
+					adjacent_wall = (t_wall *)game->walls[y][x+1];
+					adjacent_wall->west_sprite = door_frame_sprite;
+				}
+			}
+		}
+	}
 }
