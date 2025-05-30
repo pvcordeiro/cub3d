@@ -38,8 +38,8 @@ STATS_HUD_7_SPRITE assets/wolf3d/textures/hud/stats/7-0.xpm:assets/wolf3d/textur
 STATS_HUD_7_SPRITE_LOOP TRUE
 STATS_HUD_7_SPRITE_UPDATE_DELAY 2
 
-8_TYPE ENEMY
-8_SPRITE assets/wolf3d/textures/billboards/blue-plant.xpm
+e_TYPE BILLBOARD
+e_SPRITE assets/wolf3d/textures/billboards/soldier/halt.xpm
 
 ._TYPE BILLBOARD
 ._SPRITE assets/wolf3d/textures/billboards/blue-plant.xpm
@@ -68,9 +68,11 @@ STATS_HUD_7_SPRITE_UPDATE_DELAY 2
 -_SPRITE assets/wolf3d/textures/billboards/table.xpm
 
 :_TYPE BILLBOARD
+:_HARD FALSE
 :_SPRITE assets/wolf3d/textures/billboards/food.xpm
 
 ;_TYPE BILLBOARD
+;_HARD FALSE
 ;_SPRITE assets/wolf3d/textures/billboards/ammo.xpm
 
 v_TYPE DOOR
@@ -165,15 +167,15 @@ ffhff   f , f               j  jjj   jjj
 f   fffff   f               j  j j   j
 f , f   f   f               j  j j   j
 f     , f , f               jjjj l , l
-f   f   f   f                    j   j              
+f   f   f   f                    j   j
 f   ffffffhfffff                fjlhljf              aaaaaaaaaaa
 f , ff         f           ffffif.   .fiffff         a      '''a
 f   ff         f           f.             .f         aa       'a
-f   ff  ,   ,  f           g       aha     gaaaaaaaaaaa        a
+f   ff  ,   ,  f           g       e       gaaaaaaaaaaa        a
 f    f         f           f                a         a        a
-f    v         f           f  /    / a  /   v         v        a
-f    f         f           f         v      a         a        a
-f   ff  ,   ,  f           g  E      a     gaaa    aaaa  -  -  a
+f    v         f           f  / e  /  e /   v         v        a
+f    f         f           f                a         a        a
+f   ff  ,   ,  f           g  E    e       gaaa    aaaa  -  -  a
 f   ff         f           f.             .f  aa  a   a        a
 f   ff         f           ffkfff     ffkfff   a  a   a        a
 f , ffffffhfffff                faahaaf        a  aaaaaaa+aa?aaa

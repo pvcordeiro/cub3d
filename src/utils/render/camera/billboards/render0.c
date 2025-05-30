@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 00:47:16 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/28 14:17:02 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/30 18:57:35 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,13 @@ static double	get_screen_x(t_ftm_image *canvas, t_camera *camera,
 	return (screen_x);
 }
 
+static int	get_image_width(t_sprite *sprite)
+{
+	if (!sprite)
+		return (0);
+	return (get_sprite_image(sprite)->size.width);
+}
+
 static void	render_billboard(t_billboard *bill, t_ftm_image *canvas,
 	t_camera *camera)
 {
@@ -72,7 +79,7 @@ static void	render_billboard(t_billboard *bill, t_ftm_image *canvas,
 	new_size = get_size((t_get_size_config){
 			camera, centered_bill_coords,
 			image->size, canvas->size, relative_angle});
-	if (screen_x < 0 || screen_x > canvas->size.width)
+	if (screen_x + get_image_width(bill->sprite) * 0.7 < 0 || screen_x - get_image_width(bill->sprite) * 0.7 > canvas->size.width)
 		return ;
 	render_billboard_slices((t_render_billboard_slices_config){new_size,
 		screen_x, canvas, image, camera, centered_bill_coords});
