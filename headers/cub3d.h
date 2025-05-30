@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/02 17:04:49 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/02 17:23:04 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,7 +182,7 @@ struct s_camera
 struct s_billboard
 {
 	t_entity		entity;
-	t_sprite		*sprite;
+	t_sprite		*sprites[360];
 };
 
 struct s_enemy
