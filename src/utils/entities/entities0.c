@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 20:49:46 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/28 20:04:02 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/01 18:46:39 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,21 @@ void	call_entity_frames(t_list *entities, t_fps *fps)
 		entity = curr->data;
 		if (entity->frame)
 			entity->frame(entity, fps->delta_time);
+		curr = curr->next;
+	}
+}
+
+void	call_entity_keys(t_list *entities, int key, bool down)
+{
+	t_list		*curr;
+	t_entity	*entity;
+
+	curr = entities;
+	while (curr)
+	{
+		entity = curr->data;
+		if (entity->key)
+			entity->key(entity, key, down);
 		curr = curr->next;
 	}
 }

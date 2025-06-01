@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/01 18:30:24 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/01 19:02:21 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,16 @@
 # define PLAYER_FOV 73.5
 # define PLAYER_RAYS W_WIDTH
 # define PLAYER_RAY_SUBRAYS 5
-# define PLAYER_HITBOX_RADIUS 0.23
 # define PLAYER_MOUSE_LOOK_VELOCITY 30.0
 # define PLAYER_KEY_LOOK_VELOCITY 90.0
 # define PLAYER_WALK_VELOCITY 3.0
 # define PLAYER_SPRINT_VELOCITY 5.0
 # define PLAYER_RAY_HIT_ENTITIES_NUMBER 5
 # define PLAYER_MAX_TARGET_DISTANCE 1.2
+# define PLAYER_HITBOX_RADIUS 0.23
+
+// Entity Config
+# define HITBOX_RADIUS 0.8
 
 // Door Config
 # define DOOR_ANIMATION_DURATION 10.0
@@ -126,6 +129,7 @@ enum e_entity_type
 
 struct s_controller
 {
+	void		(*key)(t_entity *entity, int key, bool down);
 	void		(*frame)(t_entity *entity, double delta_time);
 	bool		walking_forward;
 	bool		walking_left;
@@ -145,6 +149,7 @@ struct s_controller
 
 struct s_entity
 {
+	void			(*key)(t_entity *entity, int key, bool down);
 	void			(*frame)(t_entity *entity, double delta_time);
 	void			(*free)(void *this);
 	void			(*action)(t_entity *entity, t_entity *actioner);
@@ -156,6 +161,7 @@ struct s_entity
 	bool			wall;
 	bool			billboard;
 	char			identifier;
+	double			hitbox_radius;
 	t_coords		coords;
 	t_size			size;
 	t_entity_type	type;
@@ -372,6 +378,7 @@ void 		insert_door_frames(t_game *game);
 
 // Entities
 void		call_entity_frames(t_list *entities, t_fps *fps);
+void		call_entity_keys(t_list *entities, int key, bool down);
 bool		entity_x_is_transparent(t_entity *entity, t_direction direction, double x);
 t_player	*player_new(t_game *game, t_ftm_window *window, char identifier);
 t_wall		*wall_new(t_game *game, t_ftm_window *window, char identifier);

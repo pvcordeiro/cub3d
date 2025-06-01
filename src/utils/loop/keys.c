@@ -6,33 +6,11 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:21:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/31 19:55:39 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/01 18:50:02 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "loop.h"
-
-static void	player_keys(t_player *player, int key, bool down)
-{
-	if (!player)
-		return ;
-	if (key == XK_w)
-		player->billboard.entity.controller.walking_forward = down;
-	if (key == XK_a)
-		player->billboard.entity.controller.walking_left = down;
-	if (key == XK_s)
-		player->billboard.entity.controller.walking_backward = down;
-	if (key == XK_d)
-		player->billboard.entity.controller.walking_right = down;
-	if (key == XK_Right)
-		player->billboard.entity.controller.looking_right = down;
-	if (key == XK_Left)
-		player->billboard.entity.controller.looking_left = down;
-	if (key == XK_space)
-		player->billboard.entity.controller.action = down;
-	if (key == XK_Shift_L || key == XK_Shift_R)
-		player->billboard.entity.controller.sprinting = down;
-}
 
 static void	hud_debug_keys(t_hud_debug *hud_debug, int key, bool down)
 {
@@ -72,6 +50,8 @@ static void	hud_debug_keys(t_hud_debug *hud_debug, int key, bool down)
 
 static void	hud_minimap_keys(int key, bool down)
 {
+	if (key == XK_Tab)
+		cub3d()->game.hud.minimap.full = down;
 	if (key == XK_equal && down && cub3d()->game.hud.minimap.zoom_level < 5.0)
 		cub3d()->game.hud.minimap.zoom_level += 0.5;
 	if (key == XK_minus && down && cub3d()->game.hud.minimap.zoom_level > 1.0)
@@ -92,10 +72,8 @@ static void	hud_keys(t_hud *hud, int key, bool down)
 
 void	key_hook(int key, bool down)
 {
-	player_keys(cub3d()->game.player, key, down);
+	call_entity_keys(cub3d()->game.entities, key, down);
 	hud_keys(&cub3d()->game.hud, key, down);
-	if (key == XK_Tab)
-		cub3d()->game.hud.minimap.full = down;
 	if (key == XK_Escape)
 		cub3d_exit(0);
 }
