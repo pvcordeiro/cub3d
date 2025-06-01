@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 00:47:16 by paude-so          #+#    #+#             */
-/*   Updated: 2025/06/01 18:32:14 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/01 18:34:05 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,6 @@ void	render_billboards(t_game *game, t_ftm_image *canvas, t_camera *camera)
 		(void *)cmp_billboards);
 	i = -1;
 	while (game->billboards[++i])
-		render_billboard((t_billboard *)game->billboards[i], canvas, camera);
+		if (game->billboards[i] != camera->entity)
+			render_billboard((t_billboard *)game->billboards[i], canvas, camera);
 }
