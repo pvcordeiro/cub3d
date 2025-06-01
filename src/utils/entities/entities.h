@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 18:04:16 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/28 20:00:19 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/05/31 19:33:40 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,6 @@ void	init_billboard(t_game *game, t_billboard *billboard, char identifier);
 void	init_enemy(t_game *game, t_enemy *enemy, char identifier);
 void	init_wall(t_game *game, t_wall *wall, char identifier);
 void	init_door_e(t_game *game, t_door *door, char identifier, t_ftm_window *window);
+void	init_controller(t_entity *entity, const char *type);
 
 #endif

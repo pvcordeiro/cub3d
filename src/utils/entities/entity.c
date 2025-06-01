@@ -12,6 +12,12 @@
 
 #include "entities.h"
 
+static void	frame(t_entity *entity, double delta_time)
+{
+	if (entity->controller.frame)
+		entity->controller.frame(entity, delta_time);
+}
+
 void	init_entity(t_game *game, t_entity *entity, char identifier)
 {
 	if (!entity)
@@ -22,4 +28,6 @@ void	init_entity(t_game *game, t_entity *entity, char identifier)
 			"HARD"), "FALSE");
 	entity->identifier = identifier;
 	entity->size = (t_size){1, 1};
+	entity->frame = frame;
+	init_controller(entity, hashmap_get_with_identifier(game->map->types, identifier, "CONTROLLER"));
 }

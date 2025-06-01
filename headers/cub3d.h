@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/29 16:23:58 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/01 18:30:24 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,29 @@
 // FPS Config
 # define FPS_LIMIT 1000
 
-typedef struct s_sprite
+typedef struct s_sprite			t_sprite;
+typedef enum e_entity_type		t_entity_type;
+typedef struct s_controller		t_controller;
+typedef struct s_entity			t_entity;
+typedef struct s_camera			t_camera;
+typedef struct s_billboard		t_billboard;
+typedef struct s_enemy			t_enemy;
+typedef struct s_player			t_player;
+typedef struct s_wall			t_wall;
+typedef struct s_cub3d			t_cub3d;
+typedef struct s_game			t_game;
+typedef struct s_fps			t_fps;
+typedef struct s_hud			t_hud;
+typedef struct s_hud_action		t_hud_action;
+typedef struct s_hud_stats		t_hud_stats;
+typedef struct s_hud_debug		t_hud_debug;
+typedef struct s_hud_minimap	t_hud_minimap;
+typedef struct s_environment	t_environment;
+typedef struct s_map			t_map;
+typedef struct s_door			t_door;
+typedef struct s_identifiers	t_identifiers;
+
+struct s_sprite
 {
 	t_list			*images;
 	ssize_t			index;
@@ -90,9 +112,9 @@ typedef struct s_sprite
 	bool			reversed;
 	bool			running;
 	bool			loop;
-}	t_sprite;
+};
 
-typedef enum e_entity_type
+enum e_entity_type
 {
 	ENTITY,
 	ENTITY_PLAYER,
@@ -100,51 +122,11 @@ typedef enum e_entity_type
 	ENTITY_DOOR,
 	ENTITY_ENEMY,
 	ENTITY_BILLBOARD,
-}	t_entity_type;
+};
 
-typedef struct s_entity
+struct s_controller
 {
-	void			(*frame)(struct s_entity *this, double delta_time);
-	void			(*free)(void *this);
-	void			(*action)(struct s_entity *entity,
-			struct s_entity *actioner);
-	bool			transparent;
-	int				max_health;
-	int				health;
-	bool			hard;
-	bool			wall;
-	bool			billboard;
-	char			identifier;
-	t_coords		coords;
-	t_size			size;
-	t_entity_type	type;
-	struct s_entity	*target_entity;
-	t_direction		target_entity_direction;
-}	t_entity;
-
-typedef struct s_camera
-{
-	t_entity		*entity;
-	double			fov;
-	unsigned int	rays;
-	double			*ray_distances;
-}	t_camera;
-
-typedef struct s_billboard
-{
-	t_entity	entity;
-	t_sprite	*sprite;
-}	t_billboard;
-
-typedef struct s_enemy
-{
-	t_billboard	billboard;
-	t_sprite	*idle_sprite;
-}	t_enemy;
-
-typedef struct s_player
-{
-	t_billboard	billboard;
+	void		(*frame)(t_entity *entity, double delta_time);
 	bool		walking_forward;
 	bool		walking_left;
 	bool		walking_backward;
@@ -159,19 +141,64 @@ typedef struct s_player
 	double		key_look_velocity;
 	double		walk_velocity;
 	double		sprint_velocity;
-	t_fta_audio	*collision_sound;
-}	t_player;
+};
 
-typedef struct s_wall
+struct s_entity
+{
+	void			(*frame)(t_entity *entity, double delta_time);
+	void			(*free)(void *this);
+	void			(*action)(t_entity *entity, t_entity *actioner);
+	t_controller	controller;
+	bool			transparent;
+	int				max_health;
+	int				health;
+	bool			hard;
+	bool			wall;
+	bool			billboard;
+	char			identifier;
+	t_coords		coords;
+	t_size			size;
+	t_entity_type	type;
+	t_entity		*target_entity;
+	t_direction		target_entity_direction;
+	t_fta_audio		*collision_sound;
+};
+
+struct s_camera
+{
+	t_entity		*entity;
+	double			fov;
+	unsigned int	rays;
+	double			*ray_distances;
+};
+
+struct s_billboard
+{
+	t_entity		entity;
+	t_sprite		*sprite;
+};
+
+struct s_enemy
+{
+	t_billboard	billboard;
+	t_sprite	*idle_sprite;
+};
+
+struct s_player
+{
+	t_billboard	billboard;
+};
+
+struct s_wall
 {
 	t_entity	entity;
 	t_sprite	*north_sprite;
 	t_sprite	*south_sprite;
 	t_sprite	*west_sprite;
 	t_sprite	*east_sprite;
-}	t_wall;
+};
 
-typedef struct s_door
+struct s_door
 {
 	t_wall		wall;
 	t_direction	direction;
@@ -181,9 +208,9 @@ typedef struct s_door
 	int			last_animation_index;
 	t_fta_audio	*open_sound;
 	t_fta_audio	*close_sound;
-}	t_door;
+};
 
-typedef struct s_identifiers
+struct s_identifiers
 {
 	t_list	*wall;
 	t_list	*player;
@@ -191,9 +218,9 @@ typedef struct s_identifiers
 	t_list	*enemy;
 	t_list	*billboard;
 	t_list	*air;
-}	t_identifiers;
+};
 
-typedef struct s_map
+struct s_map
 {
 	char			*path;
 	t_hashmap		*types;
@@ -201,15 +228,15 @@ typedef struct s_map
 	char			**map;
 	t_size			size;
 	t_identifiers	identifiers;
-}	t_map;
+};
 
-typedef struct s_environment
+struct s_environment
 {
 	unsigned int	floor_color;
 	unsigned int	ceiling_color;
-}	t_environment;
+};
 
-typedef struct s_hud_minimap
+struct s_hud_minimap
 {
 	bool			enabled;
 	t_coords		coords;
@@ -226,9 +253,9 @@ typedef struct s_hud_minimap
 	unsigned int	player_ray_color;
 	unsigned int	player_middle_ray_color;
 	double			zoom_level;
-}	t_hud_minimap;
+};
 
-typedef struct s_hud_debug
+struct s_hud_debug
 {
 	t_ftm_font	*font;
 	char		*fps;
@@ -247,9 +274,9 @@ typedef struct s_hud_debug
 	char		*player_fov;
 	char		*entities_count;
 	bool		enabled;
-}	t_hud_debug;
+};
 
-typedef struct s_hud_stats
+struct s_hud_stats
 {
 	t_ftm_font	*font;
 	t_sprite	*sprite;
@@ -257,15 +284,15 @@ typedef struct s_hud_stats
 	int			states;
 	int			prev_health;
 	bool		enabled;
-}	t_hud_stats;
+};
 
-typedef struct s_hud_action
+struct s_hud_action
 {
 	t_ftm_font	*font;
 	bool		enabled;
-}	t_hud_action;
+};
 
-typedef struct s_hud
+struct s_hud
 {
 	t_entity		*entity;
 	t_hud_debug		debug;
@@ -273,9 +300,9 @@ typedef struct s_hud
 	t_hud_action	action;
 	t_hud_minimap	minimap;
 	bool			enabled;
-}	t_hud;
+};
 
-typedef struct s_fps
+struct s_fps
 {
 	t_time	beginning;
 	t_time	fps_update_time;
@@ -286,9 +313,9 @@ typedef struct s_fps
 	int		fps;
 	int		max;
 	int		min;
-}	t_fps;
+};
 
-typedef struct s_game
+struct s_game
 {
 	t_fps				fps;
 	t_hud				hud;
@@ -303,15 +330,15 @@ typedef struct s_game
 	t_entity			***walls;
 	t_entity			**billboards;
 	t_ftt_thread		*camera_threads[CAMERA_THREADS];
-}	t_game;
+};
 
-typedef struct s_cub3d
+struct s_cub3d
 {
 	t_sprite			placeholder;
 	t_map				*curr_map;
 	t_ftm_window		window;
 	t_game				game;
-}	t_cub3d;
+};
 
 // cub3d
 t_cub3d		*cub3d(void);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:21:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/28 18:04:24 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/05/31 19:55:39 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,21 @@ static void	player_keys(t_player *player, int key, bool down)
 	if (!player)
 		return ;
 	if (key == XK_w)
-		player->walking_forward = down;
+		player->billboard.entity.controller.walking_forward = down;
 	if (key == XK_a)
-		player->walking_left = down;
+		player->billboard.entity.controller.walking_left = down;
 	if (key == XK_s)
-		player->walking_backward = down;
+		player->billboard.entity.controller.walking_backward = down;
 	if (key == XK_d)
-		player->walking_right = down;
+		player->billboard.entity.controller.walking_right = down;
 	if (key == XK_Right)
-		player->looking_right = down;
+		player->billboard.entity.controller.looking_right = down;
 	if (key == XK_Left)
-		player->looking_left = down;
+		player->billboard.entity.controller.looking_left = down;
 	if (key == XK_space)
-		player->action = down;
+		player->billboard.entity.controller.action = down;
 	if (key == XK_Shift_L || key == XK_Shift_R)
-		player->sprinting = down;
+		player->billboard.entity.controller.sprinting = down;
 }
 
 static void	hud_debug_keys(t_hud_debug *hud_debug, int key, bool down)
