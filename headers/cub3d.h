@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/01 19:02:21 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/02 15:06:34 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@
 # define PLAYER_HITBOX_RADIUS 0.23
 
 // Entity Config
-# define HITBOX_RADIUS 0.8
+# define HITBOX_RADIUS 0.23
 
 // Door Config
 # define DOOR_ANIMATION_DURATION 10.0
