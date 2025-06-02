@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/01 19:01:13 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/02 17:02:04 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	init_player(t_game *game, t_player *player, char identifier)
 		player->billboard.entity.coords.yaw = 180.0;
 	player->billboard.entity.max_health = 100;
 	player->billboard.entity.health = player->billboard.entity.max_health;
-	player->billboard.entity.hitbox_radius = PLAYER_HITBOX_RADIUS;
+	player->billboard.entity.size = (t_dsize){PLAYER_WIDTH, PLAYER_HEIGHT};
 	player->billboard.entity.collision_sound = ft_hashmap_get_value(game->sounds, "COLLISION");
 }
 

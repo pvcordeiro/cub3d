@@ -28,9 +28,8 @@ void	init_entity(t_game *game, t_entity *entity, char identifier)
 			"HARD"), "FALSE");
 	entity->collision_sound = hashmap_get_with_identifier(game->sounds, identifier, "COLLISION");
 	entity->identifier = identifier;
-	entity->size = (t_size){1, 1};
+	entity->size = (t_dsize){1, 1};
 	entity->frame = frame;
-	entity->hitbox_radius = HITBOX_RADIUS;
 	init_controller(entity, hashmap_get_with_identifier(game->map->types, identifier, "CONTROLLER"));
 	entity->key = entity->controller.key;
 }

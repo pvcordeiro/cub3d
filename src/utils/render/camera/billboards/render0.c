@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render0.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 00:47:16 by paude-so          #+#    #+#             */
-/*   Updated: 2025/06/01 18:34:05 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/02 16:39:36 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,7 @@ static void	render_billboard(t_billboard *bill, t_ftm_image *canvas,
 	image = get_sprite_image(bill->sprite);
 	if (!image)
 		return ;
-	centered_bill_coords = (t_coords){bill->entity.coords.x + 0.5,
-		bill->entity.coords.y + 0.5, bill->entity.coords.yaw};
+	centered_bill_coords = bill->entity.coords;
 	relative_angle = get_relative_angle(camera->entity->coords,
 			centered_bill_coords);
 	screen_x = get_screen_x(canvas, camera, relative_angle);

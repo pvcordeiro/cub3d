@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moviment.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 18:51:55 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/01 19:03:50 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/02 17:15:28 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ static bool	position_overlaps(t_list *entities, t_entity *entity, t_coords coord
 	{
 		curr_entity = curr->data;
         if (curr_entity != entity && curr_entity->hard
-            && coords.x + entity->hitbox_radius >= curr_entity->coords.x
-            && coords.x - entity->hitbox_radius <= (curr_entity->coords.x + curr_entity->size.width)
-            && coords.y + entity->hitbox_radius >= curr_entity->coords.y
-            && coords.y - entity->hitbox_radius <= (curr_entity->coords.y + curr_entity->size.height))
+            && coords.x + entity->size.width >= curr_entity->coords.x
+            && coords.x - entity->size.width <= (curr_entity->coords.x + curr_entity->size.width)
+            && coords.y + entity->size.height >= curr_entity->coords.y
+            && coords.y - entity->size.height <= (curr_entity->coords.y + curr_entity->size.height))
 			return (fta_play(entity->collision_sound), true);
 		curr = curr->next;
 	}

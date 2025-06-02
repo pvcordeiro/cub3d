@@ -17,6 +17,7 @@ void	init_billboard(t_game *game, t_billboard *billboard, char identifier)
 	init_entity(game, (t_entity *)billboard, identifier);
 	billboard->entity.type = ENTITY_BILLBOARD;
 	billboard->entity.billboard = true;
+	billboard->entity.size = (t_dsize){BILLBOARD_WIDTH, BILLBOARD_HEIGHT};
 	billboard->sprite = hashmap_get_with_identifier(game->sprites, billboard->entity.identifier, "SPRITE");
 }
 

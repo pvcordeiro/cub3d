@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/02 15:06:34 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/02 17:04:49 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,12 @@
 # define PLAYER_SPRINT_VELOCITY 5.0
 # define PLAYER_RAY_HIT_ENTITIES_NUMBER 5
 # define PLAYER_MAX_TARGET_DISTANCE 1.2
-# define PLAYER_HITBOX_RADIUS 0.23
+# define PLAYER_WIDTH 0.23
+# define PLAYER_HEIGHT 0.23
 
-// Entity Config
-# define HITBOX_RADIUS 0.23
+// Billboard Config
+# define BILLBOARD_WIDTH 0.23
+# define BILLBOARD_HEIGHT 0.23
 
 // Door Config
 # define DOOR_ANIMATION_DURATION 10.0
@@ -161,9 +163,8 @@ struct s_entity
 	bool			wall;
 	bool			billboard;
 	char			identifier;
-	double			hitbox_radius;
 	t_coords		coords;
-	t_size			size;
+	t_dsize			size;
 	t_entity_type	type;
 	t_entity		*target_entity;
 	t_direction		target_entity_direction;
