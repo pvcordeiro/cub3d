@@ -40,11 +40,14 @@ STATS_HUD_7_SPRITE_UPDATE_DELAY 2
 
 e_TYPE BILLBOARD
 e_CONTROLLER AI_DUMB
-e_1_SPRITE assets/wolf3d/textures/billboards/soldier/still-front.xpm
+e_8_SPRITE assets/wolf3d/textures/billboards/soldier/still-front.xpm
+e_7_SPRITE assets/wolf3d/textures/billboards/soldier/still-front-right.xpm
+e_6_SPRITE assets/wolf3d/textures/billboards/soldier/still-left.xpm
+e_5_SPRITE assets/wolf3d/textures/billboards/soldier/still-back-left.xpm
+e_4_SPRITE assets/wolf3d/textures/billboards/soldier/still-back.xpm
+e_3_SPRITE assets/wolf3d/textures/billboards/soldier/still-back-right.xpm
 e_2_SPRITE assets/wolf3d/textures/billboards/soldier/still-right.xpm
-e_3_SPRITE assets/wolf3d/textures/billboards/soldier/still-back.xpm
-e_4_SPRITE assets/wolf3d/textures/billboards/soldier/still-back-left.xpm
-e_5_SPRITE assets/wolf3d/textures/billboards/soldier/still-back-right.xpm
+e_1_SPRITE assets/wolf3d/textures/billboards/soldier/still-front-left.xpm
 
 ._TYPE BILLBOARD
 ._SPRITE assets/wolf3d/textures/billboards/blue-plant.xpm
@@ -178,9 +181,9 @@ f , ff         f           ffffif.   .fiffff         a      '''a
 f   ff         f           f.             .f         aa       'a
 f   ff  ,   ,  f           g       e       gaaaaaaaaaaa        a
 f    f         f           f                a         a        a
-f    v         f           f  /    /    /   v         v        a
+f    v         f           f  / e  /  e /   v         v        a
 f    f         f           f                a         a        a
-f   ff  ,   ,  f           g  E            gaaa    aaaa  -  -  a
+f   ff  ,   ,  f           g  E    e       gaaa    aaaa  -  -  a
 f   ff         f           f.             .f  aa  a   a        a
 f   ff         f           ffkfff     ffkfff   a  a   a        a
 f , ffffffhfffff                faahaaf        a  aaaaaaa+aa?aaa

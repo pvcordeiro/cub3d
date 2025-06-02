@@ -25,23 +25,26 @@ static	int count_sprite(t_hashmap *sprites, char identifier)
 
 static void	fill_sprites(t_billboard *billboard, t_hashmap *game_sprites, char identifier)
 {
-	int	x;
-	int	y;
-	int	count;
-	int	size;
+    int	angle;
+    int	count;
+    int	size;
+    int	sprite_index;
+    int	offset;
 
-	count = count_sprite(game_sprites, identifier);
-	if (!count)
-		return ;
-	size = 360 / count;
-	x = 0;
-	while (x < count * size)
+    count = count_sprite(game_sprites, identifier);
+    if (!count)
+        return ;
+    size = 360 / count;
+    offset = size / 2;
+    angle = -1;
+	while (++angle <= 360)
 	{
-		y = -1;
-		while (++y < size)
-			billboard->sprites[x + y] = hashmap_get_with_identifier(game_sprites, identifier, ft_strf("%d_SPRITE", (x / size) + 1));
-		x += size;
-	}
+        sprite_index = (ft_normalize_angle(angle - offset)) / size + 1;
+        if (sprite_index > count)
+            sprite_index = 1;
+        billboard->sprites[angle] = hashmap_get_with_identifier(
+            game_sprites, identifier, ft_strf("%d_SPRITE", sprite_index));
+    }
 }
 
 void	init_billboard(t_game *game, t_billboard *billboard, char identifier)
