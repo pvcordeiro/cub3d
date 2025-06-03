@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player.c                                           :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/02 17:02:04 by paude-so         ###   ########.fr       */
+/*   Created: 2025/06/03 00:50:48 by afpachec          #+#    #+#             */
+/*   Updated: 2025/06/03 01:22:03 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "player.h"
 
-void	init_player(t_game *game, t_player *player, char identifier)
+void	init_player(t_game *game, t_ftm_window *window, t_player *player, char identifier)
 {
 	ft_hashmap_set(game->map->types, "N_CONTROLLER", "PLAYER", NULL);
 	ft_hashmap_set(game->map->types, "S_CONTROLLER", "PLAYER", NULL);
 	ft_hashmap_set(game->map->types, "W_CONTROLLER", "PLAYER", NULL);
 	ft_hashmap_set(game->map->types, "E_CONTROLLER", "PLAYER", NULL);
-	init_billboard(game, (t_billboard *)player, identifier);
+	init_billboard(game, window, (t_billboard *)player, identifier);
 	player->billboard.entity.type = ENTITY_PLAYER;
+	player->billboard.entity.frame = player_frame;
+	player->billboard.entity.clear = clear_player;
+	player->billboard.entity.action = player_action;
 	if (identifier == 'N')
 		player->billboard.entity.coords.yaw = 270.0;
 	else if (identifier == 'S')
@@ -36,11 +39,9 @@ t_player	*player_new(t_game *game, t_ftm_window *window, char identifier)
 {
 	t_player	*player;
 
-	(void)window;
 	player = ft_calloc(1, sizeof(t_player));
 	if (!player)
 		return (NULL);
-	init_player(game, player, identifier);
-	player->billboard.entity.free = free;
+	init_player(game, window, player, identifier);
 	return (player);
 }

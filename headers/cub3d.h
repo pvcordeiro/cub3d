@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/02 17:23:04 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/03 01:42:50 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ typedef struct s_controller		t_controller;
 typedef struct s_entity			t_entity;
 typedef struct s_camera			t_camera;
 typedef struct s_billboard		t_billboard;
-typedef struct s_enemy			t_enemy;
 typedef struct s_player			t_player;
 typedef struct s_wall			t_wall;
 typedef struct s_cub3d			t_cub3d;
@@ -125,7 +124,6 @@ enum e_entity_type
 	ENTITY_PLAYER,
 	ENTITY_WALL,
 	ENTITY_DOOR,
-	ENTITY_ENEMY,
 	ENTITY_BILLBOARD,
 };
 
@@ -151,9 +149,8 @@ struct s_controller
 
 struct s_entity
 {
-	void			(*key)(t_entity *entity, int key, bool down);
 	void			(*frame)(t_entity *entity, double delta_time);
-	void			(*free)(void *this);
+	void			(*clear)(void *this);
 	void			(*action)(t_entity *entity, t_entity *actioner);
 	t_controller	controller;
 	bool			transparent;
@@ -161,6 +158,7 @@ struct s_entity
 	int				health;
 	bool			hard;
 	bool			wall;
+	bool			actionable;
 	bool			billboard;
 	char			identifier;
 	t_coords		coords;
@@ -185,12 +183,6 @@ struct s_billboard
 	t_sprite		*sprites[360];
 };
 
-struct s_enemy
-{
-	t_billboard	billboard;
-	t_sprite	*idle_sprite;
-};
-
 struct s_player
 {
 	t_billboard	billboard;
@@ -211,6 +203,7 @@ struct s_door
 	t_direction	direction;
 	t_sprite	opening_sprite;
 	t_sprite	*door_sprite;
+	t_sprite	*door_sides_sprite;
 	bool		opened;
 	int			last_animation_index;
 	t_fta_audio	*open_sound;
@@ -222,7 +215,6 @@ struct s_identifiers
 	t_list	*wall;
 	t_list	*player;
 	t_list	*door;
-	t_list	*enemy;
 	t_list	*billboard;
 	t_list	*air;
 };
@@ -375,16 +367,16 @@ void		free_sprite(void *data);
 void		clear_sprite(void *data);
 void		init_sprite(t_sprite *sprite, t_list *images, t_time update_delay);
 t_sprite	*sprite_new(t_list *images, t_time update_delay);
-void 		insert_door_frames(t_game *game);
 
 // Entities
+void		free_entity(void *data);
 void		call_entity_frames(t_list *entities, t_fps *fps);
 void		call_entity_keys(t_list *entities, int key, bool down);
 bool		entity_x_is_transparent(t_entity *entity, t_direction direction, double x);
 t_player	*player_new(t_game *game, t_ftm_window *window, char identifier);
 t_wall		*wall_new(t_game *game, t_ftm_window *window, char identifier);
 t_door		*door_new_e(t_game *game, t_ftm_window *window, char identifier);
-t_enemy		*enemy_new(t_game *game, t_ftm_window *window, char identifier);
 t_billboard	*billboard_new(t_game *game, t_ftm_window *window, char identifier);
+t_entity	*entity_new(t_game *game, t_ftm_window *window, char identifier);
 
 #endif

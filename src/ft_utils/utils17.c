@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 13:45:53 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/28 00:37:02 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/03 00:38:12 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,17 @@ void	ft_strvorder(char **strv, const void *data, bool (*cmp)(const void
 			strv[j] = tmp;
 		}
 	}
+}
+
+t_direction	ft_direction_from_str(const char *str)
+{
+	if (ft_strequal(str, "NORTH"))
+		return (NORTH);
+	else if (ft_strequal(str, "SOUTH"))
+		return (SOUTH);
+	else if (ft_strequal(str, "EAST"))
+		return (EAST);
+	else if (ft_strequal(str, "WEST"))
+		return (WEST);
+	return (-1);
 }

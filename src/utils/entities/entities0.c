@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 20:49:46 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/01 18:46:39 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/03 01:25:44 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ void	call_entity_frames(t_list *entities, t_fps *fps)
 	while (curr)
 	{
 		entity = curr->data;
-		if (entity->frame)
-			entity->frame(entity, fps->delta_time);
+		entity->frame(entity, fps->delta_time);
 		curr = curr->next;
 	}
 }
@@ -58,8 +57,8 @@ void	call_entity_keys(t_list *entities, int key, bool down)
 	while (curr)
 	{
 		entity = curr->data;
-		if (entity->key)
-			entity->key(entity, key, down);
+		if (entity->controller.key)
+			entity->controller.key(entity, key, down);
 		curr = curr->next;
 	}
 }
@@ -91,4 +90,12 @@ bool	entity_x_is_transparent(t_entity *entity, t_direction direction, double x)
 	if (!pixel)
 		return (true);
 	return (!(*pixel >> 24));
+}
+
+void	free_entity(void *data)
+{
+	if (!data)
+		return ;
+	((t_entity *)data)->clear(data);
+	free(data);
 }

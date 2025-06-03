@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 12:15:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/06/02 16:22:43 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/03 00:37:55 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,5 +184,8 @@ double					ft_degrees(double angle_radians);
 double					ft_angle_distance(t_coords a, t_coords b);
 bool					ft_is_directory(const char *path);
 char					*ft_clean_path(const char *path);
+void					ft_strvorder(char **strv, const void *data, bool (*cmp)(const void
+							*data, const char *, const char *));
+t_direction				ft_direction_from_str(const char *str);
 
 #endif

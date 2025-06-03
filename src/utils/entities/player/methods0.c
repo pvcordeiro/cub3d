@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   enemy.c                                             :+:      :+:    :+:   */
+/*   methods0.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/22 14:37:18 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/03 01:22:08 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "entities.h"
+#include "player.h"
 
-void	init_enemy(t_game *game, t_enemy *enemy, char identifier)
+void	player_frame(t_entity *entity, double delta_time)
 {
-	init_billboard(game, (t_billboard *)enemy, identifier);
-	enemy->billboard.entity.type = ENTITY_ENEMY;
-	enemy->idle_sprite = hashmap_get_with_identifier(game->sprites, identifier, "IDLE");
+	billboard_frame(entity, delta_time);
 }
 
-t_enemy	*enemy_new(t_game *game, t_ftm_window *window, char identifier)
+void	clear_player(void *player)
 {
-	t_enemy	*enemy;
+	clear_billboard(player);
+}
 
-	(void)window;
-	enemy = ft_calloc(1, sizeof(t_enemy));
-	if (!enemy)
-		return (NULL);
-	init_enemy(game, enemy, identifier);
-	enemy->billboard.entity.free = free;
-	return (enemy);
+void	player_action(t_entity *entity, t_entity *actioner)
+{
+	billboard_action(entity, actioner);
 }

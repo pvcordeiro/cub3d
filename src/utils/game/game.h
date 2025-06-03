@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:16:32 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/27 17:45:30 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/02 23:47:13 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ void	init_billboards_e(t_game *game);
 void	init_fps(t_game *game);
 void	set_sprite_configs(t_game *game);
 void	init_fonts_e(t_ftm_window *window, t_game *game);
+void	insert_door_frames(t_game *game);
 
 #endif

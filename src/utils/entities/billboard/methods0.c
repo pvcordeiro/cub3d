@@ -1,18 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player.h                                           :+:      :+:    :+:   */
+/*   methods0.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/03 00:50:57 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/03 01:04:29 by afpachec         ###   ########.fr       */
+/*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
+/*   Updated: 2025/06/03 01:21:32 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PLAYER_H
-# define PLAYER_H
+#include "billboard.h"
 
-# include "../entities.h"
+void	billboard_frame(t_entity *entity, double delta_time)
+{
+	entity_frame(entity, delta_time);
+}
 
-#endif
+void	clear_billboard(void *billboard)
+{
+	clear_entity(billboard);
+}
+
+void	billboard_action(t_entity *entity, t_entity *actioner)
+{
+	entity_action(entity, actioner);
+}

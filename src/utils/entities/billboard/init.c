@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   billboard.c                                             :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/22 14:37:18 by afpachec         ###   ########.fr       */
+/*   Created: 2025/06/03 00:50:48 by afpachec          #+#    #+#             */
+/*   Updated: 2025/06/03 01:43:53 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "entities.h"
+#include "billboard.h"
 
 static	int count_sprite(t_hashmap *sprites, char identifier)
 {
@@ -47,13 +47,16 @@ static void	fill_sprites(t_billboard *billboard, t_hashmap *game_sprites, char i
     }
 }
 
-void	init_billboard(t_game *game, t_billboard *billboard, char identifier)
+void	init_billboard(t_game *game, t_ftm_window *window, t_billboard *billboard, char identifier)
 {
 	int	i;
 
 	i = -1;
-	init_entity(game, (t_entity *)billboard, identifier);
+	init_entity(game, window, (t_entity *)billboard, identifier);
 	billboard->entity.type = ENTITY_BILLBOARD;
+	billboard->entity.frame = billboard_frame;
+	billboard->entity.clear = clear_billboard;
+	billboard->entity.action = billboard_action;
 	billboard->entity.billboard = true;
 	billboard->entity.size = (t_dsize){BILLBOARD_WIDTH, BILLBOARD_HEIGHT};
 	if (hashmap_get_with_identifier(game->sprites, billboard->entity.identifier, "SPRITE"))
@@ -70,11 +73,9 @@ t_billboard	*billboard_new(t_game *game, t_ftm_window *window, char identifier)
 {
 	t_billboard	*billboard;
 
-	(void)window;
 	billboard = ft_calloc(1, sizeof(t_billboard));
 	if (!billboard)
 		return (NULL);
-	init_billboard(game, billboard, identifier);
-	billboard->entity.free = free;
+	init_billboard(game, window, billboard, identifier);
 	return (billboard);
 }

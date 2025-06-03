@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 02:27:23 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/27 17:43:41 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/03 01:25:30 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	render_action(t_game *game, t_ftm_image *canvas)
 
 	if (!game->player
 		|| !game->player->billboard.entity.target_entity
-		|| !game->player->billboard.entity.target_entity->action)
+		|| !game->player->billboard.entity.target_entity->actionable)
 		return ;
 	text_config = (t_ftm_text_config){
 		.text = "Press SPACE to interact",

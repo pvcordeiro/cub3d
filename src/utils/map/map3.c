@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 20:52:20 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/23 17:23:49 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/03 00:31:21 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static bool	identifier_already_defined(t_identifiers *identifiers, char *identif
 		|| ft_list_any(identifiers->player, (void *)ft_strequal, identifier)
 		|| ft_list_any(identifiers->door, (void *)ft_strequal, identifier)
 		|| ft_list_any(identifiers->air, (void *)ft_strequal, identifier)
-		|| ft_list_any(identifiers->enemy, (void *)ft_strequal, identifier)
 		|| ft_list_any(identifiers->billboard, (void *)ft_strequal, identifier));
 }
 
@@ -31,8 +30,6 @@ static void	add_identifier_e(t_identifiers *identifiers, char *identifier, char 
 		ft_list_add(&identifiers->player, ft_strdup(identifier), free);
 	else if (ft_strequal(type, "DOOR"))
 		ft_list_add(&identifiers->door, ft_strdup(identifier), free);
-	else if (ft_strequal(type, "ENEMY"))
-		ft_list_add(&identifiers->enemy, ft_strdup(identifier), free);
 	else if (ft_strequal(type, "BILLBOARD"))
 		ft_list_add(&identifiers->billboard, ft_strdup(identifier), free);
 	else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game3.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 23:10:00 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/02 17:08:40 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/03 01:13:45 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void	create_entity_e(t_game *game, t_ftm_window *window, char c, t_size p
 		entity->coords.x += 0.5 - entity->size.width * 0.5;
  		entity->coords.y += 0.5 - entity->size.height * 0.5;
 	}
-	ft_list_add(&game->entities, entity, entity->free);
+	ft_list_add(&game->entities, entity, free_entity);
 	if (entity->type == ENTITY_PLAYER)
 		game->player = (t_player *)entity;
 	fte_set(ERROR_NO_ERROR);
