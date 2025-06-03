@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 15:31:27 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/27 20:35:47 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/03 21:32:35 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ char	*ft_strf(char *format, ...)
 
 double	ft_atof(const char *str)
 {
-	// FAZER
+	if (!str)
+		return (0.0);
 	return (atof(str));
 }

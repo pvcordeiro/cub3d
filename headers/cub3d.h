@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/03 17:32:02 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/03 21:38:58 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,8 @@ typedef struct s_environment	t_environment;
 typedef struct s_map			t_map;
 typedef struct s_door			t_door;
 typedef struct s_identifiers	t_identifiers;
+typedef struct s_item			t_item;
+typedef struct s_food			t_food;
 
 struct s_sprite
 {
@@ -116,6 +118,23 @@ struct s_sprite
 	bool			reversed;
 	bool			running;
 	bool			loop;
+};
+
+struct s_item
+{
+	void			(*use)(t_item *item, t_entity *user);
+	char			identifier;
+	char			*name;
+	char			*description;
+	bool			food;
+	t_sprite		*icon_sprite;
+	t_sprite		*screen_sprite;
+};
+
+struct s_food
+{
+	t_item	item;
+	int		health;
 };
 
 enum e_entity_type
