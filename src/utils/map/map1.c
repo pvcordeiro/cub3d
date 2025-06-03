@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map1.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 08:42:58 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/21 14:46:14 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/03 17:38:49 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,17 +64,21 @@ t_map	*parse_map_e(char *path)
 	return (map);
 }
 
-void	clear_map(void *map)
+void	clear_map(void *data)
 {
+	t_map	*map;
+
+	map = data;
 	if (!map)
 		return ;
-	ft_strvfree(((t_map *)map)->raw);
-	ft_hashmap_destroy(((t_map *)map)->types);
-	ft_list_destroy(&((t_map *)map)->identifiers.air);
-	ft_list_destroy(&((t_map *)map)->identifiers.door);
-	ft_list_destroy(&((t_map *)map)->identifiers.player);
-	ft_list_destroy(&((t_map *)map)->identifiers.wall);
-	free(((t_map *)map)->path);
+	ft_strvfree(map->raw);
+	ft_hashmap_destroy(map->types);
+	ft_list_destroy(&map->identifiers.air);
+	ft_list_destroy(&map->identifiers.billboard);
+	ft_list_destroy(&map->identifiers.door);
+	ft_list_destroy(&map->identifiers.player);
+	ft_list_destroy(&map->identifiers.wall);
+	free(map->path);
 }
 
 void	free_map(t_map *map)

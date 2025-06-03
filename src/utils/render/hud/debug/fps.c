@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fps.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 23:04:16 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/27 20:08:57 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/03 18:07:06 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	set_fps(t_game *game)
 	if (fps.fps == last_fps)
 		return ;
 	last_fps = fps.fps;
-	free(game->hud.debug.fps);
+	(free(game->hud.debug.fps), free(game->hud.debug.fps_min),
+		free(game->hud.debug.fps_max), free(game->hud.debug.fps_limit));
 	game->hud.debug.fps = ft_strf("%d", fps.fps);
 	game->hud.debug.fps_min = ft_strf("Min: %d", fps.min);
 	game->hud.debug.fps_max = ft_strf("Max: %d", fps.max);

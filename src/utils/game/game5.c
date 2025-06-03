@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game5.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 17:18:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/27 20:10:06 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/03 18:10:28 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static void	set_audio_configs_e(t_game *game)
 		{
 			key = ft_strndup(curr->key, ft_strlen(curr->key) - 13);
 			audio = ft_hashmap_get_value(game->sounds, key);
+			free(key);
 			if (!audio)
 				return (fte_set(ERROR_AUDIO_CONFIG_ON_INVALID));
 			fta_audio_config(audio, (t_fta_audio_config){ft_atof(curr->value), audio->config.loop});
@@ -39,6 +40,7 @@ static void	set_audio_configs_e(t_game *game)
 		{
 			key = ft_strndup(curr->key, ft_strlen(curr->key) - 11);
 			audio = ft_hashmap_get_value(game->sounds, key);
+			free(key);
 			if (!audio)
 				return (fte_set(ERROR_AUDIO_CONFIG_ON_INVALID));
 			fta_audio_config(audio, (t_fta_audio_config){audio->config.volume, ft_strequal(curr->value, "TRUE")});

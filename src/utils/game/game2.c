@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:20:04 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/28 00:22:38 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/03 17:57:04 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,11 @@ void	init_sprites_e(t_ftm_window *window, t_game *game)
 				continue ;
 			image = ftm_image_from_file(window, paths[i]);
 			if (!image)
-				return (free(paths[i]), fte_set(ERROR_LOAD_SPRITE));
+				return (ft_strvfree(paths), fte_set(ERROR_LOAD_SPRITE));
 			ft_list_add(&((t_sprite *)ft_hashmap_get_value(game->sprites,
 						curr->key))->images, image, ftm_free_image);
 		}
+		ft_strvfree(paths);
 	}
 	set_sprite_configs(game);
 }

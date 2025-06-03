@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game6.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 20:30:03 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/23 21:00:50 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/03 18:03:06 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ void	init_walls_e(t_game *game)
 	size_t		i;
 
 	fte_set(ERROR_NO_ERROR);
-	game->walls = ft_calloc(game->map->size.height, sizeof(t_entity **));
+	game->walls = ft_calloc(game->map->size.height + 1, sizeof(t_entity **));
 	if (!game->walls)
 		return (fte_set(ERROR_WALLS_INIT));
 	i = -1;
 	while (++i < (size_t)game->map->size.height)
 	{
-		game->walls[i] = ft_calloc(game->map->size.width, sizeof(t_entity *));
+		game->walls[i] = ft_calloc(game->map->size.width + 1, sizeof(t_entity *));
 		if (!game->walls[i])
 			return (fte_set(ERROR_WALLS_INIT));
 	}

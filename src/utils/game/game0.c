@@ -6,20 +6,53 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:27:08 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/03 16:36:18 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/03 18:10:56 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game.h"
 
-void	clear_game(void *game)
+void	free_hud_debug_strings(void *data)
 {
+	t_hud_debug	*debug;
+
+	debug = data;
+	if (!debug)
+		return ;
+	free(debug->fps);
+	free(debug->fps_min);
+	free(debug->fps_max);
+	free(debug->fps_limit);
+	free(debug->target_x);
+	free(debug->target_y);
+	free(debug->target_yaw);
+	free(debug->target_type);
+	free(debug->target_id);
+	free(debug->player_x);
+	free(debug->player_y);
+	free(debug->player_health);
+	free(debug->player_yaw);
+	free(debug->player_fov);
+	free(debug->entities_count);
+}
+
+void	clear_game(void *data)
+{
+	t_game	*game;
+
+	game = data;
 	if (!game)
 		return ;
-	ft_list_destroy(&((t_game *)game)->entities);
-	ft_hashmap_destroy(((t_game *)game)->sprites);
+	ft_list_destroy(&game->entities);
+	ft_hashmap_destroy(game->sprites);
 	kill_threads(game);
-	ft_hashmap_destroy(((t_game *)game)->fonts);
+	ft_hashmap_destroy(game->fonts);
+	ft_hashmap_destroy(game->sounds);
+	free_hud_debug_strings(&game->hud.debug);
+	ft_list_destroy(&game->hud.stats.states_list);
+	ft_strvfree((void *)game->walls);
+	free(game->camera.ray_distances);
+	free(game->billboards);
 	ft_bzero(game, sizeof(t_game));
 }
 

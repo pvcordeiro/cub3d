@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 00:50:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/03 17:32:10 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/03 18:04:48 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,12 @@ static	int count_sprite(t_hashmap *sprites, char identifier)
 
 static void	fill_sprites(t_billboard *billboard, t_hashmap *game_sprites, char identifier)
 {
-    int	angle;
-    int	count;
-    int	size;
-    int	sprite_index;
-    int	offset;
+    int		angle;
+    int		count;
+    int		size;
+    int		sprite_index;
+	char	*keykeykey;
+    int		offset;
 
     count = count_sprite(game_sprites, identifier);
     if (!count)
@@ -50,8 +51,10 @@ static void	fill_sprites(t_billboard *billboard, t_hashmap *game_sprites, char i
         sprite_index = (ft_normalize_angle(angle - offset)) / size + 1;
         if (sprite_index > count)
             sprite_index = 1;
+		keykeykey = ft_strf("%d_SPRITE", sprite_index);
         billboard->sprites[angle] = hashmap_get_with_identifier(
-            game_sprites, identifier, ft_strf("%d_SPRITE", sprite_index));
+            game_sprites, identifier, keykeykey);
+		free(keykeykey);
     }
 }
 

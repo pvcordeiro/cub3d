@@ -6,13 +6,14 @@
 #    By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/26 17:16:21 by afpachec          #+#    #+#              #
-#    Updated: 2025/05/28 13:49:59 by paude-so         ###   ########.fr        #
+#    Updated: 2025/06/03 18:12:08 by paude-so         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3d
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -O3 -g -std=c99
+# CFLAGS = -Wall -Wextra -Werror -O3 -g -std=c99 -fsanitize=address -fno-omit-frame-pointer
 INCLUDES = -I headers
 LIBS = -L lib
 LDLIBS = -lmlx -lX11 -lXext -lm -ldl -lpthread
@@ -72,7 +73,7 @@ dev: $(NAME)
 run: clean $(NAME)
 	@for map in $(MAPS); do echo "Running with $$map" && ./$(NAME) $$map; done
 
-val: re
+val: clean $(NAME)
 	@valgrind --show-leak-kinds=all --leak-check=full --track-fds=all ./$(NAME) maps/subject.cub
 
 update-wolf3d-assets:
