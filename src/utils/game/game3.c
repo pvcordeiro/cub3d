@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game3.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 23:10:00 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/03 01:13:45 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/03 17:17:57 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,12 @@
 static bool	cmp_str_to_char(void *str, void *c)
 {
 	bool	result;
-	char	*c_str;
+	char	c_str[2];
 
-	c_str = ft_strndup(c, 1);
+	c_str[0] = *(char *)c;
+	c_str[1] = '\0';
 	result = ft_strequal(str, c_str);
-	return (free(c_str), result);
+	return (result);
 }
 
 static void	*get_creator_e(t_identifiers *identifiers, char identifier)

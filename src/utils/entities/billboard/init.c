@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 00:50:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/03 01:43:53 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/03 17:32:10 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,21 @@
 
 static	int count_sprite(t_hashmap *sprites, char identifier)
 {
-	int	i;
+	int		i;
+	char	*keykeykey;
+	void	*pagman;
 
 	i = 1;
-	while (hashmap_get_with_identifier(sprites, identifier, ft_strf("%d_SPRITE", i)))
+	while (true)
+	{
+		keykeykey = ft_strf("%d_SPRITE", i);
+		pagman = hashmap_get_with_identifier(sprites, identifier, keykeykey);
+		free(keykeykey);
+		if (!pagman)
+			break ;
 		++i;
+	}
 	return (i - 1);
-
 }
 
 static void	fill_sprites(t_billboard *billboard, t_hashmap *game_sprites, char identifier)
