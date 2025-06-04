@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:16:16 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/28 18:01:19 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/04 01:23:19 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ void	init_enviroment_e(t_game *game)
 	char	*ceiling;
 	char	*flooring;
 
-	fte_set(ERROR_NO_ERROR);
+	fte_set(NULL);
 	ceiling = ft_hashmap_get_value(game->map->types, "C");
 	flooring = ft_hashmap_get_value(game->map->types, "F");
 	if (!ceiling || !flooring)
-		return (fte_set(ERROR_CEILING_OR_FLOORING_UNDEFINED));
+		return (fte_set("ceiling or flooring missing"));
 	game->environment.ceiling_color = ft_rgb_to_unsigned(ceiling, ",");
 	game->environment.floor_color = ft_rgb_to_unsigned(flooring, ",");
 }
@@ -62,6 +62,6 @@ void	init_font_e(t_ftm_window *window, t_game *game)
 		return ;
 	font = ftm_font_new(window, DEFAULT_FONT_PATH);
 	if (!font)
-		fte_set(ERROR_DEFAULT_FONT_NOT_FOUND);
+		fte_set("default font not found :(");
 	ft_hashmap_set(game->fonts, "DEFAULT", font, ftm_free_font);
 }

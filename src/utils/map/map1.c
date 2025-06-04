@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map1.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 08:42:58 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/03 17:38:49 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/04 01:25:36 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	read_map_raw_lines_e(t_map *map)
 
 	fd = open(map->path, O_RDONLY);
 	if (fd < 0)
-		return (fte_set(ERROR_MAP_OPEN));
+		return (fte_set("map open"));
 	while (1)
 	{
 		line = ft_get_next_line(fd);
@@ -36,21 +36,21 @@ static void	read_map_raw_lines_e(t_map *map)
 	}
 	ft_close(fd);
 	if (!map->raw)
-		return (fte_set(ERROR_MAP_READ));
-	fte_set(ERROR_NO_ERROR);
+		return (fte_set("map read"));
+	fte_set(NULL);
 }
 
 t_map	*parse_map_e(char *path)
 {
 	t_map	*map;
 
-	fte_set(ERROR_NO_ERROR);
+	fte_set(NULL);
 	map = ft_calloc(1, sizeof(t_map));
 	if (!map)
-		return (fte_set(ERROR_MAP_ALLOC), NULL);
+		return (fte_set("map alloc"), NULL);
 	map->path = ft_strdup(path);
 	if (!map->path || !ft_str_endswith(map->path, ".cub"))
-		return (fte_set(ERROR_INVALID_MAP), NULL);
+		return (fte_set("invalid map"), NULL);
 	read_map_raw_lines_e(map);
 	if (fte_flagged())
 		return (clear_map(map), NULL);

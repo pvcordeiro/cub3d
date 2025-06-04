@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 23:10:00 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/03 22:52:38 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/04 01:22:35 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	create_entity_e(t_game *game, t_ftm_window *window, char c, t_size p
 	t_entity_creator	creator;
 	t_entity			*entity;
 
-	fte_set(ERROR_NO_ERROR);
+	fte_set(NULL);
 	entity = NULL;
 	creator = get_entity_creator(&game->map->identifiers, c);
 	if (fte_flagged() || !creator)
@@ -26,7 +26,7 @@ static void	create_entity_e(t_game *game, t_ftm_window *window, char c, t_size p
 	if (fte_flagged())
 		return ;
 	if (!entity)
-		return (fte_set(ERROR_ENTITY_CREATION));
+		return (fte_set("entity creation"));
 	entity->identifier = c;
 	entity->coords.x = position.width;
 	entity->coords.y = position.height;
@@ -38,7 +38,7 @@ static void	create_entity_e(t_game *game, t_ftm_window *window, char c, t_size p
 	ft_list_add(&game->entities, entity, free_entity);
 	if (entity->type == ENTITY_PLAYER)
 		game->player = (t_player *)entity;
-	fte_set(ERROR_NO_ERROR);
+	fte_set(NULL);
 }
 
 void	init_entities_e(t_game *game, t_ftm_window *window)

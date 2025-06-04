@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 00:50:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/03 01:25:13 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/04 01:26:24 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	init_animation_sprites_e(t_door *door, t_ftm_window *window)
 	t_ftm_pitc_config	config;
 	int					i;
 
-	fte_set(ERROR_NO_ERROR);
+	fte_set(NULL);
 	ft_bzero(&config, sizeof(t_ftm_pitc_config));
 	door_image = door->door_sprite->images->data;
 	init_sprite(&door->opening_sprite, NULL, DOOR_ANIMATION_DURATION);
@@ -28,7 +28,7 @@ static void	init_animation_sprites_e(t_door *door, t_ftm_window *window)
 	{
 		frame = ftm_image_new(window, door_image->size);
 		if (!frame)
-			return (fte_set(ERROR_INIT_DOOR_FRAME));
+			return (fte_set("init door frame"));
 		config.coords = (t_coords){(frame->size.width / DOOR_ANIMATION_FRAMES) * i, 0, 0};
 		ftm_put_image_to_canvas(frame, door_image, config);
 		ft_list_add(&door->opening_sprite.images, frame, ftm_free_image);
@@ -54,7 +54,7 @@ static void	set_sprites(t_door *door)
 
 void	init_door_e(t_game *game, t_ftm_window *window, t_door *door, char identifier)
 {
-	fte_set(ERROR_NO_ERROR);
+	fte_set(NULL);
 	init_wall(game, window, &door->wall, identifier);
 	door->wall.entity.type = ENTITY_DOOR;
 	door->wall.entity.frame = door_frame;
@@ -63,11 +63,11 @@ void	init_door_e(t_game *game, t_ftm_window *window, t_door *door, char identifi
 	door->wall.entity.actionable = true;
 	door->direction = ft_direction_from_str(hashmap_get_with_identifier(game->map->types, identifier, "DIRECTION"));
 	if (door->direction == (t_direction)-1)
-		return (fte_set(ERROR_DOOR_DIRECTION_MISSING));
+		return (fte_set("door direction missing"));
 	door->door_sprite = hashmap_get_with_identifier(game->sprites, identifier, "DOOR_SPRITE");
 	door->door_sides_sprite = hashmap_get_with_identifier(game->sprites, identifier, "SIDES_SPRITE");
 	if (!door->door_sprite)
-		return (fte_set(ERROR_DOOR_SPRITE_MISSING));
+		return (fte_set("door sprite missing"));
 	door->open_sound = hashmap_get_with_identifier(game->sounds, identifier, "OPEN");
 	door->close_sound = hashmap_get_with_identifier(game->sounds, identifier, "CLOSE");
 	set_sprites(door);
@@ -78,7 +78,7 @@ t_door	*door_new_e(t_game *game, t_ftm_window *window, char identifier)
 {
 	t_door	*door;
 
-	fte_set(ERROR_NO_ERROR);
+	fte_set(NULL);
 	door = ft_calloc(1, sizeof(t_door));
 	if (!door)
 		return (NULL);

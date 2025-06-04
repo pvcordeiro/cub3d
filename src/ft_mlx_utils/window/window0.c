@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window0.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:58:13 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/17 11:33:46 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/04 01:26:57 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 void	ftm_create_window_e(t_ftm_window *window, t_size size, char *title)
 {
-	fte_set(ERROR_NO_ERROR);
+	fte_set(NULL);
 	window->display = mlx_init();
 	if (!window->display)
-		return (fte_set(ERROR_INIT_MLX));
+		return (fte_set("init mlx"));
 	window->win = mlx_new_window(window->display,
 			size.width, size.height, title);
 	if (!window->win)
 		return (mlx_destroy_display(window->display),
-			fte_set(ERROR_INIT_WINDOW));
+			fte_set("init window"));
 	window->canvas = ftm_image_new(window, size);
 	if (!window->canvas)
 		return (mlx_destroy_window(window->display, window->win),
-			mlx_destroy_display(window->display), fte_set(ERROR_INIT_CANVAS));
+			mlx_destroy_display(window->display), fte_set("init canvas"));
 	window->size = size;
 }
 

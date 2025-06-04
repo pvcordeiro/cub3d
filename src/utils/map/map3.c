@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 20:52:20 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/04 00:42:58 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/04 01:26:02 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static bool	identifier_already_defined(t_identifiers *identifiers, char *identif
 
 static void	add_identifier_e(t_identifiers *identifiers, char *identifier, char *type)
 {
-	fte_set(ERROR_NO_ERROR);
+	fte_set(NULL);
 	if (ft_strequal(type, "WALL"))
 		ft_list_add(&identifiers->wall, ft_strdup(identifier), free);
 	else if (ft_strequal(type, "PLAYER"))
@@ -42,7 +42,7 @@ static void	add_identifier_e(t_identifiers *identifiers, char *identifier, char 
 	else if (ft_strequal(type, "DROP"))
 		ft_list_add(&identifiers->drop, ft_strdup(identifier), free);
 	else
-		fte_set(ERROR_INVALID_IDENTIFIER_TYPE);
+		fte_set("invalid identifier type");
 }
 
 static void add_default_identifiers(t_identifiers *identifiers)
@@ -76,9 +76,9 @@ void	parse_identifiers_e(t_map *map)
 			continue ;
 		identifier = ft_strndup(curr->key, ft_strlen(curr->key) - 5);
 		if (!identifier)
-			return (fte_set(ERROR_EMPTY_TYPE_IDENTIFIER));
+			return (fte_set("empty type identifier"));
 		if (identifier_already_defined(&map->identifiers, identifier))
-			return (fte_set(ERROR_DUPLICATE_TYPE_IDENTIFIER));
+			return (fte_set("duplicate type identifier"));
 		add_identifier_e(&map->identifiers, identifier, curr->value);
 		if (free(identifier), fte_flagged())
 			return ;

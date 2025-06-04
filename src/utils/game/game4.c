@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 22:43:09 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/22 23:12:40 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/04 01:22:55 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ void	init_threads_e(t_game *game)
 {
 	int	i;
 
-	fte_set(ERROR_NO_ERROR);
+	fte_set(NULL);
 	i = -1;
 	while (++i < CAMERA_THREADS)
 	{
 		game->camera_threads[i] = ftt_thread_new();
 		if (!game->camera_threads[i])
-			return (fte_set(ERROR_THREAD_INIT));
+			return (fte_set("thread init"));
 	}
 }
 

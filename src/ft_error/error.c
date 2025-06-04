@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 22:00:34 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/07 23:21:37 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/04 01:21:34 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ t_error_storage	*fte_storage(void)
 	return (&singleton);
 }
 
-void	fte_set(t_error _error)
+void	fte_set(const char *msg)
 {
-	fte_storage()->error = _error;
+	fte_storage()->msg = (char *)msg;
 }
 
 static ssize_t	ft_error_fputstr(int fd, char *string)
@@ -38,9 +38,7 @@ static ssize_t	ft_error_fputstr(int fd, char *string)
 
 bool	fte_flagged(void)
 {
-	if (fte_storage()->error == ERROR_NO_ERROR)
-		return (false);
-	return (true);
+	return (fte_storage()->msg);
 }
 
 void	fte_assert(void)
@@ -48,8 +46,7 @@ void	fte_assert(void)
 	if (!fte_flagged())
 		return ;
 	ft_error_fputstr(STDERR_FILENO, "Error\n");
-	ft_error_fputstr(STDERR_FILENO,
-		fte_error_to_message(fte_storage()->error));
+	ft_error_fputstr(STDERR_FILENO, fte_storage()->msg);
 	ft_error_fputstr(STDERR_FILENO, "\n");
-	fte_storage()->exit(fte_storage()->error);
+	fte_storage()->exit(1);
 }

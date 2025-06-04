@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:20:04 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/03 17:57:04 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/04 01:24:22 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	init_sprites_e(t_ftm_window *window, t_game *game)
 	char		**paths;
 	int			i;
 
-	fte_set(ERROR_NO_ERROR);
+	fte_set(NULL);
 	image = NULL;
 	el = *game->map->types->table;
 	while (el)
@@ -64,10 +64,10 @@ void	init_sprites_e(t_ftm_window *window, t_game *game)
 			continue ;
 		paths = get_sprite_paths(curr->value);
 		if (!paths)
-			return (fte_set(ERROR_LOAD_SPRITE));
+			return (fte_set("sprite load (get paths)"));
 		sprite = sprite_new(NULL, 0);
 		if (!sprite)
-			return (ft_strvfree(paths), fte_set(ERROR_LOAD_SPRITE));
+			return (ft_strvfree(paths), fte_set("sprite load (sprite new)"));
 		ft_hashmap_set(game->sprites, curr->key, sprite, free_sprite);
 		i = -1;
 		while (paths[++i])
@@ -76,7 +76,7 @@ void	init_sprites_e(t_ftm_window *window, t_game *game)
 				continue ;
 			image = ftm_image_from_file(window, paths[i]);
 			if (!image)
-				return (ft_strvfree(paths), fte_set(ERROR_LOAD_SPRITE));
+				return (ft_strvfree(paths), fte_set("sprite load (image from file)"));
 			ft_list_add(&((t_sprite *)ft_hashmap_get_value(game->sprites,
 						curr->key))->images, image, ftm_free_image);
 		}

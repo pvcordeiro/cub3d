@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game0.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:27:08 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/03 18:10:56 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/04 01:22:48 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,17 +66,17 @@ void	free_game(void *game)
 
 void	game_load_map_e(t_game *game, t_ftm_window *window, t_map *map)
 {
-	fte_set(ERROR_NO_ERROR);
+	fte_set(NULL);
 	game->map = map;
 	game->sprites = ft_hashmap_new();
 	if (!game->sprites)
-		return (fte_set(ERROR_INIT_SPRITES));
+		return (fte_set("init sprites"));
 	game->sounds = ft_hashmap_new();
 	if (!game->sounds)
-		return (fte_set(ERROR_INIT_SOUNDS));
+		return (fte_set("init sounds"));
 	game->fonts = ft_hashmap_new();
 	if (!game->fonts)
-		return (fte_set(ERROR_INIT_FONTS));
+		return (fte_set("init sounds"));
 	init_sprites_e(window, game);
 	if (fte_flagged())
 		return (clear_game(game));

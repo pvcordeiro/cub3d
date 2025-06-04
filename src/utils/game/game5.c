@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game5.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 17:18:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/03 18:10:28 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/04 01:23:50 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	set_audio_configs_e(t_game *game)
 	t_element			*curr;
 	char				*key;
 
-	fte_set(ERROR_NO_ERROR);
+	fte_set(NULL);
 	el = *game->map->types->table;
 	while (el)
 	{
@@ -32,7 +32,7 @@ static void	set_audio_configs_e(t_game *game)
 			audio = ft_hashmap_get_value(game->sounds, key);
 			free(key);
 			if (!audio)
-				return (fte_set(ERROR_AUDIO_CONFIG_ON_INVALID));
+				return (fte_set("audio config on invalid"));
 			fta_audio_config(audio, (t_fta_audio_config){ft_atof(curr->value), audio->config.loop});
 			continue ;
 		}
@@ -42,7 +42,7 @@ static void	set_audio_configs_e(t_game *game)
 			audio = ft_hashmap_get_value(game->sounds, key);
 			free(key);
 			if (!audio)
-				return (fte_set(ERROR_AUDIO_CONFIG_ON_INVALID));
+				return (fte_set("audio config on invalid"));
 			fta_audio_config(audio, (t_fta_audio_config){audio->config.volume, ft_strequal(curr->value, "TRUE")});
 			continue ;
 		}
@@ -57,7 +57,7 @@ void	init_sounds_e(t_game *game)
 	t_element			*curr;
 	char				*key;
 
-	fte_set(ERROR_NO_ERROR);
+	fte_set(NULL);
 	el = *game->map->types->table;
 	while (el)
 	{
@@ -66,10 +66,10 @@ void	init_sounds_e(t_game *game)
 		if (!ft_str_endswith(curr->key, "_SOUND"))
 			continue ;
 		if (!ft_str_endswith(curr->value, ".mp3"))
-			return (fte_set(ERROR_INVALID_AUDIO_FORMAT));
+			return (fte_set("invalid audio format"));
 		audio = fta_audio_new(curr->value);
 		if (!audio && fta_engine()->initialized)
-			return (fte_set(ERROR_LOAD_SOUND));
+			return (fte_set("audio load"));
 		if (!audio)
 			continue ;
 		key = ft_strndup(curr->key, ft_strlen(curr->key) - 6);

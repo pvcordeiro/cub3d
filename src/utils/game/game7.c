@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:20:04 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/27 19:45:34 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/04 01:22:29 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	init_fonts_e(t_ftm_window *window, t_game *game)
 	t_element			*curr;
 	char				*key;
 
-	fte_set(ERROR_NO_ERROR);
+	fte_set(NULL);
 	el = *game->map->types->table;
 	while (el)
 	{
@@ -94,7 +94,7 @@ void	init_fonts_e(t_ftm_window *window, t_game *game)
 			continue ;
 		font = ftm_font_new(window, curr->value);
 		if (!font)
-			return (fte_set(ERROR_DEFAULT_FONT_NOT_FOUND));
+			return (fte_set("default font not found"));
 		key = ft_strndup(curr->key, ft_strlen(curr->key) - 5);
 		ft_hashmap_set(game->fonts, key, font, ftm_free_font);
 		free(key);

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 11:02:20 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/22 21:31:35 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/04 01:26:39 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ void	fta_init_e(void)
 {
 	ma_result	result;
 
-	fte_set(ERROR_NO_ERROR);
+	fte_set(NULL);
 	result = ma_engine_init(NULL, &fta_engine()->engine);
 	if (result != MA_SUCCESS)
-		return (fte_set(ERROR_AUDIO_ENGINE_INIT));
+		return (fte_set("audio engine init"));
 	fta_engine()->initialized = true;
 }
 
