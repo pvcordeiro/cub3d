@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 22:14:35 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/04 23:27:00 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/05 00:41:31 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	render_hand_item_icon(t_game *game, t_ftm_image *canvas)
 		return ;
 	image = get_sprite_image(item->icon_sprite);
 	item_size = (t_size){
-		.width = (canvas->size.height * 0.33) * ((double)image->size.width / image->size.width),
+		.width = (canvas->size.height * 0.33) * ((double)image->size.width / image->size.height),
 		.height = canvas->size.height * 0.33
 	};
 	ftm_put_image_to_canvas(canvas, image,

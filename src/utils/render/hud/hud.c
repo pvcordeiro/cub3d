@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hud.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 19:59:12 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/28 17:49:40 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/04 23:32:47 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@ void	render_hud(t_game *game, t_ftm_image *canvas)
 {
 	if (!game->hud.enabled)
 		return ;
-	render_debug(game, canvas);
-	render_action(game, canvas);
+	render_hand_item(game, canvas);
 	render_stats(game, canvas);
 	render_minimap(game, canvas);
+	render_action(game, canvas);
+	render_debug(game, canvas);
 }
