@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 00:50:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/04 00:21:30 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/04 15:36:46 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ void	init_entity(t_game *game, t_ftm_window *window, t_entity *entity, char iden
 		hashmap_get_with_identifier(game->map->types, identifier,
 			"HARD"), "FALSE");
 	entity->collision_sound = hashmap_get_with_identifier(game->sounds, identifier, "COLLISION");
+	entity->inventory_size = abs(ft_atoi(hashmap_get_with_identifier(game->map->types, identifier, "INVENTORY_SIZE")));
+	if (entity->inventory_size)
+			entity->inventory = ft_calloc(entity->inventory_size, sizeof(t_item *));
 	entity->identifier = identifier;
 	entity->size = (t_dsize){1, 1};
 	init_controller(entity, hashmap_get_with_identifier(game->map->types, identifier, "CONTROLLER"));

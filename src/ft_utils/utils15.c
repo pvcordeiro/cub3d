@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils15.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 20:26:55 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/20 18:07:23 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/04 15:43:48 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	ft_sleep(double milliseconds)
 
 	start = ft_get_time();
 	while (ft_get_time() - start < milliseconds)
-		;
+		usleep(100);
 }
 
 void	ft_list_clear_without_free(t_list *list)

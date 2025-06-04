@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game5.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 17:18:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/04 01:23:50 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/04 16:12:31 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	set_audio_configs_e(t_game *game)
 			audio = ft_hashmap_get_value(game->sounds, key);
 			free(key);
 			if (!audio)
-				return (fte_set("audio config on invalid"));
+				continue ;
 			fta_audio_config(audio, (t_fta_audio_config){ft_atof(curr->value), audio->config.loop});
 			continue ;
 		}
@@ -42,7 +42,7 @@ static void	set_audio_configs_e(t_game *game)
 			audio = ft_hashmap_get_value(game->sounds, key);
 			free(key);
 			if (!audio)
-				return (fte_set("audio config on invalid"));
+				continue ;
 			fta_audio_config(audio, (t_fta_audio_config){audio->config.volume, ft_strequal(curr->value, "TRUE")});
 			continue ;
 		}

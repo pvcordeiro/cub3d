@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils0.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 15:44:32 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/08 14:57:58 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/04 15:45:30 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int	ft_atoi(const char *nptr)
 	int	result;
 	int	sign;
 
+	if (!nptr)
+		return (0);
 	result = 0;
 	sign = 1;
 	while ((*nptr && *nptr >= 9 && *nptr <= 13) || *nptr == 32)

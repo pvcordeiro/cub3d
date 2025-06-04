@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/04 15:10:18 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/04 15:36:44 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,6 +198,8 @@ struct s_entity
 	char			identifier;
 	bool			active;
 	int				ammo;
+	t_item			*inventory;
+	int				inventory_size;
 	t_coords		coords;
 	t_dsize			size;
 	t_entity_type	type;
