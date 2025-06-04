@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   methods0.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/04 01:12:08 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/04 15:19:18 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,24 +26,21 @@ static void	set_sprite(t_drop	*drop)
 
 static void	do_the_auto_use(t_game *game, t_drop *drop)
 {
-	t_list	*curr;
+	int			i;
 	t_entity	*entity;
 
-	if (!drop->item)
+	if (!drop->item || !drop->auto_use || !drop->item->use)
 		return ;
-	curr = game->entities;
-	while (curr)
+	i = -1;
+	while (game->billboards[++i])
 	{
-		entity = curr->data;
-		curr = curr->next;
-        if (entity == (t_entity *)drop || !entity->auto_use_drops
+		entity = game->billboards[i];
+        if (entity == (t_entity *)drop
             || drop->billboard.entity.coords.x + entity->size.width < entity->coords.x
             || drop->billboard.entity.coords.x - entity->size.width > (entity->coords.x + entity->size.width)
             || drop->billboard.entity.coords.y + entity->size.height < entity->coords.y
             || drop->billboard.entity.coords.y - entity->size.height > (entity->coords.y + entity->size.height))
 			continue ;
-		if (!drop->item->use)
-			return ;
 		drop->item->use(drop->item, entity);
 		drop->billboard.entity.active = false;
 	}

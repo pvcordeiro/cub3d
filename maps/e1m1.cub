@@ -3,7 +3,6 @@ BACKGROUND_SOUND_VOLUME 0.7
 BACKGROUND_SOUND_LOOP TRUE
 
 COLLISION_SOUND assets/wolf3d/sounds/hitwall.mp3
-AUTO_USE_DROPS TRUE
 
 HUD TRUE
 DEBUG_HUD TRUE
@@ -83,9 +82,20 @@ U_USE_SOUND assets/wolf3d/sounds/health1.mp3
 U_DESCRIPTION The Greatest Food ever for real
 U_ICON_SPRITE assets/wolf3d/textures/billboards/food.xpm
 
+V_TYPE WEAPON
+V_NAME Arma
+V_USE_SOUND assets/wolf3d/sounds/atkpistol.mp3
+V_DESCRIPTION armarma mramma mmsd
+V_ICON_SPRITE assets/wolf3d/textures/billboards/machine-gun.xpm
+
 :_TYPE DROP
 :_ITEM U
+:_AUTO_USE TRUE
 :_HARD FALSE
+
+{_TYPE DROP
+{_ITEM V
+{_HARD FALSE
 
 ;_TYPE BILLBOARD
 ;_HARD FALSE
@@ -198,7 +208,7 @@ f , ffffffhfffff                faahaaf        a  aaaaaaa+aa?aaa
 f   f   f   f                    a   a         a  a     aaaaaa
 f   fffff   f                    a , a         a  a
 f   f   f   f                    a   a         a  a aaaaaaaaa
-f     , f , f                    a   a         a  aaa a a a aa
+f     , f , f                    a { a         a  aaa a a a aa
 f   f   f   f                    a   a         a   a         a
 f , fffff   f                    a , a         a   v         b
 f   fffff   fffffffffffffff      a   a         a   a        =a

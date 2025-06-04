@@ -1,36 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   items.h                                            :+:      :+:    :+:   */
+/*   weapon.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 00:50:57 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/04 15:20:42 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/04 14:51:50 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ITEMS_H
-# define ITEMS_H
+#ifndef WEAPON_H
+# define WEAPON_H
 
-# include <cub3d.h>
-
-// Item
-void	init_item(t_game *game, t_ftm_window *window, t_item *item,
-			char identifier);
-void	clear_food(void *data);
-void	item_use(t_item *item, t_entity *user);
-
-// Food
-void	food_use(t_item *item, t_entity *user);
-void	clear_item(void *data);
-void	init_food(t_game *game, t_ftm_window *window, t_food *food,
-			char identifier);
-
-// Weapon
-void	weapon_use(t_item *item, t_entity *user);
-void	clear_weapon(void *data);
-void	init_weapon(t_game *game, t_ftm_window *window, t_weapon *weapon,
-			char identifier);
+# include "../items.h"
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 00:50:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/04 00:26:44 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/04 15:09:28 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	init_player(t_game *game, t_ftm_window *window, t_player *player, char iden
 	player->billboard.entity.health = player->billboard.entity.max_health;
 	player->billboard.entity.size = (t_dsize){PLAYER_WIDTH, PLAYER_HEIGHT};
 	player->billboard.entity.collision_sound = ft_hashmap_get_value(game->sounds, "COLLISION");
-	player->billboard.entity.auto_use_drops = ft_strequal(ft_hashmap_get_value(game->map->types, "AUTO_USE_DROPS"), "TRUE");
 }
 
 t_player	*player_new(t_game *game, t_ftm_window *window, char identifier)

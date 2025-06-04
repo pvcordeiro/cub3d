@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/04 01:07:27 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/04 15:10:18 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ typedef struct s_food			t_food;
 typedef struct s_drop			t_drop;
 typedef t_item *(*t_item_creator)(t_game *, t_ftm_window *, char);
 typedef t_entity *(*t_entity_creator)(t_game *, t_ftm_window *, char);
+typedef struct s_weapon			t_weapon;
 
 struct s_sprite
 {
@@ -130,6 +131,7 @@ struct s_item
 	char			identifier;
 	char			*name;
 	char			*description;
+	bool			weapon;
 	bool			food;
 	t_fta_audio		*use_sound;
 	t_sprite		*icon_sprite;
@@ -140,6 +142,14 @@ struct s_food
 {
 	t_item	item;
 	int		health;
+};
+
+struct s_weapon
+{
+	t_item	item;
+	int		damage;
+	double	range;
+	int		ammo_usage;
 };
 
 enum e_entity_type
@@ -187,7 +197,7 @@ struct s_entity
 	bool			billboard;
 	char			identifier;
 	bool			active;
-	bool			auto_use_drops;
+	int				ammo;
 	t_coords		coords;
 	t_dsize			size;
 	t_entity_type	type;
@@ -219,6 +229,7 @@ struct s_drop
 {
 	t_billboard	billboard;
 	t_item		*item;
+	bool		auto_use;
 	t_item		*_prev_item;
 };
 
@@ -254,6 +265,7 @@ struct s_identifiers
 	t_list	*item;
 	t_list	*food;
 	t_list	*drop;
+	t_list	*weapon;
 };
 
 struct s_map
@@ -424,5 +436,6 @@ t_item_creator	get_item_creator(t_identifiers *identifiers, char identifier);
 void			free_item(void *data);
 t_item			*item_new(t_game *game, t_ftm_window *window, char identifier);
 t_food			*food_new(t_game *game, t_ftm_window *window, char identifier);
+t_weapon		*weapon_new(t_game *game, t_ftm_window *window, char identifier);
 
 #endif
