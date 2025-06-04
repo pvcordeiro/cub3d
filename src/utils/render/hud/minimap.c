@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 17:48:25 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/28 18:02:12 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/04 17:45:02 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ static void	set_entity_color(t_game *game, t_entity *entity, unsigned *color)
 
 static bool in_boundaries(t_coords entity_pos, t_coords minimap_pos, t_size minimap_size)
 {
-    return (entity_pos.x + 100>= minimap_pos.x &&
-            entity_pos.y + 100 >= minimap_pos.y &&
-            entity_pos.x - 100 < minimap_pos.x + minimap_size.width &&
-            entity_pos.y - 100 < minimap_pos.y + minimap_size.height);
+    return (entity_pos.x + minimap_size.width * 0.2>= minimap_pos.x &&
+            entity_pos.y + minimap_size.height * 0.2 >= minimap_pos.y &&
+            entity_pos.x - minimap_size.width * 0.2 < minimap_pos.x + minimap_size.width &&
+            entity_pos.y - minimap_size.height * 0.2 < minimap_pos.y + minimap_size.height);
 }
 
 static void fix_clipping(t_coords *pos, t_size *size, t_coords minimap_pos, t_size minimap_size)
