@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 00:50:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/03 01:21:55 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/04 00:21:30 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	init_entity(t_game *game, t_ftm_window *window, t_entity *entity, char iden
 	entity->frame = entity_frame;
 	entity->clear = clear_entity;
 	entity->action = entity_action;
+	entity->active = true;
 	entity->hard = !ft_strequal(
 		hashmap_get_with_identifier(game->map->types, identifier,
 			"HARD"), "FALSE");

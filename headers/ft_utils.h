@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 12:15:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/06/03 00:37:55 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/03 22:46:14 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,17 +116,18 @@ char					**ft_strvjoin(char **v1, char **v2);
 
 char					**ft_split(const char *s, const char *c);
 void					*ft_memcpy(void *dst, const void *src, size_t n);
+
 char					*ft_charjoin(char *str, char c);
 char					*ft_itoa(int n);
 char					*ft_substr(char const *s, unsigned int start,
 							size_t len);
+bool					ft_strequal(const char *s1, const char *s2);
 
 char					**ft_strvndup(char **v, size_t n);
 char					**ft_strvdup(char **v);
 void					ft_strvfree(char **v);
 void					ft_bzero(void *s, size_t n);
 
-bool					ft_strequal(const char *s1, const char *s2);
 
 t_list					*ft_list_new(void *data, void (*data_free)(void *data));
 void					ft_list_add(t_list **list, void *data,
@@ -187,5 +188,7 @@ char					*ft_clean_path(const char *path);
 void					ft_strvorder(char **strv, const void *data, bool (*cmp)(const void
 							*data, const char *, const char *));
 t_direction				ft_direction_from_str(const char *str);
+
+bool					ft_str_equal_char_ptr(const char *str, const char *char_ptr);
 
 #endif

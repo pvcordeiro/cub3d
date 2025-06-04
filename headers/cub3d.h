@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/03 21:38:58 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/04 01:07:27 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,9 @@ typedef struct s_door			t_door;
 typedef struct s_identifiers	t_identifiers;
 typedef struct s_item			t_item;
 typedef struct s_food			t_food;
+typedef struct s_drop			t_drop;
+typedef t_item *(*t_item_creator)(t_game *, t_ftm_window *, char);
+typedef t_entity *(*t_entity_creator)(t_game *, t_ftm_window *, char);
 
 struct s_sprite
 {
@@ -123,10 +126,12 @@ struct s_sprite
 struct s_item
 {
 	void			(*use)(t_item *item, t_entity *user);
+	void			(*clear)(void *this);
 	char			identifier;
 	char			*name;
 	char			*description;
 	bool			food;
+	t_fta_audio		*use_sound;
 	t_sprite		*icon_sprite;
 	t_sprite		*screen_sprite;
 };
@@ -144,6 +149,7 @@ enum e_entity_type
 	ENTITY_WALL,
 	ENTITY_DOOR,
 	ENTITY_BILLBOARD,
+	ENTITY_DROP,
 };
 
 struct s_controller
@@ -180,6 +186,8 @@ struct s_entity
 	bool			actionable;
 	bool			billboard;
 	char			identifier;
+	bool			active;
+	bool			auto_use_drops;
 	t_coords		coords;
 	t_dsize			size;
 	t_entity_type	type;
@@ -205,6 +213,13 @@ struct s_billboard
 struct s_player
 {
 	t_billboard	billboard;
+};
+
+struct s_drop
+{
+	t_billboard	billboard;
+	t_item		*item;
+	t_item		*_prev_item;
 };
 
 struct s_wall
@@ -236,6 +251,9 @@ struct s_identifiers
 	t_list	*door;
 	t_list	*billboard;
 	t_list	*air;
+	t_list	*item;
+	t_list	*food;
+	t_list	*drop;
 };
 
 struct s_map
@@ -361,6 +379,7 @@ struct s_cub3d
 // cub3d
 t_cub3d		*cub3d(void);
 void		cub3d_exit(int code);
+void		*hashmap_get_with_identifier(t_hashmap *hashmap, char identifier, char *rest);
 
 // Game
 void		game_load_map_e(t_game *game, t_ftm_window *window, t_map *map);
@@ -388,14 +407,22 @@ void		init_sprite(t_sprite *sprite, t_list *images, t_time update_delay);
 t_sprite	*sprite_new(t_list *images, t_time update_delay);
 
 // Entities
-void		free_entity(void *data);
-void		call_entity_frames(t_list *entities, t_fps *fps);
-void		call_entity_keys(t_list *entities, int key, bool down);
-bool		entity_x_is_transparent(t_entity *entity, t_direction direction, double x);
-t_player	*player_new(t_game *game, t_ftm_window *window, char identifier);
-t_wall		*wall_new(t_game *game, t_ftm_window *window, char identifier);
-t_door		*door_new_e(t_game *game, t_ftm_window *window, char identifier);
-t_billboard	*billboard_new(t_game *game, t_ftm_window *window, char identifier);
-t_entity	*entity_new(t_game *game, t_ftm_window *window, char identifier);
+t_entity_creator	get_entity_creator(t_identifiers *identifiers, char identifier);
+void				free_entity(void *data);
+void				call_entity_frames(t_list *entities, t_fps *fps);
+void				call_entity_keys(t_list *entities, int key, bool down);
+bool				entity_x_is_transparent(t_entity *entity, t_direction direction, double x);
+t_player			*player_new(t_game *game, t_ftm_window *window, char identifier);
+t_wall				*wall_new(t_game *game, t_ftm_window *window, char identifier);
+t_door				*door_new_e(t_game *game, t_ftm_window *window, char identifier);
+t_billboard			*billboard_new(t_game *game, t_ftm_window *window, char identifier);
+t_entity			*entity_new(t_game *game, t_ftm_window *window, char identifier);
+t_drop				*drop_new(t_game *game, t_ftm_window *window, char identifier);
+
+// Items
+t_item_creator	get_item_creator(t_identifiers *identifiers, char identifier);
+void			free_item(void *data);
+t_item			*item_new(t_game *game, t_ftm_window *window, char identifier);
+t_food			*food_new(t_game *game, t_ftm_window *window, char identifier);
 
 #endif

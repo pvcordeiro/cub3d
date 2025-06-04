@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/03 21:35:09 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/04 01:13:59 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ void	food_use(t_item *item, t_entity *user)
 	user->health += food->health;
 	if (user->health > user->max_health)
 		user->health = user->max_health;
-	if (user->health < 0)
-		user->health = 0;
+}
+
+void	clear_food(void *data)
+{
+	clear_item(data);
 }

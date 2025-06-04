@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 12:05:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/24 00:45:47 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/04 00:22:55 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static t_entity	*perform_dda(t_dda_ray *ray, t_game *game)
 			|| ray->map_pos.y < 0 || ray->map_pos.y >= ray->map_size.height)
 			return (NULL);
 		hit = game->walls[(int)ray->map_pos.y][(int)ray->map_pos.x];
-		if (hit && hit != ray->ignored_entity)
+		if (hit && hit->active && hit != ray->ignored_entity)
 			return (hit);
 	}
 }

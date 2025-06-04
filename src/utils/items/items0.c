@@ -6,18 +6,29 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 21:15:02 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/03 21:27:46 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/04 01:02:11 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "items.h"
 
-void	*hashmap_get_with_identifier(t_hashmap *hashmap, char identifier, char *rest)
+t_item_creator	get_item_creator(t_identifiers *identifiers, char identifier)
 {
-	char	*key;
-	void	*data;
+	if (ft_list_any(identifiers->item, (void *)ft_str_equal_char_ptr, &identifier))
+		return ((void *)item_new);
+	if (ft_list_any(identifiers->food, (void *)ft_str_equal_char_ptr, &identifier))
+		return ((void *)food_new);
+	return (NULL);
+}
 
-	key = ft_strf("%c_%s", identifier, rest);
-	data = ft_hashmap_get_value(hashmap, key);
-	return (free(key), data);
+void	free_item(void *data)
+{
+	t_item	*item;
+
+	item = data;
+	if (!item)
+		return ;
+	if (item->clear)
+		item->clear(data);
+	free(item);
 }

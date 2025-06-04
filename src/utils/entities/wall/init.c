@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 00:50:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/03 01:22:15 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/03 23:55:14 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	init_wall(t_game *game, t_ftm_window *window, t_wall *wall, char identifier
 	wall->entity.clear = clear_wall;
 	wall->entity.action = wall_action;
 	wall->entity.wall = true;
+	if (identifier == '1')
+		identifier = '\0';
 	wall->north_sprite = hashmap_get_with_identifier(game->sprites, identifier, "NO");
 	wall->south_sprite = hashmap_get_with_identifier(game->sprites, identifier, "SO");
 	wall->west_sprite = hashmap_get_with_identifier(game->sprites, identifier, "WE");

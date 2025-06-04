@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 20:49:46 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/03 01:25:44 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/04 00:32:06 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ void	call_entity_frames(t_list *entities, t_fps *fps)
 	while (curr)
 	{
 		entity = curr->data;
-		entity->frame(entity, fps->delta_time);
+		if (entity->active)
+			entity->frame(entity, fps->delta_time);
 		curr = curr->next;
 	}
 }
@@ -57,22 +58,10 @@ void	call_entity_keys(t_list *entities, int key, bool down)
 	while (curr)
 	{
 		entity = curr->data;
-		if (entity->controller.key)
+		if (entity->active && entity->controller.key)
 			entity->controller.key(entity, key, down);
 		curr = curr->next;
 	}
-}
-
-void	*hashmap_get_with_identifier(t_hashmap *hashmap, char identifier, char *rest)
-{
-	char	*key;
-	void	*data;
-
-	key = ft_strdup(rest);
-	if (identifier != '1')
-		key = (free(key), ft_strf("%c_%s", identifier, rest));
-	data = ft_hashmap_get_value(hashmap, key);
-	return (free(key), data);
 }
 
 bool	entity_x_is_transparent(t_entity *entity, t_direction direction, double x)
@@ -98,4 +87,21 @@ void	free_entity(void *data)
 		return ;
 	((t_entity *)data)->clear(data);
 	free(data);
+}
+
+t_entity_creator	get_entity_creator(t_identifiers *identifiers, char identifier)
+{
+	if (ft_list_any(identifiers->air, (void *)ft_str_equal_char_ptr, &identifier))
+		return (NULL);
+	if (ft_list_any(identifiers->wall, (void *)ft_str_equal_char_ptr, &identifier))
+		return ((void *)wall_new);
+	if (ft_list_any(identifiers->player, (void *)ft_str_equal_char_ptr, &identifier))
+		return ((void *)player_new);
+	if (ft_list_any(identifiers->door, (void *)ft_str_equal_char_ptr, &identifier))
+		return ((void *)door_new_e);
+	if (ft_list_any(identifiers->billboard, (void *)ft_str_equal_char_ptr, &identifier))
+		return ((void *)billboard_new);
+	if (ft_list_any(identifiers->drop, (void *)ft_str_equal_char_ptr, &identifier))
+		return ((void *)drop_new);
+	return (NULL);
 }

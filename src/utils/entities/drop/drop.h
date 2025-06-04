@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   methods0.c                                         :+:      :+:    :+:   */
+/*   drop.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/04 01:08:19 by afpachec         ###   ########.fr       */
+/*   Created: 2025/06/03 00:50:57 by afpachec          #+#    #+#             */
+/*   Updated: 2025/06/03 22:22:09 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "item.h"
+#ifndef DROP_H
+# define DROP_H
 
-void	item_use(t_item *item, t_entity *user)
-{
-	(void)user;
-	fta_play(item->use_sound);
-}
+# include "../entities.h"
 
-void	clear_item(void *data)
-{
-	(void)data;
-}
+#endif

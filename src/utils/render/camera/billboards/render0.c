@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render0.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 00:47:16 by paude-so          #+#    #+#             */
-/*   Updated: 2025/06/02 18:16:01 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/04 00:22:22 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ static void	render_billboard(t_billboard *bill, t_ftm_image *canvas,
 	double		relative_angle;
 	t_coords	centered_bill_coords;
 
+	if (!bill->entity.active)
+		return ;
 	centered_bill_coords = bill->entity.coords;
 	relative_angle = get_relative_angle(camera->entity->coords,
 			centered_bill_coords);

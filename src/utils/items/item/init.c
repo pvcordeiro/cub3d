@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 00:50:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/03 21:20:05 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/04 01:07:47 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	init_item(t_game *game, t_ftm_window *window, t_item *item,
 	if (!item)
 		return ;
 	item->use = item_use;
+	item->clear = clear_item;
 	item->identifier = identifier;
 	item->name = hashmap_get_with_identifier(game->map->types, identifier,
 		"NAME");
@@ -28,6 +29,8 @@ void	init_item(t_game *game, t_ftm_window *window, t_item *item,
 		identifier, "ICON_SPRITE");
 	item->screen_sprite = hashmap_get_with_identifier(game->sprites,
 		identifier, "SCREEN_SPRITE");
+	item->use_sound = hashmap_get_with_identifier(game->sounds,
+		identifier, "USE");
 }
 
 t_item	*item_new(t_game *game, t_ftm_window *window, char identifier)

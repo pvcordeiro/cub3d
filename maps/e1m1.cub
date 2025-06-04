@@ -3,6 +3,7 @@ BACKGROUND_SOUND_VOLUME 0.7
 BACKGROUND_SOUND_LOOP TRUE
 
 COLLISION_SOUND assets/wolf3d/sounds/hitwall.mp3
+AUTO_USE_DROPS TRUE
 
 HUD TRUE
 DEBUG_HUD TRUE
@@ -75,9 +76,16 @@ e_1_SPRITE assets/wolf3d/textures/billboards/soldier/still-front-left.xpm
 -_TYPE BILLBOARD
 -_SPRITE assets/wolf3d/textures/billboards/table.xpm
 
-:_TYPE BILLBOARD
+U_TYPE FOOD
+U_HEALTH 10
+U_NAME FOOD
+U_USE_SOUND assets/wolf3d/sounds/health1.mp3
+U_DESCRIPTION The Greatest Food ever for real
+U_ICON_SPRITE assets/wolf3d/textures/billboards/food.xpm
+
+:_TYPE DROP
+:_ITEM U
 :_HARD FALSE
-:_SPRITE assets/wolf3d/textures/billboards/food.xpm
 
 ;_TYPE BILLBOARD
 ;_HARD FALSE

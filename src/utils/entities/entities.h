@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 18:04:16 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/03 01:22:30 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/03 23:59:21 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <cub3d.h>
 
-void	*hashmap_get_with_identifier(t_hashmap *hashmap, char identifier, char *rest);
 void	init_controller(t_entity *entity, const char *type);
 void	free_entity(void *entity);
 
@@ -45,9 +44,16 @@ void	clear_door(void *door);
 void	door_action(t_entity *entity, t_entity *actioner);
 
 // Player
+void	init_player(t_game *game, t_ftm_window *window, t_player *player, char identifier);
 void	player_frame(t_entity *entity, double delta_time);
 void	clear_player(void *player);
 void	player_action(t_entity *entity, t_entity *actioner);
+
+// Drop
+void	init_drop(t_game *game, t_ftm_window *window, t_drop *drop, char identifier);
+void	drop_frame(t_entity *entity, double delta_time);
+void	clear_drop(void *drop);
+void	drop_action(t_entity *entity, t_entity *actioner);
 
 
 #endif
