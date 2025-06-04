@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 00:50:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/03 18:04:48 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/04 18:42:55 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	init_billboard(t_game *game, t_ftm_window *window, t_billboard *billboard, 
 	billboard->entity.frame = billboard_frame;
 	billboard->entity.clear = clear_billboard;
 	billboard->entity.action = billboard_action;
+	billboard->entity.shot = billboard_shot;
 	billboard->entity.billboard = true;
 	billboard->entity.size = (t_dsize){BILLBOARD_WIDTH, BILLBOARD_HEIGHT};
 	if (hashmap_get_with_identifier(game->sprites, billboard->entity.identifier, "SPRITE"))

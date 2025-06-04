@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/04 15:36:44 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/04 18:29:12 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,6 +187,7 @@ struct s_entity
 	void			(*frame)(t_entity *entity, double delta_time);
 	void			(*clear)(void *this);
 	void			(*action)(t_entity *entity, t_entity *actioner);
+	void			(*shot)(t_entity *shooted, t_entity *shooter);
 	t_controller	controller;
 	bool			transparent;
 	int				max_health;

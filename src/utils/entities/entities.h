@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   entities.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 18:04:16 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/03 23:59:21 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/04 18:47:58 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,14 @@ void	entity_frame(t_entity *entity, double delta_time);
 void	clear_entity(void *entity);
 void	free_entity(void *entity);
 void	entity_action(t_entity *entity, t_entity *actioner);
+void	entity_shot(t_entity *shooted, t_entity *shooter);
 
 // Billboard
 void	init_billboard(t_game *game, t_ftm_window *window, t_billboard *billboard, char identifier);
 void	billboard_frame(t_entity *entity, double delta_time);
 void	clear_billboard(void *billboard);
 void	billboard_action(t_entity *entity, t_entity *actioner);
+void	billboard_shot(t_entity *shooted, t_entity *shooter);
 
 // Wall
 void	init_wall(t_game *game, t_ftm_window *window, t_wall *wall, char identifier);
@@ -48,6 +50,7 @@ void	init_player(t_game *game, t_ftm_window *window, t_player *player, char iden
 void	player_frame(t_entity *entity, double delta_time);
 void	clear_player(void *player);
 void	player_action(t_entity *entity, t_entity *actioner);
+void	player_shot(t_entity *shooted, t_entity *shooter);
 
 // Drop
 void	init_drop(t_game *game, t_ftm_window *window, t_drop *drop, char identifier);

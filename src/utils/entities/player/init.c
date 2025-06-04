@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 00:50:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/04 15:09:28 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/04 18:48:14 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	init_player(t_game *game, t_ftm_window *window, t_player *player, char iden
 	player->billboard.entity.frame = player_frame;
 	player->billboard.entity.clear = clear_player;
 	player->billboard.entity.action = player_action;
+	player->billboard.entity.action = player_shot;
 	if (identifier == 'N')
 		player->billboard.entity.coords.yaw = 270.0;
 	else if (identifier == 'S')
