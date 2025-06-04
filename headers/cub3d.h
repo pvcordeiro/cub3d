@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/04 15:36:44 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/04 23:27:39 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,9 @@
 // Billboard Config
 # define BILLBOARD_WIDTH 0.23
 # define BILLBOARD_HEIGHT 0.23
+
+// Entity Config
+# define INVENTORY_SIZE 9
 
 // Door Config
 # define DOOR_ANIMATION_DURATION 10.0
@@ -198,8 +201,8 @@ struct s_entity
 	char			identifier;
 	bool			active;
 	int				ammo;
-	t_item			*inventory;
-	int				inventory_size;
+	t_item			*inventory[INVENTORY_SIZE];
+	int				inventory_index;
 	t_coords		coords;
 	t_dsize			size;
 	t_entity_type	type;
@@ -232,6 +235,7 @@ struct s_drop
 	t_billboard	billboard;
 	t_item		*item;
 	bool		auto_use;
+	bool		auto_pickup;
 	t_item		*_prev_item;
 };
 

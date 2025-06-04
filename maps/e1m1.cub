@@ -95,6 +95,7 @@ V_ICON_SPRITE assets/wolf3d/textures/billboards/machine-gun.xpm
 
 {_TYPE DROP
 {_ITEM V
+{_AUTO_PICKUP TRUE
 {_HARD FALSE
 
 ;_TYPE BILLBOARD

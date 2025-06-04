@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:48:02 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/26 21:58:09 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/04 23:17:35 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ void	ftm_put_image_to_canvas(t_ftm_image *canvas, t_ftm_image *image,
 {
 	t_pitc_data	pd;
 
+	pitc.coords.x = (int)pitc.coords.x;
+	pitc.coords.y = (int)pitc.coords.y;
 	if (!init_pd(&pd, canvas, image, pitc))
 		return ;
 	pd.index.width = -1;
