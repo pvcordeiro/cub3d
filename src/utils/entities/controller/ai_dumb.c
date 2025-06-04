@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ai_dumb.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 18:34:50 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/02 15:19:17 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/04 13:55:18 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ static void	frame(t_entity *entity, double delta_time)
         dy = cub3d()->game.player->billboard.entity.coords.y - entity->coords.y;
         angle_to_player = ft_degrees(atan2(dy, dx));
         entity->coords.yaw = ft_normalize_angle(angle_to_player);
-        entity->controller.walking_forward = true;
+        distance_to_player = sqrt(dx * dx + dy * dy);
+        entity->controller.walking_forward = (distance_to_player > 2.0);
         entity->controller.walking_left = false;
         entity->controller.walking_right = false;
         entity->controller.walking_backward = false;
-        distance_to_player = sqrt(dx * dx + dy * dy);
-        entity->controller.sprinting = (distance_to_player > 3.0);
+        entity->controller.sprinting = false;
     }
     else if (time_accumulator >= AI_MOVE_INTERVAL)
     {
