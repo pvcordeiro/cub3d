@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 21:53:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/03 23:55:37 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/06 20:54:53 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	cub3d_exit(int code)
 	free_map(cub3d()->curr_map);
 	clear_game(&cub3d()->game);
 	clear_sprite(&cub3d()->placeholder);
+	ft_restore_screen_mode((t_xvar *)cub3d()->window.display, (t_win_list *)cub3d()->window.win);
 	ftm_clear_window(&cub3d()->window);
 	fta_destroy();
 	exit(code);

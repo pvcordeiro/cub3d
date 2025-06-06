@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_mlx_utils.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:46:27 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/03 00:37:43 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/06 21:25:47 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_ftm_window
 	void		*display;
 	t_ftm_image	*canvas;
 	bool		using_mouse;
+	int			fullscreen;
 	void		(*loop_hook)(void);
 	void		(*key_hook)(int key, bool down);
 	void		(*exit_hook)(int code);

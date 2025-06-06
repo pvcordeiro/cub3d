@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/07 16:41:10 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/07 16:41:27 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -449,5 +449,6 @@ t_item			*item_new(t_game *game, t_ftm_window *window, char identifier);
 t_food			*food_new(t_game *game, t_ftm_window *window, char identifier);
 t_weapon		*weapon_new(t_game *game, t_ftm_window *window, char identifier);
 int			ft_ext_fullscreen(t_xvar *xvar, t_win_list *win);
+void	ft_restore_screen_mode(t_xvar *xvar, t_win_list *win);
 
 #endif
