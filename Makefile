@@ -6,7 +6,7 @@
 #    By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/26 17:16:21 by afpachec          #+#    #+#              #
-#    Updated: 2025/06/04 16:06:05 by paude-so         ###   ########.fr        #
+#    Updated: 2025/06/06 17:18:17 by paude-so         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,10 @@ ifeq ($(UNAME_S),Darwin)
 	LIBS += -L /opt/homebrew/lib
 	INCLUDES += -I /opt/X11/include
 	LDLIBS += -framework OpenGL -framework AppKit
-# else
-# 	CFLAGS += -Wno-error=stringop-overflow
+else
+ 	ifeq ($(call check_flag,-Wno-error=stringop-overflow),1)
+        CFLAGS += -Wno-error=stringop-overflow
+    endif
 endif
 
 all: $(NAME)
