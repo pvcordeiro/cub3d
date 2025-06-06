@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   methods0.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/04 15:06:20 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/06 19:54:39 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,9 @@ void	weapon_use(t_item *item, t_entity *user)
 void	clear_weapon(void *data)
 {
 	clear_item(data);
+}
+
+void	weapon_frame(t_item *item)
+{
+	item_frame(item);
 }

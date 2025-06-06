@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/04 01:13:59 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/06 19:54:11 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,3 +29,9 @@ void	clear_food(void *data)
 {
 	clear_item(data);
 }
+
+void	food_frame(t_item *item)
+{
+	item_frame(item);
+}
+

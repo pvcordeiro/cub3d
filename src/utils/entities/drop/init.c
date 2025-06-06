@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 00:50:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/04 23:06:12 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/06 19:58:22 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	set_item(t_game *game, t_ftm_window *window, t_drop *drop, char iden
 	item_creator = get_item_creator(&game->map->identifiers, item_type[0]);
 	if (!item_creator)
 		return ;
-	drop->item = item_creator(game, window, item_type[0]);
+	drop->billboard.entity.inventory[0] = item_creator(game, window, item_type[0]);
 }
 
 void	init_drop(t_game *game, t_ftm_window *window, t_drop *drop, char identifier)

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/04 23:27:39 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/06 20:01:33 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ struct s_sprite
 
 struct s_item
 {
+	void			(*frame)(t_item *item);
 	void			(*use)(t_item *item, t_entity *user);
 	void			(*clear)(void *this);
 	char			identifier;
@@ -138,7 +139,11 @@ struct s_item
 	bool			food;
 	t_fta_audio		*use_sound;
 	t_sprite		*icon_sprite;
+	t_sprite		*icon_still_sprite;
+	t_sprite		*icon_use_sprite;
 	t_sprite		*screen_sprite;
+	t_sprite		*screen_still_sprite;
+	t_sprite		*screen_use_sprite;
 };
 
 struct s_food
@@ -233,10 +238,8 @@ struct s_player
 struct s_drop
 {
 	t_billboard	billboard;
-	t_item		*item;
 	bool		auto_use;
 	bool		auto_pickup;
-	t_item		*_prev_item;
 };
 
 struct s_wall
