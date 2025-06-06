@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:21:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/01 18:50:02 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/06 20:45:21 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,11 @@ static void	hud_minimap_keys(int key, bool down)
 
 static void	hud_keys(t_hud *hud, int key, bool down)
 {
-	if (key == XK_h && down)
-		hud->enabled = !hud->enabled;
+	t_ftm_window *window = &cub3d()->window;
+    if (key == XK_h && down)
+        hud->enabled = !hud->enabled;
+    if (key == XK_F11 && down)
+		ft_ext_fullscreen((t_xvar *)window->display, (t_win_list *)window->win);
 	if (!hud->enabled)
 		return ;
 	hud_debug_keys(&hud->debug, key, down);

@@ -6,7 +6,7 @@
 #    By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/26 17:16:21 by afpachec          #+#    #+#              #
-#    Updated: 2025/06/06 18:42:13 by paude-so         ###   ########.fr        #
+#    Updated: 2025/06/06 19:46:35 by paude-so         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CFLAGS = -Wall -Wextra -Werror -O3 -g
 # CFLAGS = -Wall -Wextra -Werror -O3 -g -std=c99 -fsanitize=address -fno-omit-frame-pointer
 INCLUDES = -I headers
 LIBS = -L lib
-LDLIBS = -lmlx -lX11 -lXext -lm -ldl -lpthread
+LDLIBS = -lmlx -lX11 -lXext -lXrandr -lm -ldl -lpthread
 SRCS = $(shell find src -name "**.c")
 OBJ_DIR = obj
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
@@ -52,6 +52,7 @@ else
 	@cp lib/minilibx-linux/libmlx.a lib
 endif
 	@cp lib/minilibx-linux/mlx.h headers
+	@cp lib/minilibx-linux/mlx_int.h headers
 	@rm -rf lib/minilibx-linux
 
 $(OBJ_DIR)/%.o: %.c
