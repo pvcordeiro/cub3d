@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 19:35:54 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/06 16:12:45 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/06 16:25:27 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ static void	inv_key(t_entity *entity, int key, bool down)
 	int	i;
 
 	i = -1;
+	if (!down)
+		return ;
 	while (++i < INVENTORY_SIZE)
 	{
 		if (key == XK_1 + i)
@@ -47,6 +49,7 @@ static void	key(t_entity *entity, int key, bool down)
 		entity->controller.action = down;
 	if (key == XK_Shift_L || key == XK_Shift_R)
 		entity->controller.sprinting = down;
+	inv_key(entity, key, down);
 }
 
 void	init_player_controller(t_entity *entity)
