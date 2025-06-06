@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 19:35:54 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/03 01:20:35 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/06 16:12:45 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,18 @@
 static void	frame(t_entity *entity, double delta_time)
 {
 	moviment_frame(entity, delta_time);
+}
+
+static void	inv_key(t_entity *entity, int key, bool down)
+{
+	int	i;
+
+	i = -1;
+	while (++i < INVENTORY_SIZE)
+	{
+		if (key == XK_1 + i)
+			entity->inventory_index = i;
+	}
 }
 
 static void	key(t_entity *entity, int key, bool down)

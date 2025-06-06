@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils14.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 15:31:27 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/03 21:32:35 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/06 15:59:30 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,23 +60,21 @@ static char	*parse_thing(char c, va_list *args)
 	return (result);
 }
 
-char	*ft_strf(char *format, ...)
+char	*ft_strfva(const char *format, va_list *args)
 {
-	va_list		args;
 	char		*str;
 	char		*to_join;
 	char		*tmp;
 	size_t		i;
 
-	va_start(args, format);
 	str = ft_strdup("");
-	if (!str)
-		return (NULL);
+	if (!format || !str)
+		return (free(str), NULL);
 	i = -1;
 	while (format[++i])
 	{
 		if (format[i] == '%' && format[i + 1])
-			to_join = parse_thing(format[++i], &args);
+			to_join = parse_thing(format[++i], args);
 		else
 			to_join = ft_strndup(&format[i], 1);
 		if (!to_join)
@@ -85,7 +83,6 @@ char	*ft_strf(char *format, ...)
 		(free(str), free(to_join));
 		str = tmp;
 	}
-	va_end(args);
 	return (str);
 }
 

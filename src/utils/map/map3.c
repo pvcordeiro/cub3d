@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 20:52:20 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/04 15:02:31 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/06 16:13:40 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,10 @@ void	parse_identifiers_e(t_map *map)
 		if (!ft_str_endswith(curr->key, "_TYPE"))
 			continue ;
 		identifier = ft_strndup(curr->key, ft_strlen(curr->key) - 5);
-		if (!identifier)
-			return (fte_set("empty type identifier"));
+		if (!identifier || !*identifier)
+			return (free(identifier), fte_set("empty type identifier"));
 		if (identifier_already_defined(&map->identifiers, identifier))
-			return (fte_set("duplicate type identifier"));
+			return (fte_set("duplicate type identifier %s", identifier), free(identifier));
 		add_identifier_e(&map->identifiers, identifier, curr->value);
 		if (free(identifier), fte_flagged())
 			return ;

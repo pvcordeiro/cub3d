@@ -88,6 +88,12 @@ V_USE_SOUND assets/wolf3d/sounds/atkpistol.mp3
 V_DESCRIPTION armarma mramma mmsd
 V_ICON_SPRITE assets/wolf3d/textures/billboards/machine-gun.xpm
 
+H_TYPE WEAPON
+H_NAME arma2
+H_USE_SOUND assets/wolf3d/sounds/atkpistol.mp3
+H_DESCRIPTION armarma mramma mms
+H_ICON_SPRITE assets/wolf3d/textures/billboards/gatling-gun.xpm
+
 :_TYPE DROP
 :_ITEM U
 :_AUTO_USE TRUE
@@ -97,6 +103,11 @@ V_ICON_SPRITE assets/wolf3d/textures/billboards/machine-gun.xpm
 {_ITEM V
 {_AUTO_PICKUP TRUE
 {_HARD FALSE
+
+}_TYPE DROP
+}_ITEM H
+}_AUTO_PICKUP TRUE
+}_HARD FALSE
 
 ;_TYPE BILLBOARD
 ;_HARD FALSE
@@ -210,7 +221,7 @@ f   f   f   f                    a   a         a  a     aaaaaa
 f   fffff   f                    a , a         a  a
 f   f   f   f                    a   a         a  a aaaaaaaaa
 f     , f , f                    a { a         a  aaa a a a aa
-f   f   f   f                    a   a         a   a         a
+f   f   f   f                    a } a         a   a         a
 f , fffff   f                    a , a         a   v         b
 f   fffff   fffffffffffffff      a   a         a   a        =a
 f               f       fff      a   a         aaaaaa a a a aa

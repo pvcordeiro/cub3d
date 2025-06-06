@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 12:15:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/06/03 22:46:14 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/06 15:59:40 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,7 +168,7 @@ bool					ft_list_any(t_list *list, bool (*condition)(void *data,
 								void *params), void *params);
 bool					ft_str_all_params(char *str, bool (*func)(char, void *),
 							void *params);
-char					*ft_strf(char *format, ...);
+char					*ft_strfva(const char *format, va_list *args);
 double					ft_atof(const char *str);
 
 t_list					*ft_list_clone(t_list *list);
@@ -190,5 +190,6 @@ void					ft_strvorder(char **strv, const void *data, bool (*cmp)(const void
 t_direction				ft_direction_from_str(const char *str);
 
 bool					ft_str_equal_char_ptr(const char *str, const char *char_ptr);
+char					*ft_strf(const char *format, ...);
 
 #endif
