@@ -6,14 +6,14 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 12:15:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/06/06 16:23:14 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/06 16:34:13 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_UTILS_H
 # define FT_UTILS_H
 
-# include <linux/errno.h>
+# include <errno.h>
 # include <stdbool.h>
 # include <stdint.h>
 # include <stdlib.h>
