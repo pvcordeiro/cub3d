@@ -6,7 +6,7 @@
 #    By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/26 17:16:21 by afpachec          #+#    #+#              #
-#    Updated: 2025/06/06 17:30:17 by paude-so         ###   ########.fr        #
+#    Updated: 2025/06/06 18:42:13 by paude-so         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,9 +29,11 @@ ifeq ($(UNAME_S),Darwin)
 	INCLUDES += -I /opt/X11/include
 	LDLIBS += -framework OpenGL -framework AppKit
 else
- 	ifeq ($(call check_flag,-Wno-error=stringop-overflow),1)
-        CFLAGS += -Wno-error=stringop-overflow
-    endif
+	ifeq ($(shell $(CC) --version | grep -i clang > /dev/null && echo clang),clang)
+    	CFLAGS += -Wno-unknown-warning-option
+	else
+    	CFLAGS += -Wno-stringop-overflow
+	endif
 endif
 
 all: $(NAME)
