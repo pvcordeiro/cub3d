@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:46:27 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/06 21:25:47 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/06 22:31:34 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_ftm_window
 	t_ftm_image	*canvas;
 	bool		using_mouse;
 	int			fullscreen;
+	char		*title;
 	void		(*loop_hook)(void);
 	void		(*key_hook)(int key, bool down);
 	void		(*exit_hook)(int code);
@@ -114,6 +115,9 @@ void			ftm_update_window(t_ftm_window *window);
 void			ftm_update_hooks(t_ftm_window *window);
 void			ftm_window_loop(t_ftm_window *window);
 void			ftm_window_wipe(t_ftm_window *window);
+
+void			ftm_window_resize_e(t_ftm_window *window, t_size size);
+void			ftm_window_fullscreen(t_ftm_window *window);
 
 unsigned int	*ftm_image_pixel(t_ftm_image *image, t_coords coords);
 unsigned int	ftm_remove_pixel_transparency(unsigned int value);

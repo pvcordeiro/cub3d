@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:21:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/06 20:45:21 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/06 22:32:27 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,10 @@ static void	hud_keys(t_hud *hud, int key, bool down)
     if (key == XK_h && down)
         hud->enabled = !hud->enabled;
     if (key == XK_F11 && down)
+	{
+		ftm_window_fullscreen(window);
 		ft_ext_fullscreen((t_xvar *)window->display, (t_win_list *)window->win);
+	}
 	if (!hud->enabled)
 		return ;
 	hud_debug_keys(&hud->debug, key, down);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:51:04 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/10 14:52:45 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/06 22:28:48 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define WINDOW_H
 
 # include <ft_mlx_utils.h>
+# include <X11/extensions/Xrandr.h>
+# include <mlx_int.h>
 
 int	window_loop_hook(void *window);
 int window_key_down_hook(int key, void *window);

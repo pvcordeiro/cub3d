@@ -1,5 +1,5 @@
 
-//TODO XDisplayHeight(xvar->display, xvar->screen), XDisplayWidth(xvar->display, xvar->screen)
+// XDisplayHeight(xvar->display, xvar->screen), XDisplayWidth(xvar->display, xvar->screen)
 
 #include	"mlx_int.h"
 
