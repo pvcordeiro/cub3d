@@ -6,7 +6,7 @@
 #    By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/26 17:16:21 by afpachec          #+#    #+#              #
-#    Updated: 2025/06/06 17:18:17 by paude-so         ###   ########.fr        #
+#    Updated: 2025/06/06 17:30:17 by paude-so         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 MAPS = $(wildcard maps/*.cub)
 UNAME_S = $(shell uname -s)
 
+check_flag = $(shell $(CC) $(1) -E -c /dev/null -o /dev/null 2>/dev/null && echo 1 || echo 0)
 ifeq ($(UNAME_S),Darwin)
 	LIBS += -L /opt/homebrew/lib
 	INCLUDES += -I /opt/X11/include
