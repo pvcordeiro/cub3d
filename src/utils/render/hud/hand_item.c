@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 23:28:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/05 00:41:16 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/06 19:44:42 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_ftm_pitc_config	get_pitc_config(t_ftm_image *canvas, t_ftm_image *image)
 		.height = (canvas->size.height / 1.5) * ((double)image->size.width / image->size.height)
 	};
 	return ((t_ftm_pitc_config){
-		.coords = (t_coords){(canvas->size.width / 1.2) - (new_size.width / 2),
+		.coords = (t_coords){(canvas->size.width / 2) - (new_size.width / 2),
 			(canvas->size.height / 2) - (new_size.height / 2), 0},
 		.crop = false,
 		.resize = true,

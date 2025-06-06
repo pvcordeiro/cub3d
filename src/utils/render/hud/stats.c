@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 22:14:35 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/05 00:41:31 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/06 19:44:12 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,39 +37,60 @@ void	render_health_text(t_game *game, t_ftm_image *canvas)
 	free(health_text);
 }
 
+static t_size	get_hand_item_size(t_ftm_image *image, double max_w, double max_h)
+{
+    t_size		item_size;
+    double		aspect_ratio;
+
+    aspect_ratio = (double)image->size.width / image->size.height;
+    if (aspect_ratio > 1.0)
+    {
+        item_size.width = max_w;
+        item_size.height = max_w / aspect_ratio;
+        if (item_size.height > max_h)
+        {
+            item_size.height = max_h;
+            item_size.width = max_h * aspect_ratio;
+        }
+		return (item_size);
+    }
+	item_size.height = max_h;
+	item_size.width = max_h * aspect_ratio;
+	if (item_size.width > max_w)
+	{
+		item_size.width = max_w;
+		item_size.height = max_w / aspect_ratio;
+	}
+	return (item_size);
+}
+
 void	render_hand_item_icon(t_game *game, t_ftm_image *canvas)
 {
-	t_item		*item;
-	t_entity	*entity;
-	t_size		item_size;
-	t_ftm_image	*image;
+    t_item		*item;
+    t_entity	*entity;
+    t_ftm_image	*image;
+    t_size		item_size;
 
-	entity = (t_entity *)game->player;
-	if (!entity)
-		return ;
-	if (entity->inventory_index < 0
-		|| entity->inventory_index >= INVENTORY_SIZE)
-		return ;
-	item = entity->inventory[entity->inventory_index];
-	if (!item)
-		return ;
-	image = get_sprite_image(item->icon_sprite);
-	item_size = (t_size){
-		.width = (canvas->size.height * 0.33) * ((double)image->size.width / image->size.height),
-		.height = canvas->size.height * 0.33
-	};
-	ftm_put_image_to_canvas(canvas, image,
-		(t_ftm_pitc_config){
-		.coords = (t_coords){canvas->size.width - item_size.width - 10,
-			(canvas->size.height * 0.98) - item_size.height - 10, 0},
-		.crop = false,
-		.crop_start = (t_coords){0, 0, 0},
-		.crop_end = (t_coords){0, 0, 0},
-		.resize = true,
-		.size = item_size,
-		.pixel_modifier_data = NULL,
-		.pixel_modifier = NULL
-	});
+    entity = (t_entity *)game->player;
+    if (!entity)
+        return ;
+    if (entity->inventory_index < 0
+        || entity->inventory_index >= INVENTORY_SIZE)
+        return ;
+    item = entity->inventory[entity->inventory_index];
+    if (!item)
+        return ;
+    image = get_sprite_image(item->icon_sprite);
+	item_size = get_hand_item_size(image, canvas->size.width * 0.15, canvas->size.height * 0.10);
+    ftm_put_image_to_canvas(canvas, image,
+        (t_ftm_pitc_config){
+        .coords = (t_coords){(canvas->size.width * 0.87) - (item_size.width / 2),
+            (canvas->size.height * 0.92) - (item_size.height / 2), 0},
+        .crop = false,
+        .resize = true,
+        .size = item_size,
+        .pixel_modifier = NULL
+    });
 }
 
 void	render_stats(t_game *game, t_ftm_image *canvas)
