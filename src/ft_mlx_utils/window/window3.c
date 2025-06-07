@@ -6,7 +6,7 @@
 /*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 22:21:31 by paude-so          #+#    #+#             */
-/*   Updated: 2025/06/07 09:51:47 by pvcordeiro       ###   ########.fr       */
+/*   Updated: 2025/06/07 10:27:17 by pvcordeiro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	ftm_window_resize_e(t_ftm_window *window, t_size size)
 	ftm_update_hooks(window);
 	ftm_free_image(window->canvas);
 	window->canvas = ftm_image_new(window, size);
+	cub3d()->game.camera.rays = size.width; //TODO make it so that all the items use canvas.width instead of having to set manually
 }
 
 void	ftm_window_fullscreen(t_ftm_window *window)
