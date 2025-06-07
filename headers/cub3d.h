@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/07 16:41:38 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/07 16:41:54 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 // MLX
 # include <mlx.h>
 # include <mlx_int.h>
-# include <X11/extensions/Xrandr.h>
 
 // Internal Libs
 # include <ft_error.h>
