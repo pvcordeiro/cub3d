@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/07 16:46:07 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/07 16:52:40 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@
 // Player Config
 # define PLAYER_RAYS_NO_HIT_LENGTH 50.0
 # define PLAYER_FOV 73.5
-# define PLAYER_RAYS W_WIDTH
 # define PLAYER_RAY_SUBRAYS 5
 # define PLAYER_MOUSE_LOOK_VELOCITY 30.0
 # define PLAYER_KEY_LOOK_VELOCITY 90.0

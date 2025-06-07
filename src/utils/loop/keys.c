@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:21:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/07 16:20:50 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/07 16:59:23 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,12 @@ static void	hud_debug_keys(t_hud_debug *hud_debug, int key, bool down)
 	if (!hud_debug->enabled)
 		return ;
 	if (key == XK_c && down)
-		cub3d()->game.camera.rays /= 1.5;
+	{
+		if (cub3d()->game.camera.rays % 2)
+			cub3d()->game.camera.rays += 1;
+		else
+			cub3d()->game.camera.rays /= 2;
+	}
 	if (key == XK_v && down)
 		cub3d()->game.camera.rays = cub3d()->window.canvas->size.width;
 	if (key == XK_b && down)
