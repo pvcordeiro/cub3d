@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:21:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/06 22:32:27 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/07 12:20:38 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,18 @@ static void	hud_minimap_keys(int key, bool down)
 
 static void	hud_keys(t_hud *hud, int key, bool down)
 {
-	t_ftm_window *window = &cub3d()->window;
+	int	*fullscreen;
+	t_ftm_window *window;
+
+	window = &cub3d()->window;
+	fullscreen = &window->fullscreen;
     if (key == XK_h && down)
         hud->enabled = !hud->enabled;
     if (key == XK_F11 && down)
 	{
 		ftm_window_fullscreen(window);
-		ft_ext_fullscreen((t_xvar *)window->display, (t_win_list *)window->win);
+		// ft_ext_fullscreen((t_xvar *)window->display, (t_win_list *)window->win);
+		set_window_fullscreen((t_xvar *)window->display, (t_win_list *)window->win, fullscreen);
 	}
 	if (!hud->enabled)
 		return ;

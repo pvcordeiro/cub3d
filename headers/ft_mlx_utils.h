@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:46:27 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/06 22:31:34 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/07 12:20:28 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 // External Libs
 # include <mlx.h>
 # include <X11/X.h>
+# include <mlx_int.h>
 
 // Internal Libs
 # include <ft_utils.h>
@@ -118,6 +119,7 @@ void			ftm_window_wipe(t_ftm_window *window);
 
 void			ftm_window_resize_e(t_ftm_window *window, t_size size);
 void			ftm_window_fullscreen(t_ftm_window *window);
+void 			set_window_fullscreen(t_xvar *xvar, t_win_list *wind, int *fullscreen);
 
 unsigned int	*ftm_image_pixel(t_ftm_image *image, t_coords coords);
 unsigned int	ftm_remove_pixel_transparency(unsigned int value);
