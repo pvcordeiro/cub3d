@@ -1,6 +1,7 @@
 obj/
 cub3d
 headers/mlx.h
+headers/mlx_int.h
 lib/libmlx.a
 lib/minilibx-linux
 .vscode

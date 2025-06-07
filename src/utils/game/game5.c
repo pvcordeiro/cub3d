@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 17:18:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/04 16:12:31 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/07 16:53:35 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,10 @@ void	init_sounds_e(t_game *game)
 		return ;
 }
 
-void	init_camera(t_game *game)
+void	init_camera(t_game *game, t_ftm_window *window)
 {
 	game->camera.entity = (t_entity *)game->player;
-	game->camera.rays = PLAYER_RAYS;
+	game->camera.rays = window->canvas->size.width;
 	game->camera.fov = PLAYER_FOV;
 }
 

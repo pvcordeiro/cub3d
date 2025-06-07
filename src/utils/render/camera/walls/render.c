@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 00:45:35 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/27 01:04:16 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/07 16:38:17 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,12 +104,9 @@ void	render_walls(t_game *game, t_ftm_image *canvas, t_camera *camera)
 	index_scaler = (camera->rays / CAMERA_THREADS);
 	while (++i < CAMERA_THREADS)
 	{
-		if (!trrd[i].canvas)
-		{
-			trrd[i].canvas = canvas;
-			trrd[i].camera = camera;
-			trrd[i].game = game;
-		}
+		trrd[i].canvas = canvas;
+		trrd[i].camera = camera;
+		trrd[i].game = game;
 		trrd[i].start = index_scaler * i;
 		trrd[i].end = index_scaler * (i + 1);
 		game->camera_threads[i]->routine = thread_render_rays;
