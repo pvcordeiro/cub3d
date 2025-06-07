@@ -22,16 +22,37 @@ typedef struct {
 #define MWM_HINTS_DECORATIONS   (1L << 1)
 RRMode	saved_mode = 0;
 
-void set_window_decorations(Display *display, Window win, int decorated)
+// void set_window_decorations(Display *display, Window win, int decorated)
+// {
+//     MotifWmHints hints;
+//     Atom prop = XInternAtom(display, "_MOTIF_WM_HINTS", False);
+
+//     hints.flags = MWM_HINTS_DECORATIONS;
+//     hints.decorations = decorated ? 1 : 0;
+
+//     XChangeProperty(display, win, prop, prop, 32, PropModeReplace,
+//                     (unsigned char *)&hints, 5);
+//     XFlush(display);
+// }
+
+void set_window_fullscreen(Display *display, Window win, int fullscreen)
 {
-    MotifWmHints hints;
-    Atom prop = XInternAtom(display, "_MOTIF_WM_HINTS", False);
+    Atom wm_state = XInternAtom(display, "_NET_WM_STATE", False);
+    Atom fullscreen_atom = XInternAtom(display, "_NET_WM_STATE_FULLSCREEN", False);
 
-    hints.flags = MWM_HINTS_DECORATIONS;
-    hints.decorations = decorated ? 1 : 0;
+    XEvent xev = {0};
+    xev.type = ClientMessage;
+    xev.xclient.window = win;
+    xev.xclient.message_type = wm_state;
+    xev.xclient.format = 32;
+    xev.xclient.data.l[0] = fullscreen ? 1 : 0; // 1 = add, 0 = remove
+    xev.xclient.data.l[1] = fullscreen_atom;
+    xev.xclient.data.l[2] = 0;
+    xev.xclient.data.l[3] = 0;
+    xev.xclient.data.l[4] = 0;
 
-    XChangeProperty(display, win, prop, prop, 32, PropModeReplace,
-                    (unsigned char *)&hints, 5);
+    XSendEvent(display, DefaultRootWindow(display), False,
+               SubstructureRedirectMask | SubstructureNotifyMask, &xev);
     XFlush(display);
 }
 
@@ -50,7 +71,8 @@ int			ft_ext_fullscreen(t_xvar *xvar, t_win_list *win)
 
   fullscreen = &cub3d()->window.fullscreen;
   *fullscreen = !*fullscreen;
-  set_window_decorations(xvar->display, win->window, !*fullscreen);
+//   set_window_decorations(xvar->display, win->window, !*fullscreen);
+  set_window_fullscreen(xvar->display, win->window, *fullscreen); //TODO test on school pc
   if (!XGetWindowAttributes(xvar->display, win->window, &watt))
     return (0);
   res = XRRGetScreenResources(xvar->display, xvar->root);
