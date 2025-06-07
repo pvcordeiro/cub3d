@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+         #
+#    By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/26 17:16:21 by afpachec          #+#    #+#              #
-#    Updated: 2025/06/07 14:21:47 by paude-so         ###   ########.fr        #
+#    Updated: 2025/06/07 15:18:59 by pvcordeiro       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,9 +69,14 @@ fclean: clean
 	@rm -rf $(NAME)
 	@rm -rf lib/libmlx.a
 	@rm -rf headers/mlx.h
-	@rm -rf assets/wolf3d
 
 re: fclean all
+
+sprites: re
+	@rm -rf $(NAME)
+	@rm -rf lib/libmlx.a
+	@rm -rf headers/mlx.h
+	@rm -rf assets/wolf3d
 
 dev: $(NAME)
 	./$(NAME) maps/e1m1.cub
