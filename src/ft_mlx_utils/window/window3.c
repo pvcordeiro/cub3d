@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 22:21:31 by paude-so          #+#    #+#             */
-/*   Updated: 2025/06/06 22:40:44 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/07 09:51:47 by pvcordeiro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ void	ftm_window_fullscreen(t_ftm_window *window)
 	t_xvar *xvar;
 
 	xvar = (void *)window->display;
+	if (!window->fullscreen)
 	ftm_window_resize_e(window, (t_size){XDisplayWidth(xvar->display,
 		xvar->screen), XDisplayHeight(xvar->display, xvar->screen)});
+	else
+		ftm_window_resize_e(window, (t_size){W_WIDTH, W_HEIGHT});
 }

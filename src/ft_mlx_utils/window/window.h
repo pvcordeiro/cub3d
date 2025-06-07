@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:51:04 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/06 22:28:48 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/07 09:51:45 by pvcordeiro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <ft_mlx_utils.h>
 # include <X11/extensions/Xrandr.h>
 # include <mlx_int.h>
+# include <cub3d.h>
 
 int	window_loop_hook(void *window);
 int window_key_down_hook(int key, void *window);
