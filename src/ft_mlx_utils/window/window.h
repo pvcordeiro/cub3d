@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:51:04 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/07 13:49:11 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/07 16:49:31 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define WINDOW_H
 
 # include <ft_mlx_utils.h>
-# include <mlx_int.h>
 # include <cub3d.h>
 
 int	window_loop_hook(void *window);
