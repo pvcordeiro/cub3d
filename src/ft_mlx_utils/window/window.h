@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:51:04 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/07 09:51:45 by pvcordeiro       ###   ########.fr       */
+/*   Updated: 2025/06/07 13:49:11 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define WINDOW_H
 
 # include <ft_mlx_utils.h>
-# include <X11/extensions/Xrandr.h>
 # include <mlx_int.h>
 # include <cub3d.h>
 

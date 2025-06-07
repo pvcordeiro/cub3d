@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:21:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/07 12:20:38 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/07 14:03:25 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	hud_debug_keys(t_hud_debug *hud_debug, int key, bool down)
 	if (key == XK_c && down)
 		cub3d()->game.camera.rays /= 1.5;
 	if (key == XK_v && down)
-		cub3d()->game.camera.rays = PLAYER_RAYS;
+		cub3d()->game.camera.rays = cub3d()->window.canvas->size.width;
 	if (key == XK_b && down)
 		cub3d()->game.player->billboard.entity.hard = !cub3d()->game.player->billboard.entity.hard;
 	if (key == XK_n && down)
@@ -60,31 +60,27 @@ static void	hud_minimap_keys(int key, bool down)
 		cub3d()->game.hud.minimap.zoom_level = 5.0;
 }
 
-static void	hud_keys(t_hud *hud, int key, bool down)
+static void	hud_keys(t_game *game, t_ftm_window *window, int key, bool down)
 {
-	int	*fullscreen;
-	t_ftm_window *window;
-
-	window = &cub3d()->window;
-	fullscreen = &window->fullscreen;
     if (key == XK_h && down)
-        hud->enabled = !hud->enabled;
+        game->hud.enabled = !game->hud.enabled;
     if (key == XK_F11 && down)
 	{
-		ftm_window_fullscreen(window);
-		// ft_ext_fullscreen((t_xvar *)window->display, (t_win_list *)window->win);
-		set_window_fullscreen((t_xvar *)window->display, (t_win_list *)window->win, fullscreen);
+		ftm_get_res(window, &game->camera);
+		window->fullscreen = !window->fullscreen;
+		ftm_set_fullscreen(((t_xvar *)window->display)->display,
+        ((t_win_list *)window->win)->window, window->fullscreen);
 	}
-	if (!hud->enabled)
+	if (!game->hud.enabled)
 		return ;
-	hud_debug_keys(&hud->debug, key, down);
+	hud_debug_keys(&game->hud.debug, key, down);
 	hud_minimap_keys(key, down);
 }
 
 void	key_hook(int key, bool down)
 {
 	call_entity_keys(cub3d()->game.entities, key, down);
-	hud_keys(&cub3d()->game.hud, key, down);
+	hud_keys(&cub3d()->game, &cub3d()->window, key, down);
 	if (key == XK_Escape)
 		cub3d_exit(0);
 }

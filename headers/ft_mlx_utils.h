@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:46:27 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/07 12:20:28 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/07 14:09:08 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 // Line drawing step size (Used for diagonal lines)
 # define FT_MLX_UTILS_DRAW_LINE_STEP 1024
 
+typedef struct s_camera t_camera;
+
 typedef struct s_ftm_image
 {
 	void			*display;
@@ -46,7 +48,7 @@ typedef struct s_ftm_window
 	void		*display;
 	t_ftm_image	*canvas;
 	bool		using_mouse;
-	int			fullscreen;
+	bool		fullscreen;
 	char		*title;
 	void		(*loop_hook)(void);
 	void		(*key_hook)(int key, bool down);
@@ -117,9 +119,9 @@ void			ftm_update_hooks(t_ftm_window *window);
 void			ftm_window_loop(t_ftm_window *window);
 void			ftm_window_wipe(t_ftm_window *window);
 
-void			ftm_window_resize_e(t_ftm_window *window, t_size size);
-void			ftm_window_fullscreen(t_ftm_window *window);
-void 			set_window_fullscreen(t_xvar *xvar, t_win_list *wind, int *fullscreen);
+void			ftm_window_resize_e(t_ftm_window *window, t_camera *camera, t_size size);
+void			ftm_get_res(t_ftm_window *window, t_camera *camera);
+void 			ftm_set_fullscreen(Display *display, Window win, bool fullscreen);
 
 unsigned int	*ftm_image_pixel(t_ftm_image *image, t_coords coords);
 unsigned int	ftm_remove_pixel_transparency(unsigned int value);

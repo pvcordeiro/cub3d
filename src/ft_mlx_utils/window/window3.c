@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   window3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 22:21:31 by paude-so          #+#    #+#             */
-/*   Updated: 2025/06/07 10:27:17 by pvcordeiro       ###   ########.fr       */
+/*   Updated: 2025/06/07 14:11:39 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "window.h"
 
-void	ftm_window_resize_e(t_ftm_window *window, t_size size)
+void	ftm_window_resize_e(t_ftm_window *window, t_camera *camera, t_size size)
 {
 	char	*title;
 
@@ -23,17 +23,17 @@ void	ftm_window_resize_e(t_ftm_window *window, t_size size)
 	ftm_update_hooks(window);
 	ftm_free_image(window->canvas);
 	window->canvas = ftm_image_new(window, size);
-	cub3d()->game.camera.rays = size.width; //TODO make it so that all the items use canvas.width instead of having to set manually
+	camera->rays = size.width;
 }
 
-void	ftm_window_fullscreen(t_ftm_window *window)
+void	ftm_get_res(t_ftm_window *window, t_camera *camera)
 {
 	t_xvar *xvar;
 
 	xvar = (void *)window->display;
 	if (!window->fullscreen)
-	ftm_window_resize_e(window, (t_size){XDisplayWidth(xvar->display,
+	ftm_window_resize_e(window, camera, (t_size){XDisplayWidth(xvar->display,
 		xvar->screen), XDisplayHeight(xvar->display, xvar->screen)});
 	else
-		ftm_window_resize_e(window, (t_size){W_WIDTH, W_HEIGHT});
+		ftm_window_resize_e(window, camera, (t_size){W_WIDTH, W_HEIGHT});
 }
