@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:46:27 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/07 14:09:08 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/07 16:16:46 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,9 +119,10 @@ void			ftm_update_hooks(t_ftm_window *window);
 void			ftm_window_loop(t_ftm_window *window);
 void			ftm_window_wipe(t_ftm_window *window);
 
-void			ftm_window_resize_e(t_ftm_window *window, t_camera *camera, t_size size);
-void			ftm_get_res(t_ftm_window *window, t_camera *camera);
-void 			ftm_set_fullscreen(Display *display, Window win, bool fullscreen);
+void			ftm_window_resize_e(t_ftm_window *window, t_size size);
+t_size			ftm_window_toggle_fullscreen(t_ftm_window *window, t_size prev_size);
+t_size			ftm_get_screen_size(t_ftm_window *window);
+void 			ftm_window_notify_fullscreen(t_ftm_window *window);
 
 unsigned int	*ftm_image_pixel(t_ftm_image *image, t_coords coords);
 unsigned int	ftm_remove_pixel_transparency(unsigned int value);

@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:21:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/07 14:03:25 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/07 16:20:50 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,7 @@ static void	hud_keys(t_game *game, t_ftm_window *window, int key, bool down)
     if (key == XK_h && down)
         game->hud.enabled = !game->hud.enabled;
     if (key == XK_F11 && down)
-	{
-		ftm_get_res(window, &game->camera);
-		window->fullscreen = !window->fullscreen;
-		ftm_set_fullscreen(((t_xvar *)window->display)->display,
-        ((t_win_list *)window->win)->window, window->fullscreen);
-	}
+		game->camera.rays = ftm_window_toggle_fullscreen(window, (t_size){W_WIDTH, W_HEIGHT}).width;
 	if (!game->hud.enabled)
 		return ;
 	hud_debug_keys(&game->hud.debug, key, down);

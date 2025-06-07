@@ -3,29 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   window1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:38:00 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/18 10:42:03 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/07 16:16:28 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "window.h"
 
-int	window_loop_hook(void *window)
+int	window_loop_hook(void *data)
 {
 	static bool	previous_using_mouse;
+	t_ftm_window *window;
 
-	if (((t_ftm_window *)window)->using_mouse != previous_using_mouse)
+	window = data;
+	if (window->using_mouse != previous_using_mouse)
 	{
-		previous_using_mouse = ((t_ftm_window *)window)->using_mouse;
+		previous_using_mouse = window->using_mouse;
 		if (previous_using_mouse)
-			mlx_mouse_hide(((t_ftm_window *)window)->display, ((t_ftm_window *)window)->win);
+			mlx_mouse_hide(window->display, window->win);
 		else
-			mlx_mouse_show(((t_ftm_window *)window)->display, ((t_ftm_window *)window)->win);
+			mlx_mouse_show(window->display, window->win);
 	}
-	if (((t_ftm_window *)window)->loop_hook)
-		((t_ftm_window *)window)->loop_hook();
+	if (window->loop_hook)
+		window->loop_hook();
 	return (0);
 }
 
