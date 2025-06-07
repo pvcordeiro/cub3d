@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:46:27 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/07 16:16:46 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/07 16:48:11 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@
 
 // Line drawing step size (Used for diagonal lines)
 # define FT_MLX_UTILS_DRAW_LINE_STEP 1024
-
-typedef struct s_camera t_camera;
 
 typedef struct s_ftm_image
 {
