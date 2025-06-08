@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:21:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/07 16:59:23 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/08 15:14:42 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void	hud_keys(t_game *game, t_ftm_window *window, int key, bool down)
 {
     if (key == XK_h && down)
         game->hud.enabled = !game->hud.enabled;
-    if (key == XK_F11 && down)
+    if (key == XK_F1 && down)
 		game->camera.rays = ftm_window_toggle_fullscreen(window, (t_size){W_WIDTH, W_HEIGHT}).width;
 	if (!game->hud.enabled)
 		return ;

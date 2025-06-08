@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_mlx_utils.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:46:27 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/07 16:48:11 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/08 15:16:26 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 // External Libs
 # include <mlx.h>
 # include <X11/X.h>
-# include <mlx_int.h>
+# include <X11/Xlib.h>
+# include <X11/Xutil.h>
 
 // Internal Libs
 # include <ft_utils.h>
@@ -87,6 +88,40 @@ typedef struct s_ftm_rectangle
 	unsigned int	border_color;
 	t_size			border_size;
 }	t_ftm_rectangle;
+
+typedef struct s_win_list
+{
+	Window				window;
+	GC					gc;
+	struct s_win_list	*next;
+	int					(*mouse_hook)();
+	int					(*key_hook)();
+	int					(*expose_hook)();
+	void				*mouse_param;
+	void				*key_param;
+	void				*expose_param;
+}	t_win_list;
+
+typedef struct s_xvar
+{
+	Display		*display;
+	Window		root;
+	int			screen;
+	int			depth;
+	Visual		*visual;
+	Colormap	cmap;
+	int			private_cmap;
+	t_win_list	*win_list;
+	int			(*loop_hook)();
+	void		*loop_param;
+	int			use_xshm;
+	int			pshm_format;
+	int			do_flush;
+	int			decrgb[6];
+	Atom		wm_delete_window;
+	Atom		wm_protocols;
+	int 		end_loop;
+}	t_xvar;
 
 void			ftm_free_image(void *image);
 t_ftm_image		*ftm_image_from_file(t_ftm_window *window, char *path);
