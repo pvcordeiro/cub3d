@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   methods0.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/07 19:40:50 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/08 17:39:56 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,38 @@ void	clear_item(void *data)
 	(void)data;
 }
 
+void	item_use(t_item *item)
+{
+	if (!item->user)
+		return ;
+	item->last_use = ft_get_time();
+	fta_play(item->use_sound);
+}
+
 void	item_frame(t_item *item)
 {
-	bool	play_sound1;
-	bool	play_sound2;
+	bool	can_use1;
+	bool	can_use2;
 
-	play_sound1 = !item->single_use && item->using
+	if (item->user && !item->can_use)
+	{
+		item->screen_sprite = item->_screen_sprite;
+		if (item->cant_sound
+			&& ft_get_time() - item->last_cant_use_sound_play >= item->cant_sound->length)
+		{
+			item->last_cant_use_sound_play = ft_get_time();
+			fta_play(item->cant_sound);
+		}
+		return ;
+	}
+	can_use1 = !item->single_use && item->user
 		&& item->use_sound
 		&& item->screen_sprite
-		&& ft_get_time() - item->last_sound_play >= item->screen_sprite->update_delay * 2;
-	play_sound2 = item->single_use && !item->already_using && item->using;
-	if (play_sound1 || play_sound2)
-	{
-		item->last_sound_play = ft_get_time();
-		fta_play(item->use_sound);
-	}
-	if (((!item->single_use && item->using) || (item->single_use && !item->already_using && item->using)) && item->screen_use_sprite)
+		&& ft_get_time() - item->last_use >= item->screen_sprite->update_delay * 2;
+	can_use2 = item->single_use && !item->already_using && item->user;
+	if ((can_use1 || can_use2) && item->use)
+		item->use(item);
+	if (((!item->single_use && item->user) || (item->single_use && !item->already_using && item->user)) && item->screen_use_sprite)
 	{
 		item->screen_sprite = item->screen_use_sprite;
 		item->screen_sprite->index = 0;
@@ -40,5 +56,5 @@ void	item_frame(t_item *item)
 	}
 	else
 		item->screen_sprite = item->_screen_sprite;
-	item->already_using = item->using;
+	item->already_using = !!item->user;
 }

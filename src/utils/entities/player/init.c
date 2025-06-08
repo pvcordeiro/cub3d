@@ -6,18 +6,36 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 00:50:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/04 18:48:14 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/08 17:21:21 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "player.h"
 
+static void	set_keys(t_game *game, char identifier)
+{
+	char	*identifiers;
+	char	*key;
+	int		i;
+
+	identifiers = "NSWE";
+	i = -1;
+	key = NULL;
+	while (identifiers[++i])
+	{
+		key = (free(key), ft_strf("%c_CONTROLLER", identifier));
+		if (key && !ft_hashmap_get_value(game->map->types, key))
+			ft_hashmap_set(game->map->types, key, "PLAYER", NULL);
+		key = (free(key), ft_strf("%c_MAX_HEALTH", identifier));
+		if (key && !ft_hashmap_get_value(game->map->types, key))
+			ft_hashmap_set(game->map->types, key,
+				ft_hashmap_get_value(game->map->types, "MAX_HEALTH"), NULL);
+	}
+}
+
 void	init_player(t_game *game, t_ftm_window *window, t_player *player, char identifier)
 {
-	ft_hashmap_set(game->map->types, "N_CONTROLLER", "PLAYER", NULL);
-	ft_hashmap_set(game->map->types, "S_CONTROLLER", "PLAYER", NULL);
-	ft_hashmap_set(game->map->types, "W_CONTROLLER", "PLAYER", NULL);
-	ft_hashmap_set(game->map->types, "E_CONTROLLER", "PLAYER", NULL);
+	set_keys(game, identifier);
 	init_billboard(game, window, (t_billboard *)player, identifier);
 	player->billboard.entity.type = ENTITY_PLAYER;
 	player->billboard.entity.frame = player_frame;
@@ -30,8 +48,6 @@ void	init_player(t_game *game, t_ftm_window *window, t_player *player, char iden
 		player->billboard.entity.coords.yaw = 90.0;
 	else if (identifier == 'W')
 		player->billboard.entity.coords.yaw = 180.0;
-	player->billboard.entity.max_health = 100;
-	player->billboard.entity.health = player->billboard.entity.max_health;
 	player->billboard.entity.size = (t_dsize){PLAYER_WIDTH, PLAYER_HEIGHT};
 	player->billboard.entity.collision_sound = ft_hashmap_get_value(game->sounds, "COLLISION");
 }

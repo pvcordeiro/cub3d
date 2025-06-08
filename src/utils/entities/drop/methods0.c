@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/06 22:05:10 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/08 17:35:48 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,25 @@ static void	set_sprite(t_drop	*drop)
 		drop->billboard.sprites[i] = item->icon_sprite;
 }
 
+static bool	add_ammo_if_already_has_the_weapon(t_entity *entity, t_weapon *weapon)
+{
+	int			i;
+	t_weapon	*inv_weapon;
+
+	i = -1;
+	entity->ammo += weapon->ammo_usage * 10;
+	while (++i < INVENTORY_SIZE)
+	{
+		inv_weapon = (t_weapon *)entity->inventory[i];
+		if (!inv_weapon || !inv_weapon->item.weapon)
+			continue ;
+		if (inv_weapon->item.identifier != weapon->item.identifier)
+			continue ;
+		return (true);
+	}
+	return (false);
+}
+
 static void	do_the_thing(t_game *game, t_drop *drop)
 {
 	int			i;
@@ -51,12 +70,13 @@ static void	do_the_thing(t_game *game, t_drop *drop)
 			continue ;
 		if (drop->auto_use)
 		{
-			item->using = true;
+			item->user = entity;
 			drop->billboard.entity.active = false;
 		}
 		else if (drop->auto_pickup)
 		{
-			add_item_to_inventory(entity, item);
+			if (!item->weapon || !add_ammo_if_already_has_the_weapon(entity, (t_weapon *)item))
+				add_item_to_inventory(entity, item);
 			drop->billboard.entity.active = false;
 		}
 	}
@@ -67,6 +87,8 @@ void	drop_frame(t_entity *entity, double delta_time)
 	t_drop	*drop;
 
 	billboard_frame(entity, delta_time);
+	if (!entity->active)
+		return ;
 	drop = (t_drop *)entity;
 	set_sprite(drop);
 	do_the_thing(&cub3d()->game, drop);

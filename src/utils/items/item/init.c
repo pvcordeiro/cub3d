@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 00:50:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/08 14:37:04 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:46:23 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	init_item(t_game *game, t_ftm_window *window, t_item *item,
 		return ;
 	item->clear = clear_item;
 	item->frame = item_frame;
+	item->use = item_use;
 	item->identifier = identifier;
 	item->name = hashmap_get_with_identifier(game->map->types, identifier,
 		"NAME");
@@ -39,6 +40,8 @@ void	init_item(t_game *game, t_ftm_window *window, t_item *item,
 		identifier, "SINGLE_USE"), "TRUE");
 	item->use_sound = hashmap_get_with_identifier(game->sounds,
 		identifier, "USE");
+	item->cant_sound = hashmap_get_with_identifier(game->sounds,
+		identifier, "CANT_USE");
 }
 
 t_item	*item_new(t_game *game, t_ftm_window *window, char identifier)

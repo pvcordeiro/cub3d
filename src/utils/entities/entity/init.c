@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 00:50:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/08 14:10:41 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:01:48 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ void	init_entity(t_game *game, t_ftm_window *window, t_entity *entity, char iden
 	entity->clear = clear_entity;
 	entity->action = entity_action;
 	entity->shot = entity_shot;
+	entity->max_health = ft_atoi(hashmap_get_with_identifier(game->map->types, identifier,
+			"MAX_HEALTH"));
+	entity->health = entity->max_health;
 	entity->targetable = !ft_strequal(
 		hashmap_get_with_identifier(game->map->types, identifier,
 			"TARGETABLE"), "FALSE");

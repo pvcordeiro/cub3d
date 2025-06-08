@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   entities0.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 20:49:46 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/04 23:24:16 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/08 17:12:04 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ void	call_entity_frames(t_list *entities, t_fps *fps)
 	while (curr)
 	{
 		entity = curr->data;
-		if (entity->active)
-			entity->frame(entity, fps->delta_time);
+		entity->frame(entity, fps->delta_time);
 		curr = curr->next;
 	}
 }
@@ -103,6 +102,8 @@ t_entity_creator	get_entity_creator(t_identifiers *identifiers, char identifier)
 		return ((void *)billboard_new);
 	if (ft_list_any(identifiers->drop, (void *)ft_str_equal_char_ptr, &identifier))
 		return ((void *)drop_new);
+	if (ft_list_any(identifiers->character, (void *)ft_str_equal_char_ptr, &identifier))
+		return ((void *)character_new);
 	return (NULL);
 }
 

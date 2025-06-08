@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_audio.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 11:01:45 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/22 20:25:07 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:50:33 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_fta_audio
 {
 	ma_sound			sound[FT_AUDIO_SOUND_INSTANCES];
 	t_fta_audio_config	config;
+	float				length;
 }	t_fta_audio;
 
 typedef struct s_fta_engine

@@ -6,33 +6,29 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 00:50:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/08 16:14:28 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:01:20 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "weapon.h"
+#include "character.h"
 
-void	init_weapon(t_game *game, t_ftm_window *window, t_weapon *weapon,
-	char identifier)
+void	init_character(t_game *game, t_ftm_window *window, t_character *character, char identifier)
 {
-	if (!weapon)
-		return ;
-	init_item(game, window, (t_item *)weapon, identifier);
-	weapon->item.weapon = true;
-	weapon->item.clear = clear_weapon;
-	weapon->item.frame = weapon_frame;
-	weapon->item.use = weapon_use;
-	weapon->damage = ft_atoi(hashmap_get_with_identifier(game->map->types, identifier, "DAMAGE"));
-	weapon->ammo_usage = ft_atoi(hashmap_get_with_identifier(game->map->types, identifier, "AMMO_USAGE"));
+	init_billboard(game, window, (t_billboard *)character, identifier);
+	character->billboard.entity.type = ENTITY_CHARACTER;
+	character->billboard.entity.frame = character_frame;
+	character->billboard.entity.clear = clear_character;
+	character->billboard.entity.action = character_action;
+	character->billboard.entity.shot = character_shot;
 }
 
-t_weapon	*weapon_new(t_game *game, t_ftm_window *window, char identifier)
+t_character	*character_new(t_game *game, t_ftm_window *window, char identifier)
 {
-	t_weapon	*weapon;
+	t_character	*character;
 
-	weapon = ft_calloc(1, sizeof(t_weapon));
-	if (!weapon)
+	character = ft_calloc(1, sizeof(t_character));
+	if (!character)
 		return (NULL);
-	init_weapon(game, window, weapon, identifier);
-	return (weapon);
+	init_character(game, window, character, identifier);
+	return (character);
 }

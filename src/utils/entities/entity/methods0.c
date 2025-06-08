@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/08 13:09:39 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/08 17:58:15 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	entity_shot(t_entity *shooted, t_entity *shooter)
 	if (!weapon->item.weapon)
 		return ;
 	shooted->health -= weapon->damage;
+	if (shooted->health > shooted->max_health)
+		shooted->health = shooted->max_health;
 	if (shooted->health < 0)
 		shooted->health = 0;
 }

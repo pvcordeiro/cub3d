@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   audio0.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 11:02:20 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/04 01:26:39 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/08 17:56:44 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,10 @@ t_fta_audio	*fta_audio_new(const char *path)
 		if (result != MA_SUCCESS)
 			return (fta_free_audio(audio), NULL);
 	}
+	result = ma_sound_get_length_in_seconds(&audio->sound[0], &audio->length);
+	if (result != MA_SUCCESS)
+		return (free(audio), NULL);
+	audio->length *= 1000;
 	return (audio);
 }
 

@@ -6,33 +6,30 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/08 17:39:46 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/08 17:17:25 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "weapon.h"
+#include "ammo.h"
 
-void	clear_weapon(void *data)
+void	clear_ammo(void *data)
 {
 	clear_item(data);
 }
 
-void	weapon_use(t_item *item)
+void	ammo_use(t_item *item)
 {
-	t_weapon	*weapon;
-
 	item_use(item);
-	weapon = (t_weapon *)item;
 	if (!item->user)
 		return ;
-	if (!item->user || !item->user->target_entity || !item->user->target_entity->shot)
-		return ;
-	item->user->ammo -= weapon->ammo_usage;
-	item->user->target_entity->shot(item->user->target_entity, item->user);
+	item->user->ammo += ((t_ammo *)item)->amount;
+	if (item->user->ammo < 0)
+		item->user->ammo = 0;
 }
 
-void	weapon_frame(t_item *item)
+void	ammo_frame(t_item *item)
 {
-	item->can_use = item->user && item->user->ammo - ((t_weapon *)item)->ammo_usage >= 0;
+	item->can_use = !item->last_use;
 	item_frame(item);
 }
+

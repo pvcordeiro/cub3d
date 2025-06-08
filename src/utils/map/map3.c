@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 20:52:20 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/06 16:13:40 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:22:56 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,10 @@ static void	add_identifier_e(t_identifiers *identifiers, char *identifier, char 
 		ft_list_add(&identifiers->drop, ft_strdup(identifier), free);
 	else if (ft_strequal(type, "WEAPON"))
 		ft_list_add(&identifiers->weapon, ft_strdup(identifier), free);
+	else if (ft_strequal(type, "CHARACTER"))
+		ft_list_add(&identifiers->character, ft_strdup(identifier), free);
+	else if (ft_strequal(type, "AMMO"))
+		ft_list_add(&identifiers->ammo, ft_strdup(identifier), free);
 	else
 		fte_set("invalid identifier type");
 }

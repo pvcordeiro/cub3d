@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/08 14:27:22 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:55:17 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ typedef struct s_entity			t_entity;
 typedef struct s_camera			t_camera;
 typedef struct s_billboard		t_billboard;
 typedef struct s_player			t_player;
+typedef struct s_character		t_character;
 typedef struct s_wall			t_wall;
 typedef struct s_cub3d			t_cub3d;
 typedef struct s_game			t_game;
@@ -110,6 +111,7 @@ typedef struct s_door			t_door;
 typedef struct s_identifiers	t_identifiers;
 typedef struct s_item			t_item;
 typedef struct s_food			t_food;
+typedef struct s_ammo			t_ammo;
 typedef struct s_drop			t_drop;
 typedef t_item *(*t_item_creator)(t_game *, t_ftm_window *, char);
 typedef t_entity *(*t_entity_creator)(t_game *, t_ftm_window *, char);
@@ -130,16 +132,20 @@ struct s_item
 {
 	void			(*frame)(t_item *item);
 	void			(*clear)(void *this);
+	void			(*use)(t_item *item);
 	char			identifier;
 	char			*name;
 	char			*description;
 	bool			weapon;
 	bool			food;
-	bool			using;
+	bool			can_use;
+	t_entity		*user;
 	bool			prev_using;
 	bool			already_using;
 	bool			single_use;
-	t_time			last_sound_play;
+	t_fta_audio		*cant_sound;
+	t_time			last_cant_use_sound_play;
+	t_time			last_use;
 	t_fta_audio		*use_sound;
 	t_sprite		*icon_use_sprite;
 	t_sprite		*_icon_sprite;
@@ -155,12 +161,18 @@ struct s_food
 	int		health;
 };
 
-struct s_weapon
+struct s_ammo
 {
 	t_item	item;
-	int		damage;
-	double	range;
-	int		ammo_usage;
+	int		amount;
+};
+
+struct s_weapon
+{
+	t_item		item;
+	int			damage;
+	double		range;
+	int			ammo_usage;
 };
 
 enum e_entity_type
@@ -171,6 +183,7 @@ enum e_entity_type
 	ENTITY_DOOR,
 	ENTITY_BILLBOARD,
 	ENTITY_DROP,
+	ENTITY_CHARACTER,
 };
 
 struct s_controller
@@ -240,6 +253,11 @@ struct s_player
 	t_billboard	billboard;
 };
 
+struct s_character
+{
+	t_billboard billboard;
+};
+
 struct s_drop
 {
 	t_billboard	billboard;
@@ -282,6 +300,8 @@ struct s_identifiers
 	t_list	*food;
 	t_list	*drop;
 	t_list	*weapon;
+	t_list	*character;
+	t_list	*ammo;
 };
 
 struct s_map
@@ -330,6 +350,7 @@ struct s_hud_debug
 	char		*target_y;
 	char		*target_yaw;
 	char		*target_type;
+	char		*target_health;
 	char		*target_id;
 	char		*player_x;
 	char		*player_y;
@@ -446,6 +467,7 @@ t_door				*door_new_e(t_game *game, t_ftm_window *window, char identifier);
 t_billboard			*billboard_new(t_game *game, t_ftm_window *window, char identifier);
 t_entity			*entity_new(t_game *game, t_ftm_window *window, char identifier);
 t_drop				*drop_new(t_game *game, t_ftm_window *window, char identifier);
+t_character			*character_new(t_game *game, t_ftm_window *window, char identifier);
 
 // Items
 t_item_creator	get_item_creator(t_identifiers *identifiers, char identifier);
@@ -453,5 +475,6 @@ void			free_item(void *data);
 t_item			*item_new(t_game *game, t_ftm_window *window, char identifier);
 t_food			*food_new(t_game *game, t_ftm_window *window, char identifier);
 t_weapon		*weapon_new(t_game *game, t_ftm_window *window, char identifier);
+t_ammo			*ammo_new(t_game *game, t_ftm_window *window, char identifier);
 
 #endif

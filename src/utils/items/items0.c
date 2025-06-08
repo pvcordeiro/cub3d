@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 21:15:02 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/04 15:01:04 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:22:45 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ t_item_creator	get_item_creator(t_identifiers *identifiers, char identifier)
 		return ((void *)food_new);
 	if (ft_list_any(identifiers->weapon, (void *)ft_str_equal_char_ptr, &identifier))
 		return ((void *)weapon_new);
+	if (ft_list_any(identifiers->ammo, (void *)ft_str_equal_char_ptr, &identifier))
+		return ((void *)ammo_new);
 	return (NULL);
 }
 

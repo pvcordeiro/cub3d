@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 18:04:16 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/08 13:03:27 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/08 17:56:59 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,11 @@ void	clear_drop(void *drop);
 void	drop_action(t_entity *entity, t_entity *actioner);
 void	drop_shot(t_entity *shooted, t_entity *shooter);
 
+// Character
+void	init_character(t_game *game, t_ftm_window *window, t_character *character, char identifier);
+void	character_frame(t_entity *entity, double delta_time);
+void	clear_character(void *character);
+void	character_action(t_entity *entity, t_entity *actioner);
+void	character_shot(t_entity *shooted, t_entity *shooter);
 
 #endif

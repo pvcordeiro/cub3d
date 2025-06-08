@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 19:35:54 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/06 22:07:32 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:07:20 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,12 @@ static void	item_key(t_entity *entity, int key, bool down)
 
 	item = entity->inventory[entity->inventory_index];
 	if (key == XK_space && item)
-		item->using = down;
+	{
+		if (down)
+			item->user = entity;
+		else
+			item->user = NULL;
+	}
 }
 
 static void	key(t_entity *entity, int key, bool down)

@@ -6,33 +6,28 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/08 17:39:46 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:10:50 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "weapon.h"
+#include "character.h"
 
-void	clear_weapon(void *data)
+void	character_frame(t_entity *entity, double delta_time)
 {
-	clear_item(data);
+	billboard_frame(entity, delta_time);
 }
 
-void	weapon_use(t_item *item)
+void	clear_character(void *character)
 {
-	t_weapon	*weapon;
-
-	item_use(item);
-	weapon = (t_weapon *)item;
-	if (!item->user)
-		return ;
-	if (!item->user || !item->user->target_entity || !item->user->target_entity->shot)
-		return ;
-	item->user->ammo -= weapon->ammo_usage;
-	item->user->target_entity->shot(item->user->target_entity, item->user);
+	clear_billboard(character);
 }
 
-void	weapon_frame(t_item *item)
+void	character_action(t_entity *entity, t_entity *actioner)
 {
-	item->can_use = item->user && item->user->ammo - ((t_weapon *)item)->ammo_usage >= 0;
-	item_frame(item);
+	billboard_action(entity, actioner);
+}
+
+void	character_shot(t_entity *shooted, t_entity *shooter)
+{
+	billboard_shot(shooted, shooter);
 }
