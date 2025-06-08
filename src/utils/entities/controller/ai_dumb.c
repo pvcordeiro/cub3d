@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ai_dumb.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 18:34:50 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/08 20:45:31 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/08 21:06:18 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,11 @@
 #define AI_MOVE_INTERVAL 2.0
 static void	frame(t_entity *entity, double delta_time)
 {
-    static double	time_accumulator;
     double			angle_to_player;
     double			dx;
 	double			dy;
 	double			distance_to_player;
 
-    time_accumulator += delta_time;
     if (!cub3d()->game.player)
 		return ;
 	dx = cub3d()->game.player->billboard.entity.coords.x - entity->coords.x;
