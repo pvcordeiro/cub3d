@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 00:50:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/08 20:35:06 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/08 20:58:36 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 void	init_billboard(t_game *game, t_ftm_window *window, t_billboard *billboard, char identifier)
 {
-	int	i;
-
-	i = -1;
 	init_entity(game, window, (t_entity *)billboard, identifier);
 	billboard->entity.type = ENTITY_BILLBOARD;
 	billboard->entity.frame = billboard_frame;
