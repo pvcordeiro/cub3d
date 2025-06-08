@@ -129,20 +129,24 @@ struct s_sprite
 struct s_item
 {
 	void			(*frame)(t_item *item);
-	void			(*use)(t_item *item, t_entity *user);
 	void			(*clear)(void *this);
 	char			identifier;
 	char			*name;
 	char			*description;
 	bool			weapon;
 	bool			food;
+	bool			using;
+	bool			prev_using;
+	bool			already_using;
+	bool			single_use;
+	t_time			last_sound_play;
 	t_fta_audio		*use_sound;
-	t_sprite		*icon_sprite;
-	t_sprite		*icon_still_sprite;
 	t_sprite		*icon_use_sprite;
-	t_sprite		*screen_sprite;
-	t_sprite		*screen_still_sprite;
+	t_sprite		*_icon_sprite;
+	t_sprite		*icon_sprite;
 	t_sprite		*screen_use_sprite;
+	t_sprite		*screen_sprite;
+	t_sprite		*_screen_sprite;
 };
 
 struct s_food

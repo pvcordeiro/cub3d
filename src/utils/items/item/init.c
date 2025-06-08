@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 00:50:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/06 19:52:15 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/08 14:37:04 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,27 @@ void	init_item(t_game *game, t_ftm_window *window, t_item *item,
 	(void)window;
 	if (!item)
 		return ;
-	item->use = item_use;
 	item->clear = clear_item;
+	item->frame = item_frame;
 	item->identifier = identifier;
 	item->name = hashmap_get_with_identifier(game->map->types, identifier,
 		"NAME");
 	item->description = hashmap_get_with_identifier(game->map->types,
 		identifier, "DESCRIPTION");
-	item->icon_still_sprite = hashmap_get_with_identifier(game->sprites,
+	item->icon_sprite = hashmap_get_with_identifier(game->sprites,
 		identifier, "ICON_SPRITE");
-	item->screen_still_sprite = hashmap_get_with_identifier(game->sprites,
+	item->screen_sprite = hashmap_get_with_identifier(game->sprites,
 		identifier, "SCREEN_SPRITE");
-	item->screen_use_sprite = hashmap_get_with_identifier(game->sprites,
-		identifier, "SCREEN_USE_SPRITE");
 	item->icon_use_sprite = hashmap_get_with_identifier(game->sprites,
 		identifier, "ICON_USE_SPRITE");
+	item->screen_use_sprite = hashmap_get_with_identifier(game->sprites,
+		identifier, "SCREEN_USE_SPRITE");
+	item->_icon_sprite = item->icon_sprite;
+	item->_screen_sprite = item->screen_sprite;
+	item->single_use = ft_strequal(hashmap_get_with_identifier(game->map->types,
+		identifier, "SINGLE_USE"), "TRUE");
 	item->use_sound = hashmap_get_with_identifier(game->sounds,
 		identifier, "USE");
-	item->icon_sprite = item->icon_still_sprite;
-	item->screen_sprite = item->screen_still_sprite;
 }
 
 t_item	*item_new(t_game *game, t_ftm_window *window, char identifier)

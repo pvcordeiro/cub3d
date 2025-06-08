@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 00:50:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/04 01:16:21 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/07 18:12:11 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	init_food(t_game *game, t_ftm_window *window, t_food *food,
 	init_item(game, window, (t_item *)food, identifier);
 	food->item.food = true;
 	food->item.clear = clear_food;
-	food->item.use = food_use;
+	food->item.frame = food_frame;
 	food->health = fabs(ft_atof(hashmap_get_with_identifier(game->map->types,
 			identifier, "HEALTH")));
 }
