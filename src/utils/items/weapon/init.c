@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 00:50:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/04 15:01:02 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/06 21:28:35 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	init_weapon(t_game *game, t_ftm_window *window, t_weapon *weapon,
 	init_item(game, window, (t_item *)weapon, identifier);
 	weapon->item.weapon = true;
 	weapon->item.clear = clear_weapon;
-	weapon->item.use = weapon_use;
+	weapon->item.frame = weapon_frame;
 }
 
 t_weapon	*weapon_new(t_game *game, t_ftm_window *window, char identifier)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 19:35:54 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/06 16:25:27 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/06 22:07:32 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,15 @@ static void	inv_key(t_entity *entity, int key, bool down)
 	}
 }
 
+static void	item_key(t_entity *entity, int key, bool down)
+{
+	t_item	*item;
+
+	item = entity->inventory[entity->inventory_index];
+	if (key == XK_space && item)
+		item->using = down;
+}
+
 static void	key(t_entity *entity, int key, bool down)
 {
 	if (key == XK_w)
@@ -45,10 +54,11 @@ static void	key(t_entity *entity, int key, bool down)
 		entity->controller.looking_right = down;
 	if (key == XK_Left)
 		entity->controller.looking_left = down;
-	if (key == XK_space)
+	if (key == XK_e)
 		entity->controller.action = down;
 	if (key == XK_Shift_L || key == XK_Shift_R)
 		entity->controller.sprinting = down;
+	item_key(entity, key, down);
 	inv_key(entity, key, down);
 }
 

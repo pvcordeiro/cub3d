@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/06 20:01:58 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/06 22:05:10 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ static void	do_the_thing(t_game *game, t_drop *drop)
             || drop->billboard.entity.coords.y + entity->size.height < entity->coords.y
             || drop->billboard.entity.coords.y - entity->size.height > (entity->coords.y + entity->size.height))
 			continue ;
-		if (drop->auto_use && item->use)
+		if (drop->auto_use)
 		{
-			item->use(item, entity);
+			item->using = true;
 			drop->billboard.entity.active = false;
 		}
 		else if (drop->auto_pickup)

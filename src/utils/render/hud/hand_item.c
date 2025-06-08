@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 23:28:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/06 19:44:42 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/06 20:10:21 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,6 @@ void	render_hand_item(t_game *game, t_ftm_image *canvas)
 
 	entity = (t_entity *)game->player;
 	if (!entity)
-		return ;
-	if (entity->inventory_index < 0
-		|| entity->inventory_index >= INVENTORY_SIZE)
 		return ;
 	item = entity->inventory[entity->inventory_index];
 	if (!item)

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:20:04 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/04 01:22:29 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/07 18:15:19 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static void	set_update_delay(t_sprite *sprite, t_hashmap *types, const char *key)
 {
-	double	update_delay;
 	char	*update_delay_key;
 	char	*update_delay_str;
 
@@ -23,10 +22,7 @@ static void	set_update_delay(t_sprite *sprite, t_hashmap *types, const char *key
 	free(update_delay_key);
 	if (!update_delay_str)
 		return ;
-	update_delay = ft_atof(update_delay_str);
-	if (update_delay < 0)
-		update_delay = 0;
-	sprite->update_delay = (t_time)(update_delay * 1000);
+	sprite->update_delay = (t_time)(fabs(ft_atof(update_delay_str)) * 1000);
 }
 
 static void	set_loop(t_sprite *sprite, t_hashmap *types, const char *key)
