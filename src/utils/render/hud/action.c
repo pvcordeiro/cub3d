@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   action.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 02:27:23 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/04 18:01:27 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/08 15:02:12 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	render_action(t_game *game, t_ftm_image *canvas)
 		|| !game->player->billboard.entity.target_entity->actionable)
 		return ;
 	text_config = (t_ftm_text_config){
-		.text = "Press SPACE to interact",
+		.text = "Press \"E\" to interact",
 		.coords = {0, 0, 0},
 		.height = canvas->size.height * 0.014,
 		.spacing = 0,
