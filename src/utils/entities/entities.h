@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 18:04:16 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/08 10:43:50 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/08 13:03:27 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,14 @@ void	init_wall(t_game *game, t_ftm_window *window, t_wall *wall, char identifier
 void	wall_frame(t_entity *entity, double delta_time);
 void	clear_wall(void *wall);
 void	wall_action(t_entity *entity, t_entity *actioner);
+void	wall_shot(t_entity *shooted, t_entity *shooter);
 
 // Door
 void	init_door_e(t_game *game, t_ftm_window *window, t_door *door, char identifier);
 void	door_frame(t_entity *entity, double delta_time);
 void	clear_door(void *door);
 void	door_action(t_entity *entity, t_entity *actioner);
+void	door_shot(t_entity *shooted, t_entity *shooter);
 
 // Player
 void	init_player(t_game *game, t_ftm_window *window, t_player *player, char identifier);
@@ -58,6 +60,7 @@ void	init_drop(t_game *game, t_ftm_window *window, t_drop *drop, char identifier
 void	drop_frame(t_entity *entity, double delta_time);
 void	clear_drop(void *drop);
 void	drop_action(t_entity *entity, t_entity *actioner);
+void	drop_shot(t_entity *shooted, t_entity *shooter);
 
 
 #endif

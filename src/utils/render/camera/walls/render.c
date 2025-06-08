@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 00:45:35 by paude-so          #+#    #+#             */
-/*   Updated: 2025/06/07 16:38:17 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/08 14:19:45 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,11 @@ static void	draw_ray(t_draw_ray_config drc)
 		ray, drc.i);
 	if (drc.i == drc.camera->rays / 2)
 	{
-		if (ray.distance < PLAYER_MAX_TARGET_DISTANCE)
-			drc.camera->entity->target_entity = ray.hit_entity;
-		else
-			drc.camera->entity->target_entity = NULL;
+		drc.camera->entity->target_entity = ray.hit_entity;
 		drc.camera->entity
 			->target_entity_direction = ray.hit_direction;
+		if (!ray.hit_entity->targetable)
+			drc.camera->entity->target_entity = NULL;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/08 10:43:29 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/08 13:09:39 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,14 @@ void	entity_action(t_entity *entity, t_entity *actioner)
 
 void	entity_shot(t_entity *shooted, t_entity *shooter)
 {
-	((void)shooted, (void)shooter);
+	t_weapon	*weapon;
+
+	if (!shooted || !shooter)
+		return ;
+	weapon = (t_weapon *)shooter->inventory[shooter->inventory_index];
+	if (!weapon->item.weapon)
+		return ;
+	shooted->health -= weapon->damage;
+	if (shooted->health < 0)
+		shooted->health = 0;
 }

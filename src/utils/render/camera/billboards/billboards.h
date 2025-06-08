@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   billboards.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 00:46:51 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/28 00:42:09 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/08 13:53:59 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ typedef struct s_render_billboard_slices_config
 	t_ftm_image	*canvas;
 	t_ftm_image	*image;
 	t_camera	*camera;
-	t_coords	centered_bill_coords;
+	t_billboard	*bill;
+	t_coords	bill_coords;
 }	t_render_billboard_slices_config;
 
 void	render_billboard_slices(t_render_billboard_slices_config rbsc);

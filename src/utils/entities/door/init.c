@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 00:50:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/04 01:26:24 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/08 14:32:13 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,9 @@ void	init_door_e(t_game *game, t_ftm_window *window, t_door *door, char identifi
 	door->wall.entity.frame = door_frame;
 	door->wall.entity.clear = clear_door;
 	door->wall.entity.action = door_action;
+	door->wall.entity.shot = door_shot;
 	door->wall.entity.actionable = true;
+	door->auto_close_delay = fabs(ft_atof(hashmap_get_with_identifier(game->map->types, identifier, "AUTO_CLOSE_DELAY")));
 	door->direction = ft_direction_from_str(hashmap_get_with_identifier(game->map->types, identifier, "DIRECTION"));
 	if (door->direction == (t_direction)-1)
 		return (fte_set("door direction missing"));
