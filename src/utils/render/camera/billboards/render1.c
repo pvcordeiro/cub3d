@@ -3,32 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   render1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 00:47:16 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/27 18:23:05 by pvcordeiro       ###   ########.fr       */
+/*   Updated: 2025/06/08 14:13:40 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "billboards.h"
 
-static bool	is_behind_wall(int i, t_render_billboard_slices_config rbsc)
+static bool	is_behind_wall(int i, unsigned int ray_index, t_render_billboard_slices_config rbsc)
 {
-	unsigned int	ray_index;
 	double			offset;
 	double			world_x;
 	double			world_y;
 	double			dist;
 
-	ray_index = (int)((rbsc.screen_x + i - (rbsc.new_size.width / 2))
-			/ rbsc.canvas->size.width * rbsc.camera->rays);
 	if (ray_index >= rbsc.camera->rays)
 		return (false);
 	offset = (i - rbsc.new_size.width / 2.0) / rbsc.new_size.width;
-	world_x = rbsc.centered_bill_coords.x + offset
-		* cos(ft_radians(rbsc.centered_bill_coords.yaw + 90));
-	world_y = rbsc.centered_bill_coords.y + offset
-		* sin(ft_radians(rbsc.centered_bill_coords.yaw + 90));
+	world_x = rbsc.bill_coords.x + offset
+		* cos(ft_radians(rbsc.bill_coords.yaw + 90));
+	world_y = rbsc.bill_coords.y + offset
+		* sin(ft_radians(rbsc.bill_coords.yaw + 90));
 	dist = ft_distance(rbsc.camera->entity->coords,
 			(t_coords){world_x, world_y, 0});
 	return (dist >= rbsc.camera->ray_distances[ray_index]);
@@ -59,11 +56,20 @@ static t_ftm_pitc_config	get_pitc_config(int i,
 
 void	render_billboard_slices(t_render_billboard_slices_config rbsc)
 {
-	int	i;
+	unsigned int		ray_index;
+	t_ftm_pitc_config	pitc_config;
+	int					i;
 
 	i = -1;
 	while (++i < rbsc.new_size.width)
-		if (!is_behind_wall(i, rbsc))
-			ftm_put_image_to_canvas(rbsc.canvas, rbsc.image,
-				get_pitc_config(i, rbsc));
+	{
+		ray_index = (int)((rbsc.screen_x + i - (rbsc.new_size.width / 2))
+				/ rbsc.canvas->size.width * rbsc.camera->rays);
+		if (is_behind_wall(i, ray_index, rbsc))
+			continue ;
+		pitc_config = get_pitc_config(i, rbsc);
+		if (ray_index == rbsc.camera->rays / 2 && rbsc.bill->entity.targetable)
+			rbsc.camera->entity->target_entity = (t_entity *)rbsc.bill;
+		ftm_put_image_to_canvas(rbsc.canvas, rbsc.image, pitc_config);
+	}
 }

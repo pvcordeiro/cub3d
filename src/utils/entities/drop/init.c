@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 00:50:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/06 19:58:22 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/08 13:02:34 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	init_drop(t_game *game, t_ftm_window *window, t_drop *drop, char identifier
 	drop->billboard.entity.frame = drop_frame;
 	drop->billboard.entity.clear = clear_drop;
 	drop->billboard.entity.action = drop_action;
+	drop->billboard.entity.shot = drop_shot;
 	drop->auto_use = ft_strequal(hashmap_get_with_identifier(game->map->types,
 		identifier, "AUTO_USE"), "TRUE");
 	drop->auto_pickup = ft_strequal(hashmap_get_with_identifier(game->map->types,

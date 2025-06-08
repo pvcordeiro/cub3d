@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   methods0.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/03 01:21:41 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/08 14:34:19 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,12 @@ void	door_frame(t_entity *entity, double delta_time)
 	door->wall.entity.hard = door->opening_sprite.index != DOOR_ANIMATION_FRAMES - 1;
 	door->wall.entity.transparent = door->opening_sprite.index;
 	(void)get_sprite_image(&door->opening_sprite);
-	if (door->opening_sprite.index == 0 && door->opening_sprite.index != door->last_animation_index)
+	if (!door->opening_sprite.index && door->opening_sprite.index != door->last_animation_index)
 		fta_play(door->close_sound);
 	door->last_animation_index = door->opening_sprite.index;
+	if (ft_get_time() - door->last_opened_at >= door->auto_close_delay
+		&& door->wall.entity.action && door->opened)
+		door->wall.entity.action(entity, entity);
 }
 
 void	clear_door(void *door)
@@ -43,5 +46,13 @@ void	door_action(t_entity *entity, t_entity *actioner)
 	door->opening_sprite.running = true;
 	door->opening_sprite.updated_at = ft_get_time();
 	if (door->opened)
+	{
+		door->last_opened_at = ft_get_time();	
 		fta_play(door->open_sound);
+	}
+}
+
+void	door_shot(t_entity *shooted, t_entity *shooter)
+{
+	wall_shot(shooted, shooter);
 }
