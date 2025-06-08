@@ -82,11 +82,45 @@ U_USE_SOUND assets/wolf3d/sounds/health1.mp3
 U_DESCRIPTION The Greatest Food ever for real
 U_ICON_SPRITE assets/wolf3d/textures/billboards/food.xpm
 
-V_TYPE WEAPON
-V_NAME Arma
-V_USE_SOUND assets/wolf3d/sounds/atkpistol.mp3
-V_DESCRIPTION armarma mramma mmsd
-V_ICON_SPRITE assets/wolf3d/textures/billboards/machine-gun.xpm
+P_TYPE WEAPON
+P_NAME Pistol
+P_USE_SOUND assets/wolf3d/sounds/atkpistol.mp3
+P_USE_DELAY 0.5
+P_DESCRIPTION Normal pistol, good for close combat
+P_SCREEN_SPRITE assets/wolf3d/textures/items/pistol/screen/0.xpm
+P_SCREEN_USE_SPRITE assets/wolf3d/textures/items/pistol/screen/1.xpm:assets/wolf3d/textures/items/pistol/screen/2.xpm:assets/wolf3d/textures/items/pistol/screen/3.xpm:assets/wolf3d/textures/items/pistol/screen/4.xpm
+P_SCREEN_USE_SPRITE_UPDATE_DELAY 0.1
+P_ICON_SPRITE assets/wolf3d/textures/items/pistol/icon.xpm
+
+G_TYPE WEAPON
+G_NAME Gatling
+G_USE_SOUND assets/wolf3d/sounds/shoot.mp3
+G_USE_DELAY 1.0
+G_DESCRIPTION Gatling gun, very powerful, but slow
+G_SCREEN_SPRITE assets/wolf3d/textures/items/gatling/screen/0.xpm
+G_SCREEN_USE_SPRITE assets/wolf3d/textures/items/gatling/screen/1.xpm:assets/wolf3d/textures/items/gatling/screen/2.xpm:assets/wolf3d/textures/items/gatling/screen/3.xpm:assets/wolf3d/textures/items/gatling/screen/4.xpm
+G_SCREEN_USE_SPRITE_UPDATE_DELAY 0.1
+G_ICON_SPRITE assets/wolf3d/textures/items/gatling/icon.xpm
+
+K_TYPE WEAPON
+K_NAME Knife
+K_USE_SOUND assets/wolf3d/sounds/atkknife.mp3
+K_USE_DELAY 0.2
+K_DESCRIPTION A knife, good for close combat
+K_SCREEN_SPRITE assets/wolf3d/textures/items/knife/screen/0.xpm
+K_SCREEN_USE_SPRITE assets/wolf3d/textures/items/knife/screen/1.xpm:assets/wolf3d/textures/items/knife/screen/2.xpm:assets/wolf3d/textures/items/knife/screen/3.xpm:assets/wolf3d/textures/items/knife/screen/4.xpm
+K_SCREEN_USE_SPRITE_UPDATE_DELAY 0.1
+K_ICON_SPRITE assets/wolf3d/textures/items/knife/icon.xpm
+
+M_TYPE WEAPON
+M_NAME Machine Gun
+M_USE_SOUND assets/wolf3d/sounds/shoot.mp3
+M_USE_DELAY 0.5
+M_DESCRIPTION Machine gun, good for medium range combat
+M_SCREEN_SPRITE assets/wolf3d/textures/items/machinegun/screen/0.xpm
+M_SCREEN_USE_SPRITE assets/wolf3d/textures/items/machinegun/screen/1.xpm:assets/wolf3d/textures/items/machinegun/screen/2.xpm:assets/wolf3d/textures/items/machinegun/screen/3.xpm:assets/wolf3d/textures/items/machinegun/screen/4.xpm
+M_SCREEN_USE_SPRITE_UPDATE_DELAY 0.1
+M_ICON_SPRITE assets/wolf3d/textures/items/machinegun/icon.xpm
 
 :_TYPE DROP
 :_ITEM U
@@ -94,8 +128,24 @@ V_ICON_SPRITE assets/wolf3d/textures/billboards/machine-gun.xpm
 :_HARD FALSE
 
 {_TYPE DROP
-{_ITEM V
+{_ITEM P
+{_AUTO_PICKUP TRUE
 {_HARD FALSE
+
+}_TYPE DROP
+}_ITEM G
+}_AUTO_PICKUP TRUE
+}_HARD FALSE
+
+[_TYPE DROP
+[_ITEM K
+[_AUTO_PICKUP TRUE
+[_HARD FALSE
+
+]_TYPE DROP
+]_ITEM M
+]_AUTO_PICKUP TRUE
+]_HARD FALSE
 
 ;_TYPE BILLBOARD
 ;_HARD FALSE
@@ -197,11 +247,11 @@ f   f   f   f                    j   j
 f   ffffffhfffff                fjlhljf              aaaaaaaaaaa
 f , ff         f           ffffif.   .fiffff         a      '''a
 f   ff         f           f.             .f         aa       'a
-f   ff  ,   ,  f           g       e       gaaaaaaaaaaa        a
+f   ff  ,   ,  f           g   {       ]   gaaaaaaaaaaa        a
 f    f         f           f                a         a        a
-f    v         f           f  / e  /  e /   v         v        a
+f    v         f           f  / e  /  } /   v         v        a
 f    f         f           f                a         a        a
-f   ff  ,   ,  f           g  E    e       gaaa    aaaa  -  -  a
+f   ff  ,   ,  f           g  E       [    gaaa    aaaa  -  -  a
 f   ff         f           f.             .f  aa  a   a        a
 f   ff         f           ffkfff     ffkfff   a  a   a        a
 f , ffffffhfffff                faahaaf        a  aaaaaaa+aa?aaa
@@ -209,7 +259,7 @@ f   f   f   f                    a   a         a  a     aaaaaa
 f   fffff   f                    a , a         a  a
 f   f   f   f                    a   a         a  a aaaaaaaaa
 f     , f , f                    a { a         a  aaa a a a aa
-f   f   f   f                    a   a         a   a         a
+f   f   f   f                    a } a         a   a         a
 f , fffff   f                    a , a         a   v         b
 f   fffff   fffffffffffffff      a   a         a   a        =a
 f               f       fff      a   a         aaaaaa a a a aa

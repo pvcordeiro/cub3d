@@ -6,7 +6,7 @@
 #    By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/26 17:16:21 by afpachec          #+#    #+#              #
-#    Updated: 2025/06/04 16:06:05 by paude-so         ###   ########.fr        #
+#    Updated: 2025/06/07 16:46:39 by paude-so         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,12 +23,17 @@ OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 MAPS = $(wildcard maps/*.cub)
 UNAME_S = $(shell uname -s)
 
+check_flag = $(shell $(CC) $(1) -E -c /dev/null -o /dev/null 2>/dev/null && echo 1 || echo 0)
 ifeq ($(UNAME_S),Darwin)
 	LIBS += -L /opt/homebrew/lib
 	INCLUDES += -I /opt/X11/include
 	LDLIBS += -framework OpenGL -framework AppKit
-# else
-# 	CFLAGS += -Wno-error=stringop-overflow
+else
+	ifeq ($(shell $(CC) --version | grep -i clang > /dev/null && echo clang),clang)
+    	CFLAGS += -Wno-unknown-warning-option
+	else
+    	CFLAGS += -Wno-stringop-overflow
+	endif
 endif
 
 all: $(NAME)
@@ -47,6 +52,7 @@ else
 	@cp lib/minilibx-linux/libmlx.a lib
 endif
 	@cp lib/minilibx-linux/mlx.h headers
+	@cp lib/minilibx-linux/mlx_int.h headers
 	@rm -rf lib/minilibx-linux
 
 $(OBJ_DIR)/%.o: %.c
@@ -63,7 +69,6 @@ fclean: clean
 	@rm -rf $(NAME)
 	@rm -rf lib/libmlx.a
 	@rm -rf headers/mlx.h
-	@rm -rf assets/wolf3d
 
 re: fclean all
 

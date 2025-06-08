@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/04 01:08:19 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/06 19:53:38 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,9 @@ void	item_use(t_item *item, t_entity *user)
 void	clear_item(void *data)
 {
 	(void)data;
+}
+
+void	item_frame(t_item *item)
+{
+	(void)item;
 }

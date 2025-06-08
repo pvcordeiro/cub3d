@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils18.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 22:40:59 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/03 23:51:45 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/06 16:00:28 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,15 @@ bool	ft_str_equal_char_ptr(const char *str, const char *char_ptr)
 	c_str[1] = '\0';
 	result = ft_strequal(str, c_str);
 	return (result);
+}
+
+char	*ft_strf(const char *format, ...)
+{
+	va_list	args;
+	char	*str;
+
+	va_start(args, format);
+	str = ft_strfva(format, &args);
+	va_end(args);
+	return (str);
 }

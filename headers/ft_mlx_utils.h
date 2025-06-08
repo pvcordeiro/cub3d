@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_mlx_utils.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:46:27 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/03 00:37:43 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/07 16:48:11 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 // External Libs
 # include <mlx.h>
 # include <X11/X.h>
+# include <mlx_int.h>
 
 // Internal Libs
 # include <ft_utils.h>
@@ -45,6 +46,8 @@ typedef struct s_ftm_window
 	void		*display;
 	t_ftm_image	*canvas;
 	bool		using_mouse;
+	bool		fullscreen;
+	char		*title;
 	void		(*loop_hook)(void);
 	void		(*key_hook)(int key, bool down);
 	void		(*exit_hook)(int code);
@@ -113,6 +116,11 @@ void			ftm_update_window(t_ftm_window *window);
 void			ftm_update_hooks(t_ftm_window *window);
 void			ftm_window_loop(t_ftm_window *window);
 void			ftm_window_wipe(t_ftm_window *window);
+
+void			ftm_window_resize_e(t_ftm_window *window, t_size size);
+t_size			ftm_window_toggle_fullscreen(t_ftm_window *window, t_size prev_size);
+t_size			ftm_get_screen_size(t_ftm_window *window);
+void 			ftm_window_notify_fullscreen(t_ftm_window *window);
 
 unsigned int	*ftm_image_pixel(t_ftm_image *image, t_coords coords);
 unsigned int	ftm_remove_pixel_transparency(unsigned int value);

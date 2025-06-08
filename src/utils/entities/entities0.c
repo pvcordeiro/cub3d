@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 20:49:46 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/04 00:32:06 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/04 23:24:16 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,4 +104,21 @@ t_entity_creator	get_entity_creator(t_identifiers *identifiers, char identifier)
 	if (ft_list_any(identifiers->drop, (void *)ft_str_equal_char_ptr, &identifier))
 		return ((void *)drop_new);
 	return (NULL);
+}
+
+bool	add_item_to_inventory(t_entity *entity, t_item *item)
+{
+	int	i;
+
+	if (!entity || !item)
+		return (false);
+	i = -1;
+	while (++i < INVENTORY_SIZE)
+	{
+		if (entity->inventory[i])
+			continue ;
+		entity->inventory[i] = item;
+		return (true);
+	}
+	return (false);
 }

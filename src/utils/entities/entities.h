@@ -6,7 +6,11 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 18:04:16 by afpachec          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2025/06/04 18:47:58 by paude-so         ###   ########.fr       */
+=======
+/*   Updated: 2025/06/04 23:04:11 by afpachec         ###   ########.fr       */
+>>>>>>> master
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +21,7 @@
 
 void	init_controller(t_entity *entity, const char *type);
 void	free_entity(void *entity);
+bool	add_item_to_inventory(t_entity *entity, t_item *item);
 
 // Entity
 void	init_entity(t_game *game, t_ftm_window *window, t_entity *entity, char identifier);

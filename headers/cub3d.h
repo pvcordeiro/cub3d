@@ -6,7 +6,11 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2025/06/04 18:29:12 by paude-so         ###   ########.fr       */
+=======
+/*   Updated: 2025/06/07 16:52:40 by paude-so         ###   ########.fr       */
+>>>>>>> master
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +57,6 @@
 // Player Config
 # define PLAYER_RAYS_NO_HIT_LENGTH 50.0
 # define PLAYER_FOV 73.5
-# define PLAYER_RAYS W_WIDTH
 # define PLAYER_RAY_SUBRAYS 5
 # define PLAYER_MOUSE_LOOK_VELOCITY 30.0
 # define PLAYER_KEY_LOOK_VELOCITY 90.0
@@ -67,6 +70,9 @@
 // Billboard Config
 # define BILLBOARD_WIDTH 0.23
 # define BILLBOARD_HEIGHT 0.23
+
+// Entity Config
+# define INVENTORY_SIZE 9
 
 // Door Config
 # define DOOR_ANIMATION_DURATION 10.0
@@ -126,6 +132,7 @@ struct s_sprite
 
 struct s_item
 {
+	void			(*frame)(t_item *item);
 	void			(*use)(t_item *item, t_entity *user);
 	void			(*clear)(void *this);
 	char			identifier;
@@ -135,7 +142,11 @@ struct s_item
 	bool			food;
 	t_fta_audio		*use_sound;
 	t_sprite		*icon_sprite;
+	t_sprite		*icon_still_sprite;
+	t_sprite		*icon_use_sprite;
 	t_sprite		*screen_sprite;
+	t_sprite		*screen_still_sprite;
+	t_sprite		*screen_use_sprite;
 };
 
 struct s_food
@@ -199,8 +210,8 @@ struct s_entity
 	char			identifier;
 	bool			active;
 	int				ammo;
-	t_item			*inventory;
-	int				inventory_size;
+	t_item			*inventory[INVENTORY_SIZE];
+	int				inventory_index;
 	t_coords		coords;
 	t_dsize			size;
 	t_entity_type	type;
@@ -231,9 +242,8 @@ struct s_player
 struct s_drop
 {
 	t_billboard	billboard;
-	t_item		*item;
 	bool		auto_use;
-	t_item		*_prev_item;
+	bool		auto_pickup;
 };
 
 struct s_wall

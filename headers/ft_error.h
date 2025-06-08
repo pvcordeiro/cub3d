@@ -3,28 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   ft_error.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 22:05:32 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/04 01:20:23 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/06 15:47:24 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_ERROR_H
 # define FT_ERROR_H
 
-# include <unistd.h>
-# include <stdbool.h>
-# include <stdlib.h>
+# include <ft_utils.h>
 
 typedef struct s_error_storage
 {
-	char 	*msg;
+	char 	msg[1024];
 	void	(*exit)(int);
 }	t_error_storage;
 
 // Set ft_error global error
-void			fte_set(const char *msg);
+void			fte_set(const char *msg, ...);
 
 // Check if there is an error
 bool			fte_flagged(void);

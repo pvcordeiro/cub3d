@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 22:00:34 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/04 01:21:34 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/06 16:00:37 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,22 @@ t_error_storage	*fte_storage(void)
 {
 	static t_error_storage	singleton;
 
-	if (singleton.exit == NULL)
+	if (!singleton.exit)
 		singleton.exit = exit;
 	return (&singleton);
 }
 
-void	fte_set(const char *msg)
+void	fte_set(const char *msg, ...)
 {
-	fte_storage()->msg = (char *)msg;
+	char	*tmp;
+    va_list	args;
+
+	ft_bzero(fte_storage()->msg, 1024);
+    va_start(args, msg);
+	tmp = ft_strfva(msg, &args);
+	va_end(args);
+	ft_strlcpy(fte_storage()->msg, tmp, 1024);
+	free(tmp);
 }
 
 static ssize_t	ft_error_fputstr(int fd, char *string)
@@ -38,7 +46,7 @@ static ssize_t	ft_error_fputstr(int fd, char *string)
 
 bool	fte_flagged(void)
 {
-	return (fte_storage()->msg);
+	return (fte_storage()->msg[0]);
 }
 
 void	fte_assert(void)
