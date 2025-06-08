@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 17:48:25 by paude-so          #+#    #+#             */
-/*   Updated: 2025/06/04 17:45:02 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/07 10:26:24 by pvcordeiro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,8 +141,8 @@ void	render_minimap(t_game *game, t_ftm_image *canvas)
 	map_size = canvas->size;
 	if (!game->hud.minimap.full)
 	{
-		map_coords = game->hud.minimap.coords;
-		map_size = game->hud.minimap.size;
+		map_size = (t_size){canvas->size.width * MINIMAP_WIDTH_MULTIPLIER, canvas->size.height * MINIMAP_HEIGHT_MULTIPLIER};
+		map_coords = (t_coords){canvas->size.width - map_size.width - 10, 10, 0};
 	}
 	render_minimapp(game, canvas, map_coords, map_size);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/07 19:31:34 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/08 14:27:22 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@
 // Player Config
 # define PLAYER_RAYS_NO_HIT_LENGTH 50.0
 # define PLAYER_FOV 73.5
-# define PLAYER_RAYS W_WIDTH
 # define PLAYER_RAY_SUBRAYS 5
 # define PLAYER_MOUSE_LOOK_VELOCITY 30.0
 # define PLAYER_KEY_LOOK_VELOCITY 90.0
@@ -199,7 +198,9 @@ struct s_entity
 	void			(*frame)(t_entity *entity, double delta_time);
 	void			(*clear)(void *this);
 	void			(*action)(t_entity *entity, t_entity *actioner);
+	void			(*shot)(t_entity *shooted, t_entity *shooter);
 	t_controller	controller;
+	bool			targetable;
 	bool			transparent;
 	int				max_health;
 	int				health;
@@ -263,6 +264,8 @@ struct s_door
 	t_sprite	*door_sprite;
 	t_sprite	*door_sides_sprite;
 	bool		opened;
+	t_time		auto_close_delay;
+	t_time		last_opened_at;
 	int			last_animation_index;
 	t_fta_audio	*open_sound;
 	t_fta_audio	*close_sound;

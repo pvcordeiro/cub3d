@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game0.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:27:08 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/04 01:22:48 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/07 16:53:11 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	game_load_map_e(t_game *game, t_ftm_window *window, t_map *map)
 	init_billboards_e(game);
 	if (fte_flagged())
 		return (clear_game(game));
-	init_camera(game);
+	init_camera(game, window);
 	init_hud(game);
 	init_window(window, game);
 	init_fps(game);

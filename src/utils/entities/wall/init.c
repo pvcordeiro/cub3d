@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 00:50:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/03 23:55:14 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/08 13:01:05 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	init_wall(t_game *game, t_ftm_window *window, t_wall *wall, char identifier
 	wall->entity.frame = wall_frame;
 	wall->entity.clear = clear_wall;
 	wall->entity.action = wall_action;
+	wall->entity.shot = wall_shot;
 	wall->entity.wall = true;
 	if (identifier == '1')
 		identifier = '\0';

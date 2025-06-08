@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render0.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 00:47:16 by paude-so          #+#    #+#             */
-/*   Updated: 2025/06/04 00:22:22 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/08 13:54:10 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,24 +59,22 @@ static void	render_billboard(t_billboard *bill, t_ftm_image *canvas,
 	t_size		new_size;
 	double		screen_x;
 	double		relative_angle;
-	t_coords	centered_bill_coords;
 
 	if (!bill->entity.active)
 		return ;
-	centered_bill_coords = bill->entity.coords;
 	relative_angle = get_relative_angle(camera->entity->coords,
-			centered_bill_coords);
-	image = get_sprite_image(bill->sprites[(int)ft_angle_distance(centered_bill_coords, camera->entity->coords)]);
+			bill->entity.coords);
+	image = get_sprite_image(bill->sprites[(int)ft_angle_distance(bill->entity.coords, camera->entity->coords)]);
 	if (!image)
 		return ;
 	screen_x = get_screen_x(canvas, camera, relative_angle);
 	new_size = get_size((t_get_size_config){
-			camera, centered_bill_coords,
+			camera, bill->entity.coords,
 			image->size, canvas->size, relative_angle});
 	if (screen_x + image->size.width * 0.7 < 0 || screen_x - image->size.width * 0.7 > canvas->size.width)
 		return ;
 	render_billboard_slices((t_render_billboard_slices_config){new_size,
-		screen_x, canvas, image, camera, centered_bill_coords});
+		screen_x, canvas, image, camera, bill, bill->entity.coords});
 }
 
 void	render_billboards(t_game *game, t_ftm_image *canvas, t_camera *camera)

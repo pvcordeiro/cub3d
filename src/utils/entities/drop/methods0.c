@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   methods0.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
 /*   Updated: 2025/06/06 22:05:10 by afpachec         ###   ########.fr       */
@@ -83,4 +83,9 @@ void	clear_drop(void *drop)
 void	drop_action(t_entity *entity, t_entity *actioner)
 {
 	billboard_action(entity, actioner);
+}
+
+void	drop_shot(t_entity *shooted, t_entity *shooter)
+{
+	billboard_shot(shooted, shooter);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:21:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/01 18:50:02 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/07 16:59:23 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,14 @@ static void	hud_debug_keys(t_hud_debug *hud_debug, int key, bool down)
 	if (!hud_debug->enabled)
 		return ;
 	if (key == XK_c && down)
-		cub3d()->game.camera.rays /= 1.5;
+	{
+		if (cub3d()->game.camera.rays % 2)
+			cub3d()->game.camera.rays += 1;
+		else
+			cub3d()->game.camera.rays /= 2;
+	}
 	if (key == XK_v && down)
-		cub3d()->game.camera.rays = PLAYER_RAYS;
+		cub3d()->game.camera.rays = cub3d()->window.canvas->size.width;
 	if (key == XK_b && down)
 		cub3d()->game.player->billboard.entity.hard = !cub3d()->game.player->billboard.entity.hard;
 	if (key == XK_n && down)
@@ -60,20 +65,22 @@ static void	hud_minimap_keys(int key, bool down)
 		cub3d()->game.hud.minimap.zoom_level = 5.0;
 }
 
-static void	hud_keys(t_hud *hud, int key, bool down)
+static void	hud_keys(t_game *game, t_ftm_window *window, int key, bool down)
 {
-	if (key == XK_h && down)
-		hud->enabled = !hud->enabled;
-	if (!hud->enabled)
+    if (key == XK_h && down)
+        game->hud.enabled = !game->hud.enabled;
+    if (key == XK_F11 && down)
+		game->camera.rays = ftm_window_toggle_fullscreen(window, (t_size){W_WIDTH, W_HEIGHT}).width;
+	if (!game->hud.enabled)
 		return ;
-	hud_debug_keys(&hud->debug, key, down);
+	hud_debug_keys(&game->hud.debug, key, down);
 	hud_minimap_keys(key, down);
 }
 
 void	key_hook(int key, bool down)
 {
 	call_entity_keys(cub3d()->game.entities, key, down);
-	hud_keys(&cub3d()->game.hud, key, down);
+	hud_keys(&cub3d()->game, &cub3d()->window, key, down);
 	if (key == XK_Escape)
 		cub3d_exit(0);
 }

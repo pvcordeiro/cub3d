@@ -6,7 +6,7 @@
 #    By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/26 17:16:21 by afpachec          #+#    #+#              #
-#    Updated: 2025/06/06 18:42:13 by paude-so         ###   ########.fr        #
+#    Updated: 2025/06/07 16:46:39 by paude-so         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,7 @@ else
 	@cp lib/minilibx-linux/libmlx.a lib
 endif
 	@cp lib/minilibx-linux/mlx.h headers
+	@cp lib/minilibx-linux/mlx_int.h headers
 	@rm -rf lib/minilibx-linux
 
 $(OBJ_DIR)/%.o: %.c
@@ -68,7 +69,6 @@ fclean: clean
 	@rm -rf $(NAME)
 	@rm -rf lib/libmlx.a
 	@rm -rf headers/mlx.h
-	@rm -rf assets/wolf3d
 
 re: fclean all
 
