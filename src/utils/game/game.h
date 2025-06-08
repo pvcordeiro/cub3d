@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:16:32 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/07 16:53:22 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/08 18:49:51 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@ void	init_fps(t_game *game);
 void	set_sprite_configs(t_game *game);
 void	init_fonts_e(t_ftm_window *window, t_game *game);
 void	insert_door_frames(t_game *game);
+void	init_sprites_3d(t_game *game);
 
 #endif

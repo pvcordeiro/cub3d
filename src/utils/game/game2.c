@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:20:04 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/04 01:24:22 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/08 19:34:43 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	init_sprites_e(t_ftm_window *window, t_game *game)
 	t_element	*el;
 	t_element	*curr;
 	char		**paths;
+	char		*key;
 	int			i;
 
 	fte_set(NULL);
@@ -68,7 +69,10 @@ void	init_sprites_e(t_ftm_window *window, t_game *game)
 		sprite = sprite_new(NULL, 0);
 		if (!sprite)
 			return (ft_strvfree(paths), fte_set("sprite load (sprite new)"));
-		ft_hashmap_set(game->sprites, curr->key, sprite, free_sprite);
+		key = ft_strdup(curr->key);
+		if (ft_str_endswith(key, "_SPRITE"))
+			key[ft_strlen(key) - 7] = '\0';
+		ft_hashmap_set(game->sprites, key, sprite, free_sprite);
 		i = -1;
 		while (paths[++i])
 		{
@@ -76,11 +80,11 @@ void	init_sprites_e(t_ftm_window *window, t_game *game)
 				continue ;
 			image = ftm_image_from_file(window, paths[i]);
 			if (!image)
-				return (ft_strvfree(paths), fte_set("sprite load (image from file)"));
+				return (free(key), ft_strvfree(paths), fte_set("sprite load (image from file)"));
 			ft_list_add(&((t_sprite *)ft_hashmap_get_value(game->sprites,
-						curr->key))->images, image, ftm_free_image);
+						key))->images, image, ftm_free_image);
 		}
-		ft_strvfree(paths);
+		(free(key), ft_strvfree(paths));
 	}
 	set_sprite_configs(game);
 }

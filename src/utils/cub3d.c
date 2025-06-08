@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 21:53:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/07 14:09:58 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/08 19:14:38 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ void	*hashmap_get_with_identifier(t_hashmap *hashmap, char identifier, char *res
 	void	*data;
 
 	key = ft_strdup(rest);
-	if (identifier)
+	if (!rest)
+		key = (free(key), ft_strndup(&identifier, 1));
+	else if (identifier)
 		key = (free(key), ft_strf("%c_%s", identifier, rest));
 	data = ft_hashmap_get_value(hashmap, key);
 	return (free(key), data);

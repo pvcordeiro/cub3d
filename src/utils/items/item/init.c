@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 00:50:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/08 16:46:23 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/08 19:42:11 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ void	init_item(t_game *game, t_ftm_window *window, t_item *item,
 	item->description = hashmap_get_with_identifier(game->map->types,
 		identifier, "DESCRIPTION");
 	item->icon_sprite = hashmap_get_with_identifier(game->sprites,
-		identifier, "ICON_SPRITE");
+		identifier, "ICON");
 	item->screen_sprite = hashmap_get_with_identifier(game->sprites,
-		identifier, "SCREEN_SPRITE");
+		identifier, "SCREEN");
 	item->icon_use_sprite = hashmap_get_with_identifier(game->sprites,
-		identifier, "ICON_USE_SPRITE");
+		identifier, "ICON_USE");
 	item->screen_use_sprite = hashmap_get_with_identifier(game->sprites,
-		identifier, "SCREEN_USE_SPRITE");
+		identifier, "SCREEN_USE");
 	item->_icon_sprite = item->icon_sprite;
 	item->_screen_sprite = item->screen_sprite;
 	item->single_use = ft_strequal(hashmap_get_with_identifier(game->map->types,

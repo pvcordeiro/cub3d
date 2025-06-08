@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 17:18:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/07 16:53:35 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/08 19:36:30 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ static void	init_stats_hud(t_game *game)
 	game->hud.stats.states = -1;
 	while (++game->hud.stats.states || true)
 	{
-		key = ft_strf("STATS_HUD_%d_SPRITE", game->hud.stats.states + 1);
+		key = ft_strf("STATS_HUD_%d", game->hud.stats.states + 1);
 		sprite = ft_hashmap_get_value(game->sprites, key);
 		free(key);
 		if (!sprite)

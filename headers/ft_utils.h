@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 12:15:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/06/06 16:34:13 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/08 19:58:51 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,5 +191,8 @@ t_direction				ft_direction_from_str(const char *str);
 
 bool					ft_str_equal_char_ptr(const char *str, const char *char_ptr);
 char					*ft_strf(const char *format, ...);
+char					*ft_strnrstr(const char *haystack, const char *needle, size_t len);
+char					*ft_strrstr(const char *haystack, const char *needle);
+char					*ft_strrchr(const char *s, int c);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 20:49:46 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/08 17:12:04 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/08 19:48:52 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,4 +122,34 @@ bool	add_item_to_inventory(t_entity *entity, t_item *item)
 		return (true);
 	}
 	return (false);
+}
+
+void	fill_3d_sprites_from_src(t_sprite **dst, t_sprite **src)
+{
+	int	i;
+
+	i = -1;
+	while (++i < 360)
+		dst[i] = src[i];
+}
+
+void	fill_3d_sprites_from_single(t_sprite **dst, t_sprite *src)
+{
+	int	i;
+
+	i = -1;
+	while (++i < 360)
+		dst[i] = src;
+}
+
+void	fill_3d_sprites_from_game(t_game *game, t_sprite **dst, char identifier, char *key)
+{
+	t_sprite	**sprites;
+	t_sprite	*sprite;
+
+	sprite = hashmap_get_with_identifier(game->sprites, identifier, key);
+	sprites = hashmap_get_with_identifier(game->sprites_3d, identifier, key);
+	if (sprites)
+		return (fill_3d_sprites_from_src(dst, sprites));
+	fill_3d_sprites_from_single(dst, sprite);
 }

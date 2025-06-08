@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game7.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:20:04 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/07 18:15:19 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/08 20:20:44 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	set_update_delay(t_sprite *sprite, t_hashmap *types, const char *key
 	char	*update_delay_key;
 	char	*update_delay_str;
 
-	update_delay_key = ft_strf("%s_UPDATE_DELAY", key);
+	update_delay_key = ft_strf("%s_SPRITE_UPDATE_DELAY", key);
 	update_delay_str = ft_hashmap_get_value(types, update_delay_key);
 	free(update_delay_key);
 	if (!update_delay_str)
@@ -31,7 +31,7 @@ static void	set_loop(t_sprite *sprite, t_hashmap *types, const char *key)
 	char	*loop_key;
 	char	*loop_str;
 
-	loop_key = ft_strf("%s_LOOP", key);
+	loop_key = ft_strf("%s_SPRITE_LOOP", key);
 	loop_str = ft_hashmap_get_value(types, loop_key);
 	free(loop_key);
 	if (!loop_str)
@@ -46,7 +46,7 @@ static void	set_reversed(t_sprite *sprite, t_hashmap *types, const char *key)
 	char	*reversed_key;
 	char	*reversed_str;
 
-	reversed_key = ft_strf("%s_REVERSED", key);
+	reversed_key = ft_strf("%s_SPRITE_REVERSED", key);
 	reversed_str = ft_hashmap_get_value(types, reversed_key);
 	free(reversed_key);
 	if (!reversed_str)

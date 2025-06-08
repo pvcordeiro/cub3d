@@ -6,35 +6,11 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:27:08 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/07 16:53:11 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/08 20:40:33 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game.h"
-
-void	free_hud_debug_strings(void *data)
-{
-	t_hud_debug	*debug;
-
-	debug = data;
-	if (!debug)
-		return ;
-	free(debug->fps);
-	free(debug->fps_min);
-	free(debug->fps_max);
-	free(debug->fps_limit);
-	free(debug->target_x);
-	free(debug->target_y);
-	free(debug->target_yaw);
-	free(debug->target_type);
-	free(debug->target_id);
-	free(debug->player_x);
-	free(debug->player_y);
-	free(debug->player_health);
-	free(debug->player_yaw);
-	free(debug->player_fov);
-	free(debug->entities_count);
-}
 
 void	clear_game(void *data)
 {
@@ -48,7 +24,6 @@ void	clear_game(void *data)
 	kill_threads(game);
 	ft_hashmap_destroy(game->fonts);
 	ft_hashmap_destroy(game->sounds);
-	free_hud_debug_strings(&game->hud.debug);
 	ft_list_destroy(&game->hud.stats.states_list);
 	ft_strvfree((void *)game->walls);
 	free(game->camera.ray_distances);
@@ -64,10 +39,9 @@ void	free_game(void *game)
 	free(game);
 }
 
-void	game_load_map_e(t_game *game, t_ftm_window *window, t_map *map)
+static void	init_hashmaps_e(t_game *game)
 {
 	fte_set(NULL);
-	game->map = map;
 	game->sprites = ft_hashmap_new();
 	if (!game->sprites)
 		return (fte_set("init sprites"));
@@ -77,9 +51,22 @@ void	game_load_map_e(t_game *game, t_ftm_window *window, t_map *map)
 	game->fonts = ft_hashmap_new();
 	if (!game->fonts)
 		return (fte_set("init sounds"));
+	game->sprites_3d = ft_hashmap_new();
+	if (!game->fonts)
+		return (fte_set("init sprites 3d"));
+}
+
+void	game_load_map_e(t_game *game, t_ftm_window *window, t_map *map)
+{
+	fte_set(NULL);
+	game->map = map;
+	init_hashmaps_e(game);
+	if (fte_flagged())
+		return (clear_game(game));
 	init_sprites_e(window, game);
 	if (fte_flagged())
 		return (clear_game(game));
+	init_sprites_3d(game);
 	init_enviroment_e(game);
 	if (fte_flagged())
 		return (clear_game(game));

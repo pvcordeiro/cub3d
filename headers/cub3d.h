@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/08 16:55:17 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/08 20:37:36 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,9 @@
 // Billboard Config
 # define BILLBOARD_WIDTH 0.23
 # define BILLBOARD_HEIGHT 0.23
+
+// Character Config
+# define CHARACTER_HIT_DELAY 100.0
 
 // Entity Config
 # define INVENTORY_SIZE 9
@@ -245,7 +248,7 @@ struct s_camera
 struct s_billboard
 {
 	t_entity		entity;
-	t_sprite		*sprites[361];
+	t_sprite		**sprites;
 };
 
 struct s_player
@@ -256,6 +259,14 @@ struct s_player
 struct s_character
 {
 	t_billboard billboard;
+	t_sprite	**death_sprite;
+	t_sprite	**hit_sprite;
+	t_sprite	**walking_sprite;
+	t_sprite	**_sprite;
+	t_time		last_hit;
+	t_fta_audio	*hit_sound;
+	t_fta_audio	*death_sound;
+	bool		dead;
 };
 
 struct s_drop
@@ -411,6 +422,7 @@ struct s_game
 	t_camera			camera;
 	t_player			*player;
 	t_list				*entities;
+	t_hashmap			*sprites_3d;
 	t_hashmap			*sprites;
 	t_entity			***walls;
 	t_entity			**billboards;
