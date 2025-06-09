@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_mlx_utils.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:46:27 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/08 15:16:26 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/09 19:13:46 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,12 @@
 
 // Line drawing step size (Used for diagonal lines)
 # define FT_MLX_UTILS_DRAW_LINE_STEP 1024
+
+# define XK_MOUSE_LEFT 1
+# define XK_MOUSE_RIGHT 3
+# define XK_MOUSE_MIDDLE 2
+# define XK_MOUSE_SCROLL_UP 4
+# define XK_MOUSE_SCROLL_DOWN 5
 
 typedef struct s_ftm_image
 {
@@ -50,7 +56,7 @@ typedef struct s_ftm_window
 	bool		fullscreen;
 	char		*title;
 	void		(*loop_hook)(void);
-	void		(*key_hook)(int key, bool down);
+	void		(*key_hook)(int key, t_coords coords, bool down);
 	void		(*exit_hook)(int code);
 	void		(*mouse_hook)(t_coords coords);
 }	t_ftm_window;

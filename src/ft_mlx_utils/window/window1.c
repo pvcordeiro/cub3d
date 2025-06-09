@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:38:00 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/07 16:16:28 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/09 19:25:46 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,30 @@ int	window_loop_hook(void *data)
 int window_key_down_hook(int key, void *window)
 {
 	if (((t_ftm_window *)window)->key_hook)
-		((t_ftm_window *)window)->key_hook(key, true);
+		((t_ftm_window *)window)->key_hook(key, (t_coords){0}, true);
 	return (0);
 }
 
 int window_key_up_hook(int key, void *window)
 {
 	if (((t_ftm_window *)window)->key_hook)
-		((t_ftm_window *)window)->key_hook(key, false);
+		((t_ftm_window *)window)->key_hook(key, (t_coords){0}, false);
+	return (0);
+}
+
+int window_mouse_down_hook(int key, int x, int y, void *window)
+{
+	if (((t_ftm_window *)window)->key_hook
+		&& ((t_ftm_window *)window)->using_mouse)
+		((t_ftm_window *)window)->key_hook(key, (t_coords){x, y, 0}, true);
+	return (0);
+}
+
+int window_mouse_up_hook(int key, int x, int y, void *window)
+{
+	if (((t_ftm_window *)window)->key_hook
+		&& ((t_ftm_window *)window)->using_mouse)
+		((t_ftm_window *)window)->key_hook(key, (t_coords){x, y, 0}, false);
 	return (0);
 }
 

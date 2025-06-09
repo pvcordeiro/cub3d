@@ -127,21 +127,21 @@ Z_ICON_SPRITE assets/wolf3d/textures/billboards/ammo.xpm
 
 P_TYPE WEAPON
 P_CANT_USE_SOUND assets/wolf3d/sounds/noammo.mp3
-P_DAMAGE 100
-P_AMMO_USAGE 0
+P_DAMAGE 34
+P_AMMO_USAGE 1
 P_NAME Pistol
 P_USE_SOUND assets/wolf3d/sounds/atkpistol.mp3
 P_SINGLE_USE TRUE
 P_DESCRIPTION Normal pistol, good for close combat
 P_SCREEN_SPRITE assets/wolf3d/textures/items/pistol/screen/0.xpm
 P_SCREEN_USE_SPRITE assets/wolf3d/textures/items/pistol/screen/2.xpm:assets/wolf3d/textures/items/pistol/screen/3.xpm
-P_SCREEN_USE_SPRITE_UPDATE_DELAY 2.0
+P_SCREEN_USE_SPRITE_UPDATE_DELAY 0.3
 P_SCREEN_USE_SPRITE_LOOP TRUE
 P_ICON_SPRITE assets/wolf3d/textures/items/pistol/icon.xpm
 
 G_TYPE WEAPON
 G_CANT_USE_SOUND assets/wolf3d/sounds/noammo.mp3
-G_DAMAGE 10
+G_DAMAGE 50
 G_AMMO_USAGE 1
 G_NAME Gatling
 G_USE_SOUND assets/wolf3d/sounds/atkgatling.mp3
@@ -154,7 +154,7 @@ G_ICON_SPRITE assets/wolf3d/textures/items/gatling/icon.xpm
 
 K_TYPE WEAPON
 K_CANT_USE_SOUND assets/wolf3d/sounds/noammo.mp3
-K_DAMAGE 10
+K_DAMAGE 5
 K_AMMO_USAGE 0
 K_NAME Knife
 K_USE_SOUND assets/wolf3d/sounds/atkknife.mp3
@@ -168,7 +168,7 @@ K_ICON_SPRITE assets/wolf3d/textures/items/knife/icon.xpm
 
 M_TYPE WEAPON
 M_CANT_USE_SOUND assets/wolf3d/sounds/noammo.mp3
-M_DAMAGE 10
+M_DAMAGE 25
 M_AMMO_USAGE 1
 M_NAME Machine Gun
 M_USE_SOUND assets/wolf3d/sounds/atkmachinegun.mp3
@@ -210,6 +210,7 @@ M_ICON_SPRITE assets/wolf3d/textures/items/machinegun/icon.xpm
 ;_HARD FALSE
 
 v_TYPE DOOR
+v_TARGETABLE TRUE
 v_AUTO_CLOSE_DELAY 8000.0
 v_DOOR_SPRITE assets/wolf3d/textures/door.xpm
 v_SIDES_SPRITE assets/wolf3d/textures/door-frame.xpm
@@ -218,6 +219,7 @@ v_OPEN_SOUND assets/wolf3d/sounds/opendoor.mp3
 v_CLOSE_SOUND assets/wolf3d/sounds/closedoor.mp3
 
 h_TYPE DOOR
+h_TARGETABLE TRUE
 h_AUTO_CLOSE_DELAY 8000.0
 h_DOOR_SPRITE assets/wolf3d/textures/door.xpm
 h_SIDES_SPRITE assets/wolf3d/textures/door-frame.xpm
@@ -286,33 +288,33 @@ C 50, 50, 50
                              jjjjjjjjjjjjjjj
      ffffff                  j           jjjjjj
      f    f      ffffffffffffj           jjjjjj
-     f    ff     f           j           j   jj
+     f    ff     f  e   e    j           j   jj
      f     f     f ,    ,    v     /     v   jj
      f     f     f           j           j   jj
      fffffhfffff f   ffffffffj           jjjjjj
      f         f f   f       j           jjjjjj
-     f         f     fff     jjjjjjhjjjjjjj
-     f         f       f         j   j
+     f     e   f     fff     jjjjjjhjjjjjjj
+     f         f    e  f         j   j
      f         v   ,   f         j   j
      f         f       f         j , j
 ffffff         fffffffff         j   j
-f   ff         f                 j   j
+f   ff         f                 j e j
 f , ffffffhfffff            jjjjjj   jjj
 f   f   f   f               j  v   ,   j
 ffhff   f , f               j  jjj   jjj
 f   fffff   f               j  j j   j
-f , f   f   f               j  j j   j
+f , f   f e f               j  j j   j
 f     , f , f               jjjj l , l
 f   f   f   f                    j   j
 f   ffffffhfffff                fjlhljf              aaaaaaaaaaa
 f , ff         f           ffffif.   .fiffff         a      '''a
-f   ff         f           f.             .f         aa       'a
-f   ff  ,   ,  f           g   { e e e ]   gaaaaaaaaaaa        a
-f    f         f           f                a         a        a
-f    v         f           f  / e  /  } /   v         v        a
-f    f         f           f   :            a         a        a
-f   ff  ,   ,  f           g  E  ;  e [ e  gaaa    aaaa  -  -  a
-f   ff         f           f.       e     .f  aa  a   a        a
+f   ff         f           f.      ;    ; .f         aa  e    'a
+f   ff  ,   ,  f           g   {       ]   gaaaaaaaaaaa        a
+f    f         f           f                a     ;   a     e  a
+f    v         f           f  /    /  } /   v         v        a
+f    f         f           f   :            a         a   ;    a
+f   ff  ,   ,  f           g  E  ;    [    gaaa    aaaa  -  -  a
+f   ff    e    f           f.    ;        .f  aa  a   a        a
 f   ff         f           ffkfff     ffkfff   a  a   a        a
 f , ffffffhfffff                faahaaf        a  aaaaaaa+aa?aaa
 f   f   f   f                    a   a         a  a     aaaaaa
@@ -320,10 +322,10 @@ f   fffff   f                    a , a         a  a
 f   f   f   f                    a   a         a  a aaaaaaaaa
 f     , f , f                    a { a         a  aaa a a a aa
 f   f   f   f                    a } a         a   a         a
-f , fffff   f                    a , a         a   v         b
+f , fffff   f                    a , a         a   v  ;      b
 f   fffff   fffffffffffffff      a   a         a   a        =a
 f               f       fff      a   a         aaaaaa a a a aa
-f     ,      ,  v       0 0      a   a             aaaaaaaaaa
+f     ,      ,  v   e   0 0      a   a             aaaaaaaaaa
 f               f       fff      a , a
 fffffffffffffffffhfffffffff      a   a
         fff  f  v  f        aaaaaaahaaaaaaa
@@ -336,7 +338,7 @@ fffffffffffffffffhfffffffff      a   a
                             a    v , v    a
                             a    a   a    a
                             aaaaaa   aaaaaa
-                            a             a
-                            a  ,   ,   , ;a
+                            a  e          a
+                            a  ,   ,  e, ;a
                             a      :      a
                             abaabaacaabaaba

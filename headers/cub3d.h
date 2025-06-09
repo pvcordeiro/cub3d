@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/09 14:05:35 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/09 19:15:18 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@
 
 // Entity Config
 # define INVENTORY_SIZE 9
+# define INVENTORY_SCROLL_DELAY 0.5
 
 // Door Config
 # define DOOR_ANIMATION_DURATION 10.0
@@ -227,6 +228,7 @@ struct s_entity
 	char			identifier;
 	bool			active;
 	int				ammo;
+	t_time			last_inventory_scroll;
 	t_item			*inventory[INVENTORY_SIZE];
 	int				inventory_index;
 	t_coords		coords;
@@ -456,7 +458,7 @@ void		free_map(t_map *map);
 
 // Loop
 void		loop(void);
-void		key_hook(int key, bool down);
+void		key_hook(int key, t_coords coords, bool down);
 void		mouse_hook(t_coords coords);
 
 // Sprites

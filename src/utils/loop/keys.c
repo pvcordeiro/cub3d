@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:21:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/08 15:14:42 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/09 19:24:05 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,9 @@ static void	hud_keys(t_game *game, t_ftm_window *window, int key, bool down)
 	hud_minimap_keys(key, down);
 }
 
-void	key_hook(int key, bool down)
+void	key_hook(int key, t_coords coords, bool down)
 {
+	(void)coords;
 	call_entity_keys(cub3d()->game.entities, key, down);
 	hud_keys(&cub3d()->game, &cub3d()->window, key, down);
 	if (key == XK_Escape)
