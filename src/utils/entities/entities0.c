@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 20:49:46 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/08 19:48:52 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/09 17:01:47 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,27 @@ bool	add_item_to_inventory(t_entity *entity, t_item *item)
 	return (false);
 }
 
+void	fill_death_sprites(t_sprite **dst, t_sprite *src)
+{
+    int	i;
+
+    i = -1;
+    while (++i < 360)
+    {
+        if (src)
+        {
+            dst[i] = ft_calloc(1, sizeof(t_sprite));
+            if (dst[i])
+            {
+                *dst[i] = *src;
+                dst[i]->index = 0;
+                dst[i]->running = false;
+                dst[i]->updated_at = ft_get_time();
+            }
+        }
+    }
+}
+
 void	fill_3d_sprites_from_src(t_sprite **dst, t_sprite **src)
 {
 	int	i;
@@ -144,12 +165,14 @@ void	fill_3d_sprites_from_single(t_sprite **dst, t_sprite *src)
 
 void	fill_3d_sprites_from_game(t_game *game, t_sprite **dst, char identifier, char *key)
 {
-	t_sprite	**sprites;
-	t_sprite	*sprite;
+    t_sprite	**sprites;
+    t_sprite	*sprite;
 
-	sprite = hashmap_get_with_identifier(game->sprites, identifier, key);
-	sprites = hashmap_get_with_identifier(game->sprites_3d, identifier, key);
-	if (sprites)
-		return (fill_3d_sprites_from_src(dst, sprites));
-	fill_3d_sprites_from_single(dst, sprite);
+    sprites = hashmap_get_with_identifier(game->sprites_3d, identifier, key);
+    if (sprites)
+        return (fill_3d_sprites_from_src(dst, sprites));
+    sprite = hashmap_get_with_identifier(game->sprites, identifier, key);
+    if (key && ft_strequal(key, "DEATH"))
+        return (fill_death_sprites(dst, sprite));
+    fill_3d_sprites_from_single(dst, sprite);
 }

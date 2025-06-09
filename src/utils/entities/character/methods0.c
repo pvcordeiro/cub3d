@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/09 14:00:10 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/09 17:05:47 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	character_shot(t_entity *shooted, t_entity *shooter)
 	character = (t_character *)shooted;
 	if (!character->dead)
 	{
-		if (shooted->health <= 0)
+		if (!shooted->health)
 		{
 			fta_play(character->death_sound);
 			i = -1;
@@ -63,7 +63,6 @@ void	character_shot(t_entity *shooted, t_entity *shooter)
 				{
 					character->death_sprite[i]->index = 0;
 					character->death_sprite[i]->running = true;
-					get_sprite_image(character->death_sprite[i]);
 				}
 			}
 			character->dead = true;

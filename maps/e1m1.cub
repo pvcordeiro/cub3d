@@ -76,7 +76,7 @@ e_WALKING_1_SPRITE assets/wolf3d/textures/billboards/soldier/front-left1.xpm:ass
 e_WALKING_1_SPRITE_UPDATE_DELAY 0.2
 e_WALKING_1_SPRITE_LOOP TRUE
 e_DEATH_SPRITE assets/wolf3d/textures/billboards/soldier/death1.xpm:assets/wolf3d/textures/billboards/soldier/death2.xpm:assets/wolf3d/textures/billboards/soldier/death3.xpm:assets/wolf3d/textures/billboards/soldier/death4.xpm:assets/wolf3d/textures/billboards/soldier/death5.xpm
-e_DEATH_SPRITE_UPDATE_DELAY 0.4
+e_DEATH_SPRITE_UPDATE_DELAY 1
 e_HIT_SPRITE assets/wolf3d/textures/billboards/soldier/hit.xpm
 e_DEATH_SOUND assets/wolf3d/sounds/deathscream5.mp3
 e_HIT_SOUND assets/wolf3d/sounds/deathscream1.mp3
@@ -128,7 +128,7 @@ Z_ICON_SPRITE assets/wolf3d/textures/billboards/ammo.xpm
 P_TYPE WEAPON
 P_CANT_USE_SOUND assets/wolf3d/sounds/noammo.mp3
 P_DAMAGE 100
-P_AMMO_USAGE 1
+P_AMMO_USAGE 0
 P_NAME Pistol
 P_USE_SOUND assets/wolf3d/sounds/atkpistol.mp3
 P_SINGLE_USE TRUE
@@ -307,12 +307,12 @@ f   f   f   f                    j   j
 f   ffffffhfffff                fjlhljf              aaaaaaaaaaa
 f , ff         f           ffffif.   .fiffff         a      '''a
 f   ff         f           f.             .f         aa       'a
-f   ff  ,   ,  f           g   {       ]   gaaaaaaaaaaa        a
+f   ff  ,   ,  f           g   { e e e ]   gaaaaaaaaaaa        a
 f    f         f           f                a         a        a
 f    v         f           f  / e  /  } /   v         v        a
 f    f         f           f   :            a         a        a
-f   ff  ,   ,  f           g  E  ;  e [    gaaa    aaaa  -  -  a
-f   ff         f           f.             .f  aa  a   a        a
+f   ff  ,   ,  f           g  E  ;  e [ e  gaaa    aaaa  -  -  a
+f   ff         f           f.       e     .f  aa  a   a        a
 f   ff         f           ffkfff     ffkfff   a  a   a        a
 f , ffffffhfffff                faahaaf        a  aaaaaaa+aa?aaa
 f   f   f   f                    a   a         a  a     aaaaaa
