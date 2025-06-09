@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/09 17:05:47 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/09 17:47:34 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,12 @@ void	character_shot(t_entity *shooted, t_entity *shooter)
 				{
 					character->death_sprite[i]->index = 0;
 					character->death_sprite[i]->running = true;
+					character->death_sprite[i]->updated_at = ft_get_time();
 				}
 			}
 			character->dead = true;
+			shooted->hard = false;
+			shooted->targetable = false;
 		}
 		else
 			fta_play(character->hit_sound);

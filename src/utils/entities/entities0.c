@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 20:49:46 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/09 17:01:47 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/09 17:30:39 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,6 @@ void	fill_death_sprites(t_sprite **dst, t_sprite *src)
                 *dst[i] = *src;
                 dst[i]->index = 0;
                 dst[i]->running = false;
-                dst[i]->updated_at = ft_get_time();
             }
         }
     }
