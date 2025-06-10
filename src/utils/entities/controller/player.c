@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 19:35:54 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/08 16:07:20 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/09 19:21:46 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,28 @@ static void	frame(t_entity *entity, double delta_time)
 	moviment_frame(entity, delta_time);
 }
 
+static void	mouse_inv_keys(t_entity *entity, int key)
+{
+	int	new_index;
+
+	new_index = entity->inventory_index;
+	if (key == XK_MOUSE_SCROLL_UP
+		&& ft_get_time() - entity->last_inventory_scroll >= INVENTORY_SCROLL_DELAY)
+	{
+		new_index = (new_index + 1) % INVENTORY_SIZE;
+			entity->last_inventory_scroll = ft_get_time();
+	}
+	if (key == XK_MOUSE_SCROLL_DOWN
+		&& ft_get_time() - entity->last_inventory_scroll >= INVENTORY_SCROLL_DELAY)
+	{
+		new_index = (new_index - 1 + INVENTORY_SIZE) % INVENTORY_SIZE;
+		entity->last_inventory_scroll = ft_get_time();
+	}
+	if (!entity->inventory[new_index])
+		return ;
+	entity->inventory_index = new_index;
+}
+
 static void	inv_key(t_entity *entity, int key, bool down)
 {
 	int	i;
@@ -24,9 +46,10 @@ static void	inv_key(t_entity *entity, int key, bool down)
 	i = -1;
 	if (!down)
 		return ;
+	mouse_inv_keys(entity, key);
 	while (++i < INVENTORY_SIZE)
 	{
-		if (key == XK_1 + i)
+		if (key == XK_1 + i && entity->inventory[i])
 			entity->inventory_index = i;
 	}
 }
@@ -36,7 +59,7 @@ static void	item_key(t_entity *entity, int key, bool down)
 	t_item	*item;
 
 	item = entity->inventory[entity->inventory_index];
-	if (key == XK_space && item)
+	if ((key == XK_space || key == XK_MOUSE_LEFT) && item)
 	{
 		if (down)
 			item->user = entity;

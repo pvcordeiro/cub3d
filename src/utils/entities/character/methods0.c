@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/08 20:51:33 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/09 17:47:34 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,21 +47,31 @@ void	character_action(t_entity *entity, t_entity *actioner)
 void	character_shot(t_entity *shooted, t_entity *shooter)
 {
 	t_character	*character;
+	int			i;
 
 	billboard_shot(shooted, shooter);
 	character = (t_character *)shooted;
 	if (!character->dead)
 	{
 		if (!shooted->health)
+		{
 			fta_play(character->death_sound);
+			i = -1;
+			while (++i < 360)
+			{
+				if (character->death_sprite[i])
+				{
+					character->death_sprite[i]->index = 0;
+					character->death_sprite[i]->running = true;
+					character->death_sprite[i]->updated_at = ft_get_time();
+				}
+			}
+			character->dead = true;
+			shooted->hard = false;
+			shooted->targetable = false;
+		}
 		else
 			fta_play(character->hit_sound);
-	}
-	if (!shooted->health)
-	{
-		character->death_sprite[0]->index = 0;
-		character->death_sprite[0]->running = true;
-		character->dead = true;
 	}
 	character->last_hit = ft_get_time();
 }

@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 18:51:55 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/02 17:15:28 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/10 15:35:05 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	looks(t_entity *entity, double delta_time)
 		entity->coords.yaw = ft_normalize_angle(entity->coords.yaw + velocity);
 }
 
-static bool	position_overlaps(t_list *entities, t_entity *entity, t_coords coords)
+static t_entity	*position_overlaps(t_list *entities, t_entity *entity, t_coords coords)
 {
 	t_list		*curr;
 	t_entity	*curr_entity;
@@ -39,10 +39,10 @@ static bool	position_overlaps(t_list *entities, t_entity *entity, t_coords coord
             && coords.x - entity->size.width <= (curr_entity->coords.x + curr_entity->size.width)
             && coords.y + entity->size.height >= curr_entity->coords.y
             && coords.y - entity->size.height <= (curr_entity->coords.y + curr_entity->size.height))
-			return (fta_play(entity->collision_sound), true);
+			return (fta_play(entity->collision_sound), curr_entity);
 		curr = curr->next;
 	}
-	return (false);
+	return (NULL);
 }
 
 static void	move_player_x(t_list *entities, t_entity *entity, double angle, double velocity)
@@ -65,7 +65,7 @@ static void	move_player_y(t_list *entities, t_entity *entity, double angle, doub
 
 static void	player_walk(t_list *entities, t_entity *entity, double angle, double delta_time)
 {
-	double	velocity;
+	double		velocity;
 
 	velocity = entity->controller.walk_velocity;
 	if (entity->controller.sprinting)
@@ -97,8 +97,16 @@ static void	mouse_moviment(t_entity *entity, double delta_time)
 	entity->coords.yaw = ft_normalize_angle(entity->coords.yaw + velocity);
 }
 
-static void	actions(t_entity *entity)
+static void	actions(t_list *entities, t_entity *entity)
 {
+	t_entity	*overlapping_entity;
+
+	overlapping_entity = position_overlaps(entities, entity, entity->coords);
+	if (overlapping_entity
+		&& overlapping_entity->type == ENTITY_DOOR
+		&& !((t_door *)overlapping_entity)->opened
+		&& overlapping_entity->action)
+		overlapping_entity->action(overlapping_entity, entity);
 	if (entity->controller.action && entity->controller.already_actioned)
 		return ;
 	entity->controller.already_actioned = entity->controller.action;
@@ -109,8 +117,8 @@ static void	actions(t_entity *entity)
 
 void	moviment_frame(t_entity *entity, double delta_time)
 {
+	actions(cub3d()->game.entities, entity);
 	looks(entity, delta_time);
 	mouse_moviment(entity, delta_time);
 	walks(cub3d()->game.entities, entity, delta_time);
-	actions(entity);
 }

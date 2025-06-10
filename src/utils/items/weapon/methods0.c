@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/08 17:39:46 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/10 13:43:21 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ void	weapon_use(t_item *item)
 
 	item_use(item);
 	weapon = (t_weapon *)item;
+	item->user->ammo -= weapon->ammo_usage;
 	if (!item->user)
 		return ;
 	if (!item->user || !item->user->target_entity || !item->user->target_entity->shot)
 		return ;
-	item->user->ammo -= weapon->ammo_usage;
 	item->user->target_entity->shot(item->user->target_entity, item->user);
 }
 

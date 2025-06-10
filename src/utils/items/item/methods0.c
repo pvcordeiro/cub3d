@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/08 17:39:56 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/10 15:46:06 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,13 @@ void	item_frame(t_item *item)
 	{
 		item->screen_sprite = item->screen_use_sprite;
 		item->screen_sprite->index = 0;
+		item->screen_sprite->running = true;
 		item->screen_sprite->loop = !item->single_use;
+		if (item->single_use)
+			item->screen_sprite->updated_at = ft_get_time();
 	}
-	else
+	else if (!item->single_use
+		|| ((item->screen_use_sprite && !item->screen_use_sprite->running) && !item->user))
 		item->screen_sprite = item->_screen_sprite;
 	item->already_using = !!item->user;
 }
