@@ -287,16 +287,16 @@ C 50, 50, 50
                              jjjjjjjjjjjjjjj
                              jjjjjjjjjjjjjjj
      ffffff                  j           jjjjjj
-     f    f      ffffffffffffj           jjjjjj
+     f    f      ffffffffffffj     e     jjjjjj
      f    ff     f  e   e    j           j   jj
-     f     f     f ,    ,    v     /     v   jj
+     f     f     f ,    ,    v  e  /   e v   jj
      f     f     f           j           j   jj
      fffffhfffff f   ffffffffj           jjjjjj
-     f         f f   f       j           jjjjjj
-     f     e   f     fff     jjjjjjhjjjjjjj
+     f         f f   f       j      e    jjjjjj
+     f     e   fff   fff     jjjjjjhjjjjjjj
      f         f    e  f         j   j
      f         v   ,   f         j   j
-     f         f       f         j , j
+     f    e    f       f         j , j
 ffffff         fffffffff         j   j
 f   ff         f                 j e j
 f , ffffffhfffff            jjjjjj   jjj
@@ -308,7 +308,7 @@ f     , f , f               jjjj l , l
 f   f   f   f                    j   j
 f   ffffffhfffff                fjlhljf              aaaaaaaaaaa
 f , ff         f           ffffif.   .fiffff         a      '''a
-f   ff         f           f.      ;    ; .f         aa  e    'a
+f   ff    e    f           f.      ;    ; .f         aa  e    'a
 f   ff  ,   ,  f           g   ;       ;   gaaaaaaaaaaa        a
 f    f         f           f                a     ;   a     e  a
 f    v         f           f  /    /  ; /   v         v        a

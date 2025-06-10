@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/09 19:15:18 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/10 15:37:45 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@
 # define PLAYER_RAYS_NO_HIT_LENGTH 50.0
 # define PLAYER_FOV 73.5
 # define PLAYER_RAY_SUBRAYS 5
-# define PLAYER_MOUSE_LOOK_VELOCITY 30.0
+# define PLAYER_MOUSE_LOOK_VELOCITY 20.0
 # define PLAYER_KEY_LOOK_VELOCITY 90.0
-# define PLAYER_WALK_VELOCITY 3.0
-# define PLAYER_SPRINT_VELOCITY 5.0
+# define PLAYER_WALK_VELOCITY 4.0
+# define PLAYER_SPRINT_VELOCITY 6.0
 # define PLAYER_RAY_HIT_ENTITIES_NUMBER 5
 # define PLAYER_MAX_TARGET_DISTANCE 1.2
 # define PLAYER_WIDTH 0.23
@@ -295,6 +295,7 @@ struct s_door
 	t_sprite	*door_sprite;
 	t_sprite	*door_sides_sprite;
 	bool		opened;
+	bool		cant_close;
 	t_time		auto_close_delay;
 	t_time		last_opened_at;
 	int			last_animation_index;
