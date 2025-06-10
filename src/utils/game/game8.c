@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 23:46:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/08 20:40:54 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/10 17:41:49 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,25 @@
 
 static void process_door_at(t_game *game, int y, int x, t_sprite *frame_sprite)
 {
-	t_door	*door;
+	t_door		*door;
+	t_entity	*wall1;
+	t_entity	*wall2;
+	t_direction	dir;
 
 	if (!frame_sprite)
 		return ;
 	door = (t_door *)game->walls[y][x];
-	if (door->direction == NORTH || door->direction == SOUTH)
-	{
-		((t_wall *)game->walls[y][x - 1])->east_sprite = frame_sprite;
-		((t_wall *)game->walls[y][x + 1])->west_sprite = frame_sprite;
-	}
-	else if (door->direction == EAST || door->direction == WEST)
-	{
-		((t_wall *)game->walls[y - 1][x])->south_sprite = frame_sprite;
-		((t_wall *)game->walls[y + 1][x])->north_sprite = frame_sprite;
-	}
+	dir = door->direction;
+	wall1 = game->walls[y - (dir == EAST || dir == WEST)][x - (dir == NORTH || dir == SOUTH)];
+	wall2 = game->walls[y + (dir == EAST || dir == WEST)][x + (dir == NORTH || dir == SOUTH)];
+	if (wall1 && wall1->wall && (dir == EAST || dir == WEST))
+		((t_wall *)wall1)->south_sprite = frame_sprite;
+	else if (wall1 && wall1->wall && (dir == NORTH || dir == SOUTH))
+		((t_wall *)wall1)->east_sprite = frame_sprite;
+	if (wall2 && wall2->wall && (dir == EAST || dir == WEST))
+		((t_wall *)wall2)->north_sprite = frame_sprite;
+	else if (wall2 && wall2->wall && (dir == NORTH || dir == SOUTH))
+		((t_wall *)wall2)->west_sprite = frame_sprite;
 }
 
 void insert_door_frames(t_game *game)
@@ -40,11 +44,9 @@ void insert_door_frames(t_game *game)
     {
         x = -1;
         while (++x < game->map->size.width)
-        {
             if (game->walls[y][x] && game->walls[y][x]->type == ENTITY_DOOR)
 				process_door_at(game, y, x,
 					((t_door *)game->walls[y][x])->door_sides_sprite);
-        }
     }
 }
 

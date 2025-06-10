@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   methods0.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/10 16:17:37 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/10 17:45:22 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	door_frame(t_entity *entity, double delta_time)
 	if (!door->opening_sprite.index && door->opening_sprite.index != door->last_animation_index)
 		fta_play(door->close_sound);
 	door->last_animation_index = door->opening_sprite.index;
-	if (ft_get_time() - door->last_opened_at >= door->auto_close_delay
+	if (door->auto_close_delay && ft_get_time() - door->last_opened_at >= door->auto_close_delay
 		&& door->wall.entity.action && door->opened)
 		door->wall.entity.action(entity, entity);
 }

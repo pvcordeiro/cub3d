@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:15:19 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/04 01:26:32 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/10 16:16:45 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void	load_placeholder_sprite_e(t_ftm_window *window, t_sprite *placeholde
 
 int	main(int argc, char **argv)
 {
+
 	(void)argc;
 	fte_storage()->exit = cub3d_exit;
 	fta_init_e();
