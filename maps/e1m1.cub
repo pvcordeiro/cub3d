@@ -118,6 +118,24 @@ e_HIT_SOUND assets/wolf3d/sounds/deathscream1.mp3
 \_TYPE BILLBOARD
 \_SPRITE assets/wolf3d/textures/billboards/armour.xpm
 
+~_TYPE BILLBOARD
+~_SPRITE assets/wolf3d/textures/billboards/table-and-chairs.xpm
+
+!_TYPE BILLBOARD
+!_SPRITE assets/wolf3d/textures/billboards/blue-pot.xpm
+
+@_TYPE BILLBOARD
+@_SPRITE assets/wolf3d/textures/billboards/lamp.xpm
+
+#_TYPE BILLBOARD
+#_SPRITE assets/wolf3d/textures/billboards/nazi-flag.xpm
+
+$_TYPE BILLBOARD
+$_SPRITE assets/wolf3d/textures/billboards/gold-plant.xpm
+
+%_TYPE BILLBOARD
+%_SPRITE assets/wolf3d/textures/billboards/green-barrel.xpm
+
 U_TYPE FOOD
 U_HEALTH 10
 U_NAME FOOD
@@ -244,6 +262,23 @@ s_DIRECTION WEST
 s_OPEN_SOUND assets/wolf3d/sounds/opendoor.mp3
 s_CLOSE_SOUND assets/wolf3d/sounds/closedoor.mp3
 
+t_TYPE DOOR
+t_TARGETABLE TRUE
+t_DOOR_SPRITE assets/wolf3d/textures/grey-wall-hitler.xpm
+t_SIDES_SPRITE assets/wolf3d/textures/grey-wall0.xpm
+t_DIRECTION NORTH
+t_OPEN_SOUND assets/wolf3d/sounds/opendoor.mp3
+t_CLOSE_SOUND assets/wolf3d/sounds/closedoor.mp3
+
+u_TYPE DOOR
+u_TARGETABLE TRUE
+u_DOOR_SPRITE assets/wolf3d/textures/electric-door-button-dark.xpm
+u_SIDES_SPRITE assets/wolf3d/textures/door-frame.xpm
+u_DIRECTION WEST
+u_OPEN_SOUND assets/wolf3d/sounds/opendoor.mp3
+u_CLOSE_SOUND assets/wolf3d/sounds/closedoor.mp3
+u_AUTO_CLOSE_DELAY 8000.0
+
 a_TYPE WALL
 a_NO assets/wolf3d/textures/blue-wall1.xpm
 a_SO assets/wolf3d/textures/blue-wall0.xpm
@@ -298,56 +333,67 @@ l_SO assets/wolf3d/textures/wood-wall-eagle.xpm
 l_WE assets/wolf3d/textures/wood-wall-eagle-dark.xpm
 l_EA assets/wolf3d/textures/wood-wall-eagle-dark.xpm
 
+m_TYPE WALL
+m_NO assets/wolf3d/textures/wood-wall-hitler.xpm
+m_SO assets/wolf3d/textures/wood-wall-hitler.xpm
+m_WE assets/wolf3d/textures/wood-wall-hitler-dark.xpm
+m_EA assets/wolf3d/textures/wood-wall-hitler-dark.xpm
+
+n_TYPE WALL
+n_NO assets/wolf3d/textures/lever-down.xpm
+n_SO assets/wolf3d/textures/lever-down.xpm
+n_WE assets/wolf3d/textures/lever-down.xpm
+n_EA assets/wolf3d/textures/lever-down.xpm
+
 F 100, 100, 100
 C 50, 50, 50
 
-                             jjjjjjjjjjjjjjj
-                             jjjjjjjjjjjjjjj
-     ffffff                  j           jjjjjj
-     f    f      ffffffffffffj     e     jjjjjj
-     f    ff     f  e   e    j           j   jj
-     f     f     f ,    ,    v  e  /   e v   jj
-     f     f     f           j           j   jj
-     fffffhfffff f   ffffffffj           jjjjjj
-     f         f f   f       j      e    jjjjjj
-     f     e   fff   fff     jjjjjjhjjjjjjj
-     f         f    e  f         j e j
-     f         v   ,   f         j   j
-     f    e    f       f         j , j
-ffffff         fffffffff         j   j
-f   ff         f                 j   j
-f , ffffffhfffff            jjjjjj   jjj
+                             jjjljjjjjljjj
+     ffffff                  j!         !j
+     f    f      fffffffiffffl  ~  ~  ~  ljjjj
+     f    ff     f           j           j   j
+     f     f     f ,    ,    v  e  /     v e l
+     f     f     f           j           j   j
+     ffgfftffgff f   fffiffffm         e mjjjj
+     f   $ $  ef f   f       j           j
+     i @     @ iff   fff     jjjljjhjjljjj
+     f  e      f   e   f         j e j
+     f#   ~ e  v   ,  ef         j   j
+     f  e      f       f         m , m
+fffffi @     @ ifffgffff         j   j
+f  'ff        ef                 j   j
+f , fffgffhffgff            jjjjjj   jjj
 f   f   f   f               j  se  ,  \j
-ffhff   f , f               j  jjj   jjj
+ffhff   i , i               j  jjj   jjj
 f   fffff   f               j  j j   j
-f , f   f e f               j  j j   j
-f     , f , f               jjjj l , l
-f   f   f   f                    j   j
+f , f  :f   f               j  j j   j
+f     , i , i               jjjj l , l
+f   f   f e f                    j   j
 f   ffffffhfffff                fjlhljf               aaaaaaaaaa
-f , ff         f           ffffif.   .fiffff          a:    '''a
-f   ff    e    f           f.             .f          a     e 'a
+i , ife        f           ffffif.   .fiffff          a:    '''a
+f   ff .     . i           f.             .f          a     e 'a
 f   ff  ,   ,  f           g               gaaaaaaaaaaa        a
 f    f         f           f                a         a        a
-f    v         f           f e/    /    /   v         v        b
+f    v         i           f e/    /    /   v         v        b
 f    f         f           f                a         a        a
-f   ff  ,   ,  f           g               gaaa    aaaa  -: -  a
-f   ff    e    f           f.             .f  aa  a   a        a
-f   ff         f           ffkfff     ffkfff   a  a   a      : a
-f , ffffffhfffff                faahaaf        a  aaaaaaa+aa?aaa
+f   ff  ,   ,  f           g            e  gaaa    aaaa  -: -e a
+f   ff .     . i           f.             .f  aa  a   a        a
+f   ff      e  f           ffkfff     ffkfff   a  a   a      : a
+k , kfffffhfffff                faahaaf        a  aaaaaaa+aa?aaa
 f   f   f   f                    a   a         a  a     aaaaaa
 f   fffff   f                    a , a         a  a
-f   f   f   f                    a   a         a  a aaaaaaaaa
-f     , f , f                    a   a         a  aaa a a a aa
-f   f   f   f                    a   a         a   a         a
+f   f  %f   f                    a   a         a  a aaaaaaaaa
+f    e, i , i                    a   a         a  aaa a a a aa
+f   f:  f   f                    a   a         a  ea         a
 f , fffff   f                    a , a         a   v         b
-f   fffff   fffffffffffffff      a   a         a e a        =a
-f               f       fff      a   a         aaaaaa a a a aa
-f     ,      ,  v   e   0 0      a   a             aaaaaaaaaa
-f               f       fff      a , a
-fffffffffffffffffhfffffffff      a   a
-        fff  f  v  f        aaaaaaahaaaaaaa
-        f    f  f  f        a|:  a   a    a
-        fff     ffff        a    v , v "  a
+f   fffff   fffffffffgfffff      a e a         a e a        =a
+f               f      eiff      a   a         aaaaaa a a a aa
+f     ,      ,  v    e  u n      a   a             aaaaaaaaaa
+f               f      eiff      a , a
+ffffffffffkffffffhfffgfffff      a   a
+        ffi  f  v  f        aaaaaaahaaaaaaa
+        n u  f  f  f        a|:  a   a    a
+        ffi     ffff        a    v , v "  a
           ffhffff           a    a   a    a
            f  f             a    a   a    a
            f  f             aaaaaa   aaaaaa
@@ -356,6 +402,6 @@ fffffffffffffffffhfffffffff      a   a
                             a]  [a   a    a
                             aaaaaa   aaaaaa
                             a             a
-                            a e,   ,   , ;a
-                            a      :      a
+                            a  ,   ,   ,e;a
+                            ae     :      a
                             abaabaacaabaaba
