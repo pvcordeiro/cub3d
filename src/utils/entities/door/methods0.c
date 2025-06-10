@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   methods0.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/10 15:32:16 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/10 16:17:37 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,9 @@
 void	door_frame(t_entity *entity, double delta_time)
 {
 	t_door		*door;
-	t_coords	p_coords;
 
 	wall_frame(entity, delta_time);
 	door = (t_door *)entity;
-	p_coords = cub3d()->game.player->billboard.entity.coords;
 	door->wall.entity.hard = door->opening_sprite.index != DOOR_ANIMATION_FRAMES - 1;
 	door->wall.entity.transparent = door->opening_sprite.index;
 	(void)get_sprite_image(&door->opening_sprite);
