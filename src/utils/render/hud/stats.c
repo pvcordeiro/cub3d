@@ -3,14 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   stats.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 22:14:35 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/06 20:10:26 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/10 13:12:50 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "hud.h"
+
+void	render_ammo_text(t_game *game, t_ftm_image *canvas)
+{
+	t_coords			text_pos;
+	char				*ammo_text;
+	double				ammo_scaler;
+
+	ammo_text = ft_strf("%d", game->player->billboard.entity.ammo);
+	ammo_scaler = 1.47;
+	if (ft_strlen(ammo_text) == 3)
+		ammo_scaler = 1.50;
+	if (ft_strlen(ammo_text) == 2)
+		ammo_scaler = 1.48;
+	text_pos = (t_coords){canvas->size.width / ammo_scaler,
+		canvas->size.height / 1.09, 0};
+	ftm_draw_text(canvas, game->hud.stats.font,
+		(t_ftm_text_config){
+			.text = ammo_text,
+			.coords = text_pos,
+			.height = canvas->size.height * 0.05,
+			.spacing = 4,
+			.color = 0xCFFFFFFF
+		});
+	free(ammo_text);
+}
 
 void	render_health_text(t_game *game, t_ftm_image *canvas)
 {
@@ -115,5 +140,6 @@ void	render_stats(t_game *game, t_ftm_image *canvas)
 		false, (t_coords){0, 0, 0}, (t_coords){0, 0, 0},
 		true, stats_size, NULL, NULL});
 	render_health_text(game, canvas);
+	render_ammo_text(game, canvas);
 	render_hand_item_icon(game, canvas);
 }

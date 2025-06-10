@@ -141,7 +141,7 @@ P_ICON_SPRITE assets/wolf3d/textures/items/pistol/icon.xpm
 
 G_TYPE WEAPON
 G_CANT_USE_SOUND assets/wolf3d/sounds/noammo.mp3
-G_DAMAGE 50
+G_DAMAGE 30
 G_AMMO_USAGE 1
 G_NAME Gatling
 G_USE_SOUND assets/wolf3d/sounds/atkgatling.mp3
@@ -309,19 +309,19 @@ f   f   f   f                    j   j
 f   ffffffhfffff                fjlhljf              aaaaaaaaaaa
 f , ff         f           ffffif.   .fiffff         a      '''a
 f   ff         f           f.      ;    ; .f         aa  e    'a
-f   ff  ,   ,  f           g   {       ]   gaaaaaaaaaaa        a
+f   ff  ,   ,  f           g   ;       ;   gaaaaaaaaaaa        a
 f    f         f           f                a     ;   a     e  a
-f    v         f           f  /    /  } /   v         v        a
+f    v         f           f  /    /  ; /   v         v        a
 f    f         f           f   :            a         a   ;    a
-f   ff  ,   ,  f           g  E  ;    [    gaaa    aaaa  -  -  a
+f   ff  ,   ,  f           g     ;    ;    gaaa    aaaa  -  -  a
 f   ff    e    f           f.    ;        .f  aa  a   a        a
 f   ff         f           ffkfff     ffkfff   a  a   a        a
 f , ffffffhfffff                faahaaf        a  aaaaaaa+aa?aaa
 f   f   f   f                    a   a         a  a     aaaaaa
 f   fffff   f                    a , a         a  a
 f   f   f   f                    a   a         a  a aaaaaaaaa
-f     , f , f                    a { a         a  aaa a a a aa
-f   f   f   f                    a } a         a   a         a
+f     , f , f                    a ; a         a  aaa a a a aa
+f   f   f   f                    a ; a         a   a         a
 f , fffff   f                    a , a         a   v  ;      b
 f   fffff   fffffffffffffff      a   a         a   a        =a
 f               f       fff      a   a         aaaaaa a a a aa
@@ -331,11 +331,11 @@ fffffffffffffffffhfffffffff      a   a
         fff  f  v  f        aaaaaaahaaaaaaa
         f    f  f  f        a    a   a    a
         fff     ffff        a    v , v    a
-          ffhffff           a    a   a    a
+          ffhffff           a  } a   a ]  a
            f  f             a    a   a    a
            f  f             aaaaaa   aaaaaa
            ffff             a    a   a    a
-                            a    v , v    a
+                            a E {v , v [  a
                             a    a   a    a
                             aaaaaa   aaaaaa
                             a  e          a
