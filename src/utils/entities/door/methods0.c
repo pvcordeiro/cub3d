@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   methods0.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/10 17:45:22 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/15 12:50:12 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	door_frame(t_entity *entity, double delta_time)
 	door->last_animation_index = door->opening_sprite.index;
 	if (door->auto_close_delay && ft_get_time() - door->last_opened_at >= door->auto_close_delay
 		&& door->wall.entity.action && door->opened)
-		door->wall.entity.action(entity, entity);
+		door->wall.entity.action(entity, NULL);
 }
 
 void	clear_door(void *door)
@@ -35,7 +35,7 @@ void	clear_door(void *door)
 	clear_sprite(&((t_door *)door)->opening_sprite);
 }
 
-void	door_action(t_entity *entity, t_entity *actioner)
+void	door_action(t_entity *entity, t_character *actioner)
 {
 	t_door	*door;
 
@@ -52,7 +52,7 @@ void	door_action(t_entity *entity, t_entity *actioner)
 	}
 }
 
-void	door_shot(t_entity *shooted, t_entity *shooter)
+void	door_shot(t_entity *shooted, t_character *shooter)
 {
 	wall_shot(shooted, shooter);
 }
