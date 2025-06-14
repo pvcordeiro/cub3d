@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 18:04:16 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/10 21:06:53 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/14 15:44:07 by pvcordeiro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 
 void	process_raw_map_e(t_map *map);
 void	set_map_size(t_map *map);
-bool	is_map_char(char c, void *params);
 void	parse_identifiers_e(t_map *map);
 
 #endif
