@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+         #
+#    By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/26 17:16:21 by afpachec          #+#    #+#              #
-#    Updated: 2025/05/10 13:29:13 by afpachec         ###   ########.fr        #
+#    Updated: 2025/06/14 11:31:49 by pvcordeiro       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,7 +63,7 @@ fclean: clean
 
 re: fclean all
 
-dev: clean $(NAME)
+dev: $(NAME)
 	./$(NAME) maps/subject.cub
 
 run: clean $(NAME)
