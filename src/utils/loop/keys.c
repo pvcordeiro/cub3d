@@ -12,7 +12,7 @@
 
 #include "loop.h"
 
-void    key_hook(int key, bool down)
+void	key_hook(int key, bool down)
 {
 	t_player	*player;
 
@@ -36,4 +36,3 @@ void    key_hook(int key, bool down)
 	if (key == XK_Escape)
 		cub3d_exit(0);
 }
-

@@ -14,16 +14,15 @@
 
 static t_wall	*hit_wall(t_game *game, t_coords coords)
 {
-	t_wall		*wall;
-	t_list		*curr;
+	t_wall	*wall;
+	t_list	*curr;
 
 	curr = game->entities;
 	while (curr)
 	{
 		wall = curr->data;
 		curr = curr->next;
-		if (!wall->base.block
-			|| (int)wall->base.coords.x != (int)coords.x
+		if (!wall->base.block || (int)wall->base.coords.x != (int)coords.x
 			|| (int)wall->base.coords.y != (int)coords.y)
 			continue ;
 		return (wall);
@@ -111,9 +110,9 @@ static double	calculate_wall_dist(t_dda_ray *data, t_coords coords)
 	if (data->side == 0)
 	{
 		wall_dist = (data->map_pos.x - coords.x + (1 - data->step.x) / 2)
-		/ data->ray_dir.x;
+			/ data->ray_dir.x;
 		if (data->step.x > 0)
-        	data->direction_of_hit_on_entity = WEST;
+			data->direction_of_hit_on_entity = WEST;
 		else
 			data->direction_of_hit_on_entity = EAST;
 	}
@@ -129,7 +128,8 @@ static double	calculate_wall_dist(t_dda_ray *data, t_coords coords)
 	return (wall_dist);
 }
 
-static void	calculate_wall_hit(t_dda_ray *data, t_coords coords, t_wall *wall_hit)
+static void	calculate_wall_hit(t_dda_ray *data, t_coords coords,
+		t_wall *wall_hit)
 {
 	data->hit_entity = (t_entity *)wall_hit;
 	if (data->side == 0)
@@ -143,7 +143,7 @@ t_raycast	send_ray(t_game *game, t_coords coords)
 {
 	t_dda_ray	data;
 	double		result;
-	t_wall	*wall_hit;
+	t_wall		*wall_hit;
 
 	init_dda_ray_data(&data, coords);
 	set_step_and_side_dist(&data, coords);
@@ -153,5 +153,6 @@ t_raycast	send_ray(t_game *game, t_coords coords)
 	data.length = calculate_wall_dist(&data, coords);
 	wall_hit = hit_wall(game, (t_coords){data.map_pos.x, data.map_pos.y, 0, 0});
 	calculate_wall_hit(&data, coords, wall_hit);
-	return ((t_raycast){data.length, (t_entity *)wall_hit, data.wall_x, data.direction_of_hit_on_entity});
+	return ((t_raycast){data.length, (t_entity *)wall_hit, data.wall_x,
+		data.direction_of_hit_on_entity});
 }

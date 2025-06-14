@@ -16,9 +16,9 @@
 # include <ft_mlx_utils.h>
 
 int	window_loop_hook(void *window);
-int window_key_down_hook(int key, void *window);
-int window_key_up_hook(int key, void *window);
-int window_exit_hook(void *window);
-int window_mouse_hook(int x, int y, void *window);
+int	window_key_down_hook(int key, void *window);
+int	window_key_up_hook(int key, void *window);
+int	window_exit_hook(void *window);
+int	window_mouse_hook(int x, int y, void *window);
 
 #endif

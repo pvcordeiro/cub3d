@@ -14,15 +14,15 @@
 # define FT_UTILS_H
 
 # include <errno.h>
+# include <fcntl.h>
+# include <math.h>
+# include <stdarg.h>
 # include <stdbool.h>
 # include <stdint.h>
-# include <stdlib.h>
-# include <unistd.h>
 # include <stdio.h>
+# include <stdlib.h>
 # include <sys/time.h>
-# include <math.h>
-# include <fcntl.h>
-# include <stdarg.h>
+# include <unistd.h>
 
 # define GNL_BUFFER_SIZE 1024
 
@@ -32,31 +32,31 @@ typedef enum s_direction
 	SOUTH,
 	WEST,
 	EAST
-}	t_direction;
+}						t_direction;
 
 typedef struct s_coords
 {
-	double	x;
-	double	y;
-	double	z;
-	double	yaw;
-}	t_coords;
+	double				x;
+	double				y;
+	double				z;
+	double				yaw;
+}						t_coords;
 
 typedef struct s_rgba
 {
-	unsigned char	r;
-	unsigned char	g;
-	unsigned char	b;
-	unsigned char	a;
-}	t_rgba;
+	unsigned char		r;
+	unsigned char		g;
+	unsigned char		b;
+	unsigned char		a;
+}						t_rgba;
 
 typedef struct s_size
 {
-	int	width;
-	int	height;
-}	t_size;
+	int					width;
+	int					height;
+}						t_size;
 
-typedef size_t	t_time;
+typedef size_t			t_time;
 
 typedef struct s_element
 {
@@ -156,8 +156,10 @@ t_time					ft_get_time(void);
 void					ft_fprint_list(int fd, t_list *list,
 							char *(*to_str)(void *data));
 
-bool					ft_list_any(t_list *list, bool (*condition)(void *data, void *params), void *params);
-bool					ft_str_all_params(char *str, bool (*func)(char, void *), void *params);
+bool					ft_list_any(t_list *list, bool (*condition)(void *data,
+								void *params), void *params);
+bool					ft_str_all_params(char *str, bool (*func)(char, void *),
+							void *params);
 char					*ft_strf(char *format, ...);
 
 #endif

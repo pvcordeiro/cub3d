@@ -16,6 +16,7 @@
 # include <cub3d.h>
 # include <time.h>
 
-void	render_minimap(t_game *game, t_ftm_image *canvas, t_coords coords, t_size size);
+void	render_minimap(t_game *game, t_ftm_image *canvas, t_coords coords,
+			t_size size);
 
 #endif

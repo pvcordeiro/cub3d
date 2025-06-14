@@ -22,7 +22,8 @@ void	init_sprites_e(t_ftm_window *window, t_game *game)
 	el = *game->map->types->table;
 	while (el)
 	{
-		if (ft_strequal(el->value, "NULL") || (ft_str_endswith(el->value, ".xpm") && ft_is_file(el->value)))
+		if (ft_strequal(el->value, "NULL") || (ft_str_endswith(el->value,
+					".xpm") && ft_is_file(el->value)))
 		{
 			if (!ft_strequal(el->value, "NULL"))
 			{

@@ -12,7 +12,8 @@
 
 #include <ft_utils.h>
 
-bool	ft_list_any(t_list *list, bool (*condition)(void *data, void *params), void *params)
+bool	ft_list_any(t_list *list, bool (*condition)(void *data, void *params),
+		void *params)
 {
 	t_list	*curr;
 
@@ -21,7 +22,6 @@ bool	ft_list_any(t_list *list, bool (*condition)(void *data, void *params), void
 		curr = curr->next;
 	return (!!curr);
 }
-
 
 bool	ft_str_all_params(char *str, bool (*func)(char, void *), void *params)
 {
@@ -54,11 +54,11 @@ static char	*parse_thing(char c, va_list *args)
 
 char	*ft_strf(char *format, ...)
 {
-	va_list		args;
-	char		*str;
-	char		*to_join;
-	char		*tmp;
-	size_t		i;
+	va_list	args;
+	char	*str;
+	char	*to_join;
+	char	*tmp;
+	size_t	i;
 
 	va_start(args, format);
 	str = ft_strdup("");

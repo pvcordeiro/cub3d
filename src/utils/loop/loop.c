@@ -24,7 +24,8 @@ static double	get_delta_time(void)
 		return (FPS60);
 	}
 	gettimeofday(&current_time, NULL);
-	delta = (current_time.tv_sec - last_time.tv_sec) + (current_time.tv_usec - last_time.tv_usec) / 1000000.0;
+	delta = (current_time.tv_sec - last_time.tv_sec) + (current_time.tv_usec
+			- last_time.tv_usec) / 1000000.0;
 	last_time = current_time;
 	return (delta);
 }

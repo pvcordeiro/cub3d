@@ -48,12 +48,19 @@ bool	is_map_char(char c, void *params)
 
 	map = params;
 	c_str = ft_strndup(&c, 1);
-	result = (ft_list_any(map->identifiers.air, (bool (*)(void *, void *))ft_strequal, c_str)
-	|| ft_list_any(map->identifiers.wall, (bool (*)(void *, void *))ft_strequal, c_str)
-	|| ft_list_any(map->identifiers.player, (bool (*)(void *, void *))ft_strequal, c_str));
-	printf("Char: %c\nChar STR: '%s'\nAir: %d\nWall: %d\nPlayer: %d\n", c, c_str, ft_list_any(map->identifiers.air, (bool (*)(void *, void *))ft_strequal, c_str),
-		ft_list_any(map->identifiers.wall, (bool (*)(void *, void *))ft_strequal, c_str),
-		ft_list_any(map->identifiers.player, (bool (*)(void *, void *))ft_strequal, c_str));
+	result = (ft_list_any(map->identifiers.air, (bool (*)(void *,
+						void *))ft_strequal, c_str)
+			|| ft_list_any(map->identifiers.wall, (bool (*)(void *,
+						void *))ft_strequal, c_str)
+			|| ft_list_any(map->identifiers.player, (bool (*)(void *,
+						void *))ft_strequal, c_str));
+	printf("Char: %c\nChar STR: '%s'\nAir: %d\nWall: %d\nPlayer: %d\n", c,
+		c_str, ft_list_any(map->identifiers.air, (bool (*)(void *,
+					void *))ft_strequal, c_str),
+		ft_list_any(map->identifiers.wall, (bool (*)(void *,
+					void *))ft_strequal, c_str),
+		ft_list_any(map->identifiers.player, (bool (*)(void *,
+					void *))ft_strequal, c_str));
 	return (free(c_str), result);
 }
 
@@ -73,7 +80,8 @@ t_map	*parse_map_e(char *path)
 		return (ft_strvfree(map->raw), free(map), NULL);
 	process_raw_map_e(map);
 	if (fte_flagged())
-		return (ft_strvfree(map->raw), ft_hashmap_destroy(map->types), free(map), NULL);
+		return (ft_strvfree(map->raw), ft_hashmap_destroy(map->types),
+			free(map), NULL);
 	parse_identifiers_e(map);
 	set_map_size(map);
 	return (map);

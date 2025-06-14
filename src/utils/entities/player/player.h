@@ -13,8 +13,8 @@
 #ifndef PLAYER_H
 # define PLAYER_H
 
-# include <cub3d.h>
 # include "../entities.h"
+# include <cub3d.h>
 
 typedef struct s_dda_ray
 {
@@ -29,18 +29,18 @@ typedef struct s_dda_ray
 	double		wall_x;
 	t_entity	*hit_entity;
 	t_direction	direction_of_hit_on_entity;
-}	t_dda_ray;
+}				t_dda_ray;
 
-typedef struct	s_raycast
+typedef struct s_raycast
 {
 	double		length;
 	t_entity	*hit_entity;
 	double		x_of_hit_in_entity;
 	t_direction	direction_of_hit_on_entity;
-}	t_raycast;
+}				t_raycast;
 
-void		draw_line(t_ftm_image *canvas, t_coords start, t_coords end, 
-	unsigned int color);
-t_raycast	send_ray(t_game *game, t_coords coords);
+void			draw_line(t_ftm_image *canvas, t_coords start, t_coords end,
+					unsigned int color);
+t_raycast		send_ray(t_game *game, t_coords coords);
 
 #endif

@@ -23,7 +23,8 @@ static void	free_wall(void *wall)
 	free(wall);
 }
 
-static void	*hashmap_get_with_identifier(t_hashmap *hashmap, char identifier, char *rest)
+static void	*hashmap_get_with_identifier(t_hashmap *hashmap, char identifier,
+		char *rest)
 {
 	char	*key;
 	void	*data;
@@ -50,9 +51,13 @@ t_wall	*wall_new(char identifier, t_game *game)
 	wall->base.free = free_wall;
 	wall->base.hard = true;
 	wall->base.block = true;
-	wall->north_sprite = hashmap_get_with_identifier(game->sprites, identifier, "NO");
-	wall->south_sprite = hashmap_get_with_identifier(game->sprites, identifier, "SO");
-	wall->west_sprite = hashmap_get_with_identifier(game->sprites, identifier, "WE");
-	wall->east_sprite = hashmap_get_with_identifier(game->sprites, identifier, "EA");
+	wall->north_sprite = hashmap_get_with_identifier(game->sprites, identifier,
+			"NO");
+	wall->south_sprite = hashmap_get_with_identifier(game->sprites, identifier,
+			"SO");
+	wall->west_sprite = hashmap_get_with_identifier(game->sprites, identifier,
+			"WE");
+	wall->east_sprite = hashmap_get_with_identifier(game->sprites, identifier,
+			"EA");
 	return (wall);
 }

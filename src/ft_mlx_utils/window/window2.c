@@ -15,9 +15,12 @@
 void	ftm_update_hooks(t_ftm_window *window)
 {
 	mlx_hook(window->win, KeyPress, KeyPressMask, window_key_down_hook, window);
-	mlx_hook(window->win, KeyRelease, KeyReleaseMask, window_key_up_hook, window);
-	mlx_hook(window->win, DestroyNotify, KeyPressMask, window_exit_hook, window);
-	mlx_hook(window->win, MotionNotify, PointerMotionMask, window_mouse_hook, window);
+	mlx_hook(window->win, KeyRelease, KeyReleaseMask, window_key_up_hook,
+		window);
+	mlx_hook(window->win, DestroyNotify, KeyPressMask, window_exit_hook,
+		window);
+	mlx_hook(window->win, MotionNotify, PointerMotionMask, window_mouse_hook,
+		window);
 	mlx_loop_hook(window->display, window_loop_hook, window);
 }
 

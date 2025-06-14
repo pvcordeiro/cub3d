@@ -21,7 +21,8 @@ void	mouse_hook(t_coords coords)
 	window = &cub3d()->window;
 	if (!window->using_mouse)
 		return ;
-	mlx_mouse_move(window->display, window->win, window->size.width / 2, window->size.height / 2);
+	mlx_mouse_move(window->display, window->win, window->size.width / 2,
+		window->size.height / 2);
 	movement = coords.x - (window->size.width / 2);
 	if (fabs(movement) < 10)
 		movement = movement * (0.5 + (fabs(movement) / 20.0));

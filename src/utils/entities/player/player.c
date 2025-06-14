@@ -18,12 +18,15 @@ static void	player_looks(t_player *player, double delta_time)
 
 	look_velocity = player->key_look_velocity * delta_time;
 	if (player->looking_left)
-		player->base.coords.yaw = ft_normalize_angle(player->base.coords.yaw - player->key_look_velocity - look_velocity);
+		player->base.coords.yaw = ft_normalize_angle(player->base.coords.yaw
+				- player->key_look_velocity - look_velocity);
 	else if (player->looking_right)
-		player->base.coords.yaw = ft_normalize_angle(player->base.coords.yaw + player->key_look_velocity + look_velocity);
+		player->base.coords.yaw = ft_normalize_angle(player->base.coords.yaw
+				+ player->key_look_velocity + look_velocity);
 }
 
-static bool	position_overlaps(t_list *entities, t_player *player, t_coords coords)
+static bool	position_overlaps(t_list *entities, t_player *player,
+		t_coords coords)
 {
 	t_list		*curr;
 	t_entity	*curr_entity;
@@ -32,36 +35,45 @@ static bool	position_overlaps(t_list *entities, t_player *player, t_coords coord
 	while (curr)
 	{
 		curr_entity = curr->data;
-        if (curr_entity != (t_entity *)player && curr_entity->hard
-            && (int)(coords.x + PLAYER_HITBOX_RADIUS) >= (int)curr_entity->coords.x
-            && (int)(coords.x - PLAYER_HITBOX_RADIUS) <= (int)(curr_entity->coords.x + 0.9)
-            && (int)(coords.y + PLAYER_HITBOX_RADIUS) >= (int)curr_entity->coords.y
-            && (int)(coords.y - PLAYER_HITBOX_RADIUS) <= (int)(curr_entity->coords.y + 0.9))
-            return (true);
+		if (curr_entity != (t_entity *)player && curr_entity->hard
+			&& (int)(coords.x
+				+ PLAYER_HITBOX_RADIUS) >= (int)curr_entity->coords.x
+			&& (int)(coords.x
+				- PLAYER_HITBOX_RADIUS) <= (int)(curr_entity->coords.x + 0.9)
+			&& (int)(coords.y
+				+ PLAYER_HITBOX_RADIUS) >= (int)curr_entity->coords.y
+			&& (int)(coords.y
+				- PLAYER_HITBOX_RADIUS) <= (int)(curr_entity->coords.y + 0.9))
+			return (true);
 		curr = curr->next;
 	}
 	return (false);
 }
 
-static void	move_player_x(t_list *entities, t_player *player, double angle_radians, double velocity)
+static void	move_player_x(t_list *entities, t_player *player,
+		double angle_radians, double velocity)
 {
 	double	new_x;
 
 	new_x = player->base.coords.x + velocity * cos(angle_radians);
-	if (!position_overlaps(entities, player, (t_coords){new_x, player->base.coords.y, 0, 0}))
+	if (!position_overlaps(entities, player, (t_coords){new_x,
+			player->base.coords.y, 0, 0}))
 		player->base.coords.x = new_x;
 }
 
-static void	move_player_y(t_list *entities, t_player *player, double angle_radians, double velocity)
+static void	move_player_y(t_list *entities, t_player *player,
+		double angle_radians, double velocity)
 {
 	double	new_y;
 
 	new_y = player->base.coords.y + velocity * sin(angle_radians);
-	if (!position_overlaps(entities, player, (t_coords){player->base.coords.x, new_y, 0, 0}))
+	if (!position_overlaps(entities, player, (t_coords){player->base.coords.x,
+			new_y, 0, 0}))
 		player->base.coords.y = new_y;
 }
 
-static void	player_walk(t_list *entities, t_player *player, double angle, double delta_time)
+static void	player_walk(t_list *entities, t_player *player, double angle,
+		double delta_time)
 {
 	double	angle_radians;
 	double	velocity;
@@ -78,11 +90,14 @@ static void	player_walk(t_list *entities, t_player *player, double angle, double
 static void	player_walks(t_list *entities, t_player *player, double delta_time)
 {
 	if (player->walking_backward)
-		player_walk(entities, player, player->base.coords.yaw - 180.0, delta_time);
+		player_walk(entities, player, player->base.coords.yaw - 180.0,
+			delta_time);
 	if (player->walking_right)
-		player_walk(entities, player, player->base.coords.yaw + 90.0, delta_time);
+		player_walk(entities, player, player->base.coords.yaw + 90.0,
+			delta_time);
 	if (player->walking_left)
-		player_walk(entities, player, player->base.coords.yaw - 90.0, delta_time);
+		player_walk(entities, player, player->base.coords.yaw - 90.0,
+			delta_time);
 	if (player->walking_forward)
 		player_walk(entities, player, player->base.coords.yaw, delta_time);
 }
@@ -114,7 +129,9 @@ static void	player_mouse_moviment(t_player *player, double delta_time)
 {
 	if (!player->mouse_moviment)
 		return ;
-	player->base.coords.yaw = ft_normalize_angle(player->base.coords.yaw + (player->mouse_moviment * player->mouse_look_velocity * delta_time));
+	player->base.coords.yaw = ft_normalize_angle(player->base.coords.yaw
+			+ (player->mouse_moviment * player->mouse_look_velocity
+				* delta_time));
 }
 
 static void	player_frame(t_entity *entity, double delta_time)

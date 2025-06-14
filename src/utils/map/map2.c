@@ -12,7 +12,7 @@
 
 #include "map.h"
 
-static char **get_last_empty_line(char **raw)
+static char	**get_last_empty_line(char **raw)
 {
 	int	i;
 
