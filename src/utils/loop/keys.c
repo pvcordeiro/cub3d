@@ -6,7 +6,7 @@
 /*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:21:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/14 15:08:26 by pvcordeiro       ###   ########.fr       */
+/*   Updated: 2025/06/14 16:26:25 by pvcordeiro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ void	key_hook(int key, bool down)
 		player->looking_right = down;
 	if (key == XK_Left)
 		player->looking_left = down;
-	if (key == XK_Shift_L || key == XK_Shift_R)
-		player->sprinting = down;
 	if (key == XK_Escape)
 		cub3d_exit(0);
 }

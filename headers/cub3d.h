@@ -6,7 +6,7 @@
 /*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/14 15:18:23 by pvcordeiro       ###   ########.fr       */
+/*   Updated: 2025/06/14 16:48:16 by pvcordeiro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,27 +33,17 @@
 # include <unistd.h>
 
 // Window Config
-# define W_TITLE "Wolfenstein"
-# define W_WIDTH 960
-# define W_HEIGHT 720
+# define W_TITLE "cub3d"
+# define W_WIDTH 1024
+# define W_HEIGHT 768
 # define FPS60 0.01666666667
-
-// Default minimap size multipliers
-# define MINIMAP_WIDTH_MULTIPLIER 0.25
-# define MINIMAP_HEIGHT_MULTIPLIER 0.25
-
-// Placeholder Image
-# define PLACEHOLDER_IMAGE_PATH "assets/placeholder.xpm"
-# define PLACEHOLDER_SPRITE_UPDATE_DELAY 0
 
 // Player Config
 # define PLAYER_RAYS_NO_HIT_LENGTH 50.0
 # define PLAYER_FOV 50.0
-# define PLAYER_RAYS 480
-# define PLAYER_HITBOX_RADIUS 0.23
+# define PLAYER_RAYS W_WIDTH
 # define PLAYER_KEY_LOOK_VELOCITY 2.0
-# define PLAYER_WALK_VELOCITY 3.0
-# define PLAYER_SPRINT_VELOCITY 6.0
+# define PLAYER_WALK_VELOCITY 4.0
 
 // Map Config
 # define DEFAULT_AIR_TYPES "0 \t\n\v\f\r"
@@ -103,7 +93,6 @@ typedef struct s_player
 	bool			walking_right;
 	bool			looking_right;
 	bool			looking_left;
-	bool			sprinting;
 	double			key_look_velocity;
 	double			walk_velocity;
 	t_ray			rays[PLAYER_RAYS];
@@ -116,10 +105,6 @@ typedef struct s_wall
 	t_sprite		*south_sprite;
 	t_sprite		*west_sprite;
 	t_sprite		*east_sprite;
-	double			north_depth;
-	double			south_depth;
-	double			west_depth;
-	double			east_depth;
 }					t_wall;
 
 typedef struct s_identifiers
@@ -192,6 +177,7 @@ t_sprite			*sprite_new(t_list *images, t_time update_delay);
 t_cub3d				*cub3d(void);
 void				cub3d_exit(int code);
 
+// Map
 t_map				*parse_map_e(char *path);
 void				destroy_map(t_map *map);
 
