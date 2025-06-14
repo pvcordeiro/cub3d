@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/17 13:12:50 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/14 15:18:23 by pvcordeiro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,7 @@
 # define PLAYER_FOV 50.0
 # define PLAYER_RAYS 480
 # define PLAYER_HITBOX_RADIUS 0.23
-# define PLAYER_MOUSE_LOOK_VELOCITY 3.5
-# define PLAYER_KEY_LOOK_VELOCITY 7.0
+# define PLAYER_KEY_LOOK_VELOCITY 2.0
 # define PLAYER_WALK_VELOCITY 3.0
 # define PLAYER_SPRINT_VELOCITY 6.0
 
@@ -79,8 +78,6 @@ typedef struct s_entity
 {
 	void			(*frame)(struct s_entity *this, double delta_time);
 	void			(*free)(void *this);
-	bool			transparent;
-	bool			hard;
 	bool			block;
 	char			identifier;
 	t_coords		coords;
@@ -107,11 +104,8 @@ typedef struct s_player
 	bool			looking_right;
 	bool			looking_left;
 	bool			sprinting;
-	double			mouse_moviment;
-	double			mouse_look_velocity;
 	double			key_look_velocity;
 	double			walk_velocity;
-	double			sprint_velocity;
 	t_ray			rays[PLAYER_RAYS];
 }					t_player;
 
@@ -151,30 +145,6 @@ typedef struct s_environment
 	unsigned int	ceiling_color;
 }					t_environment;
 
-typedef struct s_minimap
-{
-	t_coords		coords;
-	t_size			size;
-	bool			full;
-	double			width_multiplier;
-	double			height_multiplier;
-	unsigned int	background_color;
-	unsigned int	border_color;
-	unsigned int	entity_color;
-	unsigned int	wall_color;
-	unsigned int	player_color;
-	unsigned int	player_ray_color;
-}					t_minimap;
-
-typedef struct s_fps_data
-{
-	double			frametime;
-	double			fps;
-	char			fps_string[50];
-	int				frame_count;
-	time_t			last_update_time;
-}					t_fps_data;
-
 typedef struct s_render_data
 {
 	t_player		*player;
@@ -194,17 +164,14 @@ typedef struct s_render_data
 typedef struct s_game
 {
 	t_environment	environment;
-	t_minimap		minimap;
 	t_map			*map;
 	t_player		*player;
 	t_list			*entities;
 	t_hashmap		*sprites;
-	t_fps_data		fps;
 }					t_game;
 
 typedef struct s_cub3d
 {
-	t_sprite		placeholder;
 	t_map			*curr_map;
 	t_ftm_window	window;
 	t_game			game;
@@ -231,13 +198,9 @@ void				destroy_map(t_map *map);
 // Loop
 void				loop(void);
 void				key_hook(int key, bool down);
-void				mouse_hook(t_coords coords);
 
 // Render
 void				render_ceiling_and_floor(t_game *game, t_ftm_image *canvas);
-void				update_fps_data(t_fps_data *fps_data, double delta_time);
-void				render_fps_counter(t_fps_data *fps_data,
-						t_ftm_window *window);
 
 // Entities
 void				call_entity_frames(t_list *entities, double delta_time);

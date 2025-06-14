@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprites.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 19:01:44 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/10 13:36:04 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/14 15:22:36 by pvcordeiro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_ftm_image	*get_sprite_image(t_sprite *sprite)
 	t_list	*curr_image_node;
 
 	if (!sprite)
-		return (get_sprite_image(&cub3d()->placeholder));
+		return (NULL);
 	if (ft_get_time() - sprite->updated_at > sprite->update_delay)
 	{
 		sprite->index++;

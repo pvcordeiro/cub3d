@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wall.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/14 16:59:11 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/14 15:21:56 by pvcordeiro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ t_wall	*wall_new(char identifier, t_game *game)
 	wall->base.type = ENTITY_WALL;
 	wall->base.frame = wall_frame;
 	wall->base.free = free_wall;
-	wall->base.hard = true;
 	wall->base.block = true;
 	wall->north_sprite = hashmap_get_with_identifier(game->sprites, identifier,
 			"NO");

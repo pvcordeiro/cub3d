@@ -6,7 +6,7 @@
 /*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:15:19 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/14 11:32:44 by pvcordeiro       ###   ########.fr       */
+/*   Updated: 2025/06/14 14:59:56 by pvcordeiro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	main(int argc, char **argv)
 	cub3d()->window.loop_hook = loop;
 	cub3d()->window.key_hook = key_hook;
 	cub3d()->window.exit_hook = cub3d_exit;
-	cub3d()->window.mouse_hook = mouse_hook;
 	ftm_update_hooks(&cub3d()->window);
 	mlx_loop(cub3d()->window.display);
 	cub3d_exit(0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_mlx_utils.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:46:27 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/14 18:46:25 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/14 15:06:49 by pvcordeiro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,9 @@ typedef struct s_ftm_window
 	void			*win;
 	void			*display;
 	t_ftm_image		*canvas;
-	bool			using_mouse;
 	void			(*loop_hook)(void);
 	void			(*key_hook)(int key, bool down);
 	void			(*exit_hook)(int code);
-	void			(*mouse_hook)(t_coords coords);
 }					t_ftm_window;
 
 typedef struct s_ftm_rectangle
