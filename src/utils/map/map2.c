@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 08:42:58 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/10 21:35:25 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/14 17:05:44 by pvcordeiro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ static char	**get_last_empty_line(char **raw)
 	int	i;
 
 	i = ft_strvlen(raw);
-	while (raw[--i])
+	while (--i)
 		if (ft_str_all(raw[i], ft_isspace))
-			return (&raw[i]);
+			return (&raw[i + 1]);
 	return (raw);
 }
 

@@ -6,7 +6,7 @@
 /*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 20:52:20 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/14 16:23:43 by pvcordeiro       ###   ########.fr       */
+/*   Updated: 2025/06/14 18:50:21 by pvcordeiro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,28 +75,3 @@ void	parse_identifiers_e(t_map *map)
 			return ;
 	}
 }
-
-// bool	ft_backtrack(t_map *map)
-// {
-	// floodfill(map->map, map->size, map->identifiers.air);
-	// if (fte_flagged())
-	// 	return (false);
-	// if (!ft_list_any(map->identifiers.wall, (bool (*)(void *, void *))ft_strequal,
-	// 		"1"))
-	// {
-	// 	fte_set(ERROR_CEILING_OR_FLOORING_UNDEFINED);
-	// 	return (false);
-	// }
-	// if (!ft_list_any(map->identifiers.player, (bool (*)(void *, void *))ft_strequal,
-	// 		"0"))
-	// {
-	// 	fte_set(ERROR_CEILING_OR_FLOORING_UNDEFINED);
-	// 	return (false);
-	// }
-	// if (!ft_list_any(map->identifiers.air, (bool (*)(void *, void *))ft_strequal,
-	// 		" "))
-	// {
-	// 	fte_set(ERROR_CEILING_OR_FLOORING_UNDEFINED);
-	// 	return (false);
-	// }
-// }
