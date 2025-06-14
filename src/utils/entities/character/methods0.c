@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   methods0.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/09 17:47:34 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/11 14:33:22 by pvcordeiro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,19 @@ void	character_shot(t_entity *shooted, t_entity *shooter)
 			character->dead = true;
 			shooted->hard = false;
 			shooted->targetable = false;
+			t_drop *drop = drop_new(&cub3d()->game, &cub3d()->window, ';');
+            if (drop)
+            {
+                t_ammo *ammo = ammo_new(&cub3d()->game, &cub3d()->window, 'Z');
+                if (ammo)
+                {
+                    drop->billboard.entity.coords = character->billboard.entity.coords;
+                    i = 0;
+                    while (cub3d()->game.billboards[i])
+                        i++;
+                    cub3d()->game.billboards[i] = (t_entity *)drop;
+                }
+            }
 		}
 		else
 			fta_play(character->hit_sound);
