@@ -6,7 +6,7 @@
 /*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:15:19 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/15 13:18:36 by pvcordeiro       ###   ########.fr       */
+/*   Updated: 2025/06/15 15:54:11 by pvcordeiro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int argc, char **argv)
 	fte_assert();
 	game_load_map_e(&cub3d()->game, &cub3d()->window, cub3d()->curr_map);
 	fte_assert();
-	ft_backtrack(&cub3d()->game);
+	ft_backtrack_e(&cub3d()->game);
 	fte_assert();
 	cub3d()->window.loop_hook = loop;
 	cub3d()->window.key_hook = key_hook;

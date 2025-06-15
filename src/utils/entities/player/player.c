@@ -25,8 +25,7 @@ static void	player_looks(t_player *player, double delta_time)
 				+ player->key_look_velocity + look_velocity);
 }
 
-static void	player_walk(t_player *player, double angle,
-		double delta_time)
+static void	player_walk(t_player *player, double angle, double delta_time)
 {
 	double	angle_radians;
 	double	velocity;
@@ -34,21 +33,20 @@ static void	player_walk(t_player *player, double angle,
 	velocity = player->walk_velocity;
 	velocity *= delta_time;
 	angle_radians = ft_normalize_angle(angle) * (PI / 180.0);
-	player->base.coords.x = player->base.coords.x + velocity * cos(angle_radians);
-	player->base.coords.y = player->base.coords.y + velocity * sin(angle_radians);
+	player->base.coords.x = player->base.coords.x + velocity
+		* cos(angle_radians);
+	player->base.coords.y = player->base.coords.y + velocity
+		* sin(angle_radians);
 }
 
 static void	player_walks(t_player *player, double delta_time)
 {
 	if (player->walking_backward)
-		player_walk(player, player->base.coords.yaw - 180.0,
-			delta_time);
+		player_walk(player, player->base.coords.yaw - 180.0, delta_time);
 	if (player->walking_right)
-		player_walk(player, player->base.coords.yaw + 90.0,
-			delta_time);
+		player_walk(player, player->base.coords.yaw + 90.0, delta_time);
 	if (player->walking_left)
-		player_walk(player, player->base.coords.yaw - 90.0,
-			delta_time);
+		player_walk(player, player->base.coords.yaw - 90.0, delta_time);
 	if (player->walking_forward)
 		player_walk(player, player->base.coords.yaw, delta_time);
 }

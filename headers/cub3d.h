@@ -6,7 +6,7 @@
 /*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/15 14:36:40 by pvcordeiro       ###   ########.fr       */
+/*   Updated: 2025/06/15 15:54:11 by pvcordeiro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,7 +181,7 @@ void				cub3d_exit(int code);
 // Map
 t_map				*parse_map_e(char *path);
 void				destroy_map(t_map *map);
-void 				ft_backtrack(t_game *game);
+void				ft_backtrack_e(t_game *game);
 
 // Loop
 void				loop(void);
