@@ -168,15 +168,15 @@ P_USE_SOUND assets/wolf3d/sounds/atkpistol.mp3
 P_SINGLE_USE TRUE
 P_DESCRIPTION Normal pistol, good for close combat
 P_SCREEN_SPRITE assets/wolf3d/textures/items/pistol/screen/0.xpm
-P_SCREEN_USE_SPRITE assets/wolf3d/textures/items/pistol/screen/2.xpm:assets/wolf3d/textures/items/pistol/screen/3.xpm
-P_SCREEN_USE_SPRITE_UPDATE_DELAY 0.3
+P_SCREEN_USE_SPRITE assets/wolf3d/textures/items/pistol/screen/1.xpm:assets/wolf3d/textures/items/pistol/screen/2.xpm:assets/wolf3d/textures/items/pistol/screen/3.xpm:assets/wolf3d/textures/items/pistol/screen/4.xpm
+P_SCREEN_USE_SPRITE_UPDATE_DELAY 0.1
 P_SCREEN_USE_SPRITE_LOOP TRUE
 P_ICON_SPRITE assets/wolf3d/textures/items/pistol/icon.xpm
 
 G_TYPE WEAPON
 G_CANT_USE_SOUND assets/wolf3d/sounds/noammo.mp3
 G_DAMAGE 30
-G_AMMO_USAGE 1
+G_AMMO_USAGE 0
 G_NAME Gatling
 G_USE_SOUND assets/wolf3d/sounds/atkgatling.mp3
 G_DESCRIPTION Gatling gun, very powerful, but slow
@@ -188,15 +188,15 @@ G_ICON_SPRITE assets/wolf3d/textures/items/gatling/icon.xpm
 
 K_TYPE WEAPON
 K_CANT_USE_SOUND assets/wolf3d/sounds/noammo.mp3
-K_DAMAGE 5
+K_DAMAGE 25
 K_AMMO_USAGE 0
 K_NAME Knife
 K_USE_SOUND assets/wolf3d/sounds/atkknife.mp3
 K_SINGLE_USE TRUE
 K_DESCRIPTION A knife, good for close combat
 K_SCREEN_SPRITE assets/wolf3d/textures/items/knife/screen/0.xpm
-K_SCREEN_USE_SPRITE assets/wolf3d/textures/items/knife/screen/2.xpm:assets/wolf3d/textures/items/knife/screen/3.xpm
-K_SCREEN_USE_SPRITE_UPDATE_DELAY 0.2
+K_SCREEN_USE_SPRITE assets/wolf3d/textures/items/knife/screen/1.xpm:assets/wolf3d/textures/items/knife/screen/2.xpm:assets/wolf3d/textures/items/knife/screen/3.xpm:assets/wolf3d/textures/items/knife/screen/4.xpm
+K_SCREEN_USE_SPRITE_UPDATE_DELAY 0.05
 K_SCREEN_USE_SPRITE_LOOP TRUE
 K_ICON_SPRITE assets/wolf3d/textures/items/knife/icon.xpm
 
