@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 19:31:30 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/01 18:56:29 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/15 23:45:48 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 
 void	init_player_controller(t_entity *entity);
 void	init_ai_dumb_controller(t_entity *entity);
+void	init_enemy_controller(t_entity *entity);
 void	moviment_frame(t_entity *entity, double delta_time);
+void    targets_frame(t_character *character);
 
 #endif

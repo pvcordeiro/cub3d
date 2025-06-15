@@ -3,6 +3,7 @@ BACKGROUND_SOUND_VOLUME 0.7
 BACKGROUND_SOUND_LOOP TRUE
 
 COLLISION_SOUND assets/wolf3d/sounds/hitwall.mp3
+COLLISION_SOUND_VOLUME 0.1
 
 MAX_HEALTH 100
 
@@ -83,10 +84,10 @@ e_DEATH_SPRITE_UPDATE_DELAY 0.1
 e_HIT_SPRITE assets/wolf3d/textures/billboards/soldier/hit.xpm
 e_DEATH_SOUND assets/wolf3d/sounds/deathscream5.mp3
 e_HIT_SOUND assets/wolf3d/sounds/deathscream1.mp3
-e_CONTROLLER AI_DUMB
-e_0_INVENTORY P
-e_USING_P_1_SPRITE assets/wolf3d/textures/billboards/soldier/aim.xpm:assets/wolf3d/textures/billboards/soldier/shoot.xpm
-e_USING_P_1_SPRITE_UPDATE_DELAY 0.1
+e_CONTROLLER ENEMY
+e_0_INVENTORY Y
+e_USING_Y_1_SPRITE assets/wolf3d/textures/billboards/soldier/aim.xpm:assets/wolf3d/textures/billboards/soldier/shoot.xpm
+e_USING_Y_1_SPRITE_UPDATE_DELAY 0.1
 e_AMMO 2147483647
 
 ._TYPE BILLBOARD
@@ -158,6 +159,19 @@ Z_SINGLE_USE TRUE
 Z_USE_SOUND assets/wolf3d/sounds/getammo.mp3
 Z_DESCRIPTION Ammo, needed for weapons
 Z_ICON_SPRITE assets/wolf3d/textures/billboards/ammo.xpm
+
+Y_TYPE WEAPON
+Y_CANT_USE_SOUND assets/wolf3d/sounds/noammo.mp3
+Y_DAMAGE 10
+Y_AMMO_USAGE 1
+Y_NAME Soldier's Weapon
+Y_USE_SOUND assets/wolf3d/sounds/nazifire.mp3
+Y_DESCRIPTION Weapon of the National Socialist soldier
+Y_SCREEN_SPRITE assets/wolf3d/textures/items/machinegun/screen/0.xpm
+Y_SCREEN_USE_SPRITE assets/wolf3d/textures/items/machinegun/screen/2.xpm:assets/wolf3d/textures/items/machinegun/screen/3.xpm
+Y_SCREEN_USE_SPRITE_UPDATE_DELAY 0.1
+Y_SCREEN_USE_SPRITE_LOOP TRUE
+Y_ICON_SPRITE assets/wolf3d/textures/items/machinegun/icon.xpm
 
 P_TYPE WEAPON
 P_CANT_USE_SOUND assets/wolf3d/sounds/noammo.mp3

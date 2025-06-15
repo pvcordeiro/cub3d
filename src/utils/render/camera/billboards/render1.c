@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 00:47:16 by paude-so          #+#    #+#             */
-/*   Updated: 2025/06/10 18:13:55 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/15 14:11:56 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,6 @@ void	render_billboard_slices(t_render_billboard_slices_config rbsc)
 		if (is_behind_wall(i, ray_index, rbsc))
 			continue ;
 		pitc_config = get_pitc_config(i, rbsc);
-		if (ray_index == rbsc.camera->rays / 2 && rbsc.bill->entity.targetable)
-			rbsc.camera->character->target_entity = (t_entity *)rbsc.bill;
 		ftm_put_image_to_canvas(rbsc.canvas, rbsc.image, pitc_config);
 	}
 }

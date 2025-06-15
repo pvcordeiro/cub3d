@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 00:45:35 by paude-so          #+#    #+#             */
-/*   Updated: 2025/06/15 00:16:17 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/15 14:12:57 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,6 @@ static void	draw_ray(t_draw_ray_config drc)
 		draw_ray(drc);
 	}
 	draw_ray_line(drc.canvas, drc.camera, ray, drc.i);
-	if (drc.i == drc.camera->rays / 2)
-	{
-		drc.camera->character->target_entity = ((t_entity *)ray.hit);
-		drc.camera->character->target_entity_direction = ray.hit_direction;
-		if (!((t_entity *)ray.hit)->targetable)
-			drc.camera->character->target_entity = NULL;
-	}
 }
 
 static double	get_ray_yaw(t_draw_ray_config drc)
