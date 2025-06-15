@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 15:59:45 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/10 18:03:25 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/14 17:51:11 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,15 @@ static t_ftm_pitc_config	get_pitc_config(t_get_pitc_config_config gpcc)
 	});
 }
 
-void	draw_ray_line(t_ftm_image *canvas, t_camera *camera, t_ray ray, int i)
+void	draw_ray_line(t_ftm_image *canvas, t_camera *camera, t_raycast ray,
+	int i)
 {
 	t_size					ray_size;
 	t_ftm_image				*hit_entity_image;
 	t_pixel_modifier_data	pixel_modifier_data;
 
 	ray_size.width = canvas->size.width / camera->rays;
-	hit_entity_image = get_sprite_image(get_entity_sprite(ray.hit_entity,
+	hit_entity_image = get_sprite_image(get_entity_sprite(ray.hit,
 				ray.hit_direction));
 	if (!hit_entity_image)
 		return ;

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 19:35:54 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/11 12:21:22 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/15 00:35:26 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ static void	key(t_entity *entity, int key, bool down)
 		entity->controller.action = down;
 	if (key == XK_Shift_L || key == XK_Shift_R)
 		entity->controller.sprinting = down;
+	if (key == XK_i && down)
+		entity->invencible = !entity->invencible;
 	if (!entity->character)
 		return ;
 	item_key((t_character *)entity, key, down);

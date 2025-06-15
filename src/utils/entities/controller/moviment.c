@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 18:51:55 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/10 21:48:28 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/14 18:20:17 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,8 @@ static void	actions(t_list *entities, t_character *character)
 
 void	moviment_frame(t_entity *entity, double delta_time)
 {
+	if (!entity->health)
+		return ;
 	if (entity->character)
 		actions(cub3d()->game.entities, (t_character *)entity);
 	looks(entity, delta_time);

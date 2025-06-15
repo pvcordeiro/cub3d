@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/15 12:50:31 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/15 12:50:40 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,6 +222,7 @@ struct s_entity
 	bool			transparent;
 	int				max_health;
 	int				health;
+	bool			invencible;
 	bool			hard;
 	bool			wall;
 	bool			actionable;

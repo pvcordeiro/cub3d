@@ -6,13 +6,13 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 00:45:35 by paude-so          #+#    #+#             */
-/*   Updated: 2025/06/10 18:05:57 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/15 00:16:17 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "walls.h"
 
-static t_coords	get_coords(t_ray *ray)
+static t_coords	get_coords(t_raycast *ray)
 {
 	t_coords	coords;
 
@@ -30,33 +30,32 @@ static t_coords	get_coords(t_ray *ray)
 
 static void	draw_ray(t_draw_ray_config drc)
 {
-	t_ray		ray;
-	t_coords	coords;
+	t_raycast	ray;
+	t_coords	c;
 
-	coords = drc.coords;
-	coords.yaw = drc.yaw;
-	ray = send_ray(drc.game, coords,
-			drc.ignored_entity);
-	if (!ray.hit_entity)
+	c = drc.coords;
+	c.yaw = drc.yaw;
+	ray = ft_dda_raycast((t_dda_raycast_config){
+		(void ***)drc.game->walls, drc.game->map->size, c, drc.ignored_entity});
+	if (!ray.hit)
 		return ;
 	ray.distance += drc.previous_distance;
 	if (ray.distance > drc.camera->ray_distances[drc.i])
 		drc.camera->ray_distances[drc.i] = ray.distance;
-	if (ray.hit_entity->transparent && entity_x_is_transparent(ray.hit_entity,
+	if (((t_entity *)ray.hit)->transparent && entity_x_is_transparent(ray.hit,
 		ray.hit_direction, ray.hit_x))
 	{
 		drc.coords = get_coords(&ray);
-		drc.ignored_entity = ray.hit_entity;
+		drc.ignored_entity = ray.hit;
 		drc.previous_distance = ray.distance;
 		draw_ray(drc);
 	}
-	draw_ray_line(drc.canvas, drc.camera,
-		ray, drc.i);
+	draw_ray_line(drc.canvas, drc.camera, ray, drc.i);
 	if (drc.i == drc.camera->rays / 2)
 	{
-		drc.camera->character->target_entity = ray.hit_entity;
+		drc.camera->character->target_entity = ((t_entity *)ray.hit);
 		drc.camera->character->target_entity_direction = ray.hit_direction;
-		if (!ray.hit_entity->targetable)
+		if (!((t_entity *)ray.hit)->targetable)
 			drc.camera->character->target_entity = NULL;
 	}
 }

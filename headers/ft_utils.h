@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 12:15:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/06/08 19:58:51 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/15 01:32:21 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 
 # define FT_UTILS_PI 3.14159265359
 # define GNL_BUFFER_SIZE 1024
+# define MAX_RAY_LENGTH 1000.0
+# define EPSILON 1e-9
 
 typedef enum s_direction
 {
@@ -84,6 +86,42 @@ typedef struct s_list
 	struct s_list		*next;
 	void				(*data_free)(void *data);
 }						t_list;
+
+typedef struct s_dda_raycast_data
+{
+    double			length;
+    t_coords		rdir;
+    t_coords		deltadist;
+    t_coords		side_dist;
+    t_coords		pos;
+    t_coords		step;
+    int				side;
+    double			hit_x;
+    void			*hit;
+    void			***objs;
+    t_size			objs_size;
+    t_direction		hitdir;
+	t_coords		sp;
+	void			*ignored_obj;
+}	t_dda_raycast_data;
+
+typedef struct s_dda_raycast_config
+{
+	void		***objs;
+	t_size		objs_size;
+	t_coords	start_pos;
+	void		*ignored_obj;
+}	t_dda_raycast_config;
+
+typedef struct s_raycast
+{
+    double		distance;
+    double		yaw;
+    void		*hit;
+    double		hit_x;
+    t_direction	hit_direction;
+    t_coords	hit_coords;
+}	t_raycast;
 
 double					ft_normalize_angle(double angle);
 int						ft_atoi(const char *nptr);
@@ -185,14 +223,24 @@ double					ft_degrees(double angle_radians);
 double					ft_angle_distance(t_coords a, t_coords b);
 bool					ft_is_directory(const char *path);
 char					*ft_clean_path(const char *path);
-void					ft_strvorder(char **strv, const void *data, bool (*cmp)(const void
-							*data, const char *, const char *));
+void					ft_strvorder(char **strv, const void *data,
+							bool (*cmp)(const void *data, const char *,
+								const char *));
 t_direction				ft_direction_from_str(const char *str);
 
-bool					ft_str_equal_char_ptr(const char *str, const char *char_ptr);
+bool					ft_str_equal_char_ptr(const char *str,
+							const char *char_ptr);
 char					*ft_strf(const char *format, ...);
-char					*ft_strnrstr(const char *haystack, const char *needle, size_t len);
+char					*ft_strnrstr(const char *haystack, const char *needle,
+							size_t len);
 char					*ft_strrstr(const char *haystack, const char *needle);
 char					*ft_strrchr(const char *s, int c);
+
+t_raycast				ft_dda_raycast(t_dda_raycast_config ddarc);
+
+double					ft_fraction(double value);
+void					*ft_ternary_ptr(void *con, void *_if, void *_else);
+double					ft_ternary_double(bool con, double _if, double _else);
+int						ft_ternary_int(bool con, int _if, int _else);
 
 #endif

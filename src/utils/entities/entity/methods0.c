@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/10 21:31:57 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/14 18:34:03 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	entity_shot(t_entity *shooted, t_character *shooter)
 		return ;
 	weapon = (t_weapon *)shooter->inventory[shooter->inventory_index];
 	if (!weapon->item.weapon)
+		return ;
+	if (shooted->invencible)
 		return ;
 	shooted->health -= weapon->damage;
 	if (shooted->health > shooted->max_health)

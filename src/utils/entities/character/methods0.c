@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/12 19:55:15 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/14 18:19:12 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,6 @@ static void	set_using(t_game *game, t_character *character)
 		fill_3d_sprites_from_src(character->using_sprite, original);
 	character->billboard.sprites = character->using_sprite;
 	character->last_used_item_identifier = character->inventory[character->inventory_index]->identifier;
-}
-
-static void	set_dead(t_character *character)
-{
-	character->billboard.entity.controller.frame = NULL;
-	character->billboard.sprites = character->death_sprite;
 }
 
 static bool	walking(t_entity *entity)
@@ -74,7 +68,7 @@ void	character_frame(t_entity *entity, double delta_time)
 	billboard_frame(entity, delta_time);
 	character = (t_character *)entity;
 	if (character->dead)
-		set_dead(character);
+		character->billboard.sprites = character->death_sprite;
 	else if (hit(character))
 		character->billboard.sprites = character->hit_sprite;
 	else if (using(character))
