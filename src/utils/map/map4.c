@@ -6,7 +6,7 @@
 /*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 13:18:07 by pvcordeiro        #+#    #+#             */
-/*   Updated: 2025/06/15 15:54:11 by pvcordeiro       ###   ########.fr       */
+/*   Updated: 2025/06/15 16:00:10 by pvcordeiro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static bool	validate_textures(t_game *game)
 	required_textures[3] = "EA";
 	i = -1;
 	while (++i < 4)
-		if (!ft_hashmap_get(game->sprites, (char *)required_textures[i]))
+		if (!ft_hashmap_get(game->sprites, required_textures[i]))
 			return (false);
 	return (true);
 }
