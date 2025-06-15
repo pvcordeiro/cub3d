@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/15 12:50:12 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/15 13:42:50 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	door_frame(t_entity *entity, double delta_time)
 
 	wall_frame(entity, delta_time);
 	door = (t_door *)entity;
-	door->wall.entity.hard = door->opening_sprite.index != DOOR_ANIMATION_FRAMES - 1;
+	door->wall.entity.hard = door->opening_sprite.index != door->animation_frames - 1;
 	door->wall.entity.transparent = door->opening_sprite.index;
 	(void)get_sprite_image(&door->opening_sprite);
 	if (!door->opening_sprite.index && door->opening_sprite.index != door->last_animation_index)
@@ -45,6 +45,8 @@ void	door_action(t_entity *entity, t_character *actioner)
 	door->opening_sprite.reversed = !door->opened;
 	door->opening_sprite.running = true;
 	door->opening_sprite.updated_at = ft_get_time();
+	if (!door->closeable)
+		door->wall.entity.targetable = false;
 	if (door->opened)
 	{
 		door->last_opened_at = ft_get_time();	

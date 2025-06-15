@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 00:50:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/11 12:57:16 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/15 13:41:42 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,15 @@ static void	init_animation_sprites_e(t_door *door, t_ftm_window *window)
 	fte_set(NULL);
 	ft_bzero(&config, sizeof(t_ftm_pitc_config));
 	door_image = door->door_sprite->images->data;
-	init_sprite(&door->opening_sprite, NULL, DOOR_ANIMATION_DURATION);
+	init_sprite(&door->opening_sprite, NULL, door->animation_delay);
+	door->animation_frames = door->animation_delay * DOOR_ANIMATION_FPS;
 	i = -1;
-	while (++i < DOOR_ANIMATION_FRAMES - 1)
+	while (++i < door->animation_frames - 1)
 	{
 		frame = ftm_image_new(window, door_image->size);
 		if (!frame)
 			return (fte_set("init door frame"));
-		config.coords = (t_coords){(frame->size.width / DOOR_ANIMATION_FRAMES) * i, 0, 0};
+		config.coords = (t_coords){(int)((double)door_image->size.width / door->animation_frames * i), 0, 0};
 		ftm_put_image_to_canvas(frame, door_image, config);
 		ft_list_add(&door->opening_sprite.images, frame, ftm_free_image);
 	}
@@ -73,6 +74,8 @@ void	init_door_e(t_game *game, t_ftm_window *window, t_door *door, char identifi
 	door->open_sound = hashmap_get_with_identifier(game, game->sounds, identifier, "OPEN");
 	door->close_sound = hashmap_get_with_identifier(game, game->sounds, identifier, "CLOSE");
 	set_sprites(door);
+	door->closeable = !ft_strequal(hashmap_get_with_identifier(game, game->map->types, identifier, "CLOSEABLE"), "FALSE");
+	door->animation_delay = ft_atof(hashmap_get_with_identifier(game, game->map->types, identifier, "ANIMATION_DELAY")) * 10;
 	init_animation_sprites_e(door, window);
 }
 

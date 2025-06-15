@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/15 12:50:40 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/15 13:40:51 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,7 @@
 # define INVENTORY_SCROLL_DELAY 0.5
 
 // Door Config
-# define DOOR_ANIMATION_DURATION 10.0
-# define DOOR_ANIMATION_FRAMES 60
+# define DOOR_ANIMATION_FPS 6
 
 // Map Config
 # define DEFAULT_AIR_TYPES "0 \t\n\v\f\r"
@@ -306,6 +305,9 @@ struct s_door
 	t_time		auto_close_delay;
 	t_time		last_opened_at;
 	int			last_animation_index;
+	bool		closeable;
+	t_time		animation_delay;
+	int			animation_frames;
 	t_fta_audio	*open_sound;
 	t_fta_audio	*close_sound;
 };

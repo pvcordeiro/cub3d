@@ -246,45 +246,77 @@ M_ICON_SPRITE assets/wolf3d/textures/items/machinegun/icon.xpm
 v_TYPE DOOR
 v_TARGETABLE TRUE
 v_AUTO_CLOSE_DELAY 8000.0
+v_ANIMATION_DELAY 1
 v_DOOR_SPRITE assets/wolf3d/textures/door.xpm
 v_SIDES_SPRITE assets/wolf3d/textures/door-frame.xpm
 v_DIRECTION WEST
 v_OPEN_SOUND assets/wolf3d/sounds/opendoor.mp3
+v_OPEN_SOUND_VOLUME 0.8
 v_CLOSE_SOUND assets/wolf3d/sounds/closedoor.mp3
+v_CLOSE_SOUND_VOLUME 0.8
 
 h_TYPE DOOR
 h_TARGETABLE TRUE
 h_AUTO_CLOSE_DELAY 8000.0
+h_ANIMATION_DELAY 1
 h_DOOR_SPRITE assets/wolf3d/textures/door.xpm
 h_SIDES_SPRITE assets/wolf3d/textures/door-frame.xpm
 h_DIRECTION NORTH
 h_OPEN_SOUND assets/wolf3d/sounds/opendoor.mp3
+h_OPEN_SOUND_VOLUME 0.8
 h_CLOSE_SOUND assets/wolf3d/sounds/closedoor.mp3
+h_CLOSE_SOUND_VOLUME 0.8
 
 s_TYPE DOOR
 s_TARGETABLE TRUE
+s_ANIMATION_DELAY 2.3
+s_CLOSEABLE FALSE
 s_DOOR_SPRITE assets/wolf3d/textures/wood-wall-eagle-dark.xpm
 s_SIDES_SPRITE assets/wolf3d/textures/wood-wall.xpm
 s_DIRECTION WEST
-s_OPEN_SOUND assets/wolf3d/sounds/opendoor.mp3
-s_CLOSE_SOUND assets/wolf3d/sounds/closedoor.mp3
+s_OPEN_SOUND assets/wolf3d/sounds/pushwall.mp3
+s_OPEN_SOUND_VOLUME 0.8
 
 t_TYPE DOOR
 t_TARGETABLE TRUE
+t_ANIMATION_DELAY 2.3
+t_CLOSEABLE FALSE
 t_DOOR_SPRITE assets/wolf3d/textures/grey-wall-hitler.xpm
 t_SIDES_SPRITE assets/wolf3d/textures/grey-wall0.xpm
 t_DIRECTION NORTH
-t_OPEN_SOUND assets/wolf3d/sounds/opendoor.mp3
-t_CLOSE_SOUND assets/wolf3d/sounds/closedoor.mp3
+t_OPEN_SOUND assets/wolf3d/sounds/pushwall.mp3
+t_OPEN_SOUND_VOLUME 0.8
 
 u_TYPE DOOR
 u_TARGETABLE TRUE
+u_ANIMATION_DELAY 1
 u_DOOR_SPRITE assets/wolf3d/textures/electric-door-button-dark.xpm
 u_SIDES_SPRITE assets/wolf3d/textures/door-frame.xpm
 u_DIRECTION WEST
 u_OPEN_SOUND assets/wolf3d/sounds/opendoor.mp3
+u_OPEN_SOUND_VOLUME 0.8
 u_CLOSE_SOUND assets/wolf3d/sounds/closedoor.mp3
-u_AUTO_CLOSE_DELAY 8000.0
+u_CLOSE_SOUND_VOLUME 0.8
+
+w_TYPE DOOR
+w_TARGETABLE TRUE
+w_ANIMATION_DELAY 2.3
+w_CLOSEABLE FALSE
+w_DOOR_SPRITE assets/wolf3d/textures/grey-wall0.xpm
+w_SIDES_SPRITE assets/wolf3d/textures/grey-wall0-dark.xpm
+w_DIRECTION NORTH
+w_OPEN_SOUND assets/wolf3d/sounds/pushwall.mp3
+w_OPEN_SOUND_VOLUME 0.8
+
+x_TYPE DOOR
+x_TARGETABLE TRUE
+x_ANIMATION_DELAY 2.3
+x_CLOSEABLE FALSE
+x_DOOR_SPRITE assets/wolf3d/textures/grey-wall0-dark.xpm
+x_SIDES_SPRITE assets/wolf3d/textures/grey-wall0.xpm
+x_DIRECTION WEST
+x_OPEN_SOUND assets/wolf3d/sounds/pushwall.mp3
+x_OPEN_SOUND_VOLUME 0.8
 
 a_TYPE WALL
 a_NO assets/wolf3d/textures/blue-wall1.xpm
@@ -397,11 +429,11 @@ f   fffff   fffffffffgfffff      a e a         a e a        =a
 f               f      eiff      a   a         aaaaaa a a a aa
 f     ,      ,  v    e  u n      a   a             aaaaaaaaaa
 f               f      eiff      a , a
-ffffffffffkffffffhfffgfffff      a   a
-        ffi  f  v  f        aaaaaaahaaaaaaa
+ffffffffffkffffffwfffgfffff      a   a
+        ffi  f  x  f        aaaaaaahaaaaaaa
         n u  f  f  f        a|:  a   a    a
         ffi     ffff        a    v , v "  a
-          ffhffff           a    a   a    a
+          ffwffff           a    a   a    a
            f  f             a    a   a    a
            f  f             aaaaaa   aaaaaa
            ffff             a}  {a   a    a
