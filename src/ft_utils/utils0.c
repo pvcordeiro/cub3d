@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils0.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 15:44:32 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/08 14:57:58 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/15 14:05:25 by pvcordeiro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,15 @@ unsigned int	ft_rgb_to_unsigned(char *rgb_str, char *separator)
 	char			**strs;
 
 	strs = ft_split(rgb_str, separator);
-	color = ft_atoi(strs[0]);
+	color = 0;
+	if (strs[0])
+		color = ft_atoi(strs[0]);
 	color *= 0x00000100;
-	color += ft_atoi(strs[1]);
+	if (strs[0] && strs[1])
+		color += ft_atoi(strs[1]);
 	color *= 0x00000100;
-	color += ft_atoi(strs[2]);
+	if (strs[0] && strs[1] && strs[2])
+		color += ft_atoi(strs[2]);
 	ft_strvfree(strs);
 	color += 0xFF000000;
 	return (color);

@@ -6,18 +6,11 @@
 /*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:15:19 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/14 18:50:31 by pvcordeiro       ###   ########.fr       */
+/*   Updated: 2025/06/15 13:18:36 by pvcordeiro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
-
-static void	ft_backtrack(t_game *game)
-{
-	fte_set(ERROR_NO_ERROR);
-	if (!ft_hashmap_get(game->sprites, "NO") || !ft_hashmap_get(game->sprites, "SO") || !ft_hashmap_get(game->sprites, "WE") || !ft_hashmap_get(game->sprites, "EA"))
-		return (fte_set(ERROR_INVALID_TYPE));
-}
 
 int	main(int argc, char **argv)
 {

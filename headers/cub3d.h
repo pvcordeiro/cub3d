@@ -6,7 +6,7 @@
 /*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/14 18:50:38 by pvcordeiro       ###   ########.fr       */
+/*   Updated: 2025/06/15 14:36:40 by pvcordeiro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@
 # define DEFAULT_AIR_TYPES "0 \t\n\v\f\r"
 # define DEFAULT_WALL_TYPES "1"
 # define DEFAULT_PLAYER_TYPES "NSEW"
+# define DEFAULT_MAP_TYPES "01NSEW "
 
 typedef struct s_sprite
 {
@@ -180,6 +181,7 @@ void				cub3d_exit(int code);
 // Map
 t_map				*parse_map_e(char *path);
 void				destroy_map(t_map *map);
+void 				ft_backtrack(t_game *game);
 
 // Loop
 void				loop(void);
