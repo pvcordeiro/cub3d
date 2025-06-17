@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   enemy.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 21:10:29 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/17 14:05:40 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/17 14:54:06 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,13 @@
 
 #define SAFE_DISTANCE 2.0
 #define STRAFE_INTERVAL 1.0
-#define FIRE_CHANCE 0.01
+#define FIRE_CHANCE 0.05
 #define LOOK_AROUND_CHANCE 0.1
 
-static void	update_movement(t_entity *entity, t_entity *target_entity, double delta_time)
+static void	look_at_target(t_entity *entity, t_entity *target_entity)
 {
-	double	dist;
 	double	angle;
 
-	dist = ft_distance(entity->coords, target_entity->coords);
 	angle = ft_angle_distance(entity->coords, target_entity->coords);
 	entity->controller.prev_target = target_entity;
 	entity->controller.last_seen_target = ft_get_time(); 
@@ -32,6 +30,13 @@ static void	update_movement(t_entity *entity, t_entity *target_entity, double de
 	else
 		entity->coords.yaw += angle;
 	entity->controller.prev_angle = entity->coords.yaw;
+}
+
+static void	update_movement(t_entity *entity, t_entity *target_entity, double delta_time)
+{
+	double	dist;
+
+	dist = ft_distance(entity->coords, target_entity->coords);
 	if (dist > SAFE_DISTANCE + 1.5)
 	{
 		entity->controller.sprinting = true;
@@ -60,7 +65,8 @@ static void	remove_attributes(t_character *character, t_controller *controller)
 	controller->sprinting = false;
 	controller->looking_left = false;
 	controller->looking_right = false;
-	if (character->inventory[character->inventory_index])
+	if (character->inventory[character->inventory_index]
+		&& ft_get_time() - character->inventory[character->inventory_index]->last_use >= character->inventory[character->inventory_index]->screen_use_sprite->update_delay * 2) 
 		character->inventory[character->inventory_index]->user = NULL;
 	character->target_entity = NULL;
 }
@@ -105,10 +111,6 @@ static void	frame(t_entity *entity, double delta_time)
 	if (!entity->character)
 		return ;
 	character = (t_character *)entity;
-	if (character->inventory[character->inventory_index]
-		&& character->inventory[character->inventory_index]->user == character
-		&& character->billboard.sprites[0]->running)
-		return ;
 	remove_attributes(character, &entity->controller);
 	if (character->dead)
 		return ;
@@ -118,10 +120,12 @@ static void	frame(t_entity *entity, double delta_time)
 		look_around(character, &entity->controller);
 	else
 	{
+		look_at_target(entity, character->target_entity);
 		if (character->inventory[character->inventory_index]
 			&& (double)rand() / RAND_MAX < FIRE_CHANCE)
 			character->inventory[character->inventory_index]->user = character;
-		update_movement(entity, character->target_entity, delta_time);
+		else if (!character->inventory[character->inventory_index] || !character->inventory[character->inventory_index]->user)
+			update_movement(entity, character->target_entity, delta_time);
 	}
 	moviment_frame(entity, delta_time);
 }

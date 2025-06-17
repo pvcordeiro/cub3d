@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   targets.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 19:42:39 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/16 17:00:34 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/17 14:29:50 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ void	targets_frame(t_character *character, double fov)
 	t_wall_target	wall_tar_data;
 	t_entity		*bill_tar_entity;
 
-    if (!character)
-        return;
+	if (!character)
+		return;
 	character->target_entity = NULL;
-    wall_tar_data = wall_target(&cub3d()->game, character, fov);
+	wall_tar_data = wall_target(&cub3d()->game, character, fov);
 	if (wall_tar_data.entity)
 		character->target_entity = wall_tar_data.entity;
 	bill_tar_entity = billboard_target(&cub3d()->game, (t_entity *)character, fov);

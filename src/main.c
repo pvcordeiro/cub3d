@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:15:19 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/10 16:16:45 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/17 14:35:16 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	main(int argc, char **argv)
 
 	(void)argc;
 	fte_storage()->exit = cub3d_exit;
-	fta_init_e();
 	fte_assert();
 	ftm_create_window_e(&cub3d()->window, (t_size){W_WIDTH, W_HEIGHT}, W_TITLE);
 	fte_assert();
@@ -39,6 +38,7 @@ int	main(int argc, char **argv)
 	fte_assert();
 	cub3d()->curr_map = parse_map_e(argv[1]);
 	fte_assert();
+	fta_init_e();
 	game_load_map_e(&cub3d()->game, &cub3d()->window, cub3d()->curr_map);
 	fte_assert();
 	game_start(&cub3d()->game, &cub3d()->window);
