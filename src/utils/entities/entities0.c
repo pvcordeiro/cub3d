@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 20:49:46 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/11 13:13:32 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/16 20:47:28 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,4 +170,22 @@ void	fill_3d_sprites_from_game(t_game *game, t_sprite **dst, char identifier, ch
         return (fill_3d_sprites_from_src(dst, sprites));
     sprite = hashmap_get_with_identifier(game, game->sprites, identifier, key);
     fill_3d_sprites_from_single(dst, sprite);
+}
+
+void	reset_3d_sprites(t_sprite **sprites)
+{
+	int	i;
+
+	if (!sprites)
+		return ;
+	i = -1;
+	while (++i < 360)
+	{
+		if (!sprites[i])
+			continue ;
+		sprites[i]->index = 0;
+		sprites[i]->updated_at = ft_get_time();
+		sprites[i]->running = true;
+		sprites[i]->reversed = false;
+	}
 }

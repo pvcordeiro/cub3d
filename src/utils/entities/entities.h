@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 18:04:16 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/11 13:14:19 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/16 20:47:38 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	clear_3d_sprite(t_sprite **sprites);
 void	fill_3d_sprites_from_game(t_game *game, t_sprite **dst, char identifier, char *key);
 void	fill_3d_sprites_from_src(t_sprite **dst, t_sprite **src);
 void	fill_3d_sprites_from_single(t_sprite **dst, t_sprite *src);
+void	reset_3d_sprites(t_sprite **sprites);
 
 // Entity
 void	init_entity(t_game *game, t_ftm_window *window, t_entity *entity, char identifier);

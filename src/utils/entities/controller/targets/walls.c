@@ -6,13 +6,13 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 19:45:19 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/15 19:57:36 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/16 17:00:45 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "targets.h"
 
-t_wall_target	wall_target(t_game *game, t_character *character)
+t_wall_target	wall_target(t_game *game, t_character *character, double fov)
 {
     t_coords	coords;
     t_raycast	ray;
@@ -24,7 +24,7 @@ t_wall_target	wall_target(t_game *game, t_character *character)
     while (++i < TARGETS_RAYS)
     {
         angle_adjustment = (i - (TARGETS_RAYS - 1) / 2.0)
-			* (TARGETS_FOV / (TARGETS_RAYS - 1));
+			* (fov / (TARGETS_RAYS - 1));
         ray = ft_dda_raycast((t_dda_raycast_config){
             (void ***)game->walls, game->map->size,
 			(t_coords){coords.x, coords.y,

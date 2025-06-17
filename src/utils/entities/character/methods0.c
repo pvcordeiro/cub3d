@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/14 18:19:12 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/17 14:15:03 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ static bool	hit(t_character *character)
 
 static bool	using(t_character *character)
 {
+	
 	return (character->inventory[character->inventory_index]
 		&& (ft_get_time() - character->inventory[character->inventory_index]->last_use < character->inventory[character->inventory_index]->screen_sprite->update_delay
 			|| character->inventory[character->inventory_index]->user == character));
@@ -61,18 +62,34 @@ static void	call_item_frames(t_character *character)
 			character->inventory[i]->frame(character->inventory[i]);
 }
 
+static void	billions_must_die(t_character *character)
+{
+	bool	was_already_dead;
+
+	if (character->dead && character->billboard.entity.health)
+		character->dead = false;
+	was_already_dead = character->was_already_dead;
+	character->was_already_dead = character->dead;
+	if ((!character->dead && !was_already_dead)
+		|| (character->dead && was_already_dead))
+		return ;
+	character->billboard.entity.hard = !character->dead;
+	character->billboard.entity.targetable = !character->dead;
+}
+
 void	character_frame(t_entity *entity, double delta_time)
 {
 	t_character *character;
 
 	billboard_frame(entity, delta_time);
 	character = (t_character *)entity;
+	billions_must_die(character);
 	if (character->dead)
 		character->billboard.sprites = character->death_sprite;
 	else if (hit(character))
 		character->billboard.sprites = character->hit_sprite;
 	else if (using(character))
-	set_using(&cub3d()->game, character);
+		set_using(&cub3d()->game, character);
 	else if (walking(entity))
 		character->billboard.sprites = character->walking_sprite;
 	else
@@ -93,31 +110,15 @@ void	character_action(t_entity *entity, t_character *actioner)
 void	character_shot(t_entity *shooted, t_character *shooter)
 {
 	t_character	*character;
-	int			i;
 
 	billboard_shot(shooted, shooter);
 	character = (t_character *)shooted;
-	if (!character->dead)
-	{
-		if (!shooted->health)
-		{
-			fta_play(character->death_sound);
-			i = -1;
-			while (++i < 360)
-			{
-				if (character->death_sprite[i])
-				{
-					character->death_sprite[i]->index = 0;
-					character->death_sprite[i]->running = true;
-					character->death_sprite[i]->updated_at = ft_get_time();
-				}
-			}
-			character->dead = true;
-			shooted->hard = false;
-			shooted->targetable = false;
-		}
-		else
-			fta_play(character->hit_sound);
-	}
 	character->last_hit = ft_get_time();
+	if (character->dead)
+		return ;
+	if (shooted->health)
+		return (fta_play(character->hit_sound));
+	fta_play(character->death_sound);
+	reset_3d_sprites(character->death_sprite);
+	character->dead = true;
 }

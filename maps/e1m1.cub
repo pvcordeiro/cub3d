@@ -87,7 +87,8 @@ e_HIT_SOUND assets/wolf3d/sounds/deathscream1.mp3
 e_CONTROLLER ENEMY
 e_0_INVENTORY Y
 e_USING_Y_1_SPRITE assets/wolf3d/textures/billboards/soldier/aim.xpm:assets/wolf3d/textures/billboards/soldier/shoot.xpm
-e_USING_Y_1_SPRITE_UPDATE_DELAY 0.1
+e_USING_Y_1_SPRITE_UPDATE_DELAY 0.5
+e_USING_Y_1_SPRITE_LOOP TRUE
 e_AMMO 2147483647
 
 ._TYPE BILLBOARD
@@ -169,7 +170,7 @@ Y_USE_SOUND assets/wolf3d/sounds/nazifire.mp3
 Y_DESCRIPTION Weapon of the National Socialist soldier
 Y_SCREEN_SPRITE assets/wolf3d/textures/items/machinegun/screen/0.xpm
 Y_SCREEN_USE_SPRITE assets/wolf3d/textures/items/machinegun/screen/2.xpm:assets/wolf3d/textures/items/machinegun/screen/3.xpm
-Y_SCREEN_USE_SPRITE_UPDATE_DELAY 0.1
+Y_SCREEN_USE_SPRITE_UPDATE_DELAY 0.5
 Y_SCREEN_USE_SPRITE_LOOP TRUE
 Y_ICON_SPRITE assets/wolf3d/textures/items/machinegun/icon.xpm
 

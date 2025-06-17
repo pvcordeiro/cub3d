@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/15 13:40:51 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/16 20:38:22 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,6 +194,12 @@ struct s_controller
 	void		(*key)(t_entity *entity, int key, bool down);
 	void		(*frame)(t_entity *entity, double delta_time);
 	t_time		last_shot;
+	t_time		last_seen_target;
+	t_coords	last_target_position;
+	t_entity	*prev_target;
+	double		prev_angle;
+	double		moving_to_angle;
+	double		time_accumulator;
 	bool		walking_forward;
 	bool		walking_left;
 	bool		walking_backward;
@@ -267,6 +273,7 @@ struct s_character
 	int			inventory_index;
 	char		last_used_item_identifier;
 	int			ammo;
+	bool		was_already_dead;
 	bool		dead;
 };
 

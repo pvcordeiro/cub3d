@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 19:35:54 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/15 16:19:48 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/16 16:59:37 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	frame(t_entity *entity, double delta_time)
 {
 	moviment_frame(entity, delta_time);
 	if (entity->character)
-		targets_frame((t_character *)entity);
+		targets_frame((t_character *)entity, PLAYER_FOV);
 }
 
 static void	mouse_inv_keys(t_character *character, int key)
