@@ -6,19 +6,19 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 22:14:35 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/10 19:01:19 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/18 20:54:07 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "hud.h"
 
-void	render_ammo_text(t_game *game, t_ftm_image *canvas)
+void	render_ammo_text(t_game *game, t_ftm_image *canvas, t_character *character)
 {
 	t_coords			text_pos;
 	char				*ammo_text;
 	double				ammo_scaler;
 
-	ammo_text = ft_strf("%d", game->player->character.ammo);
+	ammo_text = ft_strf("%d", character->ammo);
 	ammo_scaler = 1.47;
 	if (ft_strlen(ammo_text) == 3)
 		ammo_scaler = 1.50;
@@ -37,13 +37,13 @@ void	render_ammo_text(t_game *game, t_ftm_image *canvas)
 	free(ammo_text);
 }
 
-void	render_health_text(t_game *game, t_ftm_image *canvas)
+void	render_health_text(t_game *game, t_ftm_image *canvas, t_character *character)
 {
 	t_coords			text_pos;
 	char				*health_text;
 	double				health_scaler;
 
-	health_text = ft_strf("%d%%", game->player->character.billboard.entity.health);
+	health_text = ft_strf("%d%%", character->billboard.entity.health);
 	health_scaler = 1.84;
 	if (ft_strlen(health_text) == 3)
 		health_scaler = 1.81;
@@ -89,16 +89,12 @@ static t_size	get_hand_item_size(t_ftm_image *image, double max_w, double max_h)
 	return (item_size);
 }
 
-void	render_hand_item_icon(t_game *game, t_ftm_image *canvas)
+void	render_hand_item_icon(t_ftm_image *canvas, t_character *character)
 {
     t_item		*item;
-    t_character	*character;
     t_ftm_image	*image;
     t_size		item_size;
 
-    character = (t_character *)game->player;
-    if (!character)
-        return ;
     item = character->inventory[character->inventory_index];
     if (!item)
         return ;
@@ -115,7 +111,7 @@ void	render_hand_item_icon(t_game *game, t_ftm_image *canvas)
     });
 }
 
-void	render_stats(t_game *game, t_ftm_image *canvas)
+void	render_stats(t_game *game, t_ftm_image *canvas, t_character *character)
 {
 	t_size		stats_size;
 	t_ftm_image	*image;
@@ -125,8 +121,8 @@ void	render_stats(t_game *game, t_ftm_image *canvas)
 		return ;
 	stats_size = (t_size){canvas->size.width, canvas->size.width / 8};
 	index = (int)(game->hud.stats.states
-			* ((float)game->player->character.billboard.entity.health
-				/ game->player->character.billboard.entity.max_health));
+			* ((float)character->billboard.entity.health
+				/ character->billboard.entity.max_health));
 	index = game->hud.stats.states - index;
 	if (index >= game->hud.stats.states)
 		index = game->hud.stats.states - 1;
@@ -139,7 +135,7 @@ void	render_stats(t_game *game, t_ftm_image *canvas)
 		(t_coords){0, canvas->size.height - stats_size.height, 0},
 		false, (t_coords){0, 0, 0}, (t_coords){0, 0, 0},
 		true, stats_size, NULL, NULL});
-	render_health_text(game, canvas);
-	render_ammo_text(game, canvas);
-	render_hand_item_icon(game, canvas);
+	render_health_text(game, canvas, character);
+	render_ammo_text(game, canvas, character);
+	render_hand_item_icon(canvas, character);
 }

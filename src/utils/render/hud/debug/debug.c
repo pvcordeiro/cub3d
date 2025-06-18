@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 23:03:13 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/27 20:08:37 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/18 20:52:43 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,26 +33,12 @@ int	render_debug_str(t_game *game, t_ftm_image *canvas, char *str,
 	return (width);
 }
 
-static void	set_strs(t_game *game)
-{
-	set_fps(game);
-	set_target(game);
-	set_player(game);
-	set_entities(game);
-}
-
-static void	render_debug_strs(t_game *game, t_ftm_image *canvas)
-{
-	render_debug_fps_strs(game, canvas, (t_coords){20, 20, 0});
-	render_debug_target_strs(game, canvas, (t_coords){20, 60, 0});
-	render_debug_player_strs(game, canvas, (t_coords){20, 100, 0});
-	render_debug_entities_strs(game, canvas, (t_coords){20, 140, 0});
-}
-
-void	render_debug(t_game *game, t_ftm_image *canvas)
+void	render_debug(t_game *game, t_ftm_image *canvas, t_character *character)
 {
 	if (!game->hud.debug.enabled)
 		return ;
-	set_strs(game);
-	render_debug_strs(game, canvas);
+	render_debug_fps(game, canvas, (t_coords){20, 20, 0});
+	render_debug_target(game, canvas, (t_coords){20, 60, 0}, character);
+	render_debug_player(game, canvas, (t_coords){20, 100, 0}, character);
+	render_debug_entities(game, canvas, (t_coords){20, 140, 0});
 }

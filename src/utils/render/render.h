@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:23:25 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/28 17:56:56 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/18 20:54:34 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct s_raycasting_slice
 	int			ending_index;
 }	t_raycasting_slice;
 
-void	render_hud(t_game *game, t_ftm_image *canvas);
+void	render_hud(t_game *game, t_ftm_image *canvas, t_character *character);
 void	render_camera(t_game *game, t_ftm_image *canvas, t_camera *camera);
 
 #endif

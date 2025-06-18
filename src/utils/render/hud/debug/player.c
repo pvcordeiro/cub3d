@@ -6,41 +6,36 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 01:49:57 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/10 16:43:39 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/18 20:55:29 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "debug.h"
 
-void	set_player(t_game *game)
+void	render_debug_player(t_game *game, t_ftm_image *canvas,
+	t_coords coords, t_character *character)
 {
-	if (!game->player)
-		return ;
-	(free(game->hud.debug.player_x), free(game->hud.debug.player_y),
-		free(game->hud.debug.player_yaw), free(game->hud.debug.player_fov),
-		free(game->hud.debug.player_health));
-	game->hud.debug.player_x = ft_strf("X: %d",
-			(int)game->player->character.billboard.entity.coords.x);
-	game->hud.debug.player_y = ft_strf("Y: %d",
-			(int)game->player->character.billboard.entity.coords.y);
-	game->hud.debug.player_yaw = ft_strf("Yaw: %d",
-			(int)game->player->character.billboard.entity.coords.yaw);
-	game->hud.debug.player_fov = ft_strf("FOV: %d", (int)game->camera.fov);
-	game->hud.debug.player_health = ft_strf("Health: %d",
-			game->player->character.billboard.entity.health);
-}
+	char	*player_x;
+	char	*player_y;
+	char	*player_yaw;
+	char	*player_fov;
+	char	*player_health;
 
-void	render_debug_player_strs(t_game *game, t_ftm_image *canvas,
-	t_coords coords)
-{
+	player_x = ft_strf("X: %d",
+			(int)character->billboard.entity.coords.x);
+	player_y = ft_strf("Y: %d",
+			(int)character->billboard.entity.coords.y);
+	player_yaw = ft_strf("Yaw: %d",
+			(int)character->billboard.entity.coords.yaw);
+	player_fov = ft_strf("FOV: %d", (int)game->camera.fov);
+	player_health = ft_strf("Health: %d",
+			character->billboard.entity.health);
 	coords.x += render_debug_str(game, canvas, "Player", coords) + 5;
-	coords.x += render_debug_str(game, canvas, game->hud.debug.player_x,
-			coords) + 5;
-	coords.x += render_debug_str(game, canvas, game->hud.debug.player_y,
-			coords) + 5;
-	coords.x += render_debug_str(game, canvas, game->hud.debug.player_yaw,
-			coords) + 5;
-	coords.x += render_debug_str(game, canvas, game->hud.debug.player_fov,
-			coords) + 5;
-	render_debug_str(game, canvas, game->hud.debug.player_health, coords);
+	coords.x += render_debug_str(game, canvas, player_x, coords) + 5;
+	coords.x += render_debug_str(game, canvas, player_y, coords) + 5;
+	coords.x += render_debug_str(game, canvas, player_yaw, coords) + 5;
+	coords.x += render_debug_str(game, canvas, player_fov, coords) + 5;
+	render_debug_str(game, canvas, player_health, coords);
+	(free(player_x), free(player_y), free(player_yaw),
+		free(player_fov), free(player_health));
 }

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/18 20:14:36 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/18 20:58:21 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -371,22 +371,6 @@ struct s_hud_minimap
 struct s_hud_debug
 {
 	t_ftm_font	*font;
-	char		*fps;
-	char		*fps_min;
-	char		*fps_max;
-	char		*fps_limit;
-	char		*target_x;
-	char		*target_y;
-	char		*target_yaw;
-	char		*target_type;
-	char		*target_health;
-	char		*target_id;
-	char		*player_x;
-	char		*player_y;
-	char		*player_health;
-	char		*player_yaw;
-	char		*player_fov;
-	char		*entities_count;
 	bool		enabled;
 };
 

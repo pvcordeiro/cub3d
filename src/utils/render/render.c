@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 19:49:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/28 17:55:50 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/18 20:54:44 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,5 @@ void	render_game(t_ftm_window *window, t_game *game)
 {
 	render_ceiling_and_floor(game, window->canvas);
 	render_camera(game, window->canvas, &game->camera);
-	render_hud(game, window->canvas);
+	render_hud(game, window->canvas, (t_character *)game->player);
 }
