@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 08:42:58 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/04 01:25:17 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/18 16:47:31 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	add_variable_to_types_e(t_hashmap *types, char *line)
 		return (free(clean_line), fte_set("invalid type"));
 	clean_line[i++] = '\0';
 	if (ft_hashmap_get(types, key))
-		return (free(clean_line), fte_set("duplicate type"));
+		return (free(clean_line), fte_set("duplicate type %s", line));
 	while (ft_isspace(clean_line[i]))
 		++i;
 	value = ft_strdup(&clean_line[i]);

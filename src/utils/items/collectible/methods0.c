@@ -3,31 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   methods0.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/11 12:27:19 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/18 14:50:42 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ammo.h"
+#include "collectible.h"
 
-void	clear_ammo(void *data)
+void	clear_collectible(void *data)
 {
 	clear_item(data);
 }
 
-void	ammo_use(t_item *item)
+void	collectible_use(t_item *item)
 {
+	t_collectible	*collectible;
+	
 	item_use(item);
+	collectible = (t_collectible *)item;
 	if (!item->user)
 		return ;
-	item->user->ammo += ((t_ammo *)item)->amount;
+	item->user->billboard.entity.health += collectible->health;
+	if (item->user->billboard.entity.health > item->user->billboard.entity.max_health)
+		item->user->billboard.entity.health = item->user->billboard.entity.max_health;
+	if (item->user->billboard.entity.health < 0)
+		item->user->billboard.entity.health = 0;
+	item->user->ammo += collectible->ammo;
 	if (item->user->ammo < 0)
 		item->user->ammo = 0;
+	item->user->score += collectible->score;
 }
 
-void	ammo_frame(t_item *item)
+void	collectible_frame(t_item *item)
 {
 	item->can_use = !item->last_use;
 	item_frame(item);

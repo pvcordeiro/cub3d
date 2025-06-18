@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ammo.h                                             :+:      :+:    :+:   */
+/*   collectible.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 00:50:57 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/08 16:17:57 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/18 14:45:54 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef AMMO_H
-# define AMMO_H
+#ifndef COLLECTIBLE_H
+# define COLLECTIBLE_H
 
 # include "../items.h"
 

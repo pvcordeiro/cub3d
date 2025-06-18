@@ -12,6 +12,7 @@ DEBUG_HUD TRUE
 STATUS_HUD TRUE
 
 0_INVENTORY P
+1_INVENTORY K
 AMMO 8
 
 STATS_HUD_FONT assets/fonts/wolf3d
@@ -145,7 +146,7 @@ $_SPRITE assets/wolf3d/textures/billboards/gold-plant.xpm
 %_TYPE BILLBOARD
 %_SPRITE assets/wolf3d/textures/billboards/green-barrel.xpm
 
-U_TYPE FOOD
+U_TYPE COLLECTIBLE
 U_HEALTH 10
 U_NAME FOOD
 U_SINGLE_USE TRUE
@@ -153,13 +154,37 @@ U_USE_SOUND assets/wolf3d/sounds/health1.mp3
 U_DESCRIPTION The Greatest Food ever for real
 U_ICON_SPRITE assets/wolf3d/textures/billboards/food.xpm
 
-Z_TYPE AMMO
-Z_AMOUNT 10
+Z_TYPE COLLECTIBLE
+Z_AMMO 10
 Z_NAME Ammo
 Z_SINGLE_USE TRUE
 Z_USE_SOUND assets/wolf3d/sounds/getammo.mp3
 Z_DESCRIPTION Ammo, needed for weapons
 Z_ICON_SPRITE assets/wolf3d/textures/billboards/ammo.xpm
+
+o_TYPE COLLECTIBLE
+o_SCORE 500
+o_NAME Chalice
+o_SINGLE_USE TRUE
+o_USE_SOUND assets/wolf3d/sounds/deathscream4.mp3
+o_DESCRIPTION Point giver Chalice
+o_ICON_SPRITE assets/wolf3d/textures/billboards/holy-cup.xpm
+
+z_TYPE COLLECTIBLE
+z_SCORE 100
+z_NAME Holy Cross
+z_SINGLE_USE TRUE
+z_USE_SOUND assets/wolf3d/sounds/deathscream4.mp3
+z_DESCRIPTION God himself
+z_ICON_SPRITE assets/wolf3d/textures/billboards/holy-cross.xpm
+
+I_TYPE COLLECTIBLE
+I_HEALTH 25
+I_NAME Medic Kit
+I_SINGLE_USE TRUE
+I_USE_SOUND assets/wolf3d/sounds/health2.mp3
+I_DESCRIPTION Heal yourself bro
+I_ICON_SPRITE assets/wolf3d/textures/billboards/medic-kit.xpm
 
 Y_TYPE WEAPON
 Y_CANT_USE_SOUND assets/wolf3d/sounds/noammo.mp3
@@ -239,9 +264,19 @@ M_ICON_SPRITE assets/wolf3d/textures/items/machinegun/icon.xpm
 {_HARD FALSE
 
 }_TYPE DROP
-}_ITEM G
-}_AUTO_PICKUP TRUE
+}_ITEM I
+}_AUTO_USE TRUE
 }_HARD FALSE
+
+(_TYPE DROP
+(_ITEM z
+(_AUTO_USE TRUE
+(_HARD FALSE
+
+)_TYPE DROP
+)_ITEM o
+)_AUTO_USE TRUE
+)_HARD FALSE
 
 [_TYPE DROP
 [_ITEM K
@@ -405,9 +440,9 @@ C 50, 50, 50
                              jjjljjjjjljjj
      ffffff                  j!         !j
      f    f      fffffffiffffl  ~  ~  ~  ljjjj
-     f    ff     f           j           j   j
-     f     f     f ,    ,    v  e  /     v e l
-     f     f     f           j           j   j
+     f    ff     f           j           j(()j
+     f     f     f ,    ,    v  e  /     v e(l
+     f     f     f           j           j)))j
      ffgfftffgff f   fffiffffm         e mjjjj
      f   $ $  ef f   f       j           j
      i @     @ iff   fff     jjjljjhjjljjj
@@ -417,10 +452,10 @@ C 50, 50, 50
 fffffi @     @ ifffgffff         j   j
 f  'ff        ef                 j   j
 f , fffgffhffgff            jjjjjj   jjj
-f   f   f   f               j  se  ,  \j
+f   f   f   f               j; se  ,  \j
 ffhff   i , i               j  jjj   jjj
-f   fffff   f               j  j j   j
-f , f  :f   f               j  j j   j
+f   fffff   f               j;}j j   j
+f , f  :f   f               j]}j j   j
 f     , i , i               jjjj l , l
 f   f   f e f                    j   j
 f   ffffffhfffff                fjlhljf               aaaaaaaaaa
@@ -451,9 +486,9 @@ ffffffffffkffffffwfffgfffff      a   a
           ffwffff           a    a   a    a
            f  f             a    a   a    a
            f  f             aaaaaa   aaaaaa
-           ffff             a}  {a   a    a
+           ffff             a    a   a    a
                             a E  v , v : |a
-                            a]  [a   a    a
+                            a    a   a    a
                             aaaaaa   aaaaaa
                             a             a
                             a  ,   ,   ,e;a

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map3.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 20:52:20 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/08 16:22:56 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/18 14:51:36 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static bool	identifier_already_defined(t_identifiers *identifiers, char *identif
 		|| ft_list_any(identifiers->air, (void *)ft_strequal, identifier)
 		|| ft_list_any(identifiers->billboard, (void *)ft_strequal, identifier)
 		|| ft_list_any(identifiers->item, (void *)ft_strequal, identifier)
-		|| ft_list_any(identifiers->food, (void *)ft_strequal, identifier)
+		|| ft_list_any(identifiers->collectible, (void *)ft_strequal, identifier)
 		|| ft_list_any(identifiers->drop, (void *)ft_strequal, identifier));
 }
 
@@ -37,16 +37,14 @@ static void	add_identifier_e(t_identifiers *identifiers, char *identifier, char 
 		ft_list_add(&identifiers->billboard, ft_strdup(identifier), free);
 	else if (ft_strequal(type, "ITEM"))
 		ft_list_add(&identifiers->item, ft_strdup(identifier), free);
-	else if (ft_strequal(type, "FOOD"))
-		ft_list_add(&identifiers->food, ft_strdup(identifier), free);
+	else if (ft_strequal(type, "COLLECTIBLE"))
+		ft_list_add(&identifiers->collectible, ft_strdup(identifier), free);
 	else if (ft_strequal(type, "DROP"))
 		ft_list_add(&identifiers->drop, ft_strdup(identifier), free);
 	else if (ft_strequal(type, "WEAPON"))
 		ft_list_add(&identifiers->weapon, ft_strdup(identifier), free);
 	else if (ft_strequal(type, "CHARACTER"))
 		ft_list_add(&identifiers->character, ft_strdup(identifier), free);
-	else if (ft_strequal(type, "AMMO"))
-		ft_list_add(&identifiers->ammo, ft_strdup(identifier), free);
 	else
 		fte_set("invalid identifier type");
 }

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/18 14:31:06 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/18 17:04:25 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,7 @@ typedef struct s_map			t_map;
 typedef struct s_door			t_door;
 typedef struct s_identifiers	t_identifiers;
 typedef struct s_item			t_item;
-typedef struct s_food			t_food;
-typedef struct s_ammo			t_ammo;
+typedef struct s_collectible	t_collectible;
 typedef struct s_drop			t_drop;
 typedef t_item *(*t_item_creator)(t_game *, t_ftm_window *, char);
 typedef t_entity *(*t_entity_creator)(t_game *, t_ftm_window *, char);
@@ -140,7 +139,7 @@ struct s_item
 	char			*name;
 	char			*description;
 	bool			weapon;
-	bool			food;
+	bool			collectible;
 	bool			can_use;
 	t_character		*user;
 	bool			prev_using;
@@ -158,16 +157,12 @@ struct s_item
 	t_sprite		*_screen_sprite;
 };
 
-struct s_food
+struct s_collectible
 {
 	t_item	item;
 	int		health;
-};
-
-struct s_ammo
-{
-	t_item	item;
-	int		amount;
+	int		score;
+	int		ammo;
 };
 
 struct s_weapon
@@ -275,6 +270,7 @@ struct s_character
 	int			inventory_index;
 	char		last_used_item_identifier;
 	int			ammo;
+	int			score;
 	bool		was_already_dead;
 	bool		dead;
 };
@@ -329,11 +325,10 @@ struct s_identifiers
 	t_list	*billboard;
 	t_list	*air;
 	t_list	*item;
-	t_list	*food;
+	t_list	*collectible;
 	t_list	*drop;
 	t_list	*weapon;
 	t_list	*character;
-	t_list	*ammo;
 };
 
 struct s_map
@@ -507,8 +502,7 @@ t_character			*character_new(t_game *game, t_ftm_window *window, char identifier
 t_item_creator	get_item_creator(t_identifiers *identifiers, char identifier);
 void			free_item(void *data);
 t_item			*item_new(t_game *game, t_ftm_window *window, char identifier);
-t_food			*food_new(t_game *game, t_ftm_window *window, char identifier);
+t_collectible	*collectible_new(t_game *game, t_ftm_window *window, char identifier);
 t_weapon		*weapon_new(t_game *game, t_ftm_window *window, char identifier);
-t_ammo			*ammo_new(t_game *game, t_ftm_window *window, char identifier);
 
 #endif
