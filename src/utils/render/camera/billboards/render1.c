@@ -6,13 +6,13 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 00:47:16 by paude-so          #+#    #+#             */
-/*   Updated: 2025/06/15 14:11:56 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/18 21:43:00 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "billboards.h"
 
-static bool	is_behind_wall(int i, unsigned int ray_index, t_render_billboard_slices_config rbsc)
+static bool	is_behind_wall(int i, int ray_index, t_render_billboard_slices_config rbsc)
 {
 	double			offset;
 	double			world_x;
@@ -56,8 +56,7 @@ static t_ftm_pitc_config	get_pitc_config(int i,
 
 void	render_billboard_slices(t_render_billboard_slices_config rbsc)
 {
-	unsigned int		ray_index;
-	t_ftm_pitc_config	pitc_config;
+	int		ray_index;
 	int					i;
 
 	i = -1;
@@ -67,7 +66,7 @@ void	render_billboard_slices(t_render_billboard_slices_config rbsc)
 				/ rbsc.canvas->size.width * rbsc.camera->rays);
 		if (is_behind_wall(i, ray_index, rbsc))
 			continue ;
-		pitc_config = get_pitc_config(i, rbsc);
-		ftm_put_image_to_canvas(rbsc.canvas, rbsc.image, pitc_config);
+		ftm_put_image_to_canvas(rbsc.canvas, rbsc.image,
+			get_pitc_config(i, rbsc));
 	}
 }

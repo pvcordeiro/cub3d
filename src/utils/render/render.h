@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:23:25 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/18 20:54:34 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/18 21:17:54 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,14 @@ typedef struct s_raycasting_slice
 	int			ending_index;
 }	t_raycasting_slice;
 
+typedef struct s_camera_config
+{
+	double			fov;
+	int				rays;
+}	t_camera_config;
+
 void	render_hud(t_game *game, t_ftm_image *canvas, t_character *character);
-void	render_camera(t_game *game, t_ftm_image *canvas, t_camera *camera);
+void	render_camera(t_game *game, t_ftm_image *canvas,
+	t_character *character);
 
 #endif

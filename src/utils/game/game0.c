@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game0.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:27:08 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/08 20:40:33 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/18 21:21:29 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	clear_game(void *data)
 	ft_hashmap_destroy(game->sounds);
 	ft_list_destroy(&game->hud.stats.states_list);
 	ft_strvfree((void *)game->walls);
-	free(game->camera.ray_distances);
 	free(game->billboards);
 	ft_bzero(game, sizeof(t_game));
 }
@@ -90,7 +89,6 @@ void	game_load_map_e(t_game *game, t_ftm_window *window, t_map *map)
 	init_billboards_e(game);
 	if (fte_flagged())
 		return (clear_game(game));
-	init_camera(game, window);
 	init_hud(game);
 	init_window(window, game);
 	init_fps(game);

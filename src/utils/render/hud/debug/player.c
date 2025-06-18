@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 01:49:57 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/18 20:55:29 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/18 21:18:50 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	render_debug_player(t_game *game, t_ftm_image *canvas,
 			(int)character->billboard.entity.coords.y);
 	player_yaw = ft_strf("Yaw: %d",
 			(int)character->billboard.entity.coords.yaw);
-	player_fov = ft_strf("FOV: %d", (int)game->camera.fov);
+	player_fov = ft_strf("FOV: %d", (int)character->fov);
 	player_health = ft_strf("Health: %d",
 			character->billboard.entity.health);
 	coords.x += render_debug_str(game, canvas, "Player", coords) + 5;

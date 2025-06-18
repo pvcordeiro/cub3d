@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 17:18:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/10 18:14:55 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/18 21:19:20 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,6 @@ void	init_sounds_e(t_game *game)
 	set_audio_configs_e(game);
 	if (fte_flagged())
 		return ;
-}
-
-void	init_camera(t_game *game, t_ftm_window *window)
-{
-	game->camera.character = (t_character *)game->player;
-	game->camera.rays = window->canvas->size.width;
-	game->camera.fov = PLAYER_FOV;
 }
 
 static void	init_stats_hud(t_game *game)

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 19:49:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/18 20:54:44 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/18 21:37:00 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ static void	render_ceiling_and_floor(t_game *game, t_ftm_image *canvas)
 	}
 }
 
-void	render_game(t_ftm_window *window, t_game *game)
+void	render_game(t_game *game, t_ftm_image *canvas, t_character *character)
 {
-	render_ceiling_and_floor(game, window->canvas);
-	render_camera(game, window->canvas, &game->camera);
-	render_hud(game, window->canvas, (t_character *)game->player);
+	render_ceiling_and_floor(game, canvas);
+	render_camera(game, canvas, character);
+	render_hud(game, canvas, character);
 }

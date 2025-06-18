@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/18 20:58:21 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/18 21:18:33 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ typedef struct s_drop			t_drop;
 typedef t_item *(*t_item_creator)(t_game *, t_ftm_window *, char);
 typedef t_entity *(*t_entity_creator)(t_game *, t_ftm_window *, char);
 typedef struct s_weapon			t_weapon;
+typedef struct s_render_config	t_render_config;
 
 struct s_sprite
 {
@@ -237,11 +238,20 @@ struct s_entity
 	t_fta_audio		*collision_sound;
 };
 
+struct s_render_config
+{
+	t_ftm_image		*canvas;
+	t_game			*game;
+	t_character		*character;
+	double			fov;
+	int				rays;
+};
+
 struct s_camera
 {
 	t_character		*character;
 	double			fov;
-	unsigned int	rays;
+	int				rays;
 	double			*ray_distances;
 };
 
@@ -269,6 +279,8 @@ struct s_character
 	t_direction	target_entity_direction;
 	t_time		last_inventory_scroll;
 	t_item		*inventory[INVENTORY_SIZE];
+	double		fov;
+	int			rays;
 	int			inventory_index;
 	char		last_used_item_identifier;
 	int			ammo;
@@ -421,7 +433,6 @@ struct s_game
 	t_hashmap			*fonts;
 	t_hashmap			*sounds;
 	t_map				*map;
-	t_camera			camera;
 	t_player			*player;
 	t_list				*entities;
 	t_hashmap			*sprites_3d;
@@ -449,7 +460,8 @@ void		game_load_map_e(t_game *game, t_ftm_window *window, t_map *map);
 void		game_start(t_game *game, t_ftm_window *window);
 void		clear_game(void *game);
 void		free_game(void *game);
-void		render_game(t_ftm_window *window, t_game *game);
+void		render_game(t_game *game, t_ftm_image *canvas,
+				t_character *character);
 
 // Map
 t_map		*parse_map_e(char *path);

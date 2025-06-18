@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:21:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/10 16:44:13 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/18 21:22:59 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ static void	hud_debug_keys(t_hud_debug *hud_debug, int key, bool down)
 		return ;
 	if (key == XK_c && down)
 	{
-		if (cub3d()->game.camera.rays % 2)
-			cub3d()->game.camera.rays += 1;
+		if (cub3d()->game.player->character.rays % 2)
+			cub3d()->game.player->character.rays += 1;
 		else
-			cub3d()->game.camera.rays /= 2;
+			cub3d()->game.player->character.rays /= 2;
 	}
 	if (key == XK_v && down)
-		cub3d()->game.camera.rays = cub3d()->window.canvas->size.width;
+		cub3d()->game.player->character.rays = cub3d()->window.canvas->size.width;
 	if (key == XK_b && down)
 		cub3d()->game.player->character.billboard.entity.hard = !cub3d()->game.player->character.billboard.entity.hard;
 	if (key == XK_n && down)
@@ -44,9 +44,9 @@ static void	hud_debug_keys(t_hud_debug *hud_debug, int key, bool down)
 	if (key == XK_l && down)
 		cub3d()->game.fps.fps_limit = FPS_LIMIT;
 	if (key == XK_o && down)
-		cub3d()->game.camera.fov /= 1.2;
+		cub3d()->game.player->character.fov /= 1.2;
 	if (key == XK_p && down)
-		cub3d()->game.camera.fov *= 1.2;
+		cub3d()->game.player->character.fov *= 1.2;
 	if (key == XK_y && down)
 		cub3d()->game.player->character.billboard.entity.health /= 1.2;
 	if (key == XK_u && down)
@@ -70,7 +70,7 @@ static void	hud_keys(t_game *game, t_ftm_window *window, int key, bool down)
     if (key == XK_h && down)
         game->hud.enabled = !game->hud.enabled;
     if (key == XK_F1 && down)
-		game->camera.rays = ftm_window_toggle_fullscreen(window, (t_size){W_WIDTH, W_HEIGHT}).width;
+		game->player->character.rays = ftm_window_toggle_fullscreen(window, (t_size){W_WIDTH, W_HEIGHT}).width;
 	if (!game->hud.enabled)
 		return ;
 	hud_debug_keys(&game->hud.debug, key, down);

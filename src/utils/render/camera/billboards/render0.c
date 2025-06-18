@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 00:47:16 by paude-so          #+#    #+#             */
-/*   Updated: 2025/06/12 14:41:46 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/18 21:37:12 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,14 @@ static t_size	get_size(t_get_size_config gsc)
 	double		distance;
 	double		fov_factor;
 	double		fix_fisheye;
+	double		fov;
 
 	distance = ft_distance(gsc.camera->character->billboard.entity.coords, gsc.bill_coords);
 	fix_fisheye = distance * ft_cos_degrees(gsc.relative_angle);
-	fov_factor = 73.5 / gsc.camera->fov;
+	fov = gsc.camera->fov;
+	if (!fov)
+		fov = 1.0;
+	fov_factor = 73.5 / fov;
 	return ((t_size){(gsc.bill_image_size.width / distance)
 		* (gsc.canvas_size.height / 125) * fov_factor,
 		(gsc.bill_image_size.height / fix_fisheye)
