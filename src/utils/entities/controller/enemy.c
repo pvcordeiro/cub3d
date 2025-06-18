@@ -6,16 +6,17 @@
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 21:10:29 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/17 14:54:06 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/18 14:33:14 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "controller.h"
 
 #define SAFE_DISTANCE 2.0
-#define STRAFE_INTERVAL 1.0
+#define STRAFE_INTERVAL 2500
 #define FIRE_CHANCE 0.05
-#define LOOK_AROUND_CHANCE 0.1
+#define LOOK_AROUND_CHANCE 0.01
+#define LAST_HIT_DELAY 1000
 
 static void	look_at_target(t_entity *entity, t_entity *target_entity)
 {
@@ -23,7 +24,7 @@ static void	look_at_target(t_entity *entity, t_entity *target_entity)
 
 	angle = ft_angle_distance(entity->coords, target_entity->coords);
 	entity->controller.prev_target = target_entity;
-	entity->controller.last_seen_target = ft_get_time(); 
+	entity->controller.last_seen_target = ft_get_time();
 	entity->controller.last_target_position = target_entity->coords;
 	if (angle >= 180)
 		entity->coords.yaw -= angle;
@@ -32,7 +33,7 @@ static void	look_at_target(t_entity *entity, t_entity *target_entity)
 	entity->controller.prev_angle = entity->coords.yaw;
 }
 
-static void	update_movement(t_entity *entity, t_entity *target_entity, double delta_time)
+static void	update_movement(t_entity *entity, t_entity *target_entity)
 {
 	double	dist;
 
@@ -44,14 +45,12 @@ static void	update_movement(t_entity *entity, t_entity *target_entity, double de
 	}
 	else if (dist < SAFE_DISTANCE - 1.5)
 		entity->controller.walking_backward = true;
-	entity->controller.time_accumulator += delta_time;
-	if (entity->controller.time_accumulator > STRAFE_INTERVAL)
+	if (ft_get_time() - entity->controller.last_strafe > STRAFE_INTERVAL)
 	{
-		entity->controller.time_accumulator = 0.0;
-		int strafe = rand() % 3;
-		if (strafe == 0)
+		entity->controller.last_strafe = ft_get_time();
+		if (rand() % 2)
 			entity->controller.walking_left = true;
-		else if (strafe == 1)
+		else
 			entity->controller.walking_right = true;
 	}
 }
@@ -73,32 +72,33 @@ static void	remove_attributes(t_character *character, t_controller *controller)
 
 static void	look_around(t_character *character, t_controller *controller)
 {
-	controller->walking_forward = false;
-	if (ft_get_time() - controller->last_seen_target < 10000)
+	if (controller->prev_target && ft_get_time() - controller->last_seen_target < 10000)
 	{
 		controller->walking_forward = true;
-		if (ft_get_time() - controller->last_seen_target < 5000
-			&& controller->prev_target)
+		if (ft_get_time() - controller->last_seen_target >= 2000)
 		{
 			character->billboard.entity.coords.yaw += ft_angle_distance(
 				character->billboard.entity.coords,
-				controller->last_target_position);
+				controller->prev_target->coords);
 			return ;
 		}
 		character->billboard.entity.coords.yaw += ft_angle_distance(
 			character->billboard.entity.coords,
-			controller->prev_target->coords);
-		return ;
+			controller->last_target_position);
+		if (ft_distance(character->billboard.entity.coords, controller->last_target_position) > 0.25)
+			return ;
+		controller->walking_forward = false;
 	}
     if ((double)rand() / RAND_MAX < LOOK_AROUND_CHANCE)
     {
-		controller->moving_to_angle = ft_normalize_angle(controller->prev_angle + 90.0);
-        if (ft_angle_distance(character->billboard.entity.coords, (t_coords){0, 0, controller->moving_to_angle}) > 180)
-            controller->moving_to_angle = ft_normalize_angle(controller->prev_angle - 90.0);
+        if (ft_normalize_angle(controller->moving_to_angle - controller->prev_angle) < 270)
+			controller->moving_to_angle = ft_normalize_angle(controller->prev_angle - 90.0);
+		else
+			controller->moving_to_angle = ft_normalize_angle(controller->prev_angle + 90.0);
     }
 	if (controller->moving_to_angle == character->billboard.entity.coords.yaw)
 		return ;
-	if (ft_angle_distance(character->billboard.entity.coords, (t_coords){0, 0, controller->moving_to_angle}) > 180)
+	if (ft_normalize_angle(controller->moving_to_angle - character->billboard.entity.coords.yaw) > 180)
 		controller->looking_left = true;
 	else
 		controller->looking_right = true;
@@ -115,6 +115,9 @@ static void	frame(t_entity *entity, double delta_time)
 	if (character->dead)
 		return ;
 	targets_frame(character, 120);
+	if (ft_get_time() - character->last_hit < LAST_HIT_DELAY
+		&& character->last_hit_by_character)
+		character->target_entity = (t_entity *)character->last_hit_by_character;
 	if (!character->target_entity || character->target_entity->type != ENTITY_PLAYER
 		|| ((t_character *)character->target_entity)->dead)
 		look_around(character, &entity->controller);
@@ -125,7 +128,7 @@ static void	frame(t_entity *entity, double delta_time)
 			&& (double)rand() / RAND_MAX < FIRE_CHANCE)
 			character->inventory[character->inventory_index]->user = character;
 		else if (!character->inventory[character->inventory_index] || !character->inventory[character->inventory_index]->user)
-			update_movement(entity, character->target_entity, delta_time);
+			update_movement(entity, character->target_entity);
 	}
 	moviment_frame(entity, delta_time);
 }

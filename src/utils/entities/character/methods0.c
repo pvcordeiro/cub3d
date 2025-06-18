@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   methods0.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/17 14:15:03 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/17 15:13:16 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ void	character_shot(t_entity *shooted, t_character *shooter)
 	character->last_hit = ft_get_time();
 	if (character->dead)
 		return ;
+	character->last_hit_by_character = shooter;
 	if (shooted->health)
 		return (fta_play(character->hit_sound));
 	fta_play(character->death_sound);
