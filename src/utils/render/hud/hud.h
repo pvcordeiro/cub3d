@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 20:04:15 by paude-so          #+#    #+#             */
-/*   Updated: 2025/06/04 23:32:17 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/18 20:02:44 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,6 @@ void	render_action(t_game *game, t_ftm_image *canvas);
 void	render_stats(t_game *game, t_ftm_image *canvas);
 void	render_minimap(t_game *game, t_ftm_image *canvas);
 void	render_hand_item(t_game *game, t_ftm_image *canvas);
+void	render_effects(t_game *game, t_ftm_image *canvas);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/11 12:26:31 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/18 20:15:18 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,14 @@ void	clear_item(void *data)
 	(void)data;
 }
 
-void	item_use(t_item *item)
+void	item_use(t_item *item, t_drop *drop)
 {
 	if (!item->user)
 		return ;
 	item->last_use = ft_get_time();
+	item->user->last_use = ft_get_time();
+	if (drop)
+		item->user->last_auto_use = ft_get_time();
 	fta_play(item->use_sound);
 }
 
@@ -47,7 +50,7 @@ void	item_frame(t_item *item)
 		&& ft_get_time() - item->last_use >= item->screen_sprite->update_delay * 2;
 	can_use2 = item->single_use && !item->already_using && item->user;
 	if ((can_use1 || can_use2) && item->use)
-		item->use(item);
+		item->use(item, NULL);
 	if (((!item->single_use && item->user) || (item->single_use && !item->already_using && item->user)) && item->screen_use_sprite)
 	{
 		item->screen_sprite = item->screen_use_sprite;

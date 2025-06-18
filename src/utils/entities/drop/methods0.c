@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/11 12:45:42 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/18 20:17:10 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ static void	do_the_thing(t_game *game, t_drop *drop)
 		if (drop->auto_use)
 		{
 			drop->item->user = (t_character *)entity;
+			drop->item->use(drop->item, drop);
 			drop->billboard.entity.active = false;
 		}
 		else if (drop->auto_pickup)

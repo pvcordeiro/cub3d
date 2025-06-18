@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/11 12:25:24 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/18 20:15:38 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ void	clear_weapon(void *data)
 	clear_item(data);
 }
 
-void	weapon_use(t_item *item)
+void	weapon_use(t_item *item, t_drop *drop)
 {
 	t_weapon	*weapon;
 	t_entity	*target_entity;
 
-	item_use(item);
+	item_use(item, drop);
 	weapon = (t_weapon *)item;
 	item->user->ammo -= weapon->ammo_usage;
 	if (!item->user)

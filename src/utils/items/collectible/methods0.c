@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   methods0.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/18 14:50:42 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/18 20:15:50 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ void	clear_collectible(void *data)
 	clear_item(data);
 }
 
-void	collectible_use(t_item *item)
+void	collectible_use(t_item *item, t_drop *drop)
 {
 	t_collectible	*collectible;
 	
-	item_use(item);
+	item_use(item, drop);
 	collectible = (t_collectible *)item;
 	if (!item->user)
 		return ;

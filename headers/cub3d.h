@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/18 17:04:25 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/18 20:14:36 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ struct s_item
 {
 	void			(*frame)(t_item *item);
 	void			(*clear)(void *this);
-	void			(*use)(t_item *item);
+	void			(*use)(t_item *item, t_drop *drop);
 	char			identifier;
 	char			*name;
 	char			*description;
@@ -260,6 +260,8 @@ struct s_character
 	t_sprite	**walking_sprite;
 	t_sprite	**_sprite;
 	t_time		last_hit;
+	t_time		last_use;
+	t_time		last_auto_use;
 	t_fta_audio	*hit_sound;
 	t_fta_audio	*death_sound;
 	t_entity	*target_entity;
