@@ -178,6 +178,14 @@ z_USE_SOUND assets/wolf3d/sounds/deathscream4.mp3
 z_DESCRIPTION God himself
 z_ICON_SPRITE assets/wolf3d/textures/billboards/holy-cross.xpm
 
+7_TYPE COLLECTIBLE
+7_SCORE 1000
+7_NAME MEGA Holy Treasure
+7_SINGLE_USE TRUE
+7_USE_SOUND assets/wolf3d/sounds/deathscream4.mp3
+7_DESCRIPTION God himself
+7_ICON_SPRITE assets/wolf3d/textures/billboards/treasure.xpm
+
 I_TYPE COLLECTIBLE
 I_HEALTH 25
 I_NAME Medic Kit
@@ -277,6 +285,11 @@ M_ICON_SPRITE assets/wolf3d/textures/items/machinegun/icon.xpm
 )_ITEM o
 )_AUTO_USE TRUE
 )_HARD FALSE
+
+*_TYPE DROP
+*_ITEM 7
+*_AUTO_USE TRUE
+*_HARD FALSE
 
 [_TYPE DROP
 [_ITEM K
@@ -439,25 +452,25 @@ C 50, 50, 50
 
                              jjjljjjjjljjj
      ffffff                  j!         !j
-     f    f      fffffffiffffl  ~  ~  ~  ljjjj
-     f    ff     f           j           j(()j
-     f     f     f ,    ,    v  e  /     v e(l
-     f     f     f           j           j)))j
+     f;;((f      fffffffiffffl  ~  ~  ~  ljjjj
+     f;; (ff     f           j           j(()j
+     f;;** f     f ,    ,    v  e  /     v e(l
+     f;;*  f     f           j           j)))j
      ffgfftffgff f   fffiffffm         e mjjjj
-     f   $ $  ef f   f       j           j
-     i @     @ iff   fff     jjjljjhjjljjj
+     f ()$ $) ef f   f       j           j
+     i @   ( @ iff   fff     jjjljjhjjljjj
      f  e      f   e   f         j e j
      f#   ~ e  v   ,  ef         j   j
      f  e      f       f         m , m
-fffffi @     @ ifffgffff         j   j
-f  'ff        ef                 j   j
+fffffi*@     @ ifffgffff         j   j
+f }'ff**      ef                 j   j
 f , fffgffhffgff            jjjjjj   jjj
 f   f   f   f               j; se  ,  \j
 ffhff   i , i               j  jjj   jjj
 f   fffff   f               j;}j j   j
 f , f  :f   f               j]}j j   j
-f     , i , i               jjjj l , l
-f   f   f e f                    j   j
+f     ,;i , i               jjjj l , l
+f   f  )f e f                    j   j
 f   ffffffhfffff                fjlhljf               aaaaaaaaaa
 i , ife        f           ffffif.   .fiffff          a:    '''a
 f   ff .     . i           f.             .f          a     e 'a
@@ -480,13 +493,13 @@ f               f      eiff      a   a         aaaaaa a a a aa
 f     ,      ,  v    e  u n      a   a             aaaaaaaaaa
 f               f      eiff      a , a
 ffffffffffkffffffwfffgfffff      a   a
-        ffi  f  x  f        aaaaaaahaaaaaaa
-        n u  f  f  f        a|:  a   a    a
-        ffi     ffff        a    v , v "  a
+        ffi  f  x }f        aaaaaaahaaaaaaa
+        n u  f  f ff        a|:  a   a    a
+        ffi     fff         a    v , v "  a
           ffwffff           a    a   a    a
            f  f             a    a   a    a
-           f  f             aaaaaa   aaaaaa
-           ffff             a    a   a    a
+           ff*f             aaaaaa   aaaaaa
+            fff             a    a   a    a
                             a E  v , v : |a
                             a    a   a    a
                             aaaaaa   aaaaaa
