@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 00:45:35 by paude-so          #+#    #+#             */
-/*   Updated: 2025/06/15 14:12:57 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/18 23:13:09 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static void	thread_render_rays(void *data)
 
 void	render_walls(t_game *game, t_ftm_image *canvas, t_camera *camera)
 {
-	static t_thread_render_rays_data	trrd[CAMERA_THREADS];
+	t_thread_render_rays_data			trrd[CAMERA_THREADS];
 	unsigned int						i;
 	unsigned int						index_scaler;
 

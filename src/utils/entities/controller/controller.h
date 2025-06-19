@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 19:31:30 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/16 16:59:10 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/18 23:23:04 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,20 @@
 # define CONTROLLER_H
 
 # include "../entities.h"
+
+typedef struct s_player_keys
+{
+	int	walking_forward;
+	int	walking_backward;
+	int	walking_left;
+	int	walking_right;
+	int	looking_left;
+	int	looking_right;
+	int	action;
+	int	sprinting;
+	int	move_inventory_index;
+	int	item_use;
+}	t_player_keys;
 
 void	init_player_controller(t_entity *entity);
 void	init_ai_dumb_controller(t_entity *entity);

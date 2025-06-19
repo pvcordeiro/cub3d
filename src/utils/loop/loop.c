@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:20:20 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/18 21:36:56 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/19 01:23:12 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,7 @@ static void process_fps_limit(t_game *game)
 void	loop(void)
 {
 	call_entity_frames(cub3d()->game.entities, &cub3d()->game.fps);
-	render_game(&cub3d()->game, cub3d()->window.canvas,
-		(t_character *)cub3d()->game.player);
+	render_players_game(&cub3d()->game, &cub3d()->window);
 	ftm_update_window(&cub3d()->window);
 	update_frame(&cub3d()->game);
 	process_fps_limit(&cub3d()->game);

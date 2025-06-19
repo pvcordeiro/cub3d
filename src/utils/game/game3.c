@@ -6,11 +6,27 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 23:10:00 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/04 01:22:35 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/18 22:37:58 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game.h"
+
+static void	add_player_e(t_game *game, t_player *player)
+{
+	int	i;
+
+	fte_set(NULL);
+	i = -1;
+	while (++i < PLAYER_MAX)
+	{
+		if (game->players[i])
+			continue ;
+		game->players[i] = player;
+		return ;
+	}
+	fte_set("Too many players");
+}
 
 static void	create_entity_e(t_game *game, t_ftm_window *window, char c, t_size position)
 {
@@ -37,8 +53,7 @@ static void	create_entity_e(t_game *game, t_ftm_window *window, char c, t_size p
 	}
 	ft_list_add(&game->entities, entity, free_entity);
 	if (entity->type == ENTITY_PLAYER)
-		game->player = (t_player *)entity;
-	fte_set(NULL);
+		add_player_e(game, (t_player *)entity);
 }
 
 void	init_entities_e(t_game *game, t_ftm_window *window)

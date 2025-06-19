@@ -1,6 +1,9 @@
 import os
 import re
+import sys
+import subprocess
 from PIL import ImageColor
+from time import sleep
 
 def grayN_to_hex(gray_name):
     m = re.match(r'gray(\d+)', gray_name.lower())
@@ -82,8 +85,29 @@ def clean_xpm_colors(xpm_path):
 
     print(f'✔ Corrigido: {xpm_path}')
 
-def processar_xpms_recursivamente():
-    for root, _, files in os.walk('.'):
+def converter_pngs_para_xpm(diretorio):
+    """Converte todos os arquivos PNG para XPM usando mogrify"""
+    try:
+        orignal_dir = os.getcwd()
+        # Mudamos para o diretório especificado
+        os.chdir(diretorio)
+        
+        # Executa o comando mogrify para converter PNG para XMP
+        resultado = subprocess.run(["mogrify", "-format", "xpm", "*.png"],
+                                      capture_output=True, text=True)
+        # Retorna ao diretório original
+        os.chdir(orignal_dir)
+        if resultado.returncode == 0:
+            print(f'✔ Conversão PNG->XPM concluída em {diretorio}')
+        else:
+            print(f'✘ Erro na conversão: {resultado.stderr}')
+            
+    except Exception as e:
+        print(f'✘ Erro ao executar mogrify: {e}')
+
+def processar_xpms_recursivamente(diretorio):
+    """Processa arquivos XPM no diretório especificado"""
+    for root, _, files in os.walk(diretorio):
         for file in files:
             if file.endswith('.xpm'):
                 caminho_completo = os.path.join(root, file)
@@ -94,4 +118,25 @@ def processar_xpms_recursivamente():
                     print(f'✘ Erro em {caminho_completo}: {e}')
 
 if __name__ == "__main__":
-    processar_xpms_recursivamente()
+    if len(sys.argv) != 2:
+        print("Uso: python png_to_xpm.py <diretorio>")
+        sys.exit(1)
+    
+    diretorio = sys.argv[1]
+    
+    if not os.path.exists(diretorio):
+        print(f"✘ Diretório não encontrado: {diretorio}")
+        sys.exit(1)
+    
+    if not os.path.isdir(diretorio):
+        print(f"✘ O caminho especificado não é um diretório: {diretorio}")
+        sys.exit(1)
+    
+    print(f"🚀 Processando diretório: {diretorio}")
+    
+    # Primeiro converte PNG para XPM
+    converter_pngs_para_xpm(diretorio)
+    # Depois limpa os arquivos XPM
+    processar_xpms_recursivamente(diretorio)
+    
+    print("✨ Processo completo!")

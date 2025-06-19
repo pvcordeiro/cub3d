@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/18 21:18:33 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/19 01:24:21 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@
 # define PLAYER_MAX_TARGET_DISTANCE 1.2
 # define PLAYER_WIDTH 0.23
 # define PLAYER_HEIGHT 0.23
+# define PLAYER_MAX 4
 
 // Billboard Config
 # define BILLBOARD_WIDTH 0.23
@@ -197,6 +198,7 @@ struct s_controller
 	double		prev_angle;
 	double		moving_to_angle;
 	double		time_accumulator;
+	double		optimal_proximity;
 	bool		walking_forward;
 	bool		walking_left;
 	bool		walking_backward;
@@ -363,7 +365,6 @@ struct s_environment
 
 struct s_hud_minimap
 {
-	bool			enabled;
 	t_coords		coords;
 	t_size			size;
 	bool			full;
@@ -380,34 +381,24 @@ struct s_hud_minimap
 	double			zoom_level;
 };
 
-struct s_hud_debug
-{
-	t_ftm_font	*font;
-	bool		enabled;
-};
-
 struct s_hud_stats
 {
-	t_ftm_font	*font;
 	t_sprite	*sprite;
 	t_list		*states_list;
 	int			states;
 	int			prev_health;
-	bool		enabled;
-};
-
-struct s_hud_action
-{
-	t_ftm_font	*font;
-	bool		enabled;
 };
 
 struct s_hud
 {
-	t_entity		*entity;
-	t_hud_debug		debug;
+	t_ftm_font		*action_font;
+	bool			action_enabled;
+	t_ftm_font		*debug_font;
+	bool			debug_enabled;
+	bool			minimap_enabled;
+	t_ftm_font		*stats_font;
+	bool			stats_enabled;
 	t_hud_stats		stats;
-	t_hud_action	action;
 	t_hud_minimap	minimap;
 	bool			enabled;
 };
@@ -433,7 +424,7 @@ struct s_game
 	t_hashmap			*fonts;
 	t_hashmap			*sounds;
 	t_map				*map;
-	t_player			*player;
+	t_player			*players[PLAYER_MAX];
 	t_list				*entities;
 	t_hashmap			*sprites_3d;
 	t_hashmap			*sprites;
@@ -462,6 +453,7 @@ void		clear_game(void *game);
 void		free_game(void *game);
 void		render_game(t_game *game, t_ftm_image *canvas,
 				t_character *character);
+void		render_players_game(t_game *game, t_ftm_window *window);
 
 // Map
 t_map		*parse_map_e(char *path);

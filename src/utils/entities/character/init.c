@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 00:50:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/18 21:36:30 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/18 22:31:19 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void	init_character(t_game *game, t_ftm_window *window, t_character *character, 
 	character->_sprite = character->billboard.sprites;
 	character->death_sound = hashmap_get_with_identifier(game, game->sounds, identifier, "DEATH");
 	character->hit_sound = hashmap_get_with_identifier(game, game->sounds, identifier, "HIT");
-	character->target_entity = (t_entity *)game->player;
 	character->rays = window->canvas->size.width;
 	character->fov = ft_atof(hashmap_get_with_identifier(game, game->map->types,
 		identifier, "FOV"));

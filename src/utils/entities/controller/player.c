@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 19:35:54 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/16 16:59:37 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/19 01:18:18 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,59 +41,109 @@ static void	mouse_inv_keys(t_character *character, int key)
 	character->inventory_index = new_index;
 }
 
-static void	inv_key(t_character *character, int key, bool down)
+static t_player_keys	get_player_keys(t_character *character)
+{
+	t_player	*player;
+
+	player = (t_player *)character;
+	if (character->billboard.entity.type != ENTITY_PLAYER
+		|| player == cub3d()->game.players[0])
+		return ((t_player_keys){
+			XK_w, XK_s, 0, 0,
+			XK_a, XK_d, XK_e,
+			XK_Shift_L, XK_q, XK_space
+		});
+	if (player == cub3d()->game.players[1])
+		return ((t_player_keys){
+			XK_t, XK_g, 0, 0,
+			XK_f, XK_h, XK_y,
+			0, XK_r, 0
+		});
+	if (player == cub3d()->game.players[2])
+		return ((t_player_keys){
+			XK_i, XK_k, 0, 0,
+			XK_j, XK_l, XK_o,
+			0, XK_u, 0
+		});
+	if (player == cub3d()->game.players[3])
+		return ((t_player_keys){
+			XK_Up, XK_Down, 0, 0,
+			XK_Left, XK_Right, 0,
+			0, 0, 0
+		});
+	return ((t_player_keys){0, 0, 0, 0, 0, 0, 0, 0, 0, 0});
+}
+
+static void	item_key(t_character *character, t_player_keys keys, int key,
+	bool down)
+{
+	t_item	*item;
+	bool	mouse_left;
+
+	mouse_left = key == XK_MOUSE_LEFT
+		&& (t_character *)cub3d()->game.players[0] == character;
+	item = character->inventory[character->inventory_index];
+	if (!item || (key != keys.item_use && !mouse_left))
+		return ;
+	item->user = NULL;
+	if (down)
+		item->user = character;
+}
+
+static void	move_inventory_index(t_character *character)
 {
 	int	i;
 
-	i = -1;
-	if (!down)
-		return ;
-	mouse_inv_keys(character, key);
-	while (++i < INVENTORY_SIZE)
+	i = character->inventory_index;
+	while (true)
 	{
-		if (key == XK_1 + i && character->inventory[i])
+		i += 1;
+		if (i < 0)
+			i = INVENTORY_SIZE - 1;
+		if (i >= INVENTORY_SIZE)
+			i = 0;
+		if (character->inventory[i] || i == character->inventory_index)
+		{
 			character->inventory_index = i;
-	}
-}
-
-static void	item_key(t_character *character, int key, bool down)
-{
-	t_item	*item;
-
-	item = character->inventory[character->inventory_index];
-	if ((key == XK_space || key == XK_MOUSE_LEFT) && item)
-	{
-		if (down)
-			item->user = character;
-		else
-			item->user = NULL;
+			return ;
+		}
 	}
 }
 
 static void	key(t_entity *entity, int key, bool down)
 {
-	if (key == XK_w)
+	t_character		*character;
+	t_player_keys	keys;
+
+	if (!entity || !entity->character)
+		return ;
+	character = (t_character *)entity;
+	keys = get_player_keys(character);
+	if (key == keys.walking_forward)
 		entity->controller.walking_forward = down;
-	if (key == XK_a)
+	if (key == keys.walking_left)
 		entity->controller.walking_left = down;
-	if (key == XK_s)
+	if (key == keys.walking_backward)
 		entity->controller.walking_backward = down;
-	if (key == XK_d)
+	if (key == keys.walking_right)
 		entity->controller.walking_right = down;
-	if (key == XK_Right)
+	if (key == keys.looking_right)
 		entity->controller.looking_right = down;
-	if (key == XK_Left)
+	if (key == keys.looking_left)
 		entity->controller.looking_left = down;
-	if (key == XK_e)
+	if (key == keys.action)
 		entity->controller.action = down;
-	if (key == XK_Shift_L || key == XK_Shift_R)
+	if (key == keys.sprinting)
 		entity->controller.sprinting = down;
 	if (key == XK_i && down)
 		entity->invencible = !entity->invencible;
-	if (!entity->character)
-		return ;
-	item_key((t_character *)entity, key, down);
-	inv_key((t_character *)entity, key, down);
+	if (key == XK_b && down)
+		entity->hard = !entity->hard;
+	if (key == keys.move_inventory_index && down)
+		move_inventory_index(character);
+	if ((t_character *)cub3d()->game.players[0] == character)
+		mouse_inv_keys(character, key);
+	item_key(character, keys, key, down);
 }
 
 void	init_player_controller(t_entity *entity)

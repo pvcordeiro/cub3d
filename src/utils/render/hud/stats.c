@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 22:14:35 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/18 20:54:07 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/18 22:25:44 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	render_ammo_text(t_game *game, t_ftm_image *canvas, t_character *character)
 		ammo_scaler = 1.48;
 	text_pos = (t_coords){canvas->size.width / ammo_scaler,
 		canvas->size.height / 1.09, 0};
-	ftm_draw_text(canvas, game->hud.stats.font,
+	ftm_draw_text(canvas, game->hud.stats_font,
 		(t_ftm_text_config){
 			.text = ammo_text,
 			.coords = text_pos,
@@ -51,7 +51,7 @@ void	render_health_text(t_game *game, t_ftm_image *canvas, t_character *characte
 		health_scaler = 1.70;
 	text_pos = (t_coords){canvas->size.width / health_scaler,
 		canvas->size.height / 1.09, 0};
-	ftm_draw_text(canvas, game->hud.stats.font,
+	ftm_draw_text(canvas, game->hud.stats_font,
 		(t_ftm_text_config){
 			.text = health_text,
 			.coords = text_pos,

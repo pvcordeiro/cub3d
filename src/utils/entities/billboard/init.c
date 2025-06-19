@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 00:50:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/08 20:58:36 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/18 23:49:50 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	init_billboard(t_game *game, t_ftm_window *window, t_billboard *billboard, 
 	billboard->entity.billboard = true;
 	billboard->entity.size = (t_dsize){BILLBOARD_WIDTH, BILLBOARD_HEIGHT};
 	billboard->sprites = ft_calloc(360, sizeof(t_sprite *));
-	fill_3d_sprites_from_game(game, billboard->sprites, identifier, NULL);
+	fill_3d_sprites_from_game(game, billboard->sprites, identifier, "STILL");
 }
 
 

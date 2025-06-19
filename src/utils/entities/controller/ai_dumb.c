@@ -6,24 +6,25 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 18:34:50 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/15 01:34:54 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/18 22:36:58 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "controller.h"
 
 #define AI_MOVE_INTERVAL 2.0
-static void	frame(t_entity *entity, double delta_time)
+
+static void	do_the_dumb_ai(t_entity *entity, t_player *player)
 {
     double			angle_to_player;
     double			dx;
 	double			dy;
 	double			distance_to_player;
 
-    if (!cub3d()->game.player || !entity->character)
+    if (!player || !entity->character)
 		return ;
-	dx = cub3d()->game.player->character.billboard.entity.coords.x - entity->coords.x;
-	dy = cub3d()->game.player->character.billboard.entity.coords.y - entity->coords.y;
+	dx = player->character.billboard.entity.coords.x - entity->coords.x;
+	dy = player->character.billboard.entity.coords.y - entity->coords.y;
 	angle_to_player = ft_degrees(atan2(dy, dx));
 	entity->coords.yaw = ft_normalize_angle(angle_to_player);
 	distance_to_player = sqrt(dx * dx + dy * dy);
@@ -32,6 +33,15 @@ static void	frame(t_entity *entity, double delta_time)
 	entity->controller.walking_right = false;
 	entity->controller.walking_backward = false;
 	entity->controller.sprinting = (distance_to_player > 4.0);
+}
+
+static void	frame(t_entity *entity, double delta_time)
+{
+	int	i;
+
+	i = -1;
+	while (++i < PLAYER_MAX)
+		do_the_dumb_ai(entity, cub3d()->game.players[i]);
     moviment_frame(entity, delta_time);
 }
 

@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   enemy.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 21:10:29 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/18 14:33:14 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/19 01:14:19 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "controller.h"
 
-#define SAFE_DISTANCE 2.0
 #define STRAFE_INTERVAL 2500
 #define FIRE_CHANCE 0.05
 #define LOOK_AROUND_CHANCE 0.01
@@ -38,12 +37,12 @@ static void	update_movement(t_entity *entity, t_entity *target_entity)
 	double	dist;
 
 	dist = ft_distance(entity->coords, target_entity->coords);
-	if (dist > SAFE_DISTANCE + 1.5)
+	if (dist > entity->controller.optimal_proximity + 1.5)
 	{
 		entity->controller.sprinting = true;
 		entity->controller.walking_forward = true;
 	}
-	else if (dist < SAFE_DISTANCE - 1.5)
+	else if (dist < entity->controller.optimal_proximity - 1.5)
 		entity->controller.walking_backward = true;
 	if (ft_get_time() - entity->controller.last_strafe > STRAFE_INTERVAL)
 	{
@@ -135,6 +134,9 @@ static void	frame(t_entity *entity, double delta_time)
 
 void	init_enemy_controller(t_entity *entity)
 {
+	entity->controller.optimal_proximity = ft_atof(hashmap_get_with_identifier(
+		&cub3d()->game, cub3d()->game.map->types, entity->identifier,
+		"OPTIMAL_PROXIMITY"));
 	entity->controller.frame = frame;
 	entity->controller.prev_angle = entity->coords.yaw;
 	entity->controller.key_look_velocity = PLAYER_KEY_LOOK_VELOCITY / 1.5;
