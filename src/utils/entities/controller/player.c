@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 19:35:54 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/19 01:18:18 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/19 11:34:32 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,15 @@ static t_player_keys	get_player_keys(t_character *character)
 	if (character->billboard.entity.type != ENTITY_PLAYER
 		|| player == cub3d()->game.players[0])
 		return ((t_player_keys){
-			XK_w, XK_s, 0, 0,
-			XK_a, XK_d, XK_e,
-			XK_Shift_L, XK_q, XK_space
+			XK_w, XK_s, XK_q, XK_e,
+			XK_a, XK_d, XK_f,
+			XK_Shift_L, XK_r, XK_space
 		});
 	if (player == cub3d()->game.players[1])
 		return ((t_player_keys){
-			XK_t, XK_g, 0, 0,
-			XK_f, XK_h, XK_y,
-			0, XK_r, 0
+			XK_u, XK_j, XK_y, XK_i,
+			XK_h, XK_k, XK_l,
+			XK_Shift_R, XK_o, XK_n
 		});
 	if (player == cub3d()->game.players[2])
 		return ((t_player_keys){
