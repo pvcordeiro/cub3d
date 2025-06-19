@@ -6,7 +6,7 @@
 #    By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/26 17:16:21 by afpachec          #+#    #+#              #
-#    Updated: 2025/06/11 12:55:42 by afpachec         ###   ########.fr        #
+#    Updated: 2025/06/19 14:28:13 by afpachec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CFLAGS = -Wall -Wextra -Werror -O3 -g
 # CFLAGS = -Wall -Wextra -Werror -O3 -g -std=c99 -fsanitize=address -fno-omit-frame-pointer
 INCLUDES = -I headers
 LIBS = -L lib
-LDLIBS = -lmlx -lX11 -lXext -lm -ldl -lpthread
+LDLIBS = -lmlx -lSDL2 -lX11 -lXext -lm -ldl -lpthread
 SRCS = $(shell find src -name "**.c")
 OBJ_DIR = obj
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
@@ -38,7 +38,7 @@ endif
 
 all: $(NAME)
 
-$(NAME): fonts assets/wolf3d lib/libmlx.a $(OBJS)
+$(NAME): fonts assets/wolf3d lib/libmlx.a lib/libSDL2.a $(OBJS)
 	@$(CC) -o $(NAME) $(OBJS) $(CFLAGS) $(INCLUDES) $(LIBS) $(LDLIBS)
 	@echo "\033[1;32mCompiled \033[1;0m\"$(OBJS)\"\033[1;32m into \033[1;0m\"$(NAME)\"\033[1;32m.\033[0m"
 
@@ -55,6 +55,15 @@ endif
 	@cp lib/minilibx-linux/mlx_int.h headers
 	@rm -rf lib/minilibx-linux
 
+lib/libSDL2.a:
+	@rm -rf lib/SDL2-2.32.8
+	@tar -xzf lib/SDL2-2.32.8.tar.gz -C lib
+	@mkdir -p lib/SDL2-2.32.8/build
+	@cd lib/SDL2-2.32.8/build && ../configure --disable-shared --enable-static --prefix=$(abspath lib) && make
+	@cp lib/SDL2-2.32.8/build/build/.libs/libSDL2.a lib/
+	@cp -r lib/SDL2-2.32.8/include/SDL*.h headers/
+	@rm -rf lib/SDL2-2.32.8
+
 $(OBJ_DIR)/%.o: %.c
 	@echo "\033[1;32mCompiling \033[1;0m\"$<\"\033[1;32m into \033[1;0m\"$@\"\033[1;32m.\033[0m"
 	@mkdir -p $(OBJ_DIR)
@@ -69,6 +78,8 @@ fclean: clean
 	@rm -rf $(NAME)
 	@rm -rf lib/libmlx.a
 	@rm -rf headers/mlx.h
+	@rm -rf headers/SDL*.h
+	@rm -rf lib/libSDL2.a
 
 re: fclean all
 

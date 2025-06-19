@@ -6,3 +6,5 @@ lib/libmlx.a
 lib/minilibx-linux
 .vscode
 assets/wolf3d
+SDL*.h
+lib/libSDL2.a
