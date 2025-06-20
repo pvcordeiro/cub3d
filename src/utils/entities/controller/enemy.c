@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   enemy.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 21:10:29 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/20 10:03:54 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/20 14:29:43 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #define STRAFE_INTERVAL 2500
 #define FIRE_CHANCE 0.05
 #define LOOK_AROUND_CHANCE 0.01
+#define HEARING_RANGE 10
 #define LAST_HIT_DELAY 1000
 
 static void	look_at_target(t_entity *entity, t_entity *target_entity)
@@ -106,6 +107,34 @@ static void	look_around(t_character *character, t_controller *controller)
 		controller->looking_right = true;
 }
 
+static void	hearment(t_game *game, t_character *character)
+{
+	t_player	*player;
+	t_item		*item;
+	double		dist;
+	int			i;
+	
+	i = -1;
+	while (game->billboards[++i])
+	{
+		if (!game->billboards[i]
+			|| game->billboards[i]->type != ENTITY_PLAYER)
+			continue ;
+		player = (t_player *)game->billboards[i];
+		item = player->character.inventory[player->character.inventory_index];
+		if (!item || !item->user)
+			continue ;
+		dist = ft_distance(character->billboard.entity.coords,
+			player->character.billboard.entity.coords);
+		if (dist > HEARING_RANGE)
+			continue;
+		character->target_entity = game->billboards[i];
+		character->billboard.entity.coords.yaw += ft_angle_distance(
+			character->billboard.entity.coords,
+			character->target_entity->coords);
+	}
+}
+
 static void	frame(t_entity *entity, double delta_time)
 {
 	t_character	*character;
@@ -120,6 +149,7 @@ static void	frame(t_entity *entity, double delta_time)
 	if (ft_get_time() - character->last_hit < LAST_HIT_DELAY
 		&& character->last_hit_by_character)
 		character->target_entity = (t_entity *)character->last_hit_by_character;
+	hearment(&cub3d()->game, character);
 	if (!character->target_entity || character->target_entity->type != ENTITY_PLAYER
 		|| ((t_character *)character->target_entity)->dead)
 		look_around(character, &entity->controller);
