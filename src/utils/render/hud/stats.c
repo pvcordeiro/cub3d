@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stats.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 22:14:35 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/20 16:05:23 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/20 18:02:13 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ t_size	render_stats(t_game *game, t_ftm_image *canvas, t_character *character)
 	t_ftm_image	*image;
 	int			index;
 
-	if (!game->hud.stats.states)
+	if (!game->hud.stats_enabled || !game->hud.stats.states)
 		return ((t_size){0, 0});
 	stats_size = (t_size){canvas->size.width, canvas->size.width / 8};
 	index = (int)(game->hud.stats.states
