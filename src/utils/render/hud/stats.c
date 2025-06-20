@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 22:14:35 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/20 13:45:20 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/20 16:05:23 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,14 +114,14 @@ void	render_hand_item_icon(t_ftm_image *canvas, t_character *character, t_size s
     });
 }
 
-void	render_stats(t_game *game, t_ftm_image *canvas, t_character *character)
+t_size	render_stats(t_game *game, t_ftm_image *canvas, t_character *character)
 {
 	t_size		stats_size;
 	t_ftm_image	*image;
 	int			index;
 
 	if (!game->hud.stats.states)
-		return ;
+		return ((t_size){0, 0});
 	stats_size = (t_size){canvas->size.width, canvas->size.width / 8};
 	index = (int)(game->hud.stats.states
 			* ((float)character->billboard.entity.health
@@ -141,4 +141,5 @@ void	render_stats(t_game *game, t_ftm_image *canvas, t_character *character)
 	render_health_text(game, canvas, character, stats_size);
 	render_ammo_text(game, canvas, character, stats_size);
 	render_hand_item_icon(canvas, character, stats_size);
+	return (stats_size);
 }
