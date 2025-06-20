@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 19:35:54 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/20 02:47:41 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/20 13:07:01 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,25 +45,25 @@ static t_player_keys	get_player_one_keys(void)
 {
 	return ((t_player_keys){
 		.walking_forward = (t_player_key){XK_w, false, 0.0, 1.0, false,
-			(t_coords){0, 0, 0}, (t_coords){0, 0, 0}},
+			{0, 0, 0}, {0, 0, 0}},
 		.walking_backward = (t_player_key){XK_s, false, 0.0, 1.0, false,
-			(t_coords){0, 0, 0}, (t_coords){0, 0, 0}},
-		.walking_left = (t_player_key){XK_q, false, 0.0, 1.0, false,
-			(t_coords){0, 0, 0}, (t_coords){0, 0, 0}},
-		.walking_right = (t_player_key){XK_e, false, 0.0, 1.0, false,
-			(t_coords){0, 0, 0}, (t_coords){0, 0, 0}},
-		.looking_left = (t_player_key){XK_a, false, 0.0, 1.0, false,
-			(t_coords){0, 0, 0}, (t_coords){0, 0, 0}},
-		.looking_right = (t_player_key){XK_d, false, 0.0, 1.0, false,
-			(t_coords){0, 0, 0}, (t_coords){0, 0, 0}},
+			{0, 0, 0}, {0, 0, 0}},
+		.walking_left = (t_player_key){XK_a, false, 0.0, 1.0, false,
+			{0, 0, 0}, {0, 0, 0}},
+		.walking_right = (t_player_key){XK_d, false, 0.0, 1.0, false,
+			{0, 0, 0}, {0, 0, 0}},
+		.looking_left = (t_player_key){XK_q, false, 0.0, 1.0, false,
+			{0, 0, 0}, {0, 0, 0}},
+		.looking_right = (t_player_key){XK_e, false, 0.0, 1.0, false,
+			{0, 0, 0}, {0, 0, 0}},
 		.action = (t_player_key){XK_f, false, 0.0, 1.0, false,
-			(t_coords){0, 0, 0}, (t_coords){0, 0, 0}},
+			{0, 0, 0}, {0, 0, 0}},
 		.sprinting = (t_player_key){XK_Shift_L, false, 0.0, 1.0, false,
-			(t_coords){0, 0, 0}, (t_coords){0, 0, 0}},
+			{0, 0, 0}, {0, 0, 0}},
 		.move_inventory_index = (t_player_key){XK_r, false, 0.0, 1.0, false,
-			(t_coords){0, 0, 0}, (t_coords){0, 0, 0}},
+			{0, 0, 0}, {0, 0, 0}},
 		.item_use = (t_player_key){XK_space, false, 0.0, 1.0, false,
-			(t_coords){0, 0, 0}, (t_coords){0, 0, 0}},
+			{0, 0, 0}, {0, 0, 0}},
 	});
 }
 
@@ -71,25 +71,25 @@ static t_player_keys	get_player_two_keys(void)
 {
     return ((t_player_keys){
         .walking_forward = (t_player_key){FTM_GAMEPAD_LSTICK, false, 0.0, 1.0,
-            true, (t_coords){0.0, 0.0, 0}, (t_coords){1.0, 0.3, 0}},
+            true, {0.0, 0.0, 0}, {1.0, 0.3, 0}},
         .walking_backward = (t_player_key){FTM_GAMEPAD_LSTICK, false, 0.0, 1.0,
-            true, (t_coords){0.0, 0.7, 0}, (t_coords){1.0, 1.0, 0}},
+            true, {0.0, 0.7, 0}, {1.0, 1.0, 0}},
         .walking_left = (t_player_key){FTM_GAMEPAD_LSTICK, false, 0.0, 1.0, 
-            true, (t_coords){0.0, 0.0, 0}, (t_coords){0.3, 1.0, 0}},
+            true, {0.0, 0.0, 0}, {0.3, 1.0, 0}},
         .walking_right = (t_player_key){FTM_GAMEPAD_LSTICK, false, 0.0, 1.0, 
-            true, (t_coords){0.7, 0.0, 0}, (t_coords){1.0, 1.0, 0}},
+            true, {0.7, 0.0, 0}, {1.0, 1.0, 0}},
         .looking_left = (t_player_key){FTM_GAMEPAD_RSTICK, false, 0.0, 1.0, 
-            true, (t_coords){0.0, 0.0, 0}, (t_coords){0.3, 1.0, 0}},
+            true, {0.0, 0.0, 0}, {0.3, 1.0, 0}},
         .looking_right = (t_player_key){FTM_GAMEPAD_RSTICK, false, 0.0, 1.0,
-            true, (t_coords){0.7, 0.0, 0}, (t_coords){1.0, 1.0, 0}},
+            true, {0.7, 0.0, 0}, {1.0, 1.0, 0}},
         .action = (t_player_key){FTM_GAMEPAD_X, false, 0.0, 1.0, false,
-            (t_coords){0, 0, 0}, (t_coords){0, 0, 0}},
+            {0, 0, 0}, {0, 0, 0}},
         .sprinting = (t_player_key){FTM_GAMEPAD_A, false, 0.0, 1.0, false,
-            (t_coords){0, 0, 0}, (t_coords){0, 0, 0}},
+            {0, 0, 0}, {0, 0, 0}},
         .move_inventory_index = (t_player_key){FTM_GAMEPAD_R1, false, 0.0, 1.0,
-            false, (t_coords){0, 0, 0}, (t_coords){0, 0, 0}},
+            false, {0, 0, 0}, {0, 0, 0}},
         .item_use = (t_player_key){FTM_GAMEPAD_R2, true, 0.8, 1.0, false,
-            (t_coords){0, 0, 0}, (t_coords){0, 0, 0}},
+            {0, 0, 0}, {0, 0, 0}},
     });
 }
 

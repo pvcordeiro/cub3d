@@ -8,13 +8,13 @@ COLLISION_SOUND_VOLUME 0.1
 MAX_HEALTH 100
 
 HUD TRUE
-DEBUG_HUD TRUE
+DEBUG_HUD FALSE
 STATUS_HUD TRUE
 
 0_INVENTORY P
 1_INVENTORY K
 2_INVENTORY C
-AMMO 8
+AMMO 1000
 
 STILL_8_SPRITE assets/textures/billboards/afonsomaria/still-front.xpm
 STILL_7_SPRITE assets/textures/billboards/afonsomaria/still-front-right.xpm
@@ -631,7 +631,7 @@ ffffffffffkffffffwfffgfffff      a   a
         ffi  f  x }f        aaaaaaahaaaaaaa
         n u  f  f ff        a|:  a   a    a
         ffi     fff         a    v , v "  a
-          ffwffff           a E  a   a  W a
+          ffwffff           a E  a   a    a
            f  f             a    a   a    a
            ff*f             aaaaaa   aaaaaa
             fff             a    a   a    a

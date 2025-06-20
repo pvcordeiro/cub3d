@@ -3,59 +3,62 @@
 /*                                                        :::      ::::::::   */
 /*   stats.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 22:14:35 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/18 22:25:44 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/20 13:45:20 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "hud.h"
 
-void	render_ammo_text(t_game *game, t_ftm_image *canvas, t_character *character)
+void	render_ammo_text(t_game *game, t_ftm_image *canvas, t_character *character, t_size stats_size)
 {
-	t_coords			text_pos;
-	char				*ammo_text;
-	double				ammo_scaler;
+	t_coords	text_pos;
+	char		*ammo_text;
+	double		ammo_scaler;
 
-	ammo_text = ft_strf("%d", character->ammo);
+	if (character->ammo > 999)
+		ammo_text = ft_strdup("999");
+	else
+		ammo_text = ft_strf("%d", character->ammo);
 	ammo_scaler = 1.47;
 	if (ft_strlen(ammo_text) == 3)
 		ammo_scaler = 1.50;
 	if (ft_strlen(ammo_text) == 2)
 		ammo_scaler = 1.48;
-	text_pos = (t_coords){canvas->size.width / ammo_scaler,
-		canvas->size.height / 1.09, 0};
+	text_pos = (t_coords){stats_size.width / ammo_scaler,
+		canvas->size.height - stats_size.height * 0.5, 0};
 	ftm_draw_text(canvas, game->hud.stats_font,
 		(t_ftm_text_config){
 			.text = ammo_text,
 			.coords = text_pos,
-			.height = canvas->size.height * 0.05,
+			.height = stats_size.width * 0.04,
 			.spacing = 4,
 			.color = 0xCFFFFFFF
 		});
 	free(ammo_text);
 }
 
-void	render_health_text(t_game *game, t_ftm_image *canvas, t_character *character)
+void	render_health_text(t_game *game, t_ftm_image *canvas, t_character *character, t_size stats_size)
 {
 	t_coords			text_pos;
 	char				*health_text;
 	double				health_scaler;
 
 	health_text = ft_strf("%d%%", character->billboard.entity.health);
-	health_scaler = 1.84;
+	health_scaler = 1.88;
 	if (ft_strlen(health_text) == 3)
 		health_scaler = 1.81;
 	if (ft_strlen(health_text) == 2)
-		health_scaler = 1.70;
-	text_pos = (t_coords){canvas->size.width / health_scaler,
-		canvas->size.height / 1.09, 0};
+		health_scaler = 1.78;
+	text_pos = (t_coords){stats_size.width / health_scaler,
+		canvas->size.height - stats_size.height * 0.5, 0};
 	ftm_draw_text(canvas, game->hud.stats_font,
 		(t_ftm_text_config){
 			.text = health_text,
 			.coords = text_pos,
-			.height = canvas->size.height * 0.05,
+			.height = stats_size.width * 0.04,
 			.spacing = 4,
 			.color = 0xCFFFFFFF
 		});
@@ -89,7 +92,7 @@ static t_size	get_hand_item_size(t_ftm_image *image, double max_w, double max_h)
 	return (item_size);
 }
 
-void	render_hand_item_icon(t_ftm_image *canvas, t_character *character)
+void	render_hand_item_icon(t_ftm_image *canvas, t_character *character, t_size stats_size)
 {
     t_item		*item;
     t_ftm_image	*image;
@@ -99,11 +102,11 @@ void	render_hand_item_icon(t_ftm_image *canvas, t_character *character)
     if (!item)
         return ;
     image = get_sprite_image(item->icon_sprite);
-	item_size = get_hand_item_size(image, canvas->size.width * 0.15, canvas->size.height * 0.10);
+	item_size = get_hand_item_size(image, stats_size.width * 0.15, stats_size.height * 0.5);
     ftm_put_image_to_canvas(canvas, image,
         (t_ftm_pitc_config){
-        .coords = (t_coords){(canvas->size.width * 0.87) - (item_size.width / 2),
-            (canvas->size.height * 0.92) - (item_size.height / 2), 0},
+        .coords = (t_coords){(stats_size.width * 0.87) - (item_size.width / 2),
+            (canvas->size.height - stats_size.height * 0.5) - (item_size.height / 2), 0},
         .crop = false,
         .resize = true,
         .size = item_size,
@@ -135,7 +138,7 @@ void	render_stats(t_game *game, t_ftm_image *canvas, t_character *character)
 		(t_coords){0, canvas->size.height - stats_size.height, 0},
 		false, (t_coords){0, 0, 0}, (t_coords){0, 0, 0},
 		true, stats_size, NULL, NULL});
-	render_health_text(game, canvas, character);
-	render_ammo_text(game, canvas, character);
-	render_hand_item_icon(canvas, character);
+	render_health_text(game, canvas, character, stats_size);
+	render_ammo_text(game, canvas, character, stats_size);
+	render_hand_item_icon(canvas, character, stats_size);
 }

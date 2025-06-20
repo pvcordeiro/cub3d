@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   action.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 02:27:23 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/18 22:25:53 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/20 13:07:20 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	render_action(t_game *game, t_ftm_image *canvas, t_character *character)
 	if (!character->target_entity || !character->target_entity->actionable)
 		return ;
 	text_config = (t_ftm_text_config){
-		.text = "Press \"E\" to interact",
+		.text = "Press \"F\" to interact",
 		.coords = {0, 0, 0},
 		.height = canvas->size.height * 0.014,
 		.spacing = 0,
