@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map3.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 20:52:20 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/20 12:06:16 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/20 15:22:33 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,10 @@ static bool	identifier_already_defined(t_hashmap *identifiers, char *identifier)
 	t_list		**curr;
 
 	el = *identifiers->table;
-	ft_fprint_hashmap(1, identifiers);
 	while (el)
 	{
 		curr = el->value;
 		el = el->next;
-		ft_fprint_list(1, *curr, (void *)ft_strdup);
 		if (curr && ft_list_any(*curr, (void *)ft_strequal, identifier))
 			return (true);
 	}

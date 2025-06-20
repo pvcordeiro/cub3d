@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 21:10:29 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/20 14:29:43 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/20 15:21:46 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,14 +80,14 @@ static void	look_around(t_character *character, t_controller *controller)
 		controller->walking_forward = true;
 		if (ft_get_time() - controller->last_seen_target >= 2000)
 		{
-			character->billboard.entity.coords.yaw += ft_angle_distance(
-				character->billboard.entity.coords,
-				controller->prev_target->coords);
+			character->billboard.entity.coords.yaw = ft_normalize_angle(character->billboard.entity.coords.yaw
+				+ ft_angle_distance(character->billboard.entity.coords,
+					controller->prev_target->coords));
 			return ;
 		}
-		character->billboard.entity.coords.yaw += ft_angle_distance(
+		character->billboard.entity.coords.yaw = ft_normalize_angle(character->billboard.entity.coords.yaw + ft_angle_distance(
 			character->billboard.entity.coords,
-			controller->last_target_position);
+			controller->last_target_position));
 		if (ft_distance(character->billboard.entity.coords, controller->last_target_position) > 0.25)
 			return ;
 		controller->walking_forward = false;
@@ -128,10 +128,11 @@ static void	hearment(t_game *game, t_character *character)
 			player->character.billboard.entity.coords);
 		if (dist > HEARING_RANGE)
 			continue;
-		character->target_entity = game->billboards[i];
-		character->billboard.entity.coords.yaw += ft_angle_distance(
+		character->billboard.entity.coords.yaw = ft_normalize_angle(character->billboard.entity.coords.yaw + ft_angle_distance(
 			character->billboard.entity.coords,
-			character->target_entity->coords);
+			player->character.billboard.entity.coords));
+		targets_frame(character, 120);
+		return ;
 	}
 }
 
