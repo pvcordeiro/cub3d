@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 23:28:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/20 17:58:09 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/20 18:26:39 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	render_hand_item(t_ftm_image *canvas, t_character *character, t_size stats_
 	ftm_put_image_to_canvas(canvas, image,
         (t_ftm_pitc_config){
         .coords = (t_coords){(max_size.width - display_size.width) / 2,
-			(max_size.height - display_size.height) / 2, 0},
+			(max_size.height - display_size.height), 0},
         .crop = false,
         .resize = true,
         .size = display_size,

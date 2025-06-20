@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/20 10:27:33 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/20 18:15:59 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -294,6 +294,7 @@ struct s_character
 struct s_player
 {
 	t_character character;
+	t_ftm_image	*canvas;
 };
 
 struct s_drop

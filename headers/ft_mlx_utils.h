@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_mlx_utils.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:46:27 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/20 02:34:10 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/20 18:12:08 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,6 +196,8 @@ void			ftm_put_image_to_canvas(t_ftm_image *canvas,
 					t_ftm_image *image, t_ftm_pitc_config pitc);
 
 char			*ftm_image_to_str(t_ftm_image *image);
+void			ftm_put_image_to_window(t_ftm_window *window,
+					t_ftm_image *image, t_coords coords);
 
 t_ftm_font		*ftm_font_new(t_ftm_window *window, const char *dir);
 void			ftm_clear_font(void *font);

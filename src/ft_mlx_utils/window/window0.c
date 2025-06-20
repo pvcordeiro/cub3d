@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window0.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:58:13 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/19 20:56:39 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/20 18:12:29 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,5 @@ void	ftm_free_window(void *data)
 
 void	ftm_update_window(t_ftm_window *window)
 {
-	mlx_put_image_to_window(window->display, window->win,
-		window->canvas->img_ptr, 0, 0);
+	ftm_put_image_to_window(window, window->canvas, (t_coords){0, 0, 0});
 }

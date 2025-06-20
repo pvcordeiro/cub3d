@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 19:49:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/19 01:23:44 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/20 18:20:47 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ static t_player_canvas_data	get_player_canvas_data(t_game *game, t_size cs,
 
 void	render_players_game(t_game *game, t_ftm_window *window)
 {
-	t_ftm_image				*player_canvas;
 	t_player_canvas_data	player_canvas_data;
 	int						i;
 
@@ -78,19 +77,18 @@ void	render_players_game(t_game *game, t_ftm_window *window)
 		if (!game->players[i])
 			return ;
 		player_canvas_data = get_player_canvas_data(game, window->canvas->size, i);
-		player_canvas = ftm_image_new(window, player_canvas_data.size);
-		if (!player_canvas)
+		if (!game->players[i]->canvas
+			|| game->players[i]->canvas->size.width != player_canvas_data.size.width
+			|| game->players[i]->canvas->size.height != player_canvas_data.size.height)
+		{
+			ftm_free_image(game->players[i]->canvas);
+			game->players[i]->canvas = ftm_image_new(window, player_canvas_data.size);
+			game->players[i]->character.rays = player_canvas_data.size.width;
+		}
+		if (!game->players[i]->canvas)
 			continue ;
-		game->players[i]->character.rays = player_canvas_data.size.width;
-		render_game(game, player_canvas, (t_character *)game->players[i]);
-		ftm_put_image_to_canvas(window->canvas, player_canvas,
-			(t_ftm_pitc_config){
-				.coords = player_canvas_data.coords,
-				.crop = false,
-				.resize = false,
-				.size = player_canvas_data.size,
-				.pixel_modifier = NULL
-			});
-		ftm_free_image(player_canvas);
+		render_game(game, game->players[i]->canvas, (t_character *)game->players[i]);
+		ftm_put_image_to_window(window, game->players[i]->canvas,
+			player_canvas_data.coords);
 	}
 }
