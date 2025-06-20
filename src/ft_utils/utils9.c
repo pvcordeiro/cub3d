@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils9.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 14:18:24 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/04 16:06:20 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/20 10:46:40 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,20 +46,9 @@ void	ft_list_add(t_list **list, void *data, void (*data_free)(void *data))
 
 void	ft_list_destroy(t_list **list)
 {
-	t_list	*curr;
-	t_list	*next;
-
-	if (!list || !*list)
+	if (!list)
 		return ;
-	curr = *list;
-	while (curr)
-	{
-		next = curr->next;
-		if (curr->data_free)
-			curr->data_free(curr->data);
-		free(curr);
-		curr = next;
-	}
+	ft_list_free(*list);
 	*list = NULL;
 }
 

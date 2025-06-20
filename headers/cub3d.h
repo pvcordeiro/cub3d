@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/19 17:05:41 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/20 10:27:33 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,12 +112,12 @@ typedef struct s_hud_minimap	t_hud_minimap;
 typedef struct s_environment	t_environment;
 typedef struct s_map			t_map;
 typedef struct s_door			t_door;
+typedef struct s_elevator		t_elevator;
 typedef struct s_identifiers	t_identifiers;
 typedef struct s_item			t_item;
 typedef struct s_collectible	t_collectible;
 typedef struct s_drop			t_drop;
-typedef t_item *(*t_item_creator)(t_game *, t_ftm_window *, char);
-typedef t_entity *(*t_entity_creator)(t_game *, t_ftm_window *, char);
+typedef void *(*t_type_creator)(t_game *, t_ftm_window *, char);
 typedef struct s_weapon			t_weapon;
 typedef struct s_render_config	t_render_config;
 
@@ -314,6 +314,12 @@ struct s_wall
 	t_sprite	*east_sprite;
 };
 
+struct s_elevator
+{
+	t_wall		wall;
+	char		*map_path;
+};
+
 struct s_door
 {
 	t_wall		wall;
@@ -333,20 +339,6 @@ struct s_door
 	t_fta_audio	*close_sound;
 };
 
-struct s_identifiers
-{
-	t_list	*wall;
-	t_list	*player;
-	t_list	*door;
-	t_list	*billboard;
-	t_list	*air;
-	t_list	*item;
-	t_list	*collectible;
-	t_list	*drop;
-	t_list	*weapon;
-	t_list	*character;
-};
-
 struct s_map
 {
 	char			*path;
@@ -354,7 +346,7 @@ struct s_map
 	char			**raw;
 	char			**map;
 	t_size			size;
-	t_identifiers	identifiers;
+	t_hashmap		*identifiers;
 };
 
 struct s_environment
@@ -475,7 +467,6 @@ t_sprite	*sprite_new(t_list *images, t_time update_delay);
 void		sprite_soft_copy(t_sprite **dst, t_sprite *src);
 
 // Entities
-t_entity_creator	get_entity_creator(t_identifiers *identifiers, char identifier);
 void				free_entity(void *data);
 void				call_entity_frames(t_list *entities, t_fps *fps);
 void				call_entity_keys(t_list *entities, t_ftm_key_hook_values key_hook_values);
@@ -487,9 +478,10 @@ t_billboard			*billboard_new(t_game *game, t_ftm_window *window, char identifier
 t_entity			*entity_new(t_game *game, t_ftm_window *window, char identifier);
 t_drop				*drop_new(t_game *game, t_ftm_window *window, char identifier);
 t_character			*character_new(t_game *game, t_ftm_window *window, char identifier);
+t_elevator			*elevator_new(t_game *game, t_ftm_window *window, char identifier);
 
 // Items
-t_item_creator	get_item_creator(t_identifiers *identifiers, char identifier);
+t_type_creator	get_type_creator(t_hashmap *identifiers, char identifier);
 void			free_item(void *data);
 t_item			*item_new(t_game *game, t_ftm_window *window, char identifier);
 t_collectible	*collectible_new(t_game *game, t_ftm_window *window, char identifier);

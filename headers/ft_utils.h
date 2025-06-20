@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 12:15:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/06/20 02:20:49 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/20 10:46:54 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,6 +213,7 @@ t_list					*ft_list_clone(t_list *list);
 void					ft_list_reverse(t_list **list);
 void					ft_sleep(double milliseconds);
 void					ft_list_clear_without_free(t_list *list);
+void					ft_list_free(t_list *list);
 
 double					ft_cos_degrees(double angle_degree);
 double					ft_sin_degrees(double angle_degree);

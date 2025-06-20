@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 00:50:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/18 22:31:19 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/20 10:27:56 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	create_inventory_items(t_game *game, t_ftm_window *window, t_charact
 	int				i;
 	char			*key;
 	char			*inv_item_type;
-	t_item_creator	item_creator;
+	t_type_creator	item_creator;
 
 	i = -1;
 	while (++i < INVENTORY_SIZE)
@@ -29,7 +29,7 @@ static void	create_inventory_items(t_game *game, t_ftm_window *window, t_charact
 		free(key);
 		if (ft_strlen(inv_item_type) != 1)
 			continue ;
-		item_creator = get_item_creator(&game->map->identifiers, inv_item_type[0]);
+		item_creator = get_type_creator(game->map->identifiers, inv_item_type[0]);
 		if (!item_creator)
 			continue ;
 		character->inventory[i] = item_creator(game, window, inv_item_type[0]);

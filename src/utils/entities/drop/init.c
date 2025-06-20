@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 00:50:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/10 21:23:21 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/20 10:26:05 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 static void	set_item(t_game *game, t_ftm_window *window, t_drop *drop, char identifier)
 {
-	t_item_creator	item_creator;
+	t_type_creator	item_creator;
 	char			*item_type;
 
 	item_type = hashmap_get_with_identifier(game, game->map->types, identifier, "ITEM");
 	if (!item_type)
 		return ;
-	item_creator = get_item_creator(&game->map->identifiers, item_type[0]);
+	item_creator = get_type_creator(game->map->identifiers, item_type[0]);
 	if (!item_creator)
 		return ;
 	drop->item = item_creator(game, window, item_type[0]);

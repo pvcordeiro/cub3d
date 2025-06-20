@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   entities.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 18:04:16 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/16 20:47:38 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/20 10:11:12 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,13 @@ void	door_frame(t_entity *entity, double delta_time);
 void	clear_door(void *door);
 void	door_action(t_entity *entity, t_character *actioner);
 void	door_shot(t_entity *shooted, t_character *shooter);
+
+// Elevator
+void	init_elevator(t_game *game, t_ftm_window *window, t_elevator *elevator, char identifier);
+void	elevator_frame(t_entity *entity, double delta_time);
+void	clear_elevator(void *elevator);
+void	elevator_action(t_entity *entity, t_character *actioner);
+void	elevator_shot(t_entity *shooted, t_character *shooter);
 
 // Player
 void	init_player(t_game *game, t_ftm_window *window, t_player *player, char identifier);

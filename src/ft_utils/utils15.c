@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils15.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 20:26:55 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/04 15:43:48 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/20 10:50:37 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,21 @@ void	ft_list_clear_without_free(t_list *list)
 		list->data = NULL;
 		list->data_free = NULL;
 		list = list->next;
+	}
+}
+
+void	ft_list_free(t_list *list)
+{
+	t_list	*next;
+
+	if (!list)
+		return ;
+	while (list)
+	{
+		next = list->next;
+		if (list->data_free)
+			list->data_free(list->data);
+		free(list);
+		list = next;
 	}
 }

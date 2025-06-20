@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game3.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 23:10:00 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/18 22:37:58 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/20 10:28:27 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ static void	add_player_e(t_game *game, t_player *player)
 
 static void	create_entity_e(t_game *game, t_ftm_window *window, char c, t_size position)
 {
-	t_entity_creator	creator;
+	t_type_creator		creator;
 	t_entity			*entity;
 
 	fte_set(NULL);
 	entity = NULL;
-	creator = get_entity_creator(&game->map->identifiers, c);
+	creator = get_type_creator(game->map->identifiers, c);
 	if (fte_flagged() || !creator)
 		return ;
 	entity = creator(game, window, c);

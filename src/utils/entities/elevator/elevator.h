@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   items0.c                                           :+:      :+:    :+:   */
+/*   elevator.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/03 21:15:02 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/20 10:23:18 by afpachec         ###   ########.fr       */
+/*   Created: 2025/06/03 00:50:57 by afpachec          #+#    #+#             */
+/*   Updated: 2025/06/20 10:06:13 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "items.h"
+#ifndef ELEVATOR_H
+# define ELEVATOR_H
 
-void	free_item(void *data)
-{
-	t_item	*item;
+# include "../entities.h"
 
-	item = data;
-	if (!item)
-		return ;
-	if (item->clear)
-		item->clear(data);
-	free(item);
-}
+#endif

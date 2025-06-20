@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map1.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 08:42:58 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/04 01:25:36 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/20 10:28:57 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,7 @@ void	clear_map(void *data)
 		return ;
 	ft_strvfree(map->raw);
 	ft_hashmap_destroy(map->types);
-	ft_list_destroy(&map->identifiers.air);
-	ft_list_destroy(&map->identifiers.billboard);
-	ft_list_destroy(&map->identifiers.door);
-	ft_list_destroy(&map->identifiers.player);
-	ft_list_destroy(&map->identifiers.wall);
+	ft_hashmap_destroy(map->identifiers);
 	free(map->path);
 }
 

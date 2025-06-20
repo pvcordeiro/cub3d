@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   entities0.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 20:49:46 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/19 18:24:13 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/20 10:25:23 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,25 +87,6 @@ void	free_entity(void *data)
 		return ;
 	((t_entity *)data)->clear(data);
 	free(data);
-}
-
-t_entity_creator	get_entity_creator(t_identifiers *identifiers, char identifier)
-{
-	if (ft_list_any(identifiers->air, (void *)ft_str_equal_char_ptr, &identifier))
-		return (NULL);
-	if (ft_list_any(identifiers->wall, (void *)ft_str_equal_char_ptr, &identifier))
-		return ((void *)wall_new);
-	if (ft_list_any(identifiers->player, (void *)ft_str_equal_char_ptr, &identifier))
-		return ((void *)player_new);
-	if (ft_list_any(identifiers->door, (void *)ft_str_equal_char_ptr, &identifier))
-		return ((void *)door_new_e);
-	if (ft_list_any(identifiers->billboard, (void *)ft_str_equal_char_ptr, &identifier))
-		return ((void *)billboard_new);
-	if (ft_list_any(identifiers->drop, (void *)ft_str_equal_char_ptr, &identifier))
-		return ((void *)drop_new);
-	if (ft_list_any(identifiers->character, (void *)ft_str_equal_char_ptr, &identifier))
-		return ((void *)character_new);
-	return (NULL);
 }
 
 bool	add_item_to_inventory(t_character *character, t_item *item)
