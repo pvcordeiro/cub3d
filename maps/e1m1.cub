@@ -51,7 +51,7 @@ WALKING_1_SPRITE_LOOP TRUE
 DEATH_SPRITE assets/textures/billboards/afonsomaria/dead.xpm
 DEATH_SPRITE_UPDATE_DELAY 0.1
 HIT_SPRITE assets/textures/billboards/afonsomaria/hit.xpm
-DEATH_SOUND assets/wolf3d/sounds/deathscream5.mp3
+DEATH_SOUND assets/wolf3d/sounds/deathscream4.mp3
 HIT_SOUND assets/wolf3d/sounds/deathscream1.mp3
 USING_P_8_SPRITE assets/textures/billboards/afonsomaria/aim-front.xpm:assets/textures/billboards/afonsomaria/shoot-front.xpm
 USING_P_8_SPRITE_UPDATE_DELAY 0.5
@@ -119,7 +119,6 @@ STATS_HUD_7_SPRITE_UPDATE_DELAY 2
 e_TYPE CHARACTER
 e_MAX_HEALTH 100
 e_TARGETABLE TRUE
-e_HARD FALSE
 e_STILL_8_SPRITE assets/wolf3d/textures/billboards/soldier/still-front.xpm
 e_STILL_7_SPRITE assets/wolf3d/textures/billboards/soldier/still-front-right.xpm
 e_STILL_6_SPRITE assets/wolf3d/textures/billboards/soldier/still-left.xpm

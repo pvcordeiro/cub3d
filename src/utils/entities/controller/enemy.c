@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   enemy.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 21:10:29 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/19 01:14:19 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/20 10:03:54 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,10 @@ static void	remove_attributes(t_character *character, t_controller *controller)
 
 static void	look_around(t_character *character, t_controller *controller)
 {
-	if (controller->prev_target && ft_get_time() - controller->last_seen_target < 10000)
+	if (controller->prev_target
+		&& controller->prev_target->character
+		&& !((t_character *)controller->prev_target)->dead
+		&& ft_get_time() - controller->last_seen_target < 10000)
 	{
 		controller->walking_forward = true;
 		if (ft_get_time() - controller->last_seen_target >= 2000)
