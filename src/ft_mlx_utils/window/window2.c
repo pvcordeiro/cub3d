@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:52:09 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/09 19:07:37 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/20 02:27:26 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,12 @@ void	ftm_update_hooks(t_ftm_window *window)
 	mlx_hook(window->win, ButtonPress, ButtonPressMask, window_mouse_down_hook, window);
 	mlx_hook(window->win, ButtonRelease, ButtonReleaseMask, window_mouse_up_hook, window);
 	mlx_loop_hook(window->display, window_loop_hook, window);
+	ftm_window_reload_controllers(window);
 }
 
 void	ftm_window_loop(t_ftm_window *window)
 {
+	ftm_update_hooks(window);
 	mlx_loop(window->display);
 }
 

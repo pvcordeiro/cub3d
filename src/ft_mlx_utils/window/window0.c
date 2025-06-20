@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window0.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:58:13 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/06 22:24:48 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/19 20:56:39 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,25 +29,29 @@ void	ftm_create_window_e(t_ftm_window *window, t_size size, char *title)
 			mlx_destroy_display(window->display), fte_set("init canvas"));
 	window->size = size;
 	window->title = title;
+	ftm_window_reload_controllers(window);
 }
 
-void	ftm_clear_window(void *window)
+void	ftm_clear_window(void *data)
 {
-	if (!window)
+	t_ftm_window	*window;
+
+	if (!data)
 		return ;
-	ftm_free_image(((t_ftm_window *)window)->canvas);
-	mlx_destroy_window(((t_ftm_window *)window)->display,
-		((t_ftm_window *)window)->win);
-	mlx_destroy_display(((t_ftm_window *)window)->display);
-	free(((t_ftm_window *)window)->display);
+	window = (t_ftm_window *)data;
+	ft_list_destroy(&window->controllers);
+	ftm_free_image(window->canvas);
+	mlx_destroy_window(window->display, window->win);
+	mlx_destroy_display(window->display);
+	free(window->display);
 }
 
-void	ftm_free_window(void *window)
+void	ftm_free_window(void *data)
 {
-	if (!window)
+	if (!data)
 		return ;
-	ftm_clear_window(window);
-	free(window);
+	ftm_clear_window(data);
+	free(data);
 }
 
 void	ftm_update_window(t_ftm_window *window)

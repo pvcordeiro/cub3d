@@ -1,20 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keys.c                                             :+:      :+:    :+:   */
+/*   controllers1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/06 14:21:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/20 02:45:51 by afpachec         ###   ########.fr       */
+/*   Created: 2025/06/19 20:48:27 by afpachec          #+#    #+#             */
+/*   Updated: 2025/06/19 21:07:08 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "loop.h"
+#include "controllers.h"
 
-void	key_hook(t_ftm_key_hook_values key_hook_values)
+t_ftm_controller	*ftm_controller_new(int id)
 {
-	call_entity_keys(cub3d()->game.entities, key_hook_values);
-	if (key_hook_values.key == XK_Escape)
-		cub3d_exit(0);
+	t_ftm_controller	*new;
+
+	new = ft_calloc(1, sizeof(t_ftm_controller));
+	if (!new)
+		return (NULL);
+	ftm_controller_init_e(new, id);
+	if (fte_flagged())
+		return (fte_set(NULL), free(new), NULL);
+	return (new);
+}
+
+void	ftm_controller_free(void *data)
+{
+	ftm_controller_clear(data);
+	free(data);
 }

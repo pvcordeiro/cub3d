@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keys.c                                             :+:      :+:    :+:   */
+/*   controllers.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/06 14:21:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/20 02:45:51 by afpachec         ###   ########.fr       */
+/*   Created: 2025/06/19 20:46:32 by afpachec          #+#    #+#             */
+/*   Updated: 2025/06/20 02:17:38 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "loop.h"
+#ifndef CONTROLLERS_H
+# define CONTROLLERS_H
 
-void	key_hook(t_ftm_key_hook_values key_hook_values)
+# include <ft_mlx_utils.h>
+
+# define CONTROLLERS_DEADZONE 8000
+
+typedef struct s_sdl_context
 {
-	call_entity_keys(cub3d()->game.entities, key_hook_values);
-	if (key_hook_values.key == XK_Escape)
-		cub3d_exit(0);
-}
+	int		usage_count;
+}	t_sdl_context;
+
+t_sdl_context	*sdl_context(void);
+
+#endif

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 12:15:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/06/15 01:32:21 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/20 02:20:49 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,5 +242,6 @@ double					ft_fraction(double value);
 void					*ft_ternary_ptr(void *con, void *_if, void *_else);
 double					ft_ternary_double(bool con, double _if, double _else);
 int						ft_ternary_int(bool con, int _if, int _else);
-
+void					ft_list_foreach(t_list *list,
+							void (*f)(void *, void *param), void *param);
 #endif

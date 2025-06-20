@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:38:00 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/09 19:25:46 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/20 02:24:17 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,38 +26,40 @@ int	window_loop_hook(void *data)
 		else
 			mlx_mouse_show(window->display, window->win);
 	}
+	ftm_call_controllers_event_handlers(window->controllers);
 	if (window->loop_hook)
 		window->loop_hook();
 	return (0);
 }
 
-int window_key_down_hook(int key, void *window)
+int	window_key_hook(t_ftm_key_hook_values key_hook_values, void *window)
 {
 	if (((t_ftm_window *)window)->key_hook)
-		((t_ftm_window *)window)->key_hook(key, (t_coords){0}, true);
+		((t_ftm_window *)window)->key_hook(key_hook_values);
 	return (0);
+}
+
+int window_key_down_hook(int key, void *window)
+{
+	return (window_key_hook((t_ftm_key_hook_values){key, (t_coords){0}, 1.0, true, NULL}, window));
 }
 
 int window_key_up_hook(int key, void *window)
 {
-	if (((t_ftm_window *)window)->key_hook)
-		((t_ftm_window *)window)->key_hook(key, (t_coords){0}, false);
-	return (0);
+	return (window_key_hook((t_ftm_key_hook_values){key, (t_coords){0}, 1.0, false, NULL}, window));
 }
 
 int window_mouse_down_hook(int key, int x, int y, void *window)
 {
-	if (((t_ftm_window *)window)->key_hook
-		&& ((t_ftm_window *)window)->using_mouse)
-		((t_ftm_window *)window)->key_hook(key, (t_coords){x, y, 0}, true);
+	if (((t_ftm_window *)window)->using_mouse)
+		return (window_key_hook((t_ftm_key_hook_values){key, (t_coords){x, y, 0}, 1.0, true, NULL}, window));
 	return (0);
 }
 
 int window_mouse_up_hook(int key, int x, int y, void *window)
 {
-	if (((t_ftm_window *)window)->key_hook
-		&& ((t_ftm_window *)window)->using_mouse)
-		((t_ftm_window *)window)->key_hook(key, (t_coords){x, y, 0}, false);
+	if (((t_ftm_window *)window)->using_mouse)
+		return (window_key_hook((t_ftm_key_hook_values){key, (t_coords){x, y, 0}, 1.0, false, NULL}, window));
 	return (0);
 }
 

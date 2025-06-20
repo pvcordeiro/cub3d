@@ -3,38 +3,69 @@
 /*                                                        :::      ::::::::   */
 /*   ft_mlx_utils.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:46:27 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/09 19:13:46 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/20 02:34:10 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_MLX_UTILS_H
 # define FT_MLX_UTILS_H
 
-# define FT_MLX_UTILS_PI 3.14159265359
-
 // External Libs
 # include <mlx.h>
 # include <X11/X.h>
 # include <X11/Xlib.h>
 # include <X11/Xutil.h>
+# include <SDL2/SDL.h>
 
 // Internal Libs
 # include <ft_utils.h>
 # include <ft_error.h>
 
 // Line drawing step size (Used for diagonal lines)
-# define FT_MLX_UTILS_DRAW_LINE_STEP 1024
+# define FTM_DRAW_LINE_STEP 1024
 
-# define XK_MOUSE_LEFT 1
-# define XK_MOUSE_RIGHT 3
-# define XK_MOUSE_MIDDLE 2
-# define XK_MOUSE_SCROLL_UP 4
-# define XK_MOUSE_SCROLL_DOWN 5
+# define FTM_MOUSE_LEFT 1
+# define FTM_MOUSE_RIGHT 3
+# define FTM_MOUSE_MIDDLE 2
+# define FTM_MOUSE_SCROLL_UP 4
+# define FTM_MOUSE_SCROLL_DOWN 5
 
-typedef struct s_ftm_image
+# define FTM_GAMEPAD_RSTICK -2002
+# define FTM_GAMEPAD_LSTICK -2001
+# define FTM_GAMEPAD_R2 -1002
+# define FTM_GAMEPAD_L2 -1001
+# define FTM_GAMEPAD_R1 -11
+# define FTM_GAMEPAD_L1 -10
+# define FTM_GAMEPAD_R3 -9
+# define FTM_GAMEPAD_L3 -8
+# define FTM_GAMEPAD_A -1
+# define FTM_GAMEPAD_B -2
+# define FTM_GAMEPAD_X -3
+# define FTM_GAMEPAD_Y -4
+# define FTM_GAMEPAD_RIGHT -15
+# define FTM_GAMEPAD_LEFT -14
+# define FTM_GAMEPAD_DOWN -13
+# define FTM_GAMEPAD_UP -12
+# define FTM_GAMEPAD_MENU -7
+# define FTM_GAMEPAD_SELECT -5
+# define FTM_GAMEPAD_SHARE -16
+# define FTM_GAMEPAD_MAIN -6
+
+typedef struct s_ftm_image				t_ftm_image;
+typedef struct s_ftm_key_hook_values	t_ftm_key_hook_values;
+typedef struct s_ftm_controller			t_ftm_controller;
+typedef struct s_ftm_window				t_ftm_window;
+typedef struct s_ftm_font				t_ftm_font;
+typedef struct s_ftm_pitc_config		t_ftm_pitc_config;
+typedef struct s_ftm_text_config		t_ftm_text_config;
+typedef struct s_ftm_rectangle			t_ftm_rectangle;
+typedef struct s_win_list				t_win_list;
+typedef struct s_xvar					t_xvar;
+
+struct s_ftm_image
 {
 	void			*display;
 	char			*path;
@@ -44,30 +75,47 @@ typedef struct s_ftm_image
 	int				endian;
 	void			*data;
 	t_size			size;
-}	t_ftm_image;
+};
 
-typedef struct s_ftm_window
+struct s_ftm_key_hook_values
 {
-	t_size		size;
-	void		*win;
-	void		*display;
-	t_ftm_image	*canvas;
-	bool		using_mouse;
-	bool		fullscreen;
-	char		*title;
-	void		(*loop_hook)(void);
-	void		(*key_hook)(int key, t_coords coords, bool down);
-	void		(*exit_hook)(int code);
-	void		(*mouse_hook)(t_coords coords);
-}	t_ftm_window;
+	int					key;
+	t_coords			coords;
+	double				pressure;
+	bool				down;
+	t_ftm_controller	*controller;
+};
 
-typedef struct s_ftm_font
+struct s_ftm_controller
+{
+	SDL_GameController	*controller;
+	void				(*key_hook)(t_ftm_key_hook_values);
+	int					id;
+};
+
+struct s_ftm_window
+{
+	t_size				size;
+	void				*win;
+	void				*display;
+	t_list				*controllers;
+	t_ftm_image			*canvas;
+	bool				using_mouse;
+	bool				fullscreen;
+	char				*title;
+	void				(*loop_hook)(void);
+	void				(*key_hook)(t_ftm_key_hook_values);
+	void				(*exit_hook)(int code);
+	void				(*mouse_hook)(t_coords coords);
+};
+
+struct s_ftm_font
 {
 	char		*dir;
 	t_ftm_image	*characters[255];
-}	t_ftm_font;
+};
 
-typedef struct s_ftm_pitc_config
+struct s_ftm_pitc_config
 {
 	t_coords	coords;
 	bool		crop;
@@ -77,25 +125,25 @@ typedef struct s_ftm_pitc_config
 	t_size		size;
 	void		*pixel_modifier_data;
 	unsigned	(*pixel_modifier)(void *data, unsigned pixel);
-}	t_ftm_pitc_config;
+};
 
-typedef struct s_ftm_text_config
+struct s_ftm_text_config
 {
 	char			*text;
 	t_coords		coords;
 	int				height;
 	int				spacing;
 	unsigned int	color;
-}	t_ftm_text_config;
+};
 
-typedef struct s_ftm_rectangle
+struct s_ftm_rectangle
 {
 	unsigned int	background_color;
 	unsigned int	border_color;
 	t_size			border_size;
-}	t_ftm_rectangle;
+};
 
-typedef struct s_win_list
+struct s_win_list
 {
 	Window				window;
 	GC					gc;
@@ -106,9 +154,9 @@ typedef struct s_win_list
 	void				*mouse_param;
 	void				*key_param;
 	void				*expose_param;
-}	t_win_list;
+};
 
-typedef struct s_xvar
+struct s_xvar
 {
 	Display		*display;
 	Window		root;
@@ -127,7 +175,16 @@ typedef struct s_xvar
 	Atom		wm_delete_window;
 	Atom		wm_protocols;
 	int 		end_loop;
-}	t_xvar;
+};
+
+void				ftm_controller_init_e(t_ftm_controller *controller, int id);
+void				ftm_controller_clear(void *data);
+t_ftm_controller	*ftm_controller_new(int id);
+void				ftm_controller_free(void *data);
+t_list				*ftm_load_controllers(void);
+void				ftm_controller_event_handler(void *userdata,
+						SDL_Event *event);
+void				ftm_call_controllers_event_handlers(t_list *controllers);
 
 void			ftm_free_image(void *image);
 t_ftm_image		*ftm_image_from_file(t_ftm_window *window, char *path);
@@ -162,6 +219,8 @@ void			ftm_window_resize_e(t_ftm_window *window, t_size size);
 t_size			ftm_window_toggle_fullscreen(t_ftm_window *window, t_size prev_size);
 t_size			ftm_get_screen_size(t_ftm_window *window);
 void 			ftm_window_notify_fullscreen(t_ftm_window *window);
+
+void			ftm_window_reload_controllers(t_ftm_window *window);
 
 unsigned int	*ftm_image_pixel(t_ftm_image *image, t_coords coords);
 unsigned int	ftm_remove_pixel_transparency(unsigned int value);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lines.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:37:16 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/21 14:16:18 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/19 15:38:40 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ftm_draw_line(t_ftm_image *canvas, t_coords start, t_coords end,
 	int			i;
 
 	dxy = (t_coords){end.x - start.x, end.y - start.y, 0};
-	step = FT_MLX_UTILS_DRAW_LINE_STEP;
+	step = FTM_DRAW_LINE_STEP;
 	dxy.x /= step;
 	dxy.y /= step;
 	xy = (t_coords){start.x, start.y, 0};

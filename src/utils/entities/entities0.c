@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 20:49:46 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/16 20:47:28 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/19 18:24:13 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ void	call_entity_frames(t_list *entities, t_fps *fps)
 	}
 }
 
-void	call_entity_keys(t_list *entities, int key, bool down)
+void	call_entity_keys(t_list *entities,
+	t_ftm_key_hook_values key_hook_values)
 {
 	t_list		*curr;
 	t_entity	*entity;
@@ -58,7 +59,7 @@ void	call_entity_keys(t_list *entities, int key, bool down)
 	{
 		entity = curr->data;
 		if (entity->active && entity->controller.key)
-			entity->controller.key(entity, key, down);
+			entity->controller.key(entity, key_hook_values);
 		curr = curr->next;
 	}
 }

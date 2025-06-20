@@ -6,7 +6,7 @@
 #    By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/26 17:16:21 by afpachec          #+#    #+#              #
-#    Updated: 2025/06/19 14:28:13 by afpachec         ###   ########.fr        #
+#    Updated: 2025/06/19 17:04:46 by afpachec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,19 @@ check_flag = $(shell $(CC) $(1) -E -c /dev/null -o /dev/null 2>/dev/null && echo
 ifeq ($(UNAME_S),Darwin)
 	LIBS += -L /opt/homebrew/lib
 	INCLUDES += -I /opt/X11/include
-	LDLIBS += -framework OpenGL -framework AppKit
+	LDLIBS += -framework OpenGL
+	LDLIBS += -framework AppKit
+	LDLIBS += -framework CoreAudio
+	LDLIBS += -framework AudioToolbox
+	LDLIBS += -framework CoreHaptics
+	LDLIBS += -framework CoreVideo
+	LDLIBS += -framework GameController
+	LDLIBS += -framework IOKit
+	LDLIBS += -framework ForceFeedback
+	LDLIBS += -framework CoreFoundation
+	LDLIBS += -framework Cocoa
+	LDLIBS += -framework Carbon 
+	LDLIBS += -framework Metal 
 else
 	ifeq ($(shell $(CC) --version | grep -i clang > /dev/null && echo clang),clang)
     	CFLAGS += -Wno-unknown-warning-option
@@ -61,7 +73,8 @@ lib/libSDL2.a:
 	@mkdir -p lib/SDL2-2.32.8/build
 	@cd lib/SDL2-2.32.8/build && ../configure --disable-shared --enable-static --prefix=$(abspath lib) && make
 	@cp lib/SDL2-2.32.8/build/build/.libs/libSDL2.a lib/
-	@cp -r lib/SDL2-2.32.8/include/SDL*.h headers/
+	@mkdir -p headers/SDL2
+	@cp -r lib/SDL2-2.32.8/include/* headers/SDL2/
 	@rm -rf lib/SDL2-2.32.8
 
 $(OBJ_DIR)/%.o: %.c
@@ -78,7 +91,7 @@ fclean: clean
 	@rm -rf $(NAME)
 	@rm -rf lib/libmlx.a
 	@rm -rf headers/mlx.h
-	@rm -rf headers/SDL*.h
+	@rm -rf headers/SDL2/
 	@rm -rf lib/libSDL2.a
 
 re: fclean all

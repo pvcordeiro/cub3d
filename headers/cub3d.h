@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/19 01:24:21 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/19 17:05:41 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,7 +188,7 @@ enum e_entity_type
 
 struct s_controller
 {
-	void		(*key)(t_entity *entity, int key, bool down);
+	void		(*key)(t_entity *entity, t_ftm_key_hook_values key_hook_values);
 	void		(*frame)(t_entity *entity, double delta_time);
 	t_time		last_shot;
 	t_time		last_strafe;
@@ -462,7 +462,7 @@ void		free_map(t_map *map);
 
 // Loop
 void		loop(void);
-void		key_hook(int key, t_coords coords, bool down);
+void		key_hook(t_ftm_key_hook_values key_hook_values);
 void		mouse_hook(t_coords coords);
 
 // Sprites
@@ -478,7 +478,7 @@ void		sprite_soft_copy(t_sprite **dst, t_sprite *src);
 t_entity_creator	get_entity_creator(t_identifiers *identifiers, char identifier);
 void				free_entity(void *data);
 void				call_entity_frames(t_list *entities, t_fps *fps);
-void				call_entity_keys(t_list *entities, int key, bool down);
+void				call_entity_keys(t_list *entities, t_ftm_key_hook_values key_hook_values);
 bool				entity_x_is_transparent(t_entity *entity, t_direction direction, double x);
 t_player			*player_new(t_game *game, t_ftm_window *window, char identifier);
 t_wall				*wall_new(t_game *game, t_ftm_window *window, char identifier);
