@@ -6,7 +6,7 @@
 #    By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/26 17:16:21 by afpachec          #+#    #+#              #
-#    Updated: 2025/06/19 17:04:46 by afpachec         ###   ########.fr        #
+#    Updated: 2025/06/20 21:42:04 by afpachec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ UNAME_S = $(shell uname -s)
 
 check_flag = $(shell $(CC) $(1) -E -c /dev/null -o /dev/null 2>/dev/null && echo 1 || echo 0)
 ifeq ($(UNAME_S),Darwin)
-	LIBS += -L /opt/homebrew/lib
+	LIBS += -L /opt/X11/lib
 	INCLUDES += -I /opt/X11/include
 	LDLIBS += -framework OpenGL
 	LDLIBS += -framework AppKit
