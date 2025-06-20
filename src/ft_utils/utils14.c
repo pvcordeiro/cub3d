@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils14.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 15:31:27 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/06 15:59:30 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/20 12:07:18 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 
 bool	ft_list_any(t_list *list, bool (*condition)(void *data, void *params), void *params)
 {
-	t_list	*curr;
-
-	curr = list;
-	while (curr && !condition(curr->data, params))
-		curr = curr->next;
-	return (!!curr);
+	while (list)
+	{
+		if (condition(list->data, params))
+			return (true);
+		list = list->next;
+	}
+	return (false);
 }
 
 

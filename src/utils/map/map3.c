@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 20:52:20 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/20 10:54:08 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/20 12:06:16 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,16 @@
 static bool	identifier_already_defined(t_hashmap *identifiers, char *identifier)
 {
 	t_element	*el;
-	t_list		*curr;
+	t_list		**curr;
 
 	el = *identifiers->table;
+	ft_fprint_hashmap(1, identifiers);
 	while (el)
 	{
 		curr = el->value;
 		el = el->next;
-		if (curr && ft_list_any(*((t_list **)curr->data), (void *)ft_strequal, identifier))
+		ft_fprint_list(1, *curr, (void *)ft_strdup);
+		if (curr && ft_list_any(*curr, (void *)ft_strequal, identifier))
 			return (true);
 	}
 	return (false);
@@ -41,12 +43,11 @@ static void	add_identifier(t_hashmap *identifiers, char *identifier, char *type)
 	ids = (t_list **)ft_hashmap_get_value(identifiers, type);
 	if (!ids)
 	{
-		ids = malloc(sizeof(t_list *));
+		ft_hashmap_set(identifiers, type, ft_calloc(1, sizeof(t_list *)),
+			(void *)id_list_free);
+		ids = (t_list **)ft_hashmap_get_value(identifiers, type);
 		if (!ids)
 			return ;
-		*ids = NULL;
-		ft_hashmap_set(identifiers, type, ids, (void *)id_list_free);
-		ids = (t_list **)ft_hashmap_get_value(identifiers, type);
 	}
 	ft_list_add(ids, ft_strdup(identifier), free);
 }
@@ -60,19 +61,19 @@ static void add_default_identifiers(t_hashmap *identifiers)
 	while (DEFAULT_AIR_TYPES[++i])
 	{
 		id_str = ft_strndup(&DEFAULT_AIR_TYPES[i], 1);
-		(add_identifier(identifiers, "AIR", id_str), free(id_str));
+		(add_identifier(identifiers, id_str, "AIR"), free(id_str));
 	}
 	i = -1;
 	while (DEFAULT_WALL_TYPES[++i])
 	{
 		id_str = ft_strndup(&DEFAULT_WALL_TYPES[i], 1);
-		(add_identifier(identifiers, "WALL", id_str), free(id_str));
+		(add_identifier(identifiers, id_str, "WALL"), free(id_str));
 	}
 	i = -1;
 	while (DEFAULT_PLAYER_TYPES[++i])
 	{
 		id_str = ft_strndup(&DEFAULT_PLAYER_TYPES[i], 1);
-		(add_identifier(identifiers, "PLAYER", id_str), free(id_str));
+		(add_identifier(identifiers, id_str, "PLAYER"), free(id_str));
 	}
 }
 
