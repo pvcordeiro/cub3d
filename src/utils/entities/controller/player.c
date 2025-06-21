@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 19:35:54 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 03:24:35 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 12:04:00 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,6 +210,7 @@ static void	do_inv_keys(t_game *game, t_character *character, t_player_keys keys
 
 	move_inventory = false;
 	item_use = false;
+	item_drop = false;
 	set_key_bool_value(&move_inventory, keys.move_inventory_index, khv);
 	set_key_bool_value(&item_use, keys.item_use, khv);
 	set_key_bool_value(&item_drop, keys.item_drop, khv);

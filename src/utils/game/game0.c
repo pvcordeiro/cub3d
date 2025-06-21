@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:27:08 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 02:26:59 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 11:49:46 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	clear_game(void *data)
 	ft_hashmap_destroy(game->fonts);
 	ft_hashmap_destroy(game->sounds);
 	ft_list_destroy(&game->hud.stats.states_list);
-	ft_strvfree((void *)game->walls);
+	free_walls(game);
 	free(game->billboards);
 	ft_bzero(game, sizeof(t_game));
 }

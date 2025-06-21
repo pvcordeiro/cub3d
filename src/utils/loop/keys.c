@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:21:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 03:22:50 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 11:33:29 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,11 @@ void	key_hook(t_ftm_key_hook_values khv)
 	}
 	call_entity_keys(game, khv);
 	if (khv.key == XK_Escape)
+	{
+		pthread_mutex_unlock(&cub3d()->game_mutex);
 		cub3d_exit(0);
+		return ;
+	}
 	if (khv.key == XK_F3 && khv.down)
 		game->hud.debug_enabled = !game->hud.debug_enabled;
 	if (khv.key == XK_F2 && khv.down)

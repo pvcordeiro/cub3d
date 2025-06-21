@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 21:53:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 03:17:29 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 11:48:52 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,19 @@ void	*hashmap_get_with_identifier(t_game *game, t_hashmap *hashmap, char identif
 	return (free(key), data);
 }
 
+void	free_walls(t_game *game)
+{
+	int	i;
+
+	if (!game || !game->walls)
+		return ;
+	i = -1;
+	while (++i < game->map->size.height)
+		free(game->walls[i]);
+	free(game->walls);
+	game->walls = NULL;
+}
+
 static bool	alloc_walls(t_game *game)
 {
 	int	i;
@@ -53,7 +66,10 @@ static bool	alloc_walls(t_game *game)
 		if (game->walls[i])
 			continue ;
         while (--i >= 0)
-            free(game->walls[i]);
+		{
+			free(game->walls[i]);
+			game->walls[i] = NULL;
+		}
         free(game->walls);
 		game->walls = NULL;
 		return (false);
@@ -154,6 +170,7 @@ t_cub3d	*cub3d(void)
 
 void	cub3d_exit(int code)
 {
+	pthread_mutex_lock(&cub3d()->game_mutex);
 	free_game(cub3d()->game);
 	cub3d()->game = NULL;
 	free_map(cub3d()->curr_map);
@@ -163,6 +180,7 @@ void	cub3d_exit(int code)
 	clear_sprite(&cub3d()->placeholder);
 	ftm_clear_window(&cub3d()->window);
 	fta_destroy();
+	pthread_mutex_unlock(&cub3d()->game_mutex);
 	pthread_mutex_destroy(&cub3d()->game_mutex);
 	exit(code);
 }

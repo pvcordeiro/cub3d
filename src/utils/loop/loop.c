@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:20:20 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 03:04:53 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 11:49:53 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ static void process_fps_limit(t_game *game)
 void	loop(void)
 {
 	t_game	*prev_game;
+
 	if (cub3d()->curr_map != cub3d()->game->map)
 	{
 		pthread_mutex_lock(&cub3d()->game_mutex);
@@ -69,10 +70,14 @@ void	loop(void)
 		free_map(cub3d()->prev_map);
 		pthread_mutex_unlock(&cub3d()->game_mutex);
 	}
+	if (!cub3d()->curr_map)
+		return ;
+	pthread_mutex_lock(&cub3d()->game_mutex);
 	call_entity_frames(cub3d()->game, &cub3d()->game->fps);
 	update_walls_matrix(cub3d()->game);
 	update_billboards_vec(cub3d()->game);
 	render_players_game(cub3d()->game, &cub3d()->window);
 	update_frame(cub3d()->game);
 	process_fps_limit(cub3d()->game);
+	pthread_mutex_unlock(&cub3d()->game_mutex);
 }

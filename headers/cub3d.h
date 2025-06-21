@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 03:22:43 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 12:00:31 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@
 
 // Character Config
 # define CHARACTER_HIT_DELAY 100.0
+# define CHARACTER_DEFAULT_MAX_HEALTH 100
 
 // Entity Config
 # define INVENTORY_SIZE 9
@@ -447,6 +448,7 @@ void			*hashmap_get_with_identifier(t_game *game, t_hashmap *hashmap, char ident
 void			update_walls_matrix(t_game *game);
 void			update_billboards_vec(t_game *game);
 t_type_creator	get_type_creator(t_hashmap *identifiers, char identifier);
+void			free_walls(t_game *game);
 
 // Game
 t_game		*game_new(t_ftm_window *window, t_map *map);
