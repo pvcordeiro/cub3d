@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 12:00:31 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 13:56:17 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -428,6 +428,7 @@ struct s_game
 	t_hashmap			*sprites;
 	t_entity			***walls;
 	t_entity			**billboards;
+	t_fta_audio			*background_sound;
 	t_ftt_thread		*camera_threads[CAMERA_THREADS];
 };
 
@@ -452,7 +453,6 @@ void			free_walls(t_game *game);
 
 // Game
 t_game		*game_new(t_ftm_window *window, t_map *map);
-void		game_start(t_game *game, t_ftm_window *window);
 void		clear_game(void *game);
 void		free_game(void *game);
 void		render_game(t_game *game, t_ftm_image *canvas,

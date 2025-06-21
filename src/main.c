@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:15:19 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 02:42:12 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 13:57:45 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ int	main(int argc, char **argv)
 	pthread_mutex_init(&cub3d()->game_mutex, NULL);
 	cub3d()->game = game_new(&cub3d()->window, cub3d()->curr_map);
 	fte_assert();
-	game_start(cub3d()->game, &cub3d()->window);
-	cub3d_exit(0);
+	cub3d()->window.loop_hook = loop;
+	cub3d()->window.key_hook = key_hook;
+	cub3d()->window.exit_hook = cub3d_exit;
+	cub3d()->window.mouse_hook = mouse_hook;
+	ftm_window_loop(&cub3d()->window);
 }

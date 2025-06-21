@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 23:46:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 01:17:07 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 14:16:57 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	init_sprites_3d(t_game *game)
 	char		*key_base;
 	t_sprite	**sprites;
 
-	el = *game->sprites->table;
+	el = game->sprites->table;
 	while (el)
 	{
 		curr = el;

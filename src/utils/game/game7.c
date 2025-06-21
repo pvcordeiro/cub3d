@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game7.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:20:04 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/08 20:20:44 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/21 14:17:07 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	set_sprite_configs(t_game *game)
 	t_element	*curr;
 	t_element	*el;
 
-	el = *game->sprites->table;
+	el = game->sprites->table;
 	while (el)
 	{
 		curr = el;
@@ -81,7 +81,7 @@ void	init_fonts_e(t_ftm_window *window, t_game *game)
 	char				*key;
 
 	fte_set(NULL);
-	el = *game->map->types->table;
+	el = game->map->types->table;
 	while (el)
 	{
 		curr = el;

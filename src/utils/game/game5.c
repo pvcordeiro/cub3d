@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 17:18:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/18 22:29:12 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 14:16:49 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	set_audio_configs_e(t_game *game)
 	char				*key;
 
 	fte_set(NULL);
-	el = *game->map->types->table;
+	el = game->map->types->table;
 	while (el)
 	{
 		curr = el;
@@ -58,7 +58,7 @@ void	init_sounds_e(t_game *game)
 	char				*key;
 
 	fte_set(NULL);
-	el = *game->map->types->table;
+	el = game->map->types->table;
 	while (el)
 	{
 		curr = el;

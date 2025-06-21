@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 13:52:26 by paude-so          #+#    #+#             */
-/*   Updated: 2025/04/27 22:43:08 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 14:16:08 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	ft_hashmap_set(t_hashmap *hashmap, char *key, void *value,
 	new_el = ft_element_new(key, value, el_free);
 	if (!new_el)
 		return ;
-	new_el->next = hashmap->table[0];
-	hashmap->table[0] = new_el;
+	new_el->next = hashmap->table;
+	hashmap->table = new_el;
 }
 
 void	ft_hashmap_destroy(t_hashmap *hashmap)
@@ -37,7 +37,7 @@ void	ft_hashmap_destroy(t_hashmap *hashmap)
 
 	if (!hashmap)
 		return ;
-	curr_el = hashmap->table[0];
+	curr_el = hashmap->table;
 	while (curr_el)
 	{
 		next_el = curr_el->next;
@@ -56,7 +56,7 @@ size_t	ft_hashmap_size(t_hashmap *hashmap)
 	if (!hashmap)
 		return (0);
 	size = 0;
-	curr_el = hashmap->table[0];
+	curr_el = hashmap->table;
 	while (curr_el)
 	{
 		size++;
@@ -78,7 +78,7 @@ char	**ft_hashmap_to_strv(t_hashmap *hashmap)
 	if (!strv)
 		return (NULL);
 	i = 0;
-	curr_el = hashmap->table[0];
+	curr_el = hashmap->table;
 	while (curr_el)
 	{
 		tmp = ft_strjoin(curr_el->key, "=");

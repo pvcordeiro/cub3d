@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map3.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 20:52:20 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/20 15:22:33 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/21 14:17:13 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static bool	identifier_already_defined(t_hashmap *identifiers, char *identifier)
 	t_element	*el;
 	t_list		**curr;
 
-	el = *identifiers->table;
+	el = identifiers->table;
 	while (el)
 	{
 		curr = el->value;
@@ -86,7 +86,7 @@ void	parse_identifiers_e(t_map *map)
 	if (!map->identifiers)
 		return (fte_set("Identifier Hashmap Error (its so over)"));
 	add_default_identifiers(map->identifiers);
-	el = *map->types->table;
+	el = map->types->table;
 	while (el)
 	{
 		curr = el;

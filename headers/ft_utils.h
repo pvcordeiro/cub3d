@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 12:15:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/06/21 01:09:04 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 14:15:35 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ typedef struct s_element
 
 typedef struct s_hashmap
 {
-	t_element			**table;
+	t_element			*table;
 }						t_hashmap;
 
 typedef struct s_list

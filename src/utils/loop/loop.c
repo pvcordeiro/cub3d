@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:20:20 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 11:49:53 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 14:21:23 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,20 @@ static void process_fps_limit(t_game *game)
 	previous_time = ft_get_time();
 }
 
+static void	update_controllers(t_ftm_window *window)
+{
+	static t_time	last_controller_update;
+
+	if (ft_get_time() - last_controller_update < 1000)
+		return ;
+	last_controller_update = ft_get_time();
+	ftm_window_reload_controllers(window);
+}
+
 void	loop(void)
 {
-	t_game	*prev_game;
+	static bool	playing_bg_music;
+	t_game		*prev_game;
 
 	if (cub3d()->curr_map != cub3d()->game->map)
 	{
@@ -68,11 +79,17 @@ void	loop(void)
 		cub3d()->game = game_new(&cub3d()->window, cub3d()->curr_map);
 		free_game(prev_game);
 		free_map(cub3d()->prev_map);
+		cub3d()->prev_map = NULL;
+		playing_bg_music = false;
 		pthread_mutex_unlock(&cub3d()->game_mutex);
 	}
 	if (!cub3d()->curr_map)
 		return ;
+	if (!playing_bg_music)
+		fta_play(cub3d()->game->background_sound);
+	playing_bg_music = true;
 	pthread_mutex_lock(&cub3d()->game_mutex);
+	update_controllers(&cub3d()->window);
 	call_entity_frames(cub3d()->game, &cub3d()->game->fps);
 	update_walls_matrix(cub3d()->game);
 	update_billboards_vec(cub3d()->game);
