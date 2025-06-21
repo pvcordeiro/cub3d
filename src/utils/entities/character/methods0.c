@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   methods0.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/17 15:13:16 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 02:13:08 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,15 @@ static bool	hit(t_character *character)
 
 static bool	using(t_character *character)
 {
-	
-	return (character->inventory[character->inventory_index]
-		&& (ft_get_time() - character->inventory[character->inventory_index]->last_use < character->inventory[character->inventory_index]->screen_sprite->update_delay
-			|| character->inventory[character->inventory_index]->user == character));
+	t_item	*item;
+	bool	is_in_delay;
+
+	item = character->inventory[character->inventory_index];
+	if (!item)
+		return (false);
+	is_in_delay = item->screen_sprite
+		&& ft_get_time() - item->last_use < item->screen_sprite->update_delay;
+	return (is_in_delay || item->user == character);
 }
 
 static void	call_item_frames(t_character *character)
@@ -62,10 +67,32 @@ static void	call_item_frames(t_character *character)
 			character->inventory[i]->frame(character->inventory[i]);
 }
 
+static void	drop_items(t_character *character)
+{
+	int		i;
+
+	if (!character->drop_items)
+		return ;
+	if (!character->drop)
+	{
+		i = -1;
+		while (++i < INVENTORY_SIZE)
+			if (character->inventory[i] && character->inventory[i]->drop)
+				character->inventory[i]->drop(&cub3d()->game,
+				&cub3d()->window, character->inventory[i], character);
+		return ;
+	}
+	((t_entity *)character->drop)->coords = ((t_entity *)character)->coords;
+	ft_list_add(&cub3d()->game.entities, character->drop, free_entity);
+	character->drop = NULL;
+}
+
 static void	billions_must_die(t_character *character)
 {
 	bool	was_already_dead;
 
+	if (character->dead && !character->was_already_dead)
+		drop_items(character);
 	if (character->dead && character->billboard.entity.health)
 		character->dead = false;
 	was_already_dead = character->was_already_dead;

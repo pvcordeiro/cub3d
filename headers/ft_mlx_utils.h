@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_mlx_utils.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:46:27 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/20 18:12:08 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 02:10:53 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ struct s_ftm_window
 	void				*win;
 	void				*display;
 	t_list				*controllers;
-	t_ftm_image			*canvas;
 	bool				using_mouse;
 	bool				fullscreen;
 	char				*title;
@@ -212,7 +211,6 @@ void			ftm_clear_window(void *window);
 void			ftm_free_window(void *window);
 void			ftm_create_window_e(t_ftm_window *window,
 					t_size size, char *title);
-void			ftm_update_window(t_ftm_window *window);
 void			ftm_update_hooks(t_ftm_window *window);
 void			ftm_window_loop(t_ftm_window *window);
 void			ftm_window_wipe(t_ftm_window *window);

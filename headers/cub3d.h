@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 01:25:47 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 02:04:54 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -283,6 +283,8 @@ struct s_character
 	t_direction	target_entity_direction;
 	t_time		last_inventory_scroll;
 	t_item		*inventory[INVENTORY_SIZE];
+	t_drop		*drop;
+	bool		drop_items;
 	double		fov;
 	int			rays;
 	int			inventory_index;

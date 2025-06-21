@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 19:49:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/20 18:20:47 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 02:08:17 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	render_players_game(t_game *game, t_ftm_window *window)
 	{
 		if (!game->players[i])
 			return ;
-		player_canvas_data = get_player_canvas_data(game, window->canvas->size, i);
+		player_canvas_data = get_player_canvas_data(game, window->size, i);
 		if (!game->players[i]->canvas
 			|| game->players[i]->canvas->size.width != player_canvas_data.size.width
 			|| game->players[i]->canvas->size.height != player_canvas_data.size.height)

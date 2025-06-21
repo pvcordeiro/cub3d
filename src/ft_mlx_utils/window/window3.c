@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 22:21:31 by paude-so          #+#    #+#             */
-/*   Updated: 2025/06/07 19:45:09 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/21 02:08:51 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,12 @@
 void	ftm_window_resize_e(t_ftm_window *window, t_size size)
 {
 	char		*title;
-	t_ftm_image	*new_canvas;
-	t_ftm_image	*prev_canvas;
 
 	title = window->title;
 	mlx_destroy_window(window->display, window->win);
 	window->win = mlx_new_window(window->display,
 		size.width, size.height, title);
-	prev_canvas = window->canvas;
-	new_canvas = ftm_image_new(window, size);
-	window->canvas = new_canvas;
 	window->size = size;
-	ftm_free_image(prev_canvas);
 	ftm_update_hooks(window);
 }
 

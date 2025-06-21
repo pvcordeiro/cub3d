@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 00:50:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/20 10:27:56 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 02:08:29 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,16 @@ static void	create_inventory_items(t_game *game, t_ftm_window *window, t_charact
 	}
 }
 
+static void	create_drop(t_game *game, t_ftm_window *window, t_character *character)
+{
+	char	*drop_id;
+
+	drop_id = hashmap_get_with_identifier(game, game->map->types, character->billboard.entity.identifier, "DROP");
+	if (ft_strlen(drop_id) != 1)
+		return ;
+	character->drop = drop_new(game, window, drop_id[0]);
+}
+
 void	init_character(t_game *game, t_ftm_window *window, t_character *character, char identifier)
 {
 	init_billboard(game, window, (t_billboard *)character, identifier);
@@ -56,12 +66,14 @@ void	init_character(t_game *game, t_ftm_window *window, t_character *character, 
 	character->_sprite = character->billboard.sprites;
 	character->death_sound = hashmap_get_with_identifier(game, game->sounds, identifier, "DEATH");
 	character->hit_sound = hashmap_get_with_identifier(game, game->sounds, identifier, "HIT");
-	character->rays = window->canvas->size.width;
 	character->fov = ft_atof(hashmap_get_with_identifier(game, game->map->types,
 		identifier, "FOV"));
+	character->drop_items = ft_strequal(hashmap_get_with_identifier(game, game->map->types,
+		identifier, "DROP_ITEMS"), "TRUE");
 	if (!character->fov)
 		character->fov = PLAYER_FOV;
 	create_inventory_items(game, window, character);
+	create_drop(game, window, character);
 }
 
 t_character	*character_new(t_game *game, t_ftm_window *window, char identifier)

@@ -14,6 +14,7 @@ STATUS_HUD TRUE
 0_INVENTORY P
 1_INVENTORY K
 2_INVENTORY C
+DROP_ITEMS TRUE
 AMMO 1000
 
 STILL_8_SPRITE assets/textures/billboards/afonsomaria/still-front.xpm
@@ -155,6 +156,8 @@ e_USING_Y_1_SPRITE assets/wolf3d/textures/billboards/soldier/aim.xpm:assets/wolf
 e_USING_Y_1_SPRITE_UPDATE_DELAY 0.5
 e_USING_Y_1_SPRITE_LOOP TRUE
 e_AMMO 2147483647
+e_DROP ;
+e_DROP_ITEMS TRUE
 
 d_TYPE CHARACTER
 d_MAX_HEALTH 1
