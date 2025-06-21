@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 17:18:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 14:16:49 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 16:18:42 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static void	init_stats_hud(t_game *game)
 	t_sprite	*sprite;
 	char		*key;
 
-	game->hud.stats_enabled = ft_strequal(ft_hashmap_get_value(game->map->types, "STATS_HUD"), "TRUE");
+	game->hud.stats_enabled = !ft_strequal(ft_hashmap_get_value(game->map->types, "STATS_HUD"), "FALSE");
 	game->hud.stats_font = ft_hashmap_get_value(game->fonts, "STATS_HUD");
 	if (!game->hud.stats_font)
 		game->hud.stats_font = ft_hashmap_get_value(game->fonts, "DEFAULT");
@@ -115,7 +115,7 @@ static void	init_debug_hud(t_game *game)
 
 static void	init_action_hud(t_game *game)
 {
-	game->hud.action_enabled = ft_strequal(ft_hashmap_get_value(game->map->types, "ACTION_HUD"), "TRUE");
+	game->hud.action_enabled = !ft_strequal(ft_hashmap_get_value(game->map->types, "ACTION_HUD"), "FALSE");
 	game->hud.action_font = ft_hashmap_get_value(game->fonts, "ACTION_HUD");
 	if (!game->hud.action_font)
 		game->hud.action_font = ft_hashmap_get_value(game->fonts, "DEFAULT");
@@ -123,7 +123,8 @@ static void	init_action_hud(t_game *game)
 
 void	init_hud(t_game *game)
 {
-	game->hud.enabled = ft_strequal(ft_hashmap_get_value(game->map->types, "HUD"), "TRUE");
+	game->hud.enabled = !ft_strequal(ft_hashmap_get_value(game->map->types, "HUD"), "FALSE");
+	game->hud.minimap_enabled = !ft_strequal(ft_hashmap_get_value(game->map->types, "MINIMAP_HUD"), "FALSE");
 	init_stats_hud(game);
 	init_debug_hud(game);
 	init_action_hud(game);

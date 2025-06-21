@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 00:50:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/15 21:25:33 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 16:13:38 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@ void	init_player(t_game *game, t_ftm_window *window, t_player *player, char iden
 	player->character.billboard.entity.frame = player_frame;
 	player->character.billboard.entity.clear = clear_player;
 	player->character.billboard.entity.action = player_action;
-	player->character.billboard.entity.action = player_shot;
+	player->character.billboard.entity.shot = player_shot;
 	player->character.billboard.entity.targetable = true;
+	player->friendly_fire = !ft_strequal(ft_hashmap_get_value(
+		game->map->types, "FRIENDLY_FIRE"), "FALSE");
 	if (identifier == 'N')
 		player->character.billboard.entity.coords.yaw = 270.0;
 	else if (identifier == 'S')

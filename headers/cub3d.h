@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 15:39:57 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 16:04:25 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -301,6 +301,7 @@ struct s_player
 {
 	t_character character;
 	t_ftm_image	*canvas;
+	bool		friendly_fire;
 };
 
 struct s_drop
