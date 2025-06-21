@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:27:08 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 13:56:43 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 21:19:28 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,9 @@ t_game	*game_new(t_ftm_window *window, t_map *map)
 	if (fte_flagged())
 		return (free_game(game), NULL);
 	game->background_sound = ft_hashmap_get_value(game->sounds, "BACKGROUND");
+	game->background_sprite = ft_hashmap_get_value(game->sprites, "BACKGROUND");
+	if (game->players[0])
+		game->players[0]->character.billboard.entity.active = true;
 	return (game);
 }
 

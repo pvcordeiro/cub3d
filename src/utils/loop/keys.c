@@ -6,11 +6,41 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:21:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 15:12:37 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 20:58:45 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "loop.h"
+
+static void	activate_another_player(t_game *game)
+{
+	int	i;
+
+	i = -1;
+	while (++i < PLAYER_MAX)
+	{
+		if (!game->players[i])
+			return ;
+		if (game->players[i]->character.billboard.entity.active)
+			continue ;
+		game->players[i]->character.billboard.entity.active = true;
+		return ;
+	}
+}
+
+static void	deactivate_another_player(t_game *game)
+{
+	int	i;
+
+	i = PLAYER_MAX;
+	while (--i)
+	{
+		if (!game->players[i] || !game->players[i]->character.billboard.entity.active)
+			continue ;
+		game->players[i]->character.billboard.entity.active = false;
+		return ;
+	}
+}
 
 void	key_hook(t_ftm_key_hook_values khv)
 {
@@ -30,6 +60,13 @@ void	key_hook(t_ftm_key_hook_values khv)
 		cub3d_exit(0);
 		return ;
 	}
+	if (khv.key == XK_k && khv.down && game->players[0])
+		((t_entity *)game->players[0])->controller.keyboard_only =
+			!((t_entity *)game->players[0])->controller.keyboard_only;
+	if (khv.key == XK_p && khv.down)
+		activate_another_player(game);
+	if (khv.key == XK_o && khv.down)
+		deactivate_another_player(game);
 	if (khv.key == XK_F3 && khv.down)
 		game->hud.debug_enabled = !game->hud.debug_enabled;
 	if (khv.key == XK_F2 && khv.down)

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 19:35:54 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 15:36:55 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 20:47:23 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,59 +44,43 @@ static void	mouse_inv_keys(t_character *character, t_ftm_key_hook_values key_hoo
 static t_player_keys	get_player_keyboard_keys(void)
 {
 	return ((t_player_keys){
-		.walking_forward = (t_player_key){XK_w, false, 0.0, 1.0, false,
-			{0, 0, 0}, {0, 0, 0}},
-		.walking_backward = (t_player_key){XK_s, false, 0.0, 1.0, false,
-			{0, 0, 0}, {0, 0, 0}},
-		.walking_left = (t_player_key){XK_a, false, 0.0, 1.0, false,
-			{0, 0, 0}, {0, 0, 0}},
-		.walking_right = (t_player_key){XK_d, false, 0.0, 1.0, false,
-			{0, 0, 0}, {0, 0, 0}},
-		.looking_left = (t_player_key){XK_Left, false, 0.0, 1.0, false,
-			{0, 0, 0}, {0, 0, 0}},
-		.looking_right = (t_player_key){XK_Right, false, 0.0, 1.0, false,
-			{0, 0, 0}, {0, 0, 0}},
-		.action = (t_player_key){XK_e, false, 0.0, 1.0, false,
-			{0, 0, 0}, {0, 0, 0}},
-		.sprinting = (t_player_key){XK_Shift_L, false, 0.0, 1.0, false,
-			{0, 0, 0}, {0, 0, 0}},
-		.move_inventory_index = (t_player_key){XK_r, false, 0.0, 1.0, false,
-			{0, 0, 0}, {0, 0, 0}},
-		.item_use = (t_player_key){XK_space, false, 0.0, 1.0, false,
-			{0, 0, 0}, {0, 0, 0}},
-		.item_drop = (t_player_key){XK_q, false, 0.0, 1.0, false,
-			{0, 0, 0}, {0, 0, 0}},
-		.keyboard_only = (t_player_key){XK_k, false, 0.0, 1.0, false,
-			{0, 0, 0}, {0, 0, 0}},
+		.walking_forward = {XK_w, false, 0.0, 1.0, false, {0}, {0}},
+		.walking_backward = {XK_s, false, 0.0, 1.0, false, {0}, {0}},
+		.walking_left = {XK_a, false, 0.0, 1.0, false, {0}, {0}},
+		.walking_right = {XK_d, false, 0.0, 1.0, false, {0}, {0}},
+		.looking_left = {XK_Left, false, 0.0, 1.0, false, {0}, {0}},
+		.looking_right = {XK_Right, false, 0.0, 1.0, false, {0}, {0}},
+		.action = {XK_e, false, 0.0, 1.0, false, {0}, {0}},
+		.sprinting = {XK_Shift_L, false, 0.0, 1.0, false, {0}, {0}},
+		.move_inventory_index = {XK_r, false, 0.0, 1.0, false, {0}, {0}},
+		.item_use = {XK_space, false, 0.0, 1.0, false, {0}, {0}},
+		.item_drop = {XK_q, false, 0.0, 1.0, false, {0}, {0}},
+		.activate = {0},
 	});
 }
 
 static t_player_keys	get_player_gamepad_keys(void)
 {
     return ((t_player_keys){
-        .walking_forward = (t_player_key){FTM_GAMEPAD_LSTICK, false, 0.0, 1.0,
+        .walking_forward = {FTM_GAMEPAD_LSTICK, false, 0.0, 1.0,
             true, {0.0, 0.0, 0}, {1.0, 0.3, 0}},
-        .walking_backward = (t_player_key){FTM_GAMEPAD_LSTICK, false, 0.0, 1.0,
+        .walking_backward = {FTM_GAMEPAD_LSTICK, false, 0.0, 1.0,
             true, {0.0, 0.7, 0}, {1.0, 1.0, 0}},
-        .walking_left = (t_player_key){FTM_GAMEPAD_LSTICK, false, 0.0, 1.0, 
+        .walking_left = {FTM_GAMEPAD_LSTICK, false, 0.0, 1.0,
             true, {0.0, 0.0, 0}, {0.3, 1.0, 0}},
-        .walking_right = (t_player_key){FTM_GAMEPAD_LSTICK, false, 0.0, 1.0, 
+        .walking_right = {FTM_GAMEPAD_LSTICK, false, 0.0, 1.0,
             true, {0.7, 0.0, 0}, {1.0, 1.0, 0}},
-        .looking_left = (t_player_key){FTM_GAMEPAD_RSTICK, false, 0.0, 1.0, 
+        .looking_left = {FTM_GAMEPAD_RSTICK, false, 0.0, 1.0,
             true, {0.0, 0.0, 0}, {0.3, 1.0, 0}},
-        .looking_right = (t_player_key){FTM_GAMEPAD_RSTICK, false, 0.0, 1.0,
+        .looking_right = {FTM_GAMEPAD_RSTICK, false, 0.0, 1.0,
             true, {0.7, 0.0, 0}, {1.0, 1.0, 0}},
-        .action = (t_player_key){FTM_GAMEPAD_X, false, 0.0, 1.0, false,
-            {0, 0, 0}, {0, 0, 0}},
-        .sprinting = (t_player_key){FTM_GAMEPAD_A, false, 0.0, 1.0, false,
-            {0, 0, 0}, {0, 0, 0}},
-        .move_inventory_index = (t_player_key){FTM_GAMEPAD_R1, false, 0.0, 1.0,
-            false, {0, 0, 0}, {0, 0, 0}},
-        .item_use = (t_player_key){FTM_GAMEPAD_R2, true, 0.8, 1.0, false,
-            {0, 0, 0}, {0, 0, 0}},
-		.item_drop = (t_player_key){FTM_GAMEPAD_L2, true, 0.8, 1.0, false,
-			{0, 0, 0}, {0, 0, 0}},
-		.keyboard_only = (t_player_key){0},
+        .action = {FTM_GAMEPAD_X, false, 0.0, 1.0, false, {0}, {0}},
+        .sprinting = {FTM_GAMEPAD_A, false, 0.0, 1.0, false, {0}, {0}},
+        .move_inventory_index = {FTM_GAMEPAD_R1, false, 0.0, 1.0,
+            false, {0}, {0}},
+        .item_use = {FTM_GAMEPAD_R2, true, 0.8, 1.0, false, {0}, {0}},
+		.item_drop = {FTM_GAMEPAD_L2, true, 0.8, 1.0, false, {0}, {0}},
+		.activate = {FTM_GAMEPAD_MENU, false, 0.0, 1.0, false, {0}, {0}},
     });
 }
 
@@ -206,8 +190,6 @@ static void	do_inv_keys(t_game *game, t_entity *entity, t_player_keys keys,
 	set_key_bool_value(&boolean, keys.item_drop, khv);
 	if (khv.key == keys.item_drop.key)
 		item_drop_key(game, boolean, (t_character *)entity);
-	if (khv.key == keys.keyboard_only.key && khv.down)
-		entity->controller.keyboard_only = !entity->controller.keyboard_only;
 	if ((t_entity *)game->players[0] == entity)
 		mouse_inv_keys((t_character *)entity, khv);
 }
@@ -230,8 +212,8 @@ static int	get_player_id_with_keyboard_only_accounted_for(
 static void	do_keys(t_game *game, t_entity *entity, t_player_keys keys,
 	t_ftm_key_hook_values khv)
 {
-	do_half_of_keys(&entity->controller, keys, khv);
 	do_internal_keys(entity, khv);
+	do_half_of_keys(&entity->controller, keys, khv);
 	do_inv_keys(game, entity, keys, khv);
 }
 
@@ -239,7 +221,7 @@ static void	key(t_game *game, t_entity *entity, t_ftm_key_hook_values khv)
 {
 	int	player_id;
 
-	if (!entity || entity->type != ENTITY_PLAYER)
+	if (!entity || !entity->active || entity->type != ENTITY_PLAYER)
 		return ;
 	player_id = get_player_id_with_keyboard_only_accounted_for(
 		game, (t_player *)entity);

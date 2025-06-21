@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game3.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 23:10:00 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/20 10:28:27 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 20:03:27 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static void	add_player_e(t_game *game, t_player *player)
 	{
 		if (game->players[i])
 			continue ;
+		player->character.billboard.entity.active = false;
 		game->players[i] = player;
 		return ;
 	}

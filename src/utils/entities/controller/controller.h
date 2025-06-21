@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 19:31:30 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 15:26:08 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 20:11:13 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_player_keys
 	t_player_key	item_use;
 	t_player_key	item_drop;
 	t_player_key	keyboard_only;
+	t_player_key	activate;
 }	t_player_keys;
 
 void	init_player_controller(t_entity *entity);

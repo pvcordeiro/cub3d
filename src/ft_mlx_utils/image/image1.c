@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 14:51:11 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/20 18:11:37 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 21:24:50 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,27 @@ char	*ftm_image_to_str(t_ftm_image *image)
 }
 
 void	ftm_put_image_to_window(t_ftm_window *window, t_ftm_image *image,
-	t_coords coords)
+			t_coords coords)
 {
 	if (!image || !image->img_ptr)
 		return ;
 	mlx_put_image_to_window(window->display, window->win,
 		image->img_ptr, coords.x, coords.y);
 }
+
+void	ftm_put_image_to_window_pitc(t_ftm_window *window, t_ftm_image *image,
+			t_ftm_pitc_config pitc)
+{
+	t_ftm_image	*canvas;
+
+	if (!image || !image->img_ptr)
+		return ;
+	canvas = ftm_image_new(window, window->size);
+	if (!canvas)
+		return ;
+	ftm_put_image_to_canvas(canvas, image, pitc);
+	mlx_put_image_to_window(window->display, window->win,
+		canvas->img_ptr, 0, 0);
+	ftm_free_image(canvas);
+}
+
