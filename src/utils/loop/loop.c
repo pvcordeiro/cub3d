@@ -6,7 +6,7 @@
 /*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:20:20 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/14 16:37:23 by pvcordeiro       ###   ########.fr       */
+/*   Updated: 2025/06/21 18:24:44 by pvcordeiro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ static double	get_delta_time(void)
 
 void	loop(void)
 {
-	mlx_clear_window(cub3d()->window.display, cub3d()->window.win);
 	call_entity_frames(cub3d()->game.entities, get_delta_time());
 	render_game(&cub3d()->window, &cub3d()->game);
 }
