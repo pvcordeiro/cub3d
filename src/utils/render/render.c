@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 19:49:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 02:08:17 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 16:38:16 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,12 @@ void	render_game(t_game *game, t_ftm_image *canvas, t_character *character)
 static t_player_canvas_data	get_player_canvas_data(t_game *game, t_size cs,
 	int player_index)
 {
-	int						player_count;
+	int	player_count;
 	
 	player_count = -1;
-	while (game->players[++player_count])
-		;
+	while (++player_count < PLAYER_MAX)
+		if (!game->players[player_count])
+			break ;
 	if (player_index >= player_count)
 		return ((t_player_canvas_data){(t_size){cs.width / 2, cs.height / 2}, (t_coords){0, cs.height / 2, 0}});
 	if (player_count == 1)
