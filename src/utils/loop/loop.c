@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:20:20 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/20 18:14:57 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 01:16:51 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ static void process_fps_limit(t_game *game)
 void	loop(void)
 {
 	call_entity_frames(cub3d()->game.entities, &cub3d()->game.fps);
+	update_walls_matrix(&cub3d()->game);
+	update_billboards_vec(&cub3d()->game);
 	render_players_game(&cub3d()->game, &cub3d()->window);
 	update_frame(&cub3d()->game);
 	process_fps_limit(&cub3d()->game);

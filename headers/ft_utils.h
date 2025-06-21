@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 12:15:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/06/20 10:46:54 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 01:09:04 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@
 # include <dirent.h>
 
 # define FT_UTILS_PI 3.14159265359
-# define GNL_BUFFER_SIZE 1024
-# define MAX_RAY_LENGTH 1000.0
-# define EPSILON 1e-9
+# define FT_GNL_BUFF 1024
+# define FT_MAX_RAY_LENGTH 150.0
+# define FT_EPSILON 1e-9
 
 typedef enum s_direction
 {
@@ -245,4 +245,12 @@ double					ft_ternary_double(bool con, double _if, double _else);
 int						ft_ternary_int(bool con, int _if, int _else);
 void					ft_list_foreach(t_list *list,
 							void (*f)(void *, void *param), void *param);
+
+bool					ft_list_all(t_list *list,
+							bool (*condition)(void *data, void *params),
+							void *params);
+size_t					ft_list_count(t_list *list,
+							bool (*condition)(void *data, void *params),
+							void *params);
+
 #endif

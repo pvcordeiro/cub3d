@@ -5,77 +5,133 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/20 20:30:03 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/04 01:24:56 by afpachec         ###   ########.fr       */
+/*   Created: 2025/06/02 23:46:52 by afpachec          #+#    #+#             */
+/*   Updated: 2025/06/21 01:17:07 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game.h"
 
-void	init_walls_e(t_game *game)
+static void process_door_at(t_game *game, int y, int x, t_sprite *frame_sprite)
 {
-	t_entity	*entity;
-	t_list		*curr;
-	size_t		i;
+	t_door		*door;
+	t_entity	*wall1;
+	t_entity	*wall2;
+	t_direction	dir;
 
-	fte_set(NULL);
-	game->walls = ft_calloc(game->map->size.height + 1, sizeof(t_entity **));
-	if (!game->walls)
-		return (fte_set("walls init (outer calloc)"));
-	i = -1;
-	while (++i < (size_t)game->map->size.height)
-	{
-		game->walls[i] = ft_calloc(game->map->size.width + 1, sizeof(t_entity *));
-		if (!game->walls[i])
-			return (fte_set("walls init (inner calloc)"));
-	}
-	curr = game->entities;
-	i = -1;
-	while (curr)
-	{
-		entity = curr->data;
-		curr = curr->next;
-		if (!entity->wall || entity->coords.x < 0 || entity->coords.x >= game->map->size.width
-			|| entity->coords.y < 0 || entity->coords.y >= game->map->size.height)
-			continue ;
-		game->walls[(int)entity->coords.y][(int)entity->coords.x] = entity;
-	}
+	if (!frame_sprite)
+		return ;
+	door = (t_door *)game->walls[y][x];
+	dir = door->direction;
+	wall1 = game->walls[y - (dir == EAST || dir == WEST)][x - (dir == NORTH
+		|| dir == SOUTH)];
+	wall2 = game->walls[y + (dir == EAST || dir == WEST)][x + (dir == NORTH
+		|| dir == SOUTH)];
+	if (wall1 && wall1->wall && (dir == EAST || dir == WEST))
+		((t_wall *)wall1)->south_sprite = frame_sprite;
+	else if (wall1 && wall1->wall && (dir == NORTH || dir == SOUTH))
+		((t_wall *)wall1)->east_sprite = frame_sprite;
+	if (wall2 && wall2->wall && (dir == EAST || dir == WEST))
+		((t_wall *)wall2)->north_sprite = frame_sprite;
+	else if (wall2 && wall2->wall && (dir == NORTH || dir == SOUTH))
+		((t_wall *)wall2)->west_sprite = frame_sprite;
 }
 
-static size_t	count_billboards(t_list *entities)
+void insert_door_frames(t_game *game)
 {
-	t_entity	*entity;
-	size_t		count;
+    int y, x;
 
-	count = 0;
-	while (entities)
-	{
-		entity = entities->data;
-		if (entity->billboard)
-			count++;
-		entities = entities->next;
-	}
-	return (count);
+    y = -1;
+    while (++y < game->map->size.height)
+    {
+        x = -1;
+        while (++x < game->map->size.width)
+            if (game->walls[y][x] && game->walls[y][x]->type == ENTITY_DOOR)
+				process_door_at(game, y, x,
+					((t_door *)game->walls[y][x])->door_sides_sprite);
+    }
 }
 
-void	init_billboards_e(t_game *game)
+static int	count_sprite(t_hashmap *sprites, char *key)
 {
-	t_entity	*entity;
-	t_list		*curr;
-	size_t		i;
+	int		i;
+	char	*full_key;
+	void	*found;
 
-	fte_set(NULL);
-	game->billboards = ft_calloc(count_billboards(game->entities) + 1, sizeof(t_entity *));
-	if (!game->billboards)
-		return (fte_set("billboards init"));
-	curr = game->entities;
-	i = -1;
-	while (curr)
+	i = 1;
+	while (1)
 	{
-		entity = curr->data;
-		curr = curr->next;
-		if (!entity->billboard)
-			continue ;
-		game->billboards[++i] = entity;
+		full_key = ft_strf("%s_%d", key, i);
+		found = ft_hashmap_get_value(sprites, full_key);
+		free(full_key);
+		if (!found)
+			break ;
+		i++;
+	}
+	return (i - 1);
+}
+
+static void	fill_sprites(t_sprite **sprites, t_hashmap *game_sprites, char *key)
+{
+	int		angle;
+	int		count;
+	int		size;
+	int		sprite_index;
+	char	*full_key;
+	int		offset;
+
+	count = count_sprite(game_sprites, key);
+	if (!count)
+		return ;
+	size = 360 / count;
+	offset = size / 2;
+	angle = -1;
+	while (++angle <= 360)
+	{
+		sprite_index = (ft_normalize_angle(angle - offset)) / size + 1;
+		if (sprite_index > count)
+			sprite_index = 1;
+		full_key = ft_strf("%s_%d", key, sprite_index);
+		sprites[angle] = ft_hashmap_get_value(game_sprites, full_key);
+		free(full_key);
+	}
+}
+void	init_sprites_3d(t_game *game)
+{
+	t_element	*curr;
+	t_element	*el;
+	char		*key;
+	int			len;
+	int			i;
+	char		*key_base;
+	t_sprite	**sprites;
+
+	el = *game->sprites->table;
+	while (el)
+	{
+		curr = el;
+		el = el->next;
+		key = curr->key;
+		len = ft_strlen(key);
+		i = len - 1;
+		while (i >= 0 && ft_isdigit(key[i]))
+			i--;
+		if (i < 1 || key[i] != '_')
+			continue;
+		key_base = ft_strndup(key, i);
+		if (!key_base)
+			continue;
+		if (!ft_hashmap_get_value(game->sprites_3d, key_base))
+		{
+			sprites = ft_calloc(360, sizeof(t_sprite *));
+			if (!sprites)
+			{
+				free(key_base);
+				continue;
+			}
+			fill_sprites(sprites, game->sprites, key_base);
+			ft_hashmap_set(game->sprites_3d, key_base, sprites, free);
+		}
+		free(key_base);
 	}
 }

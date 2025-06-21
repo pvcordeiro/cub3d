@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/20 18:15:59 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 00:16:43 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -435,9 +435,12 @@ struct s_cub3d
 };
 
 // cub3d
-t_cub3d		*cub3d(void);
-void		cub3d_exit(int code);
-void		*hashmap_get_with_identifier(t_game *game, t_hashmap *hashmap, char identifier, char *rest);
+t_cub3d			*cub3d(void);
+void			cub3d_exit(int code);
+void			*hashmap_get_with_identifier(t_game *game, t_hashmap *hashmap, char identifier, char *rest);
+void			update_walls_matrix(t_game *game);
+void			update_billboards_vec(t_game *game);
+t_type_creator	get_type_creator(t_hashmap *identifiers, char identifier);
 
 // Game
 void		game_load_map_e(t_game *game, t_ftm_window *window, t_map *map);
@@ -482,7 +485,6 @@ t_character			*character_new(t_game *game, t_ftm_window *window, char identifier
 t_elevator			*elevator_new(t_game *game, t_ftm_window *window, char identifier);
 
 // Items
-t_type_creator	get_type_creator(t_hashmap *identifiers, char identifier);
 void			free_item(void *data);
 t_item			*item_new(t_game *game, t_ftm_window *window, char identifier);
 t_collectible	*collectible_new(t_game *game, t_ftm_window *window, char identifier);

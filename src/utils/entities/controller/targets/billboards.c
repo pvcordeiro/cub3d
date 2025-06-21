@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 19:43:23 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/16 17:12:26 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 01:12:44 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,9 @@ static bool	has_line_of_sight(t_game *game, t_entity *entity,
         }, entity});
 	if (!los_ray.hit)
 		return (true);
-    return (los_ray.distance >= target_dist || is_door_and_opened(los_ray.hit));
+	if (is_door_and_opened(los_ray.hit))
+		return (has_line_of_sight(game, los_ray.hit, target, target_dist));
+    return (los_ray.distance >= target_dist);
 }
 
 t_entity	*billboard_target(t_game *game, t_entity *entity, double fov)

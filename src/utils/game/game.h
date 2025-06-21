@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:16:32 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/18 21:21:15 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 00:30:39 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ void	kill_threads(t_game *game);
 void	init_threads_e(t_game *game);
 void	init_sounds_e(t_game *game);
 void	init_hud(t_game *game);
-void	init_walls_e(t_game *game);
-void	init_billboards_e(t_game *game);
 void	init_fps(t_game *game);
 void	set_sprite_configs(t_game *game);
 void	init_fonts_e(t_ftm_window *window, t_game *game);

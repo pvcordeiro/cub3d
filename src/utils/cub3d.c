@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 21:53:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/20 12:10:15 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 00:55:15 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,87 @@ void	*hashmap_get_with_identifier(t_game *game, t_hashmap *hashmap, char identif
 	return (free(key), data);
 }
 
+static bool	alloc_walls(t_game *game)
+{
+	int	i;
+
+	game->walls = ft_calloc(game->map->size.height, sizeof(t_entity **));
+	if (!game->walls)
+		return (false);
+	i = -1;
+	while (++i < game->map->size.height)
+	{
+		game->walls[i] = ft_calloc(game->map->size.width, sizeof(t_entity *));
+		if (game->walls[i])
+			continue ;
+        while (--i >= 0)
+            free(game->walls[i]);
+        free(game->walls);
+		game->walls = NULL;
+		return (false);
+	}
+	return (true);
+}
+
+void	update_walls_matrix(t_game *game)
+{
+	t_entity	*entity;
+	t_list		*curr;
+
+	if (!game)
+		return ;
+	if (!game->walls && !alloc_walls(game))
+		return ;
+	curr = game->entities;
+	while (curr)
+	{
+		entity = curr->data;
+		curr = curr->next;
+		if (!entity->wall || entity->coords.x < 0
+			|| entity->coords.x >= game->map->size.width || entity->coords.y < 0
+			|| entity->coords.y >= game->map->size.height)
+			continue ;
+		game->walls[(int)entity->coords.y][(int)entity->coords.x] = entity;
+	}
+}
+
+static bool	is_billboard(t_entity *entity, void *param)
+{
+	(void)param;
+	return (entity && entity->billboard);
+}
+
+void	update_billboards_vec(t_game *game)
+{
+    t_entity	*entity;
+    t_list		*curr;
+    size_t		i;
+    size_t		billboard_count;
+
+    if (!game || !game->entities)
+        return ;
+    billboard_count = ft_list_count(game->entities, (void *)is_billboard, NULL);
+    if (!game->billboards
+		|| billboard_count != ft_strvlen((void *)game->billboards))
+    {
+        free(game->billboards);
+        game->billboards = ft_calloc(billboard_count + 1, sizeof(t_entity *));
+        if (!game->billboards)
+            return ;
+    }
+	ft_bzero(game->billboards, sizeof(t_entity *) * (billboard_count + 1));
+    curr = game->entities;
+    i = -1;
+    while (curr)
+    {
+        entity = curr->data;
+        curr = curr->next;
+        if (!entity->billboard)
+            continue ;
+        game->billboards[++i] = entity;
+    }
+}
+
 t_type_creator	get_type_creator(t_hashmap *ids, char identifier)
 {
 	if (ft_list_any(identifiers_get(ids, "ITEM"), (void *)ft_str_equal_char_ptr, &identifier))
@@ -47,8 +128,6 @@ t_type_creator	get_type_creator(t_hashmap *ids, char identifier)
 		return ((void *)collectible_new);
 	if (ft_list_any(identifiers_get(ids, "WEAPON"), (void *)ft_str_equal_char_ptr, &identifier))
 		return ((void *)weapon_new);
-	if (ft_list_any(identifiers_get(ids, "AIR"), (void *)ft_str_equal_char_ptr, &identifier))
-		return (NULL);
 	if (ft_list_any(identifiers_get(ids, "WALL"), (void *)ft_str_equal_char_ptr, &identifier))
 		return ((void *)wall_new);
 	if (ft_list_any(identifiers_get(ids, "PLAYER"), (void *)ft_str_equal_char_ptr, &identifier))

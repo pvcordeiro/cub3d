@@ -6,7 +6,7 @@
 #    By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/26 17:16:21 by afpachec          #+#    #+#              #
-#    Updated: 2025/06/20 21:42:04 by afpachec         ###   ########.fr        #
+#    Updated: 2025/06/21 01:04:01 by afpachec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,8 @@ OBJ_DIR = obj
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 MAPS = $(wildcard maps/*.cub)
 UNAME_S = $(shell uname -s)
+RAND=$(shell echo $$RANDOM)
+FT_AUDIO_DIR = src/ft_audio
 
 check_flag = $(shell $(CC) $(1) -E -c /dev/null -o /dev/null 2>/dev/null && echo 1 || echo 0)
 ifeq ($(UNAME_S),Darwin)
@@ -83,9 +85,19 @@ $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
+clean-everything-but-ft-audio:
+	@if [ -d "$(OBJ_DIR)/$(FT_AUDIO_DIR)" ]; then \
+		tar -cf ft_audio.tar -C $(OBJ_DIR) $(FT_AUDIO_DIR); \
+	fi
+	@$(MAKE) clean
+	@if [ -f "ft_audio.tar" ]; then \
+		mkdir -p $(OBJ_DIR); \
+		tar -xf ft_audio.tar -C $(OBJ_DIR); \
+		rm -f ft_audio.tar; \
+	fi
+
 clean:
 	@rm -rf $(OBJ_DIR)
-	@rm -rf lib/minilibx-linux
 
 fclean: clean
 	@rm -rf $(NAME)
@@ -95,6 +107,8 @@ fclean: clean
 	@rm -rf lib/libSDL2.a
 
 re: fclean all
+
+cdev: clean-everything-but-ft-audio dev
 
 dev: $(NAME)
 	./$(NAME) maps/e1m1.cub

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 12:28:23 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/27 11:47:23 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 01:09:08 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,13 @@ static char	*ft_gnl_str_join_buff(char *s1, char *s2)
 
 char	*ft_get_next_line(int fd)
 {
-	static char	buff[FOPEN_MAX][GNL_BUFFER_SIZE + 1];
+	static char	buff[FOPEN_MAX][FT_GNL_BUFF + 1];
 	ssize_t		bytes_read;
 	char		*line;
 
 	line = NULL;
 	bytes_read = 1;
-	while ((fd >= 0 && fd < FOPEN_MAX && GNL_BUFFER_SIZE > 0) && bytes_read > 0)
+	while ((fd >= 0 && fd < FOPEN_MAX && FT_GNL_BUFF > 0) && bytes_read > 0)
 	{
 		if (buff[fd][0])
 		{
@@ -73,7 +73,7 @@ char	*ft_get_next_line(int fd)
 		}
 		else
 		{
-			bytes_read = read(fd, buff[fd], GNL_BUFFER_SIZE);
+			bytes_read = read(fd, buff[fd], FT_GNL_BUFF);
 			if (bytes_read < 0)
 				return (free(line), NULL);
 			buff[fd][bytes_read] = '\0';
