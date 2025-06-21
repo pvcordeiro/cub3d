@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   enemy.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 21:10:29 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/20 15:21:46 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/21 03:33:10 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 #define STRAFE_INTERVAL 2500
 #define FIRE_CHANCE 0.05
 #define LOOK_AROUND_CHANCE 0.01
-#define HEARING_RANGE 10
+#define SHOT_HEARING_RANGE 10
+#define SPRINT_HEARING_RANGE 5
 #define LAST_HIT_DELAY 1000
 
 static void	look_at_target(t_entity *entity, t_entity *target_entity)
@@ -122,21 +123,21 @@ static void	hearment(t_game *game, t_character *character)
 			continue ;
 		player = (t_player *)game->billboards[i];
 		item = player->character.inventory[player->character.inventory_index];
-		if (!item || !item->user)
-			continue ;
 		dist = ft_distance(character->billboard.entity.coords,
-			player->character.billboard.entity.coords);
-		if (dist > HEARING_RANGE)
-			continue;
+			game->billboards[i]->coords);
+		if (!(game->billboards[i]->controller.sprinting
+			&& dist < SPRINT_HEARING_RANGE)
+			&& !(item && item->user && dist < SHOT_HEARING_RANGE))
+			continue ;
 		character->billboard.entity.coords.yaw = ft_normalize_angle(character->billboard.entity.coords.yaw + ft_angle_distance(
 			character->billboard.entity.coords,
 			player->character.billboard.entity.coords));
-		targets_frame(character, 120);
+		targets_frame(game, character, 120);
 		return ;
 	}
 }
 
-static void	frame(t_entity *entity, double delta_time)
+static void	frame(t_game *game, t_entity *entity, double delta_time)
 {
 	t_character	*character;
 
@@ -146,11 +147,11 @@ static void	frame(t_entity *entity, double delta_time)
 	remove_attributes(character, &entity->controller);
 	if (character->dead)
 		return ;
-	targets_frame(character, 120);
+	targets_frame(game, character, 120);
 	if (ft_get_time() - character->last_hit < LAST_HIT_DELAY
 		&& character->last_hit_by_character)
 		character->target_entity = (t_entity *)character->last_hit_by_character;
-	hearment(&cub3d()->game, character);
+	hearment(game, character);
 	if (!character->target_entity || character->target_entity->type != ENTITY_PLAYER
 		|| ((t_character *)character->target_entity)->dead)
 		look_around(character, &entity->controller);
@@ -163,14 +164,13 @@ static void	frame(t_entity *entity, double delta_time)
 		else if (!character->inventory[character->inventory_index] || !character->inventory[character->inventory_index]->user)
 			update_movement(entity, character->target_entity);
 	}
-	moviment_frame(entity, delta_time);
+	moviment_frame(game, entity, delta_time);
 }
 
-void	init_enemy_controller(t_entity *entity)
+void	init_enemy_controller(t_game *game, t_entity *entity)
 {
 	entity->controller.optimal_proximity = ft_atof(hashmap_get_with_identifier(
-		&cub3d()->game, cub3d()->game.map->types, entity->identifier,
-		"OPTIMAL_PROXIMITY"));
+		game, game->map->types, entity->identifier, "OPTIMAL_PROXIMITY"));
 	entity->controller.frame = frame;
 	entity->controller.prev_angle = entity->coords.yaw;
 	entity->controller.key_look_velocity = PLAYER_KEY_LOOK_VELOCITY / 1.5;

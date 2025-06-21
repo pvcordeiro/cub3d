@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   entities0.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 20:49:46 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/20 10:25:23 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 03:22:31 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,32 +34,31 @@ t_sprite	*get_entity_sprite(t_entity *entity, t_direction direction)
 	return (NULL);
 }
 
-void	call_entity_frames(t_list *entities, t_fps *fps)
+void	call_entity_frames(t_game *game, t_fps *fps)
 {
 	t_list		*curr;
 	t_entity	*entity;
 
-	curr = entities;
+	curr = game->entities;
 	while (curr)
 	{
 		entity = curr->data;
-		entity->frame(entity, fps->delta_time);
+		entity->frame(game, entity, fps->delta_time);
 		curr = curr->next;
 	}
 }
 
-void	call_entity_keys(t_list *entities,
-	t_ftm_key_hook_values key_hook_values)
+void	call_entity_keys(t_game *game, t_ftm_key_hook_values kvh)
 {
 	t_list		*curr;
 	t_entity	*entity;
 
-	curr = entities;
+	curr = game->entities;
 	while (curr)
 	{
 		entity = curr->data;
 		if (entity->active && entity->controller.key)
-			entity->controller.key(entity, key_hook_values);
+			entity->controller.key(game, entity, kvh);
 		curr = curr->next;
 	}
 }

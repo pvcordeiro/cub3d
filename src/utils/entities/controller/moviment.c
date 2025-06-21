@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 18:51:55 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/14 18:20:17 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 03:19:10 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,13 +120,13 @@ static void	actions(t_list *entities, t_character *character)
 		target_entity->action((t_entity *)target_entity, character);
 }
 
-void	moviment_frame(t_entity *entity, double delta_time)
+void	moviment_frame(t_game *game, t_entity *entity, double delta_time)
 {
 	if (!entity->health)
 		return ;
 	if (entity->character)
-		actions(cub3d()->game.entities, (t_character *)entity);
+		actions(game->entities, (t_character *)entity);
 	looks(entity, delta_time);
 	mouse_moviment(entity, delta_time);
-	walks(cub3d()->game.entities, entity, delta_time);
+	walks(game->entities, entity, delta_time);
 }

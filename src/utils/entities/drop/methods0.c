@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/18 20:17:10 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 03:06:06 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,11 @@ static void	do_the_thing(t_game *game, t_drop *drop)
 	}
 }
 
-void	drop_frame(t_entity *entity, double delta_time)
+void	drop_frame(t_game *game, t_entity *entity, double delta_time)
 {
 	t_drop	*drop;
 
-	billboard_frame(entity, delta_time);
+	billboard_frame(game, entity, delta_time);
 	if (!entity)
 		return ;
 	drop = (t_drop *)entity;
@@ -86,7 +86,7 @@ void	drop_frame(t_entity *entity, double delta_time)
 	if (!entity->active)
 		return ;
 	set_sprite(drop);
-	do_the_thing(&cub3d()->game, drop);
+	do_the_thing(game, drop);
 }
 
 void	clear_drop(void *drop)

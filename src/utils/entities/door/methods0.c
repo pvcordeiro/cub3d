@@ -6,17 +6,17 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/15 13:42:50 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 03:05:30 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "door.h"
 
-void	door_frame(t_entity *entity, double delta_time)
+void	door_frame(t_game *game, t_entity *entity, double delta_time)
 {
 	t_door		*door;
 
-	wall_frame(entity, delta_time);
+	wall_frame(game, entity, delta_time);
 	door = (t_door *)entity;
 	door->wall.entity.hard = door->opening_sprite.index != door->animation_frames - 1;
 	door->wall.entity.transparent = door->opening_sprite.index;

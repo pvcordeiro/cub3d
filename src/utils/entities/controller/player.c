@@ -6,17 +6,17 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 19:35:54 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 01:30:24 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 03:24:35 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "controller.h"
 
-static void	frame(t_entity *entity, double delta_time)
+static void	frame(t_game *game, t_entity *entity, double delta_time)
 {
-	moviment_frame(entity, delta_time);
+	moviment_frame(game, entity, delta_time);
 	if (entity->character)
-		targets_frame((t_character *)entity, PLAYER_FOV);
+		targets_frame(game, (t_character *)entity, PLAYER_FOV);
 }
 
 static void	mouse_inv_keys(t_character *character, t_ftm_key_hook_values key_hook_values)
@@ -97,15 +97,15 @@ static t_player_keys	get_player_two_keys(void)
     });
 }
 
-static t_player_keys	get_player_keys(t_character *character)
+static t_player_keys	get_player_keys(t_game *game, t_character *character)
 {
 	t_player	*player;
 
 	player = (t_player *)character;
 	if (character->billboard.entity.type != ENTITY_PLAYER
-		|| player == cub3d()->game.players[0])
+		|| player == game->players[0])
 		return (get_player_one_keys());
-	else if (player == cub3d()->game.players[1])
+	else if (player == game->players[1])
 		return (get_player_two_keys());
 	return ((t_player_keys){0});
 }
@@ -122,7 +122,7 @@ static void	item_use_key(bool use, t_character *character)
 		item->user = character;
 }
 
-static void	item_drop_key(bool drop, t_character *character)
+static void	item_drop_key(t_game *game, bool drop, t_character *character)
 {
 	t_item	*item;
 
@@ -130,7 +130,7 @@ static void	item_drop_key(bool drop, t_character *character)
 	if (!item)
 		return ;
 	if (drop)
-		item->drop(&cub3d()->game, &cub3d()->window, item, character);
+		item->drop(game, &cub3d()->window, item, character);
 }
 
 static void	move_inventory_index(t_character *character)
@@ -201,7 +201,7 @@ static void	do_cheat_keys(t_entity *entity, t_ftm_key_hook_values khv)
 		entity->hard = !entity->hard;
 }
 
-static void	do_inv_keys(t_character *character, t_player_keys keys,
+static void	do_inv_keys(t_game *game, t_character *character, t_player_keys keys,
 	t_ftm_key_hook_values khv)
 {
 	bool	move_inventory;
@@ -213,26 +213,26 @@ static void	do_inv_keys(t_character *character, t_player_keys keys,
 	set_key_bool_value(&move_inventory, keys.move_inventory_index, khv);
 	set_key_bool_value(&item_use, keys.item_use, khv);
 	set_key_bool_value(&item_drop, keys.item_drop, khv);
-	if ((t_character *)cub3d()->game.players[0] == character)
+	if ((t_character *)game->players[0] == character)
 		mouse_inv_keys(character, khv);
 	if (move_inventory)
 		move_inventory_index(character);
 	if (khv.key == keys.item_use.key)
 		item_use_key(item_use, character);
 	if (khv.key == keys.item_drop.key)
-		item_drop_key(item_drop, character);
+		item_drop_key(game, item_drop, character);
 }
 
-static void	key(t_entity *entity, t_ftm_key_hook_values khv)
+static void	key(t_game *game, t_entity *entity, t_ftm_key_hook_values khv)
 {
 	t_player_keys	keys;
 
 	if (!entity || !entity->character)
 		return ;
-	keys = get_player_keys((t_character *)entity);
+	keys = get_player_keys(game, (t_character *)entity);
 	do_half_of_keys(&entity->controller, keys, khv);
 	do_cheat_keys(entity, khv);
-	do_inv_keys((t_character *)entity, keys, khv);
+	do_inv_keys(game, (t_character *)entity, keys, khv);
 }
 
 void	init_player_controller(t_entity *entity)

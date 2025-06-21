@@ -30,7 +30,7 @@ p_EA NULL
 9_NO assets/textures/billiosn-ust-smile.xpm
 9_WE assets/textures/billiosn-ust-smile.xpm
 9_EA assets/textures/billiosn-ust-smile.xpm
-MOUSE FALSE
+MOUSE TRUE
 BACKGROUND_SOUND assets/sounds/billiosmustsmile.mp3
 
 F 46,39,30

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 02:13:08 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 03:18:06 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void	call_item_frames(t_character *character)
 			character->inventory[i]->frame(character->inventory[i]);
 }
 
-static void	drop_items(t_character *character)
+static void	drop_items(t_game *game, t_character *character)
 {
 	int		i;
 
@@ -78,21 +78,21 @@ static void	drop_items(t_character *character)
 		i = -1;
 		while (++i < INVENTORY_SIZE)
 			if (character->inventory[i] && character->inventory[i]->drop)
-				character->inventory[i]->drop(&cub3d()->game,
-				&cub3d()->window, character->inventory[i], character);
+				character->inventory[i]->drop(game, &cub3d()->window,
+				character->inventory[i], character);
 		return ;
 	}
 	((t_entity *)character->drop)->coords = ((t_entity *)character)->coords;
-	ft_list_add(&cub3d()->game.entities, character->drop, free_entity);
+	ft_list_add(&game->entities, character->drop, free_entity);
 	character->drop = NULL;
 }
 
-static void	billions_must_die(t_character *character)
+static void	billions_must_die(t_game *game, t_character *character)
 {
 	bool	was_already_dead;
 
 	if (character->dead && !character->was_already_dead)
-		drop_items(character);
+		drop_items(game, character);
 	if (character->dead && character->billboard.entity.health)
 		character->dead = false;
 	was_already_dead = character->was_already_dead;
@@ -104,19 +104,19 @@ static void	billions_must_die(t_character *character)
 	character->billboard.entity.targetable = !character->dead;
 }
 
-void	character_frame(t_entity *entity, double delta_time)
+void	character_frame(t_game *game, t_entity *entity, double delta_time)
 {
 	t_character *character;
 
-	billboard_frame(entity, delta_time);
+	billboard_frame(game, entity, delta_time);
 	character = (t_character *)entity;
-	billions_must_die(character);
+	billions_must_die(game, character);
 	if (character->dead)
 		character->billboard.sprites = character->death_sprite;
 	else if (hit(character))
 		character->billboard.sprites = character->hit_sprite;
 	else if (using(character))
-		set_using(&cub3d()->game, character);
+		set_using(game, character);
 	else if (walking(entity))
 		character->billboard.sprites = character->walking_sprite;
 	else

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 18:34:50 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/18 22:36:58 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 03:23:17 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ static void	do_the_dumb_ai(t_entity *entity, t_player *player)
 	entity->controller.sprinting = (distance_to_player > 4.0);
 }
 
-static void	frame(t_entity *entity, double delta_time)
+static void	frame(t_game *game, t_entity *entity, double delta_time)
 {
 	int	i;
 
 	i = -1;
 	while (++i < PLAYER_MAX)
-		do_the_dumb_ai(entity, cub3d()->game.players[i]);
-    moviment_frame(entity, delta_time);
+		do_the_dumb_ai(entity, game->players[i]);
+    moviment_frame(game, entity, delta_time);
 }
 
 void	init_ai_dumb_controller(t_entity *entity)

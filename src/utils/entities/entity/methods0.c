@@ -6,16 +6,17 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/14 18:34:03 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 03:20:44 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "entity.h"
 
-void	entity_frame(t_entity *entity, double delta_time)
+void	entity_frame(t_game *game, t_entity *entity, double delta_time)
 {
+	(void)game;
 	if (entity->controller.frame)
-		entity->controller.frame(entity, delta_time);
+		entity->controller.frame(game, entity, delta_time);
 }
 
 void	clear_entity(void *entity)

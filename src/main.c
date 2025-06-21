@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:15:19 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/17 14:35:16 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 02:42:12 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,9 @@ int	main(int argc, char **argv)
 	cub3d()->curr_map = parse_map_e(argv[1]);
 	fte_assert();
 	fta_init_e();
-	game_load_map_e(&cub3d()->game, &cub3d()->window, cub3d()->curr_map);
+	pthread_mutex_init(&cub3d()->game_mutex, NULL);
+	cub3d()->game = game_new(&cub3d()->window, cub3d()->curr_map);
 	fte_assert();
-	game_start(&cub3d()->game, &cub3d()->window);
+	game_start(cub3d()->game, &cub3d()->window);
 	cub3d_exit(0);
 }

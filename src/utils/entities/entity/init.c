@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 00:50:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/10 19:05:13 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 02:37:19 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ void	init_entity(t_game *game, t_ftm_window *window, t_entity *entity, char iden
 	entity->collision_sound = hashmap_get_with_identifier(game, game->sounds, identifier, "COLLISION");
 	entity->identifier = identifier;
 	entity->size = (t_dsize){1, 1};
-	init_controller(entity, hashmap_get_with_identifier(game, game->map->types, identifier, "CONTROLLER"));
+	init_controller(game, entity,
+		hashmap_get_with_identifier(game, game->map->types, identifier,
+			"CONTROLLER"));
 }
 
 t_entity	*entity_new(t_game *game, t_ftm_window *window, char identifier)

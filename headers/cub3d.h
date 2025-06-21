@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 02:04:54 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 03:22:43 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,8 +190,8 @@ enum e_entity_type
 
 struct s_controller
 {
-	void		(*key)(t_entity *entity, t_ftm_key_hook_values key_hook_values);
-	void		(*frame)(t_entity *entity, double delta_time);
+	void		(*key)(t_game *game, t_entity *entity, t_ftm_key_hook_values);
+	void		(*frame)(t_game *game, t_entity *entity, double delta_time);
 	t_time		last_shot;
 	t_time		last_strafe;
 	t_time		last_seen_target;
@@ -219,7 +219,7 @@ struct s_controller
 
 struct s_entity
 {
-	void			(*frame)(t_entity *entity, double delta_time);
+	void			(*frame)(t_game *game, t_entity *entity, double delta_time);
 	void			(*clear)(void *this);
 	void			(*action)(t_entity *entity, t_character *actioner);
 	void			(*shot)(t_entity *shooted, t_character *shooter);
@@ -433,9 +433,11 @@ struct s_game
 struct s_cub3d
 {
 	t_sprite			placeholder;
+	t_map				*prev_map;
 	t_map				*curr_map;
 	t_ftm_window		window;
-	t_game				game;
+	pthread_mutex_t		game_mutex;
+	t_game				*game;
 };
 
 // cub3d
@@ -447,7 +449,7 @@ void			update_billboards_vec(t_game *game);
 t_type_creator	get_type_creator(t_hashmap *identifiers, char identifier);
 
 // Game
-void		game_load_map_e(t_game *game, t_ftm_window *window, t_map *map);
+t_game		*game_new(t_ftm_window *window, t_map *map);
 void		game_start(t_game *game, t_ftm_window *window);
 void		clear_game(void *game);
 void		free_game(void *game);
@@ -476,8 +478,8 @@ void		sprite_soft_copy(t_sprite **dst, t_sprite *src);
 
 // Entities
 void				free_entity(void *data);
-void				call_entity_frames(t_list *entities, t_fps *fps);
-void				call_entity_keys(t_list *entities, t_ftm_key_hook_values key_hook_values);
+void				call_entity_frames(t_game *game, t_fps *fps);
+void				call_entity_keys(t_game *game, t_ftm_key_hook_values kvh);
 bool				entity_x_is_transparent(t_entity *entity, t_direction direction, double x);
 t_player			*player_new(t_game *game, t_ftm_window *window, char identifier);
 t_wall				*wall_new(t_game *game, t_ftm_window *window, char identifier);

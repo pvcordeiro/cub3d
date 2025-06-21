@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:27:08 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 00:30:36 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 02:26:59 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,46 +55,52 @@ static void	init_hashmaps_e(t_game *game)
 		return (fte_set("init sprites 3d"));
 }
 
-void	game_load_map_e(t_game *game, t_ftm_window *window, t_map *map)
+t_game	*game_new(t_ftm_window *window, t_map *map)
 {
+	t_game	*game;
+
 	fte_set(NULL);
+	game = ft_calloc(1, sizeof(t_game));
+	if (!game)
+		return (fte_set("game new"), NULL);
 	game->map = map;
 	init_hashmaps_e(game);
 	if (fte_flagged())
-		return (clear_game(game));
+		return (free_game(game), NULL);
 	init_sprites_e(window, game);
 	if (fte_flagged())
-		return (clear_game(game));
+		return (free_game(game), NULL);
 	init_sprites_3d(game);
 	init_enviroment_e(game);
 	if (fte_flagged())
-		return (clear_game(game));
+		return (free_game(game), NULL);
 	init_minimap(window, game);
 	init_sounds_e(game);
 	if (fte_flagged())
-		return (clear_game(game));
+		return (free_game(game), NULL);
 	init_entities_e(game, window);
 	if (fte_flagged())
-		return (clear_game(game));
+		return (free_game(game), NULL);
 	init_fonts_e(window, game);
 	if (fte_flagged())
-		return (clear_game(game));
+		return (free_game(game), NULL);
 	init_font_e(window, game);
 	if (fte_flagged())
-		return (clear_game(game));
+		return (free_game(game), NULL);
 	update_walls_matrix(game);
 	if (fte_flagged())
-		return (clear_game(game));
+		return (free_game(game), NULL);
 	insert_door_frames(game);
 	update_billboards_vec(game);
 	if (fte_flagged())
-		return (clear_game(game));
+		return (free_game(game), NULL);
 	init_hud(game);
 	init_window(window, game);
 	init_fps(game);
 	init_threads_e(game);
 	if (fte_flagged())
-		return (clear_game(game));
+		return (free_game(game), NULL);
+	return (game);
 }
 
 void	game_start(t_game *game, t_ftm_window *window)

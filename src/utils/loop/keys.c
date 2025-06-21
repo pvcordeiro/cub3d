@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:21:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/20 18:01:23 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 03:22:50 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,29 @@
 
 void	key_hook(t_ftm_key_hook_values khv)
 {
-	call_entity_keys(cub3d()->game.entities, khv);
+	t_game	*game;
+
+	game = cub3d()->game;
+	pthread_mutex_lock(&cub3d()->game_mutex);
+	if (game != cub3d()->game)
+	{
+		pthread_mutex_unlock(&cub3d()->game_mutex);
+		return ;
+	}
+	call_entity_keys(game, khv);
 	if (khv.key == XK_Escape)
 		cub3d_exit(0);
 	if (khv.key == XK_F3 && khv.down)
-		cub3d()->game.hud.debug_enabled = !cub3d()->game.hud.debug_enabled;
+		game->hud.debug_enabled = !game->hud.debug_enabled;
 	if (khv.key == XK_F2 && khv.down)
-		cub3d()->game.hud.stats_enabled = !cub3d()->game.hud.stats_enabled;
+		game->hud.stats_enabled = !game->hud.stats_enabled;
 	if (khv.key == XK_F4 && khv.down)
-		cub3d()->game.hud.minimap_enabled = !cub3d()->game.hud.minimap_enabled;
+		game->hud.minimap_enabled = !game->hud.minimap_enabled;
 	if (khv.key == XK_F5 && khv.down)
-		cub3d()->game.hud.action_enabled = !cub3d()->game.hud.action_enabled;
+		game->hud.action_enabled = !game->hud.action_enabled;
 	if (khv.key == XK_F6 && khv.down)
-		cub3d()->game.hud.enabled = !cub3d()->game.hud.enabled;
+		game->hud.enabled = !game->hud.enabled;
 	if (khv.key == XK_F1 && khv.down)
 		ftm_window_toggle_fullscreen(&cub3d()->window, (t_size){W_WIDTH, W_HEIGHT});
+	pthread_mutex_unlock(&cub3d()->game_mutex);
 }
