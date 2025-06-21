@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 00:50:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/18 16:55:46 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 01:23:56 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	init_collectible(t_game *game, t_ftm_window *window, t_collectible *collect
 	collectible->item.clear = clear_collectible;
 	collectible->item.frame = collectible_frame;
 	collectible->item.use = collectible_use;
+	collectible->item.drop = collectible_drop;
 	collectible->health = fabs(ft_atof(hashmap_get_with_identifier(game, game->map->types,
 			identifier, "HEALTH")));
 	collectible->ammo = fabs(ft_atof(hashmap_get_with_identifier(game, game->map->types,

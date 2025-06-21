@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/19 01:11:24 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 01:24:50 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,12 @@ void	weapon_use(t_item *item, t_drop *drop)
 			|| ft_distance(item->user->billboard.entity.coords,
 				target_entity->coords) <= weapon->range))
 		target_entity->shot(target_entity, item->user);
+}
+
+void	weapon_drop(t_game *game, t_ftm_window *window, t_item *item,
+	t_character *dropper)
+{
+	item_drop(game, window, item, dropper);
 }
 
 void	weapon_frame(t_item *item)

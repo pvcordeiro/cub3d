@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 17:48:25 by paude-so          #+#    #+#             */
-/*   Updated: 2025/06/18 20:37:00 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 01:42:26 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ static void render_entities(t_minimap_data mp_data)
     while (entity_item)
     {
         entity = entity_item->data;
-        if (entity != (t_entity *)mp_data.character)
+        if (entity != (t_entity *)mp_data.character && entity->active)
             render_entity(mp_data, entity,
                     (t_coords){
                         mp_data.coords.x + entity_offset.x,

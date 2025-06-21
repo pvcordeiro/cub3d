@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/18 20:15:18 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 01:40:16 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,33 @@ void	item_use(t_item *item, t_drop *drop)
 	if (drop)
 		item->user->last_auto_use = ft_get_time();
 	fta_play(item->use_sound);
+}
+
+void	item_drop(t_game *game, t_ftm_window *window, t_item *item,
+	t_character *dropper)
+{
+	t_drop	*drop;
+	int		i;
+
+	if (!game || !window || !item || !dropper)
+		return ;
+	drop = drop_new(game, window, 0);
+	if (!drop)
+		return ;
+	item->user = NULL;
+	i = -1;
+	while (++i < INVENTORY_SIZE)
+		if (dropper->inventory[i] == item)
+			dropper->inventory[i] = NULL;
+	drop->item = item;
+	drop->auto_pickup = true;
+	drop->billboard.entity.coords = dropper->billboard.entity.coords;
+	if (dropper->billboard.entity.coords.yaw < 90
+		|| dropper->billboard.entity.coords.yaw > 270)
+		drop->billboard.entity.coords.x += 1;
+	else
+		drop->billboard.entity.coords.x -= 1;
+	ft_list_add(&game->entities, drop, free_entity);
 }
 
 void	item_frame(t_item *item)

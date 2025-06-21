@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 00:16:43 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 01:25:47 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,8 @@ struct s_item
 	void			(*frame)(t_item *item);
 	void			(*clear)(void *this);
 	void			(*use)(t_item *item, t_drop *drop);
+	void			(*drop)(t_game *, t_ftm_window *, t_item *,
+						t_character *dropper);
 	char			identifier;
 	char			*name;
 	char			*description;

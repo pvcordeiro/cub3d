@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 00:50:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/19 01:10:03 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 01:24:55 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	init_weapon(t_game *game, t_ftm_window *window, t_weapon *weapon,
 	weapon->item.clear = clear_weapon;
 	weapon->item.frame = weapon_frame;
 	weapon->item.use = weapon_use;
+	weapon->item.drop = weapon_drop;
 	weapon->range = ft_atof(hashmap_get_with_identifier(game, game->map->types, identifier, "RANGE"));
 	weapon->damage = ft_atoi(hashmap_get_with_identifier(game, game->map->types, identifier, "DAMAGE"));
 	weapon->ammo_usage = ft_atoi(hashmap_get_with_identifier(game, game->map->types, identifier, "AMMO_USAGE"));

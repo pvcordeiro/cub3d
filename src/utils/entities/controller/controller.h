@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 19:31:30 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/19 16:26:09 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 01:27:21 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_player_keys
 	t_player_key	sprinting;
 	t_player_key	move_inventory_index;
 	t_player_key	item_use;
+	t_player_key	item_drop;
 }	t_player_keys;
 
 void	init_player_controller(t_entity *entity);

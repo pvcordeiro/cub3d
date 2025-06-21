@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 00:50:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/11 12:53:24 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 01:38:03 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	init_item(t_game *game, t_ftm_window *window, t_item *item,
 	item->clear = clear_item;
 	item->frame = item_frame;
 	item->use = item_use;
+	item->drop = item_drop;
 	item->identifier = identifier;
 	item->name = hashmap_get_with_identifier(game, game->map->types, identifier,
 		"NAME");

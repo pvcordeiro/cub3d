@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/18 20:15:50 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 01:24:36 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,12 @@ void	collectible_use(t_item *item, t_drop *drop)
 	if (item->user->ammo < 0)
 		item->user->ammo = 0;
 	item->user->score += collectible->score;
+}
+
+void	collectible_drop(t_game *game, t_ftm_window *window, t_item *item,
+	t_character *dropper)
+{
+	item_drop(game, window, item, dropper);
 }
 
 void	collectible_frame(t_item *item)

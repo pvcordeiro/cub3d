@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 19:35:54 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/20 13:07:01 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/21 01:30:24 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,19 @@ static t_player_keys	get_player_one_keys(void)
 			{0, 0, 0}, {0, 0, 0}},
 		.walking_right = (t_player_key){XK_d, false, 0.0, 1.0, false,
 			{0, 0, 0}, {0, 0, 0}},
-		.looking_left = (t_player_key){XK_q, false, 0.0, 1.0, false,
+		.looking_left = (t_player_key){XK_Left, false, 0.0, 1.0, false,
 			{0, 0, 0}, {0, 0, 0}},
-		.looking_right = (t_player_key){XK_e, false, 0.0, 1.0, false,
+		.looking_right = (t_player_key){XK_Right, false, 0.0, 1.0, false,
 			{0, 0, 0}, {0, 0, 0}},
-		.action = (t_player_key){XK_f, false, 0.0, 1.0, false,
+		.action = (t_player_key){XK_e, false, 0.0, 1.0, false,
 			{0, 0, 0}, {0, 0, 0}},
 		.sprinting = (t_player_key){XK_Shift_L, false, 0.0, 1.0, false,
 			{0, 0, 0}, {0, 0, 0}},
 		.move_inventory_index = (t_player_key){XK_r, false, 0.0, 1.0, false,
 			{0, 0, 0}, {0, 0, 0}},
 		.item_use = (t_player_key){XK_space, false, 0.0, 1.0, false,
+			{0, 0, 0}, {0, 0, 0}},
+		.item_drop = (t_player_key){XK_q, false, 0.0, 1.0, false,
 			{0, 0, 0}, {0, 0, 0}},
 	});
 }
@@ -90,6 +92,8 @@ static t_player_keys	get_player_two_keys(void)
             false, {0, 0, 0}, {0, 0, 0}},
         .item_use = (t_player_key){FTM_GAMEPAD_R2, true, 0.8, 1.0, false,
             {0, 0, 0}, {0, 0, 0}},
+		.item_drop = (t_player_key){FTM_GAMEPAD_L2, true, 0.8, 1.0, false,
+			{0, 0, 0}, {0, 0, 0}},
     });
 }
 
@@ -106,7 +110,7 @@ static t_player_keys	get_player_keys(t_character *character)
 	return ((t_player_keys){0});
 }
 
-static void	item_key(bool use, t_character *character)
+static void	item_use_key(bool use, t_character *character)
 {
 	t_item	*item;
 
@@ -116,6 +120,17 @@ static void	item_key(bool use, t_character *character)
 	item->user = NULL;
 	if (use)
 		item->user = character;
+}
+
+static void	item_drop_key(bool drop, t_character *character)
+{
+	t_item	*item;
+
+	item = character->inventory[character->inventory_index];
+	if (!item)
+		return ;
+	if (drop)
+		item->drop(&cub3d()->game, &cub3d()->window, item, character);
 }
 
 static void	move_inventory_index(t_character *character)
@@ -191,17 +206,21 @@ static void	do_inv_keys(t_character *character, t_player_keys keys,
 {
 	bool	move_inventory;
 	bool	item_use;
+	bool	item_drop;
 
 	move_inventory = false;
 	item_use = false;
 	set_key_bool_value(&move_inventory, keys.move_inventory_index, khv);
 	set_key_bool_value(&item_use, keys.item_use, khv);
+	set_key_bool_value(&item_drop, keys.item_drop, khv);
 	if ((t_character *)cub3d()->game.players[0] == character)
 		mouse_inv_keys(character, khv);
 	if (move_inventory)
 		move_inventory_index(character);
 	if (khv.key == keys.item_use.key)
-		item_key(item_use, character);
+		item_use_key(item_use, character);
+	if (khv.key == keys.item_drop.key)
+		item_drop_key(item_drop, character);
 }
 
 static void	key(t_entity *entity, t_ftm_key_hook_values khv)
