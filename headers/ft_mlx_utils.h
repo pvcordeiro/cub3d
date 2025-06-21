@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:46:27 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 02:10:53 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 14:54:26 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,11 @@ struct s_ftm_controller
 	SDL_GameController	*controller;
 	void				(*key_hook)(t_ftm_key_hook_values);
 	int					id;
+	int					joy_id;
+	int16_t				lx;
+	int16_t				ly;
+	int16_t				rx;
+	int16_t				ry;
 };
 
 struct s_ftm_window

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 20:46:22 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 03:01:31 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 14:55:45 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ void	ftm_controller_init_e(t_ftm_controller *controller, int id)
 	controller->controller = SDL_GameControllerOpen(id);
 	if (!controller->controller)
 		return (fte_set("Failed to open controller %d: %s", id, SDL_GetError()));
-	controller->id = id;
+	controller->id = SDL_JoystickInstanceID(
+		SDL_GameControllerGetJoystick(controller->controller));
+	controller->joy_id = id;
 }
 
 void	ftm_controller_clear(void *data)

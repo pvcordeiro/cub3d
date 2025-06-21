@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 19:35:54 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 12:04:00 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 15:36:55 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	mouse_inv_keys(t_character *character, t_ftm_key_hook_values key_hoo
 	character->inventory_index = new_index;
 }
 
-static t_player_keys	get_player_one_keys(void)
+static t_player_keys	get_player_keyboard_keys(void)
 {
 	return ((t_player_keys){
 		.walking_forward = (t_player_key){XK_w, false, 0.0, 1.0, false,
@@ -66,10 +66,12 @@ static t_player_keys	get_player_one_keys(void)
 			{0, 0, 0}, {0, 0, 0}},
 		.item_drop = (t_player_key){XK_q, false, 0.0, 1.0, false,
 			{0, 0, 0}, {0, 0, 0}},
+		.keyboard_only = (t_player_key){XK_k, false, 0.0, 1.0, false,
+			{0, 0, 0}, {0, 0, 0}},
 	});
 }
 
-static t_player_keys	get_player_two_keys(void)
+static t_player_keys	get_player_gamepad_keys(void)
 {
     return ((t_player_keys){
         .walking_forward = (t_player_key){FTM_GAMEPAD_LSTICK, false, 0.0, 1.0,
@@ -94,20 +96,8 @@ static t_player_keys	get_player_two_keys(void)
             {0, 0, 0}, {0, 0, 0}},
 		.item_drop = (t_player_key){FTM_GAMEPAD_L2, true, 0.8, 1.0, false,
 			{0, 0, 0}, {0, 0, 0}},
+		.keyboard_only = (t_player_key){0},
     });
-}
-
-static t_player_keys	get_player_keys(t_game *game, t_character *character)
-{
-	t_player	*player;
-
-	player = (t_player *)character;
-	if (character->billboard.entity.type != ENTITY_PLAYER
-		|| player == game->players[0])
-		return (get_player_one_keys());
-	else if (player == game->players[1])
-		return (get_player_two_keys());
-	return ((t_player_keys){0});
 }
 
 static void	item_use_key(bool use, t_character *character)
@@ -193,7 +183,7 @@ static void	do_half_of_keys(t_controller *cont, t_player_keys keys,
 	set_key_bool_value(&cont->sprinting, keys.sprinting, khv);
 }
 
-static void	do_cheat_keys(t_entity *entity, t_ftm_key_hook_values khv)
+static void	do_internal_keys(t_entity *entity, t_ftm_key_hook_values khv)
 {
 	if (khv.key == XK_i && khv.down)
 		entity->invencible = !entity->invencible;
@@ -201,39 +191,63 @@ static void	do_cheat_keys(t_entity *entity, t_ftm_key_hook_values khv)
 		entity->hard = !entity->hard;
 }
 
-static void	do_inv_keys(t_game *game, t_character *character, t_player_keys keys,
+static void	do_inv_keys(t_game *game, t_entity *entity, t_player_keys keys,
 	t_ftm_key_hook_values khv)
 {
-	bool	move_inventory;
-	bool	item_use;
-	bool	item_drop;
+	bool	boolean;
 
-	move_inventory = false;
-	item_use = false;
-	item_drop = false;
-	set_key_bool_value(&move_inventory, keys.move_inventory_index, khv);
-	set_key_bool_value(&item_use, keys.item_use, khv);
-	set_key_bool_value(&item_drop, keys.item_drop, khv);
-	if ((t_character *)game->players[0] == character)
-		mouse_inv_keys(character, khv);
-	if (move_inventory)
-		move_inventory_index(character);
+	boolean = false;
+	set_key_bool_value(&boolean, keys.move_inventory_index, khv);
+	if (boolean)
+		move_inventory_index((t_character *)entity);
+	set_key_bool_value(&boolean, keys.item_use, khv);
 	if (khv.key == keys.item_use.key)
-		item_use_key(item_use, character);
+		item_use_key(boolean, (t_character *)entity);
+	set_key_bool_value(&boolean, keys.item_drop, khv);
 	if (khv.key == keys.item_drop.key)
-		item_drop_key(game, item_drop, character);
+		item_drop_key(game, boolean, (t_character *)entity);
+	if (khv.key == keys.keyboard_only.key && khv.down)
+		entity->controller.keyboard_only = !entity->controller.keyboard_only;
+	if ((t_entity *)game->players[0] == entity)
+		mouse_inv_keys((t_character *)entity, khv);
+}
+
+static int	get_player_id_with_keyboard_only_accounted_for(
+	t_game *game, t_player *player)
+{
+	int	i;
+
+	i = -1;
+	while (++i < PLAYER_MAX)
+		if (game->players[i] == player)
+			break ;
+	if (game->players[0]
+		&& ((t_entity *)game->players[0])->controller.keyboard_only)
+		--i;
+	return (i);
+}
+
+static void	do_keys(t_game *game, t_entity *entity, t_player_keys keys,
+	t_ftm_key_hook_values khv)
+{
+	do_half_of_keys(&entity->controller, keys, khv);
+	do_internal_keys(entity, khv);
+	do_inv_keys(game, entity, keys, khv);
 }
 
 static void	key(t_game *game, t_entity *entity, t_ftm_key_hook_values khv)
 {
-	t_player_keys	keys;
+	int	player_id;
 
-	if (!entity || !entity->character)
+	if (!entity || entity->type != ENTITY_PLAYER)
 		return ;
-	keys = get_player_keys(game, (t_character *)entity);
-	do_half_of_keys(&entity->controller, keys, khv);
-	do_cheat_keys(entity, khv);
-	do_inv_keys(game, (t_character *)entity, keys, khv);
+	player_id = get_player_id_with_keyboard_only_accounted_for(
+		game, (t_player *)entity);
+	if (!entity->controller.keyboard_only && khv.controller
+		&& khv.controller->id == player_id)
+		return (do_keys(game, entity, get_player_gamepad_keys(), khv));
+	if (entity == (t_entity *)game->players[0])
+		do_keys(game, entity, get_player_keyboard_keys(), khv);
 }
 
 void	init_player_controller(t_entity *entity)

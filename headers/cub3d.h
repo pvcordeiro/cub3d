@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 13:56:17 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/21 15:39:57 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@
 # define PLAYER_FOV 66.0
 # define PLAYER_RAY_SUBRAYS 5
 # define PLAYER_MOUSE_LOOK_VELOCITY 20.0
-# define PLAYER_KEY_LOOK_VELOCITY 90.0
+# define PLAYER_KEY_LOOK_VELOCITY 180.0
 # define PLAYER_WALK_VELOCITY 4.0
 # define PLAYER_SPRINT_VELOCITY 6.0
 # define PLAYER_RAY_HIT_ENTITIES_NUMBER 5
@@ -210,6 +210,7 @@ struct s_controller
 	bool		looking_left;
 	bool		sprinting;
 	bool		action;
+	bool		keyboard_only;
 	bool		already_actioned;
 	double		mouse_moviment;
 	double		mouse_look_velocity;

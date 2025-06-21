@@ -70,6 +70,32 @@ USING_P_2_SPRITE assets/textures/billboards/afonsomaria/shoot-right.xpm:assets/t
 USING_P_2_SPRITE_UPDATE_DELAY 0.05
 USING_P_1_SPRITE assets/textures/billboards/afonsomaria/shoot-front-left.xpm:assets/textures/billboards/afonsomaria/aim-front-left.xpm
 USING_P_1_SPRITE_UPDATE_DELAY 0.05
+
+USING_M_8_SPRITE assets/textures/billboards/afonsomaria/shoot-front.xpm:assets/textures/billboards/afonsomaria/aim-front.xpm
+USING_M_8_SPRITE_UPDATE_DELAY 0.05
+USING_M_8_SPRITE_LOOP TRUE
+USING_M_7_SPRITE assets/textures/billboards/afonsomaria/shoot-front-right.xpm:assets/textures/billboards/afonsomaria/aim-front-right.xpm
+USING_M_7_SPRITE_UPDATE_DELAY 0.05
+USING_M_7_SPRITE_LOOP TRUE
+USING_M_6_SPRITE assets/textures/billboards/afonsomaria/shoot-left.xpm:assets/textures/billboards/afonsomaria/aim-left.xpm
+USING_M_6_SPRITE_UPDATE_DELAY 0.05
+USING_M_6_SPRITE_LOOP TRUE
+USING_M_5_SPRITE assets/textures/billboards/afonsomaria/shoot-back-left.xpm:assets/textures/billboards/afonsomaria/aim-back-left.xpm
+USING_M_5_SPRITE_UPDATE_DELAY 0.05
+USING_M_5_SPRITE_LOOP TRUE
+USING_M_4_SPRITE assets/textures/billboards/afonsomaria/shoot-back.xpm:assets/textures/billboards/afonsomaria/aim-back.xpm
+USING_M_4_SPRITE_UPDATE_DELAY 0.05
+USING_M_4_SPRITE_LOOP TRUE
+USING_M_3_SPRITE assets/textures/billboards/afonsomaria/shoot-back-right.xpm:assets/textures/billboards/afonsomaria/aim-back-right.xpm
+USING_M_3_SPRITE_UPDATE_DELAY 0.05
+USING_M_3_SPRITE_LOOP TRUE
+USING_M_2_SPRITE assets/textures/billboards/afonsomaria/shoot-right.xpm:assets/textures/billboards/afonsomaria/aim-right.xpm
+USING_M_2_SPRITE_UPDATE_DELAY 0.05
+USING_M_2_SPRITE_LOOP TRUE
+USING_M_1_SPRITE assets/textures/billboards/afonsomaria/shoot-front-left.xpm:assets/textures/billboards/afonsomaria/aim-front-left.xpm
+USING_M_1_SPRITE_UPDATE_DELAY 0.05
+USING_M_1_SPRITE_LOOP TRUE
+
 USING_K_8_SPRITE assets/textures/billboards/afonsomaria/sword-front.xpm
 USING_K_7_SPRITE assets/textures/billboards/afonsomaria/sword-front-right.xpm
 USING_K_6_SPRITE assets/textures/billboards/afonsomaria/sword-left.xpm
@@ -631,7 +657,7 @@ ffffffffffkffffffwfffgfffff      a   a
            f  f             a    a   a    a
            ff*f             aaaaaa   aaaaaa
             fff             a    a   a    a
-                            a    v , v : |a
+                            a  E v , v : |a
                             a    a   a    a
                             aaaaaa   aaaaaa
                             a             a
