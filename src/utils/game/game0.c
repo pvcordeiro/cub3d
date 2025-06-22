@@ -6,18 +6,24 @@
 /*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:27:08 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/14 15:08:09 by pvcordeiro       ###   ########.fr       */
+/*   Updated: 2025/06/22 11:31:40 by pvcordeiro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game.h"
 
-void	clear_game(void *game)
+void	clear_game(void *data)
 {
+	t_game	*game;
+
+	game = data;
 	if (!game)
 		return ;
-	ft_list_destroy(&((t_game *)game)->entities);
-	ft_hashmap_destroy(((t_game *)game)->sprites);
+	ft_list_destroy(&game->entities);
+	ft_list_destroy(&game->map->identifiers.air);
+	ft_list_destroy(&game->map->identifiers.wall);
+	ft_list_destroy(&game->map->identifiers.player);
+	ft_hashmap_destroy(game->sprites);
 	ft_bzero(game, sizeof(t_game));
 }
 

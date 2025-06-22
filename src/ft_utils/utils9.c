@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils9.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 14:18:24 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/04 16:06:20 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/22 11:32:51 by pvcordeiro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,9 @@ void	ft_list_destroy(t_list **list)
 	while (curr)
 	{
 		next = curr->next;
-		if (curr->data_free)
+		if (curr->data_free && curr->data)
 			curr->data_free(curr->data);
+		curr->data = NULL;
 		free(curr);
 		curr = next;
 	}

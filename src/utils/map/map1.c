@@ -6,7 +6,7 @@
 /*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 08:42:58 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/14 15:43:39 by pvcordeiro       ###   ########.fr       */
+/*   Updated: 2025/06/22 11:37:35 by pvcordeiro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,6 @@ void	destroy_map(t_map *map)
 		return ;
 	ft_strvfree(map->raw);
 	ft_hashmap_destroy(map->types);
+	free(map->path);
 	free(map);
 }

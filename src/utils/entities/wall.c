@@ -6,7 +6,7 @@
 /*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/14 15:21:56 by pvcordeiro       ###   ########.fr       */
+/*   Updated: 2025/06/22 11:28:17 by pvcordeiro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	*hashmap_get_with_identifier(t_hashmap *hashmap, char identifier,
 		key = ft_strf("%c_%s", identifier, rest);
 	}
 	data = ft_hashmap_get_value(hashmap, key);
-	return (data);
+	return (free(key), data);
 }
 
 t_wall	*wall_new(char identifier, t_game *game)
