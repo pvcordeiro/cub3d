@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 21:53:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 11:48:52 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/22 14:12:14 by pvcordeiro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ void	*hashmap_get_with_identifier(t_game *game, t_hashmap *hashmap, char identif
 	key = ft_strdup(rest);
 	if (!rest)
 		key = (free(key), ft_strndup(&identifier, 1));
-	else if (ft_list_any(identifiers_get(game->map->identifiers, "PLAYER"),
-		(void *)ft_str_equal_char_ptr, &identifier))
-		key = (free(key), ft_strdup(rest));
 	else if (identifier)
 		key = (free(key), ft_strf("%c_%s", identifier, rest));
 	data = ft_hashmap_get_value(hashmap, key);
+	if (!data && ft_list_any(identifiers_get(game->map->identifiers, "PLAYER"),
+		(void *)ft_str_equal_char_ptr, &identifier))
+		data = ft_hashmap_get_value(hashmap, rest);
 	return (free(key), data);
 }
 
