@@ -6,7 +6,7 @@
 #    By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/26 17:16:21 by afpachec          #+#    #+#              #
-#    Updated: 2025/06/22 11:42:08 by pvcordeiro       ###   ########.fr        #
+#    Updated: 2025/06/22 12:01:18 by pvcordeiro       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,6 @@ LDLIBS = -lmlx -lX11 -lXext -lm
 SRCS = $(shell find src -name "**.c")
 OBJ_DIR = obj
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
-MAPS = $(wildcard maps/*.cub)
 UNAME_S = $(shell uname -s)
 
 ifeq ($(UNAME_S),Darwin)
@@ -66,10 +65,7 @@ re: fclean all
 dev: $(NAME)
 	./$(NAME) maps/subject.cub
 
-run: clean $(NAME)
-	@for map in $(MAPS); do echo "Running with $$map" && ./$(NAME) $$map; done
-
-val: re
+val: $(NAME)
 	@valgrind --show-leak-kinds=all --leak-check=full --track-fds=all ./$(NAME) maps/subject.cub
 
 errors:

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 19:05:41 by paude-so          #+#    #+#             */
-/*   Updated: 2025/05/14 18:57:38 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/22 11:53:56 by pvcordeiro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,16 @@ static void	setup_wall_dimensions(t_render_data *data)
 static t_ftm_image	*get_wall_texture(t_render_data *data)
 {
 	t_ftm_image	*texture;
+	t_ray		*rays;
+	int			ray_idx;
 
-	texture = get_sprite_image(get_entity_sprite(data->player->rays[data->ray_idx].hit_entity,
-				data->player->rays[data->ray_idx].direction_of_hit_on_entity));
+	rays = data->player->rays;
+	ray_idx = data->ray_idx;
+	texture = get_sprite_image(get_entity_sprite(rays[ray_idx].hit_entity,
+				rays[ray_idx].direction_of_hit_on_entity));
 	if (!texture)
 		return (NULL);
-	data->tex_x = data->player->rays[data->ray_idx].x_of_hit_in_entity
+	data->tex_x = rays[ray_idx].x_of_hit_in_entity
 		* texture->size.width;
 	if (data->tex_x < 0)
 		data->tex_x = 0;
