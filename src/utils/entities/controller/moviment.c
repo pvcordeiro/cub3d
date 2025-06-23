@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 18:51:55 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 03:19:10 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/23 13:53:09 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static t_entity	*position_overlaps(t_list *entities, t_entity *entity, t_coords 
 	while (curr)
 	{
 		curr_entity = curr->data;
-        if (curr_entity != entity && curr_entity->hard
+        if (curr_entity != entity && curr_entity->hard && curr_entity->active
             && coords.x + entity->size.width >= curr_entity->coords.x
             && coords.x - entity->size.width <= (curr_entity->coords.x + curr_entity->size.width)
             && coords.y + entity->size.height >= curr_entity->coords.y
