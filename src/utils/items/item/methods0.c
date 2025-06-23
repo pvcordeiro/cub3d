@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 01:40:16 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/22 23:05:11 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	item_frame(t_item *item)
 	can_use1 = !item->single_use && item->user
 		&& item->use_sound
 		&& item->screen_sprite
-		&& ft_get_time() - item->last_use >= item->screen_sprite->update_delay * 2;
+		&& ft_get_time() - item->last_use >= item->use_delay;
 	can_use2 = item->single_use && !item->already_using && item->user;
 	if ((can_use1 || can_use2) && item->use)
 		item->use(item, NULL);

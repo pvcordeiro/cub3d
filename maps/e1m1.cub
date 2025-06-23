@@ -10,6 +10,7 @@ MAX_HEALTH 100
 
 0_INVENTORY P
 1_INVENTORY K
+2_INVENTORY H
 DROP_ITEMS TRUE
 AMMO 8
 
@@ -189,33 +190,36 @@ W_USING_K_1_SPRITE assets/textures/billboards/pv/sword-front-left.xpm
 
 STATS_HUD_FONT assets/fonts/wolf3d
 
-STATS_HUD_1_SPRITE assets/wolf3d/textures/hud/stats/1-0.xpm:assets/wolf3d/textures/hud/stats/1-1.xpm:assets/wolf3d/textures/hud/stats/1-0.xpm:assets/wolf3d/textures/hud/stats/1-2.xpm
+STATS_HUD_1_SPRITE assets/wolf3d/textures/hud/stats/0-0.xpm:assets/wolf3d/textures/hud/stats/0-1.xpm:assets/wolf3d/textures/hud/stats/0-2.xpm
 STATS_HUD_1_SPRITE_LOOP TRUE
-STATS_HUD_1_SPRITE_UPDATE_DELAY 2
+STATS_HUD_1_SPRITE_UPDATE_DELAY 1.2
 
-STATS_HUD_2_SPRITE assets/wolf3d/textures/hud/stats/2-0.xpm:assets/wolf3d/textures/hud/stats/2-1.xpm:assets/wolf3d/textures/hud/stats/2-0.xpm:assets/wolf3d/textures/hud/stats/2-2.xpm
+STATS_HUD_2_SPRITE assets/wolf3d/textures/hud/stats/1-0.xpm:assets/wolf3d/textures/hud/stats/1-1.xpm:assets/wolf3d/textures/hud/stats/1-2.xpm
 STATS_HUD_2_SPRITE_LOOP TRUE
-STATS_HUD_2_SPRITE_UPDATE_DELAY 2
+STATS_HUD_2_SPRITE_UPDATE_DELAY 1.2
 
-STATS_HUD_3_SPRITE assets/wolf3d/textures/hud/stats/3-0.xpm:assets/wolf3d/textures/hud/stats/3-1.xpm:assets/wolf3d/textures/hud/stats/3-0.xpm:assets/wolf3d/textures/hud/stats/3-2.xpm
+STATS_HUD_3_SPRITE assets/wolf3d/textures/hud/stats/2-0.xpm:assets/wolf3d/textures/hud/stats/2-1.xpm:assets/wolf3d/textures/hud/stats/2-2.xpm
 STATS_HUD_3_SPRITE_LOOP TRUE
-STATS_HUD_3_SPRITE_UPDATE_DELAY 2
+STATS_HUD_3_SPRITE_UPDATE_DELAY 1.2
 
-STATS_HUD_4_SPRITE assets/wolf3d/textures/hud/stats/4-0.xpm:assets/wolf3d/textures/hud/stats/4-1.xpm:assets/wolf3d/textures/hud/stats/4-0.xpm:assets/wolf3d/textures/hud/stats/4-2.xpm
+STATS_HUD_4_SPRITE assets/wolf3d/textures/hud/stats/3-0.xpm:assets/wolf3d/textures/hud/stats/3-1.xpm:assets/wolf3d/textures/hud/stats/3-2.xpm
 STATS_HUD_4_SPRITE_LOOP TRUE
-STATS_HUD_4_SPRITE_UPDATE_DELAY 2
+STATS_HUD_4_SPRITE_UPDATE_DELAY 1.2
 
-STATS_HUD_5_SPRITE assets/wolf3d/textures/hud/stats/5-0.xpm:assets/wolf3d/textures/hud/stats/5-1.xpm:assets/wolf3d/textures/hud/stats/5-0.xpm:assets/wolf3d/textures/hud/stats/5-2.xpm
+STATS_HUD_5_SPRITE assets/wolf3d/textures/hud/stats/4-0.xpm:assets/wolf3d/textures/hud/stats/4-1.xpm:assets/wolf3d/textures/hud/stats/4-2.xpm
 STATS_HUD_5_SPRITE_LOOP TRUE
-STATS_HUD_5_SPRITE_UPDATE_DELAY 2
+STATS_HUD_5_SPRITE_UPDATE_DELAY 1.2
 
-STATS_HUD_6_SPRITE assets/wolf3d/textures/hud/stats/6-0.xpm:assets/wolf3d/textures/hud/stats/6-1.xpm:assets/wolf3d/textures/hud/stats/6-0.xpm:assets/wolf3d/textures/hud/stats/6-2.xpm
+STATS_HUD_6_SPRITE assets/wolf3d/textures/hud/stats/5-0.xpm:assets/wolf3d/textures/hud/stats/5-1.xpm:assets/wolf3d/textures/hud/stats/5-2.xpm
 STATS_HUD_6_SPRITE_LOOP TRUE
-STATS_HUD_6_SPRITE_UPDATE_DELAY 2
+STATS_HUD_6_SPRITE_UPDATE_DELAY 1.2
 
-STATS_HUD_7_SPRITE assets/wolf3d/textures/hud/stats/7-0.xpm:assets/wolf3d/textures/hud/stats/7-1.xpm:assets/wolf3d/textures/hud/stats/7-0.xpm:assets/wolf3d/textures/hud/stats/7-2.xpm
+STATS_HUD_7_SPRITE assets/wolf3d/textures/hud/stats/6-0.xpm:assets/wolf3d/textures/hud/stats/6-1.xpm:assets/wolf3d/textures/hud/stats/6-2.xpm
 STATS_HUD_7_SPRITE_LOOP TRUE
-STATS_HUD_7_SPRITE_UPDATE_DELAY 2
+STATS_HUD_7_SPRITE_UPDATE_DELAY 1.2
+
+STATS_HUD_DEAD_SPRITE assets/wolf3d/textures/hud/stats/7-0.xpm
+STATS_HUD_CHEAT_SPRITE assets/wolf3d/textures/hud/stats/7-1.xpm
 
 e_TYPE CHARACTER
 e_MAX_HEALTH 100
@@ -259,10 +263,12 @@ e_DEATH_SOUND assets/wolf3d/sounds/deathscream5.mp3
 e_HIT_SOUND assets/wolf3d/sounds/deathscream1.mp3
 e_CONTROLLER ENEMY
 e_OPTIMAL_PROXIMITY 2
-e_0_INVENTORY Y
-e_USING_Y_1_SPRITE assets/wolf3d/textures/billboards/soldier/aim.xpm:assets/wolf3d/textures/billboards/soldier/shoot.xpm
+e_0_INVENTORY H
+e_1_INVENTORY Y
+e_USING_Y_1_SPRITE assets/wolf3d/textures/billboards/soldier/shoot.xpm:assets/wolf3d/textures/billboards/soldier/aim.xpm
 e_USING_Y_1_SPRITE_UPDATE_DELAY 0.5
 e_USING_Y_1_SPRITE_LOOP TRUE
+e_USING_H_1_SPRITE assets/wolf3d/textures/billboards/soldier/halt.xpm
 e_AMMO 2147483647
 e_DROP ;
 e_DROP_ITEMS TRUE
@@ -389,7 +395,7 @@ o_TYPE COLLECTIBLE
 o_SCORE 500
 o_NAME Chalice
 o_SINGLE_USE TRUE
-o_USE_SOUND assets/wolf3d/sounds/deathscream4.mp3
+o_USE_SOUND assets/wolf3d/sounds/bonus2.mp3
 o_DESCRIPTION Point giver Chalice
 o_ICON_SPRITE assets/wolf3d/textures/billboards/holy-cup.xpm
 
@@ -397,7 +403,7 @@ z_TYPE COLLECTIBLE
 z_SCORE 100
 z_NAME Holy Cross
 z_SINGLE_USE TRUE
-z_USE_SOUND assets/wolf3d/sounds/deathscream4.mp3
+z_USE_SOUND assets/wolf3d/sounds/bonus1.mp3
 z_DESCRIPTION God himself
 z_ICON_SPRITE assets/wolf3d/textures/billboards/holy-cross.xpm
 
@@ -405,7 +411,7 @@ z_ICON_SPRITE assets/wolf3d/textures/billboards/holy-cross.xpm
 7_SCORE 1000
 7_NAME MEGA Holy Treasure
 7_SINGLE_USE TRUE
-7_USE_SOUND assets/wolf3d/sounds/deathscream4.mp3
+7_USE_SOUND assets/wolf3d/sounds/bonus3.mp3
 7_DESCRIPTION God himself
 7_ICON_SPRITE assets/wolf3d/textures/billboards/treasure.xpm
 
@@ -424,9 +430,10 @@ Y_AMMO_USAGE 1
 Y_NAME Soldier's Weapon
 Y_USE_SOUND assets/wolf3d/sounds/nazifire.mp3
 Y_DESCRIPTION Weapon of the National Socialist soldier
+Y_USE_DELAY 0.8
 Y_SCREEN_SPRITE assets/wolf3d/textures/items/machinegun/screen/0.xpm
 Y_SCREEN_USE_SPRITE assets/wolf3d/textures/items/machinegun/screen/2.xpm:assets/wolf3d/textures/items/machinegun/screen/3.xpm
-Y_SCREEN_USE_SPRITE_UPDATE_DELAY 0.5
+Y_SCREEN_USE_SPRITE_UPDATE_DELAY 0.4
 Y_SCREEN_USE_SPRITE_LOOP TRUE
 Y_ICON_SPRITE assets/wolf3d/textures/items/machinegun/icon.xpm
 
@@ -437,11 +444,22 @@ C_NAME Dog's Mouth
 C_RANGE 1.5
 C_USE_SOUND assets/wolf3d/sounds/dogbark.mp3
 C_DESCRIPTION Weapon of the National Socialist soldier
+C_USE_DELAY 1.0
 C_SCREEN_SPRITE assets/wolf3d/textures/billboards/dog/right1.xpm
 C_SCREEN_USE_SPRITE assets/wolf3d/textures/billboards/dog/right1.xpm:assets/wolf3d/textures/billboards/dog/right2.xpm:assets/wolf3d/textures/billboards/dog/right3.xpm
 C_SCREEN_USE_SPRITE_UPDATE_DELAY 0.5
 C_SCREEN_USE_SPRITE_LOOP TRUE
 C_ICON_SPRITE assets/wolf3d/textures/billboards/dog/right1.xpm
+
+H_TYPE ITEM
+H_NAME Halt SIR
+H_USE_SOUND assets/wolf3d/sounds/halt.mp3
+H_SINGLE_USE TRUE
+H_DESCRIPTION Halt SIR, you are not allowed to pass
+H_USE_DELAY 0.6
+H_SCREEN_SPRITE assets/wolf3d/textures/billboards/soldier/still-front.xpm
+H_SCREEN_USE_SPRITE assets/wolf3d/textures/billboards/soldier/halt.xpm
+H_ICON_SPRITE assets/wolf3d/textures/billboards/soldier/still-front.xpm
 
 P_TYPE WEAPON
 P_CANT_USE_SOUND assets/wolf3d/sounds/noammo.mp3
@@ -451,6 +469,7 @@ P_NAME Pistol
 P_USE_SOUND assets/wolf3d/sounds/atkpistol.mp3
 P_SINGLE_USE TRUE
 P_DESCRIPTION Normal pistol, good for close combat
+P_USE_DELAY 0.2
 P_SCREEN_SPRITE assets/wolf3d/textures/items/pistol/screen/0.xpm
 P_SCREEN_USE_SPRITE assets/wolf3d/textures/items/pistol/screen/1.xpm:assets/wolf3d/textures/items/pistol/screen/2.xpm:assets/wolf3d/textures/items/pistol/screen/3.xpm:assets/wolf3d/textures/items/pistol/screen/4.xpm
 P_SCREEN_USE_SPRITE_UPDATE_DELAY 0.1
@@ -460,13 +479,15 @@ P_ICON_SPRITE assets/wolf3d/textures/items/pistol/icon.xpm
 G_TYPE WEAPON
 G_CANT_USE_SOUND assets/wolf3d/sounds/noammo.mp3
 G_DAMAGE 30
-G_AMMO_USAGE 0
+G_AMMO_USAGE 1
 G_NAME Gatling
 G_USE_SOUND assets/wolf3d/sounds/atkgatling.mp3
+G_GET_SOUND assets/wolf3d/sounds/getgatling.mp3
 G_DESCRIPTION Gatling gun, very powerful, but slow
+G_USE_DELAY 0.1
 G_SCREEN_SPRITE assets/wolf3d/textures/items/gatling/screen/0.xpm
 G_SCREEN_USE_SPRITE assets/wolf3d/textures/items/gatling/screen/2.xpm:assets/wolf3d/textures/items/gatling/screen/3.xpm
-G_SCREEN_USE_SPRITE_UPDATE_DELAY 0.05
+G_SCREEN_USE_SPRITE_UPDATE_DELAY 0.1
 G_SCREEN_USE_SPRITE_LOOP TRUE
 G_ICON_SPRITE assets/wolf3d/textures/items/gatling/icon.xpm
 
@@ -479,6 +500,7 @@ K_RANGE 1
 K_USE_SOUND assets/wolf3d/sounds/atkknife.mp3
 K_SINGLE_USE TRUE
 K_DESCRIPTION A knife, good for close combat
+K_USE_DELAY 0.1
 K_SCREEN_SPRITE assets/wolf3d/textures/items/knife/screen/0.xpm
 K_SCREEN_USE_SPRITE assets/wolf3d/textures/items/knife/screen/1.xpm:assets/wolf3d/textures/items/knife/screen/2.xpm:assets/wolf3d/textures/items/knife/screen/3.xpm:assets/wolf3d/textures/items/knife/screen/4.xpm
 K_SCREEN_USE_SPRITE_UPDATE_DELAY 0.05
@@ -491,7 +513,9 @@ M_DAMAGE 25
 M_AMMO_USAGE 1
 M_NAME Machine Gun
 M_USE_SOUND assets/wolf3d/sounds/atkmachinegun.mp3
+M_GET_SOUND assets/wolf3d/sounds/getmachine.mp3
 M_DESCRIPTION Machine gun, good for medium range combat
+M_USE_DELAY 0.1
 M_SCREEN_SPRITE assets/wolf3d/textures/items/machinegun/screen/0.xpm
 M_SCREEN_USE_SPRITE assets/wolf3d/textures/items/machinegun/screen/2.xpm:assets/wolf3d/textures/items/machinegun/screen/3.xpm
 M_SCREEN_USE_SPRITE_UPDATE_DELAY 0.05
@@ -537,6 +561,11 @@ M_ICON_SPRITE assets/wolf3d/textures/items/machinegun/icon.xpm
 ]_ITEM M
 ]_AUTO_PICKUP TRUE
 ]_HARD FALSE
+
+2_TYPE DROP
+2_ITEM G
+2_AUTO_PICKUP TRUE
+2_HARD FALSE
 
 ;_TYPE DROP
 ;_ITEM Z
@@ -691,7 +720,7 @@ C 50, 50, 50
 
                              jjjljjjjjljjj
      ffffff                  j!         !j
-     f;;((f      fffffffiffffl  ~  ~  ~  ljjjj
+     f2;((f      fffffffiffffl  ~  ~  ~  ljjjj
      f;; (ff     f           j           j(()j
      f;;** f     f ,    ,    v  e  /     v e(l
      f;;*  f     f           j           j)))j

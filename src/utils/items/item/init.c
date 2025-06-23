@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 00:50:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 01:38:03 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/22 23:18:57 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	init_item(t_game *game, t_ftm_window *window, t_item *item,
 	item->use = item_use;
 	item->drop = item_drop;
 	item->identifier = identifier;
+	item->can_use = true;
 	item->name = hashmap_get_with_identifier(game, game->map->types, identifier,
 		"NAME");
 	item->description = hashmap_get_with_identifier(game, game->map->types,
@@ -35,12 +36,16 @@ void	init_item(t_game *game, t_ftm_window *window, t_item *item,
 		identifier, "ICON_USE"));
 	sprite_soft_copy(&item->screen_use_sprite, hashmap_get_with_identifier(game, game->sprites,
 		identifier, "SCREEN_USE"));
+	item->use_delay = ft_atof(hashmap_get_with_identifier(game, game->map->types,
+		identifier, "USE_DELAY")) * 1000;
 	item->_icon_sprite = item->icon_sprite;
 	item->_screen_sprite = item->screen_sprite;
 	item->single_use = ft_strequal(hashmap_get_with_identifier(game, game->map->types,
 		identifier, "SINGLE_USE"), "TRUE");
 	item->use_sound = hashmap_get_with_identifier(game, game->sounds,
 		identifier, "USE");
+	item->get_sound = hashmap_get_with_identifier(game, game->sounds,
+		identifier, "GET");
 	item->cant_sound = hashmap_get_with_identifier(game, game->sounds,
 		identifier, "CANT_USE");
 }

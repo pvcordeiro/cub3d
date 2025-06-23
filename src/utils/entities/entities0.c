@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 20:49:46 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 03:22:31 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/22 23:20:11 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ bool	add_item_to_inventory(t_character *character, t_item *item)
 		if (character->inventory[i])
 			continue ;
 		character->inventory[i] = item;
+		fta_play(item->get_sound);
 		return (true);
 	}
 	return (false);

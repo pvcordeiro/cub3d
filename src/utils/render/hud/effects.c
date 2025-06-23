@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 19:59:30 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/18 20:52:57 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/22 12:26:52 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,7 @@ void	render_effects(t_ftm_image *canvas, t_character *character)
 			0, (t_size){0, 0}
 		});
 	}
+	if (character->dead)
+		ftm_draw_rectangle(canvas, (t_coords){0, 0, 0}, canvas->size,
+			(t_ftm_rectangle){0xAAFF0000, 0, (t_size){0, 0}});
 }

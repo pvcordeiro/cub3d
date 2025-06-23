@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 19:35:54 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 20:47:23 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/22 13:28:39 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,10 +169,20 @@ static void	do_half_of_keys(t_controller *cont, t_player_keys keys,
 
 static void	do_internal_keys(t_entity *entity, t_ftm_key_hook_values khv)
 {
+	t_character	*character;
+
+	character = (t_character *)entity;
 	if (khv.key == XK_i && khv.down)
+	{
+		character->cheating = true;
 		entity->invencible = !entity->invencible;
+		entity->health = entity->max_health;
+	}
 	if (khv.key == XK_b && khv.down)
+	{
+		character->cheating = true;
 		entity->hard = !entity->hard;
+	}
 }
 
 static void	do_inv_keys(t_game *game, t_entity *entity, t_player_keys keys,

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 21:10:29 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 03:33:10 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/22 23:07:44 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #define LOOK_AROUND_CHANCE 0.01
 #define SHOT_HEARING_RANGE 10
 #define SPRINT_HEARING_RANGE 5
+#define FIRST_SHOT_DELAY 500
 #define LAST_HIT_DELAY 1000
 
 static void	look_at_target(t_entity *entity, t_entity *target_entity)
@@ -66,7 +67,7 @@ static void	remove_attributes(t_character *character, t_controller *controller)
 	controller->looking_left = false;
 	controller->looking_right = false;
 	if (character->inventory[character->inventory_index]
-		&& ft_get_time() - character->inventory[character->inventory_index]->last_use >= character->inventory[character->inventory_index]->screen_use_sprite->update_delay * 2) 
+		&& ft_get_time() - character->inventory[character->inventory_index]->last_use >= character->inventory[character->inventory_index]->use_delay) 
 		character->inventory[character->inventory_index]->user = NULL;
 	character->target_entity = NULL;
 }
@@ -137,6 +138,25 @@ static void	hearment(t_game *game, t_character *character)
 	}
 }
 
+static void	shoot(t_character *character)
+{
+	t_item	*item;
+
+	item = character->inventory[character->inventory_index];
+	if (!item)
+		return ;
+	if (character->inventory_index == 0
+		&& character->inventory_index < INVENTORY_SIZE - 1
+		&& character->inventory[character->inventory_index + 1]
+		&& ft_get_time() - item->last_use >= item->use_delay)
+	{
+		item->user = NULL;
+		++character->inventory_index;
+		item = character->inventory[character->inventory_index];
+	}
+	item->user = character;
+}
+
 static void	frame(t_game *game, t_entity *entity, double delta_time)
 {
 	t_character	*character;
@@ -158,9 +178,12 @@ static void	frame(t_game *game, t_entity *entity, double delta_time)
 	else
 	{
 		look_at_target(entity, character->target_entity);
+		if (character->inventory_index == 0
+			&& character->inventory[1])
+			character->inventory[0]->user = character;
 		if (character->inventory[character->inventory_index]
 			&& (double)rand() / RAND_MAX < FIRE_CHANCE)
-			character->inventory[character->inventory_index]->user = character;
+			shoot(character);
 		else if (!character->inventory[character->inventory_index] || !character->inventory[character->inventory_index]->user)
 			update_movement(entity, character->target_entity);
 	}

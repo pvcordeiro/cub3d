@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 17:18:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 16:18:42 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/22 13:20:56 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ static void	init_stats_hud(t_game *game)
 	t_sprite	*sprite;
 	char		*key;
 
+	game->hud.stats.cheat_sprite = ft_hashmap_get_value(game->sprites, "STATS_HUD_CHEAT");
+	game->hud.stats.dead_sprite = ft_hashmap_get_value(game->sprites, "STATS_HUD_DEAD");
 	game->hud.stats_enabled = !ft_strequal(ft_hashmap_get_value(game->map->types, "STATS_HUD"), "FALSE");
 	game->hud.stats_font = ft_hashmap_get_value(game->fonts, "STATS_HUD");
 	if (!game->hud.stats_font)

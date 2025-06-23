@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 21:19:06 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/22 23:19:06 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,10 +150,12 @@ struct s_item
 	bool			prev_using;
 	bool			already_using;
 	bool			single_use;
+	t_time			use_delay;
 	t_fta_audio		*cant_sound;
 	t_time			last_cant_use_sound_play;
 	t_time			last_use;
 	t_fta_audio		*use_sound;
+	t_fta_audio		*get_sound;
 	t_sprite		*icon_use_sprite;
 	t_sprite		*_icon_sprite;
 	t_sprite		*icon_sprite;
@@ -284,6 +286,7 @@ struct s_character
 	t_character	*last_hit_by_character;
 	t_direction	target_entity_direction;
 	t_time		last_inventory_scroll;
+	bool		cheating;
 	t_item		*inventory[INVENTORY_SIZE];
 	t_drop		*drop;
 	bool		drop_items;
@@ -386,6 +389,8 @@ struct s_hud_minimap
 struct s_hud_stats
 {
 	t_sprite	*sprite;
+	t_sprite	*cheat_sprite;
+	t_sprite	*dead_sprite;
 	t_list		*states_list;
 	int			states;
 	int			prev_health;
