@@ -610,9 +610,9 @@ T_TYPE DOOR
 T_TARGETABLE TRUE
 T_ANIMATION_DELAY 2.3
 T_CLOSEABLE FALSE
-T_DOOR_SPRITE assets/wolf3d/textures/wood-wall-eagle-dark.xpm
+T_DOOR_SPRITE assets/wolf3d/textures/wood-wall-eagle.xpm
 T_SIDES_SPRITE assets/wolf3d/textures/wood-wall.xpm
-T_DIRECTION WEST
+T_DIRECTION NORTH
 T_OPEN_SOUND assets/wolf3d/sounds/pushwall.mp3
 T_OPEN_SOUND_VOLUME 0.8
 
@@ -741,7 +741,7 @@ C 50, 50, 50
               j   e   e   )j                   ej    - ** -    j
               j!      e  (!j   jjjjjjjjjjjjjjjjjj  /        /  j
               jjhjjljjmjjljj   jjjljjmjjljjmjjljj    -    -    j
-              j E                               j           e* j
+              j                                 j           e* j
               j ,   ,    ,   ,   ,   ,   ,   ,  j - e* (     - j
               j                                 j     ((( } ; )j
               jjmjjjmjmjjljjmjjljjmjjljjmjj     mjjjjjjjjjjjjjjj
@@ -759,7 +759,7 @@ fffffhffhffffff             j ,  ,  ,  ,  ,  , e,  ,  ,  ,  ,  j
 f            ff             j                        e         j
 f            ffjjjljjjjjjjjmjjjjjljjmjjljjmjjljjjjjljjmjjljj   j
 f              j  e           j                 j      e       j
-f              v         e    v  ,     ,     ,  v  ,  ,  ,  ,  j
+f              v         e    v  ,     ,  E  ,  v  ,  ,  ,  ,  j
 f  ,      ,    j              j                 j $ $      $ $ j
 f     ff     ffjjjljjjjjjjjmjjjjjmjjjj   jTjjmjjjjjhjjjjjjjjhjjj
 f     ff     ffffffffffffffffffffffffj   j  jmjjlj   jjjjjj   jj

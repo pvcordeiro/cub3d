@@ -3,14 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   stats.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 22:14:35 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/22 13:29:03 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/24 14:30:43 by pvcordeiro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "hud.h"
+
+void	render_score_text(t_game *game, t_ftm_image *canvas, t_character *character, t_size stats_size)
+{
+	t_coords	text_pos;
+	char		*score_text;
+	double		score_scaler;
+
+	score_text = ft_strf("%d", character->score);
+	score_scaler = 4.85;
+	if (character->score > 99999)
+		character->score = 99999;
+	if (ft_strlen(score_text) == 3)
+		score_scaler = 5.25;
+	if (ft_strlen(score_text) == 4)
+		score_scaler = 5.45;
+	if (ft_strlen(score_text) == 5)
+		score_scaler = 5.65;
+	text_pos = (t_coords){stats_size.width / score_scaler,
+		canvas->size.height - stats_size.height * 0.5, 0};
+	ftm_draw_text(canvas, game->hud.stats_font,
+		(t_ftm_text_config){
+			.text = score_text,
+			.coords = text_pos,
+			.height = stats_size.width * 0.04,
+			.spacing = 4,
+			.color = 0xCFFFFFFF
+		});
+	free(score_text);
+}
 
 void	render_ammo_text(t_game *game, t_ftm_image *canvas, t_character *character, t_size stats_size)
 {
@@ -150,6 +179,7 @@ t_size	render_stats(t_game *game, t_ftm_image *canvas, t_character *character)
 		true, stats_size, NULL, NULL});
 	render_health_text(game, canvas, character, stats_size);
 	render_ammo_text(game, canvas, character, stats_size);
+	render_score_text(game, canvas, character, stats_size);
 	render_hand_item_icon(canvas, character, stats_size);
 	return (stats_size);
 }
