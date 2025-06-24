@@ -281,7 +281,7 @@ o_TYPE COLLECTIBLE
 o_SCORE 500
 o_NAME Chalice
 o_SINGLE_USE TRUE
-o_USE_SOUND assets/wolf3d/sounds/deathscream4.mp3
+o_USE_SOUND assets/wolf3d/sounds/bonus2.mp3
 o_DESCRIPTION Point giver Chalice
 o_ICON_SPRITE assets/wolf3d/textures/billboards/holy-cup.xpm
 
@@ -289,7 +289,7 @@ z_TYPE COLLECTIBLE
 z_SCORE 100
 z_NAME Holy Cross
 z_SINGLE_USE TRUE
-z_USE_SOUND assets/wolf3d/sounds/deathscream4.mp3
+z_USE_SOUND assets/wolf3d/sounds/bonus1.mp3
 z_DESCRIPTION God himself
 z_ICON_SPRITE assets/wolf3d/textures/billboards/holy-cross.xpm
 
@@ -297,7 +297,7 @@ z_ICON_SPRITE assets/wolf3d/textures/billboards/holy-cross.xpm
 7_SCORE 1000
 7_NAME MEGA Holy Treasure
 7_SINGLE_USE TRUE
-7_USE_SOUND assets/wolf3d/sounds/deathscream4.mp3
+7_USE_SOUND assets/wolf3d/sounds/bonus3.mp3
 7_DESCRIPTION God himself
 7_ICON_SPRITE assets/wolf3d/textures/billboards/treasure.xpm
 
