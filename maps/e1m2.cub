@@ -469,15 +469,15 @@ s_DIRECTION WEST
 s_OPEN_SOUND assets/wolf3d/sounds/pushwall.mp3
 s_OPEN_SOUND_VOLUME 0.8
 
-S_TYPE DOOR
-S_TARGETABLE TRUE
-S_ANIMATION_DELAY 2.3
-S_CLOSEABLE FALSE
-S_DOOR_SPRITE assets/wolf3d/textures/wood-wall-eagle-dark.xpm
-S_SIDES_SPRITE assets/wolf3d/textures/wood-wall.xpm
-S_DIRECTION WEST
-S_OPEN_SOUND assets/wolf3d/sounds/pushwall.mp3
-S_OPEN_SOUND_VOLUME 0.8
+T_TYPE DOOR
+T_TARGETABLE TRUE
+T_ANIMATION_DELAY 2.3
+T_CLOSEABLE FALSE
+T_DOOR_SPRITE assets/wolf3d/textures/wood-wall-eagle-dark.xpm
+T_SIDES_SPRITE assets/wolf3d/textures/wood-wall.xpm
+T_DIRECTION WEST
+T_OPEN_SOUND assets/wolf3d/sounds/pushwall.mp3
+T_OPEN_SOUND_VOLUME 0.8
 
 t_TYPE DOOR
 t_TARGETABLE TRUE
@@ -598,21 +598,21 @@ F 100, 100, 100
 C 50, 50, 50
 
               jjmjjljjmjjljjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
-			  j!        *(!jjjjjjjjjjjjjjjjjjjjjj o  ooooo e;  j
-              l   e   e   *j                   ej -   ooo    - j
-              j         e~om ,   ,   ,   ,   ,  v            o j
-              j   e   e   oj                   ej    - ** -    j
+              j!        *(!jjjjjjjjjjjjjjjjjjjjjj )  ))))) e;  j
+              l   e   e   *j                   ej -   )))    - j
+              j         e~)m ,   ,   ,   ,   ,  v            ) j
+              j   e   e   )j                   ej    - ** -    j
               j!      e  (!j   jjjjjjjjjjjjjjjjjj  /        /  j
               jjhjjljjmjjljj   jjjljjmjjljjmjjljj    -    -    j
               j E                               j           e* j
               j ,   ,    ,   ,   ,   ,   ,   ,  j - e* (     - j
-              j                                 j     ((( } ; oj
+              j                                 j     ((( } ; )j
               jjmjjjmjmjjljjmjjljjmjjljjmjj     mjjjjjjjjjjjjjjj
               j;:; j$   e         j ( **  j     j?jjjjj j     jj
               jjj  s   ,   ,   ,  j(@   @*j  ,  j , ;e,}j    :jj
 ffffffffffffffj;:; j$      e    e l(( - * m     l ~   ~ j   %:jj
-fff        ffffjjljjmjjljjmjj     jo      j     j       j  %%%jj
-ff          fff             j  ,  j e    oj e   j ,   , j   % jj
+fff        ffffjjljjmjjljjmjj     j)      j     j       j  %%%jj
+ff          fff             j  ,  j e    )j e   j ,   , j   % jj
 f            ff             l     m   -   l  ,  m ~   ~ j     jj
 f            ff             j     j @   @ j     j       j     jj
 f            ff             j     j e     j     j     e j     jj
@@ -624,15 +624,15 @@ f            ffjjjljjjjjjjjmjjjjjljjmjjljjmjjljjjjjljjmjjljj   j
 f              j  e           j                 j      e       j
 f              v         e    v  ,     ,     ,  v  ,  ,  ,  ,  j
 f  ,      ,    j              j                 j $ $      $ $ j
-f     ff     ffjjjljjjjjjjjmjjjjjmjjjj   jSjjmjjjjjhjjjjjjjjhjjj
+f     ff     ffjjjljjjjjjjjmjjjjjmjjjj   jTjjmjjjjjhjjjjjjjjhjjj
 f     ff     ffffffffffffffffffffffffj   j  jmjjlj   jjjjjj   jj
 f  ,  ff  ,                      faaaaahaj ;j   $    e $      .j
-f     ff                       , fa2 a e aj;l;$ o              m
-f     ff                         fa; a   aj;je   o          !**j
-f     ff     ffffffffffffffffffhffaaaa   aajmo o              *l
+f     ff                       , fa2 a e aj;l;$ )              m
+f     ff                         fa; a   aj;je   )          !**j
+f     ff     ffffffffffffffffffhffaaaa   aajm) )              *l
 f  ,  ff  ,  f        fffffff    fa;e  , \aaj$   $   e       $ j
 f     ff     v        fffffff    faaaa   aaal  e          e .  m
-f     ff     f        ff   ff    ffffa   ajjj !oo         o    j
+f     ff     f        ff   ff    ffffa   ajjj !))         )    j
 f     ffffffffffffffffff , ffffffffffa   ajjjmjjljjmjjljjmjjljjj
 f  ,  f     ffffffffffff   ffffffffffaahaaffffffffffffffffffffff
 f     f     ff         ffhff        ff   ff                   ff
