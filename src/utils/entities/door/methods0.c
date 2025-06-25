@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 03:05:30 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/25 15:58:58 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,16 @@ void	door_frame(t_game *game, t_entity *entity, double delta_time)
 
 	wall_frame(game, entity, delta_time);
 	door = (t_door *)entity;
-	door->wall.entity.hard = door->opening_sprite.index != door->animation_frames - 1;
+	door->wall.entity.hard = door->opening_sprite.index
+		!= door->animation_frames - 1;
 	door->wall.entity.transparent = door->opening_sprite.index;
 	(void)get_sprite_image(&door->opening_sprite);
-	if (!door->opening_sprite.index && door->opening_sprite.index != door->last_animation_index)
+	if (!door->opening_sprite.index && door->opening_sprite.index
+		!= door->last_animation_index)
 		fta_play(door->close_sound);
 	door->last_animation_index = door->opening_sprite.index;
-	if (door->auto_close_delay && ft_get_time() - door->last_opened_at >= door->auto_close_delay
+	if (door->auto_close_delay && ft_get_time() - door->last_opened_at
+		>= door->auto_close_delay
 		&& door->wall.entity.action && door->opened)
 		door->wall.entity.action(entity, NULL);
 }
@@ -49,7 +52,7 @@ void	door_action(t_entity *entity, t_character *actioner)
 		door->wall.entity.targetable = false;
 	if (door->opened)
 	{
-		door->last_opened_at = ft_get_time();	
+		door->last_opened_at = ft_get_time();
 		fta_play(door->open_sound);
 	}
 }

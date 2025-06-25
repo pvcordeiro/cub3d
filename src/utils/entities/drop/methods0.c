@@ -6,72 +6,11 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 03:06:06 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/25 16:00:09 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "drop.h"
-
-static void	set_sprite(t_drop	*drop)
-{
-	if (!drop->item)
-		return ;
-	if (drop->prev_item == drop->item)
-		return ;
-	drop->prev_item = drop->item;
-	fill_3d_sprites_from_single(drop->billboard.sprites, drop->item->icon_sprite);
-}
-
-static bool	add_ammo_if_already_has_the_weapon(t_character *character, t_weapon *weapon)
-{
-	int			i;
-	t_weapon	*inv_weapon;
-
-	i = -1;
-	character->ammo += weapon->ammo_usage * 10;
-	while (++i < INVENTORY_SIZE)
-	{
-		inv_weapon = (t_weapon *)character->inventory[i];
-		if (!inv_weapon || !inv_weapon->item.weapon)
-			continue ;
-		if (inv_weapon->item.identifier != weapon->item.identifier)
-			continue ;
-		return (true);
-	}
-	return (false);
-}
-
-static void	do_the_thing(t_game *game, t_drop *drop)
-{
-	int			i;
-	t_entity	*entity;
-
-	if (!drop->item || (!drop->auto_use && !drop->auto_pickup))
-		return ;
-	i = -1;
-	while (game->billboards[++i])
-	{
-		entity = game->billboards[i];
-        if (entity == (t_entity *)drop || entity->type != ENTITY_PLAYER
-            || drop->billboard.entity.coords.x + entity->size.width < entity->coords.x
-            || drop->billboard.entity.coords.x - entity->size.width > (entity->coords.x + entity->size.width)
-            || drop->billboard.entity.coords.y + entity->size.height < entity->coords.y
-            || drop->billboard.entity.coords.y - entity->size.height > (entity->coords.y + entity->size.height))
-			continue ;
-		if (drop->auto_use)
-		{
-			drop->item->user = (t_character *)entity;
-			drop->item->use(drop->item, drop);
-			drop->billboard.entity.active = false;
-		}
-		else if (drop->auto_pickup)
-		{
-			if (!drop->item->weapon || !add_ammo_if_already_has_the_weapon((t_character *)entity, (t_weapon *)drop->item))
-				add_item_to_inventory((t_character *)entity, drop->item);
-			drop->billboard.entity.active = false;
-		}
-	}
-}
 
 void	drop_frame(t_game *game, t_entity *entity, double delta_time)
 {
