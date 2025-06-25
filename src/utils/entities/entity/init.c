@@ -6,13 +6,35 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 00:50:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/23 18:19:48 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/25 16:07:10 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "entity.h"
 
-void	init_entity(t_game *game, t_ftm_window *window, t_entity *entity, char identifier)
+void	do_amazing_things(t_game *game, t_entity *entity, char identifier)
+{
+	entity->targetable = ft_strequal(
+			hashmap_get_with_identifier(game, game->map->types, identifier,
+				"TARGETABLE"), "TRUE");
+	entity->transparent = !ft_strequal(
+			hashmap_get_with_identifier(game, game->map->types, identifier,
+				"TRANSPARENT"), "FALSE");
+	entity->active = true;
+	entity->hard = !ft_strequal(
+			hashmap_get_with_identifier(game, game->map->types, identifier,
+				"HARD"), "FALSE");
+	entity->collision_sound = hashmap_get_with_identifier(game, game->sounds,
+			identifier, "COLLISION");
+	entity->identifier = identifier;
+	entity->size = (t_dsize){1, 1};
+	init_controller(game, entity,
+		hashmap_get_with_identifier(game, game->map->types, identifier,
+			"CONTROLLER"));
+}
+
+void	init_entity(t_game *game, t_ftm_window *window, t_entity *entity,
+	char identifier)
 {
 	(void)window;
 	if (!entity)
@@ -22,27 +44,12 @@ void	init_entity(t_game *game, t_ftm_window *window, t_entity *entity, char iden
 	entity->clear = clear_entity;
 	entity->action = entity_action;
 	entity->shot = entity_shot;
-	entity->max_health = ft_atoi(hashmap_get_with_identifier(game, game->map->types, identifier,
-			"MAX_HEALTH"));
+	entity->max_health = ft_atoi(hashmap_get_with_identifier(game,
+				game->map->types, identifier, "MAX_HEALTH"));
 	if (!entity->max_health)
 		entity->max_health = CHARACTER_DEFAULT_MAX_HEALTH;
 	entity->health = entity->max_health;
-	entity->targetable = ft_strequal(
-		hashmap_get_with_identifier(game, game->map->types, identifier,
-			"TARGETABLE"), "TRUE");
-	entity->transparent = !ft_strequal(
-		hashmap_get_with_identifier(game, game->map->types, identifier,
-			"TRANSPARENT"), "FALSE");
-	entity->active = true;
-	entity->hard = !ft_strequal(
-		hashmap_get_with_identifier(game, game->map->types, identifier,
-			"HARD"), "FALSE");
-	entity->collision_sound = hashmap_get_with_identifier(game, game->sounds, identifier, "COLLISION");
-	entity->identifier = identifier;
-	entity->size = (t_dsize){1, 1};
-	init_controller(game, entity,
-		hashmap_get_with_identifier(game, game->map->types, identifier,
-			"CONTROLLER"));
+	do_amazing_things(game, entity, identifier);
 }
 
 t_entity	*entity_new(t_game *game, t_ftm_window *window, char identifier)

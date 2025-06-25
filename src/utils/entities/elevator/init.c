@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 00:50:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/20 10:13:50 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/25 16:05:03 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	init_elevator(t_game *game, t_ftm_window *window,
 	elevator->wall.entity.action = elevator_action;
 	elevator->wall.entity.shot = elevator_shot;
 	elevator->map_path = hashmap_get_with_identifier(game, game->map->types,
-		identifier, "MAP_PATH");
+			identifier, "MAP_PATH");
 	elevator->wall.entity.actionable = !!elevator->map_path;
 }
 
