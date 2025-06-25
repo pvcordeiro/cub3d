@@ -58,30 +58,37 @@ def force_hex_color(color_value):
 
 def clean_xpm_colors(xpm_path):
     with open(xpm_path, 'r') as f:
-        lines = f.readlines()
+        content = f.read()
 
-    new_lines = []
-    for line in lines:
-        if ' c ' in line:
-            try:
-                before_c, after_c = line.split(' c ', 1)
-                match = re.match(r'([^",]+)', after_c.strip())
-                if match:
-                    cor_original = match.group(1)
-                    cor_hex = force_hex_color(cor_original)
-                    rest = after_c[len(cor_original):]
-                    line_corrigida = f'{before_c} c {cor_hex}{rest}'
-                    new_lines.append(line_corrigida)
-                else:
-                    new_lines.append(line)
-            except Exception as e:
-                print(f"[erro] {xpm_path}: {e}")
-                new_lines.append(line)
-        else:
-            new_lines.append(line)
+    # Encontra a posição de "/* pixels */"
+    pixels_match = re.search(r'/\*\s*pixels\s*\*/', content)
+    if not pixels_match:
+        print(f"[aviso] Não encontrado '/* pixels */' em {xpm_path}")
+        return
+
+    # Divide o conteúdo antes e depois de "/* pixels */"
+    before_pixels = content[:pixels_match.start()]
+    after_pixels = content[pixels_match.start():]
+
+    # Regex para encontrar todas as linhas com "c #" na parte antes de "/* pixels */"
+    color_pattern = r'([^"]*"\s*[^"]*\s*c\s+)([^",\s]+)([^"]*"[^"]*)'
+    
+    def replace_color(match):
+        prefix = match.group(1)  # parte antes da cor
+        original_color = match.group(2)  # cor original
+        suffix = match.group(3)  # parte depois da cor
+        
+        hex_color = force_hex_color(original_color)
+        return f"{prefix}{hex_color}{suffix}"
+
+    # Aplica a substituição apenas na parte antes de "/* pixels */"
+    new_before_pixels = re.sub(color_pattern, replace_color, before_pixels)
+    
+    # Reconstrói o conteúdo completo
+    new_content = new_before_pixels + after_pixels
 
     with open(xpm_path, 'w') as f:
-        f.writelines(new_lines)
+        f.write(new_content)
 
     print(f'✔ Corrigido: {xpm_path}')
 

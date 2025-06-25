@@ -1,5 +1,5 @@
 /* XPM */
-static char *shoot_back_right2[] = {
+static char *shoot_back_right[] = {
 /* columns rows colors chars-per-pixel */
 "128 128 203 2 ",
 "   c #00000000",
