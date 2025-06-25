@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 12:15:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/06/25 17:04:18 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/25 21:25:23 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,18 +103,18 @@ typedef struct s_list
 
 typedef struct s_dda_raycast_data
 {
-    double			length;
-    t_coords		rdir;
-    t_coords		deltadist;
-    t_coords		side_dist;
-    t_coords		pos;
-    t_coords		step;
-    int				side;
-    double			hit_x;
-    void			*hit;
-    void			***objs;
-    t_size			objs_size;
-    t_direction		hitdir;
+	double			length;
+	t_coords		rdir;
+	t_coords		deltadist;
+	t_coords		side_dist;
+	t_coords		pos;
+	t_coords		step;
+	int				side;
+	double			hit_x;
+	void			*hit;
+	void			***objs;
+	t_size			objs_size;
+	t_direction		hitdir;
 	t_coords		sp;
 	void			*ignored_obj;
 }	t_dda_raycast_data;
@@ -129,12 +129,12 @@ typedef struct s_dda_raycast_config
 
 typedef struct s_raycast
 {
-    double		distance;
-    double		yaw;
-    void		*hit;
-    double		hit_x;
-    t_direction	hit_direction;
-    t_coords	hit_coords;
+	double		distance;
+	double		yaw;
+	void		*hit;
+	double		hit_x;
+	t_direction	hit_direction;
+	t_coords	hit_coords;
 }	t_raycast;
 
 double					ft_normalize_angle(double angle);
@@ -179,7 +179,6 @@ char					**ft_strvndup(char **v, size_t n);
 char					**ft_strvdup(char **v);
 void					ft_strvfree(char **v);
 void					ft_bzero(void *s, size_t n);
-
 
 t_list					*ft_list_new(void *data, void (*data_free)(void *data));
 void					ft_list_add(t_list **list, void *data,

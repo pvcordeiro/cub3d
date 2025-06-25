@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:46:27 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 21:24:12 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/25 21:28:49 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,7 +178,7 @@ struct s_xvar
 	int			decrgb[6];
 	Atom		wm_delete_window;
 	Atom		wm_protocols;
-	int 		end_loop;
+	int			end_loop;
 };
 
 void				ftm_controller_init_e(t_ftm_controller *controller, int id);
@@ -190,56 +190,63 @@ void				ftm_controller_event_handler(void *userdata,
 						SDL_Event *event);
 void				ftm_call_controllers_event_handlers(t_list *controllers);
 
-void			ftm_free_image(void *image);
-t_ftm_image		*ftm_image_from_file(t_ftm_window *window, char *path);
-t_ftm_image		*ftm_image_new(t_ftm_window *window, t_size size);
-t_list			*ftm_images_from_files(t_ftm_window *window, char **file_paths);
+void				ftm_free_image(void *image);
+t_ftm_image			*ftm_image_from_file(t_ftm_window *window, char *path);
+t_ftm_image			*ftm_image_new(t_ftm_window *window, t_size size);
+t_list				*ftm_images_from_files(t_ftm_window *window,
+						char **file_paths);
 
-void			ftm_image_clear(t_ftm_image *image);
-void			ftm_put_image_to_canvas(t_ftm_image *canvas,
-					t_ftm_image *image, t_ftm_pitc_config pitc);
+void				ftm_image_clear(t_ftm_image *image);
+void				ftm_put_image_to_canvas(t_ftm_image *canvas,
+						t_ftm_image *image, t_ftm_pitc_config pitc);
 
-char			*ftm_image_to_str(t_ftm_image *image);
-void			ftm_put_image_to_window(t_ftm_window *window,
-					t_ftm_image *image, t_coords coords);
-void			ftm_put_image_to_window_pitc(t_ftm_window *window, t_ftm_image *image,
-					t_ftm_pitc_config pitc);
+char				*ftm_image_to_str(t_ftm_image *image);
+void				ftm_put_image_to_window(t_ftm_window *window,
+						t_ftm_image *image, t_coords coords);
+void				ftm_put_image_to_window_pitc(t_ftm_window *window,
+						t_ftm_image *image,
+						t_ftm_pitc_config pitc);
 
-t_ftm_font		*ftm_font_new(t_ftm_window *window, const char *dir);
-void			ftm_clear_font(void *font);
-void			ftm_free_font(void *font);
+t_ftm_font			*ftm_font_new(t_ftm_window *window, const char *dir);
+void				ftm_clear_font(void *font);
+void				ftm_free_font(void *font);
 
-void			ftm_draw_text(t_ftm_image *canvas, t_ftm_font *font, t_ftm_text_config text_config);
-int				ftm_get_text_size_prediction(t_ftm_font *font, t_ftm_text_config text_config);
-void			ftm_draw_text_in_box(t_ftm_image *canvas, t_ftm_font *font,
-					t_ftm_text_config text_config, t_ftm_rectangle rectangle);
+void				ftm_draw_text(t_ftm_image *canvas, t_ftm_font *font,
+						t_ftm_text_config text_config);
+int					ftm_get_text_size_prediction(t_ftm_font *font,
+						t_ftm_text_config text_config);
+void				ftm_draw_text_in_box(t_ftm_image *canvas, t_ftm_font *font,
+						t_ftm_text_config text_config,
+						t_ftm_rectangle rectangle);
 
-void			ftm_clear_window(void *window);
-void			ftm_free_window(void *window);
-void			ftm_create_window_e(t_ftm_window *window,
-					t_size size, char *title);
-void			ftm_update_hooks(t_ftm_window *window);
-void			ftm_window_loop(t_ftm_window *window);
-void			ftm_window_wipe(t_ftm_window *window);
+void				ftm_clear_window(void *window);
+void				ftm_free_window(void *window);
+void				ftm_create_window_e(t_ftm_window *window,
+						t_size size, char *title);
+void				ftm_update_hooks(t_ftm_window *window);
+void				ftm_window_loop(t_ftm_window *window);
+void				ftm_window_wipe(t_ftm_window *window);
 
-void			ftm_window_resize_e(t_ftm_window *window, t_size size);
-t_size			ftm_window_toggle_fullscreen(t_ftm_window *window, t_size prev_size);
-t_size			ftm_get_screen_size(t_ftm_window *window);
-void 			ftm_window_notify_fullscreen(t_ftm_window *window);
+void				ftm_window_resize_e(t_ftm_window *window, t_size size);
+t_size				ftm_window_toggle_fullscreen(t_ftm_window *window,
+						t_size prev_size);
+t_size				ftm_get_screen_size(t_ftm_window *window);
+void				ftm_window_notify_fullscreen(t_ftm_window *window);
 
-void			ftm_window_reload_controllers(t_ftm_window *window);
+void				ftm_window_reload_controllers(t_ftm_window *window);
 
-unsigned int	*ftm_image_pixel(t_ftm_image *image, t_coords coords);
-unsigned int	ftm_remove_pixel_transparency(unsigned int value);
-unsigned int	ftm_blend_pixel(unsigned int dst, unsigned int src);
-void			ftm_set_pixel(unsigned int *pixel, unsigned int value);
+unsigned int		*ftm_image_pixel(t_ftm_image *image, t_coords coords);
+unsigned int		ftm_remove_pixel_transparency(unsigned int value);
+unsigned int		ftm_blend_pixel(unsigned int dst, unsigned int src);
+void				ftm_set_pixel(unsigned int *pixel, unsigned int value);
 
-void			ftm_draw_line(t_ftm_image *canvas, t_coords start,
-					t_coords end, unsigned int color);
-void			ftm_draw_line_angle(t_ftm_image *canvas, t_coords start,
-					double length, unsigned int color);
-void			ftm_draw_rectangle(t_ftm_image *canvas, t_coords coords,
-					t_size size, t_ftm_rectangle rectangle);
-void			ftm_draw_arrow(t_ftm_image *canvas, t_coords coords, t_size size, unsigned int color);
+void				ftm_draw_line(t_ftm_image *canvas, t_coords start,
+						t_coords end, unsigned int color);
+void				ftm_draw_line_angle(t_ftm_image *canvas, t_coords start,
+						double length, unsigned int color);
+void				ftm_draw_rectangle(t_ftm_image *canvas, t_coords coords,
+						t_size size, t_ftm_rectangle rectangle);
+void				ftm_draw_arrow(t_ftm_image *canvas, t_coords coords,
+						t_size size, unsigned int color);
 
 #endif

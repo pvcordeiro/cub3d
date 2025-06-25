@@ -6,7 +6,7 @@
 #    By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/26 17:16:21 by afpachec          #+#    #+#              #
-#    Updated: 2025/06/25 21:19:59 by afpachec         ###   ########.fr        #
+#    Updated: 2025/06/25 21:21:37 by afpachec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -112,6 +112,7 @@ fclean: clean
 	@rm -rf headers/mlx.h
 	@rm -rf headers/SDL2/
 	@rm -rf lib/libSDL2.a
+	@rm -rf headers/miniaudio.h
 
 re: fclean all
 

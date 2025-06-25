@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/25 20:12:41 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/25 21:24:44 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,8 @@ typedef struct s_identifiers	t_identifiers;
 typedef struct s_item			t_item;
 typedef struct s_collectible	t_collectible;
 typedef struct s_drop			t_drop;
-typedef void *(*t_type_creator)(t_game *, t_ftm_window *, char);
+typedef void					*(*t_type_creator)(t_game *, t_ftm_window *,
+									char);
 typedef struct s_weapon			t_weapon;
 typedef struct s_render_config	t_render_config;
 
@@ -139,7 +140,7 @@ struct s_item
 	void			(*clear)(void *this);
 	void			(*use)(t_item *item, t_drop *drop);
 	void			(*drop)(t_game *, t_ftm_window *, t_item *,
-						t_character *dropper);
+			t_character *dropper);
 	char			identifier;
 	char			*name;
 	char			*description;
@@ -271,7 +272,7 @@ struct s_billboard
 
 struct s_character
 {
-	t_billboard billboard;
+	t_billboard	billboard;
 	t_sprite	**using_sprite;
 	t_sprite	**death_sprite;
 	t_sprite	**hit_sprite;
@@ -302,7 +303,7 @@ struct s_character
 
 struct s_player
 {
-	t_character 		character;
+	t_character			character;
 	t_ftm_image			*canvas;
 	t_coords			last_canvas_pos;
 	int					controller_id;
@@ -454,60 +455,74 @@ struct s_cub3d
 };
 
 // cub3d
-t_cub3d			*cub3d(void);
-void			cub3d_exit(int code);
-void			*hashmap_get_with_identifier(t_game *game, t_hashmap *hashmap, char identifier, char *rest);
-void			update_walls_matrix(t_game *game);
-void			update_billboards_vec(t_game *game);
-t_type_creator	get_type_creator(t_hashmap *identifiers, char identifier);
-void			free_walls(t_game *game);
+t_cub3d				*cub3d(void);
+void				cub3d_exit(int code);
+void				*hashmap_get_with_identifier(t_game *game,
+						t_hashmap *hashmap, char identifier, char *rest);
+void				update_walls_matrix(t_game *game);
+void				update_billboards_vec(t_game *game);
+t_type_creator		get_type_creator(t_hashmap *identifiers, char identifier);
+void				free_walls(t_game *game);
 
 // Game
-t_game		*game_new(t_ftm_window *window, t_map *map);
-void		clear_game(void *game);
-void		free_game(void *game);
-void		render_game(t_game *game, t_ftm_image *canvas,
-				t_character *character);
-void		render_players_game(t_game *game, t_ftm_window *window);
+t_game				*game_new(t_ftm_window *window, t_map *map);
+void				clear_game(void *game);
+void				free_game(void *game);
+void				render_game(t_game *game, t_ftm_image *canvas,
+						t_character *character);
+void				render_players_game(t_game *game, t_ftm_window *window);
 
 // Map
-t_map		*parse_map_e(char *path);
-void		clear_map(void *map);
-void		free_map(t_map *map);
+t_map				*parse_map_e(char *path);
+void				clear_map(void *map);
+void				free_map(t_map *map);
 
 // Loop
-void		loop(void);
-void		key_hook(t_ftm_key_hook_values key_hook_values);
-void		mouse_hook(t_coords coords);
+void				loop(void);
+void				key_hook(t_ftm_key_hook_values key_hook_values);
+void				mouse_hook(t_coords coords);
 
 // Sprites
-t_ftm_image	*get_sprite_image(t_sprite *sprite);
-t_ftm_image	*get_sprite3d_image(t_sprite **sprite3d, double angle);
-t_sprite	*get_entity_sprite(t_entity *entity, t_direction direction);
-void		free_sprite(void *data);
-void		clear_sprite(void *data);
-void		init_sprite(t_sprite *sprite, t_list *images, t_time update_delay);
-t_sprite	*sprite_new(t_list *images, t_time update_delay);
-void		sprite_soft_copy(t_sprite **dst, t_sprite *src);
+t_ftm_image			*get_sprite_image(t_sprite *sprite);
+t_ftm_image			*get_sprite3d_image(t_sprite **sprite3d, double angle);
+t_sprite			*get_entity_sprite(t_entity *entity, t_direction direction);
+void				free_sprite(void *data);
+void				clear_sprite(void *data);
+void				init_sprite(t_sprite *sprite, t_list *images,
+						t_time update_delay);
+t_sprite			*sprite_new(t_list *images, t_time update_delay);
+void				sprite_soft_copy(t_sprite **dst, t_sprite *src);
 
 // Entities
 void				free_entity(void *data);
 void				call_entity_frames(t_game *game, t_fps *fps);
 void				call_entity_keys(t_game *game, t_ftm_key_hook_values kvh);
-bool				entity_x_is_transparent(t_entity *entity, t_direction direction, double x);
-t_player			*player_new(t_game *game, t_ftm_window *window, char identifier);
-t_wall				*wall_new(t_game *game, t_ftm_window *window, char identifier);
-t_door				*door_new_e(t_game *game, t_ftm_window *window, char identifier);
-t_billboard			*billboard_new(t_game *game, t_ftm_window *window, char identifier);
-t_entity			*entity_new(t_game *game, t_ftm_window *window, char identifier);
-t_drop				*drop_new(t_game *game, t_ftm_window *window, char identifier);
-t_character			*character_new(t_game *game, t_ftm_window *window, char identifier);
-t_elevator			*elevator_new(t_game *game, t_ftm_window *window, char identifier);
+bool				entity_x_is_transparent(t_entity *entity,
+						t_direction direction, double x);
+t_player			*player_new(t_game *game, t_ftm_window *window,
+						char identifier);
+t_wall				*wall_new(t_game *game, t_ftm_window *window,
+						char identifier);
+t_door				*door_new_e(t_game *game, t_ftm_window *window,
+						char identifier);
+t_billboard			*billboard_new(t_game *game, t_ftm_window *window,
+						char identifier);
+t_entity			*entity_new(t_game *game, t_ftm_window *window,
+						char identifier);
+t_drop				*drop_new(t_game *game, t_ftm_window *window,
+						char identifier);
+t_character			*character_new(t_game *game, t_ftm_window *window,
+						char identifier);
+t_elevator			*elevator_new(t_game *game, t_ftm_window *window,
+						char identifier);
 
 // Items
-void			free_item(void *data);
-t_item			*item_new(t_game *game, t_ftm_window *window, char identifier);
-t_collectible	*collectible_new(t_game *game, t_ftm_window *window, char identifier);
-t_weapon		*weapon_new(t_game *game, t_ftm_window *window, char identifier);
+void				free_item(void *data);
+t_item				*item_new(t_game *game, t_ftm_window *window,
+						char identifier);
+t_collectible		*collectible_new(t_game *game, t_ftm_window *window,
+						char identifier);
+t_weapon			*weapon_new(t_game *game, t_ftm_window *window,
+						char identifier);
 
 #endif
