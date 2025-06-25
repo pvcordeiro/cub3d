@@ -6,7 +6,7 @@
 #    By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/26 17:16:21 by afpachec          #+#    #+#              #
-#    Updated: 2025/06/21 01:04:01 by afpachec         ###   ########.fr        #
+#    Updated: 2025/06/25 21:19:59 by afpachec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,11 +52,12 @@ endif
 
 all: $(NAME)
 
-$(NAME): fonts assets/wolf3d lib/libmlx.a lib/libSDL2.a $(OBJS)
+$(NAME): fonts assets/wolf3d lib/libSDL2.a lib/libmlx.a headers/miniaudio.h $(OBJS)
+	@echo "\033[1;32mCompiling \033[1;0m\"$(OBJS)\"\033[1;32m into \033[1;0m\"$(NAME)\"\033[1;32m.\033[0m"
 	@$(CC) -o $(NAME) $(OBJS) $(CFLAGS) $(INCLUDES) $(LIBS) $(LDLIBS)
-	@echo "\033[1;32mCompiled \033[1;0m\"$(OBJS)\"\033[1;32m into \033[1;0m\"$(NAME)\"\033[1;32m.\033[0m"
 
 lib/libmlx.a:
+	@echo "\033[1;32mCompiling \033[1;0m\"minilibx\"\033[1;32m.\033[0m"
 	@rm -rf lib/minilibx-linux
 	@tar -xzf lib/minilibx-linux.tgz -C lib
 ifeq ($(UNAME_S),Darwin)
@@ -69,7 +70,13 @@ endif
 	@cp lib/minilibx-linux/mlx_int.h headers
 	@rm -rf lib/minilibx-linux
 
+headers/miniaudio.h:
+	@echo "\033[1;32mCompiling \033[1;0m\"miniaudio\"\033[1;32m.\033[0m"
+	@rm -rf headers/miniaudio.h
+	@tar -xzf lib/miniaudio.tar.gz -C headers
+
 lib/libSDL2.a:
+	@echo "\033[1;32mCompiling \033[1;0m\"SDL2\"\033[1;32m.\033[0m"
 	@rm -rf lib/SDL2-2.32.8
 	@tar -xzf lib/SDL2-2.32.8.tar.gz -C lib
 	@mkdir -p lib/SDL2-2.32.8/build
