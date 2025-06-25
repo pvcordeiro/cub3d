@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 00:50:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 12:00:54 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/23 18:19:48 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ void	init_entity(t_game *game, t_ftm_window *window, t_entity *entity, char iden
 	entity->targetable = ft_strequal(
 		hashmap_get_with_identifier(game, game->map->types, identifier,
 			"TARGETABLE"), "TRUE");
+	entity->transparent = !ft_strequal(
+		hashmap_get_with_identifier(game, game->map->types, identifier,
+			"TRANSPARENT"), "FALSE");
 	entity->active = true;
 	entity->hard = !ft_strequal(
 		hashmap_get_with_identifier(game, game->map->types, identifier,
