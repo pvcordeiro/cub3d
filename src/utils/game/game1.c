@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:16:16 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/04 01:23:19 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/25 18:48:53 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ void	init_minimap(t_ftm_window *window, t_game *game)
 
 void	init_window(t_ftm_window *window, t_game *game)
 {
-	window->using_mouse = ft_strequal(ft_hashmap_get_value(game->map->types, "MOUSE"), "TRUE");
+	window->using_mouse = ft_strequal(ft_hashmap_get_value(game->map->types,
+				"MOUSE"), "TRUE");
 }
 
 void	init_font_e(t_ftm_window *window, t_game *game)

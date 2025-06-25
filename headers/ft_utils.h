@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 12:15:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/06/21 14:15:35 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/25 17:04:18 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,20 @@ typedef struct s_coords
 	double	y;
 	double	yaw;
 }	t_coords;
+
+typedef struct s_ten_ints
+{
+	int	one;
+	int	two;
+	int	three;
+	int	four;
+	int	five;
+	int	six;
+	int	seven;
+	int	eight;
+	int	nine;
+	int	ten;
+}	t_ten_ints;
 
 typedef struct s_rgba
 {

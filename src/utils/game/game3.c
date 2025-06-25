@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 23:10:00 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 20:03:27 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/25 16:58:07 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ static void	add_player_e(t_game *game, t_player *player)
 	fte_set("Too many players");
 }
 
-static void	create_entity_e(t_game *game, t_ftm_window *window, char c, t_size position)
+static void	create_entity_e(t_game *game, t_ftm_window *window, char c,
+	t_size position)
 {
 	t_type_creator		creator;
 	t_entity			*entity;
@@ -50,7 +51,7 @@ static void	create_entity_e(t_game *game, t_ftm_window *window, char c, t_size p
 	if (entity->billboard)
 	{
 		entity->coords.x += 0.5 - entity->size.width * 0.5;
- 		entity->coords.y += 0.5 - entity->size.height * 0.5;
+		entity->coords.y += 0.5 - entity->size.height * 0.5;
 	}
 	ft_list_add(&game->entities, entity, free_entity);
 	if (entity->type == ENTITY_PLAYER)
@@ -67,7 +68,8 @@ void	init_entities_e(t_game *game, t_ftm_window *window)
 		s.width = -1;
 		while (game->map->map[s.height][++s.width])
 		{
-			if (create_entity_e(game, window, game->map->map[s.height][s.width], s), fte_flagged())
+			if (create_entity_e(game, window, game->map->map[s.height][s.width],
+				s), fte_flagged())
 				return ;
 			if (fte_flagged())
 				return ;

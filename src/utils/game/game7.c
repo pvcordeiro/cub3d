@@ -6,13 +6,14 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:20:04 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 14:17:07 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/25 18:47:23 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game.h"
 
-static void	set_update_delay(t_sprite *sprite, t_hashmap *types, const char *key)
+static void	set_update_delay(t_sprite *sprite, t_hashmap *types,
+	const char *key)
 {
 	char	*update_delay_key;
 	char	*update_delay_str;
