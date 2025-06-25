@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 01:24:50 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/25 20:48:08 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	weapon_drop(t_game *game, t_ftm_window *window, t_item *item,
 
 void	weapon_frame(t_item *item)
 {
-	item->can_use = item->user && item->user->ammo - ((t_weapon *)item)->ammo_usage >= 0;
+	item->can_use = item->user && item->user->ammo
+		- ((t_weapon *)item)->ammo_usage >= 0;
 	item_frame(item);
 }

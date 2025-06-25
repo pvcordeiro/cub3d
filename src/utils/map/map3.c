@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 20:52:20 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 14:17:13 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/25 21:03:38 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	add_identifier(t_hashmap *identifiers, char *identifier, char *type)
 	ft_list_add(ids, ft_strdup(identifier), free);
 }
 
-static void add_default_identifiers(t_hashmap *identifiers)
+static void	add_default_identifiers(t_hashmap *identifiers)
 {
 	char	*id_str;
 	int		i;
@@ -97,7 +97,7 @@ void	parse_identifiers_e(t_map *map)
 		if (!identifier || !*identifier)
 			return (free(identifier), fte_set("empty type identifier"));
 		if (identifier_already_defined(map->identifiers, identifier))
-			return (fte_set("duplicate type identifier %s", identifier), free(identifier));
+			return (fte_set("dup type id %s", identifier), free(identifier));
 		add_identifier(map->identifiers, identifier, curr->value);
 		if (free(identifier), fte_flagged())
 			return ;

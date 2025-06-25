@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 11:06:16 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/25 19:01:45 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/25 20:47:42 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ void	mouse_hook(t_coords coords)
 		pthread_mutex_unlock(&cub3d()->game_mutex);
 		return ;
 	}
-	mlx_mouse_move(window->display, window->win, window->size.width / 2, window->size.height / 2);
+	mlx_mouse_move(window->display, window->win, window->size.width / 2,
+		window->size.height / 2);
 	movement = coords.x - (window->size.width / 2);
 	if (fabs(movement) < 10)
 		movement = movement * (0.5 + (fabs(movement) / 20.0));
