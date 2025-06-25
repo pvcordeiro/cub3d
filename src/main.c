@@ -6,15 +6,16 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:15:19 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 13:57:45 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/25 21:15:51 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
-static void	load_placeholder_sprite_e(t_ftm_window *window, t_sprite *placeholder)
+static void	load_placeholder_sprite_e(t_ftm_window *window,
+	t_sprite *placeholder)
 {
-	t_list	*list;
+	t_list		*list;
 	t_ftm_image	*image;
 
 	fte_set(NULL);
@@ -28,7 +29,6 @@ static void	load_placeholder_sprite_e(t_ftm_window *window, t_sprite *placeholde
 
 int	main(int argc, char **argv)
 {
-
 	(void)argc;
 	fte_storage()->exit = cub3d_exit;
 	fte_assert();
