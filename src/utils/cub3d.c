@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 21:53:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/22 14:12:14 by pvcordeiro       ###   ########.fr       */
+/*   Updated: 2025/06/25 18:58:35 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,33 +107,33 @@ static bool	is_billboard(t_entity *entity, void *param)
 
 void	update_billboards_vec(t_game *game)
 {
-    t_entity	*entity;
-    t_list		*curr;
-    size_t		i;
-    size_t		billboard_count;
+	t_entity	*entity;
+	t_list		*curr;
+	size_t		i;
+	size_t		billboard_count;
 
-    if (!game || !game->entities)
-        return ;
-    billboard_count = ft_list_count(game->entities, (void *)is_billboard, NULL);
-    if (!game->billboards
+	if (!game || !game->entities)
+		return ;
+	billboard_count = ft_list_count(game->entities, (void *)is_billboard, NULL);
+	if (!game->billboards
 		|| billboard_count != ft_strvlen((void *)game->billboards))
-    {
-        free(game->billboards);
-        game->billboards = ft_calloc(billboard_count + 1, sizeof(t_entity *));
-        if (!game->billboards)
-            return ;
-    }
+	{
+		free(game->billboards);
+		game->billboards = ft_calloc(billboard_count + 1, sizeof(t_entity *));
+		if (!game->billboards)
+			return ;
+	}
 	ft_bzero(game->billboards, sizeof(t_entity *) * (billboard_count + 1));
-    curr = game->entities;
-    i = -1;
-    while (curr)
-    {
-        entity = curr->data;
-        curr = curr->next;
-        if (!entity->billboard)
-            continue ;
-        game->billboards[++i] = entity;
-    }
+	curr = game->entities;
+	i = -1;
+	while (curr)
+	{
+		entity = curr->data;
+		curr = curr->next;
+		if (!entity->billboard)
+			continue ;
+		game->billboards[++i] = entity;
+	}
 }
 
 t_type_creator	get_type_creator(t_hashmap *ids, char identifier)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hand_item.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 23:28:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/20 18:26:39 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/25 19:52:36 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ static t_size	get_hand_item_size(t_size max_size, t_ftm_image	*image)
 		return ((t_size){max_size.height * aspect_ratio, max_size.height});
 }
 
-void	render_hand_item(t_ftm_image *canvas, t_character *character, t_size stats_size)
+void	render_hand_item(t_ftm_image *canvas, t_character *character,
+	t_size stats_size)
 {
 	t_sprite	*sprite;
 	t_ftm_image	*image;
@@ -40,15 +41,16 @@ void	render_hand_item(t_ftm_image *canvas, t_character *character, t_size stats_
 	if (!sprite)
 		sprite = character->inventory[character->inventory_index]->icon_sprite;
 	image = get_sprite_image(sprite);
-	max_size = (t_size){canvas->size.width, canvas->size.height - stats_size.height};
+	max_size = (t_size){canvas->size.width, canvas->size.height
+		- stats_size.height};
 	display_size = get_hand_item_size(max_size, image);
 	ftm_put_image_to_canvas(canvas, image,
-        (t_ftm_pitc_config){
-        .coords = (t_coords){(max_size.width - display_size.width) / 2,
-			(max_size.height - display_size.height), 0},
-        .crop = false,
-        .resize = true,
-        .size = display_size,
-        .pixel_modifier = NULL
-    });
+		(t_ftm_pitc_config){
+		.coords = (t_coords){(max_size.width - display_size.width) / 2,
+		(max_size.height - display_size.height), 0},
+		.crop = false,
+		.resize = true,
+		.size = display_size,
+		.pixel_modifier = NULL
+	});
 }

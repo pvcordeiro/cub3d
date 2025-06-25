@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 00:47:16 by paude-so          #+#    #+#             */
-/*   Updated: 2025/06/18 21:37:12 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/25 20:12:59 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ static t_size	get_size(t_get_size_config gsc)
 	double		fix_fisheye;
 	double		fov;
 
-	distance = ft_distance(gsc.camera->character->billboard.entity.coords, gsc.bill_coords);
+	distance = ft_distance(gsc.camera->character->billboard.entity.coords,
+			gsc.bill_coords);
 	fix_fisheye = distance * ft_cos_degrees(gsc.relative_angle);
 	fov = gsc.camera->fov;
 	if (!fov)
@@ -63,21 +64,24 @@ static void	render_billboard(t_billboard *bill, t_ftm_image *canvas,
 	t_size		new_size;
 	double		screen_x;
 	double		relative_angle;
+	t_coords	camb_coords;
 
 	if (!bill->entity.active)
 		return ;
-	relative_angle = get_relative_angle(camera->character->billboard.entity.coords,
-			bill->entity.coords);
+	camb_coords = camera->character->billboard.entity.coords;
+	relative_angle = get_relative_angle(camb_coords, bill->entity.coords);
 	image = NULL;
 	if (bill->sprites)
-		image = get_sprite_image(bill->sprites[((int)ft_angle_distance(bill->entity.coords, camera->character->billboard.entity.coords)) % 359]);
+		image = get_sprite3d_image(bill->sprites,
+				(int)ft_angle_distance(bill->entity.coords, camb_coords));
 	if (!image)
 		return ;
 	screen_x = get_screen_x(canvas, camera, relative_angle);
 	new_size = get_size((t_get_size_config){
 			camera, bill->entity.coords,
 			image->size, canvas->size, relative_angle});
-	if (screen_x + image->size.width * 0.7 < 0 || screen_x - image->size.width * 0.7 > canvas->size.width)
+	if (screen_x + image->size.width * 0.7 < 0 || screen_x - image->size.width
+		* 0.7 > canvas->size.width)
 		return ;
 	render_billboard_slices((t_render_billboard_slices_config){new_size,
 		screen_x, canvas, image, camera, bill, bill->entity.coords});
@@ -87,10 +91,12 @@ void	render_billboards(t_game *game, t_ftm_image *canvas, t_camera *camera)
 {
 	int	i;
 
-	ft_strvorder((void *)game->billboards, &camera->character->billboard.entity.coords,
+	ft_strvorder((void *)game->billboards,
+		&camera->character->billboard.entity.coords,
 		(void *)cmp_billboards);
 	i = -1;
 	while (game->billboards[++i])
 		if (game->billboards[i] != (t_entity *)camera->character)
-			render_billboard((t_billboard *)game->billboards[i], canvas, camera);
+			render_billboard((t_billboard *)game->billboards[i],
+				canvas, camera);
 }

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/22 23:19:06 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/25 20:12:41 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -482,6 +482,7 @@ void		mouse_hook(t_coords coords);
 
 // Sprites
 t_ftm_image	*get_sprite_image(t_sprite *sprite);
+t_ftm_image	*get_sprite3d_image(t_sprite **sprite3d, double angle);
 t_sprite	*get_entity_sprite(t_entity *entity, t_direction direction);
 void		free_sprite(void *data);
 void		clear_sprite(void *data);

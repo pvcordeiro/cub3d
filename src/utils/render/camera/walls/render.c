@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 00:45:35 by paude-so          #+#    #+#             */
-/*   Updated: 2025/06/18 23:13:09 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/25 20:16:59 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,15 @@ static void	draw_ray(t_draw_ray_config drc)
 	c = drc.coords;
 	c.yaw = drc.yaw;
 	ray = ft_dda_raycast((t_dda_raycast_config){
-		(void ***)drc.game->walls, drc.game->map->size, c, drc.ignored_entity});
+			(void ***)drc.game->walls, drc.game->map->size, c,
+			drc.ignored_entity});
 	if (!ray.hit)
 		return ;
 	ray.distance += drc.previous_distance;
 	if (ray.distance > drc.camera->ray_distances[drc.i])
 		drc.camera->ray_distances[drc.i] = ray.distance;
 	if (((t_entity *)ray.hit)->transparent && entity_x_is_transparent(ray.hit,
-		ray.hit_direction, ray.hit_x))
+			ray.hit_direction, ray.hit_x))
 	{
 		drc.coords = get_coords(&ray);
 		drc.ignored_entity = ray.hit;
@@ -61,8 +62,11 @@ static double	get_ray_yaw(t_draw_ray_config drc)
 
 	half_rays = drc.camera->rays / 2;
 	dist_to_proj = half_rays / tan(ft_radians(drc.camera->fov) / 2);
-	angle_ajustment = ft_degrees(atan(((double)drc.i - half_rays) / dist_to_proj));
-	return (ft_normalize_angle(drc.camera->character->billboard.entity.coords.yaw + angle_ajustment));
+	angle_ajustment = ft_degrees(atan(((double)drc.i - half_rays)
+				/ dist_to_proj));
+	return (ft_normalize_angle(
+			drc.camera->character->billboard.entity.coords.yaw
+			+ angle_ajustment));
 }
 
 static void	thread_render_rays(void *data)
@@ -74,7 +78,8 @@ static void	thread_render_rays(void *data)
 	trrd = data;
 	i = trrd->start;
 	drc = (t_draw_ray_config){trrd->canvas, trrd->camera, trrd->game,
-		trrd->camera->character->billboard.entity.coords, (t_entity *)trrd->camera->character, 0, 0, 0};
+		trrd->camera->character->billboard.entity.coords,
+		(t_entity *)trrd->camera->character, 0, 0, 0};
 	while (i < trrd->end)
 	{
 		drc.i = i++;

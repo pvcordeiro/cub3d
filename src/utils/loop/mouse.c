@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 11:06:16 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 03:01:42 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/25 19:01:45 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	mouse_hook(t_coords coords)
 	t_player		*player;
 	t_ftm_window	*window;
 	double			movement;
-	t_game	*game;
+	t_game			*game;
 
 	window = &cub3d()->window;
 	if (!window->using_mouse)

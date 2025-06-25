@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:23:25 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/19 01:23:33 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/25 20:17:56 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,6 @@ typedef struct s_player_canvas_data
 
 void	render_hud(t_game *game, t_ftm_image *canvas, t_character *character);
 void	render_camera(t_game *game, t_ftm_image *canvas,
-	t_character *character);
+			t_character *character);
 
 #endif

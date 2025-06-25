@@ -6,13 +6,14 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 00:47:16 by paude-so          #+#    #+#             */
-/*   Updated: 2025/06/18 21:43:00 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/25 20:03:58 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "billboards.h"
 
-static bool	is_behind_wall(int i, int ray_index, t_render_billboard_slices_config rbsc)
+static bool	is_behind_wall(int i, int ray_index,
+	t_render_billboard_slices_config rbsc)
 {
 	double			offset;
 	double			world_x;
@@ -57,7 +58,7 @@ static t_ftm_pitc_config	get_pitc_config(int i,
 void	render_billboard_slices(t_render_billboard_slices_config rbsc)
 {
 	int		ray_index;
-	int					i;
+	int		i;
 
 	i = -1;
 	while (++i < rbsc.new_size.width)

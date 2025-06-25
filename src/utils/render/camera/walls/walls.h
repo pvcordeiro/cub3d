@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 15:40:06 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/14 17:50:52 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/25 20:17:49 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_get_pitc_config_config
 	t_pixel_modifier_data	*pixel_modifier_data;
 }	t_get_pitc_config_config;
 
-void	draw_ray_line(t_ftm_image *canvas, t_camera *camera, t_raycast ray, int i);
+void	draw_ray_line(t_ftm_image *canvas, t_camera *camera, t_raycast ray,
+			int i);
 
 #endif

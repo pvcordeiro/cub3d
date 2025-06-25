@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   action.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 02:27:23 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/20 13:07:20 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/25 19:52:49 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	render_action(t_game *game, t_ftm_image *canvas, t_character *character)
 		.color = 0xFFDDDDDD
 	};
 	text_config.coords.x = (canvas->size.width / 2)
-		- (ftm_get_text_size_prediction(game->hud.action_font, text_config) / 2);
+		- (ftm_get_text_size_prediction(game->hud.action_font, text_config)
+			/ 2);
 	text_config.coords.y = canvas->size.height * 0.7;
 	ftm_draw_text_in_box(canvas, game->hud.action_font, text_config,
 		(t_ftm_rectangle){0x55000000, 0x55EFBF04, (t_size){2, 2}});
