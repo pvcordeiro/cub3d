@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 23:44:03 by afpachec          #+#    #+#             */
-/*   Updated: 2025/05/28 00:05:50 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/25 14:43:12 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ static void	load_char(t_ftm_window *window, t_ftm_font *font, unsigned char c)
 t_ftm_font	*ftm_font_new(t_ftm_window *window, const char *dir)
 {
 	t_ftm_font	*font;
-	char	*clean_dir;
-	int		i;
+	char		*clean_dir;
+	int			i;
 
 	font = ft_calloc(1, sizeof(t_ftm_font));
 	if (!font)
 		return (NULL);
 	clean_dir = ft_clean_path(dir);
-	if (!clean_dir)	
+	if (!clean_dir)
 		return (free(font), NULL);
 	font->dir = clean_dir;
 	i = -1;

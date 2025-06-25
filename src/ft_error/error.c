@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 22:00:34 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/06 16:00:37 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/25 14:58:39 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ t_error_storage	*fte_storage(void)
 void	fte_set(const char *msg, ...)
 {
 	char	*tmp;
-    va_list	args;
+	va_list	args;
 
 	ft_bzero(fte_storage()->msg, 1024);
-    va_start(args, msg);
+	va_start(args, msg);
 	tmp = ft_strfva(msg, &args);
 	va_end(args);
 	ft_strlcpy(fte_storage()->msg, tmp, 1024);

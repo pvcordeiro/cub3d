@@ -6,15 +6,15 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 21:22:31 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 14:57:38 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/25 14:39:37 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "controllers.h"
 
-static double normalize_pressure(int16_t value)
+static double	normalize_pressure(int16_t value)
 {
-	return fmax(0.0, (double)value / 32767.0);
+	return (fmax(0.0, (double)value / 32767.0));
 }
 
 static void	set_to_raw_if_x(bool is_x, int16_t *x, int16_t *y, int16_t raw)
@@ -33,12 +33,14 @@ static t_ftm_key_hook_values	get_joystick_vals(t_ftm_controller *controller,
 	int axis, int16_t raw)
 {
 	t_ftm_key_hook_values	val;
-	bool 					is_left;
-	bool 					is_x;
+	bool					is_left;
+	bool					is_x;
 
 	val = (t_ftm_key_hook_values){0};
-	is_x = (axis == SDL_CONTROLLER_AXIS_LEFTX || axis == SDL_CONTROLLER_AXIS_RIGHTX);
-	is_left = (axis == SDL_CONTROLLER_AXIS_LEFTX || axis == SDL_CONTROLLER_AXIS_LEFTY);
+	is_x = axis == SDL_CONTROLLER_AXIS_LEFTX
+		|| axis == SDL_CONTROLLER_AXIS_RIGHTX;
+	is_left = axis == SDL_CONTROLLER_AXIS_LEFTX
+		|| axis == SDL_CONTROLLER_AXIS_LEFTY;
 	if (is_left)
 		set_to_raw_if_x(is_x, &controller->lx, &controller->ly, raw);
 	else
@@ -65,9 +67,11 @@ static t_ftm_key_hook_values	get_axis_vals(t_ftm_controller *controller,
 	val = (t_ftm_key_hook_values){0};
 	raw = event->caxis.value;
 	axis = event->caxis.axis;
-	if (axis == SDL_CONTROLLER_AXIS_TRIGGERLEFT || axis == SDL_CONTROLLER_AXIS_TRIGGERRIGHT)
+	if (axis == SDL_CONTROLLER_AXIS_TRIGGERLEFT
+		|| axis == SDL_CONTROLLER_AXIS_TRIGGERRIGHT)
 	{
-		val.key = (axis == SDL_CONTROLLER_AXIS_TRIGGERLEFT) ? FTM_GAMEPAD_L2 : FTM_GAMEPAD_R2;
+		val.key = ft_ternary_int(axis == SDL_CONTROLLER_AXIS_TRIGGERLEFT,
+				FTM_GAMEPAD_L2, FTM_GAMEPAD_R2);
 		val.pressure = normalize_pressure(raw);
 		val.down = (val.pressure > 0.05);
 		return (val);
@@ -84,7 +88,8 @@ void	ftm_controller_event_handler(void *userdata, SDL_Event *event)
 	if (!controller || !controller->key_hook)
 		return ;
 	val = (t_ftm_key_hook_values){0};
-	if (event->type == SDL_CONTROLLERBUTTONDOWN || event->type == SDL_CONTROLLERBUTTONUP)
+	if (event->type == SDL_CONTROLLERBUTTONDOWN
+		|| event->type == SDL_CONTROLLERBUTTONUP)
 	{
 		if (event->cbutton.which != controller->id)
 			return ;
@@ -101,5 +106,4 @@ void	ftm_controller_event_handler(void *userdata, SDL_Event *event)
 		return ;
 	val.controller = controller;
 	controller->key_hook(val);
-	return ;
 }

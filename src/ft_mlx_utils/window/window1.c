@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:38:00 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/20 02:24:17 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/25 14:49:18 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	window_loop_hook(void *data)
 {
-	static bool	previous_using_mouse;
-	t_ftm_window *window;
+	static bool		previous_using_mouse;
+	t_ftm_window	*window;
 
 	window = data;
 	if (window->using_mouse != previous_using_mouse)
@@ -39,40 +39,22 @@ int	window_key_hook(t_ftm_key_hook_values key_hook_values, void *window)
 	return (0);
 }
 
-int window_key_down_hook(int key, void *window)
+int	window_key_down_hook(int key, void *window)
 {
-	return (window_key_hook((t_ftm_key_hook_values){key, (t_coords){0}, 1.0, true, NULL}, window));
+	return (window_key_hook((t_ftm_key_hook_values){key, {0}, 1.0,
+			true, NULL}, window));
 }
 
-int window_key_up_hook(int key, void *window)
+int	window_key_up_hook(int key, void *window)
 {
-	return (window_key_hook((t_ftm_key_hook_values){key, (t_coords){0}, 1.0, false, NULL}, window));
+	return (window_key_hook((t_ftm_key_hook_values){key, {0}, 1.0,
+			false, NULL}, window));
 }
 
-int window_mouse_down_hook(int key, int x, int y, void *window)
+int	window_mouse_down_hook(int key, int x, int y, void *window)
 {
 	if (((t_ftm_window *)window)->using_mouse)
-		return (window_key_hook((t_ftm_key_hook_values){key, (t_coords){x, y, 0}, 1.0, true, NULL}, window));
-	return (0);
-}
-
-int window_mouse_up_hook(int key, int x, int y, void *window)
-{
-	if (((t_ftm_window *)window)->using_mouse)
-		return (window_key_hook((t_ftm_key_hook_values){key, (t_coords){x, y, 0}, 1.0, false, NULL}, window));
-	return (0);
-}
-
-int window_exit_hook(void *window)
-{
-	if (((t_ftm_window *)window)->exit_hook)
-		((t_ftm_window *)window)->exit_hook(0);
-	return (0);
-}
-
-int window_mouse_hook(int x, int y, void *window)
-{
-	if (((t_ftm_window *)window)->mouse_hook)
-		((t_ftm_window *)window)->mouse_hook((t_coords){x, y, 0});
+		return (window_key_hook((t_ftm_key_hook_values){key, {x, y, 0}, 1.0,
+				true, NULL}, window));
 	return (0);
 }

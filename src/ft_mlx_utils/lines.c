@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:37:16 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/19 15:38:40 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/25 14:57:57 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,26 +70,26 @@ void	ftm_draw_rectangle(t_ftm_image *canvas, t_coords coords, t_size size,
 	}
 }
 
-void	ftm_draw_arrow(t_ftm_image *canvas, t_coords coords, t_size size, unsigned int color)
+void	ftm_draw_arrow(t_ftm_image *canvas, t_coords coords, t_size size,
+	unsigned int color)
 {
 	t_coords	end;
 	t_coords	head1;
 	t_coords	head2;
 	double		angle;
-	double		head_length;
-	double		head_angle;
+	t_coords	head;
 
 	coords.yaw = ft_normalize_angle(coords.yaw);
 	angle = coords.yaw;
 	end.x = coords.x + ft_cos_degrees(angle) * size.height;
 	end.y = coords.y + ft_sin_degrees(angle) * size.height;
-	head_length = size.width;
-	head_angle = 30.0;
-	head1.x = end.x - ft_cos_degrees(angle - head_angle) * head_length;
-	head1.y = end.y - ft_sin_degrees(angle - head_angle) * head_length;
+	head.x = size.width;
+	head.yaw = 30.0;
+	head1.x = end.x - ft_cos_degrees(angle - head.yaw) * head.x;
+	head1.y = end.y - ft_sin_degrees(angle - head.yaw) * head.x;
 	ftm_draw_line(canvas, end, head1, color);
-	head2.x = end.x - ft_cos_degrees(angle + head_angle) * head_length;
-	head2.y = end.y - ft_sin_degrees(angle + head_angle) * head_length;
+	head2.x = end.x - ft_cos_degrees(angle + head.yaw) * head.x;
+	head2.y = end.y - ft_sin_degrees(angle + head.yaw) * head.x;
 	ftm_draw_line(canvas, end, head2, color);
 	end.x = coords.x + ft_cos_degrees(angle) * size.height / 2;
 	end.y = coords.y + ft_sin_degrees(angle) * size.height / 2;

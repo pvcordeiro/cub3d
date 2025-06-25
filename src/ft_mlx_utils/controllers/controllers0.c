@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 20:46:22 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 14:55:45 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/25 14:40:43 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ void	ftm_controller_init_e(t_ftm_controller *controller, int id)
 	sdl_context()->usage_count++;
 	controller->controller = SDL_GameControllerOpen(id);
 	if (!controller->controller)
-		return (fte_set("Failed to open controller %d: %s", id, SDL_GetError()));
+		return (fte_set("Failed to open controller %d", id));
 	controller->id = SDL_JoystickInstanceID(
-		SDL_GameControllerGetJoystick(controller->controller));
+			SDL_GameControllerGetJoystick(controller->controller));
 	controller->joy_id = id;
 }
 
@@ -68,7 +68,8 @@ t_list	*ftm_load_controllers(void)
 		controller = ftm_controller_new(i);
 		if (!controller)
 			break ;
-		printf("Controller %d: %s\n", i, SDL_GameControllerName(controller->controller));
+		printf("Controller %d: %s\n", i,
+			SDL_GameControllerName(controller->controller));
 		ft_list_add(&list, controller, ftm_controller_free);
 		++i;
 	}
@@ -80,5 +81,6 @@ void	ftm_call_controllers_event_handlers(t_list *controllers)
 	SDL_Event	event;
 
 	while (SDL_PollEvent(&event))
-		ft_list_foreach(controllers, (void *)ftm_controller_event_handler, &event);
+		ft_list_foreach(controllers, (void *)ftm_controller_event_handler,
+			&event);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   audio0.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 11:02:20 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/08 17:56:44 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/25 15:01:58 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,22 @@ void	fta_destroy(void)
 	fta_engine()->initialized = false;
 }
 
+static bool	init_audio_instances(t_fta_audio *audio)
+{
+	ma_result	result;
+	int			i;
+
+	i = 0;
+	while (++i < FT_AUDIO_SOUND_INSTANCES)
+		result = ma_sound_init_copy(&fta_engine()->engine, &audio->sound[0],
+				0, NULL, &audio->sound[i]);
+	return (result == MA_SUCCESS);
+}
+
 t_fta_audio	*fta_audio_new(const char *path)
 {
 	t_fta_audio	*audio;
 	ma_result	result;
-	int			i;
 
 	if (!fta_engine()->initialized)
 		return (NULL);
@@ -54,64 +65,11 @@ t_fta_audio	*fta_audio_new(const char *path)
 			path, 0, NULL, NULL, &audio->sound[0]);
 	if (result != MA_SUCCESS)
 		return (free(audio), NULL);
-	i = 0;
-	while (++i < FT_AUDIO_SOUND_INSTANCES)
-	{
-		result = ma_sound_init_copy(&fta_engine()->engine, &audio->sound[0], 0, NULL, &audio->sound[i]);
-		if (result != MA_SUCCESS)
-			return (fta_free_audio(audio), NULL);
-	}
+	if (!init_audio_instances(audio))
+		return (fta_free_audio(audio), NULL);
 	result = ma_sound_get_length_in_seconds(&audio->sound[0], &audio->length);
 	if (result != MA_SUCCESS)
 		return (free(audio), NULL);
 	audio->length *= 1000;
 	return (audio);
-}
-
-void	fta_audio_config(t_fta_audio *audio, t_fta_audio_config config)
-{
-	int	i;
-
-	if (!audio || !fta_engine()->initialized)
-		return ;
-	if (config.volume < 0.0)
-		config.volume = 0.0;
-	else if (config.volume > 1.0)
-		config.volume = 1.0;
-	audio->config = config;
-	i = -1;
-	while (++i < FT_AUDIO_SOUND_INSTANCES)
-	{
-		ma_sound_set_looping(&audio->sound[i], config.loop);
-		ma_sound_set_volume(&audio->sound[i], config.volume);
-	}
-}
-
-void	fta_clear_audio(void *audio)
-{
-	int	i;
-
-	if (!audio || !fta_engine()->initialized)
-		return ;
-	i = -1;
-	while (++i < FT_AUDIO_SOUND_INSTANCES)
-		ma_sound_uninit(&((t_fta_audio *)audio)->sound[i]);
-}
-
-void	fta_free_audio(void *audio)
-{
-	fta_clear_audio(audio);
-	free(audio);
-}
-
-void	fta_play(t_fta_audio *audio)
-{
-	static int	i;
-
-	if (!audio || !fta_engine()->initialized)
-		return ;
-	++i;
-	if (i < 0 || i >= FT_AUDIO_SOUND_INSTANCES)
-		i = 0;
-	ma_sound_start(&audio->sound[i]);
 }
