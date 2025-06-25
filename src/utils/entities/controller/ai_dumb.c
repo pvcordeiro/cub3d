@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 18:34:50 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 03:23:17 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/25 15:38:58 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@
 
 static void	do_the_dumb_ai(t_entity *entity, t_player *player)
 {
-    double			angle_to_player;
-    double			dx;
+	double			angle_to_player;
+	double			dx;
 	double			dy;
 	double			distance_to_player;
 
-    if (!player || !entity->character)
+	if (!player || !entity->character)
 		return ;
 	dx = player->character.billboard.entity.coords.x - entity->coords.x;
 	dy = player->character.billboard.entity.coords.y - entity->coords.y;
@@ -42,7 +42,7 @@ static void	frame(t_game *game, t_entity *entity, double delta_time)
 	i = -1;
 	while (++i < PLAYER_MAX)
 		do_the_dumb_ai(entity, game->players[i]);
-    moviment_frame(game, entity, delta_time);
+	moviment_frame(game, entity, delta_time);
 }
 
 void	init_ai_dumb_controller(t_entity *entity)

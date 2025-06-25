@@ -6,86 +6,11 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 03:18:06 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/25 15:19:00 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "character.h"
-
-static void	set_using(t_game *game, t_character *character)
-{
-	char		*key;
-	t_sprite	**original;
-
-	key = ft_strf("USING_%c",
-		character->inventory[character->inventory_index]->identifier);
-	original = hashmap_get_with_identifier(game, game->sprites_3d,
-		character->billboard.entity.identifier, key);
-	free(key);
-	if (!original)
-		return ;
-	if (character->billboard.sprites != character->using_sprite
-		|| character->last_used_item_identifier != character->inventory[character->inventory_index]->identifier)
-		fill_3d_sprites_from_src(character->using_sprite, original);
-	character->billboard.sprites = character->using_sprite;
-	character->last_used_item_identifier = character->inventory[character->inventory_index]->identifier;
-}
-
-static bool	walking(t_entity *entity)
-{
-	return (entity->controller.walking_right
-		|| entity->controller.walking_backward
-		|| entity->controller.walking_forward
-		|| entity->controller.walking_left);
-}
-
-static bool	hit(t_character *character)
-{
-	return (ft_get_time() - character->last_hit < CHARACTER_HIT_DELAY);
-}
-
-static bool	using(t_character *character)
-{
-	t_item	*item;
-	bool	is_in_delay;
-
-	item = character->inventory[character->inventory_index];
-	if (!item)
-		return (false);
-	is_in_delay = item->screen_sprite
-		&& ft_get_time() - item->last_use < item->screen_sprite->update_delay;
-	return (is_in_delay || item->user == character);
-}
-
-static void	call_item_frames(t_character *character)
-{
-	int	i;
-
-	i = -1;
-	while (++i < INVENTORY_SIZE)
-		if (character->inventory[i] && character->inventory[i]->frame)
-			character->inventory[i]->frame(character->inventory[i]);
-}
-
-static void	drop_items(t_game *game, t_character *character)
-{
-	int		i;
-
-	if (!character->drop_items)
-		return ;
-	if (!character->drop)
-	{
-		i = -1;
-		while (++i < INVENTORY_SIZE)
-			if (character->inventory[i] && character->inventory[i]->drop)
-				character->inventory[i]->drop(game, &cub3d()->window,
-				character->inventory[i], character);
-		return ;
-	}
-	((t_entity *)character->drop)->coords = ((t_entity *)character)->coords;
-	ft_list_add(&game->entities, character->drop, free_entity);
-	character->drop = NULL;
-}
 
 static void	billions_must_die(t_game *game, t_character *character)
 {
@@ -106,14 +31,14 @@ static void	billions_must_die(t_game *game, t_character *character)
 
 void	character_frame(t_game *game, t_entity *entity, double delta_time)
 {
-	t_character *character;
+	t_character	*character;
 
 	billboard_frame(game, entity, delta_time);
 	character = (t_character *)entity;
 	billions_must_die(game, character);
 	if (character->dead)
 		character->billboard.sprites = character->death_sprite;
-	else if (hit(character))
+	else if (ft_get_time() - character->last_hit < CHARACTER_HIT_DELAY)
 		character->billboard.sprites = character->hit_sprite;
 	else if (using(character))
 		set_using(game, character);

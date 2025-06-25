@@ -6,13 +6,14 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 00:27:36 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 00:53:45 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/25 15:11:34 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_utils.h>
 
-bool	ft_list_all(t_list *list, bool (*condition)(void *data, void *params), void *params)
+bool	ft_list_all(t_list *list, bool (*condition)(void *data, void *params),
+	void *params)
 {
 	t_list	*current;
 
@@ -28,7 +29,8 @@ bool	ft_list_all(t_list *list, bool (*condition)(void *data, void *params), void
 	return (true);
 }
 
-size_t	ft_list_count(t_list *list, bool (*condition)(void *data, void *params), void *params)
+size_t	ft_list_count(t_list *list, bool (*condition)(void *data, void *params),
+	void *params)
 {
 	size_t	count;
 

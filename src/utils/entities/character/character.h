@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   character.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 00:50:57 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/08 15:36:30 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/25 15:19:18 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,11 @@
 # define CHARACTER_H
 
 # include "../entities.h"
+
+void	set_using(t_game *game, t_character *character);
+bool	walking(t_entity *entity);
+bool	using(t_character *character);
+void	call_item_frames(t_character *character);
+void	drop_items(t_game *game, t_character *character);
 
 #endif

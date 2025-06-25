@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   utils14.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 15:31:27 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/20 12:07:18 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/25 15:11:27 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_utils.h>
 
-bool	ft_list_any(t_list *list, bool (*condition)(void *data, void *params), void *params)
+bool	ft_list_any(t_list *list,
+	bool (*condition)(void *data, void *params), void *params)
 {
 	while (list)
 	{
@@ -22,7 +23,6 @@ bool	ft_list_any(t_list *list, bool (*condition)(void *data, void *params), void
 	}
 	return (false);
 }
-
 
 bool	ft_str_all_params(char *str, bool (*func)(char, void *), void *params)
 {

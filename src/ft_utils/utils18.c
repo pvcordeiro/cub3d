@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils18.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 22:40:59 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/08 19:58:36 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/06/25 15:10:55 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*ft_strf(const char *format, ...)
 	return (str);
 }
 
-char *ft_strnrstr(const char *haystack, const char *needle, size_t len)
+char	*ft_strnrstr(const char *haystack, const char *needle, size_t len)
 {
 	size_t	h_len;
 	size_t	n_len;
@@ -64,12 +64,12 @@ char *ft_strnrstr(const char *haystack, const char *needle, size_t len)
 	return (NULL);
 }
 
-char *ft_strrstr(const char *haystack, const char *needle)
+char	*ft_strrstr(const char *haystack, const char *needle)
 {
-	return ft_strnrstr(haystack, needle, ft_strlen(haystack));
+	return (ft_strnrstr(haystack, needle, ft_strlen(haystack)));
 }
 
-char *ft_strrchr(const char *s, int c)
+char	*ft_strrchr(const char *s, int c)
 {
 	size_t	len;
 	char	*last_occurrence;

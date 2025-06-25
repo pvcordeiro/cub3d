@@ -6,13 +6,14 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 00:50:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/18 23:49:50 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/25 15:12:39 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "billboard.h"
 
-void	init_billboard(t_game *game, t_ftm_window *window, t_billboard *billboard, char identifier)
+void	init_billboard(t_game *game, t_ftm_window *window,
+	t_billboard *billboard, char identifier)
 {
 	init_entity(game, window, (t_entity *)billboard, identifier);
 	billboard->entity.type = ENTITY_BILLBOARD;
@@ -25,7 +26,6 @@ void	init_billboard(t_game *game, t_ftm_window *window, t_billboard *billboard, 
 	billboard->sprites = ft_calloc(360, sizeof(t_sprite *));
 	fill_3d_sprites_from_game(game, billboard->sprites, identifier, "STILL");
 }
-
 
 t_billboard	*billboard_new(t_game *game, t_ftm_window *window, char identifier)
 {

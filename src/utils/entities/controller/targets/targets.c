@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 19:42:39 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 03:24:11 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/25 15:23:26 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,16 @@
 
 double	signed_angle_to(t_coords from, t_coords to)
 {
-    double angle_to = ft_degrees(atan2(to.y - from.y, to.x - from.x));
-    double diff = angle_to - from.yaw;
+	double	angle_to;
+	double	diff;
 
-    while (diff > 180.0)
-        diff -= 360.0;
-    while (diff < -180.0)
-        diff += 360.0;
-    return diff;
+	angle_to = ft_degrees(atan2(to.y - from.y, to.x - from.x));
+	diff = angle_to - from.yaw;
+	while (diff > 180.0)
+		diff -= 360.0;
+	while (diff < -180.0)
+		diff += 360.0;
+	return (diff);
 }
 
 void	targets_frame(t_game *game, t_character *character, double fov)
@@ -30,7 +32,7 @@ void	targets_frame(t_game *game, t_character *character, double fov)
 	t_entity		*bill_tar_entity;
 
 	if (!character)
-		return;
+		return ;
 	character->target_entity = NULL;
 	wall_tar_data = wall_target(game, character, fov);
 	if (wall_tar_data.entity)

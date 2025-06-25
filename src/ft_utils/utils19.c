@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 16:51:19 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 01:07:57 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/25 15:11:08 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static void	set_aftermath(t_dda_raycast_data *r)
 	if (!r->side)
 	{
 		r->length = ft_ternary_double(
-			fabs(r->rdir.x) < FT_EPSILON, FT_MAX_RAY_LENGTH,
+				fabs(r->rdir.x) < FT_EPSILON, FT_MAX_RAY_LENGTH,
 				((r->pos.x - r->sp.x + (1 - r->step.x) / 2.0) / r->rdir.x));
 		r->hitdir = ft_ternary_int(r->step.x > 0, WEST, EAST);
 		r->hit_x = ft_fraction(r->sp.y + r->length * r->rdir.y);
