@@ -23,4 +23,4 @@ SOFTWARE.
 ---
 
 Note: This license applies only to the source code of this project.  
-Files located in the 'assets/' directory are not covered by the MIT License.
+Files located in the 'assets/' directory are excluded from the scope of this license.
