@@ -274,7 +274,7 @@ e_DROP_ITEMS TRUE
 
 d_TYPE CHARACTER
 d_MAX_HEALTH 1
-d_HARD TRUE
+d_HARD FALSE
 d_TARGETABLE TRUE
 d_STILL_8_SPRITE assets/wolf3d/textures/billboards/dog/front1.xpm
 d_STILL_7_SPRITE assets/wolf3d/textures/billboards/dog/front-right1.xpm
@@ -374,6 +374,15 @@ $_STILL_SPRITE assets/wolf3d/textures/billboards/gold-plant.xpm
 %_TYPE BILLBOARD
 %_STILL_SPRITE assets/wolf3d/textures/billboards/green-barrel.xpm
 
+^_TYPE BILLBOARD
+^_STILL_SPRITE assets/wolf3d/textures/billboards/pillar.xpm
+
+&_TYPE BILLBOARD
+&_STILL_SPRITE assets/wolf3d/textures/billboards/skeleton-hang.xpm
+
+<_TYPE BILLBOARD
+<_STILL_SPRITE assets/wolf3d/textures/billboards/dog-food.xpm
+
 U_TYPE COLLECTIBLE
 U_HEALTH 10
 U_NAME FOOD
@@ -440,7 +449,7 @@ C_TYPE WEAPON
 C_DAMAGE 3
 C_AMMO_USAGE 0
 C_NAME Dog's Mouth
-C_RANGE 2
+C_RANGE 1.5
 C_USE_SOUND assets/wolf3d/sounds/dogbark.mp3
 C_DESCRIPTION Weapon of the National Socialist soldier
 C_USE_DELAY 1.0
@@ -745,55 +754,55 @@ C 50, 50, 50
               j                                 j     ((( } ; )j
               jjmjjjmjmjjljjmjjljjmjjljjmjj     mjjjjjjjjjjjjjjj
               j;:; j$   e         j ( **  j     j?jjjjj j     jj
-              jjj  s   ,   ,   ,  j(@   @*j  ,  j , ;e,}j    :jj
-ffffffffffffffj;:; j$      e    e l(( - * m     l ~   ~ j   %:jj
-fff        ffffjjljjmjjljjmjj     j)      j     j       j  %%%jj
-ff          fff             j  ,  j e    )j e   j ,   , j   % jj
-f            ff             l     m   -   l  ,  m ~   ~ j     jj
+              jjj] s   ,   ,   ,  j(@   @*j  ,  j , ;e,}j    :jj
+ffffiffffiffffj;:; j$      e    e l(( - * m     l ~   ~ j   %:jj
+fff : 2:: ;ffffjjljjmjjljjmjj     j)      j     j       j  %%%jj
+ff@;:    : @fff             j  ,  j e    )j e   j ,   , j   % jj
+f e      e   ff             l     m   -   l  ,  m ~   ~ j d   jj
 f            ff             j     j @   @ j     j       j     jj
-f            ff             j     j e     j     j     e j     jj
+i         e  if             j     j e     j     j     e j     jj
 f            ff             mjjhjjjjljhjmjjjjhjjjjjjhjjjjjjhjjjj
-ff          fff             j               . .                j
-fffffhffhffffff             j ,  ,  ,  ,  ,  , e,  ,  ,  ,  ,  j
-f            ff             j                        e         j
-f            ffjjjljjjjjjjjmjjjjjljjmjjljjmjjljjjjjljjmjjljj   j
-f              j  e           j                 j      e       j
-f              v         e    v  ,     ,  E  ,  v  ,  ,  ,  ,  j
+ffe        efff             j               . .                j
+fffkfhffhfkffff             j ,  ,  ,  ,  ,  , e,  ,  ,  ,  ,  j
+f   .    .   ff             j                        e         j
+f      d     ffjjjljjjjjjjjmjjjjjljjmjjljjmjjljjjjjljjmjjljj   j
+f d            j  e           j                 j      e       j
+i              v         e    v  ,     ,     ,  v  ,  ,  ,  ,  j
 f  ,      ,    j              j                 j $ $      $ $ j
 f     ff     ffjjjljjjjjjjjmjjjjjmjjjj   jTjjmjjjjjhjjjjjjjjhjjj
 f     ff     ffffffffffffffffffffffffj   j  jmjjlj   jjjjjj   jj
-f  ,  ff  ,                      faaaaahaj ;j   $    e $      .j
+i  ,  if d,                      faaaaahaj ;j   $    e $      .j
 f     ff                       , fa2 a e aj;l;$ )              m
-f     ff                         fa; a   aj;je   )          !**j
+f     ff                    e    fa; a   aj;je   )          !**j
 f     ff     ffffffffffffffffffhffaaaa   aajm) )              *l
-f  ,  ff  ,  f        fffffff    fa;e  , \aaj$   $   e       $ j
-f     ff     v        fffffff    faaaa   aaal  e          e .  m
-f     ff     f        ff   ff    ffffa   ajjj !))         )    j
-f     ffffffffffffffffff , ffffffffffa   ajjjmjjljjmjjljjmjjljjj
+i  ,  if  ,d f     e  fffffff]   fa;e  , \aaj$   $   e       $ j
+f     ff     v    e   fffgfff   :faaaa   aaal  e          e .  m
+f     ff     f  d     ffe-;ff'e::ffffa   ajjj !))         )    j
+f     ffffffffffffffffff ,;ffffffffffa   ajjjmjjljjmjjljjmjjljjj
 f  ,  f     ffffffffffff   ffffffffffaahaaffffffffffffffffffffff
-f     f     ff         ffhff        ff   ff                   ff
-f           ff         f   f        ff   ff                   ff
-f        ,  ff         v   v        ff   ff                   +f
-f  ,        ff         f , f    ,   ff , ff                   ff
-f     f     ff         v   v        ff   ff                   ?f
-f     f     ff         f   f        ?f   fffffffhffffffffhffffff
-fffffhffffffff        ff   ff        f   ff                    f
-fff     fffffffffffffff     ffffffffff , ff                    f
-fff     ff   f                       f   ff                    f
-fff     ff , v   ,   ,   ,   ,   ,   v   ff                    f
-n u  ,  ff   f                       f   ff                    f
-fff     ff   ffffff             ffffff , ff                    f
-fff     ff       faaaaaaahaaaaaaa    f   ffffhffffffffffffffhfff
-fff     ff      ,fa    a   a    a    f   ff                    f
-ffffffffffffffffhfa    v , v    a    f   ff                    f
-aaaaaaaaaaaaaaa   a    a   a    a    f , ff                    f
-a?aaaa    a   a   aaaaaa   aaaaaa    f   ff        /           f
-a    a    a   a , a    a   a    a    f   ff                    f
-a    aaahaaahaa   a    v   v    a    f   ff                    f
-a             a   a    a , a    a    f , ff                    f
-a             v   aaaaaa   aaaaaa    f   ffff   ff   ffff   ffff
-a             a , a    a   a    a    f   fffffhffffhffffffhfffff
-a    aaahaaahaa   a    v , v    afff f               ff      ?ff
-a    a    a   a   a    a   a    aaf  f ,   ,   ,   , ff      fff
-a    a    a   aapaaaaaaa   aaaaaaaffff               ff      ?ff
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafffffffffffffffffffffffffff
+f     f  )  ff         ffhff &  &   ff   ff''d ))           ''ff
+f        e) ff &       f   f      " ff   ff'  )    '    :    :ff
+f        ,~eff         v   v      e%ff   ff:             :   )+f
+f  ,e       ff  e,     f , f    ,   ff , ff        }~~       ~ff
+f   d f   e ff     e   v   v       "ff   ff:      d         ):?f
+f     f     ff &e   &  f   f       e?f   fffffffhffffffffhffffff
+fffffhffffffff        ff   ff       ~f   ff % %  %  %%  %  % % f
+fff     fffffffffifffff.   .fffffkffff , ff                    f
+fff^    ff   f                       f   ff e               e  f
+fff  e  ff , v   ,   ,   ,   ,   ,d  v   gf                    f
+n u e,  ff   f                       f   ff -                - f
+fff     ff   ffffif             fkffff , ff        ::         ef
+fff^    ff       faaaaaaahaaaaaaa;;  f   ffffhffffffffffffffhfff
+fff   e ff    e ,fa|:  a   a    a;;  f   ff                    f
+ffffffffffffffffhfa    v , v "  a;   f   ff)-          -  -  - f
+aaaaaaaaaaaaaaa   a    a   a    a    i , if            e       f
+a?aaaa d  a ==a   aaaaaa   aaaaaa    f   fk @      /         @ i
+a= d~a   =a  =a , a    a   a    a    f   ff  e               e)f
+a    aaahaaahaa   a    v   v   |a    f   ff;-          -  -  -;f
+a             a   a"   a , a    a)(  f , ffe           e       f
+a             v   aaaaaa   aaaaaa*)( f   ffff   ff   ffgf   fgff
+a             a , a|   a   a    a**) f   ffkffhffffhffffffhfffff
+a    aaahaaahaa   a    v , v    afff f       . .  . .ff%     ?ff
+a d  a <  a   a N a    a   a   |aaf  v ,   ,   ,   , ff      fff
+a    a d  a d aapaaaaaaa   aaaaaaaffff               ff% e   ?ff
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaffffffkffffffffffffffffffff
