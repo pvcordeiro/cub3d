@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 11:06:16 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/25 20:47:42 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/26 11:43:54 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	mouse_hook(t_coords coords)
 		return ;
 	game = cub3d()->game;
 	pthread_mutex_lock(&cub3d()->game_mutex);
-	if (game != cub3d()->game)
+	if (game != cub3d()->game || !game)
 	{
 		pthread_mutex_unlock(&cub3d()->game_mutex);
 		return ;

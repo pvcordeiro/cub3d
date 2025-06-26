@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/26 14:28:30 by pvcordeiro       ###   ########.fr       */
+/*   Updated: 2025/06/26 15:14:19 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 # include <math.h>
 
 // Window Config
-# define W_TITLE "Wolfenstein"
+# define W_TITLE "cub3d"
 # define W_WIDTH 1024
 # define W_HEIGHT 768
 
@@ -46,9 +46,9 @@
 // Default Font
 # define DEFAULT_FONT_PATH "assets/fonts/IBM-VGA-8x16"
 
-// Placeholder Image
+// Main Images
 # define PLACEHOLDER_IMAGE_PATH "assets/textures/placeholder.xpm"
-# define PLACEHOLDER_SPRITE_UPDATE_DELAY 0
+# define LOADING_IMAGE_PATH "assets/textures/loading.xpm"
 
 // Player Config
 # define PLAYER_RAYS_NO_HIT_LENGTH 50.0
@@ -449,7 +449,8 @@ struct s_game
 
 struct s_cub3d
 {
-	t_sprite			placeholder;
+	t_ftm_image			*placeholder_image;
+	t_ftm_image			*loading_image;
 	t_map				*prev_map;
 	t_map				*curr_map;
 	t_ftm_window		window;

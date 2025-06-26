@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 16:11:16 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/25 16:11:22 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/26 11:44:46 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	call_entity_keys(t_game *game, t_ftm_key_hook_values kvh)
 	t_list		*curr;
 	t_entity	*entity;
 
+	if (!game)
+		return ;
 	curr = game->entities;
 	while (curr)
 	{

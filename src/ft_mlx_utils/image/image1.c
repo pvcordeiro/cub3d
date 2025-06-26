@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 14:51:11 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/25 14:56:58 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/26 15:03:37 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	ftm_put_image_to_window(t_ftm_window *window, t_ftm_image *image,
 		return ;
 	mlx_put_image_to_window(window->display, window->win,
 		image->img_ptr, coords.x, coords.y);
+	mlx_do_sync(window->display);
 }
 
 void	ftm_put_image_to_window_pitc(t_ftm_window *window, t_ftm_image *image,

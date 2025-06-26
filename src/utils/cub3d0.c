@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   cub3d0.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 21:53:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/25 21:13:37 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/26 14:51:17 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void	cub3d_exit(int code)
 	free_map(cub3d()->prev_map);
 	cub3d()->curr_map = NULL;
 	cub3d()->prev_map = NULL;
-	clear_sprite(&cub3d()->placeholder);
+	ftm_free_image(cub3d()->placeholder_image);
+	ftm_free_image(cub3d()->loading_image);
 	ftm_clear_window(&cub3d()->window);
 	fta_destroy();
 	pthread_mutex_unlock(&cub3d()->game_mutex);

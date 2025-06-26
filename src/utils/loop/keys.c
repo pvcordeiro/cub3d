@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:21:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/25 19:06:37 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/26 11:46:00 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static void	activate_another_player(t_game *game)
 {
 	int	i;
 
+	if (!game)
+		return ;
 	i = -1;
 	while (++i < PLAYER_MAX)
 	{
@@ -32,6 +34,8 @@ static void	deactivate_another_player(t_game *game)
 {
 	int	i;
 
+	if (!game)
+		return ;
 	i = PLAYER_MAX;
 	while (--i)
 	{
@@ -45,6 +49,8 @@ static void	deactivate_another_player(t_game *game)
 
 static void	hud_keys(t_game *game, t_ftm_key_hook_values khv)
 {
+	if (!game)
+		return ;
 	if (khv.key == XK_F3 && khv.down)
 		game->hud.debug_enabled = !game->hud.debug_enabled;
 	if (khv.key == XK_F2 && khv.down)
@@ -68,7 +74,7 @@ void	key_hook(t_ftm_key_hook_values khv)
 	call_entity_keys(game, khv);
 	if (khv.key == XK_Escape)
 		return (pthread_mutex_unlock(&cub3d()->game_mutex), cub3d_exit(0));
-	if (khv.key == XK_k && khv.down && game->players[0])
+	if (game && khv.key == XK_k && khv.down && game->players[0])
 		((t_entity *)game->players[0])->controller.keyboard_only
 			= !((t_entity *)game->players[0])->controller.keyboard_only;
 	if (khv.key == XK_p && khv.down)
