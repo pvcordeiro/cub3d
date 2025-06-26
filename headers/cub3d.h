@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/26 00:58:24 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/26 14:28:30 by pvcordeiro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@
 
 // Door Config
 # define DOOR_ANIMATION_FPS 6
+# define DOOR_INTERACTION_DISTANCE 2.0
 
 // Map Config
 # define DEFAULT_AIR_TYPES "0 \t\n\v\f\r"

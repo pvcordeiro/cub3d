@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   walls.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 19:45:19 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/25 15:20:15 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/26 14:53:33 by pvcordeiro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ t_wall_target	wall_target(t_game *game, t_character *character, double fov)
 	t_raycast	ray;
 	double		angle_adjustment;
 	int			i;
+	t_entity	*entity;
 
 	coords = character->billboard.entity.coords;
 	i = -1;
@@ -30,9 +31,12 @@ t_wall_target	wall_target(t_game *game, t_character *character, double fov)
 				(t_coords){coords.x, coords.y,
 				ft_normalize_angle(coords.yaw + angle_adjustment)},
 				(t_entity *)character});
-		if (ray.hit && ((t_entity *)ray.hit)->targetable
-			&& ray.distance <= TARGETS_MAX_DIST && i == TARGETS_RAYS / 2)
-			return ((t_wall_target){(t_entity *)ray.hit, ray.hit_direction});
+		entity = (t_entity *)ray.hit;
+		if (ray.hit && entity->targetable
+			&& ray.distance <= TARGETS_MAX_DIST && i == TARGETS_RAYS / 2
+			&& (entity->type == ENTITY_DOOR
+				&& ray.distance < DOOR_INTERACTION_DISTANCE))
+			return ((t_wall_target){entity, ray.hit_direction});
 	}
 	return ((t_wall_target){NULL, 0});
 }
