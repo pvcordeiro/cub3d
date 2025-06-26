@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 15:50:38 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/25 15:50:49 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/26 15:31:15 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,11 +100,14 @@ void	hearment(t_game *game, t_character *character)
 
 void	shoot(t_character *character)
 {
-	t_item	*item;
+    t_item	*item;
 
-	item = character->inventory[character->inventory_index];
-	if (!item)
-		return ;
+    item = character->inventory[character->inventory_index];
+    if (!item || !character->target_entity
+        || (item->weapon && ((t_weapon *)item)->range > 0
+            && ft_distance(character->billboard.entity.coords,
+            character->target_entity->coords) > ((t_weapon *)item)->range))
+        return ;
 	if (character->inventory_index == 0
 		&& character->inventory_index < INVENTORY_SIZE - 1
 		&& character->inventory[character->inventory_index + 1]

@@ -274,7 +274,7 @@ e_DROP_ITEMS TRUE
 
 d_TYPE CHARACTER
 d_MAX_HEALTH 1
-d_HARD FALSE
+d_HARD TRUE
 d_TARGETABLE TRUE
 d_STILL_8_SPRITE assets/wolf3d/textures/billboards/dog/front1.xpm
 d_STILL_7_SPRITE assets/wolf3d/textures/billboards/dog/front-right1.xpm
@@ -440,7 +440,7 @@ C_TYPE WEAPON
 C_DAMAGE 3
 C_AMMO_USAGE 0
 C_NAME Dog's Mouth
-C_RANGE 1.5
+C_RANGE 2
 C_USE_SOUND assets/wolf3d/sounds/dogbark.mp3
 C_DESCRIPTION Weapon of the National Socialist soldier
 C_USE_DELAY 1.0
