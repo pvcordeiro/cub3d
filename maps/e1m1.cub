@@ -708,7 +708,7 @@ m_EA assets/wolf3d/textures/wood-wall-hitler-dark.xpm
 
 n_TYPE ELEVATOR
 n_TARGETABLE TRUE
-n_MAP_PATH maps/smol.cub
+n_MAP_PATH maps/e1m2.cub
 n_NO assets/wolf3d/textures/lever-down.xpm
 n_SO assets/wolf3d/textures/lever-down.xpm
 n_WE assets/wolf3d/textures/lever-down.xpm

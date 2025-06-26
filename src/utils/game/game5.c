@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 17:18:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/25 18:49:58 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/26 11:06:38 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ void	init_hud(t_game *game)
 {
 	game->hud.enabled = !ft_strequal(ft_hashmap_get_value(game->map->types,
 				"HUD"), "FALSE");
-	game->hud.minimap_enabled = !ft_strequal(ft_hashmap_get_value(
-				game->map->types, "MINIMAP_HUD"), "FALSE");
+	game->hud.minimap_enabled = ft_strequal(ft_hashmap_get_value(
+				game->map->types, "MINIMAP_HUD"), "TRUE");
 	init_stats_hud(game);
 	init_debug_hud(game);
 	init_action_hud(game);

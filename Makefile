@@ -6,7 +6,7 @@
 #    By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/26 17:16:21 by afpachec          #+#    #+#              #
-#    Updated: 2025/06/26 02:34:21 by afpachec         ###   ########.fr        #
+#    Updated: 2025/06/26 11:12:37 by afpachec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -118,7 +118,7 @@ re: fclean all
 cdev: clean-everything-but-ft-audio dev
 
 dev: $(NAME)
-	./$(NAME) maps/e1m1.cub
+	./$(NAME) maps/hub.cub
 
 run: clean $(NAME)
 	@for map in $(MAPS); do echo "Running with $$map" && ./$(NAME) $$map; done
@@ -127,7 +127,7 @@ val: $(NAME)
 	@valgrind --show-leak-kinds=all --leak-check=full --track-fds=all --suppressions=ma.supp ./$(NAME) maps/subject.cub
 
 lldb: $(NAME)
-	@lldb -o "run" ./$(NAME) maps/e1m1.cub
+	@lldb -o "run" ./$(NAME) maps/hub.cub
 
 update-wolf3d-assets:
 	@echo "\033[1;32mEncrypting \033[1;0m\"assets/wolf3d\"\033[1;32m into \033[1;0m\"assets/wolf3d-assets.zip\"\033[1;32m.\033[0m"
