@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 00:50:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/25 16:07:10 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/26 00:58:45 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,15 @@ void	do_amazing_things(t_game *game, t_entity *entity, char identifier)
 	entity->targetable = ft_strequal(
 			hashmap_get_with_identifier(game, game->map->types, identifier,
 				"TARGETABLE"), "TRUE");
-	entity->transparent = !ft_strequal(
+	entity->ultra_mega_transparent = ft_strequal(
 			hashmap_get_with_identifier(game, game->map->types, identifier,
-				"TRANSPARENT"), "FALSE");
+				"ULTRA_MEGA_TRANSPARENT"), "TRUE");
+	entity->transparent = ft_strequal(
+			hashmap_get_with_identifier(game, game->map->types, identifier,
+				"TRANSPARENT"), "TRUE");
+	entity->no_transparency_for_bill = ft_strequal(
+			hashmap_get_with_identifier(game, game->map->types, identifier,
+				"NO_TRANSPARENCY_FOR_BILL"), "TRUE");
 	entity->active = true;
 	entity->hard = !ft_strequal(
 			hashmap_get_with_identifier(game, game->map->types, identifier,

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 00:45:35 by paude-so          #+#    #+#             */
-/*   Updated: 2025/06/25 20:16:59 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/26 00:59:17 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,13 @@ static void	draw_ray(t_draw_ray_config drc)
 	if (!ray.hit)
 		return ;
 	ray.distance += drc.previous_distance;
-	if (ray.distance > drc.camera->ray_distances[drc.i])
+	if (drc.add_distance && ray.distance > drc.camera->ray_distances[drc.i])
 		drc.camera->ray_distances[drc.i] = ray.distance;
-	if (((t_entity *)ray.hit)->transparent && entity_x_is_transparent(ray.hit,
-			ray.hit_direction, ray.hit_x))
+	drc.add_distance = drc.add_distance
+		&& !((t_entity *)ray.hit)->no_transparency_for_bill;
+	if (((t_entity *)ray.hit)->ultra_mega_transparent
+		|| (((t_entity *)ray.hit)->transparent
+		&& entity_x_is_transparent(ray.hit, ray.hit_direction, ray.hit_x)))
 	{
 		drc.coords = get_coords(&ray);
 		drc.ignored_entity = ray.hit;
@@ -79,7 +82,7 @@ static void	thread_render_rays(void *data)
 	i = trrd->start;
 	drc = (t_draw_ray_config){trrd->canvas, trrd->camera, trrd->game,
 		trrd->camera->character->billboard.entity.coords,
-		(t_entity *)trrd->camera->character, 0, 0, 0};
+		(t_entity *)trrd->camera->character, true, 0, 0, 0};
 	while (i < trrd->end)
 	{
 		drc.i = i++;

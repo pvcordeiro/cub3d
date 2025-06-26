@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/25 21:24:44 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/26 00:58:24 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,6 +231,8 @@ struct s_entity
 	t_controller	controller;
 	bool			targetable;
 	bool			transparent;
+	bool			ultra_mega_transparent;
+	bool			no_transparency_for_bill;
 	int				max_health;
 	int				health;
 	bool			invencible;

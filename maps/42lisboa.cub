@@ -244,7 +244,7 @@ j_WE assets/42lisboa/cluster2-wall.xpm
 k_TYPE WALL
 k_NO assets/42lisboa/cluster1-left.xpm
 k_SO assets/42lisboa/cluster2-wall.xpm
-k_EA assets/42lisboa/cluster2-wall.xpm
+k_EA assets/42lisboa/cluster2-wall-electric.xpm
 k_WE assets/42lisboa/cluster2-wall.xpm
 
 l_TYPE WALL
@@ -284,46 +284,12 @@ q_EA assets/42lisboa/cluster1-wall.xpm
 q_WE assets/42lisboa/cluster1-wall.xpm
 
 r_TYPE WALL
-r_TRANSPARENT TRUE
+r_ULTRA_MEGA_TRANSPARENT TRUE
+r_NO_TRANSPARENCY_FOR_BILL TRUE
 r_NO assets/42lisboa/tumo-wall.xpm
 r_SO assets/42lisboa/tumo-wall.xpm
-r_EA NULL
-r_WE NULL
-
-s_TYPE WALL
-s_TRANSPARENT TRUE
-s_NO NULL
-s_SO NULL
-s_EA assets/42lisboa/tumo-wall.xpm
-s_WE assets/42lisboa/tumo-wall.xpm
-
-t_TYPE WALL
-t_TRANSPARENT TRUE
-t_NO assets/42lisboa/tumo-wall.xpm
-t_SO NULL
-t_EA NULL
-t_WE assets/42lisboa/tumo-wall.xpm
-
-u_TYPE WALL
-u_TRANSPARENT TRUE
-u_NO assets/42lisboa/tumo-wall.xpm
-u_SO NULL
-u_EA assets/42lisboa/tumo-wall.xpm
-u_WE NULL
-
-v_TYPE WALL
-v_TRANSPARENT TRUE
-v_NO NULL
-v_SO assets/42lisboa/tumo-wall.xpm
-v_EA NULL
-v_WE assets/42lisboa/tumo-wall.xpm
-
-w_TYPE WALL
-w_TRANSPARENT TRUE
-w_NO NULL
-w_SO assets/42lisboa/tumo-wall.xpm
-w_EA assets/42lisboa/tumo-wall.xpm
-w_WE NULL
+r_EA assets/42lisboa/tumo-wall.xpm
+r_WE assets/42lisboa/tumo-wall.xpm
 
 x_TYPE BILLBOARD
 x_HARD TRUE
@@ -425,15 +391,55 @@ M_STILL_8_SPRITE assets/42lisboa/cluster-pcs-front.xpm
 M_STILL_9_SPRITE assets/42lisboa/cluster-pcs-front-right.xpm
 M_STILL_10_SPRITE assets/42lisboa/cluster-pcs-left.xpm
 
-
 O_TYPE BILLBOARD
 O_STILL_SPRITE assets/42lisboa/kitchen-table.xpm
+
+s_TYPE WALL
+s_NO assets/42lisboa/cluster2-wall.xpm
+s_SO assets/42lisboa/cluster2-wall.xpm
+s_EA assets/42lisboa/wall-of-fame.xpm
+s_WE assets/42lisboa/cluster2-wall.xpm
+
+t_TYPE BILLBOARD
+t_HARD TRUE
+t_STILL_3_SPRITE assets/42lisboa/vending-machine-front-left.xpm
+t_STILL_2_SPRITE assets/42lisboa/vending-machine-front.xpm
+t_STILL_1_SPRITE assets/42lisboa/vending-machine-front-right.xpm
+
+u_TYPE BILLBOARD
+u_HARD TRUE
+u_STILL_SPRITE assets/42lisboa/tumo-table.xpm
+
+v_TYPE BILLBOARD
+v_HARD TRUE
+v_STILL_7_SPRITE assets/42lisboa/piscine-guard-front-left.xpm
+v_STILL_8_SPRITE assets/42lisboa/piscine-guard-left.xpm
+v_STILL_1_SPRITE assets/42lisboa/piscine-guard-front-right.xpm
+v_STILL_2_SPRITE assets/42lisboa/piscine-guard-front.xpm
+v_STILL_3_SPRITE assets/42lisboa/piscine-guard-front-left.xpm
+v_STILL_4_SPRITE assets/42lisboa/piscine-guard-right.xpm
+v_STILL_5_SPRITE assets/42lisboa/piscine-guard-front-right.xpm
+v_STILL_6_SPRITE assets/42lisboa/piscine-guard-front.xpm
+
+w_TYPE WALL
+w_ULTRA_MEGA_TRANSPARENT TRUE
+w_NO assets/42lisboa/cluster2-wall.xpm
+w_SO assets/42lisboa/piscine-wall-locker.xpm
+w_EA assets/42lisboa/cluster2-wall.xpm
+w_WE assets/42lisboa/piscine-wall-inside.xpm
+
+P_TYPE BILLBOARD
+P_HARD TRUE
+P_STILL_4_SPRITE assets/42lisboa/white-board-front.xpm
+P_STILL_3_SPRITE assets/42lisboa/white-board-front-left.xpm
+P_STILL_2_SPRITE assets/42lisboa/white-board-front.xpm
+P_STILL_1_SPRITE assets/42lisboa/white-board-front-right.xpm
 
 F 50,50,50
 C 140,140,140
 
   11111111
-  gE     g
+  gE    wg
   g   JJ g
   g   JK g
   g   KJ g
@@ -442,34 +448,34 @@ C 140,140,140
 gggHG DC g
 g   1 zA g
 g   F    g
-g   1 OOOg
+g   s OOOg
 g   BEOOOg
-g   1 OOOg
-g   1    g
+g   1POOOg
+g   1  t g
 g   1 y11g
 g1111 y11g
-g      x g
-g        g
-g trrrru g
-g s    s g
-g s    s g
-g s    s g
-g s    s g
-g s    s g
-g s    s g
-g vrrrrw g
+gv uu uxug
+g      u g
+g rrrrrr g
+g r    r g
+g r    r g
+g r    r g
+g r    r g
+g r    r g
+g r    r g
+g rrrrrr g
 g        g
 gonnpqnnog
 g     E  g
-gMMM MMMMg
+gMMMM MMMg
 g        g
-gMMM MMMMg
+gMMMM MMMg
 g        g
-gMMM MMMMg
+gMMMM MMMg
 g        g
-gMMM MMMMg
+gMMMM MMMg
 g        g
-gMMM MMMMg
+gMMMM MMMg
 g        g
 ghlk jIihg
 g 11 L1f g

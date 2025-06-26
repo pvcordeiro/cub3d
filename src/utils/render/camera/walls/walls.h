@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 15:40:06 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/25 20:17:49 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/26 00:35:34 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_draw_ray_config
 	t_game			*game;
 	t_coords		coords;
 	t_entity		*ignored_entity;
+	bool			add_distance;
 	double			previous_distance;
 	double			yaw;
 	unsigned int	i;
