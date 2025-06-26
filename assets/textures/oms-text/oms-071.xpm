@@ -166,7 +166,7 @@ static char *oms_071[] = {
 "P. c #FFFCFCFC",
 "I. c #FFFDFDFD",
 "U. c #FFFEFEFE",
-"Y. c #FFFFFFFF",
+"Y. c #FFFFFFF1",
 /* pixels */
 "                                                                                                                                                                                                                                                                ",
 "                                                                                                                                                                                                                                                                ",

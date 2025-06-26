@@ -152,7 +152,7 @@ static char *oms_285[] = {
 "N. c #FFFAFAFA",
 "B. c #FFFBFBFB",
 "V. c #FFFDFDFD",
-"C. c #FFFFFFFF",
+"C. c #FFFFFFF1",
 /* pixels */
 "                                                                                                                                                                                                                                                                ",
 "                                                                                                                                                                                                                                                                ",

@@ -135,7 +135,7 @@ static char *oms_103[] = {
 "a. c #FFFCFCFC",
 "s. c #FFFDFDFD",
 "d. c #FFFEFEFE",
-"f. c #FFFFFFFF",
+"f. c #FFFFFFF1",
 /* pixels */
 "                                                                                                                                                                                                                                                                ",
 "                                                                                                                                                                                                                                                                ",

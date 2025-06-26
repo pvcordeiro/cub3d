@@ -174,7 +174,7 @@ static char *oms_118[] = {
 "Q. c #FFFCFCFC",
 "!. c #FFFDFDFD",
 "~. c #FFFEFEFE",
-"^. c #FFFFFFFF",
+"^. c #FFFFFFF1",
 /* pixels */
 "                                                                                                                                                                                                                                                                ",
 "                                                                                                                                                                                                                                                                ",

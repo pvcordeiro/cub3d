@@ -211,7 +211,7 @@ static char *oms_203[] = {
 "4X c #FFFCFCFC",
 "5X c #FFFDFDFD",
 "6X c #FFFEFEFE",
-"7X c #FFFFFFFF",
+"7X c #FFFFFFF1",
 /* pixels */
 "                                                                                                                                                                                                                                                                ",
 "                                                                                                                                                                                                                                                                ",

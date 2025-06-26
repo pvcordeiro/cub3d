@@ -88,7 +88,7 @@ static char *oms_090[] = {
 ") c #FFE8E8E8",
 "_ c #FFE9E9E9",
 "` c #FFF5F5F5",
-"' c #FFFFFFFF",
+"' c #FFFFFFF1",
 /* pixels */
 "                                                                                                                                ",
 "                                                                                                                                ",

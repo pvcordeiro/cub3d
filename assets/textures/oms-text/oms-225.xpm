@@ -191,7 +191,7 @@ static char *oms_225[] = {
 "XX c #FFFCFCFC",
 "oX c #FFFDFDFD",
 "OX c #FFFEFEFE",
-"+X c #FFFFFFFF",
+"+X c #FFFFFFF1",
 /* pixels */
 "                                                                                                                                                                                                                                                                ",
 "                                                                                                                                                                                                                                                                ",

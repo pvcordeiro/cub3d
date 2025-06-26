@@ -180,7 +180,7 @@ static char *oms_129[] = {
 "). c #FFFCFCFC",
 "_. c #FFFDFDFD",
 "`. c #FFFEFEFE",
-"'. c #FFFFFFFF",
+"'. c #FFFFFFF1",
 /* pixels */
 "                                                                                                                                                                                                                                                                ",
 "                                                                                                                                                                                                                                                                ",

@@ -186,7 +186,7 @@ static char *oms_056[] = {
 "{. c #FFFCFCFC",
 "}. c #FFFDFDFD",
 "|. c #FFFEFEFE",
-" X c #FFFFFFFF",
+" X c #FFFFFFF1",
 /* pixels */
 "                                                                                                                                                                                                                                                                ",
 "                                                                                                                                                                                                                                                                ",

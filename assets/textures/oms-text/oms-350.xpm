@@ -188,7 +188,7 @@ static char *oms_350[] = {
 "|. c #FFFBFBFB",
 " X c #FFFCFCFC",
 ".X c #FFFDFDFD",
-"XX c #FFFFFFFF",
+"XX c #FFFFFFF1",
 /* pixels */
 "                                                                                                                                                                                                                                                                ",
 "                                                                                                                                                                                                                                                                ",

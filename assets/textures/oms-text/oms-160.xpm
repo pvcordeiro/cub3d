@@ -208,7 +208,7 @@ static char *oms_160[] = {
 "1X c #FFFCFCFC",
 "2X c #FFFDFDFD",
 "3X c #FFFEFEFE",
-"4X c #FFFFFFFF",
+"4X c #FFFFFFF1",
 /* pixels */
 "                                                                                                                                                                                                                                                                ",
 "                                                                                                                                                                                                                                                                ",

@@ -172,7 +172,7 @@ static char *oms_112[] = {
 "E. c #FFFBFBFB",
 "W. c #FFFCFCFC",
 "Q. c #FFFDFDFD",
-"!. c #FFFFFFFF",
+"!. c #FFFFFFF1",
 /* pixels */
 "                                                                                                                                                                                                                                                                ",
 "                                                                                                                                                                                                                                                                ",

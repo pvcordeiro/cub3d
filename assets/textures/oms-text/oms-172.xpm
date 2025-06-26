@@ -213,7 +213,7 @@ static char *oms_172[] = {
 "6X c #FFFCFCFC",
 "7X c #FFFDFDFD",
 "8X c #FFFEFEFE",
-"9X c #FFFFFFFF",
+"9X c #FFFFFFF1",
 /* pixels */
 "                                                                                                                                                                                                                                                                ",
 "                                                                                                                                                                                                                                                                ",

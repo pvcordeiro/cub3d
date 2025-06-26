@@ -173,7 +173,7 @@ static char *oms_355[] = {
 "W. c #FFFBFBFB",
 "Q. c #FFFCFCFC",
 "!. c #FFFDFDFD",
-"~. c #FFFFFFFF",
+"~. c #FFFFFFF1",
 /* pixels */
 "                                                                                                                                                                                                                                                                ",
 "                                                                                                                                                                                                                                                                ",

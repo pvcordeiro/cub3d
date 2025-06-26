@@ -205,7 +205,7 @@ static char *oms_174[] = {
 ">X c #FFFCFCFC",
 ",X c #FFFDFDFD",
 "<X c #FFFEFEFE",
-"1X c #FFFFFFFF",
+"1X c #FFFFFFF1",
 /* pixels */
 "                                                                                                                                                                                                                                                                ",
 "                                                                                                                                                                                                                                                                ",

@@ -179,7 +179,7 @@ static char *oms_249[] = {
 "(. c #FFFCFCFC",
 "). c #FFFDFDFD",
 "_. c #FFFEFEFE",
-"`. c #FFFFFFFF",
+"`. c #FFFFFFF1",
 /* pixels */
 "                                                                                                                                                                                                                                                                ",
 "                                                                                                                                                                                                                                                                ",

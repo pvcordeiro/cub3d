@@ -29,7 +29,7 @@ for font in assets/fonts/*.ttf; do
     for i in $(seq 0 255); do
         char=$(printf "\\$(printf '%03o' "$i")")
         $MAGICK -size 16x16 xc:none -font "$font" \
-            -pointsize 12 -gravity center -fill "#FFFFFFFF" \
+            -pointsize 12 -gravity center -fill "#FFFFFFF1" \
             -annotate 0 "$char" "$FOLDER/$i.xpm"
     done
     find "$FOLDER" -name '*.xpm' -exec sed "${SED_INPLACE[@]}" 's/ c white/ c #FEFFFFFF/g' {} +
