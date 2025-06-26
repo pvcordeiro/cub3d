@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 15:17:42 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/25 15:19:09 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/26 22:06:00 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	drop_items(t_game *game, t_character *character)
 		i = -1;
 		while (++i < INVENTORY_SIZE)
 			if (character->inventory[i] && character->inventory[i]->drop)
-				character->inventory[i]->drop(game, &cub3d()->window,
+				character->inventory[i]->drop(game, cub3d()->window,
 					character->inventory[i], character);
 		return ;
 	}

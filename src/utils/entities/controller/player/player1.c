@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 15:26:16 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/25 15:53:49 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/26 22:06:07 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	item_drop_key(t_game *game, bool drop, t_character *character)
 	if (!item)
 		return ;
 	if (drop)
-		item->drop(game, &cub3d()->window, item, character);
+		item->drop(game, cub3d()->window, item, character);
 }
 
 void	move_inventory_index(t_character *character)

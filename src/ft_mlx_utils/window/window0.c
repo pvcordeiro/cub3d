@@ -6,13 +6,13 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:58:13 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 02:07:45 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/26 22:01:44 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "window.h"
 
-void	ftm_create_window_e(t_ftm_window *window, t_size size, char *title)
+void	ftm_init_window_e(t_ftm_window *window, t_size size, char *title)
 {
 	fte_set(NULL);
 	window->display = mlx_init();
@@ -26,6 +26,20 @@ void	ftm_create_window_e(t_ftm_window *window, t_size size, char *title)
 	window->size = size;
 	window->title = title;
 	ftm_window_reload_controllers(window);
+}
+
+t_ftm_window	*ftm_window_new_e(t_size size, char *title)
+{
+	t_ftm_window	*window;
+
+	fte_set(NULL);
+	window = ft_calloc(1, sizeof(t_ftm_window));
+	if (!window)
+		return (NULL);
+	ftm_init_window_e(window, size, title);
+	if (fte_flagged())
+		return (free(window), NULL);
+	return (window);
 }
 
 void	ftm_clear_window(void *data)

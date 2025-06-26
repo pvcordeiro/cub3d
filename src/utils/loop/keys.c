@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:21:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/26 11:46:00 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/26 22:06:13 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,9 @@ void	key_hook(t_ftm_key_hook_values khv)
 	if (khv.key == XK_o && khv.down)
 		deactivate_another_player(game);
 	if (khv.key == XK_F7 && khv.down)
-		ftm_window_reload_controllers(&cub3d()->window);
+		ftm_window_reload_controllers(cub3d()->window);
 	if (khv.key == XK_F1 && khv.down)
-		ftm_window_toggle_fullscreen(&cub3d()->window, (t_size){W_WIDTH,
+		ftm_window_toggle_fullscreen(cub3d()->window, (t_size){W_WIDTH,
 			W_HEIGHT});
 	hud_keys(game, khv);
 	pthread_mutex_unlock(&cub3d()->game_mutex);

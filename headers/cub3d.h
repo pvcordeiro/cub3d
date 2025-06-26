@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/26 15:14:19 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/26 22:00:33 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -453,7 +453,7 @@ struct s_cub3d
 	t_ftm_image			*loading_image;
 	t_map				*prev_map;
 	t_map				*curr_map;
-	t_ftm_window		window;
+	t_ftm_window		*window;
 	pthread_mutex_t		game_mutex;
 	t_game				*game;
 };
