@@ -6,7 +6,7 @@
 #    By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/26 17:16:21 by afpachec          #+#    #+#              #
-#    Updated: 2025/06/25 21:21:37 by afpachec         ###   ########.fr        #
+#    Updated: 2025/06/26 02:34:21 by afpachec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,6 @@ else
 	@cp lib/minilibx-linux/libmlx.a lib
 endif
 	@cp lib/minilibx-linux/mlx.h headers
-	@cp lib/minilibx-linux/mlx_int.h headers
 	@rm -rf lib/minilibx-linux
 
 headers/miniaudio.h:

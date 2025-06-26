@@ -1,7 +1,6 @@
 obj/
 cub3d
 headers/mlx.h
-headers/mlx_int.h
 headers/miniaudio.h
 lib/libmlx.a
 lib/minilibx-linux

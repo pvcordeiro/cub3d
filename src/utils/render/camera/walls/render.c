@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 00:45:35 by paude-so          #+#    #+#             */
-/*   Updated: 2025/06/26 00:59:17 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/26 02:33:57 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	draw_ray(t_draw_ray_config drc)
 		&& !((t_entity *)ray.hit)->no_transparency_for_bill;
 	if (((t_entity *)ray.hit)->ultra_mega_transparent
 		|| (((t_entity *)ray.hit)->transparent
-		&& entity_x_is_transparent(ray.hit, ray.hit_direction, ray.hit_x)))
+			&& entity_x_is_transparent(ray.hit, ray.hit_direction, ray.hit_x)))
 	{
 		drc.coords = get_coords(&ray);
 		drc.ignored_entity = ray.hit;
