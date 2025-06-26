@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:38:00 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/25 14:49:18 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/26 02:40:36 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ int	window_key_hook(t_ftm_key_hook_values key_hook_values, void *window)
 
 int	window_key_down_hook(int key, void *window)
 {
-	return (window_key_hook((t_ftm_key_hook_values){key, {0}, 1.0,
+	return (window_key_hook((t_ftm_key_hook_values){key, {0, 0, 0}, 1.0,
 			true, NULL}, window));
 }
 
 int	window_key_up_hook(int key, void *window)
 {
-	return (window_key_hook((t_ftm_key_hook_values){key, {0}, 1.0,
+	return (window_key_hook((t_ftm_key_hook_values){key, {0, 0, 0}, 1.0,
 			false, NULL}, window));
 }
 

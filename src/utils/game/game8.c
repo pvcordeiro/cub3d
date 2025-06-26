@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 18:20:15 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/25 18:53:08 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/26 02:39:50 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ static void	set_config(t_game *game, t_element *element)
 	if (!key)
 		return ;
 	audio = ft_hashmap_get_value(game->sounds, key);
-	free(key);
 	if (ft_str_endswith(key, "_SOUND_VOLUME"))
 		fta_audio_config(audio, (t_fta_audio_config){ft_atof(element->value),
 			audio->config.loop});
 	else if (ft_str_endswith(key, "_SOUND_LOOP"))
 		fta_audio_config(audio, (t_fta_audio_config){audio->config.volume,
 			ft_strequal(element->value, "TRUE")});
+	free(key);
 }
 
 static void	set_audio_configs_e(t_game *game)

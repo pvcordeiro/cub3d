@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 20:43:54 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/25 20:46:26 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/26 02:38:23 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static t_player_canvas_data	get_player_canvas_data(t_game *game, t_size cs,
 		return ((t_player_canvas_data){{cs.width / 2, cs.height / 2},
 			{0, cs.height / 2, 0}});
 	if (i == 1)
-		return ((t_player_canvas_data){cs, {0}});
+		return ((t_player_canvas_data){cs, {0, 0, 0}});
 	if (i == 2)
 		return ((t_player_canvas_data){{cs.width / 2, cs.height / 2},
 			{player_index * (cs.width / 2), (cs.height / 2) / 2, 0}});

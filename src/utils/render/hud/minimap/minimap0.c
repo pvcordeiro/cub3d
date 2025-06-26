@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 17:48:25 by paude-so          #+#    #+#             */
-/*   Updated: 2025/06/25 19:51:53 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/26 02:39:00 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ void	render_minimap(t_game *game, t_ftm_image *canvas,
 {
 	t_minimap_data	mp_data;
 
-	mp_data = (t_minimap_data){game, canvas, character, {0}, canvas->size};
+	mp_data = (t_minimap_data){game, canvas, character, {0, 0, 0},
+		canvas->size};
 	if (!game->hud.minimap.full)
 	{
 		mp_data.size = (t_size){canvas->size.width * MINIMAP_WIDTH_MULTIPLIER,
