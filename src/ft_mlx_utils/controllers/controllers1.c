@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   controllers1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 20:48:27 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/27 16:07:05 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/27 19:08:49 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	update_sdl_usage_e(int value)
 {
 	if (!sdl_context()->usage_count && value > 0)
 	{
-		printf("MOGA MOGA MOGA\n");
 		SDL_SetHint(SDL_HINT_NO_SIGNAL_HANDLERS, "1");
 		if (SDL_Init(SDL_INIT_GAMECONTROLLER) < 0)
 			return (fte_set("Failed to initialize SDL: %s", SDL_GetError()));
@@ -43,9 +42,6 @@ void	update_sdl_usage_e(int value)
 	}
 	sdl_context()->usage_count += value;
 	if (!sdl_context()->usage_count)
-	{
-		printf("MEGA MEGA MEGA\n");
 		(SDL_GameControllerEventState(SDL_DISABLE), SDL_Quit());
-	}
 }
 

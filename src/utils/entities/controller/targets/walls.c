@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   walls.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 19:45:19 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/26 14:53:33 by pvcordeiro       ###   ########.fr       */
+/*   Updated: 2025/06/27 19:07:30 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ t_wall_target	wall_target(t_game *game, t_character *character, double fov)
 		entity = (t_entity *)ray.hit;
 		if (ray.hit && entity->targetable
 			&& ray.distance <= TARGETS_MAX_DIST && i == TARGETS_RAYS / 2
-			&& (entity->type == ENTITY_DOOR
-				&& ray.distance < DOOR_INTERACTION_DISTANCE))
+			&& (!entity->wall || ray.distance < WALL_INTERACTION_DISTANCE))
 			return ((t_wall_target){entity, ray.hit_direction});
 	}
 	return ((t_wall_target){NULL, 0});

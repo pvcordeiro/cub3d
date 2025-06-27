@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 00:50:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/25 16:05:03 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/27 19:04:26 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,8 @@
 void	init_elevator(t_game *game, t_ftm_window *window,
 	t_elevator *elevator, char identifier)
 {
-	fte_set(NULL);
-	init_wall(game, window, &elevator->wall, identifier);
-	elevator->wall.entity.type = ENTITY_DOOR;
+	init_wall(game, window, (t_wall *)elevator, identifier);
+	elevator->wall.entity.type = ENTITY_ELEVATOR;
 	elevator->wall.entity.frame = elevator_frame;
 	elevator->wall.entity.clear = clear_elevator;
 	elevator->wall.entity.action = elevator_action;

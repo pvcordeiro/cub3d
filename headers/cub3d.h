@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/27 00:51:24 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/27 19:07:13 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,11 @@
 # define INVENTORY_SIZE 9
 # define INVENTORY_SCROLL_DELAY 0.5
 
+// Wall Config
+# define WALL_INTERACTION_DISTANCE 2.0
+
 // Door Config
 # define DOOR_ANIMATION_FPS 6
-# define DOOR_INTERACTION_DISTANCE 2.0
 
 // Map Config
 # define DEFAULT_AIR_TYPES "0 \t\n\v\f\r"
@@ -191,6 +193,7 @@ enum e_entity_type
 	ENTITY_BILLBOARD,
 	ENTITY_DROP,
 	ENTITY_CHARACTER,
+	ENTITY_ELEVATOR
 };
 
 struct s_controller
@@ -341,7 +344,7 @@ struct s_door
 {
 	t_wall		wall;
 	t_direction	direction;
-	t_sprite	opening_sprite;
+	t_sprite	*opening_sprite;
 	t_sprite	*door_sprite;
 	t_sprite	*door_sides_sprite;
 	bool		opened;
@@ -383,6 +386,7 @@ struct s_hud_minimap
 	unsigned int	border_color;
 	unsigned int	entity_color;
 	unsigned int	door_color;
+	unsigned int	elevator_color;
 	unsigned int	wall_color;
 	unsigned int	player_color;
 	unsigned int	player_ray_color;

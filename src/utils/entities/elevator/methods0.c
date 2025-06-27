@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   methods0.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 14:13:51 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/27 19:00:40 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,12 @@
 
 void	elevator_frame(t_game *game, t_entity *entity, double delta_time)
 {
-	t_elevator		*elevator;
-
 	wall_frame(game, entity, delta_time);
-	elevator = (t_elevator *)entity;
-	(void)elevator;
 }
 
-void	clear_elevator(void *elevator)
+void	clear_elevator(void *data)
 {
-	clear_wall(elevator);
+	clear_wall(data);
 }
 
 void	elevator_action(t_entity *entity, t_character *actioner)

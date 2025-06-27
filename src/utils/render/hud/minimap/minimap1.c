@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 17:48:25 by paude-so          #+#    #+#             */
-/*   Updated: 2025/06/25 19:59:00 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/27 19:01:41 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	set_entity_color(t_minimap_data mp_data, t_entity *entity,
 		*color = mp_data.game->hud.minimap.player_color;
 	else if (entity->type == ENTITY_DOOR)
 		*color = mp_data.game->hud.minimap.door_color;
+	else if (entity->type == ENTITY_ELEVATOR)
+		*color = mp_data.game->hud.minimap.elevator_color;
 	else
 		*color = mp_data.game->hud.minimap.entity_color;
 }

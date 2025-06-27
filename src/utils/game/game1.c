@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:16:16 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/25 18:48:53 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/27 19:01:56 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	init_minimap(t_ftm_window *window, t_game *game)
 	minimap->player_middle_ray_color = 0xFFFF0000;
 	minimap->entity_color = 0xFF888888;
 	minimap->door_color = 0xFF8888DD;
+	minimap->elevator_color = 0xFF88DDDD;
 	minimap->zoom_level = 5.0;
 }
 
