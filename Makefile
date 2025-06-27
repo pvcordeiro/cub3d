@@ -1,19 +1,6 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/04/26 17:16:21 by afpachec          #+#    #+#              #
-#    Updated: 2025/06/27 20:00:21 by afpachec         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME = cub3d
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -O3 -g
-# CFLAGS = -Wall -Wextra -Werror -O3 -g -std=c99 -fsanitize=address -fno-omit-frame-pointer
 INCLUDES = -I headers
 LIBS = -L lib
 LDLIBS = -lmlx -lSDL2 -lX11 -lXext -lm -ldl -lpthread
@@ -117,11 +104,8 @@ re: fclean all
 
 cdev: clean-everything-but-ft-audio dev
 
-dev: $(NAME)
+run: $(NAME)
 	./$(NAME) maps/hub.cub
-
-run: clean $(NAME)
-	@for map in $(MAPS); do echo "Running with $$map" && ./$(NAME) $$map; done
 
 val: $(NAME)
 	@valgrind --show-leak-kinds=all --leak-check=full --track-fds=all --suppressions=cub.supp ./$(NAME) maps/hub.cub
@@ -147,9 +131,5 @@ assets/wolf3d:
 
 fonts:
 	@bash scripts/fonts.sh
-
-errors:
-	@bash -c "python3 <(git show error-msgs-script:gen_error_msgs.py)"
-	@bash -c "python3 <(git show error-msgs-script:check_error_signals.py) src"
 
 .PHONY: all re clean fclean run val errors
