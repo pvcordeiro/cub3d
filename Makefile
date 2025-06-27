@@ -3,7 +3,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -O3 -g
 INCLUDES = -I headers
 LIBS = -L lib
-LDLIBS = -lmlx -lSDL2 -lX11 -lXext -lm -ldl -lpthread
+LDLIBS = -lmlx -lX11 -lXext -lm -ldl -lpthread
 SRCS = $(shell find src -name "**.c")
 OBJ_DIR = obj
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
@@ -13,6 +13,27 @@ RAND=$(shell echo $$RANDOM)
 FT_AUDIO_DIR = src/ft_audio
 
 check_flag = $(shell $(CC) $(1) -E -c /dev/null -o /dev/null 2>/dev/null && echo 1 || echo 0)
+
+HAS_SDL2_PKG = $(shell pkg-config --exists sdl2 2>/dev/null && echo 1 || echo 0)
+ifeq ($(HAS_SDL2_PKG),1)
+	SDL2_CFLAGS = $(shell pkg-config --cflags sdl2)
+	SDL2_LIBS = $(shell pkg-config --libs sdl2)
+	USE_SYSTEM_SDL2 = 1
+else
+	ifeq ($(UNAME_S),Darwin)
+		HAS_BREW_SDL2 = $(shell brew --prefix sdl2 >/dev/null 2>&1 && echo 1 || echo 0)
+		ifeq ($(HAS_BREW_SDL2),1)
+			SDL2_PREFIX = $(shell brew --prefix sdl2)
+			SDL2_CFLAGS = -I$(SDL2_PREFIX)/include
+			SDL2_LIBS = -L$(SDL2_PREFIX)/lib -lSDL2
+			USE_SYSTEM_SDL2 = 1
+		else
+			USE_SYSTEM_SDL2 = 0
+		endif
+	else
+		USE_SYSTEM_SDL2 = 0
+	endif
+endif
 ifeq ($(UNAME_S),Darwin)
 	LIBS += -L /opt/X11/lib
 	INCLUDES += -I /opt/X11/include
@@ -37,9 +58,23 @@ else
 	endif
 endif
 
+ifeq ($(USE_SYSTEM_SDL2),1)
+	INCLUDES += $(SDL2_CFLAGS)
+	LDLIBS += $(SDL2_LIBS)
+	SDL2_TARGET = 
+else
+	LDLIBS += -lSDL2
+	SDL2_TARGET = lib/libSDL2.a
+endif
+
 all: $(NAME)
 
-$(NAME): fonts assets/wolf3d lib/libSDL2.a lib/libmlx.a headers/miniaudio.h $(OBJS)
+$(NAME): fonts assets/wolf3d lib/libmlx.a $(SDL2_TARGET) headers/miniaudio.h $(OBJS)
+ifeq ($(USE_SYSTEM_SDL2),1)
+	@echo "\033[1;33mUsing system SDL2 library for linking.\033[0m"
+else
+	@echo "\033[1;32mUsing bundled SDL2 library for linking.\033[0m"
+endif
 	@echo "\033[1;32mCompiling \033[1;0m\"$(OBJS)\"\033[1;32m into \033[1;0m\"$(NAME)\"\033[1;32m.\033[0m"
 	@$(CC) -o $(NAME) $(OBJS) $(CFLAGS) $(INCLUDES) $(LIBS) $(LDLIBS)
 
@@ -62,6 +97,9 @@ headers/miniaudio.h:
 	@tar -xzf lib/miniaudio.tar.gz -C headers
 
 lib/libSDL2.a:
+ifeq ($(USE_SYSTEM_SDL2),1)
+	@echo "\033[1;33mUsing system SDL2 library.\033[0m"
+else
 	@echo "\033[1;32mCompiling \033[1;0m\"SDL2\"\033[1;32m.\033[0m"
 	@rm -rf lib/SDL2-2.32.8
 	@tar -xzf lib/SDL2-2.32.8.tar.gz -C lib
@@ -71,6 +109,7 @@ lib/libSDL2.a:
 	@mkdir -p headers/SDL2
 	@cp -r lib/SDL2-2.32.8/include/* headers/SDL2/
 	@rm -rf lib/SDL2-2.32.8
+endif
 
 $(OBJ_DIR)/%.o: %.c
 	@echo "\033[1;32mCompiling \033[1;0m\"$<\"\033[1;32m into \033[1;0m\"$@\"\033[1;32m.\033[0m"
@@ -113,23 +152,17 @@ val: $(NAME)
 lldb: $(NAME)
 	@lldb -o "run" ./$(NAME) maps/hub.cub
 
-update-wolf3d-assets:
-	@echo "\033[1;32mEncrypting \033[1;0m\"assets/wolf3d\"\033[1;32m into \033[1;0m\"assets/wolf3d-assets.zip\"\033[1;32m.\033[0m"
-	@cd assets/wolf3d && zip --password "$$(curl -sSL accounts.omelhorsite.pt)" -qr assets.zip *
-	@cd assets/wolf3d && zip --password "$$(curl -sSL jokes.omelhorsite.pt)" -qr wolf3d-assets.zip assets.zip
-	@cd assets/wolf3d && rm -rf assets.zip
-	@rm -rf assets/wolf3d-assets.zip
-	@mv assets/wolf3d/wolf3d-assets.zip assets
-
-assets/wolf3d:
-	@echo "\033[1;32mDecrypting \033[1;0m\"assets/wolf3d-assets.zip\"\033[1;32m into \033[1;0m\"assets/wolf3d\"\033[1;32m.\033[0m"
-	@rm -rf assets/wolf3d
-	@cd assets && unzip -q -o -P "$$(curl -sSL jokes.omelhorsite.pt)" wolf3d-assets.zip
-	@mkdir -p assets/wolf3d
-	@cd assets/wolf3d && unzip -q -o -P "$$(curl -sSL accounts.omelhorsite.pt)" ../assets.zip
-	@rm -f assets/assets.zip
-
 fonts:
 	@bash scripts/fonts.sh
 
-.PHONY: all re clean fclean run val errors
+debug-sdl2:
+ifeq ($(USE_SYSTEM_SDL2),1)
+	@echo "\033[1;33mUsing system SDL2 library\033[0m"
+	@echo "SDL2 CFLAGS: $(SDL2_CFLAGS)"
+	@echo "SDL2 LIBS: $(SDL2_LIBS)"
+else
+	@echo "\033[1;31mUsing bundled SDL2 library (will compile from source)\033[0m"
+	@echo "SDL2 will be compiled from lib/SDL2-2.32.8.tar.gz"
+endif
+
+.PHONY: all re clean fclean run val errors debug-sdl2
