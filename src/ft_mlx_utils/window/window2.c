@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:52:09 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/25 14:50:04 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/27 16:18:00 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ftm_update_hooks(t_ftm_window *window)
 	mlx_hook(window->win, ButtonRelease, ButtonReleaseMask,
 		window_mouse_up_hook, window);
 	mlx_loop_hook(window->display, window_loop_hook, window);
-	ftm_window_reload_controllers(window);
+	ftm_window_update_controllers_hooks(window);
 }
 
 void	ftm_window_loop(t_ftm_window *window)

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:20:20 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/26 22:06:28 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/27 16:20:28 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,9 @@ static void	load_new_map(bool *playing_bg_music)
 	t_game		*prev_game;
 
 	pthread_mutex_lock(&cub3d()->game_mutex);
-	ftm_put_image_to_window(cub3d()->window, cub3d()->loading_image,
-		(t_coords){0, 0, 0});
+	ftm_put_image_to_window_pitc(cub3d()->window, cub3d()->loading_image,
+		(t_ftm_pitc_config){.coords = {0, 0, 0}, .pixel_modifier = NULL,
+			.resize = true, .size = cub3d()->window->size, .crop = false});
 	ft_sleep(1000);
 	prev_game = cub3d()->game;
 	cub3d()->game = game_new(cub3d()->window, cub3d()->curr_map);

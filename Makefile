@@ -6,7 +6,7 @@
 #    By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/26 17:16:21 by afpachec          #+#    #+#              #
-#    Updated: 2025/06/26 11:12:37 by afpachec         ###   ########.fr        #
+#    Updated: 2025/06/26 22:18:06 by afpachec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -124,7 +124,7 @@ run: clean $(NAME)
 	@for map in $(MAPS); do echo "Running with $$map" && ./$(NAME) $$map; done
 
 val: $(NAME)
-	@valgrind --show-leak-kinds=all --leak-check=full --track-fds=all --suppressions=ma.supp ./$(NAME) maps/subject.cub
+	@valgrind --show-leak-kinds=all --leak-check=full --track-fds=all --suppressions=ma.supp ./$(NAME) maps/hub.cub
 
 lldb: $(NAME)
 	@lldb -o "run" ./$(NAME) maps/hub.cub

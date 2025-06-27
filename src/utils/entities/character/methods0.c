@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/25 15:19:00 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/26 22:45:46 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,22 @@ void	character_frame(t_game *game, t_entity *entity, double delta_time)
 	call_item_frames(character);
 }
 
-void	clear_character(void *character)
+void	clear_character(void *data)
 {
-	clear_billboard(character);
+	t_character	*character;
+
+	if (data)
+		((t_billboard *)data)->sprites = ((t_character *)data)->_sprite;
+	clear_billboard(data);
+	if (!data)
+		return ;
+	character = (t_character *)data;
+	free_entity(character->drop);
+	free_inventory_items(character);
+	free_3d_sprite(character->hit_sprite);
+	free_3d_sprite(character->death_sprite);
+	free_3d_sprite(character->using_sprite);
+	free_3d_sprite(character->walking_sprite);
 }
 
 void	character_action(t_entity *entity, t_character *actioner)

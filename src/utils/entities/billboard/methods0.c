@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 03:05:19 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/26 22:22:45 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,15 @@ void	billboard_frame(t_game *game, t_entity *entity, double delta_time)
 	entity_frame(game, entity, delta_time);
 }
 
-void	clear_billboard(void *billboard)
+void	clear_billboard(void *data)
 {
-	clear_entity(billboard);
+	t_billboard	*billboard;
+
+	clear_entity(data);
+	if (!data)
+		return ;
+	billboard = (t_billboard *)data;
+	free_3d_sprite(billboard->sprites);
 }
 
 void	billboard_action(t_entity *entity, t_character *actioner)

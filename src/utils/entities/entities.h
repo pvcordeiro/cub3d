@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 18:04:16 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/25 16:09:19 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/26 22:20:23 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 void	init_controller(t_game *game, t_entity *entity, const char *type);
 void	free_entity(void *entity);
 bool	add_item_to_inventory(t_character *character, t_item *item);
+void	free_3d_sprite(t_sprite **sprite_3d);
 void	clear_3d_sprite(t_sprite **sprites);
 void	fill_3d_sprites_from_game(t_game *game, t_sprite **dst, char identifier,
 			char *key);

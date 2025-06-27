@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 20:48:27 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/19 21:07:08 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/27 16:07:05 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,3 +30,22 @@ void	ftm_controller_free(void *data)
 	ftm_controller_clear(data);
 	free(data);
 }
+
+void	update_sdl_usage_e(int value)
+{
+	if (!sdl_context()->usage_count && value > 0)
+	{
+		printf("MOGA MOGA MOGA\n");
+		SDL_SetHint(SDL_HINT_NO_SIGNAL_HANDLERS, "1");
+		if (SDL_Init(SDL_INIT_GAMECONTROLLER) < 0)
+			return (fte_set("Failed to initialize SDL: %s", SDL_GetError()));
+		SDL_GameControllerEventState(SDL_ENABLE);
+	}
+	sdl_context()->usage_count += value;
+	if (!sdl_context()->usage_count)
+	{
+		printf("MEGA MEGA MEGA\n");
+		(SDL_GameControllerEventState(SDL_DISABLE), SDL_Quit());
+	}
+}
+

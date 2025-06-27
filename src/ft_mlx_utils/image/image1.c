@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 14:51:11 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/26 15:03:37 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/27 16:22:47 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	ftm_put_image_to_window_pitc(t_ftm_window *window, t_ftm_image *image,
 	if (!canvas)
 		return ;
 	ftm_put_image_to_canvas(canvas, image, pitc);
-	mlx_put_image_to_window(window->display, window->win,
-		canvas->img_ptr, 0, 0);
+	ftm_put_image_to_window(window, canvas, (t_coords){0, 0, 0});
 	ftm_free_image(canvas);
 }

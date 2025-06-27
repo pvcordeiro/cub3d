@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/25 20:58:09 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/26 22:47:55 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,15 @@
 
 void	clear_item(void *data)
 {
-	(void)data;
+	t_item	*item;
+
+	if (!data)
+		return ;
+	item = (t_item *)data;
+	free(item->_screen_sprite);
+	free(item->_icon_sprite);
+	free(item->icon_use_sprite);
+	free(item->screen_use_sprite);
 }
 
 void	item_use(t_item *item, t_drop *drop)

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 20:46:22 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/25 14:40:43 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/26 22:35:20 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,12 @@ void	ftm_controller_init_e(t_ftm_controller *controller, int id)
 	fte_set(NULL);
 	if (!controller)
 		return ;
-	if (!sdl_context()->usage_count)
-	{
-		SDL_SetHint(SDL_HINT_NO_SIGNAL_HANDLERS, "1");
-		if (SDL_Init(SDL_INIT_GAMECONTROLLER) < 0)
-			return (fte_set("Failed to initialize SDL: %s", SDL_GetError()));
-		SDL_GameControllerEventState(SDL_ENABLE);
-	}
-	sdl_context()->usage_count++;
+	update_sdl_usage_e(1);
+	if (fte_flagged())
+		return ;
 	controller->controller = SDL_GameControllerOpen(id);
 	if (!controller->controller)
-		return (fte_set("Failed to open controller %d", id));
+		return (update_sdl_usage_e(-1), fte_set("Controller fail %d", id));
 	controller->id = SDL_JoystickInstanceID(
 			SDL_GameControllerGetJoystick(controller->controller));
 	controller->joy_id = id;
@@ -48,9 +43,7 @@ void	ftm_controller_clear(void *data)
 	if (!controller)
 		return ;
 	SDL_GameControllerClose(controller->controller);
-	--sdl_context()->usage_count;
-	if (!sdl_context()->usage_count)
-		(SDL_GameControllerEventState(SDL_DISABLE), SDL_Quit());
+	(update_sdl_usage_e(-1), fte_set(NULL));
 	controller->controller = NULL;
 	controller->id = -1;
 }

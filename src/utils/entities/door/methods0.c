@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/25 15:58:58 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/27 00:56:05 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,16 @@ void	door_frame(t_game *game, t_entity *entity, double delta_time)
 		door->wall.entity.action(entity, NULL);
 }
 
-void	clear_door(void *door)
+void	clear_door(void *data)
 {
-	clear_wall(door);
-	clear_sprite(&((t_door *)door)->opening_sprite);
+	t_door	*door;
+
+	clear_wall(data);
+	if (!data)
+		return ;
+	door = (t_door *)data;
+	clear_sprite(&door->opening_sprite);
+	free(door->door_sprite);
 }
 
 void	door_action(t_entity *entity, t_character *actioner)

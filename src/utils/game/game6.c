@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 23:46:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/25 17:15:52 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/26 23:14:55 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ static void	process_door_at(t_game *game, int y, int x, t_sprite *frame_sprite)
 	wall2 = game->walls[y + (dir == EAST || dir == WEST)][x + (dir == NORTH
 			|| dir == SOUTH)];
 	if (wall1 && wall1->wall && (dir == EAST || dir == WEST))
-		((t_wall *)wall1)->south_sprite = frame_sprite;
+		sprite_soft_copy(&((t_wall *)wall1)->south_sprite, frame_sprite);
 	else if (wall1 && wall1->wall && (dir == NORTH || dir == SOUTH))
-		((t_wall *)wall1)->east_sprite = frame_sprite;
+		sprite_soft_copy(&((t_wall *)wall1)->east_sprite, frame_sprite);
 	if (wall2 && wall2->wall && (dir == EAST || dir == WEST))
-		((t_wall *)wall2)->north_sprite = frame_sprite;
+		sprite_soft_copy(&((t_wall *)wall2)->north_sprite, frame_sprite);
 	else if (wall2 && wall2->wall && (dir == NORTH || dir == SOUTH))
-		((t_wall *)wall2)->west_sprite = frame_sprite;
+		sprite_soft_copy(&((t_wall *)wall2)->west_sprite, frame_sprite);
 }
 
 void	insert_door_frames(t_game *game)

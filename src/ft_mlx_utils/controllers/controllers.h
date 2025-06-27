@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 20:46:32 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/20 02:17:38 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/26 22:35:59 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@ typedef struct s_sdl_context
 }	t_sdl_context;
 
 t_sdl_context	*sdl_context(void);
+void			update_sdl_usage_e(int value);
 
 #endif

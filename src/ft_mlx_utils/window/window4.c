@@ -6,13 +6,13 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 14:56:07 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/19 21:47:47 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/27 16:17:20 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "window.h"
 
-static void	set_hooks(t_ftm_window *window)
+void	ftm_window_update_controllers_hooks(t_ftm_window *window)
 {
 	t_list				*curr;
 	t_ftm_controller	*controller;
@@ -36,5 +36,5 @@ void	ftm_window_reload_controllers(t_ftm_window *window)
 	window->controllers = ftm_load_controllers();
 	if (!window->controllers)
 		return ;
-	set_hooks(window);
+	ftm_window_update_controllers_hooks(window);
 }

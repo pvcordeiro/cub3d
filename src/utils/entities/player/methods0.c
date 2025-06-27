@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/21 16:12:23 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/26 22:25:12 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,15 @@ void	player_frame(t_game *game, t_entity *entity, double delta_time)
 	character_frame(game, entity, delta_time);
 }
 
-void	clear_player(void *player)
+void	clear_player(void *data)
 {
-	clear_character(player);
+	t_player	*player;
+
+	clear_character(data);
+	if (!data)
+		return ;
+	player = (t_player *)data;
+	ftm_free_image(player->canvas);
 }
 
 void	player_action(t_entity *entity, t_character *actioner)
