@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:21:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/26 22:06:13 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/27 20:52:57 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,19 @@ static void	hud_keys(t_game *game, t_ftm_key_hook_values khv)
 		game->hud.action_enabled = !game->hud.action_enabled;
 	if (khv.key == XK_F6 && khv.down)
 		game->hud.enabled = !game->hud.enabled;
+	if (khv.key == XK_plus && khv.down)
+		game->hud.minimap.zoom_level *= 1.2;
+	if (khv.key == XK_minus && khv.down)
+		game->hud.minimap.zoom_level /= 1.2;
+	if (khv.key == XK_0 && khv.down)
+		game->hud.minimap.zoom_level = 5.0;
+}
+
+static void	game_keys(t_game *game, t_ftm_key_hook_values khv)
+{
+	(void)game;
+	if (khv.key == XK_m && khv.down && cub3d()->window)
+		cub3d()->window->using_mouse = !cub3d()->window->using_mouse;
 }
 
 void	key_hook(t_ftm_key_hook_values khv)
@@ -87,5 +100,6 @@ void	key_hook(t_ftm_key_hook_values khv)
 		ftm_window_toggle_fullscreen(cub3d()->window, (t_size){W_WIDTH,
 			W_HEIGHT});
 	hud_keys(game, khv);
+	game_keys(game, khv);
 	pthread_mutex_unlock(&cub3d()->game_mutex);
 }
