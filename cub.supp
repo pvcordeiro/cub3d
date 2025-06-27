@@ -39,6 +39,14 @@
 }
 
 {
+   mlx_mouse_reachable_2
+   Memcheck:Leak
+   ...
+   fun:*_Xrm*
+   ...
+}
+
+{
    x11_xcb_writev_uninit
    Memcheck:Param
    writev(vector[...])
