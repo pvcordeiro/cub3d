@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 15:50:38 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/26 18:37:01 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/27 21:23:16 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	shoot(t_character *character)
 	if (!item || !character->target_entity
 		|| (item->weapon && ((t_weapon *)item)->range > 0
 			&& ft_distance(character->billboard.entity.coords,
-			character->target_entity->coords) > ((t_weapon *)item)->range))
+				character->target_entity->coords) > ((t_weapon *)item)->range))
 		return ;
 	if (character->inventory_index == 0
 		&& character->inventory_index < INVENTORY_SIZE - 1
