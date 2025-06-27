@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game6.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 23:46:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/26 23:14:55 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/27 17:06:13 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static void	fill_sprites(t_sprite **sprites, t_hashmap *game_sprites, char *key)
 	ints.three = 360 / ints.two;
 	ints.five = ints.three / 2;
 	ints.one = -1;
-	while (++ints.one <= 360)
+	while (++ints.one < 360)
 	{
 		ints.four = (ft_normalize_angle(ints.one - ints.five)) / ints.three + 1;
 		if (ints.four > ints.two)

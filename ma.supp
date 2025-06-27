@@ -1,7 +1,6 @@
 {
    pulse_reachable_1
    Memcheck:Leak
-   match-leak-kinds: reachable
    ...
    fun:ma*
    ...
@@ -10,7 +9,6 @@
 {
    pulse_reachable_2
    Memcheck:Leak
-   match-leak-kinds: reachable
    ...
    fun:pa*
    ...
@@ -19,8 +17,23 @@
 {
    val_reachable_1
    Memcheck:Leak
-   match-leak-kinds: reachable
    ...
    fun:*dl*
+   ...
+}
+
+{
+   dbus_reachable_1
+   Memcheck:Leak
+   ...
+   fun:*dbus*
+   ...
+}
+
+{
+   dbus_reachable_2
+   Memcheck:Leak
+   ...
+   fun:*DBus*
    ...
 }

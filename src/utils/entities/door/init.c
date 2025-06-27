@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 00:50:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/25 15:58:23 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/27 17:04:11 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,16 @@ static void	set_sprites(t_door *door)
 {
 	if (door->direction == NORTH || door->direction == SOUTH)
 	{
-		door->wall.north_sprite = &door->opening_sprite;
-		door->wall.west_sprite = door->door_sides_sprite;
+		sprite_soft_copy(&door->wall.north_sprite, &door->opening_sprite);
+		sprite_soft_copy(&door->wall.west_sprite, door->door_sides_sprite);
 	}
 	else if (door->direction == EAST || door->direction == WEST)
 	{
-		door->wall.west_sprite = &door->opening_sprite;
-		door->wall.north_sprite = door->door_sides_sprite;
+		sprite_soft_copy(&door->wall.west_sprite, &door->opening_sprite);
+		sprite_soft_copy(&door->wall.north_sprite, door->door_sides_sprite);
 	}
-	door->wall.east_sprite = door->wall.west_sprite;
-	door->wall.south_sprite = door->wall.north_sprite;
+	sprite_soft_copy(&door->wall.east_sprite, door->wall.west_sprite);
+	sprite_soft_copy(&door->wall.south_sprite, door->wall.north_sprite);
 }
 
 static void	crazy_door_things(t_game *game, t_ftm_window *window,
