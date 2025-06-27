@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:20:20 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/27 16:20:28 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/27 20:27:02 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,18 +59,25 @@ static void	process_fps_limit(t_game *game)
 
 static void	load_new_map(bool *playing_bg_music)
 {
-	t_game		*prev_game;
+	char		*path;
 
 	pthread_mutex_lock(&cub3d()->game_mutex);
+	path = ft_strdup(cub3d()->new_map_path);
+	cub3d()->new_map_path = NULL;
+	if (!path)
+		return (fte_set("load new map path"), fte_assert());
 	ftm_put_image_to_window_pitc(cub3d()->window, cub3d()->loading_image,
 		(t_ftm_pitc_config){.coords = {0, 0, 0}, .pixel_modifier = NULL,
 			.resize = true, .size = cub3d()->window->size, .crop = false});
 	ft_sleep(1000);
-	prev_game = cub3d()->game;
-	cub3d()->game = game_new(cub3d()->window, cub3d()->curr_map);
-	free_game(prev_game);
-	free_map(cub3d()->prev_map);
-	cub3d()->prev_map = NULL;
+	(free_game(cub3d()->game), free_map(cub3d()->curr_map));
+	cub3d()->game = NULL;
+	cub3d()->curr_map = NULL;
+	fta_destroy();
+	cub3d()->curr_map = parse_map_e(path);
+	(free(path), fte_assert(), fta_init_e());
+	cub3d()->game = game_new_e(cub3d()->window, cub3d()->curr_map);
+	fte_assert();
 	*playing_bg_music = false;
 	pthread_mutex_unlock(&cub3d()->game_mutex);
 }
@@ -79,8 +86,10 @@ void	loop(void)
 {
 	static bool		playing_bg_music;
 
-	if (!cub3d()->game || cub3d()->curr_map != cub3d()->game->map)
+	if (cub3d()->new_map_path)
 		load_new_map(&playing_bg_music);
+	if (!cub3d()->game)
+		return (ft_sleep(100));
 	if (!playing_bg_music)
 		fta_play(cub3d()->game->background_sound);
 	playing_bg_music = true;

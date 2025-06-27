@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d0.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 21:53:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/26 22:05:53 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/27 20:26:31 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,7 @@ void	cub3d_exit(int code)
 	free_game(cub3d()->game);
 	cub3d()->game = NULL;
 	free_map(cub3d()->curr_map);
-	free_map(cub3d()->prev_map);
 	cub3d()->curr_map = NULL;
-	cub3d()->prev_map = NULL;
 	ftm_free_image(cub3d()->placeholder_image);
 	ftm_free_image(cub3d()->loading_image);
 	ftm_free_window(cub3d()->window);

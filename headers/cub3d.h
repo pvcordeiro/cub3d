@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/27 19:07:13 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/27 20:14:58 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -455,7 +455,7 @@ struct s_cub3d
 {
 	t_ftm_image			*placeholder_image;
 	t_ftm_image			*loading_image;
-	t_map				*prev_map;
+	char				*new_map_path;
 	t_map				*curr_map;
 	t_ftm_window		*window;
 	pthread_mutex_t		game_mutex;
@@ -473,7 +473,7 @@ t_type_creator		get_type_creator(t_hashmap *identifiers, char identifier);
 void				free_walls(t_game *game);
 
 // Game
-t_game				*game_new(t_ftm_window *window, t_map *map);
+t_game				*game_new_e(t_ftm_window *window, t_map *map);
 void				clear_game(void *game);
 void				free_game(void *game);
 void				render_game(t_game *game, t_ftm_image *canvas,

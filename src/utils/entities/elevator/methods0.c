@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 23:31:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/27 19:00:40 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/27 20:20:04 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,10 @@ void	elevator_action(t_entity *entity, t_character *actioner)
 	t_elevator	*elevator;
 
 	wall_action(entity, actioner);
+	if (!entity)
+		return ;
 	elevator = (t_elevator *)entity;
-	cub3d()->prev_map = cub3d()->curr_map;
-	cub3d()->curr_map = parse_map_e(elevator->map_path);
-	if (fte_flagged())
-	{
-		cub3d()->curr_map = cub3d()->prev_map;
-		printf("Error loading map: %s\n", fte_storage()->msg);
-	}
+	cub3d()->new_map_path = elevator->map_path;
 }
 
 void	elevator_shot(t_entity *shooted, t_character *shooter)

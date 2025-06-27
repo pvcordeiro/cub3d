@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game0.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:27:08 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/25 18:48:58 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/27 20:14:58 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static void	finalize_game(t_ftm_window *window, t_game *game)
 		game->players[0]->character.billboard.entity.active = true;
 }
 
-t_game	*game_new(t_ftm_window *window, t_map *map)
+t_game	*game_new_e(t_ftm_window *window, t_map *map)
 {
 	t_game	*game;
 

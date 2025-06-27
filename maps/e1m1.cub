@@ -1,4 +1,4 @@
-BACKGROUND_SOUND assets/wolf3d/sounds/xfunkie.mp3
+BACKGROUND_SOUND assets/wolf3d/sounds/getthem.mp3
 BACKGROUND_SOUND_VOLUME 0.7
 BACKGROUND_SOUND_LOOP TRUE
 BACKGROUND_SPRITE assets/wolf3d/textures/wood-wall-dark.xpm
