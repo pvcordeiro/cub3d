@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 20:48:27 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/27 19:08:49 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/27 21:18:45 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,3 @@ void	update_sdl_usage_e(int value)
 	if (!sdl_context()->usage_count)
 		(SDL_GameControllerEventState(SDL_DISABLE), SDL_Quit());
 }
-
