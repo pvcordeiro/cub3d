@@ -221,12 +221,12 @@ g_WE assets/42lisboa/window.xpm
 
 h_TYPE DOOR
 h_TARGETABLE TRUE
-h_ANIMATION_DELAY 1
+h_ANIMATION_DELAY 1.3
 h_DOOR_SPRITE assets/42lisboa/cluster2-door.xpm
 h_DIRECTION NORTH
-h_OPEN_SOUND assets/wolf3d/sounds/opendoor.mp3
+h_OPEN_SOUND assets/42lisboa/cluster2-door-open.mp3
 h_OPEN_SOUND_VOLUME 0.8
-h_CLOSE_SOUND assets/wolf3d/sounds/closedoor.mp3
+h_CLOSE_SOUND assets/42lisboa/cluster2-door-close.mp3
 h_CLOSE_SOUND_VOLUME 0.8
 
 i_TYPE WALL
