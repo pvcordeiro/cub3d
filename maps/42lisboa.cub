@@ -431,9 +431,9 @@ w_WE assets/42lisboa/piscine-wall-inside.xpm
 P_TYPE BILLBOARD
 P_HARD TRUE
 P_STILL_4_SPRITE assets/42lisboa/white-board-front.xpm
-P_STILL_3_SPRITE assets/42lisboa/white-board-front-left.xpm
+P_STILL_3_SPRITE assets/42lisboa/white-board-front-right.xpm
 P_STILL_2_SPRITE assets/42lisboa/white-board-front.xpm
-P_STILL_1_SPRITE assets/42lisboa/white-board-front-right.xpm
+P_STILL_1_SPRITE assets/42lisboa/white-board-front-left.xpm
 
 F 50,50,50
 C 140,140,140
