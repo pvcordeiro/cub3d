@@ -1,7 +1,7 @@
 BACKGROUND_SOUND assets/wolf3d/sounds/xfunkie.mp3
 BACKGROUND_SOUND_VOLUME 0.7
 BACKGROUND_SOUND_LOOP TRUE
-BACKGROUND_SPRITE assets/wolf3d/textures/wood-wall-dark.xpm
+BACKGROUND_SPRITE assets/textures/wolf3d.xpm
 
 COLLISION_SOUND assets/wolf3d/sounds/hitwall.mp3
 COLLISION_SOUND_VOLUME 0.1
@@ -803,6 +803,6 @@ a             a   a"   a , a    a)(  f , ffe           e       f
 a             v   aaaaaa   aaaaaa*)( f   ffff   ff   ffgf   fgff
 a             a , a|   a   a    a**) f   ffkffhffffhffffffhfffff
 a    aaahaaahaa   a    v , v    afff f       . .  . .ff%     ?ff
-a d  a <  a   a N a    a   a   |aaf  v ,   ,   ,   , ff      fff
+a d  a <  a   a N a W  a N a  W|aaf  v ,   ,   ,   , ff      fff
 a    a d  a d aapaaaaaaa   aaaaaaaffff               ff% e   ?ff
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaffffffkffffffffffffffffffff

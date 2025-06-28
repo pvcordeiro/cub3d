@@ -150,7 +150,7 @@ Create your own maps following the `.cub` format:
 - **Memory Optimization**: Efficient sprite caching and texture management
 - **Delta Time Processing**: Frame-rate independent movement and animation
 
-- ![ending](https://github.com/user-attachments/assets/02e60445-97e6-44a4-9ce7-ceaffe376755)
+![ending](https://github.com/user-attachments/assets/02e60445-97e6-44a4-9ce7-ceaffe376755)
 
 ## 🧮 Technical Implementation Details
 

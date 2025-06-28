@@ -8,3 +8,4 @@ lib/minilibx-linux
 headers/SDL2/
 lib/libSDL2.a
 ._miniaudio.h
+.DS_Store
