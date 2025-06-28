@@ -85,7 +85,7 @@ lib/libmlx.a:
 ifeq ($(UNAME_S),Darwin)
 	@cp lib/libmlx_Darwin.a lib/libmlx.a
 else
-	@$(MAKE) -C lib/minilibx-linux
+	@$(MAKE) -j -C lib/minilibx-linux
 	@cp lib/minilibx-linux/libmlx.a lib
 endif
 	@cp lib/minilibx-linux/mlx.h headers
@@ -104,7 +104,7 @@ else
 	@rm -rf lib/SDL2-2.32.8
 	@tar -xzf lib/SDL2-2.32.8.tar.gz -C lib
 	@mkdir -p lib/SDL2-2.32.8/build
-	@cd lib/SDL2-2.32.8/build && ../configure --disable-shared --enable-static --prefix=$(abspath lib) && make
+	@cd lib/SDL2-2.32.8/build && ../configure --disable-shared --enable-static --prefix=$(abspath lib) && make -j
 	@cp lib/SDL2-2.32.8/build/build/.libs/libSDL2.a lib/
 	@mkdir -p headers/SDL2
 	@cp -r lib/SDL2-2.32.8/include/* headers/SDL2/
@@ -121,7 +121,7 @@ clean-everything-but-ft-audio:
 	@if [ -d "$(OBJ_DIR)/$(FT_AUDIO_DIR)" ]; then \
 		tar -cf ft_audio.tar -C $(OBJ_DIR) $(FT_AUDIO_DIR); \
 	fi
-	@$(MAKE) clean
+	@$(MAKE) -j clean
 	@if [ -f "ft_audio.tar" ]; then \
 		mkdir -p $(OBJ_DIR); \
 		tar -xf ft_audio.tar -C $(OBJ_DIR); \
