@@ -2,6 +2,8 @@
 
 An advanced 3D raycasting game engine featuring sophisticated rendering, multiplayer split-screen gameplay, and intelligent AI systems. This project implements a complete Wolfenstein 3D-style engine with modern enhancements, showcasing complex computer graphics algorithms and real-time game development techniques.
 
+![ScreenRecording2025-06-28at02 09 27-ezgif com-optimize](https://github.com/user-attachments/assets/88c514d8-0dd8-4d95-9930-51d3a666a5f2)
+
 ## 🎯 Project Overview
 
 This is a highly technical implementation of a 3D raycasting engine that demonstrates:
@@ -21,6 +23,8 @@ This is a highly technical implementation of a 3D raycasting engine that demonst
 - **🎵 Spatial Audio**: 3D positional sound with SDL2 integration
 - **🎯 Precise Controls**: Full gamepad support with pressure-sensitive triggers and deadzone compensation
 - **⚡ Performance Optimized**: Multi-threaded rendering pipeline and efficient memory management
+
+![starting](https://github.com/user-attachments/assets/a98e8efd-9139-4b9b-80be-b759be669e0b)
 
 ## 🚀 Getting Started
 
@@ -145,6 +149,8 @@ Create your own maps following the `.cub` format:
 - **Spatial Audio**: 3D positional sound with distance attenuation
 - **Memory Optimization**: Efficient sprite caching and texture management
 - **Delta Time Processing**: Frame-rate independent movement and animation
+
+- ![ending](https://github.com/user-attachments/assets/02e60445-97e6-44a4-9ce7-ceaffe376755)
 
 ## 🧮 Technical Implementation Details
 
