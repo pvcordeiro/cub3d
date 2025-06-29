@@ -1,7 +1,7 @@
 BACKGROUND_SOUND assets/wolf3d/sounds/xfunkie.mp3
 BACKGROUND_SOUND_VOLUME 0.7
 BACKGROUND_SOUND_LOOP TRUE
-BACKGROUND_SPRITE assets/textures/wolf3d.xpm
+BACKGROUND_SPRITE assets/wolf3d/textures/copper-wall0-dark.xpm
 
 COLLISION_SOUND assets/wolf3d/sounds/hitwall.mp3
 COLLISION_SOUND_VOLUME 0.1
