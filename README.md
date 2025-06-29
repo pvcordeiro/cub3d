@@ -64,6 +64,9 @@ make run
 - `Q` - Drop current item
 - `R` - Cycle through inventory
 - `Shift` - Sprint mode
+- `H` - Go back to hub map
+- `P/O` - Add/Remove multiplayer participants
+- `T` - Restart game
 
 ### Multiplayer Setup
 - **Split-Screen**: Press `P` to activate additional players (up to 4), press `O` to remove players
@@ -85,11 +88,10 @@ make run
 - `F5` - Interaction prompts toggle
 - `F6` - Complete HUD toggle
 - `F7` - Reload gamepad controllers
-- `H` - Go back to hub map
-- `P/O` - Add/Remove multiplayer participants
 - `K` - Toggle keyboard-only mode for Player 1
 - `M` - Toggle mouse capture
 - `+/-/0` - Minimap zoom controls
+- `TAB` - Minimap Fullscreen
 
 ## 🗺️ Map System
 

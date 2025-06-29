@@ -6,7 +6,7 @@
 /*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:21:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/29 15:07:36 by pvcordeiro       ###   ########.fr       */
+/*   Updated: 2025/06/29 15:51:52 by pvcordeiro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,14 @@ static void	hud_keys(t_game *game, t_ftm_key_hook_values khv)
 		game->hud.action_enabled = !game->hud.action_enabled;
 	if (khv.key == XK_F6 && khv.down)
 		game->hud.enabled = !game->hud.enabled;
-	if (khv.key == XK_plus && khv.down)
+	if (khv.key == XK_equal && khv.down)
 		game->hud.minimap.zoom_level *= 1.2;
 	if (khv.key == XK_minus && khv.down)
 		game->hud.minimap.zoom_level /= 1.2;
 	if (khv.key == XK_0 && khv.down)
 		game->hud.minimap.zoom_level = 5.0;
-
+	if (khv.key == XK_Tab)
+		game->hud.minimap.full = khv.down;
 }
 
 static void	game_keys(t_game *game, t_ftm_key_hook_values khv)
@@ -77,6 +78,8 @@ static void	game_keys(t_game *game, t_ftm_key_hook_values khv)
 		cub3d()->window->using_mouse = !cub3d()->window->using_mouse;
 	if (khv.key == XK_h && khv.down && ft_strcmp(cub3d()->curr_map->path, "maps/hub.cub"))
 		cub3d()->new_map_path = "maps/hub.cub";
+	if (khv.key == XK_t && khv.down)
+		cub3d()->new_map_path = cub3d()->curr_map->path;
 }
 
 void	key_hook(t_ftm_key_hook_values khv)
