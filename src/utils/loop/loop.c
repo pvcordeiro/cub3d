@@ -6,7 +6,7 @@
 /*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:20:20 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/29 21:32:32 by pvcordeiro       ###   ########.fr       */
+/*   Updated: 2025/06/29 21:42:23 by pvcordeiro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ static void	process_fps_limit(t_game *game)
 static void	load_new_map(bool *playing_bg_music)
 {
 	char		*path;
+	char		*new_title;
 
 	pthread_mutex_lock(&cub3d()->game_mutex);
 	path = ft_strdup(cub3d()->new_map_path);
@@ -79,9 +80,14 @@ static void	load_new_map(bool *playing_bg_music)
 	if (ft_strequal(ft_hashmap_get_value(cub3d()->curr_map->types, "FULLSCREEN"), "FALSE"))
 	{
 		ftm_window_resize_e(cub3d()->window, (t_size){W_WIDTH, W_HEIGHT});
-		cub3d()->window->fullscreen = false;
 		ftm_window_notify_fullscreen(cub3d()->window);
+		cub3d()->window->fullscreen = false;
 	}
+	new_title = ft_hashmap_get_value(cub3d()->curr_map->types, "TITLE");
+	if (new_title)
+		ftm_window_set_title(cub3d()->window, new_title);
+	else
+		ftm_window_set_title(cub3d()->window, W_TITLE);
 	cub3d()->game = game_new_e(cub3d()->window, cub3d()->curr_map);
 	fte_assert();
 	*playing_bg_music = false;

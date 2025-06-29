@@ -37,6 +37,7 @@ static void	init_window(void)
 	size = ftm_get_screen_size(window);
 	ftm_window_resize_e(window, size);
 	window->fullscreen = true;
+	ftm_window_notify_fullscreen(window);
 	window->loop_hook = loop;
 	window->key_hook = key_hook;
 	window->exit_hook = cub3d_exit;

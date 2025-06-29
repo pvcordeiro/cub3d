@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window0.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:58:13 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/27 16:18:39 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/29 21:40:51 by pvcordeiro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ftm_init_window_e(t_ftm_window *window, t_size size, char *title)
 		return (mlx_destroy_display(window->display),
 			fte_set("init window"));
 	window->size = size;
-	window->title = title;
+	window->title = ft_strdup(title);
 	ftm_window_reload_controllers(window);
 }
 
@@ -50,6 +50,7 @@ void	ftm_clear_window(void *data)
 		return ;
 	window = (t_ftm_window *)data;
 	ft_list_destroy(&window->controllers);
+	free(window->title);
 	mlx_destroy_window(window->display, window->win);
 	mlx_destroy_display(window->display);
 	free(window->display);

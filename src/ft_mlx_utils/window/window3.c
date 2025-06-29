@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 22:21:31 by paude-so          #+#    #+#             */
-/*   Updated: 2025/06/27 16:15:29 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/29 21:40:51 by pvcordeiro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,20 @@ void	ftm_window_notify_fullscreen(t_ftm_window *window)
 	XSendEvent(display, DefaultRootWindow(display), False,
 		SubstructureRedirectMask | SubstructureNotifyMask, &xev);
 	XFlush(display);
+}
+
+void	ftm_window_set_title(t_ftm_window *window, char *title)
+{
+	char	*new_title;
+
+	if (!window || !title)
+		return ;
+	new_title = ft_strdup(title);
+	if (!new_title)
+		return ;
+	free(window->title);
+	window->title = new_title;
+	XStoreName(((t_xvar *)window->display)->display,
+		((t_win_list *)window->win)->window, title);
+	XFlush(((t_xvar *)window->display)->display);
 }
