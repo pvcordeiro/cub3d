@@ -6,7 +6,7 @@
 /*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 15:27:20 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/29 20:25:18 by pvcordeiro       ###   ########.fr       */
+/*   Updated: 2025/06/29 22:55:03 by pvcordeiro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,5 +114,5 @@ int	get_player_id_with_keyboard_only_accounted_for(
 	if (game->players[0]
 		&& ((t_entity *)game->players[0])->controller.keyboard_only)
 		--i;
-		return (i);
+	return (i);
 }
