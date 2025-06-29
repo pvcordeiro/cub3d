@@ -23,7 +23,7 @@ void	render_hud(t_game *game, t_ftm_image *canvas, t_character *character)
 	if (game->hud.stats_enabled)
 		stats_size = render_stats(game, canvas, character);
 	render_hand_item(canvas, character, stats_size);
-	if (game->hud.minimap_enabled)
+	if (character->minimap_enabled)
 		render_minimap(game, canvas, character);
 	if (game->hud.action_enabled)
 		render_action(game, canvas, character);

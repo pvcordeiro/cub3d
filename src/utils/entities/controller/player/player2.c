@@ -6,7 +6,7 @@
 /*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 15:27:20 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/29 19:56:21 by pvcordeiro       ###   ########.fr       */
+/*   Updated: 2025/06/29 20:25:18 by pvcordeiro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	do_internal_keys(t_entity *entity, t_ftm_key_hook_values khv)
 	}
 }
 
-void	do_inv_keys(t_game *game, t_entity *entity, t_player_keys keys,
+void	do_inv_keys(t_game *game, t_character *character, t_player_keys keys,
 	t_ftm_key_hook_values khv)
 {
 	bool	boolean;
@@ -85,21 +85,21 @@ void	do_inv_keys(t_game *game, t_entity *entity, t_player_keys keys,
 	boolean = false;
 	set_key_bool_value(&boolean, keys.move_inventory_index, khv);
 	if (boolean)
-		move_inventory_index((t_character *)entity);
+		move_inventory_index(character);
 	set_key_bool_value(&boolean, keys.item_use, khv);
 	if (khv.key == keys.item_use.key)
-		item_use_key(boolean, (t_character *)entity);
+		item_use_key(boolean, character);
 	set_key_bool_value(&boolean, keys.item_drop, khv);
 	if (khv.key == keys.item_drop.key)
-		item_drop_key(game, boolean, (t_character *)entity);
+		item_drop_key(game, boolean, character);
 	set_key_bool_value(&boolean, keys.fullscreen_map, khv);
 	if (khv.key == keys.fullscreen_map.key)
-		game->hud.minimap.full = boolean;
+		character->minimap_fullscreen = boolean;
 	set_key_bool_value(&boolean, keys.toggle_minimap, khv);
 	if (khv.key == keys.toggle_minimap.key && boolean)
-		game->hud.minimap_enabled = !game->hud.minimap_enabled;
-	if ((t_entity *)game->players[0] == entity)
-		mouse_inv_keys((t_character *)entity, khv);
+		character->minimap_enabled = !character->minimap_enabled;
+	if ((t_character *)game->players[0] == character)
+		mouse_inv_keys(character, khv);
 }
 
 int	get_player_id_with_keyboard_only_accounted_for(
@@ -114,5 +114,5 @@ int	get_player_id_with_keyboard_only_accounted_for(
 	if (game->players[0]
 		&& ((t_entity *)game->players[0])->controller.keyboard_only)
 		--i;
-	return (i);
+		return (i);
 }

@@ -53,7 +53,7 @@ void	render_minimap(t_game *game, t_ftm_image *canvas,
 
 	mp_data = (t_minimap_data){game, canvas, character, {0, 0, 0},
 		canvas->size};
-	if (!game->hud.minimap.full)
+	if (!character->minimap_fullscreen)
 	{
 		mp_data.size = (t_size){canvas->size.width * MINIMAP_WIDTH_MULTIPLIER,
 			canvas->size.height * MINIMAP_HEIGHT_MULTIPLIER};

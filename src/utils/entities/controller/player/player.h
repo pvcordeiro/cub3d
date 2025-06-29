@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 15:25:53 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/25 15:54:46 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/29 20:22:13 by pvcordeiro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void			do_half_of_keys(t_controller *cont, t_player_keys keys,
 t_player_keys	get_player_keyboard_keys(void);
 t_player_keys	get_player_gamepad_keys(void);
 void			do_internal_keys(t_entity *entity, t_ftm_key_hook_values khv);
-void			do_inv_keys(t_game *game, t_entity *entity, t_player_keys keys,
+void			do_inv_keys(t_game *game, t_character *character, t_player_keys keys,
 					t_ftm_key_hook_values khv);
 int				get_player_id_with_keyboard_only_accounted_for(
 					t_game *game, t_player *player);

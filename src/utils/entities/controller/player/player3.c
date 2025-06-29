@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 15:52:50 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/25 15:53:02 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/29 20:22:50 by pvcordeiro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	do_keys(t_game *game, t_entity *entity, t_player_keys keys,
 {
 	do_internal_keys(entity, khv);
 	do_half_of_keys(&entity->controller, keys, khv);
-	do_inv_keys(game, entity, keys, khv);
+	do_inv_keys(game, (t_character *)entity, keys, khv);
 }
 
 void	key(t_game *game, t_entity *entity, t_ftm_key_hook_values khv)

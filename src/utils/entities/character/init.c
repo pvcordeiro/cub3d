@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 00:50:48 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/25 15:15:50 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/29 20:05:05 by pvcordeiro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ void	init_character(t_game *game, t_ftm_window *window,
 	init_type_things_and_type_and_that(game, character, identifier);
 	if (!character->fov)
 		character->fov = PLAYER_FOV;
+	character->minimap_enabled = game->hud.minimap_enabled;
+	character->minimap_fullscreen = game->hud.minimap.full;
 	create_inventory_items(game, window, character);
 	create_drop(game, window, character);
 }
