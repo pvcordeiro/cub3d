@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:21:37 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/27 20:52:57 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/29 15:07:36 by pvcordeiro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ static void	hud_keys(t_game *game, t_ftm_key_hook_values khv)
 		game->hud.minimap.zoom_level /= 1.2;
 	if (khv.key == XK_0 && khv.down)
 		game->hud.minimap.zoom_level = 5.0;
+
 }
 
 static void	game_keys(t_game *game, t_ftm_key_hook_values khv)
@@ -74,6 +75,8 @@ static void	game_keys(t_game *game, t_ftm_key_hook_values khv)
 	(void)game;
 	if (khv.key == XK_m && khv.down && cub3d()->window)
 		cub3d()->window->using_mouse = !cub3d()->window->using_mouse;
+	if (khv.key == XK_h && khv.down && ft_strcmp(cub3d()->curr_map->path, "maps/hub.cub"))
+		cub3d()->new_map_path = "maps/hub.cub";
 }
 
 void	key_hook(t_ftm_key_hook_values khv)

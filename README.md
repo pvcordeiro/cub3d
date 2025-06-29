@@ -85,6 +85,7 @@ make run
 - `F5` - Interaction prompts toggle
 - `F6` - Complete HUD toggle
 - `F7` - Reload gamepad controllers
+- `H` - Go back to hub map
 - `P/O` - Add/Remove multiplayer participants
 - `K` - Toggle keyboard-only mode for Player 1
 - `M` - Toggle mouse capture
