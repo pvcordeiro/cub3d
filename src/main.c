@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:15:19 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/27 20:13:24 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/29 21:29:50 by pvcordeiro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,15 @@ static void	load_main_sprite(void)
 static void	init_window(void)
 {
 	t_ftm_window	*window;
+	t_size			size;
 
-	window = ftm_window_new_e((t_size){W_WIDTH, W_HEIGHT}, W_TITLE);
+	size.width = W_WIDTH;
+	size.height = W_HEIGHT;
+	window = ftm_window_new_e((t_size){size.width, size.height}, W_TITLE);
 	fte_assert();
+	size = ftm_get_screen_size(window);
+	ftm_window_resize_e(window, size);
+	window->fullscreen = true;
 	window->loop_hook = loop;
 	window->key_hook = key_hook;
 	window->exit_hook = cub3d_exit;

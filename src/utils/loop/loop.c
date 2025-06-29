@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:20:20 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/27 21:21:17 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/06/29 21:32:32 by pvcordeiro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,12 @@ static void	load_new_map(bool *playing_bg_music)
 	fta_destroy();
 	cub3d()->curr_map = parse_map_e(path);
 	(free(path), fte_assert(), fta_init_e());
+	if (ft_strequal(ft_hashmap_get_value(cub3d()->curr_map->types, "FULLSCREEN"), "FALSE"))
+	{
+		ftm_window_resize_e(cub3d()->window, (t_size){W_WIDTH, W_HEIGHT});
+		cub3d()->window->fullscreen = false;
+		ftm_window_notify_fullscreen(cub3d()->window);
+	}
 	cub3d()->game = game_new_e(cub3d()->window, cub3d()->curr_map);
 	fte_assert();
 	*playing_bg_music = false;
