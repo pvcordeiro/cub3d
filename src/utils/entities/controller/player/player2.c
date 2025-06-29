@@ -6,7 +6,7 @@
 /*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 15:27:20 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/29 19:38:40 by pvcordeiro       ###   ########.fr       */
+/*   Updated: 2025/06/29 19:56:21 by pvcordeiro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,8 @@ t_player_keys	get_player_keyboard_keys(void)
 		.item_use = {XK_space, false, 0.0, 1.0, false, {0}, {0}},
 		.item_drop = {XK_q, false, 0.0, 1.0, false, {0}, {0}},
 		.activate = {0},
-		.restart_game = {0},
-		.go_to_hub = {0},
-		.fullscreen_map = {0},
-		.toggle_minimap = {0},
+		.fullscreen_map = {XK_Tab, false, 0.0, 1.0, false, {0}, {0}},
+		.toggle_minimap = {XK_F4, false, 0.0, 1.0, false, {0}, {0}}
 	});
 }
 
@@ -56,8 +54,6 @@ t_player_keys	get_player_gamepad_keys(void)
 		.item_use = {FTM_GAMEPAD_R2, true, 0.8, 1.0, false, {0}, {0}},
 		.item_drop = {FTM_GAMEPAD_B, false, 0.8, 1.0, false, {0}, {0}},
 		.activate = {0},
-		.restart_game = {FTM_GAMEPAD_SHARE, false, 0.0, 1.0, false, {0}, {0}},
-		.go_to_hub = {FTM_GAMEPAD_MAIN, false, 0.0, 1.0, false, {0}, {0}},
 		.fullscreen_map = {FTM_GAMEPAD_SELECT, false, 0.0, 1.0, false, {0}, {0}},
 		.toggle_minimap = {FTM_GAMEPAD_MENU, false, 0.0, 1.0, false, {0}, {0}}
 	});
@@ -96,12 +92,6 @@ void	do_inv_keys(t_game *game, t_entity *entity, t_player_keys keys,
 	set_key_bool_value(&boolean, keys.item_drop, khv);
 	if (khv.key == keys.item_drop.key)
 		item_drop_key(game, boolean, (t_character *)entity);
-	set_key_bool_value(&boolean, keys.restart_game, khv);
-	if (khv.key == keys.restart_game.key && boolean)
-		cub3d()->new_map_path = cub3d()->curr_map->path;
-	set_key_bool_value(&boolean, keys.go_to_hub, khv);
-	if (khv.key == keys.go_to_hub.key && boolean && ft_strcmp(cub3d()->curr_map->path, "maps/hub.cub"))
-		cub3d()->new_map_path = "maps/hub.cub";
 	set_key_bool_value(&boolean, keys.fullscreen_map, khv);
 	if (khv.key == keys.fullscreen_map.key)
 		game->hud.minimap.full = boolean;

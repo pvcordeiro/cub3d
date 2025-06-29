@@ -6,7 +6,7 @@
 /*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 19:31:30 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/29 19:12:04 by pvcordeiro       ###   ########.fr       */
+/*   Updated: 2025/06/29 19:56:30 by pvcordeiro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ typedef struct s_player_keys
 	t_player_key	item_drop;
 	t_player_key	keyboard_only;
 	t_player_key	activate;
-	t_player_key	restart_game;
-	t_player_key	go_to_hub;
 	t_player_key	fullscreen_map;
 	t_player_key	toggle_minimap;
 }	t_player_keys;
