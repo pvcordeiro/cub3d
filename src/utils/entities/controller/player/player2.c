@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 15:27:20 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/29 22:55:03 by pvcordeiro       ###   ########.fr       */
+/*   Updated: 2025/06/30 14:04:56 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_player_keys	get_player_keyboard_keys(void)
 		.action = {XK_e, false, 0.0, 1.0, false, {0}, {0}},
 		.sprinting = {XK_Shift_L, false, 0.0, 1.0, false, {0}, {0}},
 		.move_inventory_index = {XK_r, false, 0.0, 1.0, false, {0}, {0}},
-		.item_use = {XK_space, false, 0.0, 1.0, false, {0}, {0}},
+		.item_use = {ft_ternary_int(cub3d()->window->using_mouse, FTM_MOUSE_LEFT, XK_space), false, 0.0, 1.0, false, {0}, {0}},
 		.item_drop = {XK_q, false, 0.0, 1.0, false, {0}, {0}},
 		.activate = {0},
 		.fullscreen_map = {XK_Tab, false, 0.0, 1.0, false, {0}, {0}},

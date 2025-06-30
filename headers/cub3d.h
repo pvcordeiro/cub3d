@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pvcordeiro <pvcordeiro@student.42.fr>      +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:14:52 by afpachec          #+#    #+#             */
-/*   Updated: 2025/06/29 20:19:28 by pvcordeiro       ###   ########.fr       */
+/*   Updated: 2025/06/30 14:19:46 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,12 @@
 
 // Player Config
 # define PLAYER_RAYS_NO_HIT_LENGTH 50.0
-# define PLAYER_FOV 66.0
+# define PLAYER_FOV 75.0
 # define PLAYER_RAY_SUBRAYS 5
-# define PLAYER_MOUSE_LOOK_VELOCITY 20.0
+# define PLAYER_MOUSE_LOOK_VELOCITY 10.0
 # define PLAYER_KEY_LOOK_VELOCITY 180.0
 # define PLAYER_WALK_VELOCITY 4.0
-# define PLAYER_SPRINT_VELOCITY 6.0
+# define PLAYER_SPRINT_VELOCITY 8.0
 # define PLAYER_RAY_HIT_ENTITIES_NUMBER 5
 # define PLAYER_MAX_TARGET_DISTANCE 1.2
 # define PLAYER_WIDTH 0.23
@@ -94,7 +94,7 @@
 # define DELTA_TIME_START 0.016f
 
 // FPS Config
-# define FPS_LIMIT 1000
+# define FPS_LIMIT 60
 
 typedef struct s_sprite			t_sprite;
 typedef enum e_entity_type		t_entity_type;

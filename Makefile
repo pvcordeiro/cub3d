@@ -141,7 +141,7 @@ fclean: clean
 
 re: fclean all
 
-cdev: clean-everything-but-ft-audio dev
+crun: clean-everything-but-ft-audio run
 
 run: $(NAME)
 	./$(NAME) maps/hub.cub
